@@ -1,6 +1,6 @@
 // Service worker: cache the app shell (cache-first) but always try the network first for the
 // briefing data so the freshest edition shows when online. Bump CACHE on any shell change.
-const CACHE = "briefing-shell-v1";
+const CACHE = "briefing-shell-v2";
 const SHELL = ["./", "./index.html", "./app.js", "./styles.css", "./manifest.json",
                "./icon-192.png", "./icon-512.png"];
 
