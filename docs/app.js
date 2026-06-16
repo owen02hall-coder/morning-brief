@@ -15,7 +15,7 @@ function fmtChange(n) {
   return `${sign}${n}`;
 }
 
-function numberCard(title, obj, unit) {
+function numberCard(title, obj, unit, mode) {
   const card = el("div", "card");
   card.appendChild(el("h3", null, title));
   if (!obj) {
@@ -23,7 +23,18 @@ function numberCard(title, obj, unit) {
     return card;
   }
   const v = el("p", "figure", `${obj.value}${unit || ""}`);
-  const ch = el("span", obj.change >= 0 ? "up" : "down", `  ${fmtChange(obj.change)}${unit || ""}`);
+  let changeText;
+  if (mode === "percent") {
+    const prev = obj.value - obj.change; // percent is vs the PREVIOUS close
+    changeText = prev
+      ? `${obj.change >= 0 ? "+" : ""}${((obj.change / prev) * 100).toFixed(1)}%`
+      : `${fmtChange(obj.change)}${unit || ""}`; // divide-by-zero guard
+  } else if (mode === "bps") {
+    changeText = `${obj.change >= 0 ? "+" : ""}${Math.round(obj.change * 100)} bps`;
+  } else {
+    changeText = `${fmtChange(obj.change)}${unit || ""}`;
+  }
+  const ch = el("span", obj.change >= 0 ? "up" : "down", `  ${changeText}`);
   v.appendChild(ch);
   card.appendChild(v);
   if (obj.why) card.appendChild(el("p", null, obj.why));
@@ -53,6 +64,27 @@ function itemList(title, items) {
   return sec;
 }
 
+function breadthSection() {
+  // Static tap-through links to the StockCharts Bullish Percent Index pages. The on-screen
+  // computed value is a planned follow-up; for now the links give direct access.
+  const sec = el("section");
+  sec.appendChild(el("h2", null, "Market breadth"));
+  sec.appendChild(el("p", "muted", "Below ~30 = oversold / bullish-reversal watch."));
+  [
+    ["S&P 500 breadth ($BPSPX)", "https://stockcharts.com/sc3/ui/?s=%24BPSPX"],
+    ["Nasdaq-100 breadth ($BPNDX)", "https://stockcharts.com/sc3/ui/?s=%24BPNDX"],
+  ].forEach(([label, href]) => {
+    const a = el("a", "readmore", label);
+    a.href = href;
+    a.target = "_blank";
+    a.rel = "noopener";
+    const wrap = el("div");
+    wrap.appendChild(a);
+    sec.appendChild(wrap);
+  });
+  return sec;
+}
+
 function render(b, into) {
   into.innerHTML = "";
 
@@ -68,13 +100,15 @@ function render(b, into) {
   const market = el("section");
   market.appendChild(el("h2", null, "Markets"));
   const grid = el("div", "grid");
-  grid.appendChild(numberCard("S&P 500", b.market && b.market.sp500, ""));
-  grid.appendChild(numberCard("Nasdaq", b.market && b.market.ndx, ""));
-  grid.appendChild(numberCard("10-year Treasury", b.yield_10y, "%"));
-  grid.appendChild(numberCard("VIX", b.vix, ""));
+  grid.appendChild(numberCard("S&P 500", b.market && b.market.sp500, "", "percent"));
+  grid.appendChild(numberCard("Nasdaq", b.market && b.market.ndx, "", "percent"));
+  grid.appendChild(numberCard("10-year Treasury", b.yield_10y, "%", "bps"));
+  grid.appendChild(numberCard("VIX", b.vix, "", "percent"));
   market.appendChild(grid);
   if (b.market && b.market.why) market.appendChild(el("p", "why", b.market.why));
   into.appendChild(market);
+
+  into.appendChild(breadthSection());
 
   into.appendChild(itemList("Emerging tech", b.tech));
   into.appendChild(itemList("World", b.world));

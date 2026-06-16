@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-06-16T09:44:57.015939-06:00",
+  "generated_at": "2026-06-16T10:06:49.903484-06:00",
   "date": "2026-06-16",
   "tldr": [
-    "Global markets closed higher, driven by optimism surrounding a potential interim US-Iran peace deal that contributed to a drop in oil prices.",
-    "SpaceX announced the acquisition of AI coding firm Anysphere for $60 billion, with its market valuation now exceeding Amazon's.",
-    "The FBI reported that it thwarted a plot targeting a White House UFC event, with multiple suspects in custody."
+    "SpaceX acquired AI coding firm Anysphere for $60 billion, pushing its market capitalization past Amazon and briefly Microsoft, highlighting strong tech sector growth.",
+    "A US-Iran peace agreement was announced, causing global oil prices to fall to a three-month low, potentially signaling reduced geopolitical risk and lower energy costs.",
+    "Geopolitical tensions persist, with the UK investigating reports of a Russian warship firing warning shots near a British yacht in the English Channel and a Ukrainian drone detonating near Moscow."
   ],
   "market": {
     "sp500": {
@@ -17,47 +17,52 @@
       "change": 795.1,
       "asof": "2026-06-15"
     },
-    "why": "The S&P 500 and Nasdaq Composite closed higher, buoyed by hopes for an interim US-Iran deal that led to a 4% fall in oil prices, potentially signaling the reopening of the Strait of Hormuz. Additionally, the tech sector saw positive momentum from SpaceX's $60 billion acquisition of AI coding firm Anysphere, which pushed its valuation beyond Amazon."
+    "why": "The S&P 500 and Nasdaq Composite closed significantly higher on June 15. This rally was largely driven by positive news from the tech sector, specifically SpaceX's $60 billion acquisition of AI coding firm Anysphere, which resulted in SpaceX's market capitalization surpassing Amazon's. Additionally, global oil prices dipped below $80 per barrel for the first time since March following a US-Iran peace agreement, which was seen as a positive development for global markets."
   },
   "yield_10y": {
     "value": 4.48,
     "change": 0.03,
     "asof": "2026-06-12",
-    "why": "The 10-year Treasury yield experienced a slight increase of 0.03%, remaining largely unchanged as the Federal Reserve's two-day monetary policy meeting began, prompting investor anticipation."
+    "why": "The 10-year Treasury yield saw a slight increase of 0.03% on June 12. While a US-Iran peace agreement led to a notable drop in oil prices, the provided articles do not offer a direct explanation for the minor upward movement in the 10-year Treasury yield."
   },
   "vix": {
     "value": 16.2,
     "change": -1.48,
     "asof": "2026-06-15",
-    "why": "The VIX closed lower, indicating a decrease in market volatility and a rise in investor confidence. This sentiment was likely influenced by the prospects of an interim US-Iran deal, which could alleviate geopolitical tensions and stabilize energy markets."
+    "why": "The VIX closed lower on June 15, indicating a decrease in expected market volatility. This aligns with the strong performance of major stock indices, suggesting increased investor confidence, possibly stemming from the announced US-Iran peace agreement and its potential to reduce broader geopolitical and economic uncertainties."
   },
   "tech": [
     {
-      "summary": "Self-driving technology supplier Mobileye Global is planning to launch its own robotaxi service in the U.S. by 2027, leveraging its Moovit platform.",
-      "source": "CNBC",
-      "url": "https://www.cnbc.com/2026/06/16/self-driving-tech-supplier-mobileye-targets-us-robotaxi-launch-in-2027.html"
+      "summary": "Elon Musk's SpaceX has acquired AI coding firm Anysphere for $60 billion, placing the company's market capitalization above Amazon's and briefly Microsoft's following its recent stock market debut. Anysphere developed the AI-powered coding app Cursor.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/science/2026/jun/16/spacex-ai-coding-anysphere-cursor-amazon-market-valuation-xai"
     },
     {
-      "summary": "Google Chrome's upcoming update is expected to change how ad blockers function, potentially marking the end of some popular ad-blocking extensions.",
+      "summary": "Google Chrome's upcoming update is expected to end support for many popular ad blockers, significantly altering the web browsing experience for users who rely on these extensions.",
       "source": "Hacker News",
       "url": "https://tech.slashdot.org/story/26/06/15/205219/google-chromes-next-update-will-mark-the-end-of-popular-ad-blockers"
+    },
+    {
+      "summary": "A man with ALS has become the first 'power user' of a brain implant that allows him to speak, showcasing advanced brain-computer interface technology that enables communication for individuals with severe motor impairments.",
+      "source": "MIT Technology Review",
+      "url": "https://www.technologyreview.com/2026/06/16/1139010/the-download-brain-implant-power-user-bci-south-korea-ai-obsession/"
     }
   ],
   "world": [
     {
-      "summary": "President Trump stated that Iran would 'never have a nuclear weapon' under a new deal and warned Israel regarding Lebanon, while G7 leaders discussed strategies to compel Russia towards peace.",
+      "summary": "US President Trump announced a new deal with Iran, stating that Iran would never possess nuclear weapons under the agreement and cautioning Israel regarding Lebanon. The deal has led to a significant drop in global oil prices.",
       "source": "Guardian World",
       "url": "https://www.theguardian.com/world/live/2026/jun/16/iran-us-deal-trump-vance-strait-hormuz-israel-lebanon-middle-east-latest-news-updates"
     },
     {
-      "summary": "The FBI announced it thwarted a plot to target a UFC event at the White House using drones, with newly unsealed court documents indicating multiple suspects are in custody.",
+      "summary": "The UK is investigating reports that a Russian frigate fired warning shots near a British-registered yacht off the coast of the Isle of Wight in the English Channel, prompting a response from the Ministry of Defence.",
       "source": "BBC World",
-      "url": "https://www.bbc.com/news/articles/cqx10xlje1lo?at_medium=RSS&at_campaign=rss"
+      "url": "https://www.bbc.com/news/articles/c20yzm84r7lo?at_medium=RSS&at_campaign=rss"
     },
     {
-      "summary": "The Ministry of Defence is investigating reports that a Russian frigate, the Admiral Grigorovich, fired warning shots within 500 meters of a British yacht in the English Channel.",
-      "source": "Guardian World",
-      "url": "https://www.theguardian.com/uk-news/2026/jun/16/russian-frigate-fires-warning-shots-at-british-yacht-in-channel-reports"
+      "summary": "A Ukrainian drone detonated near Moscow, with footage showing the moment it struck a building under construction. This incident highlights the ongoing conflict and its impact on Russian territory.",
+      "source": "Al Jazeera",
+      "url": "https://www.aljazeera.com/video/newsfeed/2026/6/16/ukrainian-drone-detonates-near-moscow?traffic_source=rss"
     }
   ],
   "weekly_recap": null,
