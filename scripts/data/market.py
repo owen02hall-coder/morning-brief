@@ -12,26 +12,35 @@ Missing data degrades to None rather than raising, so the briefing still ships.
 """
 import csv
 import io
+import time
 import urllib.request
 from datetime import date, timedelta
 
 from .. import config
 
+# FRED appears to reject non-browser User-Agents from datacenter IPs (works from a home IP, fails
+# from a GitHub Actions runner). Use a browser-like UA for FRED specifically.
+FRED_UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+           "(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36")
 
-def _fred_series(series_id, retries=1):
+
+def _fred_series(series_id, retries=2):
     """Return (value, change, asof) from a recent-window FRED CSV, using the last two values."""
     cosd = (date.today() - timedelta(days=config.FRED_WINDOW_DAYS)).isoformat()
     url = config.FRED_CSV.format(series=series_id, cosd=cosd)
-    req = urllib.request.Request(url, headers={"User-Agent": config.USER_AGENT})
+    req = urllib.request.Request(url, headers={"User-Agent": FRED_UA, "Accept": "text/csv,*/*"})
     text = None
     for attempt in range(retries + 1):
         try:
             with urllib.request.urlopen(req, timeout=config.FRED_TIMEOUT) as r:
                 text = r.read().decode()
             break
-        except Exception:
+        except Exception as e:
+            # Log the real reason (silent None made the runner failure invisible).
+            print(f"market: FRED {series_id} attempt {attempt + 1} failed: {type(e).__name__}: {e}")
             if attempt >= retries:
                 return None
+            time.sleep(2 * (attempt + 1))
     rows = list(csv.reader(io.StringIO(text)))
     points = []
     for row in rows[1:]:                       # skip header
