@@ -1,0 +1,26 @@
+{
+  "feeds_alive": [
+    "BBC World",
+    "Al Jazeera",
+    "Guardian World",
+    "NPR",
+    "MarketWatch",
+    "Yahoo Finance",
+    "CNBC",
+    "Ars Technica",
+    "The Verge",
+    "MIT Tech Review",
+    "Hacker News"
+  ],
+  "feeds_total": 11,
+  "world_feeds_alive": 4,
+  "recent_items_within_hours": {
+    "hours": 72,
+    "count": 232
+  },
+  "constituent_counts": {
+    "sp500": 503,
+    "ndx": 101
+  },
+  "checked_at": "2026-06-15T21:45:55.697963+00:00"
+}

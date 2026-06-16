@@ -1,0 +1,28 @@
+{
+  "project": "Morning Briefing",
+  "scope": "v1 core (breadth/oversold is v2, deferred)",
+  "note": "Project docs/ is the GitHub Pages web root (PWA), not documentation. Dev docs live in documentation/.",
+  "docs": [
+    {
+      "path": "documentation/architecture.md",
+      "title": "Architecture",
+      "summary": "System overview, data flow, modules, key design decisions, briefing.json schema, CLI entry points.",
+      "source_files": ["scripts/", "docs/", ".github/workflows/briefing.yml"],
+      "entry_points": ["python -m scripts.build_briefing", "scripts/build_briefing.py:main"]
+    },
+    {
+      "path": "documentation/integrations.md",
+      "title": "Integrations",
+      "summary": "External services (FRED, Gemini, ntfy, RSS, GitHub Pages/Actions, v2 Twelve Data), usage, invocation sites, env var names.",
+      "source_files": ["scripts/data/market.py", "scripts/data/news.py", "scripts/summarize.py", "scripts/notify.py", "scripts/config.py", ".github/workflows/briefing.yml"],
+      "entry_points": ["GEMINI_API_KEY", "NTFY_TOPIC", "PAGES_URL", "TWELVEDATA_API_KEY"]
+    },
+    {
+      "path": "documentation/operations.md",
+      "title": "Operations",
+      "summary": "Scheduling and DST, one-time deployment, runtime, monitoring, failure modes and recovery, regression tests, cost.",
+      "source_files": [".github/workflows/briefing.yml", "scripts/build_briefing.py", "scripts/notify.py", "scripts/briefing-assumptions/"],
+      "entry_points": [".github/workflows/briefing.yml", "scripts/build_briefing.py:main"]
+    }
+  ]
+}

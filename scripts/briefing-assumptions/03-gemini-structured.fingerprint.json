@@ -1,0 +1,6 @@
+{
+  "model": "gemini-2.5-flash",
+  "working_config_shape": "response_mime_type+response_schema",
+  "parsed_ok": true,
+  "checked_at": "2026-06-15T22:12:14.449821+00:00"
+}

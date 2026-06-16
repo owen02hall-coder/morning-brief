@@ -1,0 +1,69 @@
+{
+  "generated_at": "2026-06-15T16:35:17.531366-06:00",
+  "date": "2026-06-15",
+  "tldr": [
+    "Markets reached record highs as a preliminary U.S.-Iran deal was announced, potentially reopening the Strait of Hormuz and lowering oil prices.",
+    "Nvidia announced a significant $20 billion bond deal, underscoring the ongoing surge in AI-related corporate debt.",
+    "Global events include a B-52 bomber crash in California and the EU officially launching accession talks with Ukraine and Moldova."
+  ],
+  "market": {
+    "sp500": {
+      "value": 7431.46,
+      "change": 37.16,
+      "asof": "2026-06-12"
+    },
+    "ndx": {
+      "value": 25888.84,
+      "change": 79.18,
+      "asof": "2026-06-12"
+    },
+    "why": "The S&P 500 and Nasdaq Composite reached record highs, driven by positive market sentiment surrounding the preliminary U.S.-Iran deal that could lead to the reopening of the Strait of Hormuz and a drop in oil prices. Additionally, the strong performance of tech stocks, including Western Digital and AMD, contributed to the market's upward movement."
+  },
+  "yield_10y": {
+    "value": 4.48,
+    "change": 0.03,
+    "asof": "2026-06-12",
+    "why": "The 10-year Treasury yield saw a slight increase, moving to 4.48%. This movement occurred despite broader market optimism stemming from the U.S.-Iran deal, which might lead investors to anticipate fewer Fed rate hikes."
+  },
+  "vix": {
+    "value": 17.68,
+    "change": -1.76,
+    "asof": "2026-06-12",
+    "why": "The VIX, a measure of market volatility, decreased to 17.68. This decline suggests a reduction in perceived market risk, likely influenced by the positive developments in the U.S.-Iran relations and the strong performance of major stock indices."
+  },
+  "tech": [
+    {
+      "summary": "Nvidia is planning to raise at least $20 billion through its first debt sale since the AI boom began, signaling continued demand for AI-related credit and robust investor appetite in the sector.",
+      "source": "CNBC",
+      "url": "https://www.cnbc.com/2026/06/15/nvidia-plans-to-raise-about-20-billion-first-debt-sale-in-ai-boom.html"
+    },
+    {
+      "summary": "Facebook's parent company, Meta, is integrating AI into its search function, with public posts potentially informing AI-generated results, as part of a broader rollout of new AI features.",
+      "source": "The Verge",
+      "url": "https://www.theverge.com/tech/950264/meta-ai-mode-search-facebook"
+    }
+  ],
+  "world": [
+    {
+      "summary": "A preliminary agreement has been reached between the U.S. and Iran, with President Trump indicating the Strait of Hormuz will be reopened. This development has led to a drop in oil prices and has been met with varied reactions, including skepticism from some Israeli leaders.",
+      "source": "NPR",
+      "url": "https://www.npr.org/2026/06/15/nx-s1-5858868/u-s-and-iran-reach-an-agreement-but-details-remain-scant"
+    },
+    {
+      "summary": "A B-52 bomber crashed shortly after takeoff at Edwards Air Force Base in California, with eight individuals presumed dead.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/us-news/2026/jun/15/b52-bomber-crash-california-military-base"
+    }
+  ],
+  "weekly_recap": null,
+  "data_availability": {
+    "sp500": true,
+    "ndx": true,
+    "vix": true,
+    "ten_year": true,
+    "news_world": true,
+    "news_business": true,
+    "news_tech": true,
+    "summary": "ok"
+  }
+}

@@ -1,0 +1,11 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Local secrets / env (NEVER commit keys)
+.env
+*.local.env
+
+# Assumption-test fingerprints are committed on purpose; nothing else here.

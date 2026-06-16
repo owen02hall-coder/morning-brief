@@ -1,0 +1,68 @@
+:root {
+  --bg: #f6f7f9;
+  --fg: #14181f;
+  --muted: #6a7280;
+  --card: #ffffff;
+  --accent: #0b1f3a;
+  --line: #e3e6ea;
+  --up: #1a7f4b;
+  --down: #b3261e;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0d1117;
+    --fg: #e6edf3;
+    --muted: #9098a3;
+    --card: #161b22;
+    --accent: #9db7ff;
+    --line: #272d36;
+    --up: #3fb950;
+    --down: #f85149;
+  }
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+  line-height: 1.5;
+  padding: env(safe-area-inset-top) 0 2rem;
+}
+header, main, section { max-width: 720px; margin: 0 auto; padding: 0 1rem; }
+header { padding-top: 1.25rem; }
+h1 { font-size: 1.5rem; margin: 0; }
+h2 { font-size: 1.15rem; margin: 1.5rem 0 0.5rem; }
+h3 { font-size: 0.95rem; margin: 0 0 0.25rem; color: var(--muted); }
+.updated { color: var(--muted); font-size: 0.85rem; margin-top: 0.25rem; }
+.stale {
+  background: #fff3cd; color: #663c00; border: 1px solid #ffe08a;
+  padding: 0.5rem 0.75rem; border-radius: 8px; margin-top: 0.5rem; font-size: 0.9rem;
+}
+.card {
+  background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+  padding: 0.85rem 1rem; margin: 0.5rem 0;
+}
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+.figure { font-size: 1.4rem; font-weight: 650; margin: 0.1rem 0; }
+.figure .up { color: var(--up); font-size: 0.95rem; font-weight: 600; }
+.figure .down { color: var(--down); font-size: 0.95rem; font-weight: 600; }
+.up { color: var(--up); } .down { color: var(--down); }
+.muted { color: var(--muted); font-size: 0.9rem; }
+.why { font-size: 0.97rem; }
+.tldr ul { padding-left: 1.2rem; }
+.tldr li { margin: 0.35rem 0; }
+.readmore { display: inline-block; margin-top: 0.4rem; color: var(--accent); font-size: 0.9rem; text-decoration: none; }
+.readmore:hover { text-decoration: underline; }
+#archive-search {
+  width: 100%; padding: 0.55rem 0.75rem; border: 1px solid var(--line);
+  border-radius: 8px; background: var(--card); color: var(--fg); margin-bottom: 0.5rem;
+}
+#archive-list { list-style: none; padding: 0; }
+#archive-list li { margin: 0.25rem 0; }
+.archive-link { color: var(--accent); text-decoration: none; }
+.archive-link:hover { text-decoration: underline; }
+.hint { max-width: 720px; margin: 1rem auto; padding: 0 1rem; color: var(--muted); font-size: 0.9rem; }
+.hidden { display: none; }
+@media (max-width: 420px) { .grid { grid-template-columns: 1fr; } }

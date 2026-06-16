@@ -1,0 +1,66 @@
+name: Morning Briefing
+
+on:
+  schedule:
+    # GitHub cron is UTC. 6am America/Denver = 12:00 UTC (MDT) or 13:00 UTC (MST).
+    # Both fire; the script's hour-gate makes exactly one do real work, the other no-ops.
+    - cron: "0 12 * * *"
+    - cron: "0 13 * * *"
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Run real work now regardless of the hour (for manual testing)"
+        type: boolean
+        default: true
+
+permissions:
+  contents: write          # required so GITHUB_TOKEN can push the daily commit
+
+concurrency:
+  group: briefing
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install -r requirements.txt
+
+      - name: Build briefing
+        env:
+          # v1 uses FRED (keyless) + Gemini + ntfy. TWELVEDATA_API_KEY is NOT needed until v2 breadth.
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          PAGES_URL: ${{ vars.PAGES_URL }}
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.force }}" = "true" ]; then
+            python -m scripts.build_briefing --force
+          else
+            python -m scripts.build_briefing
+          fi
+
+      - name: Commit briefing + state
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/ state/
+          git diff --staged --quiet || git commit -m "chore: daily briefing $(date -u +%F)"
+          git push
+
+      - name: Health ping on failure (backstop)
+        if: failure()
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+        run: |
+          if [ -n "${NTFY_TOPIC}" ]; then
+            curl -s -H "Title: Briefing FAILED" -H "Priority: high" \
+              -d "The morning briefing workflow failed. Check the GitHub Actions run." \
+              "https://ntfy.sh/${NTFY_TOPIC}" || true
+          fi

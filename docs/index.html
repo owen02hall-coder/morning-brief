@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0b1f3a" />
+  <title>Morning Briefing</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="icon-192.png" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <h1>Morning Briefing</h1>
+    <div id="updated" class="updated"></div>
+    <div id="stale" class="stale hidden"></div>
+  </header>
+
+  <main id="briefing">
+    <p id="loading">Loading today's briefing…</p>
+  </main>
+
+  <section id="archive-section">
+    <h2>Past briefings</h2>
+    <input id="archive-search" type="search" placeholder="Search past briefings…" />
+    <ul id="archive-list"></ul>
+    <div id="archive-view"></div>
+  </section>
+
+  <p id="ios-hint" class="hint hidden">
+    Tip: on iPhone, tap Share then "Add to Home Screen" to install this.
+  </p>
+
+  <script src="app.js"></script>
+</body>
+</html>
