@@ -1,71 +1,58 @@
 {
-  "generated_at": "2026-06-16T09:44:57.015939-06:00",
+  "generated_at": "2026-06-16T09:53:22.163455-06:00",
   "date": "2026-06-16",
   "tldr": [
-    "Global markets closed higher, driven by optimism surrounding a potential interim US-Iran peace deal that contributed to a drop in oil prices.",
-    "SpaceX announced the acquisition of AI coding firm Anysphere for $60 billion, with its market valuation now exceeding Amazon's.",
-    "The FBI reported that it thwarted a plot targeting a White House UFC event, with multiple suspects in custody."
+    "A peace agreement between the U.S. and Iran was announced, leading to a significant drop in global oil prices.",
+    "SpaceX is set to acquire AI coding firm Anysphere for $60 billion, boosting its market capitalization past Amazon.",
+    "The FBI successfully thwarted a drone plot targeting a White House event, with multiple suspects taken into custody."
   ],
   "market": {
-    "sp500": {
-      "value": 7554.29,
-      "change": 122.83,
-      "asof": "2026-06-15"
-    },
-    "ndx": {
-      "value": 26683.94,
-      "change": 795.1,
-      "asof": "2026-06-15"
-    },
-    "why": "The S&P 500 and Nasdaq Composite closed higher, buoyed by hopes for an interim US-Iran deal that led to a 4% fall in oil prices, potentially signaling the reopening of the Strait of Hormuz. Additionally, the tech sector saw positive momentum from SpaceX's $60 billion acquisition of AI coding firm Anysphere, which pushed its valuation beyond Amazon."
+    "sp500": null,
+    "ndx": null,
+    "why": "Global oil prices declined, with Brent crude dipping below $80 per barrel for the first time since March. This movement was largely attributed to the interim peace agreement between the U.S. and Iran, with hopes that the deal would lead to the reopening of the Strait of Hormuz for oil transit (CNBC, https://www.cnbc.com/2026/06/16/us-iran-peace-agreement-oil-prices-tankers-strait-of-hormuz-transit.html; Yahoo Finance, https://finance.yahoo.com/news/oil-rebounds-concerns-us-iran-011407637.html)."
   },
-  "yield_10y": {
-    "value": 4.48,
-    "change": 0.03,
-    "asof": "2026-06-12",
-    "why": "The 10-year Treasury yield experienced a slight increase of 0.03%, remaining largely unchanged as the Federal Reserve's two-day monetary policy meeting began, prompting investor anticipation."
-  },
-  "vix": {
-    "value": 16.2,
-    "change": -1.48,
-    "asof": "2026-06-15",
-    "why": "The VIX closed lower, indicating a decrease in market volatility and a rise in investor confidence. This sentiment was likely influenced by the prospects of an interim US-Iran deal, which could alleviate geopolitical tensions and stabilize energy markets."
-  },
+  "yield_10y": null,
+  "vix": null,
   "tech": [
     {
-      "summary": "Self-driving technology supplier Mobileye Global is planning to launch its own robotaxi service in the U.S. by 2027, leveraging its Moovit platform.",
-      "source": "CNBC",
-      "url": "https://www.cnbc.com/2026/06/16/self-driving-tech-supplier-mobileye-targets-us-robotaxi-launch-in-2027.html"
+      "summary": "Elon Musk's SpaceX is acquiring Anysphere, the startup behind the AI-powered coding app Cursor, for $60 billion. This acquisition has reportedly propelled SpaceX's market capitalization past Amazon, reaching $2.8 trillion.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/science/2026/jun/16/spacex-ai-coding-anysphere-cursor-amazon-market-valuation-xai"
     },
     {
-      "summary": "Google Chrome's upcoming update is expected to change how ad blockers function, potentially marking the end of some popular ad-blocking extensions.",
+      "summary": "Google Chrome's next update is anticipated to mark the end of popular ad blockers by altering how extensions can interact with web content.",
       "source": "Hacker News",
       "url": "https://tech.slashdot.org/story/26/06/15/205219/google-chromes-next-update-will-mark-the-end-of-popular-ad-blockers"
+    },
+    {
+      "summary": "Mobileye is set to enter the U.S. robotaxi market with a standalone service, leveraging its Moovit platform to launch in a U.S. city by 2027.",
+      "source": "Ars Technica",
+      "url": "https://arstechnica.com/cars/2026/06/mobileye-is-entering-the-us-robotaxi-market-with-standalone-service/"
     }
   ],
   "world": [
     {
-      "summary": "President Trump stated that Iran would 'never have a nuclear weapon' under a new deal and warned Israel regarding Lebanon, while G7 leaders discussed strategies to compel Russia towards peace.",
+      "summary": "A peace agreement between the U.S. and Iran was announced by President Trump at the G7 summit. Iran is reportedly presenting the deal as a victory, though for many Iranians it signifies a necessary step to lower prices and alleviate fears of conflict.",
       "source": "Guardian World",
       "url": "https://www.theguardian.com/world/live/2026/jun/16/iran-us-deal-trump-vance-strait-hormuz-israel-lebanon-middle-east-latest-news-updates"
     },
     {
-      "summary": "The FBI announced it thwarted a plot to target a UFC event at the White House using drones, with newly unsealed court documents indicating multiple suspects are in custody.",
+      "summary": "The FBI thwarted a drone plot targeting a UFC event at the White House, with court documents alleging the plan involved drones. Multiple suspects have been taken into custody.",
       "source": "BBC World",
       "url": "https://www.bbc.com/news/articles/cqx10xlje1lo?at_medium=RSS&at_campaign=rss"
     },
     {
-      "summary": "The Ministry of Defence is investigating reports that a Russian frigate, the Admiral Grigorovich, fired warning shots within 500 meters of a British yacht in the English Channel.",
+      "summary": "Reports indicate a Russian frigate, the Admiral Grigorovich, fired warning shots within 500 meters of a British yacht in the English Channel near the Isle of Wight. The UK Ministry of Defence is investigating the incident.",
       "source": "Guardian World",
       "url": "https://www.theguardian.com/uk-news/2026/jun/16/russian-frigate-fires-warning-shots-at-british-yacht-in-channel-reports"
     }
   ],
   "weekly_recap": null,
   "data_availability": {
-    "sp500": true,
-    "ndx": true,
-    "vix": true,
-    "ten_year": true,
+    "sp500": false,
+    "ndx": false,
+    "vix": false,
+    "ten_year": false,
     "news_world": true,
     "news_business": true,
     "news_tech": true,
