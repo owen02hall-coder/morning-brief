@@ -29,14 +29,15 @@ jobs:
 
       - name: Check live briefing freshness
         env:
-          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
-          PAGES_URL: ${{ vars.PAGES_URL }}
+          # Code reads env NTFY_TOPIC / PAGES_URL; the repo's secret/var are named NTFY_SUB / PAGE_URL.
+          NTFY_TOPIC: ${{ secrets.NTFY_SUB }}
+          PAGES_URL: ${{ vars.PAGE_URL }}
         run: python -m scripts.heartbeat
 
       - name: Failure backstop (ntfy-independent of the python push)
         if: failure()
         env:
-          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          NTFY_TOPIC: ${{ secrets.NTFY_SUB }}
         run: |
           if [ -n "${NTFY_TOPIC}" ]; then
             curl -s -H "Title: Heartbeat FAILED" -H "Priority: high" \

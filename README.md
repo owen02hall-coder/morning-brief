@@ -51,8 +51,9 @@ Your site will be at `https://<your-user>.github.io/<repo>/`.
 ### 4. Add secrets and a variable
 Repo Settings -> Secrets and variables -> Actions:
 - Secret `GEMINI_API_KEY`
-- Secret `NTFY_TOPIC` (your chosen ntfy topic name)
-- Variable `PAGES_URL` = your Pages URL from step 3 (so the notification taps through to it)
+- Secret `NTFY_SUB` — your chosen ntfy topic name (the workflows map this into the `NTFY_TOPIC` env var)
+- Variable `PAGE_URL` = your Pages URL from step 3 (mapped into the `PAGES_URL` env var; lets the
+  notification and the heartbeat reach your page)
 
 (`TWELVEDATA_API_KEY` is only needed for the v2 breadth feature, not v1.)
 
