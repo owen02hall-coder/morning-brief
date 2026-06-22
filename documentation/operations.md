@@ -1,8 +1,8 @@
 ---
 title: Operations
-source_files: [.github/workflows/briefing.yml, scripts/build_briefing.py, scripts/notify.py, scripts/briefing-assumptions/]
-entry_points: [".github/workflows/briefing.yml", "scripts/build_briefing.py:main"]
-last_verified: 2026-06-16
+source_files: [.github/workflows/briefing.yml, .github/workflows/heartbeat.yml, scripts/build_briefing.py, scripts/heartbeat.py, scripts/notify.py, scripts/briefing-assumptions/]
+entry_points: [".github/workflows/briefing.yml", ".github/workflows/heartbeat.yml", "scripts/build_briefing.py:main", "scripts/heartbeat.py:main"]
+last_verified: 2026-06-22
 ---
 
 # Operations
@@ -14,11 +14,13 @@ How the briefing is scheduled, deployed, monitored, and recovered.
 - Defined in `.github/workflows/briefing.yml` with two cron entries: `0 12 * * *` and `0 13 * * *`
   (UTC). GitHub cron is UTC only.
 - 6am America/Denver is 12:00 UTC during daylight time and 13:00 UTC during standard time. Both
-  crons fire. The script's hour-gate makes only the run that matches 6am local do real work. The
-  other run exits before any side effect.
-- The hour-gate uses `zoneinfo("America/Denver")`, which needs the `tzdata` package (in
-  requirements.txt).
-- Scheduled runs can be delayed at peak load by GitHub. Do not assume on-time delivery.
+  crons fire. The script de-dupes by date (`state.last_run`): whichever cron lands first that day
+  does real work, the rest see `last_run == today` and no-op. There is no hour comparison.
+- The date stamp uses `zoneinfo("America/Denver")` via `_now()`, which needs the `tzdata` package
+  (in requirements.txt).
+- Scheduled runs can be delayed at peak load by GitHub — often by hours. The date-gate is built for
+  exactly that: delay no longer prevents the day's build (an earlier hour-gate did, freezing the
+  briefing for days). Do not reintroduce an exact-hour gate.
 
 ## Deployment (one-time)
 
@@ -49,6 +51,11 @@ How the briefing is scheduled, deployed, monitored, and recovered.
 - Health ping: if any section is unavailable, a low-priority "degraded" ntfy lists the sections. If
   the run crashes, the Python layer sends a high-priority "FAILED" ntfy. A workflow `if: failure()`
   step sends a backstop ntfy in case the crash happens before Python can.
+- Heartbeat: an independent workflow (`.github/workflows/heartbeat.yml`, daily at 03:00 UTC) fetches
+  the LIVE Pages `briefing.json` and, if it is older than `HEARTBEAT_STALE_HOURS` (30h) or
+  unreachable, sends a high-priority ntfy AND fails the job (so its own `if: failure()` curl is a
+  second, ntfy-independent alarm). Because it runs on its own schedule and checks the real page, it
+  catches both a build that silently no-ops and a build cron that GitHub dropped entirely.
 - Transparency: `briefing.json` carries a `data_availability` map showing each section's status.
 
 ## Failure modes and recovery

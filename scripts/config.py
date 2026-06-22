@@ -7,7 +7,9 @@ import os
 
 # --- Timing -----------------------------------------------------------------
 TIMEZONE = "America/Denver"          # user is in Utah (Mountain)
-RUN_HOUR_LOCAL = 6                   # the gate: only the ~6am-local cron does real work
+# The daily build de-dupes by DATE, not by hour (see build_briefing.main): the first cron to land
+# each day builds, the rest no-op. GitHub delays scheduled jobs by hours, so an exact-hour gate
+# would no-op every run — do not reintroduce one.
 
 # --- AI (proven: gemini-2.5-flash + response_mime_type/response_schema) ------
 MODEL_ID = os.environ.get("MODEL_ID", "gemini-2.5-flash")
@@ -61,4 +63,11 @@ ARCHIVE_DIR = os.path.join(DOCS_DIR, "archive")
 BRIEFING_PATH = os.path.join(DOCS_DIR, "briefing.json")
 STATE_PATH = os.path.join(REPO_ROOT, "state", "state.json")
 
-STALE_HOURS = 28                     # PWA shows "couldn't refresh" past this age
+# --- Monitoring -------------------------------------------------------------
+STALE_HOURS = 28                     # client: the PWA shows "couldn't refresh" past this age
+HEARTBEAT_STALE_HOURS = 30           # server: heartbeat.yml pages if the LIVE page is older than this.
+                                     # > 24h + GitHub's worst observed schedule jitter (~9h, on the
+                                     # build AND on the heartbeat itself) so a healthy-but-jittery day
+                                     # never false-alarms; a real multi-day freeze trips it well within
+                                     # a day of going stale. It is a freeze backstop, not a punctuality
+                                     # check — do not tighten it toward 24h.

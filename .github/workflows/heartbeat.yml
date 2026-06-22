@@ -1,0 +1,45 @@
+name: Briefing Heartbeat
+
+# Independent of the build workflow on purpose: this catches a build that silently no-ops AND a
+# scheduled build that GitHub dropped entirely. It checks the LIVE Pages page (what the phone loads).
+on:
+  schedule:
+    - cron: "0 3 * * *"        # 03:00 UTC ~ 8-9pm America/Denver — well after the morning build window
+  workflow_dispatch:
+
+permissions:
+  contents: read              # never commits — read-only
+
+concurrency:
+  group: heartbeat
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install -r requirements.txt
+
+      - name: Check live briefing freshness
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          PAGES_URL: ${{ vars.PAGES_URL }}
+        run: python -m scripts.heartbeat
+
+      - name: Failure backstop (ntfy-independent of the python push)
+        if: failure()
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+        run: |
+          if [ -n "${NTFY_TOPIC}" ]; then
+            curl -s -H "Title: Heartbeat FAILED" -H "Priority: high" \
+              -d "The briefing heartbeat job failed or found a stale page. Check the GitHub Actions run." \
+              "https://ntfy.sh/${NTFY_TOPIC}" || true
+          fi

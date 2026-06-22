@@ -3,7 +3,8 @@ name: Morning Briefing
 on:
   schedule:
     # GitHub cron is UTC. 6am America/Denver = 12:00 UTC (MDT) or 13:00 UTC (MST).
-    # Both fire; the script's hour-gate makes exactly one do real work, the other no-ops.
+    # Both fire (and GitHub may delay each by hours). The script de-dupes by date (state.last_run),
+    # so whichever cron lands first that day builds and the rest no-op — delay is irrelevant.
     - cron: "0 12 * * *"
     - cron: "0 13 * * *"
   workflow_dispatch:
