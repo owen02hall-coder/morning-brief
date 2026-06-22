@@ -24,7 +24,7 @@ FRED_UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
            "(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36")
 
 
-def _fred_series(series_id, retries=2):
+def _fred_series(series_id, retries=1):
     """Return (value, change, asof) from a recent-window FRED CSV, using the last two values."""
     cosd = (date.today() - timedelta(days=config.FRED_WINDOW_DAYS)).isoformat()
     url = config.FRED_CSV.format(series=series_id, cosd=cosd)
