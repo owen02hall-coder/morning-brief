@@ -38,8 +38,9 @@ jobs:
         env:
           # v1 uses FRED (keyless) + Gemini + ntfy. TWELVEDATA_API_KEY is NOT needed until v2 breadth.
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
-          PAGES_URL: ${{ vars.PAGES_URL }}
+          # Code reads env NTFY_TOPIC / PAGES_URL; the repo's secret/var are named NTFY_SUB / PAGE_URL.
+          NTFY_TOPIC: ${{ secrets.NTFY_SUB }}
+          PAGES_URL: ${{ vars.PAGE_URL }}
         run: |
           if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.force }}" = "true" ]; then
             python -m scripts.build_briefing --force
@@ -58,7 +59,7 @@ jobs:
       - name: Health ping on failure (backstop)
         if: failure()
         env:
-          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          NTFY_TOPIC: ${{ secrets.NTFY_SUB }}
         run: |
           if [ -n "${NTFY_TOPIC}" ]; then
             curl -s -H "Title: Briefing FAILED" -H "Priority: high" \
