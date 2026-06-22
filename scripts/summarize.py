@@ -75,6 +75,17 @@ def _allowed_urls(news):
     return urls
 
 
+def _clean_tldr(items):
+    """Fail-closed guard on the TL;DR: the model occasionally splits one story across several list
+    entries, shipping sentence fragments (e.g. ["... Iran following ", "encouraging", "talks ..."]).
+    Keep only complete-thought bullets — >=4 words AND ending in terminal punctuation. If that drops
+    everything, fall back to the raw bullets so the section is never empty. (Prompt asks for complete
+    sentences; this enforces it, since a prompt instruction is a label, not a mechanism.)"""
+    clean = [s.strip() for s in items
+             if (s or "").strip().endswith((".", "!", "?")) and len((s or "").split()) >= 4]
+    return clean or [s.strip() for s in items if (s or "").strip()]
+
+
 def _validate_items(items, allowed):
     """Drop any item whose URL was not in the fetched set (kills invented citations)."""
     out = []
@@ -110,7 +121,9 @@ def summarize(market, news, is_sunday, recap_context=""):
         "Write market_why / yield_why / vix_why as the reasons behind those moves, drawn from the "
         "business articles below.\n\n"
         f"ARTICLES (one JSON per line; cite only these URLs):\n{_articles_block(news)}\n\n"
-        "Produce: tldr (at most 3 bullets, the must-knows), market_why, yield_why, vix_why, "
+        "Produce: tldr (up to 3 of the single most important takeaways — each ONE complete, "
+        "self-contained sentence that reads on its own; never split a single story across multiple "
+        "bullets and never output a sentence fragment), market_why, yield_why, vix_why, "
         "tech (<=3 items, cutting-edge developments), world (<=3 items, globally significant only)."
     )
     if is_sunday:
@@ -125,7 +138,7 @@ def summarize(market, news, is_sunday, recap_context=""):
             print(f"summarize: model {model} failed ({e})")
             continue
         return {
-            "tldr": (nar.tldr or [])[:3],
+            "tldr": _clean_tldr(nar.tldr or [])[:3],
             "market_why": nar.market_why,
             "yield_why": nar.yield_why,
             "vix_why": nar.vix_why,
