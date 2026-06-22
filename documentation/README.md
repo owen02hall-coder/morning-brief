@@ -17,7 +17,7 @@ documentation folder. Developer docs live here in `documentation/` to avoid poll
 
 - `architecture.md` — system overview, data flow, modules, key design decisions, the briefing.json
   schema, and entry points.
-- `integrations.md` — every external service (FRED, Gemini, ntfy, RSS, GitHub Pages and Actions,
+- `integrations.md` — every external service (Yahoo Finance, Gemini, ntfy, RSS, GitHub Pages and Actions,
   and the v2-only Twelve Data), what each is used for, where it is invoked, and the env var names.
 - `operations.md` — scheduling, one-time deployment, runtime behavior, monitoring, failure modes,
   regression tests, and cost.

@@ -2,7 +2,7 @@
 title: Integrations
 source_files: [scripts/data/market.py, scripts/data/news.py, scripts/summarize.py, scripts/notify.py, scripts/config.py, .github/workflows/briefing.yml]
 entry_points: [GEMINI_API_KEY, NTFY_TOPIC, PAGES_URL, TWELVEDATA_API_KEY]
-last_verified: 2026-06-16
+last_verified: 2026-06-22
 ---
 
 # Integrations
@@ -10,16 +10,20 @@ last_verified: 2026-06-16
 All external services are free tiers. Secrets are passed as environment variables. No credential
 values live in the repo. Environment variable names only are listed here.
 
-## FRED (Federal Reserve Economic Data)
+## Yahoo Finance (chart API)
 
 - Used for: the four headline market numbers (S&P 500, Nasdaq Composite, VIX, 10-year Treasury yield).
-- Auth: none. Keyless CSV endpoint.
-- Invoked in: `scripts/data/market.py` (`_fred_series`).
-- Endpoint shape: `https://fred.stlouisfed.org/graph/fredgraph.csv?id=<SERIES>&cosd=<start-date>`.
-- Series ids: `SP500`, `NASDAQCOM`, `VIXCLS`, `DGS10` (see `config.FRED_SERIES`).
-- Notes: a short recent window is requested (`config.FRED_WINDOW_DAYS`) so payloads stay small and
-  fast. Full-history fetches were timing out. Values publish with a 1 to 2 business day lag, so they
-  are the latest available close. Holiday rows are blank and skipped.
+- Auth: none. Keyless chart endpoint (unlike most free tiers, it includes indices).
+- Invoked in: `scripts/data/market.py` (`_yahoo_series`).
+- Endpoint shape: `https://<query1|query2>.finance.yahoo.com/v8/finance/chart/<SYMBOL>?range=5d&interval=1d`.
+- Symbols: `^GSPC`, `^IXIC`, `^VIX`, `^TNX` (see `config.YAHOO_SYMBOLS`); `^TNX` is the 10-yr yield in
+  percent. The last two daily closes give value + day-over-day change.
+- Notes: a browser-like User-Agent is required. The client tries the query1 then query2 host and uses
+  a short `config.MARKET_TIMEOUT` so a hung source fails fast instead of risking the job timeout.
+  Missing/null closes (holidays/gaps) are skipped; any failure degrades that number to None.
+- History: v1 originally used FRED's keyless CSV, which went unreachable from CI (and locally); Stooq's
+  keyless CSV is now behind a JS anti-bot challenge — Yahoo's chart API was the working keyless source
+  that still includes indices.
 
 ## Google Gemini
 
@@ -67,7 +71,7 @@ values live in the repo. Environment variable names only are listed here.
 - Auth: env var `TWELVEDATA_API_KEY`. Free tier limit is 8 credits per minute and 800 per day.
 - Client: `scripts/data/twelvedata.py`. Not imported by the v1 pipeline.
 - Reason it is not used in v1: the free tier gates index symbols, and a daily 600-constituent pull
-  exceeds the per-minute limit. v1 uses FRED instead.
+  exceeds the per-minute limit. v1 uses the keyless Yahoo Finance chart API instead.
 
 ## Environment variables (names only)
 

@@ -42,17 +42,16 @@ TECH_FEEDS = {
 }
 
 # --- Market data ------------------------------------------------------------
-# All four headline numbers come from FRED's keyless CSV (prior-close, day-over-day). We request
-# only a short recent window (cosd) so payloads stay tiny and fast. "Nasdaq" = the Nasdaq Composite
-# (NASDAQCOM); the Nasdaq-100 index is not on a free tier (Twelve Data free excludes indices), and
-# the Composite is the standard free "Nasdaq" proxy for an overview.
-FRED_CSV = "https://fred.stlouisfed.org/graph/fredgraph.csv?id={series}&cosd={cosd}"
-FRED_SERIES = {"sp500": "SP500", "ndx": "NASDAQCOM", "vix": "VIXCLS", "ten_year": "DGS10"}
-FRED_WINDOW_DAYS = 45            # only the last ~45 days; enough for the last two observations
-FRED_TIMEOUT = 20               # fail fast: a hung FRED must not blow the 10-min job timeout. A
-                                # healthy fredgraph.csv for a 45-day window answers in a few seconds;
-                                # worst case is 4 series x 2 attempts x 20s ~= 2.7 min, well under cap.
-                                # Markets degrade to None gracefully, so the AI summary still ships.
+# All four headline numbers come from Yahoo Finance's keyless chart API (prior-close, day-over-day).
+# Unlike most free tiers (incl. Twelve Data), Yahoo's chart endpoint includes indices, so it serves
+# all four with no key. "Nasdaq" = the Nasdaq Composite (^IXIC); ^TNX is the 10-yr yield in percent.
+# (FRED's keyless CSV was the prior source; it went unreachable from CI, so we moved to Yahoo.)
+YAHOO_CHART = "https://{host}.finance.yahoo.com/v8/finance/chart/{symbol}?range=5d&interval=1d"
+YAHOO_SYMBOLS = {"sp500": "^GSPC", "ndx": "^IXIC", "vix": "^VIX", "ten_year": "^TNX"}
+MARKET_TIMEOUT = 20             # fail fast: a hung market source must not blow the 10-min job timeout.
+                                # Yahoo answers in ~1s; worst case 4 symbols x 2 attempts x 2 hosts x
+                                # 20s is bounded well under the cap. Markets degrade to None
+                                # gracefully, so the AI summary still ships if the source is down.
 
 # --- Notifications / hosting ------------------------------------------------
 # Public Pages URL of the PWA; set as an env var/secret at deploy time.
