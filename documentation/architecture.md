@@ -1,8 +1,8 @@
 ---
 title: Architecture
-source_files: [scripts/, docs/, .github/workflows/briefing.yml]
-entry_points: ["python -m scripts.build_briefing", "scripts/build_briefing.py:main"]
-last_verified: 2026-06-16
+source_files: [scripts/, docs/, .github/workflows/briefing.yml, .github/workflows/heartbeat.yml]
+entry_points: ["python -m scripts.build_briefing", "scripts/build_briefing.py:main", "python -m scripts.heartbeat"]
+last_verified: 2026-06-22
 ---
 
 # Architecture
@@ -22,7 +22,7 @@ is sent. Everything runs in the cloud so the user's devices can be off. Cost is 
 
 ```
 GitHub Actions (cron, UTC) --> python -m scripts.build_briefing
-  hour-gate (only the ~6am America/Denver run does work; the other no-ops)
+  date-gate (build once/day: first cron that lands builds; if last_run == today the rest no-op)
   -> state.load()                          state/state.json
   -> market.get_market()                   FRED keyless CSV (S&P 500, Nasdaq Composite, VIX, 10-yr)
   -> news.get_news()                       RSS feeds (world, business, tech), per-feed isolation
@@ -35,14 +35,19 @@ GitHub Actions (cron, UTC) --> python -m scripts.build_briefing
   -> notify.morning_ready() + health ping if degraded
   -> git commit + push (docs/ and state/)  --> GitHub Pages redeploys
 PWA (docs/app.js): fetch briefing.json (network-first) -> render; archive + search; staleness banner
+
+Heartbeat (independent cron): python -m scripts.heartbeat
+  -> fetch LIVE docs/briefing.json from Pages -> ntfy + non-zero exit if older than HEARTBEAT_STALE_HOURS
 ```
 
 ## Modules
 
-- `scripts/config.py`: all tunables. Timezone, run hour, model id and fallback, news window, RSS
-  feed lists, FRED series, paths, staleness threshold. No secrets.
-- `scripts/build_briefing.py`: orchestrator and CLI. Hour-gate, flag handling, assembly, writing,
+- `scripts/config.py`: all tunables. Timezone, model id and fallback, news window, RSS feed lists,
+  FRED series, paths, staleness + heartbeat thresholds. No secrets.
+- `scripts/build_briefing.py`: orchestrator and CLI. Date-gate, flag handling, assembly, writing,
   archive index, top-level failure handling.
+- `scripts/heartbeat.py`: independent liveness check. Fetches the live Pages briefing and pings ntfy
+  (and exits non-zero) if it is stale or unreachable. Run by `.github/workflows/heartbeat.yml`.
 - `scripts/data/market.py`: the four headline numbers from FRED, recent-window fetch, last-two
   observations for value and day change. Each value may be None.
 - `scripts/data/news.py`: RSS fetch and parse into world, business, tech candidate lists. Per-feed
@@ -90,11 +95,12 @@ latest close.
 
 ## Entry points
 
-- `python -m scripts.build_briefing` runs the daily flow with the hour-gate.
-- `--force` runs real work now regardless of the hour (manual CI run).
-- `--local` runs now and skips the hour-gate (dev).
+- `python -m scripts.build_briefing` runs the daily flow with the once-per-day date-gate.
+- `--force` bypasses the date-gate and builds now (manual CI run).
+- `--local` bypasses the date-gate and builds now (dev).
 - `--spine` prints market numbers and news counts, writes nothing.
 - `--no-notify` skips the ntfy pushes.
+- `python -m scripts.heartbeat` checks the live page freshness (run by its own workflow).
 
 ## Scope
 

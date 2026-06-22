@@ -1,13 +1,13 @@
 """Orchestrator for the morning briefing (v1 core).
 
 Run modes:
-  python -m scripts.build_briefing            # CI: only does work if it's ~6am America/Denver
-  python -m scripts.build_briefing --force    # run real work now regardless of the hour (CI manual)
-  python -m scripts.build_briefing --local    # run now, skip the hour-gate (local dev)
+  python -m scripts.build_briefing            # CI: builds once per day (first cron that lands; rest no-op)
+  python -m scripts.build_briefing --force    # bypass the once-per-day gate and build now (CI manual)
+  python -m scripts.build_briefing --local    # bypass the once-per-day gate and build now (local dev)
   python -m scripts.build_briefing --spine     # quick check: print market numbers + news counts
   python -m scripts.build_briefing --no-notify # skip ntfy pushes
 
-Flow: hour-gate -> load state -> market (FRED, all four numbers) -> news (RSS) -> Gemini summary
+Flow: date-gate -> load state -> market (FRED, all four numbers) -> news (RSS) -> Gemini summary
 (with a no-AI fallback) -> write briefing.json + archive + state -> notify. The whole run is
 wrapped so an unhandled failure sends a high-priority health ping and exits non-zero.
 """
@@ -117,8 +117,12 @@ def _write_archive_index():
         json.dump(entries, f, indent=2)
 
 
-def run(do_notify=True):
+def run(do_notify=True, today=None):
     now = _now()
+    # `today` is the gate's date, passed from main() so the build decision and the saved state stamp
+    # use one identical date (no midnight-cross skew between two _now() reads). Falls back for --force/
+    # --local/direct callers that don't gate.
+    today = today or now.date().isoformat()
     st = state.load()
 
     market = market_mod.get_market()
@@ -130,7 +134,7 @@ def run(do_notify=True):
 
     briefing = _assemble(now, market, news, narrative, ai_ok)
     _write(briefing)
-    state.save(st, now.date().isoformat())
+    state.save(st, today)
 
     # health: report any degraded section (low priority); the run still succeeded
     degraded = [k for k, v in briefing["data_availability"].items()
@@ -168,14 +172,16 @@ def main(argv):
     force = "--force" in argv
     do_notify = "--no-notify" not in argv and not local
 
+    today = _now().date().isoformat()
     if not (local or force):
-        # CI default: only the ~6am-local cron run does real work; the other no-ops cleanly.
-        if _now().hour != config.RUN_HOUR_LOCAL:
-            print(f"not {config.RUN_HOUR_LOCAL}:00 {config.TIMEZONE} — no-op exit")
+        # Once-per-day gate: whichever cron lands first that day builds; the rest (and retries) no-op.
+        # De-duping by DATE, not by hour, makes GitHub's multi-hour schedule delays irrelevant.
+        if state.load().get("last_run") == today:
+            print("no-op exit (already built today)")
             return 0
 
     try:
-        run(do_notify=do_notify)
+        run(do_notify=do_notify, today=today)
         return 0
     except Exception as e:
         traceback.print_exc()
