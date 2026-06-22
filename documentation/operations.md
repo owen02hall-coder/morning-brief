@@ -51,6 +51,10 @@ How the briefing is scheduled, deployed, monitored, and recovered.
 - Health ping: if any section is unavailable, a low-priority "degraded" ntfy lists the sections. If
   the run crashes, the Python layer sends a high-priority "FAILED" ntfy. A workflow `if: failure()`
   step sends a backstop ntfy in case the crash happens before Python can.
+- Market blackout escalation: the build tracks `markets_last_ok` in `state.json`. A single day with
+  all four numbers missing is a low-priority "degraded" ping, but once they've been unavailable for
+  `MARKETS_STALE_DAYS` (2) days running — a dead source, not a blip — it escalates to a high-priority
+  ntfy. This exists because the prior source (FRED) died silently and degraded for days unnoticed.
 - Heartbeat: an independent workflow (`.github/workflows/heartbeat.yml`, daily at 03:00 UTC) fetches
   the LIVE Pages `briefing.json` and, if it is older than `HEARTBEAT_STALE_HOURS` (30h) or
   unreachable, sends a high-priority ntfy AND fails the job (so its own `if: failure()` curl is a
