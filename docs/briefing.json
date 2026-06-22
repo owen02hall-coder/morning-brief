@@ -1,66 +1,64 @@
 {
-  "generated_at": "2026-06-22T11:37:47.150625-06:00",
+  "generated_at": "2026-06-22T11:57:21.329791-06:00",
   "date": "2026-06-22",
   "tldr": [
-    "Major US tech stocks declined amid investor concerns over AI talent retention at companies like Alphabet and a slump in SpaceX.",
-    "Talks between the US and Iran made progress, with Iran agreeing to the return of UN nuclear inspectors and the US planning to lift oil sanctions.",
-    "Extreme heat warnings were issued across Britain and other parts of Europe, leading to disruptions in essential services like rail travel."
+    "AI summary unavailable today \u2014 showing raw market numbers and headlines."
   ],
   "market": {
     "sp500": {
-      "value": 7471.5,
-      "change": -29.08,
+      "value": 7479.89,
+      "change": -20.69,
       "asof": "2026-06-22"
     },
     "ndx": {
-      "value": 26185.15,
-      "change": -332.78,
+      "value": 26243.15,
+      "change": -274.78,
       "asof": "2026-06-22"
     },
-    "why": "The S&P 500 and Nasdaq Composite closed lower as US tech megacaps slid, primarily due to investor concerns over artificial intelligence expenses and high-profile AI talent departures from companies like Alphabet, which experienced a significant market-cap wipeout."
+    "why": ""
   },
   "yield_10y": {
-    "value": 4.51,
+    "value": 4.52,
     "change": 0.06,
     "asof": "2026-06-22",
-    "why": "The 10-year Treasury yield increased, with investors anticipating forthcoming key inflation data."
+    "why": ""
   },
   "vix": {
-    "value": 17.24,
-    "change": 0.84,
+    "value": 17.33,
+    "change": 0.93,
     "asof": "2026-06-22",
-    "why": "The VIX rose, reflecting heightened market uncertainty, likely influenced by the downturn in major tech stocks."
+    "why": ""
   },
   "tech": [
     {
-      "summary": "Google's DeepMind AI lab is partnering with A24, investing approximately $75 million to develop new AI movie production technologies aimed at expanding filmmakers' storytelling capabilities.",
+      "summary": "Google invests in A24 to build AI movie tools",
       "source": "The Verge",
       "url": "https://www.theverge.com/entertainment/953596/google-deepmind-a24-studio-ai-partnership"
     },
     {
-      "summary": "AMD released its FSR 4.1 upscaling technology for Radeon RX 7000-series GPUs, offering improved image quality and smoother gameplay for computers with these older graphics cards.",
-      "source": "The Verge",
-      "url": "https://www.theverge.com/news/953664/amd-fsr-4-1-upscaling-rx-7000-series-gpus-rdna-3"
+      "summary": "Steam Machine Game Testing",
+      "source": "Hacker News",
+      "url": "https://www.lttlabs.com/articles/2026/06/22/the-newell-nucleus-steam-machine-ltt-companion-article"
     },
     {
-      "summary": "A US military exercise in space commenced, focusing on the Space Force's goal to reduce the time required to field new satellites from years to mere weeks, days, or hours.",
+      "summary": "Doorbell cam filmed Tesla Autopilot crash that killed woman in her home",
       "source": "Ars Technica",
-      "url": "https://arstechnica.com/space/2026/06/a-us-military-exercise-in-space-got-underway-with-barely-anyone-noticing/"
+      "url": "https://arstechnica.com/tech-policy/2026/06/woman-killed-when-tesla-driver-using-autopilot-crashed-into-her-home/"
     }
   ],
   "world": [
     {
-      "summary": "UK Prime Minister Keir Starmer announced his resignation, with a new leader for the Labour party and prime minister expected to be in place before parliament reconvenes in September.",
+      "summary": "Andy Burnham sworn in as an MP after Keir Starmer resigns as prime minister - UK politics live",
       "source": "Guardian World",
       "url": "https://www.theguardian.com/politics/live/2026/jun/22/keir-starmer-resignation-timeable-andy-burnham-labour-leadership-prime-minister-latest-news-updates"
     },
     {
-      "summary": "Discussions between the US and Iran have progressed, with Iran agreeing to allow UN nuclear inspectors to return to the country as part of an agreement that could see Washington lift sanctions on Tehran's oil exports and reopen the Strait of Hormuz.",
+      "summary": "Canadian healthcare staff decry \u2018cruel hoax\u2019 after scam email promises paid day off",
       "source": "Guardian World",
-      "url": "https://www.theguardian.com/world/2026/jun/22/iran-us-talks-progress-pakistan-qatar-lebanon-israel"
+      "url": "https://www.theguardian.com/world/2026/jun/22/canadian-healthcare-staff-scam-email-paid-day-off"
     },
     {
-      "summary": "Extreme heat warnings have been issued across Britain, France, Italy, and Spain, with temperatures forecast to reach up to 40C in some areas, prompting advisories for rail passengers in the UK to travel only if essential due to expected disruptions.",
+      "summary": "Rail passengers told to only travel if essential amid red extreme heat warning",
       "source": "Guardian World",
       "url": "https://www.theguardian.com/business/2026/jun/22/rail-passengers-travel-heatwave-train-services-chiltern"
     }
@@ -74,6 +72,6 @@
     "news_world": true,
     "news_business": true,
     "news_tech": true,
-    "summary": "ok"
+    "summary": "unavailable"
   }
 }
