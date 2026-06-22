@@ -49,7 +49,10 @@ TECH_FEEDS = {
 FRED_CSV = "https://fred.stlouisfed.org/graph/fredgraph.csv?id={series}&cosd={cosd}"
 FRED_SERIES = {"sp500": "SP500", "ndx": "NASDAQCOM", "vix": "VIXCLS", "ten_year": "DGS10"}
 FRED_WINDOW_DAYS = 45            # only the last ~45 days; enough for the last two observations
-FRED_TIMEOUT = 45               # FRED can be slow; generous timeout + one retry in market.py
+FRED_TIMEOUT = 20               # fail fast: a hung FRED must not blow the 10-min job timeout. A
+                                # healthy fredgraph.csv for a 45-day window answers in a few seconds;
+                                # worst case is 4 series x 2 attempts x 20s ~= 2.7 min, well under cap.
+                                # Markets degrade to None gracefully, so the AI summary still ships.
 
 # --- Notifications / hosting ------------------------------------------------
 # Public Pages URL of the PWA; set as an env var/secret at deploy time.
