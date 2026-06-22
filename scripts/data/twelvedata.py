@@ -1,8 +1,8 @@
 """Minimal Twelve Data REST client.
 
-NOTE: NOT used by the v1 pipeline. v1 takes all four headline numbers from FRED (see
-scripts/data/market.py), because Twelve Data's free tier gates index symbols. This client is
-STAGED FOR v2 breadth (per-constituent quotes), where it will be extended to handle the
+NOTE: NOT used by the v1 pipeline. v1 takes all four headline numbers from Yahoo Finance's keyless
+chart API (see scripts/data/market.py), because Twelve Data's free tier gates index symbols. This
+client is STAGED FOR v2 breadth (per-constituent quotes), where it will be extended to handle the
 8-credits/minute free-tier limit. Kept here so v2 starts from a proven client shape.
 """
 import os

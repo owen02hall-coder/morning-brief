@@ -36,7 +36,7 @@ jobs:
 
       - name: Build briefing
         env:
-          # v1 uses FRED (keyless) + Gemini + ntfy. TWELVEDATA_API_KEY is NOT needed until v2 breadth.
+          # v1 uses Yahoo Finance chart API (keyless) + Gemini + ntfy. TWELVE_API_KEY is NOT needed until v2 breadth.
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           # Code reads env NTFY_TOPIC / PAGES_URL; the repo's secret/var are named NTFY_SUB / PAGE_URL.
           NTFY_TOPIC: ${{ secrets.NTFY_SUB }}

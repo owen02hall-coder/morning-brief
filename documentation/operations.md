@@ -62,7 +62,8 @@ How the briefing is scheduled, deployed, monitored, and recovered.
 
 - A dead RSS feed: skipped per-feed. If all world feeds are down, the world section reads
   "information not available" but the briefing still ships.
-- FRED slow or down: that number degrades to None and shows as unavailable. A retry is built in.
+- Yahoo slow or down: that number degrades to None and shows as unavailable. The client retries and
+  tries the query1/query2 hosts, with a short fail-fast timeout so it can't stall the build.
 - Gemini down: the model fallback runs, then the no-AI fallback (raw numbers and headlines). The day
   is never skipped.
 - A skipped or failed day: the PWA shows an age-based "could not refresh, last updated X" notice
@@ -79,7 +80,7 @@ How the briefing is scheduled, deployed, monitored, and recovered.
 
 ## Cost
 
-- Zero per month. FRED, RSS, ntfy, GitHub Pages, and GitHub Actions (public repo) are free. Gemini
+- Zero per month. Yahoo Finance, RSS, ntfy, GitHub Pages, and GitHub Actions (public repo) are free. Gemini
   runs on the free tier. The Gemini project must keep billing disabled to stay free.
 
 ## Local development

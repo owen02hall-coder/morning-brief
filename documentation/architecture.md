@@ -24,7 +24,7 @@ is sent. Everything runs in the cloud so the user's devices can be off. Cost is 
 GitHub Actions (cron, UTC) --> python -m scripts.build_briefing
   date-gate (build once/day: first cron that lands builds; if last_run == today the rest no-op)
   -> state.load()                          state/state.json
-  -> market.get_market()                   FRED keyless CSV (S&P 500, Nasdaq Composite, VIX, 10-yr)
+  -> market.get_market()                   Yahoo Finance chart API, keyless (S&P 500, Nasdaq Comp, VIX, 10-yr)
   -> news.get_news()                       RSS feeds (world, business, tech), per-feed isolation
   -> summarize.summarize()                 Gemini structured output (numbers injected as facts)
   -> assemble briefing dict
@@ -43,12 +43,12 @@ Heartbeat (independent cron): python -m scripts.heartbeat
 ## Modules
 
 - `scripts/config.py`: all tunables. Timezone, model id and fallback, news window, RSS feed lists,
-  FRED series, paths, staleness + heartbeat thresholds. No secrets.
+  Yahoo symbols, paths, staleness + heartbeat thresholds. No secrets.
 - `scripts/build_briefing.py`: orchestrator and CLI. Date-gate, flag handling, assembly, writing,
   archive index, top-level failure handling.
 - `scripts/heartbeat.py`: independent liveness check. Fetches the live Pages briefing and pings ntfy
   (and exits non-zero) if it is stale or unreachable. Run by `.github/workflows/heartbeat.yml`.
-- `scripts/data/market.py`: the four headline numbers from FRED, recent-window fetch, last-two
+- `scripts/data/market.py`: the four headline numbers from Yahoo's chart API, recent-window fetch, last-two
   observations for value and day change. Each value may be None.
 - `scripts/data/news.py`: RSS fetch and parse into world, business, tech candidate lists. Per-feed
   try/except, time-window cutoff, dedupe, per-bucket cap.
@@ -88,9 +88,9 @@ weekly_recap : string or null (Sundays only)
 data_availability : map of section -> true/false or "ok"/"unavailable"
 ```
 
-Note: `market.ndx` is the Nasdaq Composite (FRED NASDAQCOM), labeled "Nasdaq" in the UI. Each
-number carries its own `asof` date. FRED publishes with a short lag, so values are the latest
-available close, not live or intraday. The UI shows the as-of date and the AI describes them as the
+Note: `market.ndx` is the Nasdaq Composite (Yahoo `^IXIC`), labeled "Nasdaq" in the UI. Each
+number carries its own `asof` date. Values are the latest daily close (last two closes give the
+day-over-day change), not live or intraday. The UI shows the as-of date and the AI describes them as the
 latest close.
 
 ## Entry points

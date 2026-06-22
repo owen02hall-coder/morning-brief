@@ -22,7 +22,7 @@ Breadth / oversold-alert (BPSPX-style) is a planned v2 fast-follow — see
 
 ```
 GitHub Actions (daily cron, UTC) --> python -m scripts.build_briefing
-  FRED keyless CSV (S&P 500, Nasdaq Composite, VIX, 10-yr)  +  RSS feeds (news)
+  Yahoo Finance chart API, keyless (S&P 500, Nasdaq Composite, VIX, 10-yr)  +  RSS feeds (news)
   --> Gemini writes a structured, cited briefing  (numbers injected as facts, never invented)
   --> writes docs/briefing.json + docs/archive/<date>.json + state/state.json, commits them
   --> GitHub Pages serves the PWA; ntfy pushes "ready"

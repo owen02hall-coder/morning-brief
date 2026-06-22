@@ -7,7 +7,7 @@ Run modes:
   python -m scripts.build_briefing --spine     # quick check: print market numbers + news counts
   python -m scripts.build_briefing --no-notify # skip ntfy pushes
 
-Flow: date-gate -> load state -> market (FRED, all four numbers) -> news (RSS) -> Gemini summary
+Flow: date-gate -> load state -> market (Yahoo, all four numbers) -> news (RSS) -> Gemini summary
 (with a no-AI fallback) -> write briefing.json + archive + state -> notify. The whole run is
 wrapped so an unhandled failure sends a high-priority health ping and exits non-zero.
 """
