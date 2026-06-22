@@ -1,7 +1,7 @@
 ---
 title: Integrations
 source_files: [scripts/data/market.py, scripts/data/news.py, scripts/summarize.py, scripts/notify.py, scripts/config.py, .github/workflows/briefing.yml]
-entry_points: [GEMINI_API_KEY, NTFY_TOPIC, PAGES_URL, TWELVEDATA_API_KEY]
+entry_points: [GEMINI_API_KEY, NTFY_SUB, PAGE_URL, TWELVE_API_KEY]
 last_verified: 2026-06-22
 ---
 
@@ -41,7 +41,9 @@ values live in the repo. Environment variable names only are listed here.
 
 - Used for: the morning "ready" push and a self-monitoring health ping.
 - Auth: none. The topic name is the access control, so it must be long and unguessable.
-- Config: env var `NTFY_TOPIC`. Invoked in `scripts/notify.py` (POST to `https://ntfy.sh/<topic>`).
+- Config: the code reads env var `NTFY_TOPIC`; the GitHub secret is named `NTFY_SUB` and the
+  workflows map `secrets.NTFY_SUB -> NTFY_TOPIC`. Invoked in `scripts/notify.py` (POST to
+  `https://ntfy.sh/<topic>`). If `NTFY_TOPIC` is unset every push is silently skipped.
 - Headers used: Title, Priority, Click (the tap-through URL). The morning push taps through to
   `PAGES_URL`.
 - Privacy note: anyone who knows the topic can read and publish to it. This is acceptable for a
@@ -61,22 +63,34 @@ values live in the repo. Environment variable names only are listed here.
 
 - Used for: hosting the PWA (Pages) and running the daily job (Actions).
 - Auth: the built-in `GITHUB_TOKEN` pushes the daily commit. No personal access token.
-- Config: repo variable `PAGES_URL` (the public site URL, used in the notification Click header).
+- Config: the code reads env var `PAGES_URL` (the public site URL, used in the notification Click
+  header and by the heartbeat); the GitHub repo variable is named `PAGE_URL` and the workflows map
+  `vars.PAGE_URL -> PAGES_URL`. If unset it falls back to a placeholder URL.
 - Notes: the repo must be public for free Pages and unlimited Actions minutes. Pages serves from
   branch `main`, folder `/docs`.
 
 ## Twelve Data (v2 only)
 
 - Used for: nothing in v1. Staged for v2 breadth (per-constituent quotes).
-- Auth: env var `TWELVEDATA_API_KEY`. Free tier limit is 8 credits per minute and 800 per day.
+- Auth: the client reads env var `TWELVEDATA_API_KEY`; the GitHub secret is named `TWELVE_API_KEY`
+  (a v2 workflow will map `secrets.TWELVE_API_KEY -> TWELVEDATA_API_KEY`). Free tier limit is 8
+  credits per minute and 800 per day.
 - Client: `scripts/data/twelvedata.py`. Not imported by the v1 pipeline.
 - Reason it is not used in v1: the free tier gates index symbols, and a daily 600-constituent pull
   exceeds the per-minute limit. v1 uses the keyless Yahoo Finance chart API instead.
 
-## Environment variables (names only)
+## Environment variables and GitHub config (names only)
 
-- `GEMINI_API_KEY` (v1, required)
-- `NTFY_TOPIC` (v1, required for notifications)
-- `PAGES_URL` (v1, repo variable, tap-through link)
-- `MODEL_ID` (optional override of the Gemini model)
-- `TWELVEDATA_API_KEY` (v2 only)
+The code reads env vars; the workflows source those from GitHub secrets/variables, whose names differ
+for ntfy, Pages, and Twelve Data. Configure the GitHub name; the workflow maps it to the env var.
+
+| GitHub secret/variable | Env var the code reads | Scope |
+| --- | --- | --- |
+| Secret `GEMINI_API_KEY` | `GEMINI_API_KEY` | v1, required |
+| Secret `NTFY_SUB` | `NTFY_TOPIC` | v1, required for notifications |
+| Variable `PAGE_URL` | `PAGES_URL` | v1, tap-through link + heartbeat target |
+| Secret `TWELVE_API_KEY` | `TWELVEDATA_API_KEY` | v2 only |
+| (none) | `MODEL_ID` | optional Gemini model override |
+
+A name mismatch is silent: `notify.py` skips the push when `NTFY_TOPIC` is empty, and `PAGES_URL`
+falls back to a placeholder. The mapping lives in both `briefing.yml` and `heartbeat.yml`.

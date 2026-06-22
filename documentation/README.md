@@ -2,7 +2,7 @@
 title: Documentation Index
 source_files: [documentation/]
 entry_points: [documentation/architecture.md, documentation/integrations.md, documentation/operations.md]
-last_verified: 2026-06-16
+last_verified: 2026-06-22
 ---
 
 # Documentation

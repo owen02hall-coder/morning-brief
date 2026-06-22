@@ -31,8 +31,8 @@ GitHub Actions (cron, UTC) --> python -m scripts.build_briefing
   -> write docs/briefing.json
             docs/archive/<date>.json
             docs/archive/index.json
-            state/state.json (last_run rewritten -> daily renewing commit)
-  -> notify.morning_ready() + health ping if degraded
+            state/state.json (last_run + markets_last_ok; last_run rewritten daily -> renewing commit)
+  -> notify.morning_ready() + health ping if degraded (escalates high-priority if markets blank >= MARKETS_STALE_DAYS)
   -> git commit + push (docs/ and state/)  --> GitHub Pages redeploys
 PWA (docs/app.js): fetch briefing.json (network-first) -> render; archive + search; staleness banner
 
@@ -54,9 +54,11 @@ Heartbeat (independent cron): python -m scripts.heartbeat
   try/except, time-window cutoff, dedupe, per-bucket cap.
 - `scripts/data/twelvedata.py`: a REST client. NOT used in v1. Staged for v2 breadth.
 - `scripts/summarize.py`: Gemini call with a response schema. Numbers are passed as facts and the
-  model writes only the prose. URLs are validated against the fetched set. Model and no-AI
-  fallbacks. Returns (narrative, ok).
-- `scripts/state.py`: load and save `state/state.json`. `last_run` is always rewritten.
+  model writes only the prose. URLs are validated against the fetched set. `_clean_tldr` drops
+  TL;DR fragments (keeps complete sentences) so a malformed model response cannot ship a broken
+  headline. Model and no-AI fallbacks. Returns (narrative, ok).
+- `scripts/state.py`: load and save `state/state.json` (`last_run`, `markets_last_ok`). `last_run`
+  is always rewritten; `markets_last_ok` advances only on a day all four market numbers are present.
 - `scripts/notify.py`: ntfy publish for the morning push and the health ping.
 
 ## Key design decisions
@@ -72,6 +74,10 @@ Heartbeat (independent cron): python -m scripts.heartbeat
   auto-disabling after 60 idle days.
 - The archive needs an index. GitHub Pages cannot list a directory, so the pipeline writes
   `docs/archive/index.json` for the PWA to read.
+- Failures must be loud, not silent. Three independent monitors cover the failure classes that have
+  actually occurred: the build's own crash/degraded ntfy; a sustained market blackout escalating to
+  high-priority after `MARKETS_STALE_DAYS` (a dead source degrades silently otherwise); and an
+  independent heartbeat workflow checking the live page (catches a build that stopped or no-opped).
 
 ## briefing.json schema
 

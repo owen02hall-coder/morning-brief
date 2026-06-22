@@ -27,13 +27,18 @@ How the briefing is scheduled, deployed, monitored, and recovered.
 1. Create a public GitHub repo and push this code. Public is required for free Pages and unlimited
    Actions minutes. The page is world-readable and contains only public news.
 2. Repo Settings, Pages: Source "Deploy from a branch", branch `main`, folder `/docs`.
-3. Repo Settings, Secrets and variables, Actions:
-   - Secret `GEMINI_API_KEY`
-   - Secret `NTFY_TOPIC`
-   - Variable `PAGES_URL` set to the Pages URL
+3. Repo Settings, Secrets and variables, Actions. Names must match what `briefing.yml` /
+   `heartbeat.yml` reference (the workflows map the GitHub names into the env vars the code reads):
+   - Secret `GEMINI_API_KEY` (read as `GEMINI_API_KEY`)
+   - Secret `NTFY_SUB` (mapped to the `NTFY_TOPIC` env var the code reads)
+   - Variable `PAGE_URL` set to the Pages URL (mapped to the `PAGES_URL` env var)
+   - A name mismatch here is silent: a missing `NTFY_TOPIC` just skips every push, and a missing
+     `PAGES_URL` falls back to a placeholder. If you rename a secret/var, update both workflows.
 4. Install the ntfy app on the phone and subscribe to the same topic.
 5. Actions tab, run the workflow once with "force" on. Then open the Pages URL on the phone and use
    Add to Home Screen.
+6. The heartbeat workflow needs no extra setup; it reuses the same `NTFY_SUB` secret and `PAGE_URL`
+   variable and starts its schedule once it is on the default branch.
 
 ## Runtime behavior
 
