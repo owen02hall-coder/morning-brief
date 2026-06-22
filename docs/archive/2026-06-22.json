@@ -1,48 +1,50 @@
 {
-  "generated_at": "2026-06-22T10:40:44.442408-06:00",
+  "generated_at": "2026-06-22T10:55:55.182969-06:00",
   "date": "2026-06-22",
   "tldr": [
-    "AI summary unavailable today \u2014 showing raw market numbers and headlines."
+    "The US has partially lifted oil sanctions on Iran following ",
+    "encouraging",
+    "talks, with Iran agreeing to the return of UN nuclear inspectors."
   ],
   "market": {
     "sp500": null,
     "ndx": null,
-    "why": ""
+    "why": "The market figures for the S&P 500 and Nasdaq Composite were unavailable at the time of this briefing, therefore no explanation for their movements can be provided."
   },
   "yield_10y": null,
   "vix": null,
   "tech": [
     {
-      "summary": "RingConn&#8217;s Lord of the Rings promotion assumes smart ring wearers want to be like Gollum",
-      "source": "The Verge",
-      "url": "https://www.theverge.com/gadgets/953655/ringconn-lord-of-the-rings"
+      "summary": "The US Space Force initiated a military exercise designed to significantly reduce the time needed to deploy new satellites, aiming to cut the process from years to potentially hours.",
+      "source": "Ars Technica",
+      "url": "https://arstechnica.com/space/2026/06/a-us-military-exercise-in-space-got-underway-with-barely-anyone-noticing/"
     },
     {
-      "summary": "AMD releases FSR 4.1 upscaling for older graphics cards",
-      "source": "The Verge",
-      "url": "https://www.theverge.com/news/953664/amd-fsr-4-1-upscaling-rx-7000-series-gpus-rdna-3"
+      "summary": "A new analysis suggests that Claude Code's ",
+      "source": "Hacker News",
+      "url": "https://patrickmccanna.net/the-text-in-claude-codes-extended-thinking-output-is-not-authentic/"
     },
     {
-      "summary": "The Nintendo Switch 2 is up to $50 off for Prime Day",
-      "source": "The Verge",
-      "url": "https://www.theverge.com/gadgets/948292/nintendo-switch-2-deal-sale-woot"
+      "summary": "Developers have introduced Moebius, a 0.2 billion parameter image inpainting model that reportedly achieves performance levels typically seen in models 50 times larger.",
+      "source": "Hacker News",
+      "url": "https://hustvl.github.io/Moebius/"
     }
   ],
   "world": [
     {
-      "summary": "Middle East crisis live: US-Iran talks laid \u2018very good foundation for a successful final deal\u2019, says Vance",
-      "source": "Guardian World",
-      "url": "https://www.theguardian.com/world/live/2026/jun/22/middle-east-crisis-iran-us-peace-talks-switzerland-strait-of-hormuz-latest-news-updates"
+      "summary": "The United States partially lifted oil sanctions on Iran, a move that follows ",
+      "source": "Al Jazeera",
+      "url": "https://www.aljazeera.com/news/2026/6/22/us-partially-lifts-iran-oil-sanctions-amid-encouraging-talks?traffic_source=rss"
     },
     {
-      "summary": "Iran agrees to UN nuclear inspectors\u2019 return as part of agreement with US",
-      "source": "Guardian World",
-      "url": "https://www.theguardian.com/world/2026/jun/22/iran-us-talks-progress-pakistan-qatar-lebanon-israel"
-    },
-    {
-      "summary": "Red heat alerts issued in France, Italy and Spain as 40C temperatures forecast",
+      "summary": "Red heat alerts have been issued across France, Italy, and Spain, with temperatures predicted to reach 40C, and the UK's Network Rail is expected to impose speed restrictions, advising passengers to travel only if essential.",
       "source": "BBC World",
       "url": "https://www.bbc.com/news/articles/c0jy9g96086o?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "summary": "Ukrainian President Volodymyr Zelenskyy has pledged to ",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/world/live/2026/jun/22/zelenskyy-ukraine-russia-drones-europe-heatwave-trump-meloni-latest-news-updates"
     }
   ],
   "weekly_recap": null,
@@ -54,6 +56,6 @@
     "news_world": true,
     "news_business": true,
     "news_tech": true,
-    "summary": "unavailable"
+    "summary": "ok"
   }
 }
