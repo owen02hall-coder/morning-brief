@@ -16,7 +16,7 @@ import json
 import os
 import sys
 import traceback
-from datetime import datetime
+from datetime import date, datetime
 from zoneinfo import ZoneInfo
 
 from . import config, state, notify
@@ -27,6 +27,14 @@ from . import summarize as summarize_mod
 
 def _now():
     return datetime.now(ZoneInfo(config.TIMEZONE))
+
+
+def _days_since(iso_date, today_iso):
+    """Whole days between two YYYY-MM-DD strings, or None if the first is missing/unparseable."""
+    try:
+        return (date.fromisoformat(today_iso) - date.fromisoformat(iso_date)).days
+    except (TypeError, ValueError):
+        return None
 
 
 def _recap_context():
@@ -124,6 +132,7 @@ def run(do_notify=True, today=None):
     # --local/direct callers that don't gate.
     today = today or now.date().isoformat()
     st = state.load()
+    prev_markets_ok = st.get("markets_last_ok")   # last date all four market numbers were available
 
     market = market_mod.get_market()
     news = news_mod.get_news()
@@ -134,6 +143,13 @@ def run(do_notify=True, today=None):
 
     briefing = _assemble(now, market, news, narrative, ai_ok)
     _write(briefing)
+
+    # Track the last day markets were fully healthy, so a SUSTAINED blackout (a dead data source, the
+    # way FRED silently died) can be escalated loudly below instead of degrading unnoticed for days.
+    markets_ok = all(briefing["data_availability"].get(k)
+                     for k in ("sp500", "ndx", "vix", "ten_year"))
+    if markets_ok:
+        st = {**st, "markets_last_ok": today}
     state.save(st, today)
 
     # health: report any degraded section (low priority); the run still succeeded
@@ -147,6 +163,13 @@ def run(do_notify=True, today=None):
         notify.morning_ready(headline)
         if degraded:
             notify.health("degraded sections: " + ", ".join(degraded), ok=True)
+        # Loud escalation: markets blank for >= MARKETS_STALE_DAYS in a row means the source is likely
+        # down, not a one-day blip — page high-priority (a single bad day stays low-priority above).
+        if not markets_ok:
+            stale = _days_since(prev_markets_ok, today)
+            if stale is not None and stale >= config.MARKETS_STALE_DAYS:
+                notify.health(f"market data unavailable {stale} days running (last ok {prev_markets_ok}) "
+                              "— the market source may be down", ok=False)
 
     print(f"briefing written for {briefing['date']} (ai={'ok' if ai_ok else 'fallback'}, "
           f"degraded={degraded or 'none'})")

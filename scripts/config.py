@@ -67,6 +67,9 @@ STATE_PATH = os.path.join(REPO_ROOT, "state", "state.json")
 
 # --- Monitoring -------------------------------------------------------------
 STALE_HOURS = 28                     # client: the PWA shows "couldn't refresh" past this age
+MARKETS_STALE_DAYS = 2               # build pages HIGH-priority if all four market numbers have been
+                                     # unavailable this many days running (a dead source, not a 1-day
+                                     # blip). A single bad day stays a low-priority "degraded" ping.
 HEARTBEAT_STALE_HOURS = 30           # server: heartbeat.yml pages if the LIVE page is older than this.
                                      # > 24h + GitHub's worst observed schedule jitter (~9h, on the
                                      # build AND on the heartbeat itself) so a healthy-but-jittery day
