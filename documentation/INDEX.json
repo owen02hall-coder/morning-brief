@@ -6,9 +6,9 @@
     {
       "path": "documentation/architecture.md",
       "title": "Architecture",
-      "summary": "System overview, data flow, modules, key design decisions, briefing.json schema, CLI entry points.",
-      "source_files": ["scripts/", "docs/", ".github/workflows/briefing.yml"],
-      "entry_points": ["python -m scripts.build_briefing", "scripts/build_briefing.py:main"]
+      "summary": "System overview, data flow, modules, key design decisions (incl. the three monitors), briefing.json schema, CLI entry points.",
+      "source_files": ["scripts/", "docs/", ".github/workflows/briefing.yml", ".github/workflows/heartbeat.yml"],
+      "entry_points": ["python -m scripts.build_briefing", "scripts/build_briefing.py:main", "python -m scripts.heartbeat"]
     },
     {
       "path": "documentation/integrations.md",
@@ -20,9 +20,9 @@
     {
       "path": "documentation/operations.md",
       "title": "Operations",
-      "summary": "Scheduling and DST, one-time deployment, runtime, monitoring, failure modes and recovery, regression tests, cost.",
-      "source_files": [".github/workflows/briefing.yml", "scripts/build_briefing.py", "scripts/notify.py", "scripts/briefing-assumptions/"],
-      "entry_points": [".github/workflows/briefing.yml", "scripts/build_briefing.py:main"]
+      "summary": "Scheduling and DST, one-time deployment (secret/var name mapping), runtime, monitoring (3 alarms), failure modes and recovery, regression tests, cost.",
+      "source_files": [".github/workflows/briefing.yml", ".github/workflows/heartbeat.yml", "scripts/build_briefing.py", "scripts/heartbeat.py", "scripts/notify.py", "scripts/briefing-assumptions/"],
+      "entry_points": [".github/workflows/briefing.yml", ".github/workflows/heartbeat.yml", "scripts/build_briefing.py:main", "scripts/heartbeat.py:main"]
     }
   ]
 }
