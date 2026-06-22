@@ -1,50 +1,45 @@
 {
-  "generated_at": "2026-06-22T11:12:01.826436-06:00",
+  "generated_at": "2026-06-22T11:23:51.815064-06:00",
   "date": "2026-06-22",
   "tldr": [
-    "US and Iran held talks that laid a \"very good foundation for a successful final deal,\" with Iran agreeing to the return of UN nuclear inspectors and the US partially lifting oil sanctions.",
-    "A severe heatwave with temperatures potentially reaching 40C is forecast across central and western Europe, leading to red heat alerts in France, Italy, and Spain and disrupting rail services in Britain.",
-    "Alphabet's stock saw a significant market-cap decline following high-profile AI researcher departures and broader investor concerns regarding AI expenses in the tech sector."
+    "Discussions between the U.S. and Iran have advanced, resulting in the partial lifting of U.S. oil sanctions and Iran's agreement to allow UN nuclear inspectors back into the country.",
+    "Ukrainian President Zelenskyy has pledged to \"bring war back to Russia\" following drone attacks towards Moscow.",
+    "A significant heatwave is impacting central and western Europe, leading to extreme heat alerts and disruptions to rail services in Britain."
   ],
   "market": {
     "sp500": null,
     "ndx": null,
-    "why": "unavailable"
+    "why": "U.S. tech megacap stocks experienced a slide, driven by concerns over AI expenses and the departure of high-profile AI researchers from companies like Alphabet, which saw a significant market-cap wipeout. This indicates investor apprehension regarding the competition for AI talent and the financial implications of AI development. (Source: MarketWatch, CNBC, Yahoo Finance)"
   },
   "yield_10y": null,
   "vix": null,
   "tech": [
     {
-      "summary": "Google's DeepMind AI lab is collaborating with A24, investing approximately $75 million, to develop new AI-powered movie production tools intended to expand filmmakers' storytelling capabilities.",
+      "summary": "Google's DeepMind AI lab is collaborating with A24 to develop new movie production technologies and has reportedly invested around $75 million into the studio. (Source: The Verge)",
       "source": "The Verge",
       "url": "https://www.theverge.com/entertainment/953596/google-deepmind-a24-studio-ai-partnership"
     },
     {
-      "summary": "AMD has released FSR Upscaling 4.1 for Radeon RX 7000-series GPUs, an update designed to enhance image quality and provide smoother gameplay for older graphics cards utilizing the RDNA 3 architecture.",
-      "source": "The Verge",
-      "url": "https://www.theverge.com/news/953664/amd-fsr-4-1-upscaling-rx-7000-series-gpus-rdna-3"
+      "summary": "Researchers have introduced Moebius, a 0.2B image inpainting model that achieves performance comparable to 10B-level models. (Source: Hacker News)",
+      "source": "Hacker News",
+      "url": "https://hustvl.github.io/Moebius/"
     },
     {
-      "summary": "Valve has launched its Steam Machine, a new living room-friendly PC gaming console priced at $1,049, and is now allowing users to construct their own customized Steam Machines using SteamOS for desktop.",
-      "source": "The Verge",
-      "url": "https://www.theverge.com/news/837022/valve-steam-machine-price-release-date"
+      "summary": "The National Science Foundation is reportedly redirecting funds from basic science research programs to support a new technology initiative. (Source: Hacker News)",
+      "source": "Hacker News",
+      "url": "https://www.science.org/content/article/exclusive-nsf-slashes-research-programs-support-new-tech-initiative-insiders-say"
     }
   ],
   "world": [
     {
-      "summary": "Talks between the US and Iran in Switzerland have established a \"very good foundation for a successful final deal,\" with Iran agreeing to readmit UN nuclear inspectors and the US partially lifting sanctions on Tehran's oil exports.",
-      "source": "Guardian World",
-      "url": "https://www.theguardian.com/world/live/2026/jun/22/middle-east-crisis-iran-us-peace-talks-switzerland-strait-of-hormuz-latest-news-updates"
-    },
-    {
-      "summary": "Ukrainian President Volodymyr Zelenskyy has vowed to \"bring war back to Russia\" after Moscow reported intercepting 300 Ukrainian drones and temporarily halted operations at a Moscow airport.",
+      "summary": "Ukrainian President Volodymyr Zelenskyy has stated his intention to \"bring war back to Russia\" following a series of drone attacks targeting Moscow. (Source: Guardian World)",
       "source": "Guardian World",
       "url": "https://www.theguardian.com/world/live/2026/jun/22/zelenskyy-ukraine-russia-drones-europe-heatwave-trump-meloni-latest-news-updates"
     },
     {
-      "summary": "A significant heatwave is impacting central and western Europe, with temperatures forecast to reach 40C in some areas, leading to red heat alerts in France, Italy, and Spain, and causing disruptions to rail services in Britain.",
-      "source": "Guardian World",
-      "url": "https://www.theguardian.com/business/2026/jun/22/rail-passengers-travel-heatwave-train-services-chiltern"
+      "summary": "A substantial heatwave is affecting parts of central and western Europe, prompting red heat alerts in France, Italy, and Spain, and causing essential travel warnings for UK rail passengers due to anticipated disruptions. (Source: BBC World, Guardian World)",
+      "source": "BBC World",
+      "url": "https://www.bbc.com/news/articles/c0jy9g96086o?at_medium=RSS&at_campaign=rss"
     }
   ],
   "weekly_recap": null,
