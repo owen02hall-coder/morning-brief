@@ -1,53 +1,76 @@
 {
-  "generated_at": "2026-06-22T11:23:51.815064-06:00",
+  "generated_at": "2026-06-22T11:37:47.150625-06:00",
   "date": "2026-06-22",
   "tldr": [
-    "Discussions between the U.S. and Iran have advanced, resulting in the partial lifting of U.S. oil sanctions and Iran's agreement to allow UN nuclear inspectors back into the country.",
-    "Ukrainian President Zelenskyy has pledged to \"bring war back to Russia\" following drone attacks towards Moscow.",
-    "A significant heatwave is impacting central and western Europe, leading to extreme heat alerts and disruptions to rail services in Britain."
+    "Major US tech stocks declined amid investor concerns over AI talent retention at companies like Alphabet and a slump in SpaceX.",
+    "Talks between the US and Iran made progress, with Iran agreeing to the return of UN nuclear inspectors and the US planning to lift oil sanctions.",
+    "Extreme heat warnings were issued across Britain and other parts of Europe, leading to disruptions in essential services like rail travel."
   ],
   "market": {
-    "sp500": null,
-    "ndx": null,
-    "why": "U.S. tech megacap stocks experienced a slide, driven by concerns over AI expenses and the departure of high-profile AI researchers from companies like Alphabet, which saw a significant market-cap wipeout. This indicates investor apprehension regarding the competition for AI talent and the financial implications of AI development. (Source: MarketWatch, CNBC, Yahoo Finance)"
+    "sp500": {
+      "value": 7471.5,
+      "change": -29.08,
+      "asof": "2026-06-22"
+    },
+    "ndx": {
+      "value": 26185.15,
+      "change": -332.78,
+      "asof": "2026-06-22"
+    },
+    "why": "The S&P 500 and Nasdaq Composite closed lower as US tech megacaps slid, primarily due to investor concerns over artificial intelligence expenses and high-profile AI talent departures from companies like Alphabet, which experienced a significant market-cap wipeout."
   },
-  "yield_10y": null,
-  "vix": null,
+  "yield_10y": {
+    "value": 4.51,
+    "change": 0.06,
+    "asof": "2026-06-22",
+    "why": "The 10-year Treasury yield increased, with investors anticipating forthcoming key inflation data."
+  },
+  "vix": {
+    "value": 17.24,
+    "change": 0.84,
+    "asof": "2026-06-22",
+    "why": "The VIX rose, reflecting heightened market uncertainty, likely influenced by the downturn in major tech stocks."
+  },
   "tech": [
     {
-      "summary": "Google's DeepMind AI lab is collaborating with A24 to develop new movie production technologies and has reportedly invested around $75 million into the studio. (Source: The Verge)",
+      "summary": "Google's DeepMind AI lab is partnering with A24, investing approximately $75 million to develop new AI movie production technologies aimed at expanding filmmakers' storytelling capabilities.",
       "source": "The Verge",
       "url": "https://www.theverge.com/entertainment/953596/google-deepmind-a24-studio-ai-partnership"
     },
     {
-      "summary": "Researchers have introduced Moebius, a 0.2B image inpainting model that achieves performance comparable to 10B-level models. (Source: Hacker News)",
-      "source": "Hacker News",
-      "url": "https://hustvl.github.io/Moebius/"
+      "summary": "AMD released its FSR 4.1 upscaling technology for Radeon RX 7000-series GPUs, offering improved image quality and smoother gameplay for computers with these older graphics cards.",
+      "source": "The Verge",
+      "url": "https://www.theverge.com/news/953664/amd-fsr-4-1-upscaling-rx-7000-series-gpus-rdna-3"
     },
     {
-      "summary": "The National Science Foundation is reportedly redirecting funds from basic science research programs to support a new technology initiative. (Source: Hacker News)",
-      "source": "Hacker News",
-      "url": "https://www.science.org/content/article/exclusive-nsf-slashes-research-programs-support-new-tech-initiative-insiders-say"
+      "summary": "A US military exercise in space commenced, focusing on the Space Force's goal to reduce the time required to field new satellites from years to mere weeks, days, or hours.",
+      "source": "Ars Technica",
+      "url": "https://arstechnica.com/space/2026/06/a-us-military-exercise-in-space-got-underway-with-barely-anyone-noticing/"
     }
   ],
   "world": [
     {
-      "summary": "Ukrainian President Volodymyr Zelenskyy has stated his intention to \"bring war back to Russia\" following a series of drone attacks targeting Moscow. (Source: Guardian World)",
+      "summary": "UK Prime Minister Keir Starmer announced his resignation, with a new leader for the Labour party and prime minister expected to be in place before parliament reconvenes in September.",
       "source": "Guardian World",
-      "url": "https://www.theguardian.com/world/live/2026/jun/22/zelenskyy-ukraine-russia-drones-europe-heatwave-trump-meloni-latest-news-updates"
+      "url": "https://www.theguardian.com/politics/live/2026/jun/22/keir-starmer-resignation-timeable-andy-burnham-labour-leadership-prime-minister-latest-news-updates"
     },
     {
-      "summary": "A substantial heatwave is affecting parts of central and western Europe, prompting red heat alerts in France, Italy, and Spain, and causing essential travel warnings for UK rail passengers due to anticipated disruptions. (Source: BBC World, Guardian World)",
-      "source": "BBC World",
-      "url": "https://www.bbc.com/news/articles/c0jy9g96086o?at_medium=RSS&at_campaign=rss"
+      "summary": "Discussions between the US and Iran have progressed, with Iran agreeing to allow UN nuclear inspectors to return to the country as part of an agreement that could see Washington lift sanctions on Tehran's oil exports and reopen the Strait of Hormuz.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/world/2026/jun/22/iran-us-talks-progress-pakistan-qatar-lebanon-israel"
+    },
+    {
+      "summary": "Extreme heat warnings have been issued across Britain, France, Italy, and Spain, with temperatures forecast to reach up to 40C in some areas, prompting advisories for rail passengers in the UK to travel only if essential due to expected disruptions.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/business/2026/jun/22/rail-passengers-travel-heatwave-train-services-chiltern"
     }
   ],
   "weekly_recap": null,
   "data_availability": {
-    "sp500": false,
-    "ndx": false,
-    "vix": false,
-    "ten_year": false,
+    "sp500": true,
+    "ndx": true,
+    "vix": true,
+    "ten_year": true,
     "news_world": true,
     "news_business": true,
     "news_tech": true,
