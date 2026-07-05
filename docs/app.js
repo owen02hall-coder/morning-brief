@@ -191,9 +191,12 @@ function maybeIosHint() {
 }
 
 let lastGeneratedAt = null;
+let loadSeq = 0;
 
 async function loadBriefing() {
+  const seq = ++loadSeq; // resume-refetches can overlap; only the newest request may render
   const b = await (await fetch("briefing.json", { cache: "no-store" })).json();
+  if (seq !== loadSeq) return;
   if (b.generated_at !== lastGeneratedAt) { // only re-render on a new edition (no scroll jank)
     lastGeneratedAt = b.generated_at;
     render(b, document.getElementById("briefing"));
