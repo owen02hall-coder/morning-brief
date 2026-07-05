@@ -212,8 +212,12 @@ async function main() {
   try {
     await loadBriefing();
   } catch (e) {
-    document.getElementById("briefing").innerHTML =
-      "<p class='muted'>No briefing available yet.</p>";
+    // A stranded initial fetch can reject AFTER a resume-refetch already rendered (background/
+    // foreground on a slow network) — only show the placeholder if nothing has committed.
+    if (committedSeq === 0) {
+      document.getElementById("briefing").innerHTML =
+        "<p class='muted'>No briefing available yet.</p>";
+    }
   }
   loadArchive();
   maybeIosHint();
