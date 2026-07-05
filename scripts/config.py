@@ -66,7 +66,8 @@ BRIEFING_PATH = os.path.join(DOCS_DIR, "briefing.json")
 STATE_PATH = os.path.join(REPO_ROOT, "state", "state.json")
 
 # --- Monitoring -------------------------------------------------------------
-STALE_HOURS = 28                     # client: the PWA shows "couldn't refresh" past this age
+# The client-side staleness threshold (PWA "couldn't refresh" banner, 28h) lives in docs/app.js
+# (STALE_HOURS) — the PWA can't read this file, so a knob here would be a dead duplicate.
 MARKETS_STALE_DAYS = 2               # build pages HIGH-priority if all four market numbers have been
                                      # unavailable this many days running (a dead source, not a 1-day
                                      # blip). A single bad day stays a low-priority "degraded" ping.
