@@ -13,25 +13,46 @@ self.addEventListener("install", (e) => {
 });
 
 self.addEventListener("activate", (e) => {
-  e.waitUntil(caches.keys().then((keys) =>
-    Promise.all(keys.filter((k) => k !== CACHE && k !== DATA_CACHE).map((k) => caches.delete(k)))));
-  self.clients.claim();
+  e.waitUntil((async () => {
+    // Migrate briefing data out of outgoing caches BEFORE deleting them: pre-v3 workers stored
+    // briefing.json/archives inside the versioned shell cache, so deleting without copying would
+    // wipe every existing user's offline fallback exactly once, on upgrade.
+    const keys = await caches.keys();
+    const data = await caches.open(DATA_CACHE);
+    for (const k of keys) {
+      if (k === CACHE || k === DATA_CACHE) continue;
+      const old = await caches.open(k);
+      for (const req of await old.keys()) {
+        const url = new URL(req.url);
+        if (url.pathname.endsWith("briefing.json") || url.pathname.includes("/archive/")) {
+          const hit = await data.match(req);
+          if (!hit) {
+            const res = await old.match(req);
+            if (res) await data.put(req, res);
+          }
+        }
+      }
+      await caches.delete(k);
+    }
+    await self.clients.claim();
+  })());
 });
 
 self.addEventListener("fetch", (e) => {
   const url = new URL(e.request.url);
   const isData = url.pathname.endsWith("briefing.json") || url.pathname.includes("/archive/");
   if (isData) {
-    // network-first for data: freshest when online, last-known when offline. Only cache good
-    // responses — a 404/500 body must not overwrite the last-known-good copy the offline
-    // fallback serves.
+    // network-first for data: freshest when online, last-known when offline OR when the server
+    // answers with an error (e.g. Pages mid-deploy 404) — an error body must neither overwrite
+    // nor mask the last-known-good copy.
     e.respondWith(
       fetch(e.request).then((r) => {
         if (r.ok) {
           const copy = r.clone();
           caches.open(DATA_CACHE).then((c) => c.put(e.request, copy));
+          return r;
         }
-        return r;
+        return caches.match(e.request).then((m) => m || r);
       }).catch(() => caches.match(e.request))
     );
   } else {
