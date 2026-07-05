@@ -10,9 +10,9 @@ These are **assumption tests** (narrow-and-deep, run against real infra), not un
 
 ## Safety
 
-Every test refuses to run unless `BRIEFING_SMOKE_ALLOW_DEV=true` is set. The tests are read-only
-against external services except `03-ntfy-roundtrip.py`, which publishes one message to a
-throwaway test topic.
+Every test refuses to run unless `BRIEFING_SMOKE_ALLOW_DEV=true` is set. All four tests are
+read-only against external services (`03-gemini-structured.py` sends one prompt to Gemini but
+publishes/writes nothing anywhere).
 
 ## What each test proves
 
@@ -34,11 +34,12 @@ Actions `workflow_dispatch` job** — a local pass proves the API contract but n
 BRIEFING_SMOKE_ALLOW_DEV=true bash scripts/briefing-assumptions/run-all.sh
 
 # a single test
-BRIEFING_SMOKE_ALLOW_DEV=true python scripts/briefing-assumptions/03-ntfy-roundtrip.py
+BRIEFING_SMOKE_ALLOW_DEV=true python scripts/briefing-assumptions/03-gemini-structured.py
 ```
 
 Key-gated tests also need their secret in the environment:
-`TWELVEDATA_API_KEY` (test 1), `GEMINI_API_KEY` (test 2), and `NTFY_TOPIC` (test 3).
+`TWELVEDATA_API_KEY` (tests 1 and 2) and `GEMINI_API_KEY` (test 3). Test 4 needs no key but
+does need `pandas` + `lxml` installed (not in requirements.txt — dev-only deps).
 
 ## Exit codes
 
@@ -57,6 +58,6 @@ mismatch on a later run means the environment drifted — re-validate before tru
 
 - **Pre-implementation:** run before `/implement`. All runnable tests must PASS; key-gated tests
   must PASS once keys exist.
-- **Runner-IP proof:** run `01-twelvedata-pull.py` inside a `workflow_dispatch` GitHub Actions job
-  (not just locally) — local success does not prove the runner-IP case.
+- **Runner-IP proof:** run `01-twelvedata-runner-pull.py` inside a `workflow_dispatch` GitHub
+  Actions job (not just locally) — local success does not prove the runner-IP case.
 - **Post-ship regression:** re-run after each slice; any FAIL = regression.
