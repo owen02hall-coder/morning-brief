@@ -36,8 +36,10 @@ def _get(path, params, timeout=20):
 def quote(symbol, retries=2):
     """Return the parsed quote dict for one symbol, or None if it does not resolve.
 
-    Retries once on a transient 429 (rate limit) with a short wait; raises TwelveDataError on
-    repeated failure so the caller can degrade the section to 'unavailable'.
+    Retries up to `retries` times on a transient 429 (rate limit) with a short wait. Raises
+    TwelveDataError on HTTP/network failure; returns None on an API-level error body (including
+    a 429 that persists past the retries) or an unusable quote, so the caller can degrade the
+    section to 'unavailable'.
     """
     for attempt in range(retries + 1):
         try:
