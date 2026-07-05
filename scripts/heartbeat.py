@@ -4,7 +4,9 @@ Runs on its own GitHub Actions cron (`.github/workflows/heartbeat.yml`), separat
 it catches BOTH a build that silently no-ops AND a scheduled build that GitHub dropped entirely. It
 fetches the real Pages artifact — what the phone actually loads — not the committed file. On a stale
 or unreachable page it pings ntfy AND exits non-zero, so the workflow's `if: failure()` curl backstop
-is a second, ntfy-independent alarm path.
+fires as a second alarm path. That backstop is independent of THIS PYTHON PROCESS (it still alerts if
+this script crashes before pushing), but it is NOT ntfy-independent — every alarm leg terminates at
+the same ntfy.sh topic, so an ntfy outage silences all of them. Accepted v1 trade-off.
 """
 import json
 import os
