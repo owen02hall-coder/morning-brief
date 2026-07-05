@@ -15,6 +15,12 @@ function fmtChange(n) {
   return `${sign}${n}`;
 }
 
+function safeHref(url) {
+  // Citation URLs originate from third-party feeds (via the model). Only web links may become
+  // tap-through anchors — never javascript:/data:/anything else a hostile feed could smuggle in.
+  return /^https?:\/\//i.test(url || "") ? url : null;
+}
+
 function numberCard(title, obj, unit, mode) {
   const card = el("div", "card");
   card.appendChild(el("h3", null, title));
@@ -23,19 +29,21 @@ function numberCard(title, obj, unit, mode) {
     return card;
   }
   const v = el("p", "figure", `${obj.value}${unit || ""}`);
-  let changeText;
-  if (mode === "percent") {
-    const prev = obj.value - obj.change; // percent is vs the PREVIOUS close
-    changeText = prev
-      ? `${obj.change >= 0 ? "+" : ""}${((obj.change / prev) * 100).toFixed(1)}%`
-      : `${fmtChange(obj.change)}${unit || ""}`; // divide-by-zero guard
-  } else if (mode === "bps") {
-    changeText = `${obj.change >= 0 ? "+" : ""}${Math.round(obj.change * 100)} bps`;
-  } else {
-    changeText = `${fmtChange(obj.change)}${unit || ""}`;
+  if (obj.change != null) { // change can be null (single settled close) — show the level alone
+    let changeText;
+    if (mode === "percent") {
+      const prev = obj.value - obj.change; // percent is vs the PREVIOUS close
+      changeText = prev
+        ? `${obj.change >= 0 ? "+" : ""}${((obj.change / prev) * 100).toFixed(1)}%`
+        : `${fmtChange(obj.change)}${unit || ""}`; // divide-by-zero guard
+    } else if (mode === "bps") {
+      changeText = `${obj.change >= 0 ? "+" : ""}${Math.round(obj.change * 100)} bps`;
+    } else {
+      changeText = `${fmtChange(obj.change)}${unit || ""}`;
+    }
+    const ch = el("span", obj.change >= 0 ? "up" : "down", `  ${changeText}`);
+    v.appendChild(ch);
   }
-  const ch = el("span", obj.change >= 0 ? "up" : "down", `  ${changeText}`);
-  v.appendChild(ch);
   card.appendChild(v);
   if (obj.why) card.appendChild(el("p", null, obj.why));
   if (obj.asof) card.appendChild(el("p", "muted", `as of ${obj.asof}`));
@@ -52,9 +60,10 @@ function itemList(title, items) {
   for (const it of items) {
     const card = el("div", "card");
     card.appendChild(el("p", null, it.summary));
-    if (it.url) {
+    const href = safeHref(it.url);
+    if (href) {
       const a = el("a", "readmore", `Read more — ${it.source || "source"}`);
-      a.href = it.url;
+      a.href = href;
       a.target = "_blank";
       a.rel = "noopener";
       card.appendChild(a);
@@ -131,6 +140,8 @@ function showFreshness(b) {
   if (ageHours > STALE_HOURS) {
     stale.textContent = "Could not refresh — showing the last available briefing.";
     stale.classList.remove("hidden");
+  } else {
+    stale.classList.add("hidden"); // a resume-refetch may replace a stale copy with a fresh one
   }
 }
 
@@ -155,8 +166,14 @@ async function loadArchive() {
         a.href = "#";
         a.onclick = async (ev) => {
           ev.preventDefault();
-          const b = await (await fetch(`archive/${e.date}.json`, { cache: "no-store" })).json();
-          render(b, view);
+          try {
+            const b = await (await fetch(`archive/${e.date}.json`, { cache: "no-store" })).json();
+            render(b, view);
+          } catch (err) { // offline with no cached copy, or a failed fetch — never fail silently
+            view.innerHTML = "";
+            view.appendChild(el("p", "muted",
+              `Couldn't load the ${e.date} briefing — you may be offline.`));
+          }
           view.scrollIntoView({ behavior: "smooth" });
         };
         li.appendChild(a);
@@ -173,11 +190,20 @@ function maybeIosHint() {
   if (isIos && !standalone) document.getElementById("ios-hint").classList.remove("hidden");
 }
 
+let lastGeneratedAt = null;
+
+async function loadBriefing() {
+  const b = await (await fetch("briefing.json", { cache: "no-store" })).json();
+  if (b.generated_at !== lastGeneratedAt) { // only re-render on a new edition (no scroll jank)
+    lastGeneratedAt = b.generated_at;
+    render(b, document.getElementById("briefing"));
+  }
+  showFreshness(b);
+}
+
 async function main() {
   try {
-    const b = await (await fetch("briefing.json", { cache: "no-store" })).json();
-    render(b, document.getElementById("briefing"));
-    showFreshness(b);
+    await loadBriefing();
   } catch (e) {
     document.getElementById("briefing").innerHTML =
       "<p class='muted'>No briefing available yet.</p>";
@@ -187,6 +213,11 @@ async function main() {
   if ("serviceWorker" in navigator) {
     navigator.serviceWorker.register("sw.js").catch(() => {});
   }
+  // A standalone PWA resumed from the app switcher never reloads the page — refetch on resume so
+  // yesterday's briefing (and a stale freshness banner) can't persist all morning.
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "visible") loadBriefing().catch(() => {});
+  });
 }
 
 main();
