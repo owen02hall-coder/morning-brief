@@ -79,9 +79,18 @@ python -m scripts.build_briefing --local --no-notify   # write docs/briefing.jso
 
 ## Assumption tests
 
-`scripts/briefing-assumptions/` holds the pre-flight tests that proved the data sources and AI
-before this was built. Re-run them as regression checks:
+`scripts/briefing-assumptions/` holds the pre-flight tests that proved the news/RSS boundary,
+the Gemini structured-output contract, and the (v2-only) Twelve Data budget before this was
+built. Note what they do NOT cover: the v1 market source itself (Yahoo's chart API) — the suite
+predates the FRED→Yahoo move.
+
+Re-running the full suite needs dev-only extras and keys beyond requirements.txt: `pip install
+pandas lxml`, plus `TWELVEDATA_API_KEY` (tests 1–2, v2 key) and `GEMINI_API_KEY` (test 3); the
+runner halts at the first test missing its dependency. The keyless boundary test runs on its own:
 
 ```bash
+# everything (needs pandas+lxml and both keys):
 BRIEFING_SMOKE_ALLOW_DEV=true bash scripts/briefing-assumptions/run-all.sh
+# just the keyless RSS/boundary check (still needs pandas+lxml):
+BRIEFING_SMOKE_ALLOW_DEV=true python scripts/briefing-assumptions/04-external-boundary-smoke.py
 ```
