@@ -31,7 +31,7 @@ GitHub Actions (cron, UTC) --> python -m scripts.build_briefing
   -> write docs/briefing.json
             docs/archive/<date>.json
             docs/archive/index.json
-            state/state.json (last_run + markets_last_ok; last_run rewritten daily -> renewing commit)
+            state/state.json (last_run + markets_last_ok + markets_first_bad; last_run rewritten daily -> renewing commit)
   -> notify.morning_ready() + health ping if degraded (escalates high-priority if markets blank >= MARKETS_STALE_DAYS)
   -> git commit + push (docs/ and state/)  --> GitHub Pages redeploys
 PWA (docs/app.js): fetch briefing.json (network-first) -> render; archive + search; staleness banner

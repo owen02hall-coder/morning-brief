@@ -192,11 +192,15 @@ function maybeIosHint() {
 
 let lastGeneratedAt = null;
 let loadSeq = 0;
+let committedSeq = 0;
 
 async function loadBriefing() {
-  const seq = ++loadSeq; // resume-refetches can overlap; only the newest request may render
+  // Resume-refetches can overlap. Invalidate on COMMIT, not on start: an older response may still
+  // render if no newer response has committed — a newer request that FAILS must not blank the page.
+  const seq = ++loadSeq;
   const b = await (await fetch("briefing.json", { cache: "no-store" })).json();
-  if (seq !== loadSeq) return;
+  if (seq <= committedSeq) return; // a newer response already rendered
+  committedSeq = seq;
   if (b.generated_at !== lastGeneratedAt) { // only re-render on a new edition (no scroll jank)
     lastGeneratedAt = b.generated_at;
     render(b, document.getElementById("briefing"));

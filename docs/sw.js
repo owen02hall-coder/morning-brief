@@ -2,7 +2,7 @@
 // briefing data so the freshest edition shows when online. Bump CACHE on any shell change.
 // Briefing data lives in its own UNversioned cache: a shell bump must never delete the
 // last-known-good briefing/archives that the offline fallback depends on.
-const CACHE = "briefing-shell-v3";   // v3: app.js safe-href/archive-errors/resume-refetch + split data cache
+const CACHE = "briefing-shell-v4";   // v4: app.js refetch-race guard; v3: safe-href/archive-errors/resume-refetch + split data cache
 const DATA_CACHE = "briefing-data-v1";
 const SHELL = ["./", "./index.html", "./app.js", "./styles.css", "./manifest.json",
                "./icon-192.png", "./icon-512.png"];
@@ -17,22 +17,30 @@ self.addEventListener("activate", (e) => {
     // Migrate briefing data out of outgoing caches BEFORE deleting them: pre-v3 workers stored
     // briefing.json/archives inside the versioned shell cache, so deleting without copying would
     // wipe every existing user's offline fallback exactly once, on upgrade.
+    // Scoped to THIS app's caches and paths: caches.keys() is origin-wide, and github.io project
+    // sites share one origin — never touch a sibling app's caches or ingest its files.
+    const scopePath = new URL(self.registration.scope).pathname;
     const keys = await caches.keys();
     const data = await caches.open(DATA_CACHE);
     for (const k of keys) {
-      if (k === CACHE || k === DATA_CACHE) continue;
-      const old = await caches.open(k);
-      for (const req of await old.keys()) {
-        const url = new URL(req.url);
-        if (url.pathname.endsWith("briefing.json") || url.pathname.includes("/archive/")) {
-          const hit = await data.match(req);
-          if (!hit) {
-            const res = await old.match(req);
-            if (res) await data.put(req, res);
+      if (k === CACHE || k === DATA_CACHE || !k.startsWith("briefing-")) continue;
+      try { // one broken cache must not abort migration/cleanup of the rest (or clients.claim)
+        const old = await caches.open(k);
+        for (const req of await old.keys()) {
+          const url = new URL(req.url);
+          if (url.pathname.startsWith(scopePath) &&
+              (url.pathname.endsWith("briefing.json") || url.pathname.includes("/archive/"))) {
+            const hit = await data.match(req);
+            if (!hit) {
+              const res = await old.match(req);
+              // pre-v3 workers cached responses with NO ok-gate: only promote GOOD bodies, or the
+              // migration would enshrine a stale 404/500 as the "last-known-good" offline copy
+              if (res && res.ok) await data.put(req, res);
+            }
           }
         }
-      }
-      await caches.delete(k);
+        await caches.delete(k);
+      } catch (err) { /* leftover cache is storage bloat, not data loss — next bump retries */ }
     }
     await self.clients.claim();
   })());
