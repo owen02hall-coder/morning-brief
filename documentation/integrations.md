@@ -17,7 +17,9 @@ values live in the repo. Environment variable names only are listed here.
 - Invoked in: `scripts/data/market.py` (`_yahoo_series`).
 - Endpoint shape: `https://<query1|query2>.finance.yahoo.com/v8/finance/chart/<SYMBOL>?range=5d&interval=1d`.
 - Symbols: `^GSPC`, `^IXIC`, `^VIX`, `^TNX` (see `config.YAHOO_SYMBOLS`); `^TNX` is the 10-yr yield in
-  percent. The last two daily closes give value + day-over-day change.
+  percent. The last two SETTLED daily closes give value + day-over-day change; a bar belonging to the
+  still-open session (per the payload's `currentTradingPeriod`) is dropped, and with only one settled
+  close in the window `change` is `null`, never a fabricated 0.
 - Notes: a browser-like User-Agent is required. The client tries the query1 then query2 host and uses
   a short `config.MARKET_TIMEOUT` so a hung source fails fast instead of risking the job timeout.
   Missing/null closes (holidays/gaps) are skipped; any failure degrades that number to None.

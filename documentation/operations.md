@@ -60,11 +60,16 @@ How the briefing is scheduled, deployed, monitored, and recovered.
   all four numbers missing is a low-priority "degraded" ping, but once they've been unavailable for
   `MARKETS_STALE_DAYS` (2) days running — a dead source, not a blip — it escalates to a high-priority
   ntfy. This exists because the prior source (FRED) died silently and degraded for days unnoticed.
+  When no usable `markets_last_ok` baseline exists (fresh deployment / reset state), the build
+  anchors `markets_first_bad` instead, so a source that has never been healthy escalates on the
+  same schedule rather than degrading silently forever.
 - Heartbeat: an independent workflow (`.github/workflows/heartbeat.yml`, daily at 03:00 UTC) fetches
   the LIVE Pages `briefing.json` and, if it is older than `HEARTBEAT_STALE_HOURS` (30h) or
-  unreachable, sends a high-priority ntfy AND fails the job (so its own `if: failure()` curl is a
-  second, ntfy-independent alarm). Because it runs on its own schedule and checks the real page, it
-  catches both a build that silently no-ops and a build cron that GitHub dropped entirely.
+  unreachable, sends a high-priority ntfy AND fails the job (so its own `if: failure()` curl fires
+  as a second alarm leg — independent of the Python process, though every alarm leg still terminates
+  at the same ntfy topic, an accepted v1 trade-off). Because it runs on its own schedule and checks
+  the real page, it catches both a build that silently no-ops and a build cron that GitHub dropped
+  entirely.
 - Transparency: `briefing.json` carries a `data_availability` map showing each section's status.
 
 ## Failure modes and recovery

@@ -1,8 +1,10 @@
 """Persisted run state (committed to the repo, not served on Pages).
 
-v1 only needs `last_run` — always rewritten to today so there is a daily renewing commit, which
-keeps the scheduled GitHub Actions workflow from auto-disabling after 60 idle days. v2 breadth
-alert state will live here too.
+v1 keys: `last_run` (always rewritten to today so there is a daily renewing commit, which keeps
+the scheduled GitHub Actions workflow from auto-disabling after 60 idle days), `markets_last_ok`
+(last date all four market numbers were present), and `markets_first_bad` (anchor for a blackout
+that began with no healthy baseline; cleared on the next healthy day). v2 breadth alert state
+will live here too.
 """
 import json
 import os

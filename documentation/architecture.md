@@ -57,8 +57,10 @@ Heartbeat (independent cron): python -m scripts.heartbeat
   model writes only the prose. URLs are validated against the fetched set. `_clean_tldr` drops
   TL;DR fragments (keeps complete sentences) so a malformed model response cannot ship a broken
   headline. Model and no-AI fallbacks. Returns (narrative, ok).
-- `scripts/state.py`: load and save `state/state.json` (`last_run`, `markets_last_ok`). `last_run`
-  is always rewritten; `markets_last_ok` advances only on a day all four market numbers are present.
+- `scripts/state.py`: load and save `state/state.json` (`last_run`, `markets_last_ok`,
+  `markets_first_bad`). `last_run` is always rewritten; `markets_last_ok` advances only on a day all
+  four market numbers are present; `markets_first_bad` anchors a blackout that began with no usable
+  healthy baseline (cleared on the next healthy day).
 - `scripts/notify.py`: ntfy publish for the morning push and the health ping.
 
 ## Key design decisions
@@ -95,9 +97,11 @@ data_availability : map of section -> true/false or "ok"/"unavailable"
 ```
 
 Note: `market.ndx` is the Nasdaq Composite (Yahoo `^IXIC`), labeled "Nasdaq" in the UI. Each
-number carries its own `asof` date. Values are the latest daily close (last two closes give the
-day-over-day change), not live or intraday. The UI shows the as-of date and the AI describes them as the
-latest close.
+number carries its own `asof` date. Values are the latest SETTLED daily close — a bar belonging to
+a still-open session is dropped, never shipped as a close. `change` is the difference of the last
+two settled closes, or `null` when only one settled close is available (the UI then shows the
+level alone; the AI facts block says "change unavailable"). The UI shows the as-of date and the AI
+describes the figures as the latest close.
 
 ## Entry points
 
