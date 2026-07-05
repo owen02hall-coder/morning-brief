@@ -57,8 +57,8 @@ def _fallback_items(news, bucket, limit):
             for a in news.get(bucket, [])[:limit]]
 
 
-def _assemble(now, market, news, narrative, ai_ok):
-    date = now.date().isoformat()
+def _assemble(now, today, market, news, narrative, ai_ok):
+    briefing_date = today
     avail = {**market["availability"], **{f"news_{k}": v for k, v in news["available"].items()},
              "summary": "ok" if ai_ok else "unavailable"}
 
@@ -85,7 +85,7 @@ def _assemble(now, market, news, narrative, ai_ok):
 
     return {
         "generated_at": now.isoformat(),
-        "date": date,
+        "date": briefing_date,
         "tldr": tldr,
         "market": market_block,
         "yield_10y": yield_block,
@@ -137,11 +137,13 @@ def run(do_notify=True, today=None):
     market = market_mod.get_market()
     news = news_mod.get_news()
 
-    is_sunday = now.weekday() == 6
+    # Derive the weekday from the gate date so the build decision, the saved briefing date, and the
+    # Sunday-recap choice all agree even if midnight crosses between _now() reads.
+    is_sunday = date.fromisoformat(today).weekday() == 6
     narrative, ai_ok = summarize_mod.summarize(
         market, news, is_sunday, recap_context=_recap_context() if is_sunday else "")
 
-    briefing = _assemble(now, market, news, narrative, ai_ok)
+    briefing = _assemble(now, today, market, news, narrative, ai_ok)
     _write(briefing)
 
     # Track the last day markets were fully healthy, so a SUSTAINED blackout (a dead data source, the
@@ -149,7 +151,13 @@ def run(do_notify=True, today=None):
     markets_ok = all(briefing["data_availability"].get(k)
                      for k in ("sp500", "ndx", "vix", "ten_year"))
     if markets_ok:
-        st = {**st, "markets_last_ok": today}
+        st = {k: v for k, v in {**st, "markets_last_ok": today}.items()
+              if k != "markets_first_bad"}
+    elif not prev_markets_ok and "markets_first_bad" not in st:
+        # No healthy-day baseline exists (fresh deployment, reset/corrupt state.json): anchor the
+        # blackout's first day so a source that is dead from day one still escalates below —
+        # otherwise _days_since(None, ...) is None and the high-priority alert can never fire.
+        st = {**st, "markets_first_bad": today}
     state.save(st, today)
 
     # health: report any degraded section (low priority); the run still succeeded
@@ -170,6 +178,15 @@ def run(do_notify=True, today=None):
             if stale is not None and stale >= config.MARKETS_STALE_DAYS:
                 notify.health(f"market data unavailable {stale} days running (last ok {prev_markets_ok}) "
                               "— the market source may be down", ok=False)
+            elif stale is None:
+                # No healthy day on record: measure the blackout from its first recorded bad day
+                # (seeded above) so a never-healthy source pages instead of degrading silently forever.
+                first_bad = st.get("markets_first_bad")
+                bad_days = _days_since(first_bad, today)
+                if bad_days is not None and bad_days + 1 >= config.MARKETS_STALE_DAYS:
+                    notify.health(f"market data unavailable since {first_bad} ({bad_days + 1} days) with "
+                                  "no healthy day on record — the market source may be down or misconfigured",
+                                  ok=False)
 
     print(f"briefing written for {briefing['date']} (ai={'ok' if ai_ok else 'fallback'}, "
           f"degraded={degraded or 'none'})")
