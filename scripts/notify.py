@@ -4,6 +4,7 @@ The topic is read from NTFY_TOPIC (a secret) and is never exposed client-side. N
 failures are non-fatal — a missed push must not crash the run.
 """
 import os
+import time
 import urllib.request
 
 from . import config
@@ -20,12 +21,25 @@ def _publish(title, message, priority="default", click=None):
     req = urllib.request.Request(
         f"{config.NTFY_BASE}/{topic}", data=message.encode("utf-8"), headers=headers, method="POST"
     )
-    try:
-        with urllib.request.urlopen(req, timeout=15) as r:
-            return 200 <= r.status < 300
-    except Exception as e:  # never let a notification failure crash the briefing
-        print(f"notify: push failed ({e})")
-        return False
+    # High-priority pushes are ALERTS (failure/blackout escalations): retry once, and if delivery
+    # still fails say so unmissably in the job log — the run must not crash over a push, but a
+    # swallowed alert would mean the monitoring itself failed silently.
+    attempts = 2 if priority == "high" else 1
+    for attempt in range(attempts):
+        try:
+            with urllib.request.urlopen(req, timeout=15) as r:
+                if 200 <= r.status < 300:
+                    return True
+            last_err = f"HTTP {r.status}"
+        except Exception as e:  # never let a notification failure crash the briefing
+            last_err = e
+        if attempt < attempts - 1:
+            time.sleep(3)
+    print(f"notify: push failed ({last_err})")
+    if priority == "high":
+        print(f"notify: ALERT DELIVERY FAILED — a high-priority alert ('{title}: {message}') "
+              "could not reach ntfy; check the topic and ntfy.sh status.")
+    return False
 
 
 def morning_ready(headline):
