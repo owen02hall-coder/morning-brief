@@ -153,10 +153,12 @@ def run(do_notify=True, today=None):
     if markets_ok:
         st = {k: v for k, v in {**st, "markets_last_ok": today}.items()
               if k != "markets_first_bad"}
-    elif not prev_markets_ok and "markets_first_bad" not in st:
-        # No healthy-day baseline exists (fresh deployment, reset/corrupt state.json): anchor the
-        # blackout's first day so a source that is dead from day one still escalates below —
-        # otherwise _days_since(None, ...) is None and the high-priority alert can never fire.
+    elif _days_since(prev_markets_ok, today) is None and "markets_first_bad" not in st:
+        # No USABLE healthy-day baseline (fresh deployment, reset state, or an unparseable
+        # markets_last_ok value): anchor the blackout's first day so a source that is dead from
+        # day one still escalates below. The seed condition must mirror the alert's
+        # `stale is None` branch exactly — if they diverge, that branch reads an anchor that was
+        # never written and the escalation goes permanently silent.
         st = {**st, "markets_first_bad": today}
     state.save(st, today)
 
