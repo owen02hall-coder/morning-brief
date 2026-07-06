@@ -264,6 +264,20 @@ h3 {
 .delta.down::before { border-top:    6px solid var(--down); }
 .up { color: var(--up); } .down { color: var(--down); }
 
+/* Breadth status chip: same pill language as .delta, but stateful, not directional */
+.status {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.8rem;
+  font-weight: 650;
+  padding: 0.14rem 0.55rem;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+.status.healthy  { color: var(--up); background: var(--up-tint); }
+.status.watch    { color: var(--warn-fg); background: var(--warn-bg); }
+.status.oversold { color: var(--down); background: var(--down-tint); }
+
 .asof { color: var(--muted); font-size: 0.75rem; margin: 0.15rem 0 0; }
 .tile-why { font-size: 0.88rem; margin: 0.35rem 0 0; color: var(--fg); }
 

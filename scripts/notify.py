@@ -51,6 +51,11 @@ def morning_ready(headline):
     return _publish("Morning Briefing", headline, priority="default", click=config.PAGES_URL)
 
 
+def breadth_alert(message):
+    """Oversold market-breadth nag — high priority so it lands like the alert it is."""
+    return _publish("Market breadth OVERSOLD", message, priority="high", click=config.PAGES_URL)
+
+
 def health(message, ok=True):
     """Self-monitoring: loud high-priority on failure, low-priority on partial degradation."""
     if ok:

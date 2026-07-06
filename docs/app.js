@@ -89,11 +89,26 @@ function itemList(title, items) {
   return sec;
 }
 
-function breadthSection() {
-  // Static tap-through links to the StockCharts Bullish Percent Index pages. The on-screen
-  // computed value is a planned follow-up; for now the links give direct access.
+const BREADTH_STATUS_LABEL = { healthy: "Healthy", watch: "Watch", oversold: "Oversold" };
+
+function breadthSection(breadth) {
+  // Computed number (% of S&P 500 above 200-day MA) when available; the StockCharts BPI links
+  // stay beneath it (the exact BPI has no free feed). Unavailable -> links only, as before.
   const sec = el("section");
   sec.appendChild(el("h2", null, "Market breadth"));
+  if (breadth && breadth.value != null) {
+    const card = el("div", "card");
+    card.appendChild(el("h3", null, "S&P 500 above 200-day average"));
+    const fig = el("p", "figure", `${breadth.value}%`);
+    fig.appendChild(el("span", `status ${breadth.status}`,
+      BREADTH_STATUS_LABEL[breadth.status] || breadth.status));
+    card.appendChild(fig);
+    if (breadth.asof) {
+      card.appendChild(el("p", "asof",
+        `as of ${breadth.asof}${breadth.stale ? " (cached — today's scan failed)" : ""}`));
+    }
+    sec.appendChild(card);
+  }
   sec.appendChild(el("p", "muted", "Below ~30 = oversold / bullish-reversal watch."));
   const chips = el("div", "chips");
   [
@@ -135,7 +150,7 @@ function render(b, into) {
   if (b.market && b.market.why) market.appendChild(el("p", "why", b.market.why));
   into.appendChild(market);
 
-  into.appendChild(breadthSection());
+  into.appendChild(breadthSection(b.breadth));
 
   into.appendChild(itemList("Emerging tech", b.tech));
   into.appendChild(itemList("World", b.world));
@@ -226,6 +241,10 @@ function speechText(b) {
     parts.push(line + ".");
   }
   if (b.vix) parts.push(`The VIX is at ${b.vix.value}.`);
+  if (b.breadth && b.breadth.value != null) {
+    parts.push(`Market breadth: ${b.breadth.value} percent of S and P 500 stocks are above ` +
+      `their 200 day average — ${b.breadth.status}.`);
+  }
   [b.market && b.market.why, b.yield_10y && b.yield_10y.why, b.vix && b.vix.why]
     .forEach((w) => { if (w) parts.push(w); });
   [["tech", "In tech."], ["world", "Around the world."]].forEach(([k, label]) => {

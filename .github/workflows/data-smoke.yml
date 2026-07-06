@@ -1,0 +1,29 @@
+name: Data Smoke
+
+# Dispatch-only diagnostic: proves every data leg (Yahoo, RSS, TradingView breadth scan,
+# Wikipedia constituents) works FROM A GITHUB RUNNER — CI egress IPs get blocked/limited in ways
+# a home connection doesn't (the plan's load-bearing assumption gate for the unofficial
+# TradingView endpoint). Writes nothing, notifies nobody.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  spine:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1 (SHA-pinned: mutable tags are a supply-chain vector in a push-capable job)
+
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0 (SHA-pinned)
+        with:
+          python-version: "3.12"
+
+      - run: pip install -r requirements.txt -c constraints.txt
+
+      - name: Print the data spine (all four numbers + breadth + news counts)
+        run: |
+          python -m scripts.build_briefing --spine | tee spine.txt
+          grep -q "breadth: {'value'" spine.txt || { echo "::error::breadth did not compute from the runner"; exit 1; }

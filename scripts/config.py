@@ -53,6 +53,22 @@ MARKET_TIMEOUT = 20             # fail fast: a hung market source must not blow 
                                 # 20s is bounded well under the cap. Markets degrade to None
                                 # gracefully, so the AI summary still ships if the source is down.
 
+# --- Market breadth (v2) -------------------------------------------------------
+# "% of S&P 500 stocks above their 200-day MA", computed from a TradingView scanner POST (direct
+# urllib — deliberately NOT the tradingview-screener library: that would drag pandas+lxml into the
+# push-capable CI job for a one-endpoint JSON call) intersected with Wikipedia's constituent list.
+# Unofficial endpoint: every call is wrapped, gated by BREADTH_MIN_MATCH, and cached last-good.
+BREADTH_SCAN_URL = "https://scanner.tradingview.com/america/scan"
+BREADTH_SCAN_LIMIT = 2000        # top-N US common stocks by market cap. 2000 + the type=stock
+                                 # filter matches 500/503 constituents (validated 2026-07-05);
+                                 # without the filter ~430 ADR/fund rows displace S&P names.
+BREADTH_MIN_MATCH = 480          # of ~503 constituents; fewer = shape drift -> fail closed
+SP500_WIKI_URL = "https://en.wikipedia.org/wiki/List_of_S%26P_500_companies"
+BREADTH_OVERSOLD = 30            # alert enters below this
+BREADTH_CLEAR = 33               # alert clears at/above this (hysteresis; no 30/31 flapping)
+BREADTH_EXTREME = 20             # flagged as extreme in the alert text
+BREADTH_STALE_TRADING_DAYS = 2   # nag suppressed when the value is older than this many trading days
+
 # --- Audio edition (TTS) ------------------------------------------------------
 # One TTS request/day stays comfortably inside the Gemini free tier. The build writes a WAV to
 # AUDIO_WAV_PATH (job-local, gitignored); the workflow converts it to docs/briefing-audio.mp3 and

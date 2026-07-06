@@ -26,6 +26,7 @@ from . import config, state, notify
 from . import tts as tts_mod
 from .data import market as market_mod
 from .data import news as news_mod
+from .breadth import percent_above_ma as breadth_mod
 from . import summarize as summarize_mod
 
 
@@ -56,15 +57,51 @@ def _recap_context():
     return "\n".join(lines)
 
 
+def _get_breadth(st, today):
+    """Breadth with last-good fallback. Returns (breadth_or_None, state).
+
+    Scan failure (unofficial endpoint) or a MIN_MATCH fail-close degrades to the cached last-good
+    value IF it is still within the freshness window (marked stale=true, shown dated); otherwise
+    breadth is unavailable and the briefing ships without it. Never raises."""
+    try:
+        b = breadth_mod.percent_above_200ma()
+    except Exception as e:
+        print(f"breadth: scan failed (non-fatal): {e}")
+        b = None
+    if b is not None:
+        st = {**st, "breadth_last_good": dict(b)}
+        return {**b, "stale": False}, st
+    lg = st.get("breadth_last_good")
+    if lg:
+        gap = state.weekdays_between(lg.get("asof"), today)
+        if gap is not None and gap <= config.BREADTH_STALE_TRADING_DAYS:
+            print(f"breadth: serving last-good value from {lg.get('asof')} (stale)")
+            return {**lg, "stale": True}, st
+    return None, st
+
+
+def _breadth_block(breadth):
+    if not breadth or breadth.get("value") is None:
+        return {"value": None, "asof": None, "status": "unavailable", "matched": 0, "stale": False}
+    v = breadth["value"]
+    # Status bands align with the ALERT semantics (enter <30, clear at 33), not a prettier scale:
+    # "watch" is exactly the hysteresis band where an alert would stay latched.
+    status = ("oversold" if v < config.BREADTH_OVERSOLD
+              else "watch" if v < config.BREADTH_CLEAR else "healthy")
+    return {"value": v, "asof": breadth.get("asof"), "status": status,
+            "matched": breadth.get("matched", 0), "stale": bool(breadth.get("stale"))}
+
+
 def _fallback_items(news, bucket, limit):
     return [{"summary": a["title"], "source": a["source"], "url": a["url"]}
             for a in news.get(bucket, [])[:limit]]
 
 
-def _assemble(now, today, market, news, narrative, ai_ok):
+def _assemble(now, today, market, news, narrative, ai_ok, breadth=None):
     briefing_date = today
     avail = {**market["availability"], **{f"news_{k}": v for k, v in news["available"].items()},
-             "summary": "ok" if ai_ok else "unavailable"}
+             "summary": "ok" if ai_ok else "unavailable",
+             "breadth": bool(breadth and breadth.get("value") is not None)}
 
     def num(n, why):
         if not n:
@@ -94,6 +131,7 @@ def _assemble(now, today, market, news, narrative, ai_ok):
         "market": market_block,
         "yield_10y": yield_block,
         "vix": vix_block,
+        "breadth": _breadth_block(breadth),
         "tech": tech,
         "world": world,
         "weekly_recap": recap,
@@ -140,6 +178,7 @@ def run(do_notify=True, today=None):
 
     market = market_mod.get_market()
     news = news_mod.get_news()
+    breadth, st = _get_breadth(st, today)   # degradable; may refresh st.breadth_last_good
 
     # Derive the weekday from the gate date so the build decision, the saved briefing date, and the
     # Sunday-recap choice all agree even if midnight crosses between _now() reads.
@@ -147,7 +186,7 @@ def run(do_notify=True, today=None):
     narrative, ai_ok = summarize_mod.summarize(
         market, news, is_sunday, recap_context=_recap_context() if is_sunday else "")
 
-    briefing = _assemble(now, today, market, news, narrative, ai_ok)
+    briefing = _assemble(now, today, market, news, narrative, ai_ok, breadth)
     _write(briefing)
 
     # Track the last day markets were fully healthy, so a SUSTAINED blackout (a dead data source, the
@@ -165,6 +204,12 @@ def run(do_notify=True, today=None):
         # `stale is None` branch exactly — if they diverge, that branch reads an anchor that was
         # never written and the escalation goes permanently silent.
         st = {**st, "markets_first_bad": today}
+
+    # Breadth oversold nag: evaluated (and its nag counter advanced) only when this run actually
+    # notifies — a --local/--no-notify run must not consume nag days it never delivered.
+    breadth_msg = None
+    if do_notify:
+        breadth_msg, st = state.eval_breadth_alert(breadth, st, today)
     state.save(st, today)
 
     # Ready-push handoff: the "your briefing is ready" push must fire AFTER the commit/push/Pages
@@ -188,6 +233,8 @@ def run(do_notify=True, today=None):
     if not audio_ok:
         degraded.append("audio")
     if do_notify:
+        if breadth_msg:
+            notify.breadth_alert(breadth_msg)
         if degraded:
             notify.health("degraded sections: " + ", ".join(degraded), ok=True)
         # Loud escalation: markets blank for >= MARKETS_STALE_DAYS in a row means the source is likely
@@ -218,6 +265,10 @@ def spine():
     n = news_mod.get_news()
     print("S&P 500:", m["sp500"]); print("Nasdaq:", m["ndx"])
     print("VIX:", m["vix"]); print("10-yr:", m["ten_year"])
+    try:
+        print("breadth:", breadth_mod.percent_above_200ma())
+    except Exception as e:
+        print("breadth: FAILED —", e)
     print("news candidates: world=%d business=%d tech=%d" %
           (len(n["world"]), len(n["business"]), len(n["tech"])))
 

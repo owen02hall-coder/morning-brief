@@ -70,6 +70,10 @@ def compose_script(briefing):
         line = f"The VIX is at {v['value']:g}"
         pct = _spoken_pct(v.get("change"), v["value"]) if v.get("change") is not None else None
         parts.append(line + (f", {pct}." if pct else "."))
+    br = briefing.get("breadth") or {}
+    if br.get("value") is not None:
+        parts.append(f"Market breadth: {br['value']:g} percent of S and P 500 stocks are above "
+                     f"their 200 day average — {br.get('status', '')}.")
     if m.get("why"):
         parts.append(m["why"])
     if y and y.get("why"):
