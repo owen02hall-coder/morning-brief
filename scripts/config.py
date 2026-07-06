@@ -62,12 +62,16 @@ BREADTH_SCAN_URL = "https://scanner.tradingview.com/america/scan"
 BREADTH_SCAN_LIMIT = 2000        # top-N US common stocks by market cap. 2000 + the type=stock
                                  # filter matches 500/503 constituents (validated 2026-07-05);
                                  # without the filter ~430 ADR/fund rows displace S&P names.
-BREADTH_MIN_MATCH = 480          # of ~503 constituents; fewer = shape drift -> fail closed
+BREADTH_MIN_MATCH = 480          # of ~503 S&P constituents; fewer = shape drift -> fail closed
+BREADTH_MIN_MATCH_NDX = 96       # of ~101 Nasdaq-100 constituents
 SP500_WIKI_URL = "https://en.wikipedia.org/wiki/List_of_S%26P_500_companies"
-BREADTH_OVERSOLD = 30            # alert enters below this
-BREADTH_CLEAR = 33               # alert clears at/above this (hysteresis; no 30/31 flapping)
+NDX100_WIKI_URL = "https://en.wikipedia.org/wiki/Nasdaq-100"
+BREADTH_WARN = 40                # one-shot warning when breadth FALLS below this...
+BREADTH_WARN_CLEAR = 42          # ...re-armed only after recovering to here (no 39/41 flapping)
+BREADTH_OVERSOLD = 30            # daily nag enters below this
+BREADTH_CLEAR = 33               # nag clears at/above this (hysteresis; no 30/31 flapping)
 BREADTH_EXTREME = 20             # flagged as extreme in the alert text
-BREADTH_STALE_TRADING_DAYS = 2   # nag suppressed when the value is older than this many trading days
+BREADTH_STALE_TRADING_DAYS = 2   # alerts suppressed when the value is older than this many trading days
 
 # --- Audio edition (TTS) ------------------------------------------------------
 # One TTS request/day stays comfortably inside the Gemini free tier. The build writes a WAV to

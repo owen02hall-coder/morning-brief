@@ -26,4 +26,5 @@ jobs:
       - name: Print the data spine (all four numbers + breadth + news counts)
         run: |
           python -m scripts.build_briefing --spine | tee spine.txt
-          grep -q "breadth: {'value'" spine.txt || { echo "::error::breadth did not compute from the runner"; exit 1; }
+          grep -q "breadth: {'sp500': {'value'" spine.txt || { echo "::error::S&P breadth did not compute from the runner"; exit 1; }
+          grep -q "'ndx100': {'value'" spine.txt || { echo "::error::Nasdaq-100 breadth did not compute from the runner"; exit 1; }

@@ -32,29 +32,56 @@ def weekdays_between(a_iso, b_iso):
 
 
 def eval_breadth_alert(breadth, st, today):
-    """Oversold nag with hysteresis: enter < BREADTH_OVERSOLD, clear >= BREADTH_CLEAR (no
-    flapping in the 30-33 band), extreme < BREADTH_EXTREME flagged in the text, and a freshness
-    gate — a value older than BREADTH_STALE_TRADING_DAYS latches state but never nags (one stale
-    cache value must not page daily). Returns (alert_message_or_None, new_state); breadth
-    unavailable -> no state change at all."""
-    if not breadth or breadth.get("value") is None:
-        return None, st
-    b = st.get("breadth", {"in_alert": False, "nag_days": 0})
-    val, asof = breadth["value"], breadth.get("asof")
-    upd = {**b, "last_value": val, "last_asof": asof}
-    if val < config.BREADTH_OVERSOLD:
-        upd["in_alert"] = True
+    """Two alert tiers, evaluated independently per index (sp500, ndx100):
+
+    - WARNING (one-shot): fires once when breadth FALLS below BREADTH_WARN (40); re-armed only
+      after recovering to BREADTH_WARN_CLEAR (42), so a 39/41 wobble can't repeat it.
+    - OVERSOLD (daily nag): below BREADTH_OVERSOLD (30) it pages every notifying run with a day
+      counter, clears at BREADTH_CLEAR (33); below BREADTH_EXTREME (20) flagged EXTREME. Being
+      oversold supersedes the warning tier (no double-page on the way down).
+
+    Both tiers are freshness-gated: a value older than BREADTH_STALE_TRADING_DAYS updates state
+    but never notifies (one stale cache value must not page daily). Returns (alerts, new_state)
+    where alerts is a list of {"level": "warning"|"oversold", "text": ...}; an unavailable index
+    leaves its state untouched."""
+    if not breadth:
+        return [], st
+    cur = st.get("breadth") or {}
+    if "in_alert" in cur:                       # migrate the pre-two-index flat shape (S&P-only)
+        cur = {"sp500": cur}
+    alerts, out = [], dict(cur)
+    for key, label in (("sp500", "S&P 500"), ("ndx100", "Nasdaq-100")):
+        b = breadth.get(key)
+        if not b or b.get("value") is None:
+            continue
+        s = {**{"in_alert": False, "nag_days": 0, "warn_armed": True}, **out.get(key, {})}
+        val, asof = b["value"], b.get("asof")
+        s.update(last_value=val, last_asof=asof)
         gap = weekdays_between(asof, today)
-        if gap is None or gap > config.BREADTH_STALE_TRADING_DAYS:
-            return None, {**st, "breadth": upd}
-        upd["nag_days"] = b.get("nag_days", 0) + 1
-        extreme = " (EXTREME)" if val < config.BREADTH_EXTREME else ""
-        return (f"S&P 500 breadth: {val}% of stocks above their 200-day average — "
-                f"oversold{extreme}, day {upd['nag_days']}. Bullish-reversal watch zone.",
-                {**st, "breadth": upd})
-    if b.get("in_alert") and val < config.BREADTH_CLEAR:
-        return None, {**st, "breadth": {**upd, "in_alert": True}}   # latched: 30-33 wobble stays quiet
-    return None, {**st, "breadth": {**upd, "in_alert": False, "nag_days": 0}}
+        stale = gap is None or gap > config.BREADTH_STALE_TRADING_DAYS
+        if val < config.BREADTH_OVERSOLD:
+            s["in_alert"] = True
+            s["warn_armed"] = False             # superseded; re-arms only at WARN_CLEAR
+            if not stale:
+                s["nag_days"] = s.get("nag_days", 0) + 1
+                extreme = " (EXTREME)" if val < config.BREADTH_EXTREME else ""
+                alerts.append({"level": "oversold", "text":
+                    f"{label} breadth: {val}% of stocks above their 200-day average — "
+                    f"oversold{extreme}, day {s['nag_days']}. Bullish-reversal watch zone."})
+        elif s.get("in_alert") and val < config.BREADTH_CLEAR:
+            pass                                # latched: 30-33 wobble stays quiet
+        else:
+            s["in_alert"] = False
+            s["nag_days"] = 0
+            if val >= config.BREADTH_WARN_CLEAR:
+                s["warn_armed"] = True
+            elif s.get("warn_armed") and val < config.BREADTH_WARN and not stale:
+                s["warn_armed"] = False
+                alerts.append({"level": "warning", "text":
+                    f"{label} breadth fell below {config.BREADTH_WARN}%: {val}% of stocks above "
+                    f"their 200-day average — weakening participation."})
+        out[key] = s
+    return alerts, {**st, "breadth": out}
 
 
 def load():

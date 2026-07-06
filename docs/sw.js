@@ -2,7 +2,7 @@
 // briefing data so the freshest edition shows when online. Bump CACHE on any shell change.
 // Briefing data lives in its own UNversioned cache: a shell bump must never delete the
 // last-known-good briefing/archives that the offline fallback depends on.
-const CACHE = "briefing-shell-v8";   // v8: leaner speech narration; v7: breadth number; v6: Listen player
+const CACHE = "briefing-shell-v9";   // v9: two-index breadth cards; v8: leaner narration; v7: breadth number
 const DATA_CACHE = "briefing-data-v1";
 const SHELL = ["./", "./index.html", "./app.js", "./styles.css", "./manifest.json",
                "./icon-192.png", "./icon-512.png"];

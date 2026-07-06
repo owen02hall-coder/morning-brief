@@ -51,8 +51,11 @@ def morning_ready(headline):
     return _publish("Morning Briefing", headline, priority="default", click=config.PAGES_URL)
 
 
-def breadth_alert(message):
-    """Oversold market-breadth nag — high priority so it lands like the alert it is."""
+def breadth_alert(message, level="oversold"):
+    """Market-breadth alerts. Oversold nags page high-priority; the one-shot <40 warning is a
+    normal-priority heads-up."""
+    if level == "warning":
+        return _publish("Market breadth warning", message, priority="default", click=config.PAGES_URL)
     return _publish("Market breadth OVERSOLD", message, priority="high", click=config.PAGES_URL)
 
 

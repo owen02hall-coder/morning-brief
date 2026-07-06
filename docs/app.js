@@ -91,23 +91,35 @@ function itemList(title, items) {
 
 const BREADTH_STATUS_LABEL = { healthy: "Healthy", watch: "Watch", oversold: "Oversold" };
 
+function breadthCard(label, b) {
+  if (!b || b.value == null) return null;
+  const card = el("div", "card");
+  card.appendChild(el("h3", null, label));
+  const fig = el("p", "figure", `${b.value}%`);
+  fig.appendChild(el("span", `status ${b.status}`, BREADTH_STATUS_LABEL[b.status] || b.status));
+  card.appendChild(fig);
+  card.appendChild(el("p", "tile-why", "of members above their 200-day average"));
+  if (b.asof) {
+    card.appendChild(el("p", "asof",
+      `as of ${b.asof}${b.stale ? " (cached — today's scan failed)" : ""}`));
+  }
+  return card;
+}
+
 function breadthSection(breadth) {
-  // Computed number (% of S&P 500 above 200-day MA) when available; the StockCharts BPI links
-  // stay beneath it (the exact BPI has no free feed). Unavailable -> links only, as before.
+  // Computed % above 200-day MA per index; the StockCharts BPI links stay beneath (the exact
+  // BPI has no free feed). Handles the legacy single-index shape from pre-2026-07-06 archives.
   const sec = el("section");
   sec.appendChild(el("h2", null, "Market breadth"));
-  if (breadth && breadth.value != null) {
-    const card = el("div", "card");
-    card.appendChild(el("h3", null, "S&P 500 above 200-day average"));
-    const fig = el("p", "figure", `${breadth.value}%`);
-    fig.appendChild(el("span", `status ${breadth.status}`,
-      BREADTH_STATUS_LABEL[breadth.status] || breadth.status));
-    card.appendChild(fig);
-    if (breadth.asof) {
-      card.appendChild(el("p", "asof",
-        `as of ${breadth.asof}${breadth.stale ? " (cached — today's scan failed)" : ""}`));
-    }
-    sec.appendChild(card);
+  const shaped = breadth && breadth.value != null ? { sp500: breadth } : (breadth || {});
+  const cards = [
+    breadthCard("S&P 500", shaped.sp500),
+    breadthCard("Nasdaq-100", shaped.ndx100),
+  ].filter(Boolean);
+  if (cards.length) {
+    const grid = el("div", "grid");
+    cards.forEach((c) => grid.appendChild(c));
+    sec.appendChild(grid);
   }
   sec.appendChild(el("p", "muted", "Below ~30 = oversold / bullish-reversal watch."));
   const chips = el("div", "chips");

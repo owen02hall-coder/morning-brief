@@ -58,38 +58,53 @@ def _recap_context():
 
 
 def _get_breadth(st, today):
-    """Breadth with last-good fallback. Returns (breadth_or_None, state).
+    """Per-index breadth with per-index last-good fallback. Returns (dict, state).
 
-    Scan failure (unofficial endpoint) or a MIN_MATCH fail-close degrades to the cached last-good
-    value IF it is still within the freshness window (marked stale=true, shown dated); otherwise
-    breadth is unavailable and the briefing ships without it. Never raises."""
+    Scan failure (unofficial endpoint) or a MIN_MATCH fail-close degrades THAT index to its
+    cached last-good value IF still within the freshness window (marked stale=true, shown dated);
+    otherwise that index is unavailable. The other index is unaffected. Never raises."""
     try:
-        b = breadth_mod.percent_above_200ma()
+        computed = breadth_mod.compute_breadth()
     except Exception as e:
         print(f"breadth: scan failed (non-fatal): {e}")
-        b = None
-    if b is not None:
-        st = {**st, "breadth_last_good": dict(b)}
-        return {**b, "stale": False}, st
-    lg = st.get("breadth_last_good")
-    if lg:
-        gap = state.weekdays_between(lg.get("asof"), today)
-        if gap is not None and gap <= config.BREADTH_STALE_TRADING_DAYS:
-            print(f"breadth: serving last-good value from {lg.get('asof')} (stale)")
-            return {**lg, "stale": True}, st
-    return None, st
+        computed = {"sp500": None, "ndx100": None}
+    lg_all = st.get("breadth_last_good") or {}
+    if "value" in lg_all:                       # migrate the pre-two-index flat cache (S&P-only)
+        lg_all = {"sp500": lg_all}
+    out, new_lg = {}, dict(lg_all)
+    for key in ("sp500", "ndx100"):
+        b = computed.get(key)
+        if b is not None:
+            new_lg[key] = dict(b)
+            out[key] = {**b, "stale": False}
+            continue
+        lg = lg_all.get(key)
+        if lg:
+            gap = state.weekdays_between(lg.get("asof"), today)
+            if gap is not None and gap <= config.BREADTH_STALE_TRADING_DAYS:
+                print(f"breadth[{key}]: serving last-good value from {lg.get('asof')} (stale)")
+                out[key] = {**lg, "stale": True}
+                continue
+        out[key] = None
+    return out, {**st, "breadth_last_good": new_lg}
+
+
+def _one_breadth_block(b):
+    if not b or b.get("value") is None:
+        return {"value": None, "asof": None, "status": "unavailable", "matched": 0, "stale": False}
+    v = b["value"]
+    # Status bands mirror the ALERT tiers: oversold <30 (daily nag zone), watch <40 (the one-shot
+    # warning zone), healthy >=40.
+    status = ("oversold" if v < config.BREADTH_OVERSOLD
+              else "watch" if v < config.BREADTH_WARN else "healthy")
+    return {"value": v, "asof": b.get("asof"), "status": status,
+            "matched": b.get("matched", 0), "stale": bool(b.get("stale"))}
 
 
 def _breadth_block(breadth):
-    if not breadth or breadth.get("value") is None:
-        return {"value": None, "asof": None, "status": "unavailable", "matched": 0, "stale": False}
-    v = breadth["value"]
-    # Status bands align with the ALERT semantics (enter <30, clear at 33), not a prettier scale:
-    # "watch" is exactly the hysteresis band where an alert would stay latched.
-    status = ("oversold" if v < config.BREADTH_OVERSOLD
-              else "watch" if v < config.BREADTH_CLEAR else "healthy")
-    return {"value": v, "asof": breadth.get("asof"), "status": status,
-            "matched": breadth.get("matched", 0), "stale": bool(breadth.get("stale"))}
+    breadth = breadth or {}
+    return {"sp500": _one_breadth_block(breadth.get("sp500")),
+            "ndx100": _one_breadth_block(breadth.get("ndx100"))}
 
 
 def _fallback_items(news, bucket, limit):
@@ -101,7 +116,9 @@ def _assemble(now, today, market, news, narrative, ai_ok, breadth=None):
     briefing_date = today
     avail = {**market["availability"], **{f"news_{k}": v for k, v in news["available"].items()},
              "summary": "ok" if ai_ok else "unavailable",
-             "breadth": bool(breadth and breadth.get("value") is not None)}
+             "breadth": bool(breadth and all(
+                 breadth.get(k) and breadth[k].get("value") is not None
+                 for k in ("sp500", "ndx100")))}
 
     def num(n, why):
         if not n:
@@ -205,11 +222,12 @@ def run(do_notify=True, today=None):
         # never written and the escalation goes permanently silent.
         st = {**st, "markets_first_bad": today}
 
-    # Breadth oversold nag: evaluated (and its nag counter advanced) only when this run actually
-    # notifies — a --local/--no-notify run must not consume nag days it never delivered.
-    breadth_msg = None
+    # Breadth alerts (warning + oversold tiers, per index): evaluated (and counters/arming
+    # advanced) only when this run actually notifies — a --local/--no-notify run must not consume
+    # alerts it never delivered.
+    breadth_alerts = []
     if do_notify:
-        breadth_msg, st = state.eval_breadth_alert(breadth, st, today)
+        breadth_alerts, st = state.eval_breadth_alert(breadth, st, today)
     state.save(st, today)
 
     # Ready-push handoff: the "your briefing is ready" push must fire AFTER the commit/push/Pages
@@ -233,8 +251,8 @@ def run(do_notify=True, today=None):
     if not audio_ok:
         degraded.append("audio")
     if do_notify:
-        if breadth_msg:
-            notify.breadth_alert(breadth_msg)
+        for a in breadth_alerts:
+            notify.breadth_alert(a["text"], a["level"])
         if degraded:
             notify.health("degraded sections: " + ", ".join(degraded), ok=True)
         # Loud escalation: markets blank for >= MARKETS_STALE_DAYS in a row means the source is likely
@@ -266,7 +284,7 @@ def spine():
     print("S&P 500:", m["sp500"]); print("Nasdaq:", m["ndx"])
     print("VIX:", m["vix"]); print("10-yr:", m["ten_year"])
     try:
-        print("breadth:", breadth_mod.percent_above_200ma())
+        print("breadth:", breadth_mod.compute_breadth())
     except Exception as e:
         print("breadth: FAILED —", e)
     print("news candidates: world=%d business=%d tech=%d" %

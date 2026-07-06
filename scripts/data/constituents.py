@@ -12,18 +12,28 @@ import urllib.request
 from .. import config
 
 
-def sp500_symbols():
-    """Return the current constituent symbol list (~503). Raises on any shape drift."""
-    req = urllib.request.Request(config.SP500_WIKI_URL,
-                                 headers={"User-Agent": config.USER_AGENT})
+def _constituents(url, row_pattern, lo, hi, what):
+    req = urllib.request.Request(url, headers={"User-Agent": config.USER_AGENT})
     with urllib.request.urlopen(req, timeout=30) as r:
         html = r.read().decode("utf-8", "replace")
     m = re.search(r'id="constituents".*?</table>', html, re.S)
     if not m:
-        raise ValueError("constituents table not found (Wikipedia layout drift)")
-    # Each data row's first cell is a link whose text is the ticker (verified 2026-07-05: 503/503).
-    syms = re.findall(r'<tr[^>]*>\s*<td[^>]*>\s*<a[^>]*>([A-Z][A-Z0-9.\-]{0,6})</a>', m.group(0))
-    unique = list(dict.fromkeys(syms))
-    if not 450 <= len(unique) <= 520:
-        raise ValueError(f"implausible constituent count {len(unique)} (expected ~503)")
+        raise ValueError(f"{what}: constituents table not found (Wikipedia layout drift)")
+    unique = list(dict.fromkeys(re.findall(row_pattern, m.group(0))))
+    if not lo <= len(unique) <= hi:
+        raise ValueError(f"{what}: implausible constituent count {len(unique)}")
     return unique
+
+
+def sp500_symbols():
+    """Current S&P 500 members (~503). First cell is a LINKED ticker (verified: 503/503)."""
+    return _constituents(config.SP500_WIKI_URL,
+                         r'<tr[^>]*>\s*<td[^>]*>\s*<a[^>]*>([A-Z][A-Z0-9.\-]{0,6})</a>',
+                         450, 520, "sp500")
+
+
+def nasdaq100_symbols():
+    """Current Nasdaq-100 members (~101). First cell is a PLAIN-TEXT ticker (verified: 101)."""
+    return _constituents(config.NDX100_WIKI_URL,
+                         r'<tr[^>]*>\s*<td[^>]*>([A-Z][A-Z0-9.\-]{0,6})\s*<',
+                         90, 110, "ndx100")

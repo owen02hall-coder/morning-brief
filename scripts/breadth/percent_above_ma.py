@@ -36,9 +36,30 @@ def last_settled_trading_date():
     return d.isoformat()
 
 
-def percent_above_200ma():
-    """Return {value, matched, asof} or None (degraded — caller handles cache/unavailable)."""
-    members = constituents.sp500_symbols()
+def _tally(rows, members, min_match, what):
+    keys = {s.upper().replace(".", "") for s in members}   # BRK.B <-> BRKB normalization
+    above = total = 0
+    seen = set()
+    for row in rows:
+        d = row.get("d") or []
+        if len(d) < 3 or d[1] is None or d[2] is None:
+            continue
+        k = str(d[0]).upper().replace(".", "")
+        if k in keys and k not in seen:                    # dual-listings: count each name once
+            seen.add(k)
+            total += 1
+            if d[1] > d[2]:
+                above += 1
+    if total < min_match:
+        print(f"breadth[{what}]: only {total} constituents matched (< {min_match}) — failing closed")
+        return None
+    return {"value": round(100 * above / total, 1), "matched": total,
+            "asof": last_settled_trading_date()}
+
+
+def compute_breadth():
+    """One scan, two universes. Returns {"sp500": {...}|None, "ndx100": {...}|None} — each index
+    fails closed independently (caller handles per-index cache/unavailable)."""
     body = json.dumps({
         "columns": ["name", "close", "SMA200"],
         # type=stock is load-bearing: without it ~430 ADR/fund rows displace S&P names out of
@@ -53,21 +74,13 @@ def percent_above_200ma():
     with urllib.request.urlopen(req, timeout=30) as r:
         rows = json.loads(r.read().decode()).get("data", [])
 
-    keys = {s.upper().replace(".", "") for s in members}   # BRK.B <-> BRKB normalization
-    above = total = 0
-    seen = set()
-    for row in rows:
-        d = row.get("d") or []
-        if len(d) < 3 or d[1] is None or d[2] is None:
-            continue
-        k = str(d[0]).upper().replace(".", "")
-        if k in keys and k not in seen:                    # dual-listings: count each name once
-            seen.add(k)
-            total += 1
-            if d[1] > d[2]:
-                above += 1
-    if total < config.BREADTH_MIN_MATCH:
-        print(f"breadth: only {total} constituents matched (< {config.BREADTH_MIN_MATCH}) — failing closed")
-        return None
-    return {"value": round(100 * above / total, 1), "matched": total,
-            "asof": last_settled_trading_date()}
+    out = {}
+    for what, get_members, min_match in (
+            ("sp500", constituents.sp500_symbols, config.BREADTH_MIN_MATCH),
+            ("ndx100", constituents.nasdaq100_symbols, config.BREADTH_MIN_MATCH_NDX)):
+        try:
+            out[what] = _tally(rows, get_members(), min_match, what)
+        except Exception as e:   # one universe's Wikipedia drift must not kill the other
+            print(f"breadth[{what}]: constituents failed (non-fatal): {e}")
+            out[what] = None
+    return out
