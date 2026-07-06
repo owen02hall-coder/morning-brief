@@ -27,18 +27,11 @@ def _spoken_pct(change, value):
     return f"{direction} {abs(pct):.1f} percent"
 
 
-def _index_line(name, n):
-    if not n:
-        return f"{name} data is unavailable today."
-    level = f"{n['value']:,.0f}" if n["value"] >= 100 else f"{n['value']:g}"
-    if n.get("change") is None:
-        return f"The {name} last closed at {level}."
-    pct = _spoken_pct(n["change"], n["value"])
-    return f"The {name} closed at {level}, {pct}." if pct else f"The {name} closed at {level}."
-
-
 def compose_script(briefing):
-    """Deterministic narration of the whole briefing, in page order."""
+    """Deterministic narration — deliberately LEANER than the page (user preference 2026-07-05):
+    must-knows, the S&P/Nasdaq percent moves only (no index levels, no 10-year/VIX/breadth
+    readouts, no 'why' paragraphs), then tech and world items. The page still shows everything;
+    the audio is the drive-time cut. Mirror any change here in docs/app.js speechText()."""
     parts = []
     d = None
     try:
@@ -56,30 +49,19 @@ def compose_script(briefing):
             parts.append(f"{i}. {t}")
 
     m = briefing.get("market") or {}
-    y, v = briefing.get("yield_10y"), briefing.get("vix")
-    parts.append("Markets.")
-    parts.append(_index_line("S and P 500", m.get("sp500")))
-    parts.append(_index_line("Nasdaq", m.get("ndx")))
-    if y:
-        line = f"The ten-year Treasury yield is {y['value']:g} percent"
-        if y.get("change") is not None:
-            bps = round(y["change"] * 100)
-            line += f", {'up' if bps >= 0 else 'down'} {abs(bps)} basis points"
-        parts.append(line + ".")
-    if v:
-        line = f"The VIX is at {v['value']:g}"
-        pct = _spoken_pct(v.get("change"), v["value"]) if v.get("change") is not None else None
-        parts.append(line + (f", {pct}." if pct else "."))
-    br = briefing.get("breadth") or {}
-    if br.get("value") is not None:
-        parts.append(f"Market breadth: {br['value']:g} percent of S and P 500 stocks are above "
-                     f"their 200 day average — {br.get('status', '')}.")
-    if m.get("why"):
-        parts.append(m["why"])
-    if y and y.get("why"):
-        parts.append(y["why"])
-    if v and v.get("why"):
-        parts.append(v["why"])
+    moves = []
+    for name, n in (("S and P 500", m.get("sp500")), ("Nasdaq", m.get("ndx"))):
+        if n and n.get("change") is not None:
+            prev = n["value"] - n["change"]
+            pct_val = (n["change"] / prev) * 100 if prev else None
+            if pct_val is None:
+                continue
+            if abs(pct_val) < 0.05:   # "up 0.0 percent" reads silly — call it flat
+                moves.append(f"the {name} is flat")
+            else:
+                moves.append(f"the {name} is {'up' if pct_val >= 0 else 'down'} {abs(pct_val):.1f} percent")
+    if moves:
+        parts.append("Markets: " + ", and ".join(moves) + ".")
 
     for bucket, label in (("tech", "In tech"), ("world", "Around the world")):
         items = briefing.get(bucket) or []

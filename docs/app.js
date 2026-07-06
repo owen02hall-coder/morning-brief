@@ -214,39 +214,24 @@ function fmtTime(s) {
 
 function speechText(b) {
   // Mirror of scripts/tts.py compose_script — used when there is no audio file (fallback days,
-  // archived briefings, offline). Keep the two in the same shape so ears hear the same edition.
+  // archived briefings, offline). Deliberately LEANER than the page (user preference): must-knows,
+  // the S&P/Nasdaq percent moves only (no levels, no 10-year/VIX/breadth, no whys), tech, world.
   const parts = [];
   const d = localDate(b.date);
   parts.push(`Good morning. This is your briefing for ${d
     ? d.toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric" }) : "today"}.`);
   (b.tldr || []).forEach((t, i) => parts.push(`${i === 0 ? "The must-knows. " : ""}${i + 1}. ${t}`));
-  const idx = (name, n) => {
-    if (!n) return `${name} data is unavailable today.`;
-    const level = Number(n.value).toLocaleString("en-US", { maximumFractionDigits: 0 });
-    if (n.change == null) return `The ${name} last closed at ${level}.`;
-    const prev = n.value - n.change;
-    if (!prev) return `The ${name} closed at ${level}.`;
-    const pct = (n.change / prev) * 100;
-    return `The ${name} closed at ${level}, ${pct >= 0 ? "up" : "down"} ${Math.abs(pct).toFixed(1)} percent.`;
-  };
-  parts.push("Markets.");
-  parts.push(idx("S and P 500", b.market && b.market.sp500));
-  parts.push(idx("Nasdaq", b.market && b.market.ndx));
-  if (b.yield_10y) {
-    let line = `The ten-year Treasury yield is ${b.yield_10y.value} percent`;
-    if (b.yield_10y.change != null) {
-      const bps = Math.round(b.yield_10y.change * 100);
-      line += `, ${bps >= 0 ? "up" : "down"} ${Math.abs(bps)} basis points`;
-    }
-    parts.push(line + ".");
-  }
-  if (b.vix) parts.push(`The VIX is at ${b.vix.value}.`);
-  if (b.breadth && b.breadth.value != null) {
-    parts.push(`Market breadth: ${b.breadth.value} percent of S and P 500 stocks are above ` +
-      `their 200 day average — ${b.breadth.status}.`);
-  }
-  [b.market && b.market.why, b.yield_10y && b.yield_10y.why, b.vix && b.vix.why]
-    .forEach((w) => { if (w) parts.push(w); });
+  const moves = [];
+  [["S and P 500", b.market && b.market.sp500], ["Nasdaq", b.market && b.market.ndx]]
+    .forEach(([name, n]) => {
+      if (!n || n.change == null) return;
+      const prev = n.value - n.change;
+      if (!prev) return;
+      const pct = (n.change / prev) * 100;
+      moves.push(Math.abs(pct) < 0.05 ? `the ${name} is flat`   // "up 0.0 percent" reads silly
+        : `the ${name} is ${pct >= 0 ? "up" : "down"} ${Math.abs(pct).toFixed(1)} percent`);
+    });
+  if (moves.length) parts.push("Markets: " + moves.join(", and ") + ".");
   [["tech", "In tech."], ["world", "Around the world."]].forEach(([k, label]) => {
     const items = b[k] || [];
     if (items.length) parts.push(label);
