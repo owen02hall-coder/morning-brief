@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-07-05T09:55:02.026150-06:00",
+  "generated_at": "2026-07-05T22:16:17.702638-06:00",
   "date": "2026-07-05",
   "tldr": [
-    "Iran is increasing its control over the Strait of Hormuz, a critical global shipping route, amid the funeral of its supreme leader.",
-    "Houthi rebels and Yemeni government forces engaged in their most intense clashes in years, resulting in 16 government troop fatalities.",
-    "Technological advancements include a new project enabling transformer models to run directly on Apple's Neural Engine and successful trials of solar rail in Switzerland, hinting at wider European adoption."
+    "Ukraine is looking to expand its role as a defense provider by signing drone deals with seven NATO countries by the end of the year, following new missile and drone attacks by Russia on Kyiv that killed at least seven people.",
+    "OPEC+ members, including Saudi Arabia and Russia, announced plans to increase their monthly oil production by 188,000 barrels per day.",
+    "Nvidia's next-generation AI rack system, the Kyber, has reportedly been delayed until 2028 due to manufacturing challenges, raising concerns about the pace of AI infrastructure development."
   ],
   "market": {
     "sp500": {
@@ -17,55 +17,50 @@
       "change": -207.36,
       "asof": "2026-07-02"
     },
-    "why": "The Nasdaq Composite experienced a decline, which a strategist suggested could be part of a volatile unwind of the \"red-hot momentum trade\" that tends to struggle in July, with rumblings already starting to appear."
+    "why": "The Nasdaq Composite experienced a notable decline of 207.36 points on July 2, 2026, possibly influenced by a pre-holiday slump in chip stocks and reports of manufacturing delays affecting Nvidia's next-gen AI systems. In contrast, the S&P 500 closed slightly higher, gaining 0.01 points, indicating some market resilience."
   },
   "yield_10y": {
     "value": 4.49,
     "change": 0.01,
     "asof": "2026-07-02",
-    "why": "No specific explanation for the 10-year Treasury yield's slight increase was provided in the articles."
+    "why": "The 10-year Treasury yield saw a marginal increase of 0.01%, reaching 4.49% on July 2, 2026. This movement may be linked to broader economic expectations, including ongoing discussions among major oil producers like OPEC+ that led to their later decision to increase monthly oil production."
   },
   "vix": {
     "value": 16.15,
     "change": -0.44,
     "asof": "2026-07-02",
-    "why": "No specific explanation for the VIX's slight decrease was provided in the articles."
+    "why": "The VIX decreased by 0.44 points, closing at 16.15 on July 2, 2026. This reduction in the volatility index could reflect market participants anticipating an extension of a rally following the holiday weekend, suggesting a calmer outlook despite specific sector declines."
   },
   "tech": [
     {
-      "summary": "A new project allows for training and running transformer models directly on Apple's Neural Engine, indicating advancements in local AI processing.",
-      "source": "Hacker News",
-      "url": "https://github.com/christopherkarani/Espresso"
+      "summary": "Nvidia's next-generation AI rack system, Kyber, is reportedly delayed until 2028 due to manufacturing challenges, raising concerns about the company's ability to maintain its rapid annual release schedule for AI products.",
+      "source": "CNBC",
+      "url": "https://www.cnbc.com/2026/07/06/nvidia-kyber-rack-system-delays-manufacturing-taiwan-rubin-chips-.html"
     },
     {
-      "summary": "A successful trial of solar rail technology in Switzerland suggests that this method of generating renewable energy could become prevalent across Europe.",
-      "source": "Hacker News",
-      "url": "https://www.euronews.com/2026/07/05/italy-could-be-the-next-country-to-build-a-solar-railway-after-switzerlands-successful-tri"
+      "summary": "Some wealthy American families are reportedly turning to AI to educate their children, utilizing companies like Forge Prep and Alpha as alternatives to traditional schooling.",
+      "source": "The Verge",
+      "url": "https://www.theverge.com/ai-artificial-intelligence/961505/wealthy-ai-schools-alpha-forge-prep"
     },
     {
-      "summary": "Research is exploring the concept of transmitting megawatts of power through microwave technology, potentially offering new approaches to energy distribution.",
+      "summary": "A new AI tutor demonstrated significant effectiveness in a Dartmouth course, achieving a 0.71-1.30 standard deviation effect size, suggesting potential for AI in educational support.",
       "source": "Hacker News",
-      "url": "https://computer.rip/2026-07-04-microwave-and-power.html"
+      "url": "https://intextbooks.science.uu.nl/workshop2026/files/itb26_s1s2.pdf"
     }
   ],
   "world": [
     {
-      "summary": "Iran is escalating efforts to assert control over the Strait of Hormuz, coinciding with the funeral of its supreme leader, Ali Khamenei.",
-      "source": "Guardian World",
-      "url": "https://www.theguardian.com/world/2026/jul/05/iran-control-strait-of-hormuz-ali-khamenei-funeral"
-    },
-    {
-      "summary": "Houthi rebels killed 16 Yemeni government troops in the fiercest clashes seen in years, marking a significant escalation in the conflict.",
+      "summary": "Seven OPEC+ nations, including Saudi Arabia and Russia, announced an increase in their monthly oil production by 188,000 barrels per day.",
       "source": "Al Jazeera",
-      "url": "https://www.aljazeera.com/news/2026/7/5/at-least-15-yemeni-government-troops-killed-in-hodeidah-fighting?traffic_source=rss"
+      "url": "https://www.aljazeera.com/economy/2026/7/6/opec-countries-say-they-will-expand-monthly-oil-production?traffic_source=rss"
     },
     {
-      "summary": "Hundreds of masked white nationalists, affiliated with the neo-fascist group Patriot Front, marched through Washington D.C. on the Fourth of July, displaying banners including the Confederate flag.",
+      "summary": "Ukraine aims to sign \"drone deals\" with seven NATO countries by the end of the year, intending to transition from a military hardware recipient to a security provider by offering expertise on radar systems and ground stations.",
       "source": "Guardian World",
-      "url": "https://www.theguardian.com/us-news/2026/jul/04/neo-fascist-patriot-front-washington-dc"
+      "url": "https://www.theguardian.com/world/2026/jul/06/ukraine-drone-deals-seven-nato-countries-end-of-year"
     }
   ],
-  "weekly_recap": "The week of June 28, 2026, saw a mix of significant geopolitical developments and legal decisions. Donald Trump announced on June 29 that Iran agreed to peace talks in Doha following recent hostilities with the US, while the EU and China committed to three months of talks to address their trade imbalance. On June 30, the US Supreme Court made key rulings, striking down limits on political campaign spending and upholding birthright citizenship, but also affirming bans on transgender women in female sports. July 1 brought news that the U.S. would not renew the USMCA trade deal, opening new negotiations with Canada and Mexico, and Sony announced it would cease physical PlayStation disc production by January 2028. July 2 saw U.S. equity markets decline following a negative jobs report, alongside reports of a major Russian attack on Kyiv and allegations of Ukraine's involvement in the Nord Stream pipeline attack. On July 3, Instagram faced scrutiny for allegedly running ads promoting child sexual abuse material in India, while Anthropic launched Claude Science to aid drug development. The week concluded on July 4 with intensifying conflict in Sudan's El Obeid and Ukraine's successful targeting of a Russian oil terminal in St. Petersburg.",
+  "weekly_recap": "The week began with key diplomatic efforts, as Donald Trump announced Iran's agreement to peace talks in Doha and the European Union and China initiated trade talks to avert a trade war. The US Supreme Court made significant rulings, striking down campaign spending limits while upholding birthright citizenship and bans on transgender women in sports. Trade relations saw shifts as the U.S. chose not to renew the USMCA deal, and Sony announced plans to cease physical PlayStation disc production. Geopolitical tensions escalated with a major Russian attack on Kyiv, killing at least 22 people, and allegations against Ukraine regarding the Nord Stream pipeline. In technology, Instagram was reportedly running ads promoting child sexual abuse material, while Anthropic launched Claude Science for drug development. Conflict in Sudan's El Obeid intensified, and Ukraine targeted a Russian oil terminal in St. Petersburg. The week concluded with Iran increasing control over the Strait of Hormuz during its supreme leader's funeral, and intense clashes between Houthi rebels and Yemeni government forces.",
   "data_availability": {
     "sp500": true,
     "ndx": true,
