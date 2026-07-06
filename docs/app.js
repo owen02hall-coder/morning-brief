@@ -174,6 +174,183 @@ function showFreshness(b) {
   }
 }
 
+// ---- Listen: daily audio edition with on-device speech fallback -----------------------------
+
+const ICON_PLAY = "M8 5v14l11-7z";
+const ICON_PAUSE = "M6 5h4v14H6zM14 5h4v14h-4z";
+
+function icon(d) {
+  const ns = "http://www.w3.org/2000/svg";
+  const svg = document.createElementNS(ns, "svg");
+  svg.setAttribute("viewBox", "0 0 24 24");
+  svg.setAttribute("fill", "currentColor");
+  svg.setAttribute("aria-hidden", "true");
+  const path = document.createElementNS(ns, "path");
+  path.setAttribute("d", d);
+  svg.appendChild(path);
+  return svg;
+}
+
+function fmtTime(s) {
+  if (!isFinite(s)) return "";
+  const m = Math.floor(s / 60), sec = Math.round(s % 60);
+  return `${m}:${String(sec).padStart(2, "0")}`;
+}
+
+function speechText(b) {
+  // Mirror of scripts/tts.py compose_script — used when there is no audio file (fallback days,
+  // archived briefings, offline). Keep the two in the same shape so ears hear the same edition.
+  const parts = [];
+  const d = localDate(b.date);
+  parts.push(`Good morning. This is your briefing for ${d
+    ? d.toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric" }) : "today"}.`);
+  (b.tldr || []).forEach((t, i) => parts.push(`${i === 0 ? "The must-knows. " : ""}${i + 1}. ${t}`));
+  const idx = (name, n) => {
+    if (!n) return `${name} data is unavailable today.`;
+    const level = Number(n.value).toLocaleString("en-US", { maximumFractionDigits: 0 });
+    if (n.change == null) return `The ${name} last closed at ${level}.`;
+    const prev = n.value - n.change;
+    if (!prev) return `The ${name} closed at ${level}.`;
+    const pct = (n.change / prev) * 100;
+    return `The ${name} closed at ${level}, ${pct >= 0 ? "up" : "down"} ${Math.abs(pct).toFixed(1)} percent.`;
+  };
+  parts.push("Markets.");
+  parts.push(idx("S and P 500", b.market && b.market.sp500));
+  parts.push(idx("Nasdaq", b.market && b.market.ndx));
+  if (b.yield_10y) {
+    let line = `The ten-year Treasury yield is ${b.yield_10y.value} percent`;
+    if (b.yield_10y.change != null) {
+      const bps = Math.round(b.yield_10y.change * 100);
+      line += `, ${bps >= 0 ? "up" : "down"} ${Math.abs(bps)} basis points`;
+    }
+    parts.push(line + ".");
+  }
+  if (b.vix) parts.push(`The VIX is at ${b.vix.value}.`);
+  [b.market && b.market.why, b.yield_10y && b.yield_10y.why, b.vix && b.vix.why]
+    .forEach((w) => { if (w) parts.push(w); });
+  [["tech", "In tech."], ["world", "Around the world."]].forEach(([k, label]) => {
+    const items = b[k] || [];
+    if (items.length) parts.push(label);
+    items.forEach((it) => {
+      if (it.summary) parts.push(it.source ? `${it.summary} That's from ${it.source}.` : it.summary);
+    });
+  });
+  if (b.weekly_recap) parts.push(`Your weekly recap. ${b.weekly_recap}`);
+  parts.push("That's your briefing. Have a great day.");
+  return parts.join(" ").replace(/https?:\/\/\S+/g, "");
+}
+
+const listen = {
+  mode: null,           // "audio" | "speech"
+  playing: false,
+  audio: null,
+  stopSpeech() {
+    if ("speechSynthesis" in window) window.speechSynthesis.cancel();
+  },
+  stopAll() {
+    this.stopSpeech();
+    if (this.audio) this.audio.pause();
+    this.playing = false;
+  },
+};
+
+function speakChunked(text, onDone) {
+  // iOS quietly dies on very long utterances — queue sentence-sized chunks instead.
+  const chunks = text.match(/[^.!?]+[.!?]+[\s]*/g) || [text];
+  const synth = window.speechSynthesis;
+  synth.cancel();
+  let remaining = chunks.length;
+  chunks.forEach((c) => {
+    const u = new SpeechSynthesisUtterance(c);
+    u.onend = () => { remaining -= 1; if (remaining === 0 && onDone) onDone(); };
+    u.onerror = () => { remaining -= 1; if (remaining === 0 && onDone) onDone(); };
+    synth.speak(u);
+  });
+}
+
+function setButton(btn, playing) {
+  btn.textContent = "";
+  btn.appendChild(icon(playing ? ICON_PAUSE : ICON_PLAY));
+  btn.setAttribute("aria-label", playing ? "Pause the audio briefing" : "Play the audio briefing");
+}
+
+async function setupListen(b) {
+  const bar = document.getElementById("listen");
+  const btn = document.getElementById("listen-btn");
+  const label = document.getElementById("listen-label");
+  const track = document.getElementById("listen-track");
+  const fill = document.getElementById("listen-fill");
+  const time = document.getElementById("listen-time");
+  const audio = document.getElementById("listen-audio");
+  listen.audio = audio;
+  listen.stopAll();
+  setButton(btn, false);
+  fill.style.width = "0%";
+
+  // Prefer the real audio edition; the manifest date must MATCH this briefing — yesterday's
+  // mp3 must never play under today's page.
+  let hasAudio = false;
+  try {
+    const r = await fetch("briefing-audio.json", { cache: "no-store" });
+    if (r.ok) hasAudio = (await r.json()).date === b.date;
+  } catch (e) { /* offline or absent — fall through to speech */ }
+
+  if (hasAudio) {
+    listen.mode = "audio";
+    audio.src = `briefing-audio.mp3?d=${b.date}`;   // date param defeats the 10-min HTTP cache
+    label.textContent = "Listen to today's briefing";
+    track.classList.remove("hidden");
+    time.classList.remove("hidden");
+    audio.onloadedmetadata = () => { time.textContent = fmtTime(audio.duration); };
+    audio.ontimeupdate = () => {
+      if (audio.duration) {
+        fill.style.width = `${(audio.currentTime / audio.duration) * 100}%`;
+        time.textContent = fmtTime(audio.duration - audio.currentTime);
+      }
+    };
+    audio.onended = () => { listen.playing = false; setButton(btn, false); fill.style.width = "0%"; };
+    audio.onpause = () => { listen.playing = false; setButton(btn, false); };
+    audio.onplay = () => { listen.playing = true; setButton(btn, true); };
+    track.onclick = (ev) => {
+      if (!audio.duration) return;
+      const r = track.getBoundingClientRect();
+      audio.currentTime = ((ev.clientX - r.left) / r.width) * audio.duration;
+    };
+    btn.onclick = () => { listen.playing ? audio.pause() : audio.play().catch(() => {}); };
+    if ("mediaSession" in navigator) {
+      const d = localDate(b.date);
+      navigator.mediaSession.metadata = new MediaMetadata({
+        title: "Morning Briefing" + (d ? " — " + d.toLocaleDateString(undefined,
+          { month: "long", day: "numeric" }) : ""),
+        artist: "Morning Briefing",
+        artwork: [{ src: "icon-512.png", sizes: "512x512", type: "image/png" }],
+      });
+      navigator.mediaSession.setActionHandler("play", () => audio.play().catch(() => {}));
+      navigator.mediaSession.setActionHandler("pause", () => audio.pause());
+    }
+    bar.classList.remove("hidden");
+  } else if ("speechSynthesis" in window) {
+    listen.mode = "speech";
+    audio.removeAttribute("src");
+    label.textContent = "Listen (device voice)";
+    track.classList.add("hidden");
+    time.classList.add("hidden");
+    btn.onclick = () => {
+      if (listen.playing) {
+        listen.stopAll();
+        setButton(btn, false);
+      } else {
+        listen.playing = true;
+        setButton(btn, true);
+        speakChunked(speechText(b), () => { listen.playing = false; setButton(btn, false); });
+      }
+    };
+    bar.classList.remove("hidden");
+  } else {
+    bar.classList.add("hidden");
+  }
+}
+
 async function loadArchive() {
   const list = document.getElementById("archive-list");
   const view = document.getElementById("archive-view");
@@ -203,6 +380,27 @@ async function loadArchive() {
           try {
             const b = await (await fetch(`archive/${e.date}.json`, { cache: "no-store" })).json();
             render(b, view);
+            // Archived editions have no mp3 — offer the device voice when available.
+            if ("speechSynthesis" in window) {
+              const chip = el("button", "chip", "Listen to this briefing");
+              chip.type = "button";
+              chip.onclick = () => {
+                if (chip.dataset.speaking === "1") {
+                  listen.stopAll();
+                  chip.dataset.speaking = "0";
+                  chip.textContent = "Listen to this briefing";
+                } else {
+                  listen.stopAll();
+                  chip.dataset.speaking = "1";
+                  chip.textContent = "Stop";
+                  speakChunked(speechText(b), () => {
+                    chip.dataset.speaking = "0";
+                    chip.textContent = "Listen to this briefing";
+                  });
+                }
+              };
+              view.insertBefore(chip, view.firstChild);
+            }
           } catch (err) { // offline with no cached copy, or a failed fetch — never fail silently
             view.innerHTML = "";
             view.appendChild(el("p", "muted",
@@ -238,6 +436,7 @@ async function loadBriefing() {
   if (b.generated_at !== lastGeneratedAt) { // only re-render on a new edition (no scroll jank)
     lastGeneratedAt = b.generated_at;
     render(b, document.getElementById("briefing"));
+    setupListen(b).catch(() => {}); // audio/speech wiring must never break the render path
   }
   showFreshness(b);
 }

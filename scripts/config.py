@@ -53,6 +53,13 @@ MARKET_TIMEOUT = 20             # fail fast: a hung market source must not blow 
                                 # 20s is bounded well under the cap. Markets degrade to None
                                 # gracefully, so the AI summary still ships if the source is down.
 
+# --- Audio edition (TTS) ------------------------------------------------------
+# One TTS request/day stays comfortably inside the Gemini free tier. The build writes a WAV to
+# AUDIO_WAV_PATH (job-local, gitignored); the workflow converts it to docs/briefing-audio.mp3 and
+# writes docs/briefing-audio.json so the client can verify the audio matches today's edition.
+TTS_MODEL = os.environ.get("TTS_MODEL", "gemini-2.5-flash-preview-tts")
+TTS_VOICE = os.environ.get("TTS_VOICE", "Kore")   # warm, clear prebuilt voice
+
 # --- Notifications / hosting ------------------------------------------------
 # Public Pages URL of the PWA; set as an env var/secret at deploy time.
 # `or` (not a get() default): an UNSET repo variable reaches CI as the empty string, which get()
@@ -69,6 +76,8 @@ STATE_PATH = os.path.join(REPO_ROOT, "state", "state.json")
 # Handoff file: the build writes today's headline here; the workflow's post-publish step reads it
 # to send the "ready" push ONLY after git push succeeds (never committed — see .gitignore).
 HEADLINE_PATH = os.path.join(REPO_ROOT, "headline.txt")
+# Audio handoff: raw TTS speech; the workflow converts to mp3 (never committed — see .gitignore).
+AUDIO_WAV_PATH = os.path.join(REPO_ROOT, "audio.wav")
 
 # --- Monitoring -------------------------------------------------------------
 # The client-side staleness threshold (PWA "couldn't refresh" banner, 28h) lives in docs/app.js

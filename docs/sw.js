@@ -2,7 +2,7 @@
 // briefing data so the freshest edition shows when online. Bump CACHE on any shell change.
 // Briefing data lives in its own UNversioned cache: a shell bump must never delete the
 // last-known-good briefing/archives that the offline fallback depends on.
-const CACHE = "briefing-shell-v5";   // v5: editorial redesign (index/styles/app); v4: refetch-race guard; v3: split data cache
+const CACHE = "briefing-shell-v6";   // v6: Listen player (audio edition + speech fallback); v5: editorial redesign
 const DATA_CACHE = "briefing-data-v1";
 const SHELL = ["./", "./index.html", "./app.js", "./styles.css", "./manifest.json",
                "./icon-192.png", "./icon-512.png"];
@@ -48,6 +48,12 @@ self.addEventListener("activate", (e) => {
 
 self.addEventListener("fetch", (e) => {
   const url = new URL(e.request.url);
+  // Audio edition: never intercept. Media playback needs native Range-request handling (SW
+  // cache.match breaks seeking in Safari), and the manifest must always be network-fresh — a
+  // cached manifest could bind yesterday's mp3 to today's page.
+  if (url.pathname.endsWith("briefing-audio.mp3") || url.pathname.endsWith("briefing-audio.json")) {
+    return;
+  }
   const isData = url.pathname.endsWith("briefing.json") || url.pathname.includes("/archive/");
   if (isData) {
     // network-first for data: freshest when online, last-known when offline OR when the server

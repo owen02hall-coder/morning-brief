@@ -23,6 +23,7 @@ from datetime import date, datetime
 from zoneinfo import ZoneInfo
 
 from . import config, state, notify
+from . import tts as tts_mod
 from .data import market as market_mod
 from .data import news as news_mod
 from . import summarize as summarize_mod
@@ -176,9 +177,16 @@ def run(do_notify=True, today=None):
     with open(config.HEADLINE_PATH, "w", encoding="utf-8") as f:
         f.write(headline + "\n")
 
+    # Audio edition (non-fatal): generate() swallows its own failures and returns False. A failed
+    # audio day just means no manifest gets written downstream and the PWA's Listen button falls
+    # back to the on-device voice — the page, push, and state above are already safe on disk.
+    audio_ok = tts_mod.generate(briefing)
+
     # health: report any degraded section (low priority); the run still succeeded
     degraded = [k for k, v in briefing["data_availability"].items()
                 if v is False or v == "unavailable"]
+    if not audio_ok:
+        degraded.append("audio")
     if do_notify:
         if degraded:
             notify.health("degraded sections: " + ", ".join(degraded), ok=True)

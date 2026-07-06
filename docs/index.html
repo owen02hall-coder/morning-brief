@@ -15,6 +15,15 @@
     <p id="edition" class="edition"></p>
     <h1>Morning Briefing</h1>
     <div id="updated" class="updated"></div>
+    <div id="listen" class="listen hidden">
+      <button id="listen-btn" class="listen-btn" type="button" aria-label="Play the audio briefing"></button>
+      <div class="listen-body">
+        <span id="listen-label" class="listen-label">Listen to today's briefing</span>
+        <div id="listen-track" class="listen-track hidden" aria-hidden="true"><div id="listen-fill" class="listen-fill"></div></div>
+      </div>
+      <span id="listen-time" class="listen-time hidden"></span>
+      <audio id="listen-audio" preload="metadata"></audio>
+    </div>
     <div id="stale" class="stale hidden"></div>
   </header>
 
