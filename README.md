@@ -12,8 +12,11 @@ Runs with your laptop and phone off. Cost: $0/month (all free tiers + your exist
 - Markets: S&P 500, Nasdaq Composite, 10-year Treasury yield, VIX (latest close, day change, and a plain-English why)
 - Emerging tech (a few cutting-edge items, cited)
 - World news (globally significant only, cited)
+- **Listen** — a daily audio edition (Gemini TTS, ~4 min) with lock-screen/CarPlay controls;
+  falls back to the phone's built-in voice offline, on archived briefings, or on a failed-TTS day
 - Searchable archive of past briefings + a Sunday weekly recap
-- A morning "ready" push, plus a self-monitoring health ping if a run fails or degrades
+- A morning "ready" push sent only AFTER the new edition is actually published, plus a
+  self-monitoring health ping if a run fails or degrades
 
 Breadth / oversold-alert (BPSPX-style) is a planned v2 fast-follow — see
 `tmp/ready-plans/` for the design and why it was deferred (free market-data rate limits).
@@ -24,10 +27,17 @@ Breadth / oversold-alert (BPSPX-style) is a planned v2 fast-follow — see
 GitHub Actions (daily cron, UTC) --> python -m scripts.build_briefing
   Yahoo Finance chart API, keyless (S&P 500, Nasdaq Composite, VIX, 10-yr)  +  RSS feeds (news)
   --> Gemini writes a structured, cited briefing  (numbers injected as facts, never invented)
-  --> writes docs/briefing.json + docs/archive/<date>.json + state/state.json, commits them
-  --> GitHub Pages serves the PWA; ntfy pushes "ready"
-PWA (docs/) reads briefing.json (network-first), renders it, shows an archive + freshness banner
+  --> scripts/tts.py narrates it + Gemini TTS synthesizes; lameenc encodes the mp3 in-process
+  --> writes docs/briefing.json + archive + state; workflow publishes docs/briefing-audio.mp3
+      (+ a date manifest, written only on success) and commits everything
+  --> GitHub Pages serves the PWA; ntfy pushes "ready" only after git push succeeded
+PWA (docs/) reads briefing.json (network-first), renders it, shows the Listen player when the
+audio manifest matches today (device-voice fallback otherwise), archive + freshness banner
 ```
+
+Supply-chain hardening: workflows install with a CI-frozen `constraints.txt` and pin actions by
+commit SHA; `shell-guard.yml` fails any push that changes the PWA shell without a service-worker
+CACHE bump (installed clients would otherwise never update — this shipped broken once).
 
 ## One-time setup
 
