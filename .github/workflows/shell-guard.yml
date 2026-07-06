@@ -1,0 +1,56 @@
+name: Shell Cache Guard
+
+# Fail-closed machine guard for a bug-class that already shipped once (0e99e1d -> hotfix 134aa23):
+# the app shell is served cache-first keyed on sw.js's CACHE constant, so a shell change deployed
+# WITHOUT a CACHE bump leaves every installed PWA client on stale code — silently and permanently.
+# This guard fails the push if any shell file changed while sw.js's CACHE line did not.
+on:
+  push:
+    branches: [main]
+    paths:
+      - "docs/app.js"
+      - "docs/index.html"
+      - "docs/styles.css"
+      - "docs/manifest.json"
+      - "docs/sw.js"
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # need the pre-push base commit to diff the whole push range
+
+      - name: Fail if shell changed without a CACHE bump
+        run: |
+          BASE="${{ github.event.before }}"
+          # Force-push or brand-new branch: before is all-zeros / unknown — fall back to HEAD^.
+          if [ "$BASE" = "0000000000000000000000000000000000000000" ] || ! git cat-file -e "$BASE" 2>/dev/null; then
+            BASE=$(git rev-parse HEAD^ 2>/dev/null || echo "")
+            [ -z "$BASE" ] && { echo "no base commit to diff against — skipping"; exit 0; }
+          fi
+          CHANGED=$(git diff --name-only "$BASE" "${{ github.sha }}" -- docs/app.js docs/index.html docs/styles.css docs/manifest.json)
+          [ -z "$CHANGED" ] && { echo "no shell files changed — ok"; exit 0; }
+          if git diff "$BASE" "${{ github.sha }}" -- docs/sw.js | grep -qE '^[+-]const CACHE'; then
+            echo "shell changed AND CACHE bumped — ok"
+            exit 0
+          fi
+          echo "::error::Shell file(s) changed without bumping CACHE in docs/sw.js — installed clients would never receive this change:"
+          echo "$CHANGED"
+          exit 1
+
+      - name: Alert on guard trip (the failure this guards is otherwise silent)
+        if: failure() || cancelled()
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_SUB }}
+        run: |
+          if [ -n "${NTFY_TOPIC}" ]; then
+            curl -s -H "Title: Shell guard TRIPPED" -H "Priority: high" \
+              -d "A shell change was pushed without a sw.js CACHE bump — installed PWAs will not update. Push a CACHE bump." \
+              "https://ntfy.sh/${NTFY_TOPIC}" || true
+          fi

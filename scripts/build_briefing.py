@@ -8,8 +8,11 @@ Run modes:
   python -m scripts.build_briefing --no-notify # skip ntfy pushes
 
 Flow: date-gate -> load state -> market (Yahoo, all four numbers) -> news (RSS) -> Gemini summary
-(with a no-AI fallback) -> write briefing.json + archive + state -> notify. The whole run is
-wrapped so an unhandled failure sends a high-priority health ping and exits non-zero.
+(with a no-AI fallback) -> write briefing.json + archive + state + headline handoff -> health
+pings. The daily "ready" push is NOT sent here: the build writes headline.txt and the workflow
+sends the push (scripts.notify CLI) only after the commit/push leg succeeds, so a failed publish
+can never follow a delivered "ready". The whole run is wrapped so an unhandled failure sends a
+high-priority health ping and exits non-zero.
 """
 import glob
 import json
@@ -163,15 +166,20 @@ def run(do_notify=True, today=None):
         st = {**st, "markets_first_bad": today}
     state.save(st, today)
 
+    # Ready-push handoff: the "your briefing is ready" push must fire AFTER the commit/push/Pages
+    # deploy — not here, mid-build, where a later publish failure would make it a lie. Write the
+    # headline to a handoff file; the workflow's post-publish step sends it via
+    # `python -m scripts.notify ready`. On a good day, tease the top must-know; on a no-AI fallback
+    # day the first tldr line is an internal notice, so hand off a clean generic message instead.
+    headline = (briefing["tldr"][0] if ai_ok and briefing["tldr"]
+                else "Your morning briefing is ready.")
+    with open(config.HEADLINE_PATH, "w", encoding="utf-8") as f:
+        f.write(headline + "\n")
+
     # health: report any degraded section (low priority); the run still succeeded
     degraded = [k for k, v in briefing["data_availability"].items()
                 if v is False or v == "unavailable"]
     if do_notify:
-        # On a good day, tease the top must-know; on a no-AI fallback day the first tldr line is an
-        # internal notice, so send a clean generic message instead.
-        headline = (briefing["tldr"][0] if ai_ok and briefing["tldr"]
-                    else "Your morning briefing is ready.")
-        notify.morning_ready(headline)
         if degraded:
             notify.health("degraded sections: " + ", ".join(degraded), ok=True)
         # Loud escalation: markets blank for >= MARKETS_STALE_DAYS in a row means the source is likely

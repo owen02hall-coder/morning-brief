@@ -8,4 +8,7 @@ venv/
 .env
 *.local.env
 
+# Build → workflow ready-push handoff (job-local, never published)
+headline.txt
+
 # Assumption-test fingerprints are committed on purpose; nothing else here.

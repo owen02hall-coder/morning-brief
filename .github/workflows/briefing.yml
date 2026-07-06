@@ -28,6 +28,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # A missing/renamed NTFY_SUB secret would silently disable EVERY alarm path (ready push,
+      # degraded pings, failure backstop). Fail loudly before doing any work.
+      - name: Fail fast if alerting is unwired
+        run: '[ -n "${{ secrets.NTFY_SUB }}" ] || { echo "::error::NTFY_SUB secret missing — all alerting would be silent"; exit 1; }'
+
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
@@ -54,10 +59,23 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add docs/ state/
           git diff --staged --quiet || git commit -m "chore: daily briefing $(date -u +%F)"
-          git push
+          # Rebase-retry: a human push to main during the run must not fail the day's publish.
+          git push || { git pull --rebase origin main && git push; } \
+                   || { sleep 5 && git pull --rebase origin main && git push; }
+
+      # Runs ONLY after the commit/push leg succeeded — the phone never hears "ready" for an
+      # edition that is not on its way to Pages. No-ops (exit 0) when the build no-oped
+      # (headline.txt absent). See scripts/notify.py main().
+      - name: Send ready push (after publish)
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_SUB }}
+          PAGES_URL: ${{ vars.PAGE_URL }}
+        run: python -m scripts.notify ready
 
       - name: Health ping on failure (backstop)
-        if: failure()
+        # cancelled() included: a run killed by timeout-minutes is CANCELLED, not failed —
+        # without it a hung run alerts nobody until the heartbeat ~15h later.
+        if: failure() || cancelled()
         env:
           NTFY_TOPIC: ${{ secrets.NTFY_SUB }}
         run: |

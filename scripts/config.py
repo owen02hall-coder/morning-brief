@@ -55,7 +55,9 @@ MARKET_TIMEOUT = 20             # fail fast: a hung market source must not blow 
 
 # --- Notifications / hosting ------------------------------------------------
 # Public Pages URL of the PWA; set as an env var/secret at deploy time.
-PAGES_URL = os.environ.get("PAGES_URL", "https://example.github.io/morning-briefing/")
+# `or` (not a get() default): an UNSET repo variable reaches CI as the empty string, which get()
+# would return as-is — silently bypassing the placeholder warning and shipping an empty click-URL.
+PAGES_URL = os.environ.get("PAGES_URL") or "https://example.github.io/morning-briefing/"
 NTFY_BASE = "https://ntfy.sh"
 
 # --- Paths ------------------------------------------------------------------
@@ -64,6 +66,9 @@ DOCS_DIR = os.path.join(REPO_ROOT, "docs")
 ARCHIVE_DIR = os.path.join(DOCS_DIR, "archive")
 BRIEFING_PATH = os.path.join(DOCS_DIR, "briefing.json")
 STATE_PATH = os.path.join(REPO_ROOT, "state", "state.json")
+# Handoff file: the build writes today's headline here; the workflow's post-publish step reads it
+# to send the "ready" push ONLY after git push succeeds (never committed — see .gitignore).
+HEADLINE_PATH = os.path.join(REPO_ROOT, "headline.txt")
 
 # --- Monitoring -------------------------------------------------------------
 # The client-side staleness threshold (PWA "couldn't refresh" banner, 28h) lives in docs/app.js

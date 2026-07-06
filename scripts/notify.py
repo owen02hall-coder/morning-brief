@@ -56,3 +56,30 @@ def health(message, ok=True):
     if ok:
         return _publish("Briefing degraded", message, priority="low")
     return _publish("Briefing FAILED", message, priority="high")
+
+
+def main(argv):
+    """CLI entry so the workflow can send the ready-push AFTER the publish leg succeeds.
+
+    `python -m scripts.notify ready` reads the headline the build wrote to config.HEADLINE_PATH
+    and sends the morning push. Exits 0 with a no-op message when the file is absent (no-op
+    build day) so the workflow step needs no existence check of its own.
+    """
+    if not argv or argv[0] != "ready":
+        print("usage: python -m scripts.notify ready")
+        return 2
+    try:
+        with open(config.HEADLINE_PATH, encoding="utf-8") as f:
+            headline = f.read().strip()
+    except FileNotFoundError:
+        print("notify: no headline file — nothing was built this run, skipping ready push")
+        return 0
+    if not headline:
+        headline = "Your morning briefing is ready."
+    morning_ready(headline)
+    return 0
+
+
+if __name__ == "__main__":
+    import sys
+    sys.exit(main(sys.argv[1:]))

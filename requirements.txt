@@ -1,5 +1,5 @@
 # Personal Morning Briefing — v1 core dependencies (pinned for reproducible CI)
 google-genai==1.21.0
-requests==2.32.3
+pydantic==2.13.4
 feedparser==6.0.11
 tzdata==2025.2
