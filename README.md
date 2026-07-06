@@ -12,14 +12,15 @@ Runs with your laptop and phone off. Cost: $0/month (all free tiers + your exist
 - Markets: S&P 500, Nasdaq Composite, 10-year Treasury yield, VIX (latest close, day change, and a plain-English why)
 - Emerging tech (a few cutting-edge items, cited)
 - World news (globally significant only, cited)
-- **Listen** — a daily audio edition (Gemini TTS, ~4 min) with lock-screen/CarPlay controls;
-  falls back to the phone's built-in voice offline, on archived briefings, or on a failed-TTS day
+- **Listen** — a daily audio edition (Gemini TTS, ~2-3 min drive-time cut: must-knows, percent
+  moves, tech, world) with lock-screen/CarPlay controls; falls back to the phone's built-in voice
+  offline, on archived briefings, or on a failed-TTS day
+- **Market breadth** — % of S&P 500 and Nasdaq-100 members above their 200-day average, computed
+  daily (validated against the published $S5TH/$NDTH indexes), with two alert tiers per index: a
+  one-shot warning when breadth falls below 40% and a daily high-priority oversold nag below 30%
 - Searchable archive of past briefings + a Sunday weekly recap
 - A morning "ready" push sent only AFTER the new edition is actually published, plus a
   self-monitoring health ping if a run fails or degrades
-
-Breadth / oversold-alert (BPSPX-style) is a planned v2 fast-follow — see
-`tmp/ready-plans/` for the design and why it was deferred (free market-data rate limits).
 
 ## How it works
 
@@ -47,8 +48,7 @@ CACHE bump (installed clients would otherwise never update — this shipped brok
 - ntfy app on your phone — https://ntfy.sh/ → install, then subscribe to a private topic name
   you choose (the topic name is effectively the password — make it long and unguessable, e.g.
   `briefing-<random>`).
-- (v2 only) A Twelve Data API key — https://twelvedata.com/ — will be needed when the breadth /
-  oversold feature is added. NOT required for v1.
+(No other keys needed — market numbers and breadth both come from keyless sources.)
 
 ### 2. Create a public repo and push this code
 A public repo is required for free GitHub Pages + unlimited Actions minutes. The page is
@@ -65,7 +65,6 @@ Repo Settings -> Secrets and variables -> Actions:
 - Variable `PAGE_URL` = your Pages URL from step 3 (mapped into the `PAGES_URL` env var; lets the
   notification and the heartbeat reach your page)
 
-(`TWELVEDATA_API_KEY` is only needed for the v2 breadth feature, not v1.)
 
 ### 5. Run it once
 Actions tab -> "Morning Briefing" -> "Run workflow" (leave "force" on). It builds today's

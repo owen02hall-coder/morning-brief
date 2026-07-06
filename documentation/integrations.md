@@ -1,8 +1,8 @@
 ---
 title: Integrations
-source_files: [scripts/data/market.py, scripts/data/news.py, scripts/summarize.py, scripts/notify.py, scripts/config.py, .github/workflows/briefing.yml]
-entry_points: [GEMINI_API_KEY, NTFY_SUB, PAGE_URL, TWELVE_API_KEY]
-last_verified: 2026-06-22
+source_files: [scripts/data/, scripts/breadth/, scripts/summarize.py, scripts/tts.py, scripts/notify.py, scripts/config.py, .github/workflows/]
+entry_points: [GEMINI_API_KEY, NTFY_SUB, PAGE_URL]
+last_verified: 2026-07-06
 ---
 
 # Integrations
@@ -27,9 +27,34 @@ values live in the repo. Environment variable names only are listed here.
   keyless CSV is now behind a JS anti-bot challenge — Yahoo's chart API was the working keyless source
   that still includes indices.
 
+## TradingView scanner (breadth)
+
+- Used for: market breadth — % of S&P 500 / Nasdaq-100 members above their 200-day MA.
+- Auth: none. UNOFFICIAL endpoint — treated accordingly (single daily call, full try/except,
+  per-index MIN_MATCH fail-close, last-good cache in state.json).
+- Invoked in: `scripts/breadth/percent_above_ma.py` — one POST to
+  `https://scanner.tradingview.com/america/scan` for the top `BREADTH_SCAN_LIMIT` (2000) US
+  common stocks' `close` + `SMA200`. The `type=stock` filter is load-bearing: without it,
+  ~430 ADR/fund rows displace S&P names and coverage collapses below the gate.
+- Deliberately NOT via the `tradingview-screener` library — that would add pandas+lxml to the
+  push-capable CI job for a one-endpoint JSON call.
+- Validated vs published indexes ($S5TH, $NDTH) within <1 point.
+
+## Wikipedia (index constituents)
+
+- Used for: the current S&P 500 (~503) and Nasdaq-100 (~101) member lists that breadth
+  intersects against.
+- Auth: none; needs the project User-Agent (default UA is blocked).
+- Invoked in: `scripts/data/constituents.py`, stdlib regex over each page's `constituents`
+  table. NOTE the row shapes differ: S&P tickers are LINKED first cells, Nasdaq-100 tickers are
+  PLAIN-TEXT first cells. Fail-closed on implausible counts (450–520 / 90–110).
+
 ## Google Gemini
 
-- Used for: writing the briefing prose (tldr, the why lines, tech and world items, weekly recap).
+- Used for: writing the briefing prose (tldr, the why lines, tech and world items, weekly recap),
+  and synthesizing the daily audio edition (`scripts/tts.py`, model `TTS_MODEL` =
+  `gemini-2.5-flash-preview-tts`, voice `TTS_VOICE` = Kore, one request/day; mp3 encoded
+  in-process with `lameenc`).
 - Auth: env var `GEMINI_API_KEY`. Free tier. Keep the Google project's billing disabled to stay free.
 - Invoked in: `scripts/summarize.py` via the `google-genai` SDK (`genai.Client`).
 - Model: `config.MODEL_ID` (`gemini-2.5-flash`) with `config.MODEL_FALLBACK` (`gemini-2.5-flash-lite`).
@@ -41,7 +66,9 @@ values live in the repo. Environment variable names only are listed here.
 
 ## ntfy
 
-- Used for: the morning "ready" push and a self-monitoring health ping.
+- Used for: the morning "ready" push (sent by the workflow ONLY after `git push` succeeds — see
+  `python -m scripts.notify ready`), two-tier market-breadth alerts per index (one-shot warning
+  below 40%, daily high-priority oversold nag below 30%), and self-monitoring health pings.
 - Auth: none. The topic name is the access control, so it must be long and unguessable.
 - Config: the code reads env var `NTFY_TOPIC`; the GitHub secret is named `NTFY_SUB` and the
   workflows map `secrets.NTFY_SUB -> NTFY_TOPIC`. Invoked in `scripts/notify.py` (POST to
@@ -71,15 +98,11 @@ values live in the repo. Environment variable names only are listed here.
 - Notes: the repo must be public for free Pages and unlimited Actions minutes. Pages serves from
   branch `main`, folder `/docs`.
 
-## Twelve Data (v2 only)
+## Twelve Data (unused)
 
-- Used for: nothing in v1. Staged for v2 breadth (per-constituent quotes).
-- Auth: the client reads env var `TWELVEDATA_API_KEY`; the GitHub secret is named `TWELVE_API_KEY`
-  (a v2 workflow will map `secrets.TWELVE_API_KEY -> TWELVEDATA_API_KEY`). Free tier limit is 8
-  credits per minute and 800 per day.
-- Client: `scripts/data/twelvedata.py`. Not imported by the v1 pipeline.
-- Reason it is not used in v1: the free tier gates index symbols, and a daily 600-constituent pull
-  exceeds the per-minute limit. v1 uses the keyless Yahoo Finance chart API instead.
+- Used for: nothing. It was staged for v2 breadth, but v2 shipped keyless via the TradingView
+  scanner instead. `scripts/data/twelvedata.py` is kept only as a possible future source; no
+  workflow maps its key.
 
 ## Environment variables and GitHub config (names only)
 
@@ -91,8 +114,19 @@ for ntfy, Pages, and Twelve Data. Configure the GitHub name; the workflow maps i
 | Secret `GEMINI_API_KEY` | `GEMINI_API_KEY` | v1, required |
 | Secret `NTFY_SUB` | `NTFY_TOPIC` | v1, required for notifications |
 | Variable `PAGE_URL` | `PAGES_URL` | v1, tap-through link + heartbeat target |
-| Secret `TWELVE_API_KEY` | `TWELVEDATA_API_KEY` | v2 only |
-| (none) | `MODEL_ID` | optional Gemini model override |
+| Secret `TWELVE_API_KEY` | `TWELVEDATA_API_KEY` | unused (client staged only) |
+| (none) | `MODEL_ID` | optional Gemini text-model override |
+| (none) | `TTS_MODEL` / `TTS_VOICE` | optional audio-edition overrides |
 
-A name mismatch is silent: `notify.py` skips the push when `NTFY_TOPIC` is empty, and `PAGES_URL`
-falls back to a placeholder. The mapping lives in both `briefing.yml` and `heartbeat.yml`.
+A name mismatch is no longer fully silent: both workflows FAIL FAST at startup when
+`secrets.NTFY_SUB` is empty (a missing topic would disable every alarm path), and `config.py`
+falls back to the placeholder even when `PAGES_URL` arrives as an empty string (unset repo
+variable). The mapping lives in `briefing.yml` and `heartbeat.yml`.
+
+## Supply-chain posture
+
+The daily job holds a write token plus the Gemini/ntfy secrets, so its inputs are pinned:
+`requirements.txt` is exact-pinned, transitives are locked by a CI-frozen `constraints.txt`
+(refresh: copy the "Successfully installed" line from a green run after changing requirements),
+and all actions are pinned by commit SHA. `shell-guard.yml` and `data-smoke.yml` are the
+fail-closed/diagnostic guards.

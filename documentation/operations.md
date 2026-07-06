@@ -1,8 +1,8 @@
 ---
 title: Operations
-source_files: [.github/workflows/briefing.yml, .github/workflows/heartbeat.yml, scripts/build_briefing.py, scripts/heartbeat.py, scripts/notify.py, scripts/briefing-assumptions/]
-entry_points: [".github/workflows/briefing.yml", ".github/workflows/heartbeat.yml", "scripts/build_briefing.py:main", "scripts/heartbeat.py:main"]
-last_verified: 2026-06-22
+source_files: [.github/workflows/, scripts/build_briefing.py, scripts/heartbeat.py, scripts/notify.py, scripts/briefing-assumptions/]
+entry_points: [".github/workflows/briefing.yml", ".github/workflows/heartbeat.yml", ".github/workflows/shell-guard.yml", ".github/workflows/data-smoke.yml", "scripts/build_briefing.py:main", "scripts/heartbeat.py:main"]
+last_verified: 2026-07-06
 ---
 
 # Operations
@@ -43,12 +43,22 @@ How the briefing is scheduled, deployed, monitored, and recovered.
 ## Runtime behavior
 
 - Entry point: `python -m scripts.build_briefing`.
-- The job installs `requirements.txt`, runs the script, then commits `docs/` and `state/` with the
-  built-in token and pushes. The commit always changes `state.json` (last_run), so there is a daily
-  renewing commit even on market holidays. This prevents the 60-day scheduled-workflow auto-disable.
+- Step order matters: the job fails fast if `NTFY_SUB` is empty (all alerting would be silent),
+  installs `requirements.txt` with `-c constraints.txt` (CI-frozen transitive lock), runs the
+  build (which also writes `headline.txt` and, on TTS success, `audio.mp3`), publishes the audio
+  edition into `docs/` (manifest written only alongside a real mp3), commits `docs/` + `state/`
+  and pushes (with a rebase-retry so a human push to main mid-run can't kill the day), and ONLY
+  THEN sends the "ready" push via `python -m scripts.notify ready`. A failed publish can never
+  follow a delivered "ready".
+- The commit always changes `state.json` (last_run), so there is a daily renewing commit even on
+  market holidays. This prevents the 60-day scheduled-workflow auto-disable.
 - `permissions: contents: write` lets the token push. No personal access token is used, so the push
-  does not retrigger the workflow.
-- `timeout-minutes: 10` bounds the job so a hung fetch cannot stall it indefinitely.
+  does not retrigger the workflow (but it DOES trigger `shell-guard.yml`, which no-ops unless PWA
+  shell files changed).
+- `timeout-minutes: 10` bounds the job; the failure backstop fires on `failure() || cancelled()`
+  so a timeout-kill still alerts.
+- Actions are pinned by commit SHA; bump deliberately (look up the new tag's SHA, update all
+  workflows, validate with a Data Smoke run).
 
 ## Monitoring
 
@@ -70,6 +80,14 @@ How the briefing is scheduled, deployed, monitored, and recovered.
   at the same ntfy topic, an accepted v1 trade-off). Because it runs on its own schedule and checks
   the real page, it catches both a build that silently no-ops and a build cron that GitHub dropped
   entirely.
+- Breadth alerts (per index, S&P 500 and Nasdaq-100): a one-shot normal-priority warning when
+  breadth falls below 40% (re-armed only after recovering to 42), and a high-priority daily nag
+  below 30% with a day counter (clears at 33, EXTREME below 20). Both suppressed on stale data.
+- Shell guard: `shell-guard.yml` fails any push that changes `docs/` shell files without bumping
+  the sw.js CACHE constant, and ntfy-pages on trip — installed PWAs would otherwise silently
+  never update (this class shipped broken once).
+- Data smoke: `data-smoke.yml` (manual dispatch) prints the whole data spine from a runner and
+  fails if breadth doesn't compute — run it after touching any data source.
 - Transparency: `briefing.json` carries a `data_availability` map showing each section's status.
 
 ## Failure modes and recovery
@@ -84,6 +102,13 @@ How the briefing is scheduled, deployed, monitored, and recovered.
   rather than presenting old data as current.
 - A wrong tap-through link: if `PAGES_URL` is still the placeholder, `notify.morning_ready` prints a
   loud warning.
+- TradingView scan fails or matches too few constituents: that index's breadth serves the cached
+  last-good value (dated, marked stale) for up to 2 trading days, then shows unavailable. The
+  briefing still ships; alerts are suppressed on stale values.
+- Gemini TTS fails: no manifest is written, the page's Listen button falls back to the on-device
+  voice, and the degraded ping includes "audio". The briefing still ships.
+- GitHub Pages deploy fails with "Deployment failed, try again later": transient — re-run it
+  (`gh run rerun <id>`).
 
 ## Regression tests
 

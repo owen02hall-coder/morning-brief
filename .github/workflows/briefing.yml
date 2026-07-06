@@ -26,14 +26,14 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1 (SHA-pinned: mutable tags are a supply-chain vector in a push-capable job)
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3 (SHA-pinned: mutable tags are a supply-chain vector in a push-capable job)
 
       # A missing/renamed NTFY_SUB secret would silently disable EVERY alarm path (ready push,
       # degraded pings, failure backstop). Fail loudly before doing any work.
       - name: Fail fast if alerting is unwired
         run: '[ -n "${{ secrets.NTFY_SUB }}" ] || { echo "::error::NTFY_SUB secret missing — all alerting would be silent"; exit 1; }'
 
-      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0 (SHA-pinned)
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0 (SHA-pinned)
         with:
           python-version: "3.12"
 
