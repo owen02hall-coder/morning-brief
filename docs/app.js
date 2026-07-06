@@ -15,6 +15,20 @@ function fmtChange(n) {
   return `${sign}${n}`;
 }
 
+function fmtValue(v) {
+  // Thousands separators for index levels (5,567.19); leaves non-numbers untouched.
+  return typeof v === "number"
+    ? v.toLocaleString("en-US", { maximumFractionDigits: 2 })
+    : String(v);
+}
+
+function localDate(iso) {
+  // "YYYY-MM-DD" parsed as LOCAL date. new Date("2026-07-05") is UTC midnight,
+  // which renders as the previous day in Denver — never use it for date-only strings.
+  const [y, m, d] = (iso || "").split("-").map(Number);
+  return y && m && d ? new Date(y, m - 1, d) : null;
+}
+
 function safeHref(url) {
   // Citation URLs originate from third-party feeds (via the model). Only web links may become
   // tap-through anchors — never javascript:/data:/anything else a hostile feed could smuggle in.
@@ -28,7 +42,7 @@ function numberCard(title, obj, unit, mode) {
     card.appendChild(el("p", "muted", "Information not available."));
     return card;
   }
-  const v = el("p", "figure", `${obj.value}${unit || ""}`);
+  const v = el("p", "figure", `${fmtValue(obj.value)}${unit || ""}`);
   if (obj.change != null) { // change can be null (single settled close) — show the level alone
     let changeText;
     if (mode === "percent") {
@@ -41,12 +55,12 @@ function numberCard(title, obj, unit, mode) {
     } else {
       changeText = `${fmtChange(obj.change)}${unit || ""}`;
     }
-    const ch = el("span", obj.change >= 0 ? "up" : "down", `  ${changeText}`);
+    const ch = el("span", `delta ${obj.change >= 0 ? "up" : "down"}`, changeText);
     v.appendChild(ch);
   }
   card.appendChild(v);
-  if (obj.why) card.appendChild(el("p", null, obj.why));
-  if (obj.asof) card.appendChild(el("p", "muted", `as of ${obj.asof}`));
+  if (obj.why) card.appendChild(el("p", "tile-why", obj.why));
+  if (obj.asof) card.appendChild(el("p", "asof", `as of ${obj.asof}`));
   return card;
 }
 
@@ -59,13 +73,15 @@ function itemList(title, items) {
   }
   for (const it of items) {
     const card = el("div", "card");
-    card.appendChild(el("p", null, it.summary));
+    if (it.source) card.appendChild(el("p", "kicker", it.source));
+    card.appendChild(el("p", "summary", it.summary));
     const href = safeHref(it.url);
     if (href) {
-      const a = el("a", "readmore", `Read more — ${it.source || "source"}`);
+      const a = el("a", "readmore", "Read more");
       a.href = href;
       a.target = "_blank";
       a.rel = "noopener";
+      a.setAttribute("aria-label", `Read more at ${it.source || "source"}`);
       card.appendChild(a);
     }
     sec.appendChild(card);
@@ -79,18 +95,18 @@ function breadthSection() {
   const sec = el("section");
   sec.appendChild(el("h2", null, "Market breadth"));
   sec.appendChild(el("p", "muted", "Below ~30 = oversold / bullish-reversal watch."));
+  const chips = el("div", "chips");
   [
-    ["S&P 500 breadth ($BPSPX)", "https://stockcharts.com/sc3/ui/?s=%24BPSPX"],
-    ["Nasdaq-100 breadth ($BPNDX)", "https://stockcharts.com/sc3/ui/?s=%24BPNDX"],
+    ["S&P 500 ($BPSPX)", "https://stockcharts.com/sc3/ui/?s=%24BPSPX"],
+    ["Nasdaq-100 ($BPNDX)", "https://stockcharts.com/sc3/ui/?s=%24BPNDX"],
   ].forEach(([label, href]) => {
-    const a = el("a", "readmore", label);
+    const a = el("a", "chip", label);
     a.href = href;
     a.target = "_blank";
     a.rel = "noopener";
-    const wrap = el("div");
-    wrap.appendChild(a);
-    sec.appendChild(wrap);
+    chips.appendChild(a);
   });
+  sec.appendChild(chips);
   return sec;
 }
 
@@ -100,9 +116,11 @@ function render(b, into) {
   if (b.tldr && b.tldr.length) {
     const sec = el("section", "tldr");
     sec.appendChild(el("h2", null, "The 3 must-knows"));
-    const ul = el("ul");
-    b.tldr.forEach((t) => ul.appendChild(el("li", null, t)));
-    sec.appendChild(ul);
+    const card = el("div", "card");
+    const ol = el("ol");
+    b.tldr.forEach((t) => ol.appendChild(el("li", null, t)));
+    card.appendChild(ol);
+    sec.appendChild(card);
     into.appendChild(sec);
   }
 
@@ -123,9 +141,11 @@ function render(b, into) {
   into.appendChild(itemList("World", b.world));
 
   if (b.weekly_recap) {
-    const sec = el("section");
+    const sec = el("section", "recap");
     sec.appendChild(el("h2", null, "Weekly recap"));
-    sec.appendChild(el("p", null, b.weekly_recap));
+    const card = el("div", "card");
+    card.appendChild(el("p", null, b.weekly_recap));
+    sec.appendChild(card);
     into.appendChild(sec);
   }
 }
@@ -133,9 +153,18 @@ function render(b, into) {
 function showFreshness(b) {
   const updated = document.getElementById("updated");
   const stale = document.getElementById("stale");
+  // Masthead edition line shows the BRIEFING's date (not today's) — it must never claim
+  // an edition that isn't actually on screen.
+  const edition = document.getElementById("edition");
+  const ed = localDate(b.date);
+  if (edition && ed) {
+    edition.textContent = ed.toLocaleDateString(undefined,
+      { weekday: "long", month: "long", day: "numeric", year: "numeric" });
+  }
   if (!b.generated_at) return;
   const when = new Date(b.generated_at);
-  updated.textContent = "Last updated " + when.toLocaleString();
+  updated.textContent = "Updated " + when.toLocaleString(undefined,
+    { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" });
   const ageHours = (Date.now() - when.getTime()) / 36e5;
   if (ageHours > STALE_HOURS) {
     stale.textContent = "Could not refresh — showing the last available briefing.";
@@ -162,7 +191,12 @@ async function loadArchive() {
       .filter((e) => !f || (e.date + " " + (e.tldr || []).join(" ")).toLowerCase().includes(f))
       .forEach((e) => {
         const li = el("li");
-        const a = el("a", "archive-link", `${e.date} — ${(e.tldr && e.tldr[0]) || ""}`);
+        const a = el("a", "archive-item");
+        const d = localDate(e.date);
+        a.appendChild(el("span", "archive-date",
+          d ? d.toLocaleDateString(undefined, { weekday: "short", month: "short", day: "numeric" })
+            : e.date));
+        a.appendChild(el("span", "archive-snippet", (e.tldr && e.tldr[0]) || ""));
         a.href = "#";
         a.onclick = async (ev) => {
           ev.preventDefault();

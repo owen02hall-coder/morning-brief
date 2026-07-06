@@ -2,7 +2,7 @@
 // briefing data so the freshest edition shows when online. Bump CACHE on any shell change.
 // Briefing data lives in its own UNversioned cache: a shell bump must never delete the
 // last-known-good briefing/archives that the offline fallback depends on.
-const CACHE = "briefing-shell-v4";   // v4: app.js refetch-race guard; v3: safe-href/archive-errors/resume-refetch + split data cache
+const CACHE = "briefing-shell-v5";   // v5: editorial redesign (index/styles/app); v4: refetch-race guard; v3: split data cache
 const DATA_CACHE = "briefing-data-v1";
 const SHELL = ["./", "./index.html", "./app.js", "./styles.css", "./manifest.json",
                "./icon-192.png", "./icon-512.png"];
