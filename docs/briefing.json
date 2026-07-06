@@ -1,10 +1,8 @@
 {
-  "generated_at": "2026-07-05T22:20:37.501911-06:00",
+  "generated_at": "2026-07-05T22:53:49.319795-06:00",
   "date": "2026-07-05",
   "tldr": [
-    "Ukraine is seeking to strengthen its defense industry by pursuing drone deals with NATO countries, even as Russia continues missile and drone attacks on Kyiv.",
-    "Seven OPEC+ members, including Saudi Arabia and Russia, announced plans to increase their monthly oil production by 188,000 barrels per day.",
-    "Nvidia's next-generation AI rack system, Kyber, has reportedly been delayed to 2028 due to manufacturing challenges."
+    "AI summary unavailable today \u2014 showing raw market numbers and headlines."
   ],
   "market": {
     "sp500": {
@@ -17,55 +15,62 @@
       "change": -207.36,
       "asof": "2026-07-02"
     },
-    "why": "On July 2, the Nasdaq Composite closed lower, potentially influenced by a pre-holiday slump in chip stocks and concerns about a possible unwind of momentum trades. The S&P 500 saw a minimal change in its closing value."
+    "why": ""
   },
   "yield_10y": {
     "value": 4.49,
     "change": 0.01,
     "asof": "2026-07-02",
-    "why": "No specific explanation for the 10-year Treasury yield's slight increase was provided in the articles."
+    "why": ""
   },
   "vix": {
     "value": 16.15,
     "change": -0.44,
     "asof": "2026-07-02",
-    "why": "The articles did not provide a specific reason for the VIX's slight decrease."
+    "why": ""
+  },
+  "breadth": {
+    "value": 66.0,
+    "asof": "2026-07-03",
+    "status": "healthy",
+    "matched": 500,
+    "stale": false
   },
   "tech": [
     {
-      "summary": "Nvidia's next-generation AI rack system, Kyber, is reportedly delayed until 2028 due to manufacturing challenges, raising concerns about the company's annual release schedule.",
-      "source": "CNBC",
-      "url": "https://www.cnbc.com/2026/07/06/nvidia-kyber-rack-system-delays-manufacturing-taiwan-rubin-chips-.html"
-    },
-    {
-      "summary": "Some affluent Americans are turning to AI companies like Forge Prep and Alpha to educate their children, despite broader public skepticism regarding AI's reliability.",
-      "source": "The Verge",
-      "url": "https://www.theverge.com/ai-artificial-intelligence/961505/wealthy-ai-schools-alpha-forge-prep"
-    },
-    {
-      "summary": "A new AI tutor demonstrated a significant effect size (0.71-1.30 SD) in a Dartmouth course, suggesting its potential effectiveness as an educational tool.",
+      "summary": "Shrimple \u2013 A Simpler, Nicer Markdown",
       "source": "Hacker News",
-      "url": "https://intextbooks.science.uu.nl/workshop2026/files/itb26_s1s2.pdf"
+      "url": "https://qount25.dev/Shrimple/"
+    },
+    {
+      "summary": "Building relationships with customers through support didn't turn out as hoped",
+      "source": "Hacker News",
+      "url": "https://www.uncommonapps.nyc/p/castro-podcasts-things-i-got-wrong-support"
+    },
+    {
+      "summary": "The Sneakerweb",
+      "source": "Hacker News",
+      "url": "https://sneakerweb.org/"
     }
   ],
   "world": [
     {
-      "summary": "Ukraine aims to sign defense deals, including drone agreements, with at least seven NATO countries by year-end, positioning itself as a security provider, while Russia launched deadly missile and drone attacks on Kyiv, killing at least seven people.",
+      "summary": "Australia news live: scientists identify likely source of Queensland space balls; native title approved for Kngwarreye birthplace",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/australia-news/live/2026/jul/06/australia-news-live-crisafulli-bail-laws-property-market-auction-clearance-tax-reform-prime-minister-albanese-fiji-treaty-royal-commission-meta-antisemitism-ntwnfb"
+    },
+    {
+      "summary": "Which teams are in the World Cup quarterfinals, and what\u2019s the schedule?",
+      "source": "Al Jazeera",
+      "url": "https://www.aljazeera.com/sports/2026/7/6/which-teams-are-in-the-world-cup-quarterfinals-and-whats-the-schedule?traffic_source=rss"
+    },
+    {
+      "summary": "Ukraine hopes to sign \u2018drone deals\u2019 with seven Nato countries by end of year",
       "source": "Guardian World",
       "url": "https://www.theguardian.com/world/2026/jul/06/ukraine-drone-deals-seven-nato-countries-end-of-year"
-    },
-    {
-      "summary": "Seven OPEC+ members, including Saudi Arabia and Russia, announced plans to increase their monthly oil production by 188,000 barrels per day.",
-      "source": "Al Jazeera",
-      "url": "https://www.aljazeera.com/economy/2026/7/6/opec-countries-say-they-will-expand-monthly-oil-production?traffic_source=rss"
-    },
-    {
-      "summary": "Millions are expected to attend the funeral procession for Iran's slain supreme leader, Ali Khamenei, in Tehran.",
-      "source": "Al Jazeera",
-      "url": "https://www.aljazeera.com/news/liveblog/2026/7/6/iran-war-live-tehran-set-for-khameneis-procession-israel-bombs-lebanon?traffic_source=rss"
     }
   ],
-  "weekly_recap": "The past week was marked by significant geopolitical developments, including U.S.-Iran peace talks, EU-China trade discussions, and intensified conflict with Russian missile attacks on Kyiv and Ukrainian efforts to secure drone deals with NATO countries. Economic news included OPEC+ plans to increase oil production. In the U.S., Supreme Court rulings affected campaign finance and citizenship, while equity markets saw declines, particularly after a downbeat jobs report. Sony also announced plans to cease physical PlayStation disc production by 2028.",
+  "weekly_recap": null,
   "data_availability": {
     "sp500": true,
     "ndx": true,
@@ -74,6 +79,7 @@
     "news_world": true,
     "news_business": true,
     "news_tech": true,
-    "summary": "ok"
+    "summary": "unavailable",
+    "breadth": true
   }
 }
