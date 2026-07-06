@@ -4,16 +4,15 @@ Free-tier friendly: exactly ONE TTS request per day. The narration is composed
 deterministically in code (no extra LLM text call) from the already-built briefing dict, so the
 audio can never contradict the page.
 
-Output contract: writes raw speech to config.AUDIO_WAV_PATH (WAV, mono 16-bit). The workflow
-converts it to docs/briefing-audio.mp3 + writes docs/briefing-audio.json ({"date": ...}) ONLY on
-successful conversion — the client shows the player only when the manifest date matches the
-briefing date, so a failed/skipped audio day falls back to the on-device voice, never to stale
-audio. Everything here is non-fatal by design: no audio must never kill the briefing.
+Output contract: writes a ready-to-publish MP3 (mono, 48 kbps, encoded in-process via lameenc —
+the GitHub runner image has no ffmpeg) to config.AUDIO_MP3_PATH. The workflow moves it to
+docs/briefing-audio.mp3 + writes docs/briefing-audio.json ({"date": ...}) ONLY when the file
+exists — the client shows the player only when the manifest date matches the briefing date, so a
+failed/skipped audio day falls back to the on-device voice, never to stale audio. Everything here
+is non-fatal by design: no audio must never kill the briefing.
 """
 import os
 import re
-import struct
-import wave
 
 from . import config
 
@@ -97,16 +96,23 @@ def compose_script(briefing):
     return re.sub(r"https?://\S+", "", text)   # URLs are unreadable noise if any slip through
 
 
-def _write_wav(pcm, rate):
-    with wave.open(config.AUDIO_WAV_PATH, "wb") as w:
-        w.setnchannels(1)
-        w.setsampwidth(2)   # 16-bit PCM (Gemini TTS output format)
-        w.setframerate(rate)
-        w.writeframes(pcm)
+def _write_mp3(pcm, rate):
+    import lameenc
+    enc = lameenc.Encoder()
+    enc.set_bit_rate(48)          # mono speech: transparent enough, ~1.3 MB for ~4 min
+    enc.set_in_sample_rate(rate)
+    enc.set_channels(1)
+    enc.set_quality(5)
+    mp3 = bytes(enc.encode(pcm)) + bytes(enc.flush())
+    tmp = config.AUDIO_MP3_PATH + ".tmp"
+    with open(tmp, "wb") as f:
+        f.write(mp3)
+    os.replace(tmp, config.AUDIO_MP3_PATH)   # atomic: never leave a half-written mp3 behind
+    return len(mp3)
 
 
 def generate(briefing):
-    """Synthesize the narration to AUDIO_WAV_PATH. Returns True on success, False otherwise.
+    """Synthesize the narration to AUDIO_MP3_PATH. Returns True on success, False otherwise.
 
     Never raises to the caller's happy path — audio is an enhancement; the page and the push
     must ship regardless.
@@ -141,8 +147,8 @@ def generate(briefing):
             return False
         mime = part.inline_data.mime_type or ""
         m = re.search(r"rate=(\d+)", mime)
-        _write_wav(pcm, int(m.group(1)) if m else 24000)
-        print(f"tts: wrote {len(pcm)} bytes PCM to {config.AUDIO_WAV_PATH} "
+        size = _write_mp3(pcm, int(m.group(1)) if m else 24000)
+        print(f"tts: wrote {size} bytes mp3 to {config.AUDIO_MP3_PATH} "
               f"({config.TTS_MODEL}/{config.TTS_VOICE})")
         return True
     except Exception as e:

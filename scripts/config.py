@@ -76,8 +76,9 @@ STATE_PATH = os.path.join(REPO_ROOT, "state", "state.json")
 # Handoff file: the build writes today's headline here; the workflow's post-publish step reads it
 # to send the "ready" push ONLY after git push succeeds (never committed — see .gitignore).
 HEADLINE_PATH = os.path.join(REPO_ROOT, "headline.txt")
-# Audio handoff: raw TTS speech; the workflow converts to mp3 (never committed — see .gitignore).
-AUDIO_WAV_PATH = os.path.join(REPO_ROOT, "audio.wav")
+# Audio handoff: ready-to-publish mp3 encoded in-process (lameenc — the runner has no ffmpeg);
+# the workflow moves it into docs/ (never committed from here — see .gitignore).
+AUDIO_MP3_PATH = os.path.join(REPO_ROOT, "audio.mp3")
 
 # --- Monitoring -------------------------------------------------------------
 # The client-side staleness threshold (PWA "couldn't refresh" banner, 28h) lives in docs/app.js

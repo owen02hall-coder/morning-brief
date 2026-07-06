@@ -53,21 +53,17 @@ jobs:
             python -m scripts.build_briefing
           fi
 
-      # Non-fatal: a failed conversion ships the briefing without audio (client falls back to
-      # the device voice). The manifest is written ONLY on success so the player can never bind
-      # yesterday's mp3 to today's edition. tmp-then-mv keeps a half-written mp3 out of the commit.
-      - name: Convert audio edition to mp3
+      # Non-fatal: on days the TTS failed there is no audio.mp3 and the briefing ships without
+      # audio (client falls back to the device voice). The manifest is written ONLY alongside a
+      # real mp3 so the player can never bind yesterday's audio to today's edition.
+      - name: Publish audio edition
         run: |
-          if [ -f audio.wav ]; then
-            if ffmpeg -y -loglevel error -i audio.wav -ac 1 -codec:a libmp3lame -b:a 48k /tmp/briefing-audio.mp3; then
-              mv /tmp/briefing-audio.mp3 docs/briefing-audio.mp3
-              python -c "import json; json.dump({'date': json.load(open('docs/briefing.json'))['date']}, open('docs/briefing-audio.json', 'w'))"
-              echo "audio edition ready ($(du -h docs/briefing-audio.mp3 | cut -f1))"
-            else
-              echo "::warning::ffmpeg conversion failed — shipping without audio today"
-            fi
+          if [ -f audio.mp3 ]; then
+            mv audio.mp3 docs/briefing-audio.mp3
+            python -c "import json; json.dump({'date': json.load(open('docs/briefing.json'))['date']}, open('docs/briefing-audio.json', 'w'))"
+            echo "audio edition ready ($(du -h docs/briefing-audio.mp3 | cut -f1))"
           else
-            echo "no audio.wav (TTS skipped or failed) — shipping without audio today"
+            echo "no audio.mp3 (TTS skipped or failed) — shipping without audio today"
           fi
 
       - name: Commit briefing + state

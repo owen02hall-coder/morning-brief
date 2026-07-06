@@ -10,6 +10,6 @@ venv/
 
 # Build → workflow handoffs (job-local, never published)
 headline.txt
-audio.wav
+audio.mp3
 
 # Assumption-test fingerprints are committed on purpose; nothing else here.
