@@ -1,8 +1,10 @@
 {
-  "generated_at": "2026-07-05T22:59:57.178191-06:00",
+  "generated_at": "2026-07-05T23:17:37.312921-06:00",
   "date": "2026-07-05",
   "tldr": [
-    "AI summary unavailable today \u2014 showing raw market numbers and headlines."
+    "The Australian Space Agency has identified mysterious objects found on Queensland beaches as likely debris from a foreign rocket body that recently re-entered the atmosphere.",
+    "Russia launched deadly missile and drone attacks on Kyiv, killing at least nine people, ahead of a scheduled NATO summit in Turkey.",
+    "Nvidia's next-generation AI rack system, known as Kyber, is reportedly delayed until 2028 due to manufacturing snags."
   ],
   "market": {
     "sp500": {
@@ -15,19 +17,19 @@
       "change": -207.36,
       "asof": "2026-07-02"
     },
-    "why": ""
+    "why": "The Nasdaq Composite closed lower on July 2nd, likely influenced by a pre-holiday chip stock slump mentioned in analysis regarding the tech sector (CNBC, https://www.cnbc.com/2026/07/05/jim-cramer-what-caused-the-pre-holiday-chip-stock-slump-and-what-to-do-about-it.html). The S&P 500 saw a negligible change on the same day."
   },
   "yield_10y": {
     "value": 4.49,
     "change": 0.01,
     "asof": "2026-07-02",
-    "why": ""
+    "why": "The 10-year Treasury yield saw a slight increase on July 2nd, aligning with a general trend of rising interest rates observed \"since last week,\" as indicated by reports on mortgage rates (Yahoo Finance, https://finance.yahoo.com/personal-finance/mortgages/article/mortgage-and-refinance-interest-rates-today-sunday-july-5-rates-way-up-since-last-week-100000265.html)."
   },
   "vix": {
     "value": 16.15,
     "change": -0.44,
     "asof": "2026-07-02",
-    "why": ""
+    "why": "The reason for the VIX's decrease on July 2nd was not specified in the provided articles."
   },
   "breadth": {
     "value": 66.0,
@@ -38,39 +40,39 @@
   },
   "tech": [
     {
-      "summary": "Shrimple \u2013 A Simpler, Nicer Markdown",
-      "source": "Hacker News",
-      "url": "https://qount25.dev/Shrimple/"
+      "summary": "Nvidia's next-generation AI rack system, Kyber, is reportedly delayed until 2028 due to manufacturing challenges, adding to concerns about the company's annual release cadence colliding with production limits.",
+      "source": "CNBC",
+      "url": "https://www.cnbc.com/2026/07/06/nvidia-kyber-rack-system-delays-manufacturing-taiwan-rubin-chips-.html"
     },
     {
-      "summary": "Building relationships with customers through support didn't turn out as hoped",
-      "source": "Hacker News",
-      "url": "https://www.uncommonapps.nyc/p/castro-podcasts-things-i-got-wrong-support"
+      "summary": "Some affluent families in the United States are opting for AI to educate their children through specialized companies like Forge Prep and Alpha, despite general public distrust in AI.",
+      "source": "The Verge",
+      "url": "https://www.theverge.com/ai-artificial-intelligence/961505/wealthy-ai-schools-alpha-forge-prep"
     },
     {
-      "summary": "The Sneakerweb",
+      "summary": "A new AI tutor has demonstrated significant effectiveness in a Dartmouth course, achieving a 0.71-1.30 standard deviation effect size in assisting students.",
       "source": "Hacker News",
-      "url": "https://sneakerweb.org/"
+      "url": "https://intextbooks.science.uu.nl/workshop2026/files/itb26_s1s2.pdf"
     }
   ],
   "world": [
     {
-      "summary": "Australia news live: scientists identify likely source of Queensland space balls; native title approved for Kngwarreye birthplace",
-      "source": "Guardian World",
-      "url": "https://www.theguardian.com/australia-news/live/2026/jul/06/australia-news-live-crisafulli-bail-laws-property-market-auction-clearance-tax-reform-prime-minister-albanese-fiji-treaty-royal-commission-meta-antisemitism-ntwnfb"
+      "summary": "Russia launched missile and drone attacks on the Kyiv region, killing at least nine people, marking the second major assault on the Ukrainian capital within a week and occurring on the eve of a NATO summit in Turkey.",
+      "source": "BBC World",
+      "url": "https://www.bbc.co.uk/news/articles/cewqqnd7zdwo?at_medium=RSS&at_campaign=rss"
     },
     {
-      "summary": "Which teams are in the World Cup quarterfinals, and what\u2019s the schedule?",
+      "summary": "Seven OPEC+ members, including Saudi Arabia and Russia, have agreed to expand their monthly oil production by 188,000 barrels per day.",
       "source": "Al Jazeera",
-      "url": "https://www.aljazeera.com/sports/2026/7/6/which-teams-are-in-the-world-cup-quarterfinals-and-whats-the-schedule?traffic_source=rss"
+      "url": "https://www.aljazeera.com/economy/2026/7/6/opec-countries-say-they-will-expand-monthly-oil-production?traffic_source=rss"
     },
     {
-      "summary": "Ukraine hopes to sign \u2018drone deals\u2019 with seven Nato countries by end of year",
+      "summary": "The Australian Space Agency confirmed that six mysterious \"space balls\" discovered on north Queensland beaches are likely pressure vessels from a foreign rocket body that recently re-entered the Earth's atmosphere.",
       "source": "Guardian World",
-      "url": "https://www.theguardian.com/world/2026/jul/06/ukraine-drone-deals-seven-nato-countries-end-of-year"
+      "url": "https://www.theguardian.com/australia-news/2026/jul/06/mysterious-space-balls-queensland-beaches-origin-source-australia"
     }
   ],
-  "weekly_recap": null,
+  "weekly_recap": "This past week saw significant geopolitical developments, including US President Trump's announcement of peace talks with Iran following recent hostilities and Russia's \"most massive\" attack on Kyiv. Economic news featured US equity markets closing lower on July 2nd due to a downbeat jobs report, while OPEC+ countries announced plans to expand monthly oil production. The US also signaled new trade negotiations by stating it would not renew the USMCA deal. In technology, Sony revealed plans to discontinue physical PlayStation discs, and concerns were raised about child abuse ads on Instagram in India. Looking ahead, ongoing EU-China trade talks and the upcoming NATO summit in Turkey will be key areas of focus.",
   "data_availability": {
     "sp500": true,
     "ndx": true,
@@ -79,7 +81,7 @@
     "news_world": true,
     "news_business": true,
     "news_tech": true,
-    "summary": "unavailable",
+    "summary": "ok",
     "breadth": true
   }
 }
