@@ -1,11 +1,11 @@
 {
-  "last_run": "2026-07-15",
-  "markets_last_ok": "2026-07-15",
+  "last_run": "2026-07-16",
+  "markets_last_ok": "2026-07-16",
   "breadth_last_good": {
     "sp500": {
-      "value": 65.0,
+      "value": 64.6,
       "matched": 500,
-      "asof": "2026-07-14"
+      "asof": "2026-07-15"
     },
     "ndx100": {
       "value": 61.2,
@@ -18,8 +18,8 @@
       "in_alert": false,
       "nag_days": 0,
       "warn_armed": true,
-      "last_value": 65.0,
-      "last_asof": "2026-07-14"
+      "last_value": 64.6,
+      "last_asof": "2026-07-15"
     },
     "ndx100": {
       "in_alert": false,
