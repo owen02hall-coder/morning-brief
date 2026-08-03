@@ -50,13 +50,18 @@ Proves:
        calls close that seam: a pinned known-relevant document must come back with a non-empty
        effect, and a lone decoy must come back as an empty list.
 
-WHAT G7 CANNOT PROVE, AND WHY (observed while building the fixture, 2026-08-03; the defect is in
-scripts/data/policy.py + summarize._policy_docs_block, NOT here, so this file only records it):
-a Utah "detail" page is a status page whose first ~1,800 stripped characters are site navigation.
-`_normalize_utah` cuts the abstract at 2,000 chars and `_policy_docs_block` cuts the prompt text at
-500, so the model sees the bill's TITLE plus half a kilobyte of nav chrome and no bill text at all.
-G7's live half is therefore expected to sit vacuous (no Utah item selected) until that is fixed;
-`utah.selected` in the fingerprint is the number to watch. Its deterministic half fires every run.
+WHAT G7 CANNOT PROVE, AND WHY: G7's live half is CONDITIONAL on the model actually selecting a Utah
+item in the run at hand. Its deterministic half — the tilde survives `summarize._norm_url` and every
+Utah candidate joins back to itself — fires on every run and is what goes red on a regression. The
+live half only engages when a returned item resolves to le.utah.gov, so a run where the model ranks
+federal documents above both Utah bills is a legitimate pass rather than proof the Utah leg works
+end to end. `utah.selected` in the fingerprint is the number to watch ACROSS runs: a persistent 0 is
+a signal to investigate, not an automatic failure.
+(This block used to record a live nav-chrome defect — the model received the bill's title plus half a
+kilobyte of site navigation and no bill text, so G7's live half was expected to sit vacuous. That is
+FIXED: `policy._fetch_bill_detail` now reads the bill JSON for the legislature's own provisions text,
+and this file calls that same production function, so the live half can now fire. Test 07's A5 asserts
+on the exact prompt slice and is what keeps the fix from silently regressing.)
 
 Needs GEMINI_API_KEY (free tier). THREE generate_content calls: the batch (60s client timeout, the
 production value) plus two single-document probes (30s each), which keeps the worst case inside

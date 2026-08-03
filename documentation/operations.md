@@ -185,21 +185,39 @@ Two lifecycle rules are worth stating outright because they are the ones easiest
   This is deliberate — a permanently dead URL at the head of the queue would eat a fetch slot every
   day and block the whole backfill behind it — but it does mean the bill is gone until the next
   annual harvest. The log line names the id and the URL.
-- Utah items are fetched but never selected: a known open defect, recorded in
-  `06-policy-relevance.py`'s docstring (observed 2026-08-03). A Utah "detail" page is a status page
-  whose first ~1,800 stripped characters are site navigation. `policy._normalize_utah` cuts the
-  abstract at 2,000 characters and `summarize._policy_docs_block` cuts the prompt text at 500, so the
-  model sees the bill's TITLE plus half a kilobyte of nav chrome and no bill text at all. Nothing
-  fails, nothing is logged, and the section simply stays quiet — which is also what a healthy day
-  looks like. Watch `utah.selected` in `06-policy-relevance.fingerprint.json`. The fix belongs in
-  `policy.py` (skip to the bill body before truncating), not in the prompt.
+- The Utah bill JSON changes shape or goes away: text quality degrades, the leg does not fail. A Utah
+  "detail page" is a JavaScript shell that paints itself from `/data/{session}/{number}.json` and
+  carries NO bill text in the served HTML (its first ~1,800 stripped characters are site navigation),
+  so `policy._fetch_bill_detail` reads that JSON first and keeps the legislature's own plain-language
+  summary. When the JSON is unreachable, its session/number cannot be derived, or it carries under 80
+  characters of provisions, the extractor falls back to the HTML page sliced to `<main>` — thin but
+  honest — and PRINTS the bill id and the reason, because a Utah item summarized from that much text
+  is a degraded item, not a normal one. Grep the job log for `falling back to the page`.
+  `07-utah-bill-detail.py`'s A5 is the gate that makes a bad fallback loud: it asserts on the exact
+  `summarize.POLICY_PROMPT_TEXT_CHARS` (500) slice that reaches the model, requiring bill language
+  and NO navigation marker, with `UTAH_CHROME_CONTROL=true` as the proven negative control (it
+  replays the pre-fix whole-page strip and must go red). Run 07 after any change to the extractor; if
+  it ever passes under that control, A5 has stopped measuring anything. This bullet is a scar: the
+  first version stripped the page whole, so the model got half a kilobyte of chrome and no bill text,
+  and the invented-figure guard — which compares against that same string — then rejected every
+  figure a Utah item carried. Nothing failed and nothing was logged, which is also what a healthy day
+  looks like.
 - Gemini fails during `summarize_policy()`: the section is empty for the day, the candidates are left
   UNSEEN, and tomorrow retries them. No crash push — a policy failure must never reach `main()`'s
-  "briefing run crashed" handler. **Known gap:** Utah stubs released from the queue on that run were
-  already popped and are neither reported, re-queued, nor marked seen, so they are lost until the
-  next annual harvest. Federal candidates are unaffected (they are re-fetched from the 45-day window
-  every run). If it matters, re-add them by clearing `policy_utah_session` in `state/state.json`,
-  which re-runs the harvest; anything already in `policy_seen` will not be re-queued.
+  "briefing run crashed" handler. Federal candidates need no recovery — they are re-fetched from the
+  45-day window every run. Utah stubs do, and they get it: `_release_utah()` popped them BEFORE the
+  model ran and `state.save()` persists the shortened queue either way, so `_get_policy()` hands the
+  candidates it actually sent back to `policy.requeue_utah()` on both the `ok=False` branch and its
+  outer `except`. They go to the FRONT of `policy_utah_queue` in their original order, so the same
+  bills are the next ones released tomorrow instead of landing behind a multi-month backfill, and the
+  re-queue is id-deduped, so a double call cannot duplicate them (verified live: 3 stubs restored, no
+  duplicates on a second call). **Do not clear `policy_utah_session` to "recover" these** — that
+  triggers the full 491-row re-harvest for a loss that no longer happens.
+  Two things are still dropped on purpose and are not bugs: a stub whose DETAIL FETCH failed never
+  reaches the caller, so it is not re-queued (see the bullet above — a permanently dead URL at the
+  head of the queue would eat one of the three daily slots forever), and a released stub that the
+  abstract-level prefilter or the `MAX_POLICY_CANDIDATES` cap dropped was genuinely evaluated, so
+  re-releasing it every day would block the backfill behind it.
 - The policy section is empty on a normal day: that is the expected outcome, not a fault. Measured
   cadence is roughly one qualifying federal item per 22 days. The job log distinguishes the cases:
   `policy: 0 new candidates, skipping model call` (no model spend at all), `sent N candidates, M

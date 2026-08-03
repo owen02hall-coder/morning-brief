@@ -79,11 +79,14 @@ values live in the repo. Environment variable names only are listed here.
 
 - Used for: the Utah half of the policy section — bills the governor actually signed, i.e. that
   became law. Higher signal than the federal half, and dark for ~9 months a year.
-- Auth: none. HTML scraping is the ONLY route: Utah publishes no JSON API, and its bulk "Bill Data"
-  link is an iframe wrapper rather than a dataset.
+- Auth: none, and no published API: Utah documents no bulk feed, and its "Bill Data" link is an
+  iframe wrapper rather than a dataset. So the list of signed bills is HTML-scraped, while each
+  bill's TEXT comes from the undocumented per-bill JSON the bill page itself renders from (below) —
+  undocumented means unversioned, which is why the fallback and A5 exist.
 - Invoked in: `scripts/data/policy.py`. The list page is
   `https://le.utah.gov/asp/passedbills/passedbills.asp?session={session}` (e.g. `2026GS`); bill
-  detail pages are fetched lazily, one per released queue item.
+  text is fetched lazily, one bill per released queue item (from the bill JSON, not the bill page —
+  see below).
 - **Needs a browser-like User-Agent.** `le.utah.gov` is fronted by a filter unfriendly to
   non-browser agents; the project UA is unprobed there. The string lives module-local as
   `policy.POLICY_UA`, following `market.YAHOO_UA` — a per-host quirk belongs beside the code with the
@@ -96,14 +99,36 @@ values live in the repo. Environment variable names only are listed here.
   `UTAH_BASE_URL`. Left un-joined they would fail the host allowlist and drop 100% of Utah items
   while every other gate stayed green — a fully silent dead leg. `07-utah-bill-detail.py` exists
   specifically to keep that proven.
-- Bounds: a bill page is ~38 KB and strips to ~4,700 characters in ~0.06s; abstracts are cut to
-  2,000 characters, because an unbounded source text would make the invented-figure guard vacuous.
-  The annual harvest fetches NO detail pages — 491 sequential requests would threaten the 10-minute
-  job budget — so the queue drains at most `MAX_POLICY_ITEMS` (3) detail fetches per run.
-- **Open defect (recorded 2026-08-03 in `06-policy-relevance.py`):** those ~4,700 characters open
-  with roughly 1,800 characters of site navigation, and the prompt block truncates to the first 500 —
-  so today the model sees a Utah bill's title and nav chrome, not its text. Silent by construction:
-  the section just stays quiet. See `operations.md` for what to watch.
+- Bounds: a bill page (the fallback path below) is ~38 KB and strips to ~4,700 characters in ~0.06s;
+  abstracts are cut to 2,000 characters, because an unbounded source text would make the
+  invented-figure guard vacuous. The annual harvest fetches NO bill text at all — 491 sequential
+  requests would threaten the 10-minute job budget — so the queue drains at most `MAX_POLICY_ITEMS`
+  (3) detail fetches per run.
+- **The bill text lives in the bill JSON, not the bill page.** `/~2026/bills/static/HB0068.html` is a
+  JavaScript shell: `/js/rexBill.js` calls `loadBillJSON()` and paints `#docheader` / `#billbox` from
+  `https://le.utah.gov/data/{session}/{number}.json`, so the served HTML carries those containers
+  EMPTY and its first ~1,800 stripped characters are the site's global navigation.
+  `policy._fetch_bill_detail` therefore reads the same JSON the page reads and keeps the
+  legislature's own plain-language summary — `generalProvisions` + `highlightedProvisions` +
+  `moniesAppropriated` — measured at 123–4,233 characters across 52 signed bills from 2025GS and
+  2026GS, every one of which reads like a bill ("This bill: enacts... amends... repeals..."). It
+  keeps the provisions ONLY: the bill number and title are already separate candidate fields, and
+  prepending them would make "the text names this bill" true even on a run where this leg returned
+  nothing.
+- Fallback, and the failure mode that remains: when the JSON is unreachable, its session/number
+  cannot be derived from the id or URL, or it carries under 80 characters of provisions, the
+  extractor falls back to the HTML page sliced to `<main>` (then to everything after `</header>`,
+  then to the whole document) and PRINTS the bill and the reason. Nothing raises, so a changed JSON
+  shape costs TEXT QUALITY rather than the leg — which is exactly why the guard is an executable
+  test rather than an exception. `07-utah-bill-detail.py`'s A5 asserts on the precise
+  `summarize.POLICY_PROMPT_TEXT_CHARS` (500) slice the model receives, built through production's own
+  `_normalize_utah` + `_policy_docs_block`: it must read like a bill (fail-closed) and contain no
+  navigation marker (fail-loud), with `UTAH_CHROME_CONTROL=true` — which replays the pre-fix
+  whole-page strip — as the proven negative control. That check exists because the whole-page strip
+  shipped once: the model received half a kilobyte of chrome and no bill text, and the
+  invented-figure guard compares against that same string, so every Utah item carrying a number was
+  dropped too. Silent by construction — the section just stayed quiet. The fingerprint's `model_sees`
+  field now shows a human exactly what is being fed.
 
 ## Freddie Mac PMMS (mortgage rate)
 

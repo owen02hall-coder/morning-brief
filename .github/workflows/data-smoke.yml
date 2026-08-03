@@ -97,6 +97,8 @@ jobs:
       # this job has a timeout — `failure()` alone would silently miss the slowest failure mode.
       # The secret is NTFY_SUB while the code reads env NTFY_TOPIC (briefing.yml:46-47);
       # `secrets.NTFY_TOPIC` would resolve to empty and the [ -n ] guard would skip without a word.
+      # Hence the `else`: a guard that skips silently IS the dead alarm this step exists to prevent,
+      # so an empty topic on a red run must annotate the run rather than report green and page nobody.
       - name: Alert on a red data-smoke run (nothing else pages on this)
         if: failure() || cancelled()
         env:
@@ -106,4 +108,6 @@ jobs:
             curl -s -H "Title: Data smoke FAILED" -H "Priority: high" \
               -d "A data leg went red from the runner (market spine, policy sources, Utah detail, prefilter or model relevance). Check the Data Smoke run." \
               "https://ntfy.sh/${NTFY_TOPIC}" || true
+          else
+            echo "::error::Data smoke went red and NTFY_TOPIC was EMPTY — this run paged NOBODY. The NTFY_SUB repo secret is missing, renamed or rotated; restore it under exactly that name (the workflow maps secrets.NTFY_SUB -> NTFY_TOPIC)."
           fi

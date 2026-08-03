@@ -278,7 +278,16 @@ oversights:
 - **The audio edition excludes policy.** The narration stays deliberately leaner than the page
   (`scripts/tts.py`), and adding a fourth topic to a drive-time script was not worth the length.
 
-One residual risk is worth re-testing after a few weeks live: the model's selectivity was proven on
-a batch of 24 candidates, where it could rank documents against each other. With `policy_seen`
-differencing, production usually sends it one or two. "Is this one thing relevant?" is a different
-question from "pick the best two of these 24".
+One residual risk is no longer left to memory — it is gated weekly. The model's selectivity was
+proven on a batch of 24 candidates, where it could rank documents against each other. With
+`policy_seen` differencing, production usually sends it one or two. "Is this one thing relevant?" is
+a different question from "pick the best two of these 24". Test 06's **G8** probe covers that seam
+with two extra one-document model calls (a pinned on-profile document must come back with a
+non-empty `effect`; a lone decoy must come back as an empty list), run every Monday by
+`.github/workflows/data-smoke.yml`.
+
+**G8 currently FAILS, and the seam it measures is a live defect.** On CI run 30851392524 the model,
+given that one on-profile document in isolation, returned nothing — while in the same run selecting
+correctly from the 26-candidate batch. So single-candidate relevance really is a different question,
+and production's usual 1-2-unseen-document path is the weak one. A fix is pending; treat the section
+as under-selecting until G8 goes green.
