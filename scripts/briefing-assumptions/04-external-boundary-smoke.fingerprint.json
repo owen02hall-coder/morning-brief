@@ -16,11 +16,11 @@
   "world_feeds_alive": 4,
   "recent_items_within_hours": {
     "hours": 72,
-    "count": 232
+    "count": 227
   },
   "constituent_counts": {
     "sp500": 503,
-    "ndx": 101
+    "ndx": 103
   },
-  "checked_at": "2026-06-15T21:45:55.697963+00:00"
+  "checked_at": "2026-08-03T18:03:28.789916+00:00"
 }
