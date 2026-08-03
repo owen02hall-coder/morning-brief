@@ -6,14 +6,14 @@
     {
       "path": "documentation/architecture.md",
       "title": "Architecture",
-      "summary": "System overview, data flow, modules, key design decisions (incl. the four monitors and the policy-section accuracy guarantees), briefing.json schema, CLI entry points.",
+      "summary": "System overview, data flow, modules, key design decisions (incl. the four monitors, the policy-section accuracy guarantees and the no-year static policy calendar), briefing.json schema, CLI entry points.",
       "source_files": ["scripts/", "docs/", ".github/workflows/briefing.yml", ".github/workflows/heartbeat.yml", ".github/workflows/data-smoke.yml", ".github/workflows/shell-guard.yml"],
       "entry_points": ["python -m scripts.build_briefing", "scripts/build_briefing.py:main", "python -m scripts.heartbeat"]
     },
     {
       "path": "documentation/integrations.md",
       "title": "Integrations",
-      "summary": "External services (Yahoo Finance, Gemini, ntfy, RSS, Federal Register, Utah Legislature, Freddie Mac PMMS, GitHub Pages/Actions, v2 Twelve Data), usage, invocation sites, env var names, and the probed-dead source list.",
+      "summary": "External services (Yahoo Finance, Gemini, ntfy, RSS, Federal Register, Utah Legislature, Freddie Mac PMMS, GitHub Pages/Actions, v2 Twelve Data), usage, invocation sites, env var names, the probed-dead source list, and the static POLICY_CALENDAR that stands in for the annual announcements no feed publishes.",
       "source_files": ["scripts/data/market.py", "scripts/data/news.py", "scripts/data/policy.py", "scripts/data/mortgage.py", "scripts/summarize.py", "scripts/notify.py", "scripts/config.py", ".github/workflows/briefing.yml"],
       "entry_points": ["GEMINI_API_KEY", "NTFY_SUB", "PAGE_URL", "TWELVE_API_KEY"]
     },

@@ -8,7 +8,8 @@ Run modes:
   python -m scripts.build_briefing --no-notify # skip ntfy pushes
 
 Flow: date-gate -> load state -> market (Yahoo, all four numbers) + mortgage (PMMS) -> news (RSS)
--> breadth -> policy (re-emit-or-fetch, then its own Gemini call) -> Gemini summary
+-> breadth -> policy (re-emit-or-fetch, then its own Gemini call; plus the static, model-free
+policy calendar) -> Gemini summary
 (with a no-AI fallback) -> write briefing.json + archive + state + headline handoff -> health
 pings. The daily "ready" push is NOT sent here: the build writes headline.txt and the workflow
 sends the push (scripts.notify CLI) only after the commit/push leg succeeds, so a failed publish
@@ -261,11 +262,16 @@ def _fallback_items(news, bucket, limit):
 
 
 def _assemble(now, today, market, news, narrative, ai_ok, breadth=None,
-              policy=None, policy_upcoming=None, mortgage=None, policy_available=True):
+              policy=None, policy_upcoming=None, mortgage=None, policy_available=True,
+              policy_calendar=None):
     """`policy`, `policy_upcoming` and `mortgage` are KEYWORD-only in practice (the 7 positional
     args are the pre-existing call shape) and are emitted OUTSIDE the `if ai_ok:` branch: they come
     from a separate model call and a deterministic fetch, and both can succeed on a day when
-    summarize() fails."""
+    summarize() fails.
+
+    `policy_calendar` is a plain list of static facts — no model, no fetch, no state — and is
+    deliberately absent from `avail` below: it cannot be unavailable, and folding it into
+    `data_availability.policy` would let a healthy calendar mask a dead Federal Register leg."""
     briefing_date = today
     avail = {**market["availability"], **{f"news_{k}": v for k, v in news["available"].items()},
              "summary": "ok" if ai_ok else "unavailable",
@@ -310,6 +316,7 @@ def _assemble(now, today, market, news, narrative, ai_ok, breadth=None,
         "mortgage": mortgage,
         "policy": list(policy or []),
         "policy_upcoming": list(policy_upcoming or []),
+        "policy_calendar": list(policy_calendar or []),
         "tech": tech,
         "world": world,
         "weekly_recap": recap,
@@ -365,6 +372,11 @@ def run(do_notify=True, today=None):
     # null on proposed rules, and `None > "2026-08-03"` raises TypeError, which would kill the run.
     policy_upcoming = [i for i in (st.get("policy_active") or [])
                        if i.get("effective_date") and i["effective_date"] > today]
+    # Static facts, exactly like the market numbers in summarize._facts_block: NO model involvement,
+    # no fetch, no state. Deliberately computed here and not inside _get_policy() — routing it
+    # through that function is what would let it drift into being marked seen, pushed, or counted in
+    # data_availability.policy. It has no availability of its own because it cannot fail.
+    policy_calendar = policy_mod.upcoming_calendar(today, config.POLICY_CALENDAR_HORIZON_DAYS)
 
     # Derive the weekday from the gate date so the build decision, the saved briefing date, and the
     # Sunday-recap choice all agree even if midnight crosses between _now() reads.
@@ -374,7 +386,7 @@ def run(do_notify=True, today=None):
 
     briefing = _assemble(now, today, market, news, narrative, ai_ok, breadth,
                          policy=policy, policy_upcoming=policy_upcoming, mortgage=mortgage,
-                         policy_available=policy_available)
+                         policy_available=policy_available, policy_calendar=policy_calendar)
     _write(briefing)
 
     # Track the last day markets were fully healthy, so a SUSTAINED blackout (a dead data source, the

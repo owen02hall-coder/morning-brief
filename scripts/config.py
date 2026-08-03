@@ -199,6 +199,121 @@ MAX_POLICY_CANDIDATES = 25       # sent to the model (mirrors MAX_CANDIDATES_PER
 MAX_POLICY_UPCOMING = 5          # "What's coming": already-reported items with a future
                                  # effective_date, carried until that date passes.
 
+# --- The policy calendar: the recurring dates that have NO feed to watch ------------------------
+# The annual dollar figures this reader most wants — the conforming loan limit, the IRS brackets and
+# married-filing-jointly standard deduction, the 401(k)/IRA limits, the ACA enrollment window — are
+# NOT in the Federal Register at any document type, and none of them has a machine-readable feed.
+# Measured 2026-08-03 (integrations.md, "Adding conditions[type][]=NOTICE"): adding NOTICE to the FR
+# query multiplies candidate volume 5.4x and still returns none of them; full-text search across ALL
+# document types over 400 days finds 0 hits for the IRS phrases and 1 irrelevant hit for "conforming
+# loan limit"; the FHFA/IRS/HUD RSS feeds are 404 at every documented-looking path.
+#
+# So the shipped section can only ever REACT to rulemaking. A small hardcoded calendar is the correct
+# mechanism for the rest precisely BECAUSE those announcements have no feed — there is nothing to
+# scrape, and this is the only way the briefing can say "the loan limit lands in the next few weeks".
+#
+# THREE PROPERTIES MAKE THIS SAFE TO HARDCODE, and 09-policy-calendar.py is the machine that keeps
+# them true (a comment is not a mechanism):
+#
+# 1. NO ENTRY CARRIES A YEAR. Every entry is a month/day RULE, resolved forward against the run's
+#    date by policy._next_occurrence(). An entry therefore cannot go stale: it rolls into next year
+#    the day after it passes. A `year` key here is a bug, and C2 goes red on one.
+#
+# 2. EVERY LABEL IS ANTICIPATORY, NEVER A FACT. Exact dates move year to year, so a label says
+#    "expected late November", never "November 25". This is the same principle as the model never
+#    authoring a figure: we do not state a date the source has not announced. C5 enforces it — every
+#    label must contain the word "expected" and must contain no 4-digit year and no "Month DD".
+#    Precise dates and their sourcing live in `note`, which is explanatory context, not a claim
+#    about this year.
+#
+# 3. THE MONTH/DAY IS THE **END** OF THE PLAUSIBLE WINDOW, not a guess at the date. Anchoring on the
+#    late edge means the entry is visible for the whole period during which the event could land and
+#    never rolls forward while the event is still ahead — the failure that would make the calendar
+#    worse than nothing. It also means the anchor is never a claim: it is "by when", not "on".
+#
+# Each url was fetched 2026-08-03 and returned HTTP 200 (some via redirect). They are for a human to
+# click; nothing here is fetched at runtime, and the calendar has NO failure surface at all.
+POLICY_CALENDAR = [
+    {
+        "month": 11, "day": 30,
+        "label": "FHFA conforming loan limit for next year — expected late November",
+        "note": ("The cap on a conforming (non-jumbo) mortgage, and the line between a normal rate "
+                 "and a jumbo one. FHFA has announced it in the last days of November each year, "
+                 "and the new limit applies to loans made from January 1."),
+        "url": "https://www.fhfa.gov/data/conforming-loan-limit",
+    },
+    {
+        "month": 11, "day": 10,
+        "label": ("IRS tax brackets and the married-filing-jointly standard deduction for next "
+                  "year — expected late October or early November"),
+        "note": ("Published as an annual inflation-adjustment revenue procedure; recent releases "
+                 "landed between mid-October and mid-November. These are the bracket thresholds "
+                 "and the standard deduction the next return is filed against."),
+        "url": "https://www.irs.gov/filing/federal-income-tax-rates-and-brackets",
+    },
+    {
+        "month": 11, "day": 5,
+        "label": ("IRS 401(k) and IRA contribution limits for next year — expected late October "
+                  "or early November"),
+        "note": ("The annual cost-of-living adjustment notice, historically released within a week "
+                 "or two of the bracket figures. It sets how much can go into a 401(k) and an IRA "
+                 "next year."),
+        "url": ("https://www.irs.gov/retirement-plans/"
+                "cola-increases-for-dollar-limitations-on-benefits-and-contributions"),
+    },
+    {
+        "month": 11, "day": 1,
+        "label": "ACA marketplace open enrollment opens — expected early November",
+        "note": ("healthcare.gov has opened enrollment on November 1 each year, and currently "
+                 "publishes December 15 as the deadline for coverage starting January 1. The "
+                 "window is set by federal rule and has been changed by rulemaking before."),
+        "url": "https://www.healthcare.gov/quick-guide/dates-and-deadlines/",
+    },
+    {
+        "month": 1, "day": 15,
+        "label": "ACA marketplace open enrollment closes — expected mid-January",
+        "note": ("healthcare.gov currently publishes January 15 as the last day to enroll in or "
+                 "change a marketplace plan. After it closes, enrolling needs a qualifying life "
+                 "event. The closing date is rule-set and has moved before — confirm the year's "
+                 "actual date on healthcare.gov."),
+        "url": "https://www.healthcare.gov/quick-guide/dates-and-deadlines/",
+    },
+    {
+        "month": 4, "day": 18,
+        "label": "Federal income tax filing deadline — expected mid-April",
+        "note": ("April 15 by statute, moving to the next business day when that falls on a "
+                 "weekend or a District of Columbia holiday, which has pushed it to April 17 or "
+                 "18 in several recent years."),
+        "url": "https://www.irs.gov/filing/individuals/when-to-file",
+    },
+    {
+        "month": 1, "day": 21,
+        "label": "Utah Legislature's general session convenes — expected mid-to-late January",
+        "note": ("The general session opens on the third Tuesday in January (so January 15-21 "
+                 "depending on the year) and runs 45 calendar days, adjourning in early March. "
+                 "Bills the governor signs reach this section from the passed-bills list "
+                 "afterwards, which is why the Utah half is dark most of the year."),
+        "url": "https://le.utah.gov/session/",
+    },
+    {
+        "month": 8, "day": 31,
+        "label": "Utah Truth in Taxation hearings — expected during August",
+        "note": ("A Utah taxing entity that wants more property tax revenue than the certified "
+                 "rate allows must hold a public hearing, and those hearings are held in August. "
+                 "The county's Notice of Property Valuation and Tax Changes, mailed in July, "
+                 "carries the actual date and place for a given parcel."),
+        "url": "https://propertytax.utah.gov/",
+    },
+]
+POLICY_CALENDAR_HORIZON_DAYS = 30
+# Why 30 and not 60 or 7. Eight events a year, each anchored at the end of its window, produce these
+# visible spans: Oct 2-Nov 30, Dec 16-Jan 21, Mar 19-Apr 18, Aug 1-31 — 159 days, so the
+# forward-looking block appears on roughly 44% of mornings. That is the point of the number: useful
+# without making the section always-on. "Policy that affects you" renders ONLY when it is non-empty
+# (an empty section is a correct outcome, not a fault — architecture.md), and a horizon wide enough
+# to keep a calendar entry on screen every day would silently undo that decision by making the
+# section permanent. A 7-day horizon would swing the other way and give no planning lead at all.
+
 # --- Audio edition (TTS) ------------------------------------------------------
 # One TTS request/day stays comfortably inside the Gemini free tier. The build writes a WAV to
 # AUDIO_WAV_PATH (job-local, gitignored); the workflow converts it to docs/briefing-audio.mp3 and

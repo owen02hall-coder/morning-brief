@@ -1,0 +1,16 @@
+{
+  "entries": 8,
+  "horizon_days": 30,
+  "control": null,
+  "max_days_to_next_occurrence": [
+    365,
+    "Utah Truth in Taxation hearings \u2014 expected during ",
+    "2027-09-01",
+    "2028-08-31"
+  ],
+  "order_windows_checked": 10,
+  "visible_days_per_year": {
+    "days": 159,
+    "pct": 43.6
+  }
+}

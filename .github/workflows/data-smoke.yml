@@ -23,8 +23,9 @@ permissions:
 jobs:
   spine:
     runs-on: ubuntu-latest
-    # 10, not 5: the job now runs four assumption tests (05 fetches the Federal Register, the PMMS
-    # CSV and Utah's passed-bills page; 07 fetches bill detail pages) plus a real model call in 06.
+    # 10, not 5: the job now runs five assumption tests (05 fetches the Federal Register, the PMMS
+    # CSV and Utah's passed-bills page; 07 fetches bill detail pages; 09 is offline and instant)
+    # plus a real model call in 06.
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3 (SHA-pinned: mutable tags are a supply-chain vector in a push-capable job)
@@ -76,6 +77,17 @@ jobs:
           BRIEFING_SMOKE_ALLOW_DEV: "true"
           PYTHONPATH: ${{ github.workspace }}
         run: python scripts/briefing-assumptions/08-prefilter-recall.py
+
+      # The static policy calendar is the one HARDCODED leg — nothing fetches it, so nothing can
+      # report it broken. This step needs no network and no key; it is here because a rotted entry
+      # renders exactly like a good one, and the weekly run is where a "someone edited config"
+      # regression surfaces as a push instead of as a wrong date on the page.
+      - name: Policy calendar (no entry can go stale, no label claims an unannounced date)
+        if: always()
+        env:
+          BRIEFING_SMOKE_ALLOW_DEV: "true"
+          PYTHONPATH: ${{ github.workspace }}
+        run: python scripts/briefing-assumptions/09-policy-calendar.py
 
       # Relevance is the whole product: ~80% of agency-filtered Federal Register documents are
       # irrelevant to this user, so "did the model pick the right ones" is the assumption that

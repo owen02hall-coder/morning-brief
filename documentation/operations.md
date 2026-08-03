@@ -128,6 +128,11 @@ policy design shipped a state field that was declared and *read* but never writt
 feature that looks healthy and is permanently empty. If a key here cannot name its writer, it does
 not exist.
 
+The static policy calendar adds **no key at all**, and that is the design, not an omission: it is
+pure — it resolves `config.POLICY_CALENDAR` against the run date on every run — so there is nothing
+to remember, nothing to expire and nothing to recover. It also never marks anything seen and never
+pushes.
+
 | Key | Written by | Read by | Lifecycle |
 | --- | --- | --- | --- |
 | `last_run` | `state.save()`, every run | `main()`'s once-per-day gate | Rewritten daily |
@@ -236,6 +241,16 @@ Two lifecycle rules are worth stating outright because they are the ones easiest
   so the day's items are republished verbatim with no fetch, no model call and no second push. This
   is what stops a badly-timed re-run from overwriting `docs/archive/<date>.json` with an empty list
   and deleting items already delivered.
+- The policy calendar has no failure mode to operate. It makes no request, holds no state and has no
+  `data_availability` entry, so it cannot degrade and cannot appear in the degraded ping. The only
+  ways it can be WRONG are editorial — a real-world date moved, or someone added an entry that names
+  a year or claims a date nobody announced — and none of those is visible at runtime, because a
+  rotted entry renders exactly like a good one. That is why the guard is a runnable gate
+  (`09-policy-calendar.py`, in `run-all.sh` and in the weekly Data Smoke job) and not a log line.
+  **After editing `config.POLICY_CALENDAR`, run 09** — it needs no key and no network:
+  `PYTHONPATH=. BRIEFING_SMOKE_ALLOW_DEV=true python scripts/briefing-assumptions/09-policy-calendar.py`.
+  If a malformed entry ever does ship, production skips just that entry and prints
+  `policy: calendar entry '<label>' skipped: ...` — the section degrades by one row, never by a run.
 - Freddie Mac PMMS unreachable or unparseable: `get_rate()` returns None with a logged reason, the
   mortgage tile is omitted, and `data_availability.mortgage` goes false (so it appears in the
   degraded ping). It is deliberately NOT part of the `markets_ok` tuple: PMMS is a weekly Thursday
@@ -252,11 +267,13 @@ Two lifecycle rules are worth stating outright because they are the ones easiest
 - Run them all: `BRIEFING_SMOKE_ALLOW_DEV=true bash scripts/briefing-assumptions/run-all.sh`.
 - Keyless and runnable anywhere: `04` (RSS + Wikipedia liveness), `05` (Federal Register, PMMS, the
   Utah list page), `07` (Utah bill detail: relative hrefs resolve, real text extracts), `08` (keyword
-  prefilter recall, precision and volume). `06` needs a Gemini key; `03` needs a Gemini key; `01`/`02`
-  need a Twelve Data key and target the abandoned v2 breadth route.
+  prefilter recall, precision and volume), `09` (the static policy calendar cannot go stale and no
+  label claims an unannounced date). `09` needs no network either, so it runs offline in
+  milliseconds. `06` needs a Gemini key; `03` needs a Gemini key; `01`/`02` need a Twelve Data key
+  and target the abandoned v2 breadth route.
 - `run-all.sh` halts on the first non-zero exit and `01`/`02` exit 3 without `TWELVEDATA_API_KEY`, so
   in practice gate on the policy tests individually or just dispatch **Data Smoke**, which runs
-  05/07/08/06 from a runner with each step independent.
+  05/07/08/09/06 from a runner with each step independent.
 
 ## Cost
 

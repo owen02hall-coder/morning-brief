@@ -62,6 +62,11 @@ Python 3 — which would take the whole briefing down. Utah candidates therefore
 This module writes no state itself: it returns a new state dict. state.record_policy() remains the
 only writer of policy_seen / policy_active / policy_today; the Utah queue and session stamp are
 threaded through here because only the harvest knows what it found.
+
+SECOND, UNRELATED ENTRY POINT: upcoming_calendar(today, horizon_days). It shares nothing with
+get_policy() — no network, no state, no model, no seen set, no effect on `available` — and exists
+because the annual announcements this reader most wants have no feed to watch at all (see
+config.POLICY_CALENDAR). Everything about it is below the "static policy calendar" header.
 """
 import json
 import re
@@ -464,6 +469,91 @@ def requeue_utah(st, candidates):
     except Exception as e:
         print(f"policy: Utah re-queue failed: {type(e).__name__}: {e}")
         return st
+
+
+# --- the static policy calendar --------------------------------------------------------------------
+# The one part of this module that touches NOTHING: no network, no state, no model, no seen set, no
+# effect on data_availability. It exists because the annual announcements this reader most wants
+# (conforming loan limit, IRS brackets and standard deduction, retirement contribution limits, the
+# ACA enrollment window) are not in the Federal Register at any document type and have no feed to
+# scrape at all — measured, see config.POLICY_CALENDAR's header and integrations.md. Hardcoding is
+# not a shortcut here; it is the only available mechanism, and it is safe ONLY because every entry is
+# a month/day RULE that resolves forward, so nothing in it can go stale.
+#
+# It lives in this module rather than a new one because it is the same domain and the same caller:
+# build_briefing already imports `policy_mod`, the output renders inside the same section, and a
+# separate module for one pure function would add an import for no boundary. The functions are kept
+# apart from the fetch surface above by this header, not by a file.
+
+
+def _as_date(today):
+    """Accept a date or an ISO 'YYYY-MM-DD' string — run() carries `today` as a string."""
+    return today if isinstance(today, date) else date.fromisoformat(str(today))
+
+
+def _next_occurrence(month, day, today):
+    """The next date matching month/day that is not in the past, or None.
+
+    THIS IS THE WHOLE STALENESS STORY. A calendar entry carries no year, so "November 30" seen on
+    December 1 must resolve to NEXT year's November 30 — resolving it in the current year would put
+    a PAST date on screen under a label that says the event is coming, which is the exact failure
+    that makes a hardcoded calendar worse than no calendar. 09-policy-calendar.py's C1 pins it from
+    several dates including Dec 31 and Jan 1, and its `no-rollforward` control replaces this
+    function with the naive same-year version to prove C1 is really measuring it.
+
+    `>=`, not `>`: on the day itself the event is expected TODAY, and hiding it exactly then would
+    be the same defect one day narrower.
+
+    The multi-year loop is for February 29, which does not exist in three years out of four. Such an
+    entry degrades to a far-future date and simply never enters the horizon; C1's 366-day bound is
+    what makes that loud in CI instead of silent in production."""
+    for year in range(today.year, today.year + 5):
+        try:
+            d = date(year, month, day)
+        except (TypeError, ValueError):
+            continue
+        if d >= today:
+            return d
+    return None
+
+
+def _calendar_sort_key(entry):
+    """Module-level so 09's `no-sort` control can replace it and drive C4 red through production."""
+    return entry["date"]
+
+
+def upcoming_calendar(today, horizon_days=None):
+    """Calendar entries whose next occurrence falls within the horizon, soonest first.
+
+    Returns a list of {date, label, note, url} — DELIBERATELY different key names from a reported
+    policy item ({what_happened, effect, status, effective_date, source}). These two things look
+    similar on screen and mean opposite things: a `policy_upcoming` row is something that HAPPENED
+    and has a published effective date; a calendar row is something EXPECTED that nobody has
+    announced. Disjoint keys mean neither can ever be rendered, validated or recorded as the other.
+
+    Pure and total: no I/O, no state, no model involvement, and it never raises. A malformed entry
+    is skipped with a printed reason rather than taking the section (or the briefing) down."""
+    horizon = config.POLICY_CALENDAR_HORIZON_DAYS if horizon_days is None else horizon_days
+    try:
+        ref = _as_date(today)
+        cutoff = ref + timedelta(days=horizon)
+    except Exception as e:
+        print(f"policy: calendar skipped — unusable date {today!r}: {type(e).__name__}: {e}")
+        return []
+
+    out = []
+    for entry in config.POLICY_CALENDAR:
+        try:
+            when = _next_occurrence(entry["month"], entry["day"], ref)
+            if when is None or when > cutoff:
+                continue
+            out.append({"date": when.isoformat(), "label": entry["label"],
+                        "note": entry["note"], "url": entry["url"]})
+        except Exception as e:
+            print(f"policy: calendar entry {entry.get('label')!r} skipped: "
+                  f"{type(e).__name__}: {e}")
+    out.sort(key=_calendar_sort_key)
+    return out
 
 
 # --- the public entry point ----------------------------------------------------------------------

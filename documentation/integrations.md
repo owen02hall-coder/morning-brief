@@ -196,6 +196,47 @@ brief's original static policy calendar was the right mechanism for the latter p
 those announcements have no feed to watch — it was cut for having no staleness story, and the gap
 it covered is real. Re-adding a small dated calendar is the honest fix, not widening this query.
 
+### The static policy calendar — the answer to the paragraph above (shipped 2026-08-03)
+
+`config.POLICY_CALENDAR` closes that loop. It is **not an integration**: nothing is fetched, there is
+no host, no timeout, no key, no failure mode, and it is recorded here only because it is the
+deliberate substitute for the feeds this file lists as dead. Eight recurring annual events —
+FHFA's conforming loan limit, the IRS bracket/standard-deduction and retirement-limit adjustments,
+ACA open enrollment opening and closing, the federal filing deadline, the Utah general session, Utah
+Truth in Taxation hearings — resolved forward by `policy.upcoming_calendar()` and emitted as
+`briefing.json`'s `policy_calendar`.
+
+Hardcoding is normally the wrong answer and it is the right one here for one reason: **there is
+nothing to poll.** Every row in the table above and every measurement in this section says so.
+
+The three properties that keep a hardcoded list from rotting, each enforced by
+`09-policy-calendar.py` rather than asserted here:
+
+1. **No entry carries a year.** Each is a month/day rule resolved against the run date, so an entry
+   rolls into next year the day after it passes and cannot become a past date on a page that says
+   "What's coming". C1 checks this from 40 reference dates including December 31 and January 1; the
+   `no-rollforward` control replaces the resolver with the naive same-year version to prove C1 is
+   really measuring it.
+2. **Every label is anticipatory** — "expected late November", never "November 25". This is the same
+   rule as the model never authoring a figure, applied to dates: we do not state a date the source
+   has not announced. C5 enforces it mechanically (the label must contain "expected" and must carry
+   no year and no "Month DD"). The client reinforces it: a calendar row renders a muted **Expected**
+   where a reported item renders its real effective date, and the resolved ISO date is used only to
+   order the list, never printed.
+3. **The month/day is the END of the plausible window**, not a guess at the date — so an entry stays
+   visible for the whole period the event could land in and never rolls forward while the event is
+   still ahead.
+
+Each URL was fetched on 2026-08-03 and returned HTTP 200 (`fhfa.gov/data/conforming-loan-limit`,
+two `irs.gov` pages, `healthcare.gov/quick-guide/dates-and-deadlines`, `irs.gov/filing/individuals/
+when-to-file`, `le.utah.gov/session`, `propertytax.utah.gov`). They exist for a human to tap; nothing
+fetches them at runtime. Note that `le.utah.gov`'s code and bill pages are JavaScript shells (the
+same quirk documented under "Utah Legislature" above), so the Utah entries' TIMING is sourced from
+the published statutory rule and the observed record, not from a machine-readable page.
+
+The calendar deliberately does **not** touch `data_availability`: it cannot be unavailable, and
+folding it in would let a healthy calendar mask a dead Federal Register leg.
+
 ## Google Gemini
 
 - Used for: writing the briefing prose (tldr, the why lines, tech and world items, weekly recap),

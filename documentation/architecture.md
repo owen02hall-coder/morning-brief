@@ -47,8 +47,12 @@ GitHub Actions (cron, UTC) --> python -m scripts.build_briefing
      -> _new_policy_items()                drop ids already in policy_seen, THEN cut to MAX_POLICY_ITEMS
      -> state.record_policy()              the only writer of policy_seen/policy_active/policy_today
                                            (policy_seen records what was REPORTED, not what was sent)
+  -> policy.upcoming_calendar()            STATIC recurring dates (config.POLICY_CALENDAR) resolved
+                                           forward against today. No fetch, no model, no state, no
+                                           availability flag - called from run(), NOT from
+                                           _get_policy(), so it can never be marked seen or pushed
   -> summarize.summarize()                 Gemini structured output (numbers injected as facts)
-  -> assemble briefing dict (incl. breadth, mortgage, policy, policy_upcoming)
+  -> assemble briefing dict (incl. breadth, mortgage, policy, policy_upcoming, policy_calendar)
   -> write docs/briefing.json
             docs/archive/<date>.json
             docs/archive/index.json
@@ -104,6 +108,12 @@ Heartbeat (independent cron): python -m scripts.heartbeat
   queues STUBS only — bill detail pages are fetched lazily at release, at most `MAX_POLICY_ITEMS`
   per run, because harvesting 491 bills eagerly would be ~491 sequential requests inside a
   10-minute job. `get_policy()` never raises and writes no state itself; it returns a new state dict.
+  The module has a SECOND, unrelated entry point below its "static policy calendar" header:
+  `upcoming_calendar(today, horizon_days)`, which shares nothing with the fetch surface — no network,
+  no state, no model, no seen set, no effect on `available`. It resolves each `config.POLICY_CALENDAR`
+  month/day rule forward against the run date and returns the ones inside
+  `POLICY_CALENDAR_HORIZON_DAYS` (30), soonest first. It lives here because it is the same domain and
+  the same caller; a separate module for one pure function would add an import for no boundary.
 - `scripts/data/constituents.py`: current S&P 500 (~503, linked ticker cell) and Nasdaq-100
   (~101, plain-text ticker cell) member lists from Wikipedia. stdlib regex parse, fail-closed on
   implausible counts — a biased breadth number must never ship silently.
@@ -178,6 +188,24 @@ Heartbeat (independent cron): python -m scripts.heartbeat
   "Information not available." (that message would be a lie), and `data_availability.policy` tracks
   the FETCH, not the item count — deriving availability from an empty list would flag every healthy
   quiet day as degraded.
+- **The static calendar is hardcoded because there is nothing to poll, and it cannot go stale
+  because no entry carries a year.** The annual figures this reader most wants — the conforming loan
+  limit, the IRS brackets and standard deduction, the retirement contribution limits, the ACA
+  enrollment window — are not in the Federal Register at any document type and have no
+  machine-readable feed (measured; see `integrations.md`). So the fetched half of this section can
+  only ever REACT to rulemaking, and the calendar is the only mechanism available for the rest. Three
+  properties make hardcoding safe, and `09-policy-calendar.py` is the machine that keeps them true:
+  every entry is a month/day RULE resolved forward (so it rolls into next year the day after it
+  passes, and can never render a past date under "What's coming"); every label is ANTICIPATORY
+  ("expected late November", never "November 25" — the same rule as the model never authoring a
+  figure, applied to dates); and each anchor is the END of the plausible window, so an entry stays
+  visible for the whole period the event could land in. The horizon is 30 days on purpose: eight
+  events a year put the block on screen ~44% of mornings, which keeps the section intermittent
+  rather than silently converting it into an always-on one.
+- The calendar is emitted **outside** `_get_policy()`. Routing static facts through the function that
+  owns the model call, the seen set and the push is what would let them drift into being summarized,
+  recorded or alerted on. It is the `_facts_block()` principle at section scale: values the model
+  never touches do not travel through the model's plumbing.
 - The run degrades, it does not skip. A failed feed marks one section unavailable. A failed AI call
   falls back to a no-prose briefing of raw numbers and headlines. World news always ships if present.
 - Staleness is age-based. The PWA shows a notice when the briefing is older than `STALE_HOURS`.
@@ -241,6 +269,15 @@ policy       : list of { what_happened, effect, url, status, effective_date, sou
 policy_upcoming : list of already-reported items whose effective_date is still ahead, same shape,
                capped at MAX_POLICY_UPCOMING (5), sorted by date ascending. Carries `effect` too:
                the carry exists so a deadline stays meaningful rather than becoming a bare headline.
+policy_calendar : list of { date, label, note, url } — recurring annual events from
+               config.POLICY_CALENDAR whose next occurrence is within POLICY_CALENDAR_HORIZON_DAYS
+               (30), soonest first. Deliberately DISJOINT key names from a reported item: these two
+               look alike on screen and mean opposite things (something that HAPPENED with a
+               published effective date vs something merely EXPECTED), and disjoint keys mean neither
+               can ever be rendered, validated or recorded as the other. `date` is the resolved
+               anchor and is used ONLY for ordering — the client never prints it, because the
+               precision is not real; the timing lives in the label's words. No model involvement of
+               any kind, and no entry in `data_availability`: it cannot fail.
 tech         : list of { summary, source, url }
 world        : list of { summary, source, url }
 weekly_recap : string or null (Sundays only)
@@ -250,9 +287,10 @@ data_availability : map of section -> true/false or "ok"/"unavailable"
                     normal publishing gap must not fire the high-priority market-blackout page.)
 ```
 
-Archived briefings written before the policy section shipped carry no `mortgage`, `policy` or
-`policy_upcoming` keys. The PWA renders them unchanged: the mortgage tile is appended only `if (b.mortgage)`, and
-`policySection()` treats a missing list as empty and returns null.
+Archived briefings written before the policy section shipped carry no `mortgage`, `policy`,
+`policy_upcoming` or `policy_calendar` keys. The PWA renders them unchanged: the mortgage tile is
+appended only `if (b.mortgage)`, and `policySection()` treats each missing list as empty and returns
+null when all three are empty.
 
 Companion files: `docs/briefing-audio.mp3` (the day's narration) + `docs/briefing-audio.json`
 (`{date}` manifest — the player binds audio only when it matches the briefing's date).
@@ -283,13 +321,17 @@ v1 (core briefing) and v2 (breadth + tiered oversold alerts, both indices; audio
 built and live. The delivered v2 design (with deltas from the original plan) is archived at
 `tmp/done-plans/2026-06-16-breadth-and-fresh-data.md`.
 
-v3 adds "Policy that affects you" and the 30-year mortgage tile. Two known gaps are deliberate, not
-oversights:
+v3 adds "Policy that affects you" and the 30-year mortgage tile. One known gap is deliberate; a
+second that was listed here has since been closed:
 
-- **No forward-looking calendar.** `policy_upcoming` can only ever contain items that were already
-  reported, so with Utah's legislature dark nine months a year the section is absent most mornings
-  and carries nothing anticipatory. The mortgage tile is the only 52-week content, and it lives in
-  the markets section. A minimal static calendar is the obvious next step.
+- ~~**No forward-looking calendar.**~~ **CLOSED 2026-08-03.** `policy_upcoming` can only ever contain
+  items that were already reported, so the section was absent most mornings and carried nothing
+  anticipatory. `config.POLICY_CALENDAR` + `policy.upcoming_calendar()` now supply eight recurring
+  annual events — exactly the announcements that have no feed to watch — rendered inside "What's
+  coming" and visually separated from reported items. The reason it was cut from the plan ("no shape,
+  no source, no staleness story") is answered by a shape (month/day rules carrying no years), sources
+  (a probed `.gov` URL and a sourcing note per entry) and a staleness story that is a runnable gate,
+  `09-policy-calendar.py`, rather than a paragraph.
 - **The audio edition excludes policy.** The narration stays deliberately leaner than the page
   (`scripts/tts.py`), and adding a fourth topic to a drive-time script was not worth the length.
 

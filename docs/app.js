@@ -204,20 +204,55 @@ function policyUpcomingCard(items) {
   return card;
 }
 
-function policySection(items, upcoming) {
+function policyCalendarCard(entries) {
+  // Recurring annual dates with NO announcement behind them (config.POLICY_CALENDAR). They share
+  // the "What's coming" heading with policy_upcoming but must never read as the same kind of thing:
+  // an upcoming item HAPPENED and carries a published effective date, a calendar entry is only
+  // EXPECTED. Hence a separate card, a muted "Expected" marker where the reported rows print a real
+  // date, and this lede.
+  const card = el("div", "card policy-upcoming policy-calendar");
+  card.appendChild(el("p", "policy-calendar-lede",
+    "Recurring dates — expected, not announced. Nobody has published these yet."));
+  const ul = el("ul");
+  for (const e of entries) {
+    const li = el("li");
+    const href = safeHref(e.url); // hand-written .gov URLs, but the same guard as any other link
+    const row = href ? el("a", "policy-row cardlink") : el("div", "policy-row");
+    if (href) policyLink(row, e.url, `${e.label || "Expected change"} — official page`);
+    li.appendChild(row);
+    // The resolved ISO date exists in the JSON ONLY to order this list, and is deliberately NOT
+    // rendered: printing "Nov 30" beside "expected late November" would claim a precision no
+    // source has published. The timing lives in the label, in the words the source can support.
+    row.appendChild(el("span", "policy-date policy-expected", "Expected"));
+    const body = el("div", "policy-row-body");
+    if (e.label) body.appendChild(el("p", "policy-row-what", e.label));
+    if (e.note) body.appendChild(el("p", "policy-calendar-note", e.note));
+    row.appendChild(body);
+    ul.appendChild(li);
+  }
+  card.appendChild(ul);
+  return card;
+}
+
+function policySection(items, upcoming, calendar) {
   // Returns null when there is nothing to show — deliberately NOT itemList(), whose empty state
   // prints "Information not available." Here empty means "nothing qualified", which is not the
   // same claim. The call site MUST guard: appendChild(null) throws mid-render.
   const list = (Array.isArray(items) ? items : []).filter(Boolean);
   const soon = (Array.isArray(upcoming) ? upcoming : []).filter(Boolean);
-  if (!list.length && !soon.length) return null;
+  // A calendar entry alone is enough to render the section: it is the only forward-looking content
+  // the section has 9 months a year, and the whole reason the calendar exists. Render-when-non-empty
+  // still holds — the calendar is empty on ~56% of mornings by design (POLICY_CALENDAR_HORIZON_DAYS).
+  const cal = (Array.isArray(calendar) ? calendar : []).filter(Boolean);
+  if (!list.length && !soon.length && !cal.length) return null;
 
   const sec = el("section", "policy");
   sec.appendChild(el("h2", null, "Policy that affects you"));
   list.forEach((it) => sec.appendChild(policyCard(it)));
-  if (soon.length) {
+  if (soon.length || cal.length) {
     sec.appendChild(el("h3", "policy-coming", "What's coming"));
-    sec.appendChild(policyUpcomingCard(soon));
+    if (soon.length) sec.appendChild(policyUpcomingCard(soon));
+    if (cal.length) sec.appendChild(policyCalendarCard(cal));
   }
   return sec;
 }
@@ -257,7 +292,7 @@ function render(b, into) {
   // committed the seq and advanced lastGeneratedAt, so the visibilitychange refetch would skip
   // re-rendering for the rest of the session), and on the archive path it surfaces as a
   // misleading "you may be offline".
-  const policy = policySection(b.policy, b.policy_upcoming);
+  const policy = policySection(b.policy, b.policy_upcoming, b.policy_calendar);
   if (policy) into.appendChild(policy);
 
   into.appendChild(itemList("Emerging tech", b.tech));

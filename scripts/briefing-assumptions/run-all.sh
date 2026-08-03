@@ -10,6 +10,7 @@ TESTS=(
   "05-policy-sources.py"            # no key — runnable now; run in CI for runner-IP proof (.gov egress)
   "07-utah-bill-detail.py"          # no key — Utah scrape contract (absolute URL, real bill text)
   "08-prefilter-recall.py"          # no key — prefilter recall + precision + volume
+  "09-policy-calendar.py"           # no key, no network — the hardcoded calendar cannot go stale
   "01-twelvedata-runner-pull.py"    # needs TWELVEDATA_API_KEY; run in CI for runner-IP proof
   "02-twelvedata-seed-budget.py"    # needs TWELVEDATA_API_KEY
   "03-gemini-structured.py"         # needs GEMINI_API_KEY
