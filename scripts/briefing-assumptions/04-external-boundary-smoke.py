@@ -75,8 +75,13 @@ def main():
 
     # A2 — Wikipedia tables parse to plausible counts via a header-matched column
     counts = {}
+    # These page names deliberately mirror config.SP500_WIKI_URL / config.NDX100_WIKI_URL rather
+    # than importing them — an assumption test asserts the assumption, not whatever config happens
+    # to say. The cost of that choice showed up on 2026-07-13: Wikipedia moved the Nasdaq-100
+    # component table to its own list article, and BOTH copies had to be updated. If you change one,
+    # change the other.
     for key, page, expect in (("sp500", "List_of_S%26P_500_companies", EXPECT_SP500),
-                              ("ndx", "Nasdaq-100", 100)):
+                              ("ndx", "List_of_NASDAQ-100_companies", 100)):
         try:
             html = urllib.request.urlopen(
                 urllib.request.Request("https://en.wikipedia.org/wiki/" + page, headers=UA), timeout=25).read().decode()

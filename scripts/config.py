@@ -65,7 +65,13 @@ BREADTH_SCAN_LIMIT = 2000        # top-N US common stocks by market cap. 2000 + 
 BREADTH_MIN_MATCH = 480          # of ~503 S&P constituents; fewer = shape drift -> fail closed
 BREADTH_MIN_MATCH_NDX = 96       # of ~101 Nasdaq-100 constituents
 SP500_WIKI_URL = "https://en.wikipedia.org/wiki/List_of_S%26P_500_companies"
-NDX100_WIKI_URL = "https://en.wikipedia.org/wiki/Nasdaq-100"
+# Was https://en.wikipedia.org/wiki/Nasdaq-100 until 2026-07-13, when Wikipedia MOVED the component
+# table off that article into its own list page. The old URL still resolves (200) but no longer
+# contains id="constituents", so the parse raised "layout drift" and ndx100 breadth degraded to
+# unavailable every day from 2026-07-13 to 2026-08-03 — 22 days, while the page itself looked fine.
+# The list page keeps the same id="constituents" anchor and the same plain-text first cell, so only
+# this URL changes (verified: 103 symbols, inside the 90-110 guard).
+NDX100_WIKI_URL = "https://en.wikipedia.org/wiki/List_of_NASDAQ-100_companies"
 BREADTH_WARN = 40                # one-shot warning when breadth FALLS below this...
 BREADTH_WARN_CLEAR = 42          # ...re-armed only after recovering to here (no 39/41 flapping)
 BREADTH_OVERSOLD = 30            # daily nag enters below this
