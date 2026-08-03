@@ -1,11 +1,21 @@
 name: Data Smoke
 
-# Dispatch-only diagnostic: proves every data leg (Yahoo, RSS, TradingView breadth scan,
-# Wikipedia constituents) works FROM A GITHUB RUNNER — CI egress IPs get blocked/limited in ways
-# a home connection doesn't (the plan's load-bearing assumption gate for the unofficial
-# TradingView endpoint). Writes nothing, notifies nobody.
+# Diagnostic: proves every data leg (Yahoo, RSS, TradingView breadth scan, Wikipedia constituents,
+# policy sources) works FROM A GITHUB RUNNER — CI egress IPs get blocked/limited in ways a home
+# connection doesn't (the plan's load-bearing assumption gate for the unofficial TradingView
+# endpoint). Writes nothing, publishes nothing, notifies nobody.
+#
+# The weekly schedule is the point, not a convenience. This was dispatch-only until 2026-08-03, and
+# that is precisely why Nasdaq-100 breadth stayed dead for 22 days: Wikipedia moved the component
+# table on 07-13, 04-external-boundary-smoke.py detected it correctly, and nobody ever ran the test.
+# The guard existed; the trigger did not. A failed scheduled run emails the repo owner, which is the
+# missing leg. Weekly (not daily) because these are slow-moving upstream shapes and a red run must
+# stay a real signal.
 on:
   workflow_dispatch:
+  schedule:
+    - cron: "0 16 * * 1"   # Mondays ~10am America/Denver; GitHub may delay scheduled jobs by hours,
+                           # which is fine — this is a drift detector, not a punctuality check.
 
 permissions:
   contents: read
@@ -32,7 +42,24 @@ jobs:
       # Runner-IP proof for the planned policy section: .gov hosts and le.utah.gov are exactly the
       # kind of surface that answers a home connection but blocks/limits cloud egress. Passing
       # locally proves the API contract only. Read-only; writes nothing outside the workspace.
+      # if: always() on the diagnostic steps below — this job is a DRIFT DETECTOR, so one dead leg
+      # must not mask the others. On 2026-08-03 the spine step failed and skipped the policy check
+      # entirely, hiding whether .gov egress worked at all. Each leg now reports independently; the
+      # job still goes red if any of them fails.
       - name: Policy sources reachable from the runner
+        if: always()
         env:
           BRIEFING_SMOKE_ALLOW_DEV: "true"
         run: python scripts/briefing-assumptions/05-policy-sources.py
+
+      # Relevance is the whole product: ~80% of agency-filtered Federal Register documents are
+      # irrelevant to this user, so "did the model pick the right ones" is the assumption that
+      # decides whether the policy section is worth shipping. Uses the GEMINI_API_KEY secret the
+      # daily briefing already relies on — one model call per run. Seeded decoys make a
+      # first-N-documents answer fail.
+      - name: Policy relevance (model picks the right documents, invents no figures)
+        if: always()
+        env:
+          BRIEFING_SMOKE_ALLOW_DEV: "true"
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python scripts/briefing-assumptions/06-policy-relevance.py
