@@ -166,6 +166,36 @@ the same dead ends; do not re-add any of them without re-probing first.
 CFPB, FHFA, IRS and HUD rulemaking is covered by the Federal Register query anyway — which is
 precisely why that one API is the backbone instead of a collection of per-agency feeds.
 
+### Adding `conditions[type][]=NOTICE` — measured and rejected 2026-08-03
+
+A standing suggestion is that the annual dollar figures this section most wants — the conforming
+loan limit, IRS bracket and standard-deduction adjustments, 401(k)/HSA/IRA contribution limits —
+are published as Notices rather than Rules, and are therefore one query parameter away. **They are
+not.** Measured against the live API:
+
+| Query, our six agencies, 45 days | Documents |
+| --- | --- |
+| `RULE` + `PRORULE` (shipped) | 21 |
+| adding `NOTICE` | 114 — **5.4x the candidate volume** |
+
+And the figures still would not appear, because they are not in the Federal Register **at any
+document type**. Full-text search across ALL types over 400 days:
+
+- `"conforming loan limit"` — 1 hit, and it is a Rule about Enterprise Housing Goals, not the
+  annual limit announcement
+- `"inflation adjusted items"` (the phrase IRS revenue procedures use for brackets) — **0 hits**
+- `"cost-of-living adjustments limitations"` (the phrase for retirement contribution limits) — **0**
+
+FHFA announces the conforming loan limit by press release; the IRS publishes brackets and
+contribution limits in the Internal Revenue Bulletin. Neither is a Federal Register document, and
+neither has a machine-readable feed (the FHFA/IRS RSS row above). So the trade is 5.4x the noise
+for none of the target content.
+
+What this leaves: the section covers **rulemaking effects**, not annual number announcements. The
+brief's original static policy calendar was the right mechanism for the latter precisely because
+those announcements have no feed to watch — it was cut for having no staleness story, and the gap
+it covered is real. Re-adding a small dated calendar is the honest fix, not widening this query.
+
 ## Google Gemini
 
 - Used for: writing the briefing prose (tldr, the why lines, tech and world items, weekly recap),
