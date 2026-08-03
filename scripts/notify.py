@@ -59,6 +59,16 @@ def breadth_alert(message, level="oversold"):
     return _publish("Market breadth OVERSOLD", message, priority="high", click=config.PAGES_URL)
 
 
+def policy_alert(message):
+    """A newly-arrived federal FINAL rule that creates a number, a deadline or an obligation.
+
+    Normal priority ON PURPOSE: the brief locks these to rare (~monthly) and a rule that takes
+    effect weeks from now is a heads-up, not the wake-you-up page that breadth OVERSOLD is. One-shot
+    per date is enforced upstream by state.eval_policy_alert's `policy_today.alerted` stamp, so a
+    same-date `--force` rebuild cannot re-push."""
+    return _publish("Policy that affects you", message, priority="default", click=config.PAGES_URL)
+
+
 def health(message, ok=True):
     """Self-monitoring: loud high-priority on failure, low-priority on partial degradation."""
     if ok:

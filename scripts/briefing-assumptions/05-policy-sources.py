@@ -18,11 +18,27 @@ ASSUMPTION 5 (policy sources): the load-bearing external surfaces for the planne
 Runnable NOW (no API key). Read-only: nothing is written outside this directory's fingerprint.
 Exit: 0 PASS / 1 FAIL / 2 REFUSED / 3 INFRA.
 
+The Federal Register query shape (FR_API / FR_AGENCIES / FR_FIELDS / FR_WINDOW_DAYS / FR_PER_PAGE)
+is IMPORTED from scripts/config.py, not copied here: a local copy would let this gate keep proving a
+query production no longer sends. FR_MAX_EXPECTED is this test's own bound but is DERIVED from
+config.FR_PER_PAGE for the same reason — a second hardcoded number drifts away from the page size it
+is supposed to be protecting.
+
 NEGATIVE CONTROLS (controllable, all verified to actually go red on 2026-08-03):
   FR_SINCE_OVERRIDE=2099-01-01          -> forces P1 red (valid query, zero results)
   PMMS_MAX_AGE_DAYS_OVERRIDE=0          -> forces P4 red (nothing is ever that fresh)
   UTAH_MIN_PASSED_OVERRIDE=99999        -> forces P5 red
   (unset BRIEFING_SMOKE_ALLOW_DEV)      -> REFUSED, exit 2
+
+  FR_PER_PAGE_OVERRIDE=5                -> does NOT go red; it forces the API to TRUNCATE and then
+     asserts (P3b) that `count` still reports the full total, i.e. count > len(results). That is a
+     property, not a failure: production requests per_page=config.FR_PER_PAGE (100) and the API
+     drops everything past it SILENTLY, so the only thing standing between growth and quiet
+     data-loss is FR_MAX_EXPECTED — which can only detect truncation if `count` counts past the
+     page. If `count` ever tracked the page instead, tying FR_MAX_EXPECTED to the page size would be
+     a guard that can never fire. Set the override BELOW the live volume
+     (~21 documents / 45 days) or the assertion simply does not engage, and the run says so.
+     This run does not rewrite the fingerprint — its numbers are deliberately truncated.
 
 DISCOVERED PROPERTY (not a control): FR_AGENCY_OVERRIDE=not-an-agency returns HTTP 400, not an
 empty result set — so a MISSPELLED agency slug fails LOUDLY (exit 3 INFRA) instead of silently
@@ -55,31 +71,34 @@ if os.environ.get(GATE) != "true":
     sys.exit(2)
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+# The repo root, so `from scripts import config` resolves however this file is invoked: by bare path
+# (run-all.sh:22 does `python "${SCRIPT_DIR}/${t}"`) and from data-smoke.yml. `python -m` is not an
+# option here — the filenames start with digits and contain hyphens, and this directory has no
+# __init__.py — so sys.path is the route.
+sys.path.insert(0, os.path.dirname(os.path.dirname(HERE)))
+from scripts import config  # noqa: E402
+
 UA = {"User-Agent": "briefing-assumption-test/1.0"}
 BROWSER_UA = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
                             "(KHTML, like Gecko) Chrome/126.0 Safari/537.36"}
 
-FR_API = "https://www.federalregister.gov/api/v1/documents.json"
-# The agencies whose rulemaking can move a first-time buyer's / married filer's numbers.
-# NOTE the deliberate use of `employee-benefits-security-administration` rather than the whole
-# `labor-department`: measured 2026-08-03, the parent slug returned 46 documents in 45 days of which
-# 26 were Labor — almost entirely OSHA chemical-exposure limits (Benzene, Asbestos, Cadmium, Ethylene
-# Oxide...) and Mine Safety rules, none of which can touch this user. Narrowing to EBSA (health plans
-# + retirement, the only Labor sub-agency in scope) cut the candidate set 46 -> 21 with ZERO loss of
-# relevant items. Filtering noise at the source beats spending model tokens rejecting it.
-FR_AGENCIES = [
-    "housing-and-urban-development-department",
-    "federal-housing-finance-agency",
-    "consumer-financial-protection-bureau",
-    "internal-revenue-service",
-    "employee-benefits-security-administration",
-    "education-department",
-]
-FR_FIELDS = ["title", "html_url", "publication_date", "type", "agencies",
-             "abstract", "effective_on", "document_number"]
-FR_WINDOW_DAYS = 45
-FR_MAX_EXPECTED = 400      # bound: blowing past this means the query shape drifted, and the
-                           # candidate set would no longer fit a single model call
+# The Federal Register query shape is IMPORTED, never copied. A local copy would let production and
+# this gate drift apart silently — the test would keep proving a query nothing ships. config carries
+# the WHY for each value (agency choice, window, page size); this file proves them against the live
+# API.
+#
+# FR_MAX_EXPECTED is this test's own bound, but DERIVED from config.FR_PER_PAGE, never a second
+# hardcoded number. This bound's real job is to go
+# red BEFORE production loses data: the API drops everything past per_page SILENTLY, so at 400 (the
+# original value) a window that grew to 150 documents would have truncated 50 of them in production
+# while this test stayed green — a guard positioned where it could never fire. 80% of the page size
+# leaves a margin instead of firing at the exact document that gets dropped, and today's measured
+# volume is 21 documents / 45 days, so there is still ~4x headroom before this needs attention.
+# P3b (below) is what makes the bound meaningful at all: it proves `count` reports total matches
+# rather than the page, so growth past the page size is visible here.
+FR_MAX_EXPECTED = int(config.FR_PER_PAGE * 0.8)     # 80 at FR_PER_PAGE=100
+# When set, overrides config.FR_PER_PAGE — see the pagination control in the docstring.
+FR_PER_PAGE_OVERRIDE = os.environ.get("FR_PER_PAGE_OVERRIDE")
 PMMS_CSV = "https://www.freddiemac.com/pmms/docs/PMMS_history.csv"
 PMMS_MAX_AGE_DAYS = int(os.environ.get("PMMS_MAX_AGE_DAYS_OVERRIDE", "14"))  # weekly release
 UTAH_PASSED = "https://le.utah.gov/asp/passedbills/passedbills.asp?session={session}"
@@ -92,13 +111,13 @@ def _get(url, headers=UA, cap=2_000_000, timeout=25):
         return r.read(cap)
 
 
-def _fr_url(agencies, since, per_page=100):
+def _fr_url(agencies, since, per_page):
     parts = [f"per_page={per_page}", "order=newest",
              f"conditions[publication_date][gte]={since}",
              "conditions[type][]=RULE", "conditions[type][]=PRORULE"]
     parts += [f"conditions[agencies][]={a}" for a in agencies]
-    parts += [f"fields[]={f}" for f in FR_FIELDS]
-    return FR_API + "?" + "&".join(parts)
+    parts += [f"fields[]={f}" for f in config.FR_FIELDS]
+    return config.FR_API + "?" + "&".join(parts)
 
 
 def main():
@@ -106,10 +125,13 @@ def main():
     fp = {"checked_at": datetime.now(timezone.utc).isoformat()}
 
     # --- P1/P2/P3: Federal Register ------------------------------------------------
-    agencies = [os.environ["FR_AGENCY_OVERRIDE"]] if os.environ.get("FR_AGENCY_OVERRIDE") else FR_AGENCIES
-    since = os.environ.get("FR_SINCE_OVERRIDE") or (date.today() - timedelta(days=FR_WINDOW_DAYS)).isoformat()
+    agencies = ([os.environ["FR_AGENCY_OVERRIDE"]] if os.environ.get("FR_AGENCY_OVERRIDE")
+                else config.FR_AGENCIES)
+    since = (os.environ.get("FR_SINCE_OVERRIDE")
+             or (date.today() - timedelta(days=config.FR_WINDOW_DAYS)).isoformat())
+    per_page = int(FR_PER_PAGE_OVERRIDE) if FR_PER_PAGE_OVERRIDE else config.FR_PER_PAGE
     try:
-        data = json.loads(_get(_fr_url(agencies, since)))
+        data = json.loads(_get(_fr_url(agencies, since, per_page)))
     except urllib.error.HTTPError as e:
         print(f"INFRA: Federal Register API HTTP {e.code}", file=sys.stderr)
         sys.exit(3)
@@ -119,9 +141,10 @@ def main():
 
     count = data.get("count") or 0
     results = data.get("results") or []
-    fp["federal_register"] = {"window_days": FR_WINDOW_DAYS, "since": since,
+    fp["federal_register"] = {"window_days": config.FR_WINDOW_DAYS, "since": since,
                               "agencies": len(agencies), "count": count,
-                              "returned": len(results)}
+                              "per_page": per_page, "returned": len(results),
+                              "truncated": len(results) < count}
 
     if not results:
         failures.append(f"P1 Federal Register returned 0 results for {len(agencies)} agencies since "
@@ -129,7 +152,7 @@ def main():
     else:
         missing = {}
         for r in results:
-            for f in FR_FIELDS:
+            for f in config.FR_FIELDS:
                 # effective_on is legitimately null on proposed rules; presence of the KEY is what
                 # the item format needs (a null renders as "no effective date yet").
                 if f not in r:
@@ -155,8 +178,30 @@ def main():
 
     # P3 — bounded volume
     if count > FR_MAX_EXPECTED:
-        failures.append(f"P3 {count} documents in {FR_WINDOW_DAYS} days exceeds the expected bound "
-                        f"({FR_MAX_EXPECTED}) — candidate set no longer fits one model call")
+        failures.append(f"P3 {count} documents in {config.FR_WINDOW_DAYS} days exceeds the expected "
+                        f"bound ({FR_MAX_EXPECTED} = 80% of config.FR_PER_PAGE={config.FR_PER_PAGE}) "
+                        f"— production requests ONE page and the API drops the remainder silently, "
+                        f"so this is the warning before real data loss: raise FR_PER_PAGE, narrow "
+                        f"FR_WINDOW_DAYS or paginate")
+
+    # P3b — `count` must report TOTAL matches, independent of the page size we asked for. That single
+    # property is what makes FR_MAX_EXPECTED a real truncation guard: production requests
+    # per_page=config.FR_PER_PAGE and would silently drop every document past it, and the bound can
+    # only see that if `count` keeps counting past the page. If `count` ever tracked the PAGE, the
+    # guard would be vacuous and lowering it (plan Task 9) would prove nothing. Only asserted when
+    # FR_PER_PAGE_OVERRIDE forces truncation, because at the real page size nothing truncates.
+    if FR_PER_PAGE_OVERRIDE and results:
+        if len(results) > per_page:
+            failures.append(f"P3 API returned {len(results)} results for per_page={per_page} — the "
+                            f"page-size parameter is being ignored, so FR_PER_PAGE is not a bound")
+        elif len(results) == per_page and count <= len(results):
+            failures.append(f"P3 page filled at per_page={per_page} but count={count} does not "
+                            f"exceed it — `count` reports the PAGE, not the total, so pagination "
+                            f"truncation is invisible and FR_MAX_EXPECTED can never catch it")
+        elif len(results) < per_page:
+            print(f"NOTE: per_page={per_page} did not truncate ({count} documents in the window) — "
+                  f"the pagination assertion did not fire. Use a value below the live volume.",
+                  file=sys.stderr)
 
     # --- P4: Freddie Mac PMMS mortgage rate ---------------------------------------
     try:
@@ -231,11 +276,17 @@ def main():
             print("  -", f, file=sys.stderr)
         sys.exit(1)
 
-    with open(os.path.join(HERE, "05-policy-sources.fingerprint.json"), "w", encoding="utf-8") as fh:
-        json.dump(fp, fh, indent=2)
+    # A per_page-override run PASSES (unlike every other control here, which goes red), so it would
+    # otherwise overwrite the committed fingerprint with a deliberately truncated `returned` count
+    # and misrepresent the real volume. Skip the write instead.
+    if FR_PER_PAGE_OVERRIDE:
+        print("NOTE: FR_PER_PAGE_OVERRIDE set — fingerprint NOT rewritten", file=sys.stderr)
+    else:
+        with open(os.path.join(HERE, "05-policy-sources.fingerprint.json"), "w", encoding="utf-8") as fh:
+            json.dump(fp, fh, indent=2)
     used = utah.get(utah.get("session_used"), {})
     print(f"PASS: 05-policy-sources — P1..P5 "
-          f"(FR: {fp['federal_register']['count']} rules/{FR_WINDOW_DAYS}d across "
+          f"(FR: {fp['federal_register']['count']} rules/{config.FR_WINDOW_DAYS}d across "
           f"{len(agencies)} agencies; PMMS 30yr={fp.get('pmms', {}).get('pmms30')} "
           f"@{fp.get('pmms', {}).get('latest_date')}; Utah {utah.get('session_used')}: "
           f"{used.get('signed')} signed / {used.get('with_title')} titled)")

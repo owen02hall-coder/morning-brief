@@ -137,6 +137,91 @@ function breadthSection(breadth) {
   return sec;
 }
 
+// Status strings contain spaces ("Final rule"), so `status ${it.status}` would emit two bogus
+// classes. Map value -> class, the same way BREADTH_STATUS_LABEL maps value -> label.
+const POLICY_STATUS_CLASS = {
+  "Final rule": "final",
+  "Proposed": "proposed",
+  "Signed in Utah": "final",
+};
+
+function policyDate(iso, opts) {
+  const d = localDate(iso); // date-only strings must be parsed LOCAL, never via new Date(iso)
+  return d ? d.toLocaleDateString(undefined, opts) : iso || "";
+}
+
+function policyLink(node, url, label) {
+  const href = safeHref(url); // third-party citation URLs — web links only
+  if (!href) return false;
+  node.href = href;
+  node.target = "_blank";
+  node.rel = "noopener";
+  if (label) node.setAttribute("aria-label", label);
+  return true;
+}
+
+function policyCard(it) {
+  const card = el("div", "card");
+  const head = el("div", "policy-head"); // NOT .kicker: that uppercases + letter-spaces, which
+  const cls = POLICY_STATUS_CLASS[it.status]; // would mangle "Signed in Utah"
+  if (it.status) head.appendChild(el("span", cls ? `status ${cls}` : "status", it.status));
+  if (it.source) head.appendChild(el("span", "policy-source", it.source));
+  if (head.children.length) card.appendChild(head);
+  if (it.what_happened) card.appendChild(el("p", "summary", it.what_happened));
+  // The effect line is the point of the section — what this does to you, not what was published.
+  if (it.effect) card.appendChild(el("p", "policy-effect", it.effect));
+  if (it.effective_date) {
+    card.appendChild(el("p", "policy-when",
+      `Effective ${policyDate(it.effective_date, { month: "long", day: "numeric", year: "numeric" })}`));
+  }
+  const a = el("a", "readmore", "Read more");
+  if (policyLink(a, it.url, `Read more at ${it.source || "the source"}`)) card.appendChild(a);
+  return card;
+}
+
+function policyUpcomingCard(items) {
+  const card = el("div", "card policy-upcoming");
+  const ul = el("ul");
+  for (const it of items) {
+    const li = el("li");
+    // The whole row is the tap target when a link exists — a 44px .readmore per row would
+    // triple the height of what is meant to be a compact dated list. Anchor only when the URL
+    // is safe; otherwise a plain row, never an <a> without an href.
+    const href = safeHref(it.url);
+    const row = href ? el("a", "policy-row cardlink") : el("div", "policy-row");
+    if (href) policyLink(row, it.url, `${it.what_happened || "Upcoming change"} — details`);
+    li.appendChild(row);
+    row.appendChild(el("span", "policy-date",
+      policyDate(it.effective_date, { month: "short", day: "numeric", year: "numeric" })));
+    const body = el("div", "policy-row-body");
+    if (it.what_happened) body.appendChild(el("p", "policy-row-what", it.what_happened));
+    // The carry exists so a deadline stays MEANINGFUL — never reduce it to a bare headline.
+    if (it.effect) body.appendChild(el("p", "policy-effect", it.effect));
+    row.appendChild(body);
+    ul.appendChild(li);
+  }
+  card.appendChild(ul);
+  return card;
+}
+
+function policySection(items, upcoming) {
+  // Returns null when there is nothing to show — deliberately NOT itemList(), whose empty state
+  // prints "Information not available." Here empty means "nothing qualified", which is not the
+  // same claim. The call site MUST guard: appendChild(null) throws mid-render.
+  const list = (Array.isArray(items) ? items : []).filter(Boolean);
+  const soon = (Array.isArray(upcoming) ? upcoming : []).filter(Boolean);
+  if (!list.length && !soon.length) return null;
+
+  const sec = el("section", "policy");
+  sec.appendChild(el("h2", null, "Policy that affects you"));
+  list.forEach((it) => sec.appendChild(policyCard(it)));
+  if (soon.length) {
+    sec.appendChild(el("h3", "policy-coming", "What's coming"));
+    sec.appendChild(policyUpcomingCard(soon));
+  }
+  return sec;
+}
+
 function render(b, into) {
   into.innerHTML = "";
 
@@ -158,11 +243,22 @@ function render(b, into) {
   grid.appendChild(numberCard("Nasdaq", b.market && b.market.ndx, "", "percent"));
   grid.appendChild(numberCard("10-year Treasury", b.yield_10y, "%", "bps"));
   grid.appendChild(numberCard("VIX", b.vix, "", "percent"));
+  // Weekly PMMS rate — only when present. Archived editions predate the key, and numberCard's
+  // null branch would print a 5th "Information not available." tile where none belongs.
+  if (b.mortgage) grid.appendChild(numberCard("30-year mortgage", b.mortgage, "%"));
   market.appendChild(grid);
   if (b.market && b.market.why) market.appendChild(el("p", "why", b.market.why));
   into.appendChild(market);
 
   into.appendChild(breadthSection(b.breadth));
+
+  // Guarded: policySection returns null when nothing qualified, and appendChild(null) throws.
+  // A throw here would leave a half-built page with NO error message (loadBriefing has already
+  // committed the seq and advanced lastGeneratedAt, so the visibilitychange refetch would skip
+  // re-rendering for the rest of the session), and on the archive path it surfaces as a
+  // misleading "you may be offline".
+  const policy = policySection(b.policy, b.policy_upcoming);
+  if (policy) into.appendChild(policy);
 
   into.appendChild(itemList("Emerging tech", b.tech));
   into.appendChild(itemList("World", b.world));

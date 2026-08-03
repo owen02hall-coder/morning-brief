@@ -3,14 +3,14 @@ name: Data Smoke
 # Diagnostic: proves every data leg (Yahoo, RSS, TradingView breadth scan, Wikipedia constituents,
 # policy sources) works FROM A GITHUB RUNNER — CI egress IPs get blocked/limited in ways a home
 # connection doesn't (the plan's load-bearing assumption gate for the unofficial TradingView
-# endpoint). Writes nothing, publishes nothing, notifies nobody.
+# endpoint). Writes nothing and publishes nothing; the ONLY thing it sends is a failure alert.
 #
 # The weekly schedule is the point, not a convenience. This was dispatch-only until 2026-08-03, and
 # that is precisely why Nasdaq-100 breadth stayed dead for 22 days: Wikipedia moved the component
 # table on 07-13, 04-external-boundary-smoke.py detected it correctly, and nobody ever ran the test.
-# The guard existed; the trigger did not. A failed scheduled run emails the repo owner, which is the
-# missing leg. Weekly (not daily) because these are slow-moving upstream shapes and a red run must
-# stay a real signal.
+# The guard existed; the trigger did not. A failed scheduled run emails the repo owner AND now pushes
+# via ntfy (the final step) — email alone is the channel that gets ignored. Weekly (not daily)
+# because these are slow-moving upstream shapes and a red run must stay a real signal.
 on:
   workflow_dispatch:
   schedule:
@@ -23,7 +23,9 @@ permissions:
 jobs:
   spine:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    # 10, not 5: the job now runs four assumption tests (05 fetches the Federal Register, the PMMS
+    # CSV and Utah's passed-bills page; 07 fetches bill detail pages) plus a real model call in 06.
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3 (SHA-pinned: mutable tags are a supply-chain vector in a push-capable job)
 
@@ -46,11 +48,34 @@ jobs:
       # must not mask the others. On 2026-08-03 the spine step failed and skipped the policy check
       # entirely, hiding whether .gov egress worked at all. Each leg now reports independently; the
       # job still goes red if any of them fails.
+      # PYTHONPATH: the assumption tests do `from scripts import config` so the gate proves the
+      # PRODUCTION query shape, not a drifting local copy. `python -m` cannot address these files —
+      # the names start with digits and contain hyphens, and the directory has no __init__.py — so
+      # the import path is the route.
       - name: Policy sources reachable from the runner
         if: always()
         env:
           BRIEFING_SMOKE_ALLOW_DEV: "true"
+          PYTHONPATH: ${{ github.workspace }}
         run: python scripts/briefing-assumptions/05-policy-sources.py
+
+      # The Utah bill DETAIL page is the riskiest parse in the policy leg: the passed-bills rows
+      # carry relative hrefs, and the detail text is what the invented-figure guard compares against.
+      - name: Utah bill detail (relative hrefs resolve; detail text extracts)
+        if: always()
+        env:
+          BRIEFING_SMOKE_ALLOW_DEV: "true"
+          PYTHONPATH: ${{ github.workspace }}
+        run: python scripts/briefing-assumptions/07-utah-bill-detail.py
+
+      # The keyword prefilter decides what the model never sees. A silent recall regression here
+      # (a \b that can never match, a missing inflection) deletes candidates with no visible symptom.
+      - name: Prefilter recall (the keyword gate does not silently drop candidates)
+        if: always()
+        env:
+          BRIEFING_SMOKE_ALLOW_DEV: "true"
+          PYTHONPATH: ${{ github.workspace }}
+        run: python scripts/briefing-assumptions/08-prefilter-recall.py
 
       # Relevance is the whole product: ~80% of agency-filtered Federal Register documents are
       # irrelevant to this user, so "did the model pick the right ones" is the assumption that
@@ -62,4 +87,23 @@ jobs:
         env:
           BRIEFING_SMOKE_ALLOW_DEV: "true"
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          PYTHONPATH: ${{ github.workspace }}
         run: python scripts/briefing-assumptions/06-policy-relevance.py
+
+      # A scheduled red run only emails the repo owner, and email is exactly the channel that gets
+      # ignored — which is how Nasdaq-100 breadth stayed dead for 22 days with a working guard in
+      # place. This job IS the alarm, so it has to be able to ring.
+      # `failure() || cancelled()`, not `failure()`: a timeout-minutes kill is a CANCELLATION, and
+      # this job has a timeout — `failure()` alone would silently miss the slowest failure mode.
+      # The secret is NTFY_SUB while the code reads env NTFY_TOPIC (briefing.yml:46-47);
+      # `secrets.NTFY_TOPIC` would resolve to empty and the [ -n ] guard would skip without a word.
+      - name: Alert on a red data-smoke run (nothing else pages on this)
+        if: failure() || cancelled()
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_SUB }}
+        run: |
+          if [ -n "${NTFY_TOPIC}" ]; then
+            curl -s -H "Title: Data smoke FAILED" -H "Priority: high" \
+              -d "A data leg went red from the runner (market spine, policy sources, Utah detail, prefilter or model relevance). Check the Data Smoke run." \
+              "https://ntfy.sh/${NTFY_TOPIC}" || true
+          fi

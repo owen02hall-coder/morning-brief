@@ -5,6 +5,20 @@ the scheduled GitHub Actions workflow from auto-disabling after 60 idle days), `
 (last date all four market numbers were present), and `markets_first_bad` (anchor for a blackout
 that began with no healthy baseline; cleared on the next healthy day). v2 breadth alert state
 will live here too.
+
+Policy keys (v3), all written by `record_policy()` — the single writer:
+
+- `policy_seen` `{candidate_id: publication_date}` — every candidate that was actually SENT to the
+  model on a successful call. Read by `data/policy.get_policy()` to difference out old documents.
+  Never pruned: ~200 entries a year in a file rewritten daily, and an eviction rule interacting
+  with the 45-day fetch window is a hazard for no benefit.
+- `policy_active` `[item]` — already-reported items whose `effective_date` is still in the future.
+  Deduped by url, sorted ascending, capped at `config.MAX_POLICY_UPCOMING`. Projected to
+  `policy_upcoming` in the briefing. `effective_date` is legitimately null on proposed rules, so
+  every comparison here is None-safe (`None > "2026-08-03"` raises TypeError in Python 3).
+- `policy_today` `{date, items, alerted}` — the day's reported items, replaced only when the stored
+  date differs from today, so a `--force` same-date rebuild re-emits verbatim and keeps the
+  `alerted` stamp. `eval_policy_alert()` flips that one stamp and touches nothing else.
 """
 import json
 import os
@@ -82,6 +96,60 @@ def eval_breadth_alert(breadth, st, today):
                     f"their 200-day average — weakening participation."})
         out[key] = s
     return alerts, {**st, "breadth": out}
+
+
+def record_policy(st, sent, reported, today):
+    """The SINGLE writer of every policy state key. Returns the new state (pure, no I/O).
+
+    `sent` is every candidate handed to the model on a successful call (callers pass `[]` when
+    nothing was sent — a failed model call must leave its candidates UNSEEN so tomorrow retries).
+    `reported` is every item that survived validation and is being published today.
+
+    Two earlier revisions of this feature shipped a policy field that was declared and read but
+    never written; funnelling all three keys through one function is why that cannot recur.
+    """
+    seen = dict(st.get("policy_seen") or {})
+    for c in sent or []:
+        seen[c["id"]] = c.get("published") or today
+
+    # None-safe: `effective_date` is null on proposed rules, and a bare `>` against None raises.
+    active = [i for i in list(st.get("policy_active") or []) + list(reported or [])
+              if i.get("effective_date") and i["effective_date"] > today]
+    active = sorted({i.get("url"): i for i in active}.values(),
+                    key=lambda i: i["effective_date"])[:config.MAX_POLICY_UPCOMING]
+
+    today_block = st.get("policy_today") or {}
+    if today_block.get("date") != today:      # same-date rebuild keeps items AND the alerted stamp
+        today_block = {"date": today, "items": list(reported or []), "alerted": False}
+    return {**st, "policy_seen": seen, "policy_active": active, "policy_today": today_block}
+
+
+def eval_policy_alert(items, st, today):
+    """One push per newly-reported FINAL rule. Returns (alerts, new_state), same shape as
+    `eval_breadth_alert` — a list of {"level", "text"} plus the state to carry forward.
+
+    Never alerts on a `Proposed` rule (nothing has taken effect yet) and never on `Signed in Utah`
+    (the Utah queue is an annual backfill released a few items a day, not news — the brief locks
+    pushes to "rare, ~monthly"). The `policy_today.alerted` stamp makes the push one-shot per date,
+    which matters because `briefing.yml:50-51` dispatches with `--force` defaulting to true, so a
+    same-date rerun is the normal manual path and must not re-push."""
+    block = st.get("policy_today") or {}
+    if block.get("date") != today:            # a stale block's stamp must not gag a new day
+        block = {"date": today, "items": list(items or []), "alerted": False}
+    if block.get("alerted"):
+        return [], st
+
+    alerts = []
+    for it in items or []:
+        if it.get("status") != "Final rule":
+            continue
+        what = (it.get("what_happened") or "").strip() or it.get("url") or "a new federal rule"
+        eff = it.get("effective_date")
+        when = f"Effective {eff}." if eff else "No effective date published yet."
+        alerts.append({"level": "policy", "text": f"New final rule: {what} {when}"})
+    if not alerts:
+        return [], st
+    return alerts, {**st, "policy_today": {**block, "alerted": True}}
 
 
 def load():

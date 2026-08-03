@@ -1,0 +1,49 @@
+{
+  "checked_at": "2026-08-03T20:31:32.382820+00:00",
+  "keyword_source": "config.LIFE_PROFILE_KEYWORDS",
+  "keyword_count": 40,
+  "recall_federal": {
+    "2026-13286": [
+      "pell",
+      "direct loan"
+    ],
+    "2026-14917": [
+      "health plan",
+      "retirement"
+    ]
+  },
+  "recall_utah": {
+    "Income Tax Rate Amendments": [
+      "income tax"
+    ],
+    "Property Tax Exemption Process Amendments": [
+      "property tax"
+    ],
+    "Moderate Income Housing Infrastructure Amendments": [
+      "housing"
+    ],
+    "Housing and Community Development Amendments": [
+      "housing"
+    ]
+  },
+  "precision": {
+    "utah-appropriations": [],
+    "osha-benzene": [],
+    "msha-ventilation": [],
+    "msha-blacksmith": []
+  },
+  "utah_session": "2026GS",
+  "volume": {
+    "signed_rows": 491,
+    "passed": 17,
+    "pct": 3.5,
+    "ceiling_pct": 18.0
+  },
+  "boundary": {
+    "rent-in-current": false,
+    "rent-in-parental": false,
+    "mortgage-plural": true,
+    "401k-paren": true,
+    "housing-word": true
+  }
+}

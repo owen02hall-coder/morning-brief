@@ -2,7 +2,7 @@
 title: Integrations
 source_files: [scripts/data/, scripts/breadth/, scripts/summarize.py, scripts/tts.py, scripts/notify.py, scripts/config.py, .github/workflows/]
 entry_points: [GEMINI_API_KEY, NTFY_SUB, PAGE_URL]
-last_verified: 2026-07-06
+last_verified: 2026-08-03
 ---
 
 # Integrations
@@ -49,12 +49,104 @@ values live in the repo. Environment variable names only are listed here.
   table. NOTE the row shapes differ: S&P tickers are LINKED first cells, Nasdaq-100 tickers are
   PLAIN-TEXT first cells. Fail-closed on implausible counts (450–520 / 90–110).
 
+## Federal Register API
+
+- Used for: the federal half of "Policy that affects you" — rules and proposed rules from the six
+  agencies whose output can create a number, a deadline or an obligation for this reader.
+- Auth: none, no key, no registration. JSON.
+- Invoked in: `scripts/data/policy.py` (`_fr_url` / `_federal_candidates`). ONE request per run
+  covers all six agencies: `https://www.federalregister.gov/api/v1/documents.json` with
+  `conditions[type][]=RULE&conditions[type][]=PRORULE`, a `publication_date[gte]` window of
+  `FR_WINDOW_DAYS` (45), repeated `conditions[agencies][]` params, and an explicit `fields[]` list.
+- Agencies (`config.FR_AGENCIES`): HUD, FHFA, CFPB, IRS, **EBSA** and the Education Department.
+  Deliberately `employee-benefits-security-administration` and NOT the parent `labor-department`:
+  measured 2026-08-03, the parent returned 46 documents in 45 days of which 26 were Labor — almost
+  entirely OSHA chemical-exposure limits and Mine Safety rules, none of which can touch this reader.
+  Narrowing to EBSA (health plans + retirement) cut the set 46 → 21 with zero loss of relevant items.
+  Filtering noise at the source beats spending model tokens rejecting it.
+- Notes: uses the project `config.USER_AGENT` (no browser UA needed). Measured volume is 21
+  documents per 45 days, so `per_page=100` covers the window ~5× over. Every result URL is on
+  `www.federalregister.gov`, which is what makes the host allowlist in
+  `summarize._validate_policy_items` enforceable in code rather than asserted in a prompt.
+- Failure modes worth knowing: a MISSPELLED agency slug returns HTTP 400, not an empty set, so a typo
+  fails loudly instead of silently deleting that agency's coverage. Volume past `per_page` is dropped
+  SILENTLY by the API — production logs a `WARNING ... per_page=N truncated the window` line whenever
+  `count` exceeds the returned rows. A zero-result response is treated as a broken query and raises.
+- Why one API rather than per-agency feeds: CFPB, FHFA, IRS and HUD rulemaking all lands here anyway,
+  and each of their own feeds is dead or key-gated (see "Probed and deliberately not used" below).
+
+## Utah Legislature (passed-bills scrape)
+
+- Used for: the Utah half of the policy section — bills the governor actually signed, i.e. that
+  became law. Higher signal than the federal half, and dark for ~9 months a year.
+- Auth: none. HTML scraping is the ONLY route: Utah publishes no JSON API, and its bulk "Bill Data"
+  link is an iframe wrapper rather than a dataset.
+- Invoked in: `scripts/data/policy.py`. The list page is
+  `https://le.utah.gov/asp/passedbills/passedbills.asp?session={session}` (e.g. `2026GS`); bill
+  detail pages are fetched lazily, one per released queue item.
+- **Needs a browser-like User-Agent.** `le.utah.gov` is fronted by a filter unfriendly to
+  non-browser agents; the project UA is unprobed there. The string lives module-local as
+  `policy.POLICY_UA`, following `market.YAHOO_UA` — a per-host quirk belongs beside the code with the
+  quirk, not in `config.py` where it would read as the project's identity.
+- Parsing: stdlib regex only. No HTML-parsing dependency is permitted in the push-capable CI job
+  (the same constraint `constituents.py` works under). A row is an anchor whose text is the bill
+  number followed by nbsp-separated title / sponsor / dates / status; only rows carrying `GSIGN`
+  were signed. Measured 2026-08-03: 495 rows, 495 parseable titles, 491 signed.
+- **Row hrefs are RELATIVE** (`/~2026/bills/static/HB0001.html`) and are `urljoin`ed against
+  `UTAH_BASE_URL`. Left un-joined they would fail the host allowlist and drop 100% of Utah items
+  while every other gate stayed green — a fully silent dead leg. `07-utah-bill-detail.py` exists
+  specifically to keep that proven.
+- Bounds: a bill page is ~38 KB and strips to ~4,700 characters in ~0.06s; abstracts are cut to
+  2,000 characters, because an unbounded source text would make the invented-figure guard vacuous.
+  The annual harvest fetches NO detail pages — 491 sequential requests would threaten the 10-minute
+  job budget — so the queue drains at most `MAX_POLICY_ITEMS` (3) detail fetches per run.
+- **Open defect (recorded 2026-08-03 in `06-policy-relevance.py`):** those ~4,700 characters open
+  with roughly 1,800 characters of site navigation, and the prompt block truncates to the first 500 —
+  so today the model sees a Utah bill's title and nav chrome, not its text. Silent by construction:
+  the section just stays quiet. See `operations.md` for what to watch.
+
+## Freddie Mac PMMS (mortgage rate)
+
+- Used for: the 30-year fixed mortgage rate, rendered as a fifth market tile. The only part of the
+  policy feature with content 52 weeks a year.
+- Auth: none. Plain CSV: `https://www.freddiemac.com/pmms/docs/PMMS_history.csv` (~2,889 rows,
+  ~150 KB, oldest-first, `M/D/YYYY` dates — so the LAST row is the current release).
+- Invoked in: `scripts/data/mortgage.py` (`get_rate`). The rate is read by COLUMN NAME (`pmms30`),
+  never by position, so an inserted column shifts nothing.
+- **Needs a browser-like User-Agent** (`mortgage.PMMS_UA`, module-local for the same reason as the
+  Utah one).
+- Notes: the survey is released WEEKLY (Thursday), so on most mornings the newest row is several days
+  old — that is this source's healthy state, not staleness, and there is deliberately no freshness
+  guard in production because one would false-alarm every Monday. A genuinely stalled feed, a moved
+  column or a changed date format is caught by the weekly assumption gate instead
+  (`05-policy-sources.py` P4 bounds the row age at 14 days). Any failure returns None with a logged
+  reason; a response that hits the read cap is discarded rather than parsed, because a truncated row
+  still parses — as a wrong rate.
+
+## Probed and deliberately not used
+
+Every source below was probed on 2026-08-03 and rejected. It is recorded here so nobody re-explores
+the same dead ends; do not re-add any of them without re-probing first.
+
+| Source | Result |
+| --- | --- |
+| Congress.gov API | HTTP 403 without an api.data.gov key — key-gated, not keyless |
+| CFPB newsroom feed | HTTP 403 to both bot and browser user-agents |
+| FHFA / IRS / HUD RSS | HTTP 404 at every documented-looking path |
+| Utah Tax Commission RSS | HTTP 200 but ZERO entries — a published-but-dead feed |
+| propertytax.utah.gov | HTTP 200 but JS-rendered; a static fetch yields no Truth-in-Taxation text |
+| Utah Housing Corp feed | HTTP 403 / 503 |
+| `le.utah.gov` bulk "Bill Data" | an iframe wrapper, not a downloadable dataset |
+
+CFPB, FHFA, IRS and HUD rulemaking is covered by the Federal Register query anyway — which is
+precisely why that one API is the backbone instead of a collection of per-agency feeds.
+
 ## Google Gemini
 
 - Used for: writing the briefing prose (tldr, the why lines, tech and world items, weekly recap),
-  and synthesizing the daily audio edition (`scripts/tts.py`, model `TTS_MODEL` =
-  `gemini-2.5-flash-preview-tts`, voice `TTS_VOICE` = Kore, one request/day; mp3 encoded
-  in-process with `lameenc`).
+  writing the policy section's two prose fields, and synthesizing the daily audio edition
+  (`scripts/tts.py`, model `TTS_MODEL` = `gemini-2.5-flash-preview-tts`, voice `TTS_VOICE` = Kore,
+  one request/day; mp3 encoded in-process with `lameenc`).
 - Auth: env var `GEMINI_API_KEY`. Free tier. Keep the Google project's billing disabled to stay free.
 - Invoked in: `scripts/summarize.py` via the `google-genai` SDK (`genai.Client`).
 - Model: `config.MODEL_ID` (`gemini-2.5-flash`) with `config.MODEL_FALLBACK` (`gemini-2.5-flash-lite`).
@@ -63,12 +155,29 @@ values live in the repo. Environment variable names only are listed here.
   human reviewers may see it. Only public news is sent. No personal data. No secrets.
 - Resilience: the call tries the primary model then the fallback. If both fail the pipeline writes a
   no-AI briefing (raw numbers plus headlines).
+- Second call (policy): `summarize_policy()` is a separate, CONDITIONAL request — it is skipped
+  entirely on any day with no un-seen candidates, which is most days. It runs `config.MODEL_ID` only,
+  with NO fallback loop and a 60s client timeout, where the narrative call loops two models at 120s
+  each. The asymmetry is deliberate: losing the narrative loses the briefing, but a failed policy
+  call degrades one section and retries tomorrow, whereas overrunning `briefing.yml`'s
+  `timeout-minutes: 10` cancels the job and ships nothing at all.
+- Both prompts fence untrusted third-party text and declare it non-instructional
+  (`ARTICLES_BEGIN`/`ARTICLES_END` for news, `DOCS_BEGIN`/`DOCS_END` for policy documents).
+- `data-smoke.yml` also spends one Gemini call per weekly run, in `06-policy-relevance.py`, using the
+  same `GEMINI_API_KEY` secret.
 
 ## ntfy
 
 - Used for: the morning "ready" push (sent by the workflow ONLY after `git push` succeeds — see
   `python -m scripts.notify ready`), two-tier market-breadth alerts per index (one-shot warning
-  below 40%, daily high-priority oversold nag below 30%), and self-monitoring health pings.
+  below 40%, daily high-priority oversold nag below 30%), a policy push, self-monitoring health
+  pings, and the `data-smoke.yml` / `shell-guard.yml` failure alarms (both sent by curl from the
+  workflow, not by `notify.py`).
+- Policy pushes (`notify.policy_alert`) fire once per newly-reported FINAL rule, at NORMAL priority
+  on purpose: a rule taking effect weeks from now is a heads-up, not the wake-you-up page that
+  breadth OVERSOLD is. Proposed rules never push (nothing has taken effect) and queue-released Utah
+  bills never push (an annual backfill is not news). One-shot per date via `policy_today.alerted`,
+  so a `--force` rebuild cannot re-push.
 - Auth: none. The topic name is the access control, so it must be long and unguessable.
 - Config: the code reads env var `NTFY_TOPIC`; the GitHub secret is named `NTFY_SUB` and the
   workflows map `secrets.NTFY_SUB -> NTFY_TOPIC`. Invoked in `scripts/notify.py` (POST to
@@ -117,6 +226,11 @@ for ntfy, Pages, and Twelve Data. Configure the GitHub name; the workflow maps i
 | Secret `TWELVE_API_KEY` | `TWELVEDATA_API_KEY` | unused (client staged only) |
 | (none) | `MODEL_ID` | optional Gemini text-model override |
 | (none) | `TTS_MODEL` / `TTS_VOICE` | optional audio-edition overrides |
+| (none) | `BRIEFING_STATE_PATH` | optional state-file override — LOCAL DEV ONLY, see `operations.md` |
+
+The Federal Register, Utah Legislature and Freddie Mac PMMS sources need no key, no registration and
+no GitHub configuration at all. Nothing has to be added to either workflow for the policy section:
+`briefing.yml` already carries `GEMINI_API_KEY`, and `data-smoke.yml` reuses the same secret.
 
 A name mismatch is no longer fully silent: both workflows FAIL FAST at startup when
 `secrets.NTFY_SUB` is empty (a missing topic would disable every alarm path), and `config.py`

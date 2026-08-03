@@ -12,6 +12,7 @@
   --muted: #5d6570;
   --card: #ffffff;
   --accent: #0b1f3a;        /* ink navy — brand */
+  --accent-tint: #e6ebf4;
   --link: #274b82;
   --line: #e6e2da;
   --hairline: #d9d4ca;
@@ -32,6 +33,7 @@
     --muted: #9aa3af;
     --card: #171c24;
     --accent: #aac3f2;      /* desaturated navy for dark — not inverted */
+    --accent-tint: #1b2432;
     --link: #9db7e8;
     --line: #262c36;
     --hairline: #2d3440;
@@ -230,6 +232,10 @@ h3 {
 /* ---- Market tiles ----------------------------------------------------------- */
 .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; }
 .grid .card { margin: 0; }
+/* A 5th tile (the mortgage rate) cannot fit legibly across a 645px column — 5 x minmax(150px)
+   needs 788px — so instead of orphaning it in a 1-of-4 slot, the odd last tile spans the row.
+   Fires only at exactly five: four tiles keep today's layout untouched. */
+.grid > :nth-child(5):last-child { grid-column: 1 / -1; }
 .figure {
   font-size: 1.5rem;
   font-weight: 700;
@@ -277,6 +283,10 @@ h3 {
 .status.healthy  { color: var(--up); background: var(--up-tint); }
 .status.watch    { color: var(--warn-fg); background: var(--warn-bg); }
 .status.oversold { color: var(--down); background: var(--down-tint); }
+/* Policy status: in force vs. not yet. Set in JS via POLICY_STATUS_CLASS — never interpolated,
+   because "Final rule" and "Signed in Utah" contain spaces. */
+.status.final    { color: var(--accent); background: var(--accent-tint); }
+.status.proposed { color: var(--muted); background: var(--tldr-tint); }
 
 .asof { color: var(--muted); font-size: 0.75rem; margin: 0.15rem 0 0; }
 .tile-why { font-size: 0.88rem; margin: 0.35rem 0 0; color: var(--fg); }
@@ -321,6 +331,67 @@ h3 {
 }
 .readmore:hover { text-decoration: underline; }
 .readmore:hover::after { transform: rotate(45deg) translate(2px, -2px); }
+
+/* ---- Policy that affects you ---------------------------------------------------- */
+/* The chip lives here and NOT in .kicker: that rule uppercases and letter-spaces, which would
+   render "Signed in Utah" as S I G N E D   I N   U T A H. */
+.policy-head {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  flex-wrap: wrap;
+  margin: 0 0 0.5rem;
+}
+.policy-source {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+/* The payload line: what this does to YOU. Deliberately unlike .summary — editorial serif with
+   an ink rule, the same language the weekly recap uses for the one thing worth reading. */
+.policy-effect {
+  font-family: var(--serif);
+  font-size: 1.02rem;
+  line-height: 1.6;
+  color: var(--fg);
+  margin: 0.6rem 0 0;
+  padding-left: 0.75rem;
+  border-left: 3px solid var(--accent);
+}
+.policy-when {
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-variant-numeric: tabular-nums;
+  margin: 0.5rem 0 0;
+}
+.policy-coming { margin-top: 1.2rem; }
+.policy-upcoming ul { list-style: none; margin: 0; padding: 0; }
+.policy-upcoming li { padding: 0.65rem 0; }
+.policy-upcoming li + li { border-top: 1px solid var(--hairline); }
+.policy-row {
+  display: flex;
+  gap: 0.85rem;
+  align-items: baseline;
+  min-height: 44px;            /* the row IS the tap target — no separate 44px link per line */
+  color: inherit;
+  text-decoration: none;
+}
+.policy-date {
+  flex: none;
+  min-width: 5.4rem;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+.policy-row-body { min-width: 0; }
+.policy-row-what { margin: 0; font-size: 0.95rem; font-weight: 600; }
+.policy-upcoming .policy-effect { font-size: 0.95rem; margin-top: 0.4rem; }
+a.policy-row:active { transform: scale(0.99); }
 
 /* Tappable cards compress slightly on press (interruptible, transform-only) */
 a.cardlink { display: block; color: inherit; text-decoration: none; }
@@ -412,6 +483,7 @@ main > section:nth-child(3) { animation-delay: 80ms; }
 main > section:nth-child(4) { animation-delay: 120ms; }
 main > section:nth-child(5) { animation-delay: 160ms; }
 main > section:nth-child(6) { animation-delay: 200ms; }
+main > section:nth-child(7) { animation-delay: 240ms; }  /* policy makes a 7th section possible */
 @keyframes rise {
   from { opacity: 0; transform: translateY(8px); }
   to   { opacity: 1; transform: none; }
@@ -431,6 +503,6 @@ a:focus-visible, input:focus-visible, .chip:focus-visible {
 @media (max-width: 379px) { .grid { grid-template-columns: 1fr; } }
 @media (min-width: 720px) {
   h1 { font-size: 2.4rem; }
-  .grid { grid-template-columns: repeat(4, 1fr); }
+  .grid { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
   .grid .card { padding: 0.85rem 0.9rem; }
 }

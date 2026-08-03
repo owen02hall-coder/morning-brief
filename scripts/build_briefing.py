@@ -7,7 +7,8 @@ Run modes:
   python -m scripts.build_briefing --spine     # quick check: print market numbers + news counts
   python -m scripts.build_briefing --no-notify # skip ntfy pushes
 
-Flow: date-gate -> load state -> market (Yahoo, all four numbers) -> news (RSS) -> Gemini summary
+Flow: date-gate -> load state -> market (Yahoo, all four numbers) + mortgage (PMMS) -> news (RSS)
+-> breadth -> policy (re-emit-or-fetch, then its own Gemini call) -> Gemini summary
 (with a no-AI fallback) -> write briefing.json + archive + state + headline handoff -> health
 pings. The daily "ready" push is NOT sent here: the build writes headline.txt and the workflow
 sends the push (scripts.notify CLI) only after the commit/push leg succeeds, so a failed publish
@@ -26,6 +27,8 @@ from . import config, state, notify
 from . import tts as tts_mod
 from .data import market as market_mod
 from .data import news as news_mod
+from .data import mortgage as mortgage_mod
+from .data import policy as policy_mod
 from .breadth import percent_above_ma as breadth_mod
 from . import summarize as summarize_mod
 
@@ -107,18 +110,106 @@ def _breadth_block(breadth):
             "ndx100": _one_breadth_block(breadth.get("ndx100"))}
 
 
+def _get_policy(st, today):
+    """The whole policy leg: re-emit-or-fetch, then record. Returns (items, available, state).
+
+    NEVER raises. main() turns any unhandled exception into a high-priority "briefing run crashed"
+    push, so the newest and least critical section must not be able to page the user or cost the
+    other sections their run.
+
+    Two orderings in here are load-bearing:
+
+    1. **The same-date re-emit branch runs FIRST, before any fetch.** `_write()` rewrites
+       docs/briefing.json AND docs/archive/{date}.json unconditionally, and briefing.yml dispatches
+       with `--force` defaulting to true — so a second run of the day is the NORMAL manual path. If
+       that run re-fetched and the fetch went badly, it would overwrite the archive with an empty
+       policy list and DELETE already-published items. Reading `policy_today` before touching the
+       network makes that impossible: no fetch, no model call, no new push.
+    2. **Candidates are marked seen only AFTER summarize_policy() returns ok=True.** On a model
+       failure they stay unseen so tomorrow retries; burying a day's candidates permanently for a
+       transient Gemini outage is the failure this ordering exists to prevent. Staying unseen is only
+       half of it for UTAH: those stubs were already POPPED off policy_utah_queue at fetch time and
+       state.save() runs regardless, so the same failure must also hand them back via
+       policy_mod.requeue_utah() or they are gone until the next general session.
+    """
+    candidates = []
+    try:
+        block = st.get("policy_today") or {}
+        if block.get("date") == today:
+            items = list(block.get("items") or [])
+            # `available` is True, not the (absent) fetch result: nothing was fetched, and the
+            # published content is intact — flagging a healthy rebuild as degraded would be a lie.
+            print(f"policy: same-date rebuild for {today} — re-emitting {len(items)} item(s) "
+                  f"verbatim (no fetch, no model call, no new push)")
+            return items, True, state.record_policy(st, [], items, today)
+
+        fetched, st = policy_mod.get_policy(st, today)
+        candidates = list(fetched.get("candidates") or [])
+        available = bool(fetched.get("available"))
+
+        sent = []
+        if not st.get("policy_bootstrapped") and available:
+            # First-ever policy run: the 45-day federal window is ALL "new", and back-announcing a
+            # month and a half of rules is not a briefing. Mark the federal candidates seen and
+            # report none of them. The UTAH QUEUE IS EXEMPT — blanket suppression would swallow the
+            # 21 proven-relevant signed 2026GS bills and leave Utah contributing nothing until the
+            # next general session in March 2027, killing the higher-signal half for ~7 months.
+            # Gated on `available`: bootstrapping off a FAILED federal fetch would mark nothing seen
+            # and then back-announce the whole backfill tomorrow — the suppression's exact opposite.
+            sent = [c for c in candidates if c.get("source") != "Utah Legislature"]
+            candidates = [c for c in candidates if c.get("source") == "Utah Legislature"]
+            st = {**st, "policy_bootstrapped": True}
+            print(f"policy: bootstrap run — marking {len(sent)} federal candidate(s) seen without "
+                  f"reporting; {len(candidates)} Utah candidate(s) still flow normally")
+
+        if not candidates:
+            items = []
+            print("policy: 0 new candidates, skipping model call")
+        else:
+            items, ok = summarize_mod.summarize_policy(candidates)
+            if ok:
+                sent = sent + candidates
+                print(f"policy: sent {len(candidates)} candidates, {len(items)} survived validation")
+            else:
+                items = []
+                st = policy_mod.requeue_utah(st, candidates)
+                print(f"policy: model leg did not complete — {len(candidates)} candidate(s) left "
+                      f"UNSEEN for tomorrow's retry")
+
+        st = state.record_policy(st, sent, items, today)
+        print(f"policy: reported {len(items)}")
+        return items, available, st
+    except Exception as e:
+        # Last-resort guard. Every callee above already promises not to raise; this exists so that a
+        # promise broken later degrades ONE section instead of crashing the briefing. Nothing was
+        # recorded, so any already-popped Utah candidates go back on the queue for the same reason as
+        # the ok=False branch (`candidates` is [] until the fetch returns, so this is a no-op early).
+        print(f"policy: leg failed (non-fatal): {type(e).__name__}: {e}")
+        return [], False, policy_mod.requeue_utah(st, candidates)
+
+
 def _fallback_items(news, bucket, limit):
     return [{"summary": a["title"], "source": a["source"], "url": a["url"]}
             for a in news.get(bucket, [])[:limit]]
 
 
-def _assemble(now, today, market, news, narrative, ai_ok, breadth=None):
+def _assemble(now, today, market, news, narrative, ai_ok, breadth=None,
+              policy=None, policy_upcoming=None, mortgage=None, policy_available=True):
+    """`policy`, `policy_upcoming` and `mortgage` are KEYWORD-only in practice (the 7 positional
+    args are the pre-existing call shape) and are emitted OUTSIDE the `if ai_ok:` branch: they come
+    from a separate model call and a deterministic fetch, and both can succeed on a day when
+    summarize() fails."""
     briefing_date = today
     avail = {**market["availability"], **{f"news_{k}": v for k, v in news["available"].items()},
              "summary": "ok" if ai_ok else "unavailable",
              "breadth": bool(breadth and all(
                  breadth.get(k) and breadth[k].get("value") is not None
-                 for k in ("sp500", "ndx100")))}
+                 for k in ("sp500", "ndx100"))),
+             "policy": bool(policy_available),
+             # NOTE: `mortgage` is deliberately NOT part of the markets_ok tuple in run() — PMMS is
+             # a WEEKLY release, so a normal publishing gap would fire the high-priority
+             # "market data unavailable N days running" escalation.
+             "mortgage": mortgage is not None}
 
     def num(n, why):
         if not n:
@@ -149,6 +240,9 @@ def _assemble(now, today, market, news, narrative, ai_ok, breadth=None):
         "yield_10y": yield_block,
         "vix": vix_block,
         "breadth": _breadth_block(breadth),
+        "mortgage": mortgage,
+        "policy": list(policy or []),
+        "policy_upcoming": list(policy_upcoming or []),
         "tech": tech,
         "world": world,
         "weekly_recap": recap,
@@ -194,8 +288,16 @@ def run(do_notify=True, today=None):
     prev_markets_ok = st.get("markets_last_ok")   # last date all four market numbers were available
 
     market = market_mod.get_market()
+    mortgage = mortgage_mod.get_rate()      # weekly PMMS release; None on any failure
     news = news_mod.get_news()
     breadth, st = _get_breadth(st, today)   # degradable; may refresh st.breadth_last_good
+    # AFTER the breadth reassignment: _get_breadth returns a NEW state dict, so calling the policy
+    # leg with the pre-breadth `st` would silently discard breadth_last_good. The chain stays intact.
+    policy, policy_available, st = _get_policy(st, today)
+    # Already-reported items whose date is still ahead. None-safe: `effective_date` is legitimately
+    # null on proposed rules, and `None > "2026-08-03"` raises TypeError, which would kill the run.
+    policy_upcoming = [i for i in (st.get("policy_active") or [])
+                       if i.get("effective_date") and i["effective_date"] > today]
 
     # Derive the weekday from the gate date so the build decision, the saved briefing date, and the
     # Sunday-recap choice all agree even if midnight crosses between _now() reads.
@@ -203,7 +305,9 @@ def run(do_notify=True, today=None):
     narrative, ai_ok = summarize_mod.summarize(
         market, news, is_sunday, recap_context=_recap_context() if is_sunday else "")
 
-    briefing = _assemble(now, today, market, news, narrative, ai_ok, breadth)
+    briefing = _assemble(now, today, market, news, narrative, ai_ok, breadth,
+                         policy=policy, policy_upcoming=policy_upcoming, mortgage=mortgage,
+                         policy_available=policy_available)
     _write(briefing)
 
     # Track the last day markets were fully healthy, so a SUSTAINED blackout (a dead data source, the
@@ -225,9 +329,14 @@ def run(do_notify=True, today=None):
     # Breadth alerts (warning + oversold tiers, per index): evaluated (and counters/arming
     # advanced) only when this run actually notifies — a --local/--no-notify run must not consume
     # alerts it never delivered.
-    breadth_alerts = []
+    #
+    # The policy alert follows the same rule and for the same reason. Its state write (record_policy)
+    # already happened above on EVERY run — only the ALERT is gated here, and eval_policy_alert reads
+    # the `policy_today` block record_policy just wrote, so the order (record, then eval) is required.
+    breadth_alerts, policy_alerts = [], []
     if do_notify:
         breadth_alerts, st = state.eval_breadth_alert(breadth, st, today)
+        policy_alerts, st = state.eval_policy_alert(policy, st, today)
     state.save(st, today)
 
     # Ready-push handoff: the "your briefing is ready" push must fire AFTER the commit/push/Pages
@@ -253,6 +362,8 @@ def run(do_notify=True, today=None):
     if do_notify:
         for a in breadth_alerts:
             notify.breadth_alert(a["text"], a["level"])
+        for a in policy_alerts:
+            notify.policy_alert(a["text"])
         if degraded:
             notify.health("degraded sections: " + ", ".join(degraded), ok=True)
         # Loud escalation: markets blank for >= MARKETS_STALE_DAYS in a row means the source is likely
@@ -289,6 +400,15 @@ def spine():
         print("breadth: FAILED —", e)
     print("news candidates: world=%d business=%d tech=%d" %
           (len(n["world"]), len(n["business"]), len(n["tech"])))
+    # Federal leg ONLY, and deliberately not via get_policy(): that would run the annual Utah
+    # harvest (a 491-row scrape) plus up to MAX_POLICY_ITEMS bill-detail fetches and touch state.
+    # data-smoke.yml greps this output under a job timeout, so the spine must stay one request.
+    try:
+        fed = policy_mod._federal_candidates()
+        print("policy candidates: federal=%d (pass prefilter=%d)" %
+              (len(fed), sum(1 for c in fed if policy_mod._matches_profile(c))))
+    except Exception as e:
+        print("policy: FAILED —", e)
 
 
 def main(argv):

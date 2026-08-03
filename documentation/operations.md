@@ -2,7 +2,7 @@
 title: Operations
 source_files: [.github/workflows/, scripts/build_briefing.py, scripts/heartbeat.py, scripts/notify.py, scripts/briefing-assumptions/]
 entry_points: [".github/workflows/briefing.yml", ".github/workflows/heartbeat.yml", ".github/workflows/shell-guard.yml", ".github/workflows/data-smoke.yml", "scripts/build_briefing.py:main", "scripts/heartbeat.py:main"]
-last_verified: 2026-07-06
+last_verified: 2026-08-03
 ---
 
 # Operations
@@ -56,7 +56,11 @@ How the briefing is scheduled, deployed, monitored, and recovered.
   does not retrigger the workflow (but it DOES trigger `shell-guard.yml`, which no-ops unless PWA
   shell files changed).
 - `timeout-minutes: 10` bounds the job; the failure backstop fires on `failure() || cancelled()`
-  so a timeout-kill still alerts.
+  so a timeout-kill still alerts. That budget is the reason every policy-leg bound exists: each
+  request carries `POLICY_TIMEOUT` (25s) and a byte cap, the second Gemini call uses a 60s timeout
+  with no fallback loop, the Utah harvest fetches no bill pages at all, and the release path fetches
+  at most `MAX_POLICY_ITEMS` (3) of them per run. A cancelled job ships no briefing AND pages
+  high-priority, so an overrun is strictly worse than a missing section.
 - Actions are pinned by commit SHA; bump deliberately (look up the new tag's SHA, update all
   workflows, validate with a Data Smoke run).
 
@@ -83,12 +87,71 @@ How the briefing is scheduled, deployed, monitored, and recovered.
 - Breadth alerts (per index, S&P 500 and Nasdaq-100): a one-shot normal-priority warning when
   breadth falls below 40% (re-armed only after recovering to 42), and a high-priority daily nag
   below 30% with a day counter (clears at 33, EXTREME below 20). Both suppressed on stale data.
+- Policy push: one normal-priority ntfy per newly-reported FINAL rule ("Policy that affects you").
+  Proposed rules and queue-released Utah bills never push. The `policy_today.alerted` stamp makes it
+  one-shot per date, which matters because `briefing.yml` dispatches with `force` defaulting to true,
+  so a same-date rerun is the normal manual path and must not re-push.
 - Shell guard: `shell-guard.yml` fails any push that changes `docs/` shell files without bumping
   the sw.js CACHE constant, and ntfy-pages on trip — installed PWAs would otherwise silently
   never update (this class shipped broken once).
-- Data smoke: `data-smoke.yml` (manual dispatch) prints the whole data spine from a runner and
-  fails if breadth doesn't compute — run it after touching any data source.
+- Data smoke: `data-smoke.yml` runs WEEKLY (`0 16 * * 1`, Mondays ~10am Denver) as well as on
+  dispatch. It prints the data spine from a runner and fails if either index's breadth doesn't
+  compute, then runs assumption tests 05, 07, 08 and 06 — Federal Register, PMMS, the Utah list page,
+  Utah bill detail pages, the keyword prefilter, and one real model call. Each of those steps is
+  `if: always()` so one dead leg cannot mask the others (on 2026-08-03 a failed spine step skipped the
+  policy check entirely and hid whether `.gov` egress worked at all); the job still goes red if any
+  step fails. A red **or cancelled** run pushes a high-priority ntfy.
+  - The schedule is the point, not a convenience. This workflow was dispatch-only until 2026-08-03,
+    and that is exactly why Nasdaq-100 breadth stayed dead for 22 days: the guard existed, the
+    trigger did not, and a scheduled failure only emails the repo owner — the channel that gets
+    ignored. Weekly rather than daily because these are slow-moving upstream shapes and a red run
+    must stay a real signal.
+  - Two traps that would silently disarm it, both already handled: the alert step must be
+    `if: failure() || cancelled()`, because a `timeout-minutes` kill is a CANCELLATION and
+    `failure()` alone misses the slowest failure mode; and the env mapping must be
+    `NTFY_TOPIC: ${{ secrets.NTFY_SUB }}` — `secrets.NTFY_TOPIC` does not exist, would resolve to
+    empty, and the step's `[ -n "$NTFY_TOPIC" ]` guard would skip without a word.
+  - `PYTHONPATH: ${{ github.workspace }}` is set on the assumption-test steps so they can
+    `from scripts import config` and prove the PRODUCTION query shape rather than a drifting local
+    copy. `python -m` cannot address these files (leading digits, hyphens, no `__init__.py`), so the
+    import path is the only route.
+  - `timeout-minutes: 10`, raised from 5 when the three extra tests were added.
 - Transparency: `briefing.json` carries a `data_availability` map showing each section's status.
+
+## Run state (`state/state.json`)
+
+Committed to the repo on every run, never served on Pages. `state.save()` always rewrites `last_run`,
+which is what guarantees the daily commit that keeps the scheduled workflow alive.
+
+Every key below names its writer. That is not documentation habit, it is a scar: two revisions of the
+policy design shipped a state field that was declared and *read* but never written, which produces a
+feature that looks healthy and is permanently empty. If a key here cannot name its writer, it does
+not exist.
+
+| Key | Written by | Read by | Lifecycle |
+| --- | --- | --- | --- |
+| `last_run` | `state.save()`, every run | `main()`'s once-per-day gate | Rewritten daily |
+| `markets_last_ok` | `run()` on a day all four market numbers are present | the blackout escalation | Advances only on healthy days; clears `markets_first_bad` |
+| `markets_first_bad` | `run()` when markets are down and no usable healthy baseline exists | the escalation's "no baseline" branch | Anchors a blackout; removed on the next healthy day |
+| `breadth` (per index) | `eval_breadth_alert()` — **only on notifying runs** | itself (`in_alert`, `nag_days`, `warn_armed`) | Latched with hysteresis; a `--local`/`--no-notify` run must not consume an alert it never delivered |
+| `breadth_last_good` (per index) | `_get_breadth()`, every run | `_get_breadth()`'s fallback | Served for up to `BREADTH_STALE_TRADING_DAYS`, marked `stale` |
+| `policy_seen` `{id: published}` | `record_policy()` — only for candidates actually SENT on a successful model call | `policy.get_policy()` dedupe | **Never pruned.** ~200 entries a year in a file rewritten daily; an eviction rule interacting with the 45-day fetch window is a hazard for no benefit |
+| `policy_active` `[item]` | `record_policy()`, every run | the `policy_upcoming` projection | Deduped by url, sorted by date, capped at `MAX_POLICY_UPCOMING` (5); an entry drops out the day its `effective_date` passes |
+| `policy_today` `{date, items, alerted}` | `record_policy()` every run; `alerted` flipped by `eval_policy_alert()` on notifying runs | the same-date re-emit branch; the one-shot push | Replaced only when the stored date differs from today |
+| `policy_utah_queue` `[stub]` | `policy._maybe_harvest_utah()` appends; `policy._release_utah()` pops | the release path | Drains at ≤`MAX_POLICY_ITEMS`/day; stubs are `{id, url, title}`, detail text is fetched at release |
+| `policy_utah_session` | `policy._maybe_harvest_utah()` — **only** when a harvest yielded ≥`UTAH_MIN_SIGNED` signed bills | the annual harvest gate | Annual. Stamped with the session actually USED, so a prior-year fallback leaves the gate open and the next run retries the real current session |
+| `policy_bootstrapped` | `build_briefing._get_policy()` on the first policy run whose FEDERAL fetch succeeded | the bootstrap suppression | Once, ever |
+
+Two lifecycle rules are worth stating outright because they are the ones easiest to break:
+
+- **`policy_seen` is written only after `summarize_policy()` returns ok.** A Gemini outage therefore
+  leaves the day's candidates unseen and tomorrow retries them, instead of burying them permanently.
+- **`policy_bootstrapped` is gated on the federal fetch succeeding.** Stamping it after a FAILED
+  fetch would mark zero candidates seen and then back-announce the entire 45-day backfill tomorrow —
+  the exact opposite of what the suppression exists for. The Utah queue is exempt from the
+  suppression entirely: blanket-suppressing run one would swallow the whole queue of a completed
+  session (17 of 2026GS's 491 signed bills pass the prefilter) and leave Utah contributing nothing
+  until the next general session in March.
 
 ## Failure modes and recovery
 
@@ -107,26 +170,92 @@ How the briefing is scheduled, deployed, monitored, and recovered.
   briefing still ships; alerts are suppressed on stale values.
 - Gemini TTS fails: no manifest is written, the page's Listen button falls back to the on-device
   voice, and the degraded ping includes "audio". The briefing still ships.
+- Federal Register unreachable, or returning ZERO results: `data_availability.policy` goes false and
+  the degraded ping lists "policy". Zero results across six agencies and 45 days is treated as a
+  broken query rather than a quiet window — measured volume is ~21 documents — so it raises and is
+  caught, deliberately, rather than shipping as an empty-but-healthy section. The Utah queue still
+  drains on that run; a Utah-only failure never touches `data_availability.policy`.
+- The Utah passed-bills page is unreachable, or its markup changed: the harvest is NOT stamped, so
+  the gate stays open and tomorrow retries. Same when a scrape yields fewer than `UTAH_MIN_SIGNED`
+  (100) signed bills — that is a half-loaded page or a changed row shape, not a real session, and
+  stamping it would mark the session harvested for a year on one bad fetch. Early in a calendar year
+  the harvest falls back to the previous year's session, so January cannot burn the gate on a session
+  that has not happened yet.
+- A single Utah bill's detail page fails: that stub is DROPPED from the queue rather than re-queued.
+  This is deliberate — a permanently dead URL at the head of the queue would eat a fetch slot every
+  day and block the whole backfill behind it — but it does mean the bill is gone until the next
+  annual harvest. The log line names the id and the URL.
+- Utah items are fetched but never selected: a known open defect, recorded in
+  `06-policy-relevance.py`'s docstring (observed 2026-08-03). A Utah "detail" page is a status page
+  whose first ~1,800 stripped characters are site navigation. `policy._normalize_utah` cuts the
+  abstract at 2,000 characters and `summarize._policy_docs_block` cuts the prompt text at 500, so the
+  model sees the bill's TITLE plus half a kilobyte of nav chrome and no bill text at all. Nothing
+  fails, nothing is logged, and the section simply stays quiet — which is also what a healthy day
+  looks like. Watch `utah.selected` in `06-policy-relevance.fingerprint.json`. The fix belongs in
+  `policy.py` (skip to the bill body before truncating), not in the prompt.
+- Gemini fails during `summarize_policy()`: the section is empty for the day, the candidates are left
+  UNSEEN, and tomorrow retries them. No crash push — a policy failure must never reach `main()`'s
+  "briefing run crashed" handler. **Known gap:** Utah stubs released from the queue on that run were
+  already popped and are neither reported, re-queued, nor marked seen, so they are lost until the
+  next annual harvest. Federal candidates are unaffected (they are re-fetched from the 45-day window
+  every run). If it matters, re-add them by clearing `policy_utah_session` in `state/state.json`,
+  which re-runs the harvest; anything already in `policy_seen` will not be re-queued.
+- The policy section is empty on a normal day: that is the expected outcome, not a fault. Measured
+  cadence is roughly one qualifying federal item per 22 days. The job log distinguishes the cases:
+  `policy: 0 new candidates, skipping model call` (no model spend at all), `sent N candidates, M
+  survived validation`, and a per-item `policy: dropped (<reason>)` line for every validator drop.
+  "The model rejected everything" and "the validator ate everything" must never look alike.
+- A same-date rebuild (`--force`, the normal manual path): the re-emit branch runs before any fetch,
+  so the day's items are republished verbatim with no fetch, no model call and no second push. This
+  is what stops a badly-timed re-run from overwriting `docs/archive/<date>.json` with an empty list
+  and deleting items already delivered.
+- Freddie Mac PMMS unreachable or unparseable: `get_rate()` returns None with a logged reason, the
+  mortgage tile is omitted, and `data_availability.mortgage` goes false (so it appears in the
+  degraded ping). It is deliberately NOT part of the `markets_ok` tuple: PMMS is a weekly Thursday
+  release, and including it would fire the high-priority "market source may be down" page on any
+  normal publishing gap. A rate several days old is healthy, not stale — the age check lives in the
+  weekly assumption gate, not in production.
 - GitHub Pages deploy fails with "Deployment failed, try again later": transient — re-run it
   (`gh run rerun <id>`).
 
 ## Regression tests
 
-- Pre-flight and regression assumption tests live in `scripts/briefing-assumptions/`.
-- Run them: `BRIEFING_SMOKE_ALLOW_DEV=true bash scripts/briefing-assumptions/run-all.sh`.
-- `04-external-boundary-smoke.py` needs no key and checks RSS and Wikipedia liveness. Tests 01 and
-  02 need a Twelve Data key and target v2 breadth. Test 03 needs a Gemini key.
+- Pre-flight and regression assumption tests live in `scripts/briefing-assumptions/` (see that
+  directory's README for what each one proves and its negative controls).
+- Run them all: `BRIEFING_SMOKE_ALLOW_DEV=true bash scripts/briefing-assumptions/run-all.sh`.
+- Keyless and runnable anywhere: `04` (RSS + Wikipedia liveness), `05` (Federal Register, PMMS, the
+  Utah list page), `07` (Utah bill detail: relative hrefs resolve, real text extracts), `08` (keyword
+  prefilter recall, precision and volume). `06` needs a Gemini key; `03` needs a Gemini key; `01`/`02`
+  need a Twelve Data key and target the abandoned v2 breadth route.
+- `run-all.sh` halts on the first non-zero exit and `01`/`02` exit 3 without `TWELVEDATA_API_KEY`, so
+  in practice gate on the policy tests individually or just dispatch **Data Smoke**, which runs
+  05/07/08/06 from a runner with each step independent.
 
 ## Cost
 
-- Zero per month. Yahoo Finance, RSS, ntfy, GitHub Pages, and GitHub Actions (public repo) are free. Gemini
-  runs on the free tier. The Gemini project must keep billing disabled to stay free.
+- Zero per month. Yahoo Finance, RSS, the Federal Register API, the Utah Legislature pages, Freddie
+  Mac's PMMS CSV, ntfy, GitHub Pages, and GitHub Actions (public repo) are all free and keyless.
+  Gemini runs on the free tier; the Gemini project must keep billing disabled to stay free.
+- The policy section adds at most one Gemini call per day, and only on days with un-seen candidates
+  (most days it is skipped entirely). `data-smoke.yml` adds one more call per week.
 
 ## Local development
 
 ```bash
 pip install -r requirements.txt
 export GEMINI_API_KEY=... NTFY_TOPIC=...      # PowerShell: $env:NAME="..."
-python -m scripts.build_briefing --spine              # market numbers + news counts, no key needed
-python -m scripts.build_briefing --local --no-notify  # write docs/briefing.json, no push
+python -m scripts.build_briefing --spine              # market/news/breadth/policy counts, no key needed
+BRIEFING_STATE_PATH=/tmp/policy-state.json \
+  python -m scripts.build_briefing --local --no-notify   # write docs/briefing.json, no push
 ```
+
+**Use `BRIEFING_STATE_PATH` for every local run that is not deliberately editing real state.**
+`state.save()` is called unconditionally at the end of `run()` — outside the `if do_notify:` block —
+so `--local` and `--no-notify` still WRITE `state/state.json`. Without the override a dev run burns
+`policy_bootstrapped`, marks the day's policy candidates seen, and pops the Utah queue, all of which
+silently suppress that content in the next real build; it can also stamp `last_run` and make the next
+scheduled run no-op. The override is the reason the mitigation is real rather than advice:
+`config.STATE_PATH` used to be a plain constant with no environment hook.
+
+It is read with `or`, not `os.environ.get(default)`, on purpose: an unset-but-present variable
+arrives as the empty string, which a `get()` default would hand straight through as a path.

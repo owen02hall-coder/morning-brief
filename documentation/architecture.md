@@ -2,14 +2,15 @@
 title: Architecture
 source_files: [scripts/, docs/, .github/workflows/]
 entry_points: ["python -m scripts.build_briefing", "scripts/build_briefing.py:main", "python -m scripts.heartbeat", "python -m scripts.notify ready"]
-last_verified: 2026-07-06
+last_verified: 2026-08-03
 ---
 
 # Architecture
 
-A free, single-user morning briefing. A scheduled job gathers market numbers and news, an AI
-writes a short cited summary, the result is published as a static web app, and a push notification
-is sent. Everything runs in the cloud so the user's devices can be off. Cost is zero on free tiers.
+A free, single-user morning briefing. A scheduled job gathers market numbers, news, and the
+government policy that changes a number or a deadline for this one reader; an AI writes a short
+cited summary; the result is published as a static web app and a push notification is sent.
+Everything runs in the cloud so the user's devices can be off. Cost is zero on free tiers.
 
 ## Components
 
@@ -17,10 +18,12 @@ is sent. Everything runs in the cloud so the user's devices can be off. Cost is 
 - Pipeline: a Python package (`scripts/`) that fetches data, summarizes, narrates, and writes output.
 - Web app: a static PWA (`docs/`) served by GitHub Pages that renders the output, with a Listen
   player for the daily audio edition (on-device speech fallback).
-- Notifications: ntfy delivers a post-publish "ready" push, breadth alerts (two tiers), and
-  self-monitoring health pings.
+- Notifications: ntfy delivers a post-publish "ready" push, breadth alerts (two tiers), a
+  normal-priority push per newly-arrived federal final rule, and self-monitoring health pings.
 - Guards: `shell-guard.yml` fails any push that changes the PWA shell without a service-worker
-  CACHE bump; `data-smoke.yml` (dispatch-only) proves every data leg from a runner IP.
+  CACHE bump; `data-smoke.yml` (weekly + dispatch) proves every data leg — market spine, policy
+  sources, the Utah scrape, the keyword prefilter and the model's relevance judgement — from a
+  runner IP, and pushes ntfy when one goes red.
 
 ## Data flow
 
@@ -29,24 +32,35 @@ GitHub Actions (cron, UTC) --> python -m scripts.build_briefing
   date-gate (build once/day: first cron that lands builds; if last_run == today the rest no-op)
   -> state.load()                          state/state.json
   -> market.get_market()                   Yahoo Finance chart API, keyless (S&P 500, Nasdaq Comp, VIX, 10-yr)
+  -> mortgage.get_rate()                   Freddie Mac PMMS CSV, 30-year fixed (weekly release; None on failure)
   -> news.get_news()                       RSS feeds (world, business, tech), per-feed isolation
   -> breadth compute (TradingView scan ∩ Wikipedia constituents, S&P 500 + Nasdaq-100;
      per-index MIN_MATCH fail-close + last-good cache)
+  -> _get_policy()                         IF state.policy_today.date == today: re-emit verbatim and STOP
+                                           (no fetch, no model call, no push) — this branch is first
+     -> policy.get_policy()                Federal Register (6 agencies, 45d) + Utah signed-bill queue
+                                           -> one normalized shape -> keyword prefilter
+                                           -> drop ids in policy_seen -> cap at MAX_POLICY_CANDIDATES
+     -> summarize.summarize_policy()       SECOND Gemini call; skipped entirely when 0 candidates
+     -> state.record_policy()              the only writer of policy_seen/policy_active/policy_today
   -> summarize.summarize()                 Gemini structured output (numbers injected as facts)
-  -> assemble briefing dict (incl. breadth block)
+  -> assemble briefing dict (incl. breadth, mortgage, policy, policy_upcoming)
   -> write docs/briefing.json
             docs/archive/<date>.json
             docs/archive/index.json
             headline.txt                   (job-local handoff for the post-publish ready push)
   -> tts.generate()                        deterministic narration -> Gemini TTS -> audio.mp3 (lameenc, in-process)
   -> breadth alert eval (warning <40 one-shot / oversold <30 daily nag, per index) -> state
-  -> state.save (last_run + markets_* + breadth state; last_run rewritten daily -> renewing commit)
+  -> policy alert eval (one normal-priority push per NEW federal final rule; one-shot per date) -> state
+  -> state.save (last_run + markets_* + breadth + policy state; last_run rewritten daily -> renewing commit)
   -> health pings if degraded/crashed; breadth alerts via ntfy
 workflow: Publish audio edition            audio.mp3 -> docs/briefing-audio.mp3 + date manifest (only on success)
 workflow: git commit + push (docs/, state/) --> GitHub Pages redeploys
 workflow: Send ready push                  python -m scripts.notify ready — ONLY after git push succeeded
 PWA (docs/app.js): fetch briefing.json (network-first) -> render; Listen player (mp3 when the
-  manifest date matches, else chunked speechSynthesis); archive + search; staleness banner
+  manifest date matches, else chunked speechSynthesis); archive + search; staleness banner;
+  the policy section is built by a function that returns null when nothing qualified and is
+  appended behind a guard (see the design decisions below)
 
 Heartbeat (independent cron): python -m scripts.heartbeat
   -> fetch LIVE docs/briefing.json from Pages -> ntfy + non-zero exit if older than HEARTBEAT_STALE_HOURS
@@ -55,15 +69,37 @@ Heartbeat (independent cron): python -m scripts.heartbeat
 ## Modules
 
 - `scripts/config.py`: all tunables. Timezone, model id and fallback, news window, RSS feed lists,
-  Yahoo symbols, paths, staleness + heartbeat thresholds. No secrets.
+  Yahoo symbols, the life profile + keyword prefilter list, Federal Register / Utah / PMMS endpoints
+  and caps, paths, staleness + heartbeat thresholds. No secrets. Two things deliberately do NOT live
+  here: the browser User-Agents that PMMS and `le.utah.gov` require (module-local, following
+  `market.YAHOO_UA` — a per-host quirk belongs beside the code with the quirk) and any policy state
+  (that is `state.py`'s).
 - `scripts/build_briefing.py`: orchestrator and CLI. Date-gate, flag handling, assembly, writing,
-  archive index, top-level failure handling.
+  archive index, top-level failure handling. `_get_policy()` owns the policy leg's two load-bearing
+  orderings (re-emit before fetch; mark seen only after a successful model call) and the first-run
+  bootstrap suppression. It is called AFTER the breadth call, because `_get_breadth()` returns a new
+  state dict and passing the pre-breadth `st` onward would silently discard `breadth_last_good`.
 - `scripts/heartbeat.py`: independent liveness check. Fetches the live Pages briefing and pings ntfy
   (and exits non-zero) if it is stale or unreachable. Run by `.github/workflows/heartbeat.yml`.
 - `scripts/data/market.py`: the four headline numbers from Yahoo's chart API, recent-window fetch, last-two
   observations for value and day change. Each value may be None.
 - `scripts/data/news.py`: RSS fetch and parse into world, business, tech candidate lists. Per-feed
   try/except, time-window cutoff, dedupe, per-bucket cap.
+- `scripts/data/mortgage.py`: the Freddie Mac PMMS 30-year fixed rate. Reads the history CSV's last
+  row and looks the rate up by COLUMN NAME (`pmms30`), so an inserted column shifts nothing. Returns
+  `{value, asof}` or None; never raises. There is deliberately no freshness guard: PMMS is a WEEKLY
+  Thursday release, so a several-day-old row is its healthy state and an age check would false-alarm
+  every Monday. A stalled feed or a moved column is caught by the weekly assumption gate instead.
+- `scripts/data/policy.py`: policy candidates from two asymmetric sources, normalized to ONE shape
+  (`{id, url, title, abstract, status, effective_date, published, source}`) so the prefilter, sort,
+  dedupe and prompt only ever know about one thing. Federal Register is the daily backbone and a
+  failed **or zero-result** fetch marks the section unavailable — zero results across 6 agencies and
+  45 days is a drifted query, not a quiet day (the Nasdaq-100 class, where a healthy 200 hid dead
+  data for 22 days). Utah is seasonal (general session Jan–Mar) and its failures never touch
+  availability. The Utah harvest is annual, gated on `UTAH_MIN_SIGNED` and title-prefiltered, and
+  queues STUBS only — bill detail pages are fetched lazily at release, at most `MAX_POLICY_ITEMS`
+  per run, because harvesting 491 bills eagerly would be ~491 sequential requests inside a
+  10-minute job. `get_policy()` never raises and writes no state itself; it returns a new state dict.
 - `scripts/data/constituents.py`: current S&P 500 (~503, linked ticker cell) and Nasdaq-100
   (~101, plain-text ticker cell) member lists from Wikipedia. stdlib regex parse, fail-closed on
   implausible counts — a biased breadth number must never ship silently.
@@ -82,23 +118,54 @@ Heartbeat (independent cron): python -m scripts.heartbeat
   model writes only the prose. URLs are validated against the fetched set. `_clean_tldr` drops
   TL;DR fragments (keeps complete sentences) so a malformed model response cannot ship a broken
   headline. Model and no-AI fallbacks. Returns (narrative, ok).
+  `summarize_policy()` is a SECOND, independent call for the policy section. The model returns three
+  fields and no others — two prose lines plus a copied citation (`what_happened`, `effect`, `url`);
+  `status`, `effective_date` and `source` are joined in code from the fetched document. It runs ONE model with no fallback loop at a 60s timeout
+  (summarize() loops two models at 120s each — losing the narrative loses the briefing, whereas an
+  overrun policy call would cancel the whole job), and returns `([], False)` on any exception.
+  `_validate_policy_items()` drops off-set citations, off-host URLs, empty `effect` lines and any
+  `$`/`%` figure absent from the source text — each with its own logged reason, because "the model
+  rejected everything" (healthy) and "the validator ate everything" (a broken join) are otherwise
+  indistinguishable in the job log.
 - `scripts/state.py`: load and save `state/state.json` (`last_run`, `markets_last_ok`,
-  `markets_first_bad`, per-index `breadth` alert state, `breadth_last_good` cache). `last_run` is
-  always rewritten; `markets_last_ok` advances only on a day all four market numbers are present;
-  `markets_first_bad` anchors a blackout that began with no usable healthy baseline.
-  `eval_breadth_alert` implements the two alert tiers per index: WARNING one-shot on falling
-  below `BREADTH_WARN` (40, re-armed at 42) and OVERSOLD daily nag below `BREADTH_OVERSOLD` (30,
-  clears at 33, EXTREME below 20) — both freshness-gated; oversold supersedes warning.
-- `scripts/notify.py`: ntfy publish for the ready push, breadth alerts, and health pings. Also a
-  CLI (`python -m scripts.notify ready`) the workflow calls AFTER `git push` succeeds, reading
-  the headline the build wrote to `headline.txt` — so "ready" can never precede publication.
+  `markets_first_bad`, per-index `breadth` alert state, `breadth_last_good` cache, and the policy
+  keys). `last_run` is always rewritten; `markets_last_ok` advances only on a day all four market
+  numbers are present; `markets_first_bad` anchors a blackout that began with no usable healthy
+  baseline. `eval_breadth_alert` implements the two alert tiers per index: WARNING one-shot on
+  falling below `BREADTH_WARN` (40, re-armed at 42) and OVERSOLD daily nag below
+  `BREADTH_OVERSOLD` (30, clears at 33, EXTREME below 20) — both freshness-gated; oversold
+  supersedes warning. `record_policy()` is the single writer of `policy_seen` / `policy_active` /
+  `policy_today`, and `eval_policy_alert()` flips only the `policy_today.alerted` stamp. Every key,
+  its writer and its lifecycle are tabulated in `operations.md`.
+- `scripts/notify.py`: ntfy publish for the ready push, breadth alerts, policy alerts, and health
+  pings. Also a CLI (`python -m scripts.notify ready`) the workflow calls AFTER `git push` succeeds,
+  reading the headline the build wrote to `headline.txt` — so "ready" can never precede publication.
 
 ## Key design decisions
 
 - Numbers come from data feeds, never from the model. The model explains them, it does not produce
-  them. This is the accuracy guarantee.
+  them. This is the accuracy guarantee. It holds hardest in the policy section, where a wrong figure
+  costs real money: `PolicyItem` has three prose fields and no others, so a status, an effective date
+  and a source name are structurally impossible for the model to author — they are joined in code
+  from the fetched document, matched by URL. An invented dollar amount is also catchable (`_MONEY`
+  compares the item's figures against the source's, after normalizing both sides so `$1,200.00` in
+  the source accepts `$1,200` in the output); a hallucinated effective date would not be, which is
+  exactly why the model is never asked for one.
 - Source links are validated in code. Any item URL not in the fetched article set is dropped, so an
-  invented citation cannot reach the output.
+  invented citation cannot reach the output. Policy items additionally pass a two-host allowlist
+  (`www.federalregister.gov`, `le.utah.gov`), and the rendered `url` is re-taken from the candidate
+  rather than echoed from the model — URL matching tolerates a trailing slash, but the client renders
+  the field as an href and `.../HB0068.html/` is a 404.
+- The policy section reports only what changes a number, a deadline, or an obligation for one
+  specific reader. That is a narrow, effect-tested exception to the "no granular US politics" rule in
+  `summarize.SYSTEM`, not a reversal of it: importance in general is explicitly not a criterion. A
+  cheap word-boundary keyword prefilter and the `policy_seen` dedupe both run before the model, and
+  the call is skipped entirely when nothing survives them — which is most days, so most days cost no
+  policy tokens at all.
+- An empty policy section is a correct outcome, not a failure. It renders nothing rather than
+  "Information not available." (that message would be a lie), and `data_availability.policy` tracks
+  the FETCH, not the item count — deriving availability from an empty list would flag every healthy
+  quiet day as degraded.
 - The run degrades, it does not skip. A failed feed marks one section unavailable. A failed AI call
   falls back to a no-prose briefing of raw numbers and headlines. World news always ships if present.
 - Staleness is age-based. The PWA shows a notice when the briefing is older than `STALE_HOURS`.
@@ -109,14 +176,35 @@ Heartbeat (independent cron): python -m scripts.heartbeat
 - Fail-closed over plausible-but-wrong. Breadth refuses to publish when constituent matching
   drops below MIN_MATCH (scan/shape drift); the audio manifest is written only alongside a real
   mp3 so the player can never bind stale audio to a new page; the "ready" push fires only after
-  the publish leg succeeded.
+  the publish leg succeeded; a Federal Register query that returns zero results is treated as broken
+  rather than quiet; a PMMS body that hits the read cap is discarded rather than parsed, because a
+  truncated CSV row still parses — as a wrong rate.
+- Already-published output is never re-derived. `_write()` rewrites `docs/briefing.json` AND
+  `docs/archive/<date>.json` unconditionally, and `briefing.yml` dispatches with `--force` defaulting
+  to true, so a second run of the day is the normal manual path. The policy leg therefore checks
+  `state.policy_today` and re-emits verbatim BEFORE touching the network: a re-fetch that went badly
+  would otherwise overwrite the archive with an empty list and delete items already sent to the user.
+- A transient model failure must not bury a day's candidates. Candidates are marked `policy_seen`
+  only after `summarize_policy()` returns ok — a Gemini outage retries them tomorrow instead of
+  silently consuming them. (Two earlier revisions of this feature shipped a policy state field that
+  was declared and read but never written; routing all three keys through `record_policy()` is the
+  structural fix.)
+- Rendering the policy section is guarded at the call site. `policySection()` returns null when
+  nothing qualified and `appendChild(null)` throws — and a throw inside `render()` is worse than a
+  blank page: `loadBriefing()` has already committed the sequence and advanced `lastGeneratedAt`, so
+  the page is left half-built with no error message and the visibilitychange refetch skips
+  re-rendering for the rest of the session.
 - Recurring silent bug-classes get machine guards, not comments: `shell-guard.yml` fails a shell
   change without a sw.js CACHE bump (this class shipped broken once); workflows install with a
   CI-frozen `constraints.txt` and pin actions by commit SHA (the daily job holds a write token).
-- Failures must be loud, not silent. Three independent monitors cover the failure classes that have
+- Failures must be loud, not silent. Four independent monitors cover the failure classes that have
   actually occurred: the build's own crash/degraded ntfy; a sustained market blackout escalating to
-  high-priority after `MARKETS_STALE_DAYS` (a dead source degrades silently otherwise); and an
-  independent heartbeat workflow checking the live page (catches a build that stopped or no-opped).
+  high-priority after `MARKETS_STALE_DAYS` (a dead source degrades silently otherwise); an
+  independent heartbeat workflow checking the live page (catches a build that stopped or no-opped);
+  and, since 2026-08-03, a WEEKLY `data-smoke.yml` that re-proves every upstream shape from a runner
+  and pushes ntfy when one goes red. That fourth one exists because a guard nobody triggers is not a
+  guard: the Nasdaq-100 test detected Wikipedia's table move correctly and the breakage still lasted
+  22 days, because the workflow was dispatch-only and no one dispatched it.
 
 ## briefing.json schema
 
@@ -131,11 +219,25 @@ breadth      : { sp500: B, ndx100: B } where B = { value, asof, status, matched,
                (status: oversold <30 | watch <40 | healthy >=40 | unavailable; value null when
                unavailable; stale=true when served from the last-good cache. Archives before
                2026-07-06 carry a legacy flat single-index shape, which the PWA still renders.)
+mortgage     : { value, asof } or null — the 30-year fixed PMMS rate, rendered as a 5th market tile
+policy       : list of { what_happened, effect, url, status, effective_date, source }
+               (status: "Final rule" | "Proposed" | "Signed in Utah"; effective_date is legitimately
+               null on proposed rules and on Utah bills. Usually [] — that is the normal quiet day.)
+policy_upcoming : list of already-reported items whose effective_date is still ahead, same shape,
+               capped at MAX_POLICY_UPCOMING (5), sorted by date ascending. Carries `effect` too:
+               the carry exists so a deadline stays meaningful rather than becoming a bare headline.
 tech         : list of { summary, source, url }
 world        : list of { summary, source, url }
 weekly_recap : string or null (Sundays only)
 data_availability : map of section -> true/false or "ok"/"unavailable"
+                    (adds `policy` — the FETCH's result, true on a re-emit and on a quiet day — and
+                    `mortgage`. Neither joins the `markets_ok` tuple: PMMS is a weekly release, so a
+                    normal publishing gap must not fire the high-priority market-blackout page.)
 ```
+
+Archived briefings written before the policy section shipped carry no `mortgage`, `policy` or
+`policy_upcoming` keys. The PWA renders them unchanged: the mortgage tile is appended only `if (b.mortgage)`, and
+`policySection()` treats a missing list as empty and returns null.
 
 Companion files: `docs/briefing-audio.mp3` (the day's narration) + `docs/briefing-audio.json`
 (`{date}` manifest — the player binds audio only when it matches the briefing's date).
@@ -152,7 +254,10 @@ describes the figures as the latest close.
 - `python -m scripts.build_briefing` runs the daily flow with the once-per-day date-gate.
 - `--force` bypasses the date-gate and builds now (manual CI run).
 - `--local` bypasses the date-gate and builds now (dev).
-- `--spine` prints market numbers and news counts, writes nothing.
+- `--spine` prints market numbers, news counts, breadth, and a federal policy-candidate count;
+  writes nothing. The policy line deliberately calls `policy._federal_candidates()` directly rather
+  than `get_policy()`: the full entry point would run the annual 491-row Utah scrape plus detail
+  fetches and touch state, and `data-smoke.yml` greps this output under a job timeout.
 - `--no-notify` skips the ntfy pushes.
 - `python -m scripts.heartbeat` checks the live page freshness (run by its own workflow).
 - `python -m scripts.notify ready` sends the post-publish ready push (workflow-only step).
@@ -162,3 +267,18 @@ describes the figures as the latest close.
 v1 (core briefing) and v2 (breadth + tiered oversold alerts, both indices; audio edition) are
 built and live. The delivered v2 design (with deltas from the original plan) is archived at
 `tmp/done-plans/2026-06-16-breadth-and-fresh-data.md`.
+
+v3 adds "Policy that affects you" and the 30-year mortgage tile. Two known gaps are deliberate, not
+oversights:
+
+- **No forward-looking calendar.** `policy_upcoming` can only ever contain items that were already
+  reported, so with Utah's legislature dark nine months a year the section is absent most mornings
+  and carries nothing anticipatory. The mortgage tile is the only 52-week content, and it lives in
+  the markets section. A minimal static calendar is the obvious next step.
+- **The audio edition excludes policy.** The narration stays deliberately leaner than the page
+  (`scripts/tts.py`), and adding a fourth topic to a drive-time script was not worth the length.
+
+One residual risk is worth re-testing after a few weeks live: the model's selectivity was proven on
+a batch of 24 candidates, where it could rank documents against each other. With `policy_seen`
+differencing, production usually sends it one or two. "Is this one thing relevant?" is a different
+question from "pick the best two of these 24".

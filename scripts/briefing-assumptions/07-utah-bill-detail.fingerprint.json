@@ -1,0 +1,48 @@
+{
+  "checked_at": "2026-08-03T20:31:31.845975+00:00",
+  "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36",
+  "session": "2026GS",
+  "signed_rows": 491,
+  "sampled": [
+    "HB0265",
+    "SB0149",
+    "HB0001"
+  ],
+  "details": [
+    {
+      "number": "HB0265",
+      "url": "https://le.utah.gov/~2026/bills/static/HB0265.html",
+      "bytes": 37810,
+      "text_chars": 655,
+      "elapsed_s": 0.03,
+      "extract_s": 0.03,
+      "prompt_chars": 500,
+      "title_tokens_in_slice": "3/4",
+      "model_sees": "This bill addresses non-nicotine inhalation products. This bill: requires a non-nicotine inhalation product and a non-nicotine inhalation substance to be regist"
+    },
+    {
+      "number": "SB0149",
+      "url": "https://le.utah.gov/~2026/bills/static/SB0149.html",
+      "bytes": 37791,
+      "text_chars": 3303,
+      "elapsed_s": 0.05,
+      "extract_s": 0.06,
+      "prompt_chars": 500,
+      "title_tokens_in_slice": "1/2",
+      "model_sees": "This bill amends provisions relating to licensing. This bill: repeals Title 53, Chapter 9, Private Investigator Regulation Act; repeals Title 53, Chapter 11, Ba"
+    },
+    {
+      "number": "HB0001",
+      "url": "https://le.utah.gov/~2026/bills/static/HB0001.html",
+      "bytes": 37803,
+      "text_chars": 1556,
+      "elapsed_s": 0.05,
+      "extract_s": 0.05,
+      "prompt_chars": 500,
+      "title_tokens_in_slice": "2/5",
+      "model_sees": "This bill supplements or reduces appropriations otherwise provided for the support and operation of public education for the fiscal year beginning July 1, 2025 "
+    }
+  ],
+  "prompt_text_ceiling": 500,
+  "total_elapsed_s": 0.42
+}
