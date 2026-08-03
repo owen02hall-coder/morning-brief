@@ -113,6 +113,14 @@ LIFE_PROFILE_KEYWORDS = [
     "mortgage", "loan limit", "down payment", "closing cost", "escrow", "appraisal",
     "house", "housing", "home", "homebuyer", "first-time buyer", "rent", "rental", "landlord",
     "property tax", "properties", "zoning", "adu",
+    # Added 2026-08-03 after CI run 30857451845: the model selected HUD's "Rescission of Floodplain
+    # Management ... Minimum Property Standards for Flood Hazard Exposure" and 06's G2/prefilter
+    # assertion caught that this list filtered it OUT — so in production that document would never
+    # have reached the model and the section would just have looked quiet. Flood-risk building
+    # standards govern what an FHA-insured home must meet and whether flood insurance is required,
+    # which is squarely a first-time buyer's problem. "floodplain" is listed separately because
+    # \bflood\b cannot match it (the 'p' is a word character, so there is no boundary after 'flood').
+    "flood", "floodplain", "property standard",
     "income tax", "tax bracket", "standard deduction", "deduction", "married filing jointly",
     "withholding", "tax credit",
     "student loan", "repayment", "borrower", "pell", "direct loan",
