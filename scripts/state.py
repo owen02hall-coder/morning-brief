@@ -8,8 +8,12 @@ will live here too.
 
 Policy keys (v3), all written by `record_policy()` — the single writer:
 
-- `policy_seen` `{candidate_id: publication_date}` — every candidate that was actually SENT to the
-  model on a successful call. Read by `data/policy.get_policy()` to difference out old documents.
+- `policy_seen` `{candidate_id: publication_date}` — every candidate that was actually REPORTED to
+  the user (plus the first run's bootstrap-suppressed federal window, which is marked seen precisely
+  because it is being withheld). It is NOT everything sent to the model: since 2026-08-03 the model
+  is handed the whole prefiltered window every day, and `build_briefing._new_policy_items()` drops
+  already-reported ids AFTER the model has ranked. Read there, and by
+  `policy._maybe_harvest_utah()` to avoid re-queueing a bill that was already reported.
   Never pruned: ~200 entries a year in a file rewritten daily, and an eviction rule interacting
   with the 45-day fetch window is a hazard for no benefit.
 - `policy_active` `[item]` — already-reported items whose `effective_date` is still in the future.
@@ -98,18 +102,23 @@ def eval_breadth_alert(breadth, st, today):
     return alerts, {**st, "breadth": out}
 
 
-def record_policy(st, sent, reported, today):
+def record_policy(st, mark_seen, reported, today):
     """The SINGLE writer of every policy state key. Returns the new state (pure, no I/O).
 
-    `sent` is every candidate handed to the model on a successful call (callers pass `[]` when
-    nothing was sent — a failed model call must leave its candidates UNSEEN so tomorrow retries).
+    `mark_seen` is the CANDIDATE dicts to burn into `policy_seen`: the ones actually reported today,
+    plus the first-run bootstrap's deliberately-suppressed federal window. It is NOT "everything
+    sent" — that was the pre-2026-08-03 rule and it is gone, because `data/policy.get_policy()` now
+    hands the model the whole prefiltered window every day and recording all of it would bury the
+    window after a single call. Callers pass `[]` when nothing should be burned (a failed model call
+    must leave its candidates unseen so tomorrow retries; a same-date re-emit already recorded its
+    items on the first run of the day).
     `reported` is every item that survived validation and is being published today.
 
     Two earlier revisions of this feature shipped a policy field that was declared and read but
     never written; funnelling all three keys through one function is why that cannot recur.
     """
     seen = dict(st.get("policy_seen") or {})
-    for c in sent or []:
+    for c in mark_seen or []:
         seen[c["id"]] = c.get("published") or today
 
     # None-safe: `effective_date` is null on proposed rules, and a bare `>` against None raises.

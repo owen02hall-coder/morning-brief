@@ -146,8 +146,9 @@ FR_FIELDS = ["title", "html_url", "publication_date", "type", "agencies",
              "abstract", "effective_on", "document_number"]
 FR_WINDOW_DAYS = 45      # measured cadence is ~1 qualifying item per 22 days (2 of 24 across 45
                          # days), so a 24h window would be empty almost every morning. Dedupe is by
-                         # document_number against state.policy_seen, not by window, so a wide window
-                         # re-shows nothing — it only means a missed run or a dead day loses nothing.
+                         # document_number against state.policy_seen — applied to what the model
+                         # SELECTED, not to what it is shown — so a wide window re-reports nothing;
+                         # it only means a missed run or a dead day loses nothing.
 FR_PER_PAGE = 100        # the API's page cap. Measured volume is 21 documents / 45 days
                          # (05-policy-sources.fingerprint.json), so one page covers it ~5x over.
                          # If volume ever passes this the API truncates SILENTLY; the guard is 05's
@@ -180,6 +181,12 @@ POLICY_TIMEOUT = 25              # per request. Matches what 05/07 proved; Utah 
 MAX_POLICY_ITEMS = 3             # rendered per day; also the cap on Utah DETAIL fetches per run,
                                  # which is what keeps the annual Utah backfill (491 bills) from
                                  # fanning out into hundreds of requests inside that 10-minute budget.
+MAX_POLICY_SELECTIONS = 6        # asked of the MODEL, and deliberately larger than MAX_POLICY_ITEMS.
+                                 # The seen-set dedupe now runs AFTER selection (see
+                                 # build_briefing._new_policy_items), so a ranked list that is only
+                                 # MAX_POLICY_ITEMS long can be consumed entirely by already-reported
+                                 # documents and ship nothing. The extra headroom is what lets a NEW
+                                 # item survive that drop; the rendered cap is still MAX_POLICY_ITEMS.
 MAX_POLICY_CANDIDATES = 25       # sent to the model (mirrors MAX_CANDIDATES_PER_BUCKET above)
 MAX_POLICY_UPCOMING = 5          # "What's coming": already-reported items with a future
                                  # effective_date, carried until that date passes.

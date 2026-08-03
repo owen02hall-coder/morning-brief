@@ -44,11 +44,30 @@ Proves:
        path shape had never been round-tripped through the model. Asserted deterministically (the
        tilde survives `_norm_url` and the key joins back to its own candidate) and, when the model
        returns a Utah item, live;
-  (G8) THE SINGLE-CANDIDATE PROBE: G1-G7 measure 2-of-N RANKING. Production sends 1-2 UNSEEN
-       candidates after the seen-set dedupe, and a model asked "is this one thing relevant?" is
-       answering a different question from one asked to pick the best 2 of 24. Two extra one-document
-       calls close that seam: a pinned known-relevant document must come back with a non-empty
-       effect, and a lone decoy must come back as an empty list.
+  (G8) THE BATCH INVARIANT: production must never hand the model fewer documents than a batch.
+       Asserted against the REAL code path — `policy.get_policy()` is called twice, the second time
+       with every id it just returned already in `policy_seen`, and no candidate may disappear.
+
+WHAT G8 USED TO BE, AND WHY IT CHANGED (read this before "fixing" it back):
+G1-G7 measure 2-of-N RANKING. Until 2026-08-03 production deduped candidates against `policy_seen`
+BEFORE the prompt, so it typically sent 1-2 documents — a different question ("is this one thing
+relevant?") from the one this file's batch call asks. G8 was two extra ONE-DOCUMENT model calls
+pinning that mode: a known-relevant document had to come back with a non-empty effect, a lone decoy
+had to come back empty.
+It went RED on CI run 30851392524, and correctly: given ONE on-profile document (2026-13286, the
+Direct Loan/Pell rule) in isolation the model returned NOTHING, while in the SAME run it picked 2 of
+26 in the batch — including that document's sibling. The model is a good ranker and a poor solo
+judge.
+The fix removed the MODE rather than prompting around it: `policy.get_policy()` now sends the whole
+prefiltered window (~9-12 documents) every day, `summarize_policy` asks for MAX_POLICY_SELECTIONS
+(6) ranked items, and `build_briefing._new_policy_items()` drops already-reported ids AFTER the
+model has ranked. So the old G8 asserted a behaviour production no longer relies on. It was NOT
+deleted and it was NOT left red: the two one-document calls still run as a RECORDED MEASUREMENT
+(`single_candidate_probe.single_candidate_selects` in the fingerprint, printed as a NOTE) because
+the model limitation is real and worth tracking over time, and G8 now guards the property the fix
+actually depends on. THE MODEL DID NOT GET BETTER. If that NOTE ever reads `selects: True`, that is
+new information about the model, not permission to move the dedupe back in front of the prompt —
+the new G8 is what goes red if someone does.
 
 WHAT G7 CANNOT PROVE, AND WHY: G7's live half is CONDITIONAL on the model actually selecting a Utah
 item in the run at hand. Its deterministic half — the tilde survives `summarize._norm_url` and every
@@ -65,13 +84,21 @@ on the exact prompt slice and is what keeps the fix from silently regressing.)
 
 Needs GEMINI_API_KEY (free tier). THREE generate_content calls: the batch (60s client timeout, the
 production value) plus two single-document probes (30s each), which keeps the worst case inside
-run-all.sh's 150s per-test backstop. Read-only apart from this directory's fingerprint.
+run-all.sh's 150s per-test backstop. G8 adds two `policy.get_policy()` calls — one Federal Register
+request each, no model call, and a synthetic state (empty Utah queue, current session already
+stamped) so neither the annual 491-row harvest nor any detail fetch runs. Read-only apart from this
+directory's fingerprint.
 Exit: 0 PASS / 1 FAIL / 2 REFUSED / 3 INFRA.
 
 NEGATIVE CONTROLS (authored 2026-08-03 and NOT yet exercised — this file cannot be run to green on a
 machine with no GEMINI_API_KEY; exercise them on the first CI dispatch and record the result here):
   POLICY_PROBE_DOC_OVERRIDE=<a document_number that is irrelevant to the profile>
-      -> should force G8's positive probe red (the model correctly returns nothing for it).
+      -> flips the recorded single-candidate MEASUREMENT and prints its premise NOTE. It forces
+         nothing red: since 2026-08-03 the probe asserts nothing (see "WHAT G8 USED TO BE" above).
+         The hard pin on that document lives in 08's R1.
+  POLICY_SEEN_CONTROL=true
+      -> forces the NEW G8 red: it re-applies the removed pre-prompt dedupe to `get_policy()`'s
+         output, i.e. it simulates exactly the "optimization" G8 exists to catch.
   MODEL_ID=<a weaker model>
       -> the honest way to ask whether the gate is measuring the model or the prompt.
 """
@@ -218,6 +245,28 @@ def _fetch_pinned(document_number):
     return policy._normalize_fr(json.loads(_get(url)))
 
 
+def _window(seen):
+    """The candidate window PRODUCTION would send, given a `policy_seen` map. Real code path.
+
+    Calls `policy.get_policy()` itself rather than re-deriving the window, because the whole point of
+    G8 is that the SHIPPED function does not filter by the seen set. The state is synthetic and
+    chosen to make the Utah legs no-ops: `policy_utah_session` already stamped for this session skips
+    the annual 491-row harvest, and an empty queue means zero detail fetches. So this costs exactly
+    one Federal Register request and writes nothing (get_policy returns a new state; it is discarded).
+
+    POLICY_SEEN_CONTROL=true re-applies the dedupe that was REMOVED from get_policy — the negative
+    control for this gate, and a faithful simulation of someone moving it back in front of the prompt.
+    """
+    st = {"policy_utah_session": policy._session_for(TODAY),
+          "policy_utah_queue": [],
+          "policy_seen": dict(seen or {})}
+    out, _ = policy.get_policy(st, TODAY)
+    cands = list(out.get("candidates") or [])
+    if os.environ.get("POLICY_SEEN_CONTROL") == "true":
+        cands = [c for c in cands if c["id"] not in (seen or {})]
+    return cands, bool(out.get("available"))
+
+
 def _prompt(candidates, max_items):
     """Mirrors summarize.summarize_policy()'s user prompt verbatim.
 
@@ -310,14 +359,22 @@ def main():
     # thrown away never reaches the model in production, and the section just looks quiet.
     admitted = {c["id"]: policy._matches_profile(c) for c in candidates}
 
-    # --- G8/positive premise: the probe document must itself be on-profile ------------------------
-    if not policy._matches_profile(probe_doc):
-        failures.append(f"G8 premise: the pinned probe document {PROBE_DOC} no longer survives "
-                        f"_matches_profile, so the positive probe cannot mean anything — repin it")
+    # --- the single-candidate MEASUREMENT's premise: the probe document must be on-profile --------
+    # A note, not a failure, because the probe itself asserts nothing any more. The hard version of
+    # this check lives in 08-prefilter-recall.py's R1, which pins the SAME document_number against
+    # the shipped keyword list and needs no API key to run.
+    probe_on_profile = bool(policy._matches_profile(probe_doc))
+    probe_note = ([] if probe_on_profile else
+                  [f"NOTE the pinned probe document {PROBE_DOC} no longer survives "
+                   f"_matches_profile — the single-candidate measurement below is meaningless "
+                   f"until it is repinned (08's R1 is the hard gate on this)"])
 
     # --- the batch call ---------------------------------------------------------------------------
     try:
-        items, parse_err = _generate(candidates, config.MAX_POLICY_ITEMS, 60_000)
+        # MAX_POLICY_SELECTIONS, not MAX_POLICY_ITEMS: production asks the model for the longer
+        # ranked list and cuts to the rendered cap after the seen-drop, so a gate that asked for 3
+        # would be measuring a prompt production no longer sends.
+        items, parse_err = _generate(candidates, config.MAX_POLICY_SELECTIONS, 60_000)
     except Exception as e:                              # noqa: BLE001
         print(f"INFRA: model call failed: {e}", file=sys.stderr)
         sys.exit(3)
@@ -416,39 +473,72 @@ def main():
                 failures.append(f"G7 a returned Utah item resolved to {src['url']}, which is not "
                                 f"one of the bills we fetched")
 
-    # --- G8: the single-candidate probes ------------------------------------------------------------
+    # --- G8: THE BATCH INVARIANT -------------------------------------------------------------------
+    # The property the 2026-08-03 fix depends on: the seen set is not an input filter, so the model
+    # is always asked to RANK. Two calls to the shipped function, the second with everything the
+    # first returned already marked seen.
     try:
-        pos_items, pos_err = _generate([probe_doc], config.MAX_POLICY_ITEMS, 30_000)
+        window_a, window_available = _window({})
+        window_b, _ = _window({c["id"]: c.get("published") for c in window_a})
+    except Exception as e:                              # noqa: BLE001
+        print(f"INFRA: policy.get_policy() raised — it is contracted never to: "
+              f"{type(e).__name__}: {e}", file=sys.stderr)
+        sys.exit(3)
+
+    ids_a, ids_b = [c["id"] for c in window_a], {c["id"] for c in window_b}
+    if not ids_a:
+        # A vacuous G8 is worse than a red one: with an empty window both calls agree trivially.
+        failures.append("G8 premise: policy.get_policy() returned an EMPTY candidate window on the "
+                        f"first call (federal available={window_available}), so the invariant below "
+                        f"cannot mean anything — the prefilter, the FR query or the network is the "
+                        f"thing to look at, not the model")
+    missing = [i for i in ids_a if i not in ids_b]
+    if missing:
+        failures.append(
+            f"G8 policy.get_policy() DROPPED {len(missing)} of {len(ids_a)} candidate(s) once they "
+            f"were in policy_seen ({', '.join(missing[:5])}) — the pre-prompt dedupe is back. That "
+            f"is the mode CI run 30851392524 proved the model fails in: handed ONE on-profile "
+            f"document in isolation it returned nothing, while ranking a batch of 26 it selected "
+            f"correctly. The seen set must be applied AFTER selection "
+            f"(build_briefing._new_policy_items), never to the prompt's input")
+    elif len(window_b) < len(window_a):
+        failures.append(f"G8 the candidate window shrank from {len(window_a)} to {len(window_b)} "
+                        f"with a populated policy_seen, and no id is missing — something else in "
+                        f"get_policy() is reading the seen set")
+
+    # --- the single-candidate MEASUREMENT (no longer an assertion — see the docstring) -------------
+    try:
+        pos_items, pos_err = _generate([probe_doc], config.MAX_POLICY_SELECTIONS, 30_000)
     except Exception as e:                              # noqa: BLE001
         print(f"INFRA: single-candidate positive probe failed: {e}", file=sys.stderr)
         sys.exit(3)
     if pos_err:
-        failures.append(f"G8 positive probe: {pos_err}")
         pos_items = []
     pos_hit = next((i for i in pos_items
                     if _norm_url(i.url) == _norm_url(probe_doc["url"])), None)
-    if pos_hit is None:
-        failures.append(f"G8 asked about ONE on-profile document ({PROBE_DOC}, "
-                        f"{probe_doc['title'][:60]!r}) the model returned {len(pos_items)} item(s) "
-                        f"and none of them cited it — production sends 1-2 unseen candidates after "
-                        f"dedupe, so a model that only selects well when RANKING a batch would "
-                        f"leave this section permanently empty")
-    elif not (pos_hit.effect or "").strip():
-        failures.append(f"G8 the single-candidate probe returned {PROBE_DOC} with an EMPTY effect")
 
     try:
-        neg_items, neg_err = _generate([DECOYS[0]], config.MAX_POLICY_ITEMS, 30_000)
+        neg_items, neg_err = _generate([DECOYS[0]], config.MAX_POLICY_SELECTIONS, 30_000)
     except Exception as e:                              # noqa: BLE001
         print(f"INFRA: single-candidate negative probe failed: {e}", file=sys.stderr)
         sys.exit(3)
     if neg_err:
-        failures.append(f"G8 negative probe: {neg_err}")
         neg_items = []
-    if neg_items:
-        failures.append(f"G8 asked about ONE irrelevant document ({DECOYS[0]['title']!r}) the model "
-                        f"returned {len(neg_items)} item(s) — with no batch to rank against it "
-                        f"reports whatever it is handed, which is exactly the shape production "
-                        f"sends. The section would ship noise every day it has a candidate")
+
+    notes = probe_note + [
+        f"NOTE single-candidate probe (measurement, NOT a gate): asked about ONE on-profile document "
+        f"({PROBE_DOC}, {probe_doc['title'][:50]!r}) the model returned {len(pos_items)} item(s), "
+        f"cited={pos_hit is not None}; asked about ONE decoy ({DECOYS[0]['title']!r}) it returned "
+        f"{len(neg_items)} item(s).",
+        f"NOTE   {'the solo mode still fails' if pos_hit is None else 'the solo mode selected this time'}"
+        f" — production does not use it: get_policy() sent {len(window_a)} candidates on this run and "
+        f"the seen-set dedupe runs after selection. Track this across runs; do NOT re-derive a "
+        f"pre-prompt dedupe from a green measurement.",
+    ]
+    if pos_err:
+        notes.append(f"NOTE   positive probe parse error: {pos_err}")
+    if neg_err:
+        notes.append(f"NOTE   negative probe parse error: {neg_err}")
 
     # --- fingerprint --------------------------------------------------------------------------------
     fp = {
@@ -469,13 +559,27 @@ def main():
                  "abstract_chars": {c["id"]: len(c["abstract"]) for c in utah},
                  "norm_url": {c["id"]: _norm_url(c["url"]) for c in utah},
                  "selected": utah_selected},
+        # A MEASUREMENT, not a gate. `single_candidate_selects` is the number to watch across runs:
+        # False is the 2026-08-03 state of the model and is exactly why production stopped sending
+        # single candidates. See "WHAT G8 USED TO BE" in the docstring before acting on a True.
         "single_candidate_probe": {
-            "positive": {"document_number": PROBE_DOC, "returned": len(pos_items),
-                         "cited": pos_hit is not None,
+            "single_candidate_selects": pos_hit is not None,
+            "asserted": False,
+            "positive": {"document_number": PROBE_DOC, "on_profile": probe_on_profile,
+                         "returned": len(pos_items), "cited": pos_hit is not None,
                          "effect_chars": len(pos_hit.effect or "") if pos_hit else 0},
             "negative": {"id": DECOYS[0]["id"], "returned": len(neg_items)},
         },
+        "batch_invariant": {
+            "window": len(window_a),
+            "window_with_all_ids_seen": len(window_b),
+            "dropped_when_seen": missing,
+            "federal_available": window_available,
+        },
     }
+
+    for n in notes:
+        print(n)
 
     if failures:
         print("FAIL: 06-policy-relevance", file=sys.stderr)
@@ -490,8 +594,8 @@ def main():
     print(f"PASS: 06-policy-relevance — G1..G8 (model={MODEL}; {len(real)} federal + {len(DECOYS)} "
           f"decoy + {len(utah)} Utah candidates, {fp['candidates']['prefilter_admitted']} admitted "
           f"by the prefilter; selected {len(items)}, zero decoys, zero invented figures, zero "
-          f"hedged final rules; single-candidate probes {'+1' if pos_hit else '+0'}/-"
-          f"{len(neg_items)})")
+          f"hedged final rules; G8: get_policy returned {len(window_a)} candidates and still "
+          f"{len(window_b)} with every id marked seen)")
     for it in items:
         # status and effective_date come from the JOINED CANDIDATE. The production PolicyItem has
         # three fields (what_happened, effect, url) precisely so the model cannot author them.

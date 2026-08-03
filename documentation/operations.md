@@ -135,7 +135,7 @@ not exist.
 | `markets_first_bad` | `run()` when markets are down and no usable healthy baseline exists | the escalation's "no baseline" branch | Anchors a blackout; removed on the next healthy day |
 | `breadth` (per index) | `eval_breadth_alert()` — **only on notifying runs** | itself (`in_alert`, `nag_days`, `warn_armed`) | Latched with hysteresis; a `--local`/`--no-notify` run must not consume an alert it never delivered |
 | `breadth_last_good` (per index) | `_get_breadth()`, every run | `_get_breadth()`'s fallback | Served for up to `BREADTH_STALE_TRADING_DAYS`, marked `stale` |
-| `policy_seen` `{id: published}` | `record_policy()` — only for candidates actually SENT on a successful model call | `policy.get_policy()` dedupe | **Never pruned.** ~200 entries a year in a file rewritten daily; an eviction rule interacting with the 45-day fetch window is a hazard for no benefit |
+| `policy_seen` `{id: published}` | `record_policy()` — only for items actually REPORTED on a successful model call, plus the first-run bootstrap window | `build_briefing._new_policy_items()` (the post-selection drop) and `policy._maybe_harvest_utah()` | **Never pruned.** ~200 entries a year in a file rewritten daily; an eviction rule interacting with the 45-day fetch window is a hazard for no benefit |
 | `policy_active` `[item]` | `record_policy()`, every run | the `policy_upcoming` projection | Deduped by url, sorted by date, capped at `MAX_POLICY_UPCOMING` (5); an entry drops out the day its `effective_date` passes |
 | `policy_today` `{date, items, alerted}` | `record_policy()` every run; `alerted` flipped by `eval_policy_alert()` on notifying runs | the same-date re-emit branch; the one-shot push | Replaced only when the stored date differs from today |
 | `policy_utah_queue` `[stub]` | `policy._maybe_harvest_utah()` appends; `policy._release_utah()` pops | the release path | Drains at ≤`MAX_POLICY_ITEMS`/day; stubs are `{id, url, title}`, detail text is fetched at release |
@@ -144,8 +144,13 @@ not exist.
 
 Two lifecycle rules are worth stating outright because they are the ones easiest to break:
 
-- **`policy_seen` is written only after `summarize_policy()` returns ok.** A Gemini outage therefore
-  leaves the day's candidates unseen and tomorrow retries them, instead of burying them permanently.
+- **`policy_seen` is written only after `summarize_policy()` returns ok, and only for what was
+  REPORTED.** A Gemini outage therefore leaves the day's candidates unseen and tomorrow retries them,
+  instead of burying them permanently. "Reported, not sent" is the 2026-08-03 reversal: the seen set
+  is no longer an input filter (`get_policy()` hands the model the whole prefiltered window so it is
+  always ranking, never judging one document alone), so recording everything sent would bury the
+  window after a single call. A candidate the model never picks is re-sent tomorrow — which is
+  correct; burying it unread was the old bug.
 - **`policy_bootstrapped` is gated on the federal fetch succeeding.** Stamping it after a FAILED
   fetch would mark zero candidates seen and then back-announce the entire 45-day backfill tomorrow —
   the exact opposite of what the suppression exists for. The Utah queue is exempt from the
@@ -220,9 +225,13 @@ Two lifecycle rules are worth stating outright because they are the ones easiest
   re-releasing it every day would block the backfill behind it.
 - The policy section is empty on a normal day: that is the expected outcome, not a fault. Measured
   cadence is roughly one qualifying federal item per 22 days. The job log distinguishes the cases:
-  `policy: 0 new candidates, skipping model call` (no model spend at all), `sent N candidates, M
-  survived validation`, and a per-item `policy: dropped (<reason>)` line for every validator drop.
-  "The model rejected everything" and "the validator ate everything" must never look alike.
+  `policy: 0 candidates, skipping model call` (no model spend at all — only when the PREFILTERED
+  WINDOW is empty, which is now rare, since the seen set no longer trims the input), `sent N
+  candidates, model selected M, K new after the already-reported drop`, `policy: dropped N
+  already-reported selection(s): <ids>`, `policy: dropped N duplicate selection(s) in one response`,
+  and a per-item `policy: dropped (<reason>)` line for every validator drop. "The model rejected
+  everything", "the validator ate everything" and "everything it picked was old news" must never
+  look alike.
 - A same-date rebuild (`--force`, the normal manual path): the re-emit branch runs before any fetch,
   so the day's items are republished verbatim with no fetch, no model call and no second push. This
   is what stops a badly-timed re-run from overwriting `docs/archive/<date>.json` with an empty list
@@ -254,8 +263,12 @@ Two lifecycle rules are worth stating outright because they are the ones easiest
 - Zero per month. Yahoo Finance, RSS, the Federal Register API, the Utah Legislature pages, Freddie
   Mac's PMMS CSV, ntfy, GitHub Pages, and GitHub Actions (public repo) are all free and keyless.
   Gemini runs on the free tier; the Gemini project must keep billing disabled to stay free.
-- The policy section adds at most one Gemini call per day, and only on days with un-seen candidates
-  (most days it is skipped entirely). `data-smoke.yml` adds one more call per week.
+- The policy section adds at most one Gemini call per day, and since 2026-08-03 that call happens on
+  MOST days rather than the ~3 a month the old pre-prompt dedupe produced: the model is now given the
+  whole prefiltered window (~9-12 short documents) so that it is always ranking, and the call is
+  skipped only when that window is empty. That is the accepted, deliberate cost of the ranking fix —
+  one small call beside the two the briefing already makes, still inside the free tier.
+  `data-smoke.yml` adds three more calls per week (one batch + two single-candidate measurements).
 
 ## Local development
 

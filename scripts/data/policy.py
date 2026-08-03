@@ -5,10 +5,26 @@ high-priority "briefing FAILED" push — so nothing here may propagate):
 
     get_policy(st, today) -> ({"candidates": [...], "available": bool}, new_state)
 
-Both sources are normalized to ONE candidate shape so the prefilter, the sort, the dedupe and the
-model prompt only ever know about one thing:
+Both sources are normalized to ONE candidate shape so the prefilter, the sort and the model prompt
+only ever know about one thing:
 
     {id, url, title, abstract, status, effective_date, published, source}
+
+THE SEEN SET IS NOT AN INPUT FILTER. `get_policy()` deliberately does NOT drop ids that are already
+in `policy_seen`; it returns the whole prefiltered window (~9-12 documents) every day. The dedupe
+happens AFTER the model has ranked, in build_briefing._new_policy_items().
+
+That is a reversal of the original design, and the reason is measured, not stylistic. Filtering the
+seen set out first left 1-2 documents in the prompt, and CI run 30851392524 showed what the model
+does in that mode: given ONE genuinely on-profile document (2026-13286, the Direct Loan/Pell rule)
+in isolation it returned nothing, while in the SAME run it correctly picked 2 out of a batch of 26 —
+including that document's sibling. The model is a good RANKER and a poor solo judge, so production
+must never put it in the solo mode. Sending the full window costs one extra Gemini call on most
+mornings (the call used to be skipped on all but ~3 days a month); a dozen 500-character documents
+is trivial next to the two calls the briefing already makes.
+The skip path survives one case only: an EMPTY prefiltered window means no call at all.
+06-policy-relevance.py's G8 is the fail-closed guard on this property — it calls get_policy() twice,
+the second time with a populated policy_seen, and goes red if the candidate set shrinks.
 
 Per-source isolation, mirroring news.py's per-feed isolation, but the two legs are NOT symmetric:
 
@@ -376,6 +392,10 @@ def _maybe_harvest_utah(st, today):
     queue = list(st.get("policy_utah_queue") or [])
     # Don't re-queue what is already queued or already reported. Matters on the fallback path: a
     # January run harvests LAST year's session again, which was drained months ago.
+    # `policy_seen` now holds REPORTED ids only, so a bill that was released, shown to the model and
+    # not selected can be re-queued by a fallback harvest a year later. That costs one detail fetch
+    # out of an annual backfill and re-offers a bill nobody has ever been told about — which is the
+    # right side of the trade, and the same reasoning as sending the full window in the first place.
     known = {s.get("id") for s in queue} | set(st.get("policy_seen") or {})
     queue += [s for s in stubs if s["id"] not in known]
     # Stamping session_used (not target) is what reopens the gate tomorrow when the fallback fired:
@@ -451,6 +471,10 @@ def requeue_utah(st, candidates):
 def get_policy(st, today):
     """Return ({"candidates": [...], "available": bool}, new_state). NEVER raises.
 
+    `candidates` is the FULL prefiltered window — already-reported ids included. Nothing in here
+    reads `policy_seen` for filtering (only `_maybe_harvest_utah` reads it, to avoid re-queueing a
+    bill that was already reported); see the module docstring for why the dedupe moved downstream.
+
     `available` reflects the FEDERAL leg only: it is the daily backbone, and it is what the degraded
     ping and data_availability.policy are about. Utah is seasonal — its failure is logged and leaves
     `available` alone."""
@@ -476,17 +500,19 @@ def get_policy(st, today):
         print(f"policy: Utah release failed (availability unaffected): {type(e).__name__}: {e}")
 
     try:
-        seen = st.get("policy_seen") or {}
-        fresh = [c for c in candidates if c["id"] not in seen and _matches_profile(c)]
+        # NO policy_seen FILTER HERE, ON PURPOSE — see the "the seen set is not an input filter"
+        # block in the module docstring. The only trimming is the keyword prefilter, the None-safe
+        # sort and the MAX_POLICY_CANDIDATES cap.
+        window = [c for c in candidates if _matches_profile(c)]
         # None-safe sort key: `published` is a date string on both sources, but a normalizer bug or
         # a missing Federal Register field must degrade the ORDER, never raise.
-        fresh.sort(key=lambda c: (c.get("published") or ""), reverse=True)
-        fresh = fresh[: config.MAX_POLICY_CANDIDATES]
+        window.sort(key=lambda c: (c.get("published") or ""), reverse=True)
+        window = window[: config.MAX_POLICY_CANDIDATES]
     except Exception as e:
         # Last-resort guard: this leg cannot reach main()'s "briefing FAILED" handler.
         print(f"policy: candidate assembly failed: {type(e).__name__}: {e}")
         return {"candidates": [], "available": False}, st
 
-    print(f"policy: {len(candidates)} fetched, {len(fresh)} new candidates "
+    print(f"policy: {len(candidates)} fetched, {len(window)} candidates after the prefilter "
           f"(federal available={available})")
-    return {"candidates": fresh, "available": available}, st
+    return {"candidates": window, "available": available}, st

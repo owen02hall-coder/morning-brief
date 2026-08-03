@@ -110,6 +110,59 @@ def _breadth_block(breadth):
             "ndx100": _one_breadth_block(breadth.get("ndx100"))}
 
 
+def _new_policy_items(selected, candidates, seen):
+    """Drop already-reported selections, then cut to the rendered cap.
+
+    Returns (items, reported_candidates) — the items to publish, in the model's ranking order, and
+    the candidate dicts behind them (what `record_policy` marks seen).
+
+    THIS IS WHERE THE SEEN-SET DEDUPE LIVES. `data/policy.get_policy()` deliberately sends the whole
+    prefiltered window to the model, already-reported documents included, because a batch is the only
+    mode the model ranks well in (see that module's docstring and CI run 30851392524). The cost of
+    that is exactly this: the ranked list can contain documents the user was already told about, and
+    they must not ship twice. `summarize_policy` therefore returns up to MAX_POLICY_SELECTIONS (6)
+    and the cut to MAX_POLICY_ITEMS (3) happens HERE, AFTER the drop — cutting first would let three
+    old items consume the whole section on a day a new rule landed.
+
+    The join is by candidate URL through `summarize._norm_url`, the same join the validator used to
+    build these items (it re-takes `url` from the candidate verbatim, so this is an exact match in
+    practice; normalizing both sides costs nothing and cannot regress with it). An item that joins to
+    nothing cannot be checked against the seen set and is DROPPED, not published: `_validate_policy_
+    items` already guarantees every surviving item joins, so a miss here means the join broke, and
+    publishing an item whose candidate is unknown would also mean recording nothing as seen for it —
+    i.e. re-publishing it every day.
+    """
+    by_norm = {summarize_mod._norm_url(c.get("url")): c for c in candidates}
+    items, reported, repeats, dupes, orphans = [], [], [], [], []
+    picked = set()
+    for it in selected:
+        src = by_norm.get(summarize_mod._norm_url(it.get("url")))
+        if src is None:
+            orphans.append(it.get("url"))
+            continue
+        if src["id"] in seen:
+            repeats.append(src["id"])
+            continue
+        # `seen` covers earlier DAYS; `picked` covers this response. Asking for 6 items instead of 3
+        # makes a repeated citation likelier, and nothing upstream dedupes: _validate_policy_items
+        # joins each item independently, so two items citing one document would render twice.
+        # Logged apart from the seen-drop: one is a healthy daily outcome, the other is model noise.
+        if src["id"] in picked:
+            dupes.append(src["id"])
+            continue
+        picked.add(src["id"])
+        items.append(it)
+        reported.append(src)
+    if repeats:
+        print(f"policy: dropped {len(repeats)} already-reported selection(s): {', '.join(repeats)}")
+    if dupes:
+        print(f"policy: dropped {len(dupes)} duplicate selection(s) in one response: "
+              f"{', '.join(dupes)}")
+    for url in orphans:
+        print(f"policy: dropped (unjoinable selection): {url}")
+    return items[: config.MAX_POLICY_ITEMS], reported[: config.MAX_POLICY_ITEMS]
+
+
 def _get_policy(st, today):
     """The whole policy leg: re-emit-or-fetch, then record. Returns (items, available, state).
 
@@ -125,12 +178,23 @@ def _get_policy(st, today):
        that run re-fetched and the fetch went badly, it would overwrite the archive with an empty
        policy list and DELETE already-published items. Reading `policy_today` before touching the
        network makes that impossible: no fetch, no model call, no new push.
-    2. **Candidates are marked seen only AFTER summarize_policy() returns ok=True.** On a model
-       failure they stay unseen so tomorrow retries; burying a day's candidates permanently for a
-       transient Gemini outage is the failure this ordering exists to prevent. Staying unseen is only
-       half of it for UTAH: those stubs were already POPPED off policy_utah_queue at fetch time and
-       state.save() runs regardless, so the same failure must also hand them back via
-       policy_mod.requeue_utah() or they are gone until the next general session.
+    2. **Only REPORTED items are marked seen, and only after summarize_policy() returns ok=True.**
+       On a model failure nothing is recorded so tomorrow retries; burying a day's candidates
+       permanently for a transient Gemini outage is the failure this ordering exists to prevent.
+       Staying unseen is only half of it for UTAH: those stubs were already POPPED off
+       policy_utah_queue at fetch time and state.save() runs regardless, so the same failure must
+       also hand them back via policy_mod.requeue_utah() or they are gone until the next general
+       session.
+
+       "Reported, not sent" is a deliberate reversal of the original rule. The seen set is no longer
+       an input filter (policy.get_policy sends the whole prefiltered window), so recording
+       everything sent would bury the entire window after one call and reproduce the old defect in a
+       worse form. The consequence is intended: a candidate the model never selects comes back
+       tomorrow instead of being buried unread.
+
+       The ONE exception is the bootstrap suppression below, which marks candidates seen precisely
+       *because* it is refusing to report them. Those ids stay in the window and are re-sent, but
+       _new_policy_items() drops them after selection, so the suppression still holds.
     """
     candidates = []
     try:
@@ -147,7 +211,7 @@ def _get_policy(st, today):
         candidates = list(fetched.get("candidates") or [])
         available = bool(fetched.get("available"))
 
-        sent = []
+        mark_seen = []
         if not st.get("policy_bootstrapped") and available:
             # First-ever policy run: the 45-day federal window is ALL "new", and back-announcing a
             # month and a half of rules is not a briefing. Mark the federal candidates seen and
@@ -156,27 +220,30 @@ def _get_policy(st, today):
             # next general session in March 2027, killing the higher-signal half for ~7 months.
             # Gated on `available`: bootstrapping off a FAILED federal fetch would mark nothing seen
             # and then back-announce the whole backfill tomorrow — the suppression's exact opposite.
-            sent = [c for c in candidates if c.get("source") != "Utah Legislature"]
+            mark_seen = [c for c in candidates if c.get("source") != "Utah Legislature"]
             candidates = [c for c in candidates if c.get("source") == "Utah Legislature"]
             st = {**st, "policy_bootstrapped": True}
-            print(f"policy: bootstrap run — marking {len(sent)} federal candidate(s) seen without "
-                  f"reporting; {len(candidates)} Utah candidate(s) still flow normally")
+            print(f"policy: bootstrap run — marking {len(mark_seen)} federal candidate(s) seen "
+                  f"without reporting; {len(candidates)} Utah candidate(s) still flow normally")
 
         if not candidates:
             items = []
-            print("policy: 0 new candidates, skipping model call")
+            print("policy: 0 candidates, skipping model call")
         else:
-            items, ok = summarize_mod.summarize_policy(candidates)
+            selected, ok = summarize_mod.summarize_policy(candidates)
             if ok:
-                sent = sent + candidates
-                print(f"policy: sent {len(candidates)} candidates, {len(items)} survived validation")
+                items, reported = _new_policy_items(selected, candidates,
+                                                    st.get("policy_seen") or {})
+                mark_seen = mark_seen + reported
+                print(f"policy: sent {len(candidates)} candidates, model selected {len(selected)}, "
+                      f"{len(items)} new after the already-reported drop")
             else:
                 items = []
                 st = policy_mod.requeue_utah(st, candidates)
                 print(f"policy: model leg did not complete — {len(candidates)} candidate(s) left "
                       f"UNSEEN for tomorrow's retry")
 
-        st = state.record_policy(st, sent, items, today)
+        st = state.record_policy(st, mark_seen, items, today)
         print(f"policy: reported {len(items)}")
         return items, available, st
     except Exception as e:

@@ -40,9 +40,13 @@ GitHub Actions (cron, UTC) --> python -m scripts.build_briefing
                                            (no fetch, no model call, no push) — this branch is first
      -> policy.get_policy()                Federal Register (6 agencies, 45d) + Utah signed-bill queue
                                            -> one normalized shape -> keyword prefilter
-                                           -> drop ids in policy_seen -> cap at MAX_POLICY_CANDIDATES
-     -> summarize.summarize_policy()       SECOND Gemini call; skipped entirely when 0 candidates
+                                           -> cap at MAX_POLICY_CANDIDATES (NO policy_seen filter:
+                                              the model is always given the whole window to RANK)
+     -> summarize.summarize_policy()       SECOND Gemini call, asks for MAX_POLICY_SELECTIONS (6)
+                                           ranked items; skipped only when the window is EMPTY
+     -> _new_policy_items()                drop ids already in policy_seen, THEN cut to MAX_POLICY_ITEMS
      -> state.record_policy()              the only writer of policy_seen/policy_active/policy_today
+                                           (policy_seen records what was REPORTED, not what was sent)
   -> summarize.summarize()                 Gemini structured output (numbers injected as facts)
   -> assemble briefing dict (incl. breadth, mortgage, policy, policy_upcoming)
   -> write docs/briefing.json
@@ -159,9 +163,17 @@ Heartbeat (independent cron): python -m scripts.heartbeat
 - The policy section reports only what changes a number, a deadline, or an obligation for one
   specific reader. That is a narrow, effect-tested exception to the "no granular US politics" rule in
   `summarize.SYSTEM`, not a reversal of it: importance in general is explicitly not a criterion. A
-  cheap word-boundary keyword prefilter and the `policy_seen` dedupe both run before the model, and
-  the call is skipped entirely when nothing survives them — which is most days, so most days cost no
-  policy tokens at all.
+  cheap word-boundary keyword prefilter runs before the model and the call is skipped entirely when
+  nothing survives it.
+- **The model ranks; it does not judge in isolation.** The `policy_seen` dedupe runs AFTER selection,
+  not before the prompt, so `get_policy()` hands over the whole prefiltered window (~9-12 documents)
+  every day. This is the 2026-08-03 reversal of the original design and it was measured, not
+  reasoned: given ONE on-profile document alone the model returned nothing, while ranking a batch of
+  26 in the same run it selected correctly (CI run 30851392524). The old design's own success
+  condition — a small unseen set — was what put the model in its failing mode. The cost is a Gemini
+  call on most mornings instead of ~3 a month; a dozen 500-character documents is trivial beside the
+  two calls the briefing already makes. Test 06's **G8** calls `get_policy()` twice and goes red if
+  the input ever shrinks because of the seen set.
 - An empty policy section is a correct outcome, not a failure. It renders nothing rather than
   "Information not available." (that message would be a lie), and `data_availability.policy` tracks
   the FETCH, not the item count — deriving availability from an empty list would flag every healthy
@@ -184,11 +196,14 @@ Heartbeat (independent cron): python -m scripts.heartbeat
   to true, so a second run of the day is the normal manual path. The policy leg therefore checks
   `state.policy_today` and re-emits verbatim BEFORE touching the network: a re-fetch that went badly
   would otherwise overwrite the archive with an empty list and delete items already sent to the user.
-- A transient model failure must not bury a day's candidates. Candidates are marked `policy_seen`
-  only after `summarize_policy()` returns ok — a Gemini outage retries them tomorrow instead of
-  silently consuming them. (Two earlier revisions of this feature shipped a policy state field that
-  was declared and read but never written; routing all three keys through `record_policy()` is the
-  structural fix.)
+- A transient model failure must not bury a day's candidates. Nothing is marked `policy_seen` unless
+  `summarize_policy()` returned ok — a Gemini outage retries tomorrow instead of silently consuming
+  the day. And `policy_seen` now records only what was actually REPORTED (plus the first-run
+  bootstrap window, which is marked seen precisely because it is being withheld), because the seen
+  set is no longer an input filter: recording everything sent would bury the whole window after one
+  call. A candidate the model never selects therefore comes back tomorrow rather than being buried
+  unread. (Two earlier revisions of this feature shipped a policy state field that was declared and
+  read but never written; routing all three keys through `record_policy()` is the structural fix.)
 - Rendering the policy section is guarded at the call site. `policySection()` returns null when
   nothing qualified and `appendChild(null)` throws — and a throw inside `render()` is worse than a
   blank page: `loadBriefing()` has already committed the sequence and advanced `lastGeneratedAt`, so
@@ -278,16 +293,27 @@ oversights:
 - **The audio edition excludes policy.** The narration stays deliberately leaner than the page
   (`scripts/tts.py`), and adding a fourth topic to a drive-time script was not worth the length.
 
-One residual risk is no longer left to memory — it is gated weekly. The model's selectivity was
-proven on a batch of 24 candidates, where it could rank documents against each other. With
-`policy_seen` differencing, production usually sends it one or two. "Is this one thing relevant?" is
-a different question from "pick the best two of these 24". Test 06's **G8** probe covers that seam
-with two extra one-document model calls (a pinned on-profile document must come back with a
-non-empty `effect`; a lone decoy must come back as an empty list), run every Monday by
-`.github/workflows/data-smoke.yml`.
+One residual risk was found by the weekly gate and has been fixed by removing the mode rather than
+prompting around it. The model's selectivity was proven on a batch of 24 candidates, where it could
+rank documents against each other; with the old pre-prompt `policy_seen` differencing, production
+usually sent it one or two. Test 06's **G8** probed that seam with one-document model calls and went
+RED on CI run 30851392524: given a single on-profile document (2026-13286) the model returned
+nothing, while in the same run it correctly picked 2 of 26 from the batch. "Is this one thing
+relevant?" really is a different question from "pick the best of these 26".
 
-**G8 currently FAILS, and the seam it measures is a live defect.** On CI run 30851392524 the model,
-given that one on-profile document in isolation, returned nothing — while in the same run selecting
-correctly from the 26-candidate batch. So single-candidate relevance really is a different question,
-and production's usual 1-2-unseen-document path is the weak one. A fix is pending; treat the section
-as under-selecting until G8 goes green.
+The fix (2026-08-03) makes the batch the only mode production ever uses:
+
+- `policy.get_policy()` sends the full prefiltered window, already-reported ids included.
+- `summarize_policy()` asks for `MAX_POLICY_SELECTIONS` (6) ranked items instead of 3, so a new item
+  can still survive when the top of the list is old news.
+- `build_briefing._new_policy_items()` drops already-reported ids and then cuts to
+  `MAX_POLICY_ITEMS` (3).
+- `policy_seen` consequently records only what was REPORTED.
+
+**G8 was not deleted and is not left red.** It now asserts the invariant the fix depends on — two
+calls to `get_policy()`, the second with every returned id marked seen, and no candidate may
+disappear — with `POLICY_SEEN_CONTROL=true` as its negative control. The one-document calls survive
+as a recorded MEASUREMENT (`single_candidate_probe.single_candidate_selects` in the fingerprint,
+printed as a NOTE) because the limitation is real and worth tracking. **The model did not get
+better**: a future run where the measurement reads `true` is not permission to move the dedupe back
+in front of the prompt.
