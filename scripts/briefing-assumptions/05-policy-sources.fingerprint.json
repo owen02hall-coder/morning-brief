@@ -1,0 +1,29 @@
+{
+  "checked_at": "2026-08-03T17:22:44.049964+00:00",
+  "federal_register": {
+    "window_days": 45,
+    "since": "2026-06-19",
+    "agencies": 6,
+    "count": 21,
+    "returned": 21,
+    "types_seen": [
+      "Proposed Rule",
+      "Rule"
+    ]
+  },
+  "pmms": {
+    "rows": 2889,
+    "latest_date": "2026-07-30",
+    "age_days": 4,
+    "pmms30": "6.66"
+  },
+  "utah_legislature": {
+    "2026GS": {
+      "rows": 495,
+      "with_title": 495,
+      "signed": 491
+    },
+    "session_used": "2026GS",
+    "sample_title": "Public Education Base Budget Amendments"
+  }
+}

@@ -28,3 +28,11 @@ jobs:
           python -m scripts.build_briefing --spine | tee spine.txt
           grep -q "breadth: {'sp500': {'value'" spine.txt || { echo "::error::S&P breadth did not compute from the runner"; exit 1; }
           grep -q "'ndx100': {'value'" spine.txt || { echo "::error::Nasdaq-100 breadth did not compute from the runner"; exit 1; }
+
+      # Runner-IP proof for the planned policy section: .gov hosts and le.utah.gov are exactly the
+      # kind of surface that answers a home connection but blocks/limits cloud egress. Passing
+      # locally proves the API contract only. Read-only; writes nothing outside the workspace.
+      - name: Policy sources reachable from the runner
+        env:
+          BRIEFING_SMOKE_ALLOW_DEV: "true"
+        run: python scripts/briefing-assumptions/05-policy-sources.py
