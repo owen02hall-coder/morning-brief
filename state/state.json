@@ -1,16 +1,16 @@
 {
-  "last_run": "2026-08-03",
-  "markets_last_ok": "2026-08-03",
+  "last_run": "2026-08-04",
+  "markets_last_ok": "2026-08-04",
   "breadth_last_good": {
     "sp500": {
-      "value": 69.6,
+      "value": 68.8,
       "matched": 500,
-      "asof": "2026-07-31"
+      "asof": "2026-08-03"
     },
     "ndx100": {
-      "value": 61.2,
+      "value": 64.3,
       "matched": 98,
-      "asof": "2026-07-08"
+      "asof": "2026-08-03"
     }
   },
   "breadth": {
@@ -18,15 +18,107 @@
       "in_alert": false,
       "nag_days": 0,
       "warn_armed": true,
-      "last_value": 69.6,
-      "last_asof": "2026-07-31"
+      "last_value": 68.8,
+      "last_asof": "2026-08-03"
     },
     "ndx100": {
       "in_alert": false,
       "nag_days": 0,
       "warn_armed": true,
-      "last_value": 61.2,
-      "last_asof": "2026-07-08"
+      "last_value": 64.3,
+      "last_asof": "2026-08-03"
     }
+  },
+  "policy_utah_queue": [
+    {
+      "id": "2026GS:HB0290",
+      "url": "https://le.utah.gov/~2026/bills/static/HB0290.html",
+      "title": "Child Tax Credit Amendments"
+    },
+    {
+      "id": "2026GS:HB0404",
+      "url": "https://le.utah.gov/~2026/bills/static/HB0404.html",
+      "title": "Sex-Designated Housing Amendments"
+    },
+    {
+      "id": "2026GS:HB0436",
+      "url": "https://le.utah.gov/~2026/bills/static/HB0436.html",
+      "title": "Moderate Income Housing Infrastructure Amendments"
+    },
+    {
+      "id": "2026GS:HB0492",
+      "url": "https://le.utah.gov/~2026/bills/static/HB0492.html",
+      "title": "Transportation, Infrastructure, and Housing Amendments"
+    },
+    {
+      "id": "2026GS:HB0520",
+      "url": "https://le.utah.gov/~2026/bills/static/HB0520.html",
+      "title": "Higher Education Student Housing Study"
+    },
+    {
+      "id": "2026GS:HB0565",
+      "url": "https://le.utah.gov/~2026/bills/static/HB0565.html",
+      "title": "City Library Property Tax Amendments"
+    },
+    {
+      "id": "2026GS:SB0016",
+      "url": "https://le.utah.gov/~2026/bills/static/SB0016.html",
+      "title": "Tax Credit Review Process Amendments"
+    },
+    {
+      "id": "2026GS:SB0025",
+      "url": "https://le.utah.gov/~2026/bills/static/SB0025.html",
+      "title": "Retirement Modifications"
+    },
+    {
+      "id": "2026GS:SB0060",
+      "url": "https://le.utah.gov/~2026/bills/static/SB0060.html",
+      "title": "Income Tax Rate Amendments"
+    },
+    {
+      "id": "2026GS:SB0108",
+      "url": "https://le.utah.gov/~2026/bills/static/SB0108.html",
+      "title": "Online Marketplace Amendments"
+    },
+    {
+      "id": "2026GS:SB0175",
+      "url": "https://le.utah.gov/~2026/bills/static/SB0175.html",
+      "title": "Health Insurance Revisions"
+    },
+    {
+      "id": "2026GS:SB0236",
+      "url": "https://le.utah.gov/~2026/bills/static/SB0236.html",
+      "title": "Property Tax Exemption Process Amendments"
+    },
+    {
+      "id": "2026GS:SB0238",
+      "url": "https://le.utah.gov/~2026/bills/static/SB0238.html",
+      "title": "Property Tax Adjustments"
+    },
+    {
+      "id": "2026GS:SB0319",
+      "url": "https://le.utah.gov/~2026/bills/static/SB0319.html",
+      "title": "Health Insurance Preauthorization Amendments"
+    }
+  ],
+  "policy_utah_session": "2026GS",
+  "policy_bootstrapped": true,
+  "policy_seen": {
+    "2026-15614": "2026-08-03",
+    "2026-14917": "2026-07-23",
+    "2026-14036": "2026-07-13",
+    "2026-14035": "2026-07-13",
+    "2026-13939": "2026-07-10",
+    "2026-13834": "2026-07-09",
+    "2026-13370": "2026-07-02",
+    "2026-13286": "2026-07-01",
+    "2026-12943": "2026-06-26",
+    "2026-12750": "2026-06-24"
+  },
+  "policy_active": [],
+  "policy_today": {
+    "date": "2026-08-04",
+    "items": [],
+    "alerted": false
   }
 }
