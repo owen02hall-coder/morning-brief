@@ -280,7 +280,12 @@ function render(b, into) {
   grid.appendChild(numberCard("VIX", b.vix, "", "percent"));
   // Weekly PMMS rate — only when present. Archived editions predate the key, and numberCard's
   // null branch would print a 5th "Information not available." tile where none belongs.
-  if (b.mortgage) grid.appendChild(numberCard("30-year mortgage", b.mortgage, "%"));
+  // "bps", the same mode as the 10-year Treasury, because it is the same units problem: the tile
+  // reads "6.66%", so a raw "+0.03%" delta beside it is ambiguous — 0.03 percentage points, or
+  // 0.03% of the rate? "+3 bps" cannot be misread, it is how rate moves are quoted, and weekly
+  // PMMS moves of 0.01-0.10pp land as clean integers instead of two-decimal fractions.
+  // change is null on archived editions and whenever no prior row parsed; numberCard omits it.
+  if (b.mortgage) grid.appendChild(numberCard("30-year mortgage", b.mortgage, "%", "bps"));
   market.appendChild(grid);
   if (b.market && b.market.why) market.appendChild(el("p", "why", b.market.why));
   into.appendChild(market);

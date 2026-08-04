@@ -20,6 +20,20 @@ would rot the moment that bill moved):
   (A5) THE SLICE THAT ACTUALLY REACHES THE MODEL is the bill. See below — this is the assertion
        this file now exists for. Checked immediately after A3, since it is A3's real subject.
 
+And on EVERY signed row of the live list, not just the sample:
+  (A6) the passed-bills table still carries a readable "Effective Date" column, and production's
+       own `policy._parse_rows` resolves it to an ISO date on at least UTAH_EFF_DATE_MIN_SHARE of
+       signed rows. THE FAILURE THIS GUARDS IS SILENT BY CONSTRUCTION: a signed Utah bill with
+       `effective_date: None` cannot enter `policy_active`, so it never reaches "What's coming" —
+       the section renders slightly emptier and nothing anywhere goes red. That is the same shape
+       as the nav-chrome defect A5 exists for, and the same shape as the 22-day dead Nasdaq-100
+       breadth. The column is the ONLY published source for the date (the per-bill JSON has no
+       effective-date field at all — its only date is the governor's action date), so if Utah
+       renames or moves it, this is the one place it can be caught.
+       `policy._effective_date_index` reads the position from the table's own header, so a column
+       INSERTED upstream shifts the read correctly rather than silently promoting the passed date
+       into the effective date; A6 is what catches the rename/removal case that index cannot fix.
+
 WHY A5 EXISTS (a defect this file's earlier A3 was blind to, found 2026-08-03). A3 used to assert
 that the bill number and title tokens appeared ANYWHERE in the FULL stripped text, using a LOCAL
 copy of the tag-strip. Both halves of that were wrong:
@@ -44,6 +58,7 @@ Exit: 0 PASS / 1 FAIL / 2 REFUSED / 3 INFRA.
 
 NEGATIVE CONTROLS (controllable, both verified to actually go red on 2026-08-03):
   UTAH_DETAIL_MIN_CHARS_OVERRIDE=999999   forces A3 red.
+  UTAH_EFF_DATE_MIN_SHARE_OVERRIDE=1.01   forces A6 red without touching the live page.
   UTAH_CHROME_CONTROL=true                replaces the extracted text with the PRE-FIX extraction
      (the whole bill page stripped whole) and forces A5 red. This is the regression this file now
      stands in front of: run it after any change to policy._fetch_bill_detail and confirm it is
@@ -89,6 +104,10 @@ DETAIL_MAX_BYTES = 2_000_000        # a bill page far larger than this would blo
 DETAIL_MAX_SECONDS = 20.0           # per fetch; config.POLICY_TIMEOUT is 25
 TOTAL_MAX_SECONDS = 90.0            # list + 3 pages + 3 bill-JSON fetches; run-all.sh allows 150s
 CHROME_CONTROL = os.environ.get("UTAH_CHROME_CONTROL") == "true"
+# A6. 0.95, not 1.0: measured live 2026-08-04 the column is 495/495 on 2026GS, 550/550 on 2025GS and
+# 547/547 on 2024GS, so this has 5 points of slack for one malformed row without letting it go dark.
+# The failure it exists for is total (a rename drops it to 0.0), not gradual.
+UTAH_EFF_DATE_MIN_SHARE = float(os.environ.get("UTAH_EFF_DATE_MIN_SHARE_OVERRIDE", "0.95"))
 
 # A5, fail-closed: the model-visible slice must read like a bill. Matched by 52/52 signed bills
 # sampled across 2025GS and 2026GS; the legislature's own summaries all open "This bill ...".
@@ -164,6 +183,34 @@ def main():
 
     fp["session"] = session_used
     fp["signed_rows"] = len(rows)
+
+    # --- A6: the effective-date column is still there and still parses -------------------------
+    # Across EVERY signed row, not the 3-row sample: this is a whole-column property, and a sample
+    # of 3 would miss a partial outage. `rows` came out of production's own policy._parse_rows.
+    dated = [r for r in rows if r.get("effective_date")]
+    share = len(dated) / len(rows)
+    bad_iso = [r["number"] for r in dated
+               if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", r["effective_date"] or "")][:5]
+    fp["effective_date"] = {"with_date": len(dated), "of_signed": len(rows),
+                            "share": round(share, 4),
+                            "min_share": UTAH_EFF_DATE_MIN_SHARE,
+                            "column_index": policy._effective_date_index(
+                                body.decode("utf-8", "replace")),
+                            "sample": {r["number"]: r["effective_date"] for r in dated[:5]}}
+    if share < UTAH_EFF_DATE_MIN_SHARE:
+        failures.append(
+            f"A6: only {len(dated)}/{len(rows)} signed rows ({share:.1%}) resolved an "
+            f"effective_date, below {UTAH_EFF_DATE_MIN_SHARE:.0%}. The passed-bills 'Effective "
+            f"Date' column is the ONLY published source for a Utah bill's effective date (the "
+            f"per-bill JSON has none), and a bill without one can never enter policy_active or "
+            f"'What's coming' — it just quietly stops appearing. Check whether the column was "
+            f"renamed or removed: policy._effective_date_index returned "
+            f"{policy._effective_date_index(body.decode('utf-8', 'replace'))}")
+    if bad_iso:
+        failures.append(
+            f"A6: {len(bad_iso)} row(s) produced a non-ISO effective_date ({bad_iso}) — every "
+            f"consumer (build_briefing's `> today`, state.record_policy's sort, app.js localDate) "
+            f"compares this as a STRING, so a non-ISO value sorts and compares wrong in silence")
 
     sample = _pick_sample(rows)
     fp["sampled"] = [r["number"] for r in sample]
@@ -267,7 +314,8 @@ def main():
 
     with open(os.path.join(HERE, "07-utah-bill-detail.fingerprint.json"), "w", encoding="utf-8") as fh:
         json.dump(fp, fh, indent=2)
-    print(f"PASS: 07-utah-bill-detail — A1..A5 ({session_used}: {len(rows)} signed; sampled "
+    print(f"PASS: 07-utah-bill-detail — A1..A6 ({session_used}: {len(rows)} signed, "
+          f"{fp['effective_date']['with_date']} with an effective date; sampled "
           f"{', '.join(d['number'] for d in details)}; "
           f"text {min(d['text_chars'] for d in details)}-{max(d['text_chars'] for d in details)} chars, "
           f"of which the model sees the first {POLICY_PROMPT_TEXT_CHARS}; "

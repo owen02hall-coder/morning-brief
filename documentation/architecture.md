@@ -95,7 +95,14 @@ Heartbeat (independent cron): python -m scripts.heartbeat
   try/except, time-window cutoff, dedupe, per-bucket cap.
 - `scripts/data/mortgage.py`: the Freddie Mac PMMS 30-year fixed rate. Reads the history CSV's last
   row and looks the rate up by COLUMN NAME (`pmms30`), so an inserted column shifts nothing. Returns
-  `{value, asof}` or None; never raises. There is deliberately no freshness guard: PMMS is a WEEKLY
+  `{value, change, asof}` or None; never raises. `change` is the week-over-week move in PERCENTAGE
+  POINTS, computed from the row before the last — the whole file is already parsed in memory, so the
+  prior release costs no extra request. It is **None, never 0.0**, when there is no usable prior row
+  (the same rule `market.py` follows for a lone settled close: a fabricated zero renders as
+  "unchanged", which is a claim about the market, where the truth is "we don't know"). The tile
+  renders it in **bps**, the same `numberCard` mode as the 10-year Treasury: the figure already reads
+  "6.66%", so a "+0.08%" delta beside it is ambiguous (0.08 percentage points, or 0.08% of the
+  rate?), while "+8 bps" cannot be misread and is how rate moves are quoted. There is deliberately no freshness guard: PMMS is a WEEKLY
   Thursday release, so a several-day-old row is its healthy state and an age check would false-alarm
   every Monday. A stalled feed or a moved column is caught by the weekly assumption gate instead.
 - `scripts/data/policy.py`: policy candidates from two asymmetric sources, normalized to ONE shape
@@ -107,7 +114,32 @@ Heartbeat (independent cron): python -m scripts.heartbeat
   availability. The Utah harvest is annual, gated on `UTAH_MIN_SIGNED` and title-prefiltered, and
   queues STUBS only — bill detail pages are fetched lazily at release, at most `MAX_POLICY_ITEMS`
   per run, because harvesting 491 bills eagerly would be ~491 sequential requests inside a
-  10-minute job. `get_policy()` never raises and writes no state itself; it returns a new state dict.
+  10-minute job. Utah bills carry the **effective date published in the passed-bills table's own
+  "Effective Date" column** (measured live 2026-08-04: 495/495 rows of 2026GS, 550/550 of 2025GS,
+  547/547 of 2024GS). It is read at the column position derived from the table's HEADER, never a
+  hardcoded index, so an inserted column yields no date rather than silently promoting the passed
+  date into the effective date; gate 07's A6 is the fail-closed guard on the column going dark.
+  Nothing is derived from the passage date or from Utah's 60-days-after-sine-die statutory default —
+  where that default applies, Utah already prints the resolved date (368 of 491 signed 2026GS bills
+  read 05/06/2026). The per-bill JSON has no effective-date field at all, so the list page is the
+  only source, and three legs must all preserve it: the harvest puts it on the stub, `requeue_utah()`
+  carries it back, and `_backfill_utah_dates()` repairs stubs queued before the field existed (that
+  third leg is not optional — the live queue already had its session stamped and 14/14 dateless
+  stubs, so without it the feature would have been dead until the 2027 session).
+  `get_policy()` never raises and writes no state itself; it returns a new state dict.
+- `scripts/data/retry.py`: bounded retry for the policy + PMMS HTTP legs, applied inside
+  `policy._get()` (so every policy request inherits it) and around `mortgage._fetch()`. At most 3
+  attempts with a 2s then 5s backoff, and **transient classes only**: 403/408/425/429, every 5xx,
+  timeouts, connection resets and a body that ends mid-stream. **400 and 404 are deliberately never
+  retried** — a misspelled Federal Register agency slug returns 400, and that loud failure is a
+  property the design depends on; so are non-transport errors (a zero-result `ValueError`, a JSON
+  decode error, the PMMS read-cap `ValueError`), because a second identical response cannot change
+  a decision about a response that already arrived. Anything the classifier does not positively
+  recognise is treated as permanent and re-raised. EXTRA attempts are capped for the whole process
+  at `RETRY_EXTRA_ATTEMPT_BUDGET` (4), which is what bounds worst-case ADDED wall time to
+  4 x `POLICY_TIMEOUT` + 14s of backoff = **114s**, under 20% of `briefing.yml`'s 600s cap, across a
+  retried surface of up to 12 requests. Every retry prints its reason, so a rate-limit episode is
+  legible in the job log instead of showing up as a section that quietly rendered nothing.
   The module has a SECOND, unrelated entry point below its "static policy calendar" header:
   `upcoming_calendar(today, horizon_days)`, which shares nothing with the fetch surface — no network,
   no state, no model, no seen set, no effect on `available`. It resolves each `config.POLICY_CALENDAR`
@@ -262,10 +294,13 @@ breadth      : { sp500: B, ndx100: B } where B = { value, asof, status, matched,
                (status: oversold <30 | watch <40 | healthy >=40 | unavailable; value null when
                unavailable; stale=true when served from the last-good cache. Archives before
                2026-07-06 carry a legacy flat single-index shape, which the PWA still renders.)
-mortgage     : { value, asof } or null — the 30-year fixed PMMS rate, rendered as a 5th market tile
+mortgage     : { value, change, asof } or null — the 30-year fixed PMMS rate, rendered as a 5th
+               market tile. `change` is the week-over-week move in percentage points, shown as bps
+               (+8 bps); null when no prior release row exists, never a fabricated 0.
 policy       : list of { what_happened, effect, url, status, effective_date, source }
                (status: "Final rule" | "Proposed" | "Signed in Utah"; effective_date is legitimately
-               null on proposed rules and on Utah bills. Usually [] — that is the normal quiet day.)
+               null on proposed rules; on Utah bills it is the legislature's own published
+               effective date. Usually [] — that is the normal quiet day.)
 policy_upcoming : list of already-reported items whose effective_date is still ahead, same shape,
                capped at MAX_POLICY_UPCOMING (5), sorted by date ascending. Carries `effect` too:
                the carry exists so a deadline stays meaningful rather than becoming a bare headline.

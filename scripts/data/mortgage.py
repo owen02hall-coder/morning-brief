@@ -6,8 +6,12 @@ Freddie Mac publishes the Primary Mortgage Market Survey as a plain history CSV 
 dates, so the LAST row is the current release. The 30-year rate is read by COLUMN NAME, never by
 position, so an inserted column shifts nothing.
 
-get_rate() returns {value, asof} or None:
+get_rate() returns {value, change, asof} or None:
 - value : the 30-year fixed rate as a float (e.g. 6.66)
+- change: this release minus the PREVIOUS release, in percentage points (e.g. -0.03), or None when
+          the file holds no prior row — never a fabricated 0.0, the same rule market.py follows for
+          a lone settled close. Rate DIRECTION is what a first-time buyer is actually deciding on,
+          and the prior week's row is already in memory when the file parses.
 - asof  : the release date that rate belongs to (YYYY-MM-DD)
 
 The survey is released WEEKLY (Thursday), so on most mornings the newest row is several days old —
@@ -22,6 +26,7 @@ import urllib.request
 from datetime import datetime
 
 from .. import config
+from . import retry
 
 # freddiemac.com answers this path for a browser-like User-Agent; the project UA is unprobed there,
 # and 05-policy-sources.py proved P4 against the live file using exactly this shape. Module-local on
@@ -35,37 +40,75 @@ PMMS_UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
 _READ_CAP = 4_000_000
 
 
-def _parse(raw):
-    """Pull the newest 30-year rate out of a PMMS history CSV -> {value, asof}.
+def _rate_at(row, col):
+    """The 30-year rate in one already-split CSV row, or None if that cell is missing/blank/junk.
 
-    Parse proven against the live file by 05-policy-sources.py's P4 block. Raises on a header without
-    `pmms30`, an unparseable date or a blank rate — get_rate() turns those into a logged None."""
+    Only used for the PRIOR row. The NEWEST row is deliberately NOT read through here: a missing
+    rate there means there is no rate to publish at all, which must raise into get_rate()'s logged
+    degrade, not quietly become None."""
+    try:
+        return float(row[col].strip())
+    except (IndexError, ValueError):
+        return None
+
+
+def _parse(raw):
+    """Pull the newest 30-year rate + its week-over-week move out of a PMMS history CSV.
+
+    -> {value, change, asof}. Parse proven against the live file by 05-policy-sources.py's P4 block.
+    Raises on a header without `pmms30`, an unparseable date or a blank rate — get_rate() turns
+    those into a logged None.
+
+    `change` is the newest release minus the one before it, in PERCENTAGE POINTS, and it is None
+    whenever there is no usable prior row. None, never 0.0: a fabricated zero would render as
+    "unchanged" — an actual claim about the market — where the truth is "we don't know". Same rule
+    market._parse() applies to a lone settled close.
+
+    It is "vs the previous RELEASE", not "vs 7 days ago", and that is the honest framing: PMMS is
+    weekly, so the previous row IS last week, but if Freddie Mac ever skips a week the delta is
+    still exactly "the move since the last published rate" rather than a broken weekly claim. That
+    is why there is no date-gap guard here — there is nothing for one to protect."""
     rows = [r for r in raw.splitlines() if r.strip()]
     if len(rows) < 2:                       # header only (or nothing) is not a usable release
         return None
     header = [h.strip() for h in rows[0].split(",")]
+    # BY NAME, never by position — an inserted column shifts nothing.
+    col = header.index("pmms30")
     last = rows[-1].split(",")
     asof = datetime.strptime(last[0].strip(), "%m/%d/%Y").date().isoformat()
-    value = round(float(last[header.index("pmms30")].strip()), 2)
-    return {"value": value, "asof": asof}
+    value = round(float(last[col].strip()), 2)
+    # rows[0] is the header, so rows[-2] is only a data row when there are at least 2 of them.
+    prior = _rate_at(rows[-2].split(","), col) if len(rows) >= 3 else None
+    change = round(value - prior, 2) if prior is not None else None
+    return {"value": value, "change": change, "asof": asof}
+
+
+def _fetch():
+    """One bounded PMMS request. Split out so scripts/data/retry.py wraps the NETWORK leg only.
+
+    The read-cap ValueError is raised in here on purpose even though it is not a transport failure:
+    retry.transient_reason() does not recognise a ValueError, so it is re-raised immediately rather
+    than burning the run's retry budget re-downloading a body that is the wrong size."""
+    req = urllib.request.Request(
+        config.PMMS_CSV_URL, headers={"User-Agent": PMMS_UA, "Accept": "text/csv, */*"})
+    # Explicit timeout: a hung source must not eat the job budget (briefing.yml timeout-minutes: 10).
+    with urllib.request.urlopen(req, timeout=config.POLICY_TIMEOUT) as r:
+        raw = r.read(_READ_CAP + 1)
+    if len(raw) > _READ_CAP:
+        # A capped read can end mid-row, and a partial row still parses — as a WRONG rate
+        # (e.g. "6.6" out of "6.66"). No rate beats a plausible-looking wrong one.
+        raise ValueError(f"PMMS CSV exceeded the {_READ_CAP}-byte read cap")
+    return raw
 
 
 def get_rate():
-    """Return {"value": 6.66, "asof": "2026-07-30"} for the 30-year fixed rate, or None.
+    """Return {"value": 6.66, "change": -0.03, "asof": "2026-07-30"}, or None.
 
     Never raises: the mortgage tile is one number on the page, and it must not be able to take the
-    briefing down with it."""
-    req = urllib.request.Request(
-        config.PMMS_CSV_URL, headers={"User-Agent": PMMS_UA, "Accept": "text/csv, */*"})
+    briefing down with it. Transient transport failures (a 403 from a rate limiter, a timeout, a
+    reset) are retried inside a per-run budget first — see scripts/data/retry.py."""
     try:
-        # Explicit timeout: a hung source must not eat the job budget (briefing.yml timeout-minutes: 10).
-        with urllib.request.urlopen(req, timeout=config.POLICY_TIMEOUT) as r:
-            raw = r.read(_READ_CAP + 1)
-        if len(raw) > _READ_CAP:
-            # A capped read can end mid-row, and a partial row still parses — as a WRONG rate
-            # (e.g. "6.6" out of "6.66"). No rate beats a plausible-looking wrong one.
-            raise ValueError(f"PMMS CSV exceeded the {_READ_CAP}-byte read cap")
-        parsed = _parse(raw.decode("utf-8", "replace"))
+        parsed = _parse(retry.call("PMMS CSV", _fetch).decode("utf-8", "replace"))
         if parsed is None:
             raise ValueError("PMMS CSV contained no data rows")
         return parsed

@@ -186,6 +186,33 @@ POLICY_TIMEOUT = 25              # per request. Matches what 05/07 proved; Utah 
                                  # well under 20s each. The whole policy leg must stay inside
                                  # briefing.yml's timeout-minutes: 10 — a cancelled job ships no
                                  # briefing at all and fires a high-priority FAILED push.
+
+# --- Bounded retry for the policy + mortgage HTTP legs (scripts/data/retry.py) -------------------
+# WHY: on 2026-08-03, CI run 30859893450, federalregister.gov answered the GitHub runner with HTTP
+# 403 while the identical request succeeded from a home connection; the very next dispatch
+# (30859980835) was green. Transient rate limiting — we hit that API across five dispatches in one
+# afternoon. One 403 makes policy._federal_candidates() raise, so available=False, the section
+# renders nothing, and the only signal is a LOW-priority degraded ping. Silent AND recurring is
+# exactly the two-part gate this project uses to decide a failure earns a machine.
+# The retry classifier itself lives in scripts/data/retry.py; only the budget numbers are here.
+RETRY_MAX_ATTEMPTS = 3           # 1 initial + at most 2 retries
+RETRY_BACKOFF_SECONDS = (2, 5)   # before retry 1, before retry 2. Small on purpose: this shares
+                                 # briefing.yml's 10-minute budget with everything else, and a
+                                 # rate-limit window that needs more than 7s of patience is not one
+                                 # a morning build should sit through.
+RETRY_EXTRA_ATTEMPT_BUDGET = 4   # EXTRA attempts allowed across the WHOLE run (see retry.py). Not a
+                                 # per-call number: the retried surface is up to 12 requests (PMMS,
+                                 # Federal Register, <=2 Utah list pages, <=2 backfill list pages,
+                                 # <=3 bill JSON + <=3 HTML fallbacks), and an unbudgeted
+                                 # 3-attempts-each would put ~900s of
+                                 # worst case inside a 600s job. Worst case ADDED here is
+                                 # 4 x POLICY_TIMEOUT + 14s of backoff = 114s (~1.9 min, under 20%
+                                 # of the job cap), and it is only reachable if four separate
+                                 # requests each hang for the full 25s — a total outage in which the
+                                 # section is lost regardless. 4 with a 2-retry-per-call ceiling also
+                                 # means the FIRST retried call can never starve the second: PMMS
+                                 # (which runs first) can consume at most 2, leaving >=2 for the
+                                 # federal leg this exists for.
 MAX_POLICY_ITEMS = 3             # rendered per day; also the cap on Utah DETAIL fetches per run,
                                  # which is what keeps the annual Utah backfill (491 bills) from
                                  # fanning out into hundreds of requests inside that 10-minute budget.

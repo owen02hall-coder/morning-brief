@@ -1,8 +1,22 @@
 {
-  "checked_at": "2026-08-03T20:31:31.845975+00:00",
+  "checked_at": "2026-08-04T16:09:28.744856+00:00",
   "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36",
   "session": "2026GS",
   "signed_rows": 491,
+  "effective_date": {
+    "with_date": 491,
+    "of_signed": 491,
+    "share": 1.0,
+    "min_share": 0.95,
+    "column_index": 3,
+    "sample": {
+      "HB0001": "2026-07-01",
+      "HB0002": "2026-07-01",
+      "HB0005": "2026-07-01",
+      "HB0006": "2026-07-01",
+      "HB0007": "2026-07-01"
+    }
+  },
   "sampled": [
     "HB0265",
     "SB0149",
@@ -15,7 +29,7 @@
       "bytes": 37810,
       "text_chars": 655,
       "elapsed_s": 0.03,
-      "extract_s": 0.03,
+      "extract_s": 0.05,
       "prompt_chars": 500,
       "title_tokens_in_slice": "3/4",
       "model_sees": "This bill addresses non-nicotine inhalation products. This bill: requires a non-nicotine inhalation product and a non-nicotine inhalation substance to be regist"
@@ -25,7 +39,7 @@
       "url": "https://le.utah.gov/~2026/bills/static/SB0149.html",
       "bytes": 37791,
       "text_chars": 3303,
-      "elapsed_s": 0.05,
+      "elapsed_s": 0.03,
       "extract_s": 0.06,
       "prompt_chars": 500,
       "title_tokens_in_slice": "1/2",
@@ -36,7 +50,7 @@
       "url": "https://le.utah.gov/~2026/bills/static/HB0001.html",
       "bytes": 37803,
       "text_chars": 1556,
-      "elapsed_s": 0.05,
+      "elapsed_s": 0.03,
       "extract_s": 0.05,
       "prompt_chars": 500,
       "title_tokens_in_slice": "2/5",
@@ -44,5 +58,5 @@
     }
   ],
   "prompt_text_ceiling": 500,
-  "total_elapsed_s": 0.42
+  "total_elapsed_s": 0.41
 }

@@ -141,9 +141,9 @@ pushes.
 | `breadth` (per index) | `eval_breadth_alert()` — **only on notifying runs** | itself (`in_alert`, `nag_days`, `warn_armed`) | Latched with hysteresis; a `--local`/`--no-notify` run must not consume an alert it never delivered |
 | `breadth_last_good` (per index) | `_get_breadth()`, every run | `_get_breadth()`'s fallback | Served for up to `BREADTH_STALE_TRADING_DAYS`, marked `stale` |
 | `policy_seen` `{id: published}` | `record_policy()` — only for items actually REPORTED on a successful model call, plus the first-run bootstrap window | `build_briefing._new_policy_items()` (the post-selection drop) and `policy._maybe_harvest_utah()` | **Never pruned.** ~200 entries a year in a file rewritten daily; an eviction rule interacting with the 45-day fetch window is a hazard for no benefit |
-| `policy_active` `[item]` | `record_policy()`, every run | the `policy_upcoming` projection | Deduped by url, sorted by date, capped at `MAX_POLICY_UPCOMING` (5); an entry drops out the day its `effective_date` passes |
+| `policy_active` `[item]` | `record_policy()`, every run | the `policy_upcoming` projection | Deduped by url, sorted by date, capped at `MAX_POLICY_UPCOMING` (5); an entry drops out the day its `effective_date` passes. Utah bills can now reach this list at all — they previously always carried `effective_date: None` |
 | `policy_today` `{date, items, alerted}` | `record_policy()` every run; `alerted` flipped by `eval_policy_alert()` on notifying runs | the same-date re-emit branch; the one-shot push | Replaced only when the stored date differs from today |
-| `policy_utah_queue` `[stub]` | `policy._maybe_harvest_utah()` appends; `policy._release_utah()` pops | the release path | Drains at ≤`MAX_POLICY_ITEMS`/day; stubs are `{id, url, title}`, detail text is fetched at release |
+| `policy_utah_queue` `[stub]` | `policy._maybe_harvest_utah()` appends; `policy._release_utah()` pops; `policy.requeue_utah()` pushes unreported ones back to the front; `policy._backfill_utah_dates()` repairs old entries | the release path | Drains at ≤`MAX_POLICY_ITEMS`/day; stubs are `{id, url, title, effective_date}`, detail text is fetched at release. Stubs queued before `effective_date` existed are repaired ONCE by `_backfill_utah_dates()` (one list request; key PRESENCE, not truthiness, marks a stub handled, so it terminates). Without that the field would stay null on every already-queued bill until the next general session |
 | `policy_utah_session` | `policy._maybe_harvest_utah()` — **only** when a harvest yielded ≥`UTAH_MIN_SIGNED` signed bills | the annual harvest gate | Annual. Stamped with the session actually USED, so a prior-year fallback leaves the gate open and the next run retries the real current session |
 | `policy_bootstrapped` | `build_briefing._get_policy()` on the first policy run whose FEDERAL fetch succeeded | the bootstrap suppression | Once, ever |
 
@@ -251,6 +251,19 @@ Two lifecycle rules are worth stating outright because they are the ones easiest
   `PYTHONPATH=. BRIEFING_SMOKE_ALLOW_DEV=true python scripts/briefing-assumptions/09-policy-calendar.py`.
   If a malformed entry ever does ship, production skips just that entry and prints
   `policy: calendar entry '<label>' skipped: ...` — the section degrades by one row, never by a run.
+- **A transient HTTP failure on a policy or PMMS fetch** (the 2026-08-03 case: `federalregister.gov`
+  returned 403 to the GitHub runner while the same call succeeded from home, after five dispatches in
+  one afternoon; the next dispatch was green). `scripts/data/retry.py` now retries these in place —
+  at most 3 attempts, 2s then 5s — for transient classes only: 403/408/425/429, any 5xx, timeouts,
+  connection resets, truncated bodies. **400 and 404 are never retried** (a 400 is the misspelled-
+  agency-slug signal the design relies on), and neither is any non-transport error. Every retry
+  prints `retry: <what> — <reason> on attempt N/3 ...`, so **grep the job log for `retry:` to see a
+  rate-limit episode**; previously the only symptom was the policy section rendering nothing behind
+  a LOW-priority degraded ping. EXTRA attempts are capped per RUN at `RETRY_EXTRA_ATTEMPT_BUDGET`
+  (4), bounding worst-case added wall time to 114s — under 20% of `briefing.yml`'s 600s cap — so a
+  broad outage can never turn into a cancelled job, which would ship no briefing at all. When the
+  budget is spent the log says so explicitly (`the per-run retry budget is spent, giving up to
+  protect the job timeout`) and the pre-existing degrade path runs unchanged.
 - Freddie Mac PMMS unreachable or unparseable: `get_rate()` returns None with a logged reason, the
   mortgage tile is omitted, and `data_availability.mortgage` goes false (so it appears in the
   degraded ping). It is deliberately NOT part of the `markets_ok` tuple: PMMS is a weekly Thursday
@@ -266,7 +279,8 @@ Two lifecycle rules are worth stating outright because they are the ones easiest
   directory's README for what each one proves and its negative controls).
 - Run them all: `BRIEFING_SMOKE_ALLOW_DEV=true bash scripts/briefing-assumptions/run-all.sh`.
 - Keyless and runnable anywhere: `04` (RSS + Wikipedia liveness), `05` (Federal Register, PMMS, the
-  Utah list page), `07` (Utah bill detail: relative hrefs resolve, real text extracts), `08` (keyword
+  Utah list page), `07` (Utah bill detail: relative hrefs resolve, real text extracts, and **A6** —
+  the passed-bills "Effective Date" column is still readable on >=95% of signed rows), `08` (keyword
   prefilter recall, precision and volume), `09` (the static policy calendar cannot go stale and no
   label claims an unannounced date). `09` needs no network either, so it runs offline in
   milliseconds. `06` needs a Gemini key; `03` needs a Gemini key; `01`/`02` need a Twelve Data key

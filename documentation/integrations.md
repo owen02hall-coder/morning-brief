@@ -94,7 +94,23 @@ values live in the repo. Environment variable names only are listed here.
 - Parsing: stdlib regex only. No HTML-parsing dependency is permitted in the push-capable CI job
   (the same constraint `constituents.py` works under). A row is an anchor whose text is the bill
   number followed by nbsp-separated title / sponsor / dates / status; only rows carrying `GSIGN`
-  were signed. Measured 2026-08-03: 495 rows, 495 parseable titles, 491 signed.
+  were signed. Measured 2026-08-04: 495 rows, 495 parseable titles, 491 signed.
+- **The effective date comes from this table and nowhere else.** The passed-bills table has an
+  "Effective Date" column and it is complete: 495/495 rows of 2026GS, 550/550 of 2025GS and 547/547
+  of 2024GS, every one `MM/DD/YYYY` (measured live 2026-08-04). The per-bill JSON below has NO
+  effective-date field — its only date is `lastActionDate`, the governor's action date (probed
+  across HB0068 / SB0060 / SB0236), so nothing else publishes it. The column's position is read
+  from the table's own HEADER row rather than hardcoded, because the cells are positional: a column
+  inserted upstream would otherwise shift the *passed* date into the effective date, and a wrong
+  effective date renders exactly like a right one. Deriving the index from the header turns that
+  same change into "no date" — a visible absence instead of a plausible lie. Nothing derives a date
+  from the passage date or from Utah's statutory 60-days-after-sine-die default; where that default
+  applies, the table already prints the resolved date (368 of 491 signed 2026GS bills read
+  05/06/2026). Because the harvest runs once a year while the queue drains over months, the date is
+  carried on the queued stub, carried back by `requeue_utah()`, and backfilled onto stubs queued
+  before the field existed by `_backfill_utah_dates()` (one list request, once). Gate 07's **A6** is
+  the fail-closed guard: it goes red if the column is renamed or removed, which would otherwise be
+  silent — a dateless bill simply never reaches "What's coming".
 - **Row hrefs are RELATIVE** (`/~2026/bills/static/HB0001.html`) and are `urljoin`ed against
   `UTAH_BASE_URL`. Left un-joined they would fail the host allowlist and drop 100% of Utah items
   while every other gate stayed green — a fully silent dead leg. `07-utah-bill-detail.py` exists
@@ -138,6 +154,12 @@ values live in the repo. Environment variable names only are listed here.
   ~150 KB, oldest-first, `M/D/YYYY` dates — so the LAST row is the current release).
 - Invoked in: `scripts/data/mortgage.py` (`get_rate`). The rate is read by COLUMN NAME (`pmms30`),
   never by position, so an inserted column shifts nothing.
+- Returns `{value, change, asof}`. `change` is the week-over-week move in percentage points, taken
+  from the row BEFORE the last — the whole history is already in memory, so it costs no second
+  request — and it is `None` (never `0.0`) when there is no usable prior row. It is framed as "vs
+  the previous RELEASE" rather than "vs 7 days ago": if Freddie Mac ever skips a week the delta is
+  still exactly "the move since the last published rate" instead of a broken weekly claim. The tile
+  renders it in bps ("+8 bps"), matching the 10-year Treasury tile.
 - **Needs a browser-like User-Agent** (`mortgage.PMMS_UA`, module-local for the same reason as the
   Utah one).
 - Notes: the survey is released WEEKLY (Thursday), so on most mornings the newest row is several days

@@ -42,6 +42,28 @@ ships no briefing at all):
   release time, at most config.MAX_POLICY_ITEMS per run. Harvesting 491 bills eagerly would be
   ~491 sequential requests.
 
+Every request also goes through scripts/data/retry.py, which retries TRANSIENT failures only (403,
+429, 5xx, timeouts, resets) inside a per-run extra-attempt budget, and never retries a 400 or a 404
+— a misspelled agency slug returning 400 is the loud signal this design deliberately relies on. The
+budget is what keeps that bound above intact; see that module for the worst-case arithmetic.
+
+THE UTAH EFFECTIVE DATE COMES FROM THE LIST PAGE, and nowhere else. The passed-bills table has an
+"Effective Date" column that is fully populated (measured live 2026-08-04 across three sessions:
+495/495 rows of 2026GS, 550/550 of 2025GS and 547/547 of 2024GS, every one MM/DD/YYYY, and the
+header-derived column index was 3 in all three). The per-bill JSON that _fetch_bill_detail()
+reads has no effective-date field at all — its only date is `lastActionDate`, the GOVERNOR'S action date
+(probed 2026-08-04 across HB0068/SB0060/SB0236). Nothing derives a date from the passage date or
+from Utah's statutory 60-days-after-sine-die default; where that default applies, the table already
+prints the resolved date (368 of 491 signed 2026GS bills read 05/06/2026).
+
+Because the date exists ONLY there, the whole path has to preserve it — the harvest runs once a
+year and the queue drains over months. Three legs, and all three are required:
+  1. _parse_rows()/_harvest_utah() read it and put it on the queued stub;
+  2. requeue_utah() carries it BACK when a released bill goes unreported;
+  3. _backfill_utah_dates() repairs stubs queued before the field existed. Without (3) this feature
+     shipped DEAD: the live state already had `policy_utah_session` stamped and 14/14 dateless
+     stubs, so the harvest that reads the column would not run again until the 2027 session.
+
 Bounds on content: abstracts are truncated to _ABSTRACT_CHARS (an enrolled bill is thousands of
 words, and an unbounded source text makes summarize's invented-figure guard vacuous), and the
 candidate list is capped at config.MAX_POLICY_CANDIDATES.
@@ -71,10 +93,11 @@ config.POLICY_CALENDAR). Everything about it is below the "static policy calenda
 import json
 import re
 import urllib.request
-from datetime import date, timedelta
+from datetime import date, datetime, timedelta
 from urllib.parse import urljoin
 
 from .. import config
+from . import retry
 
 # le.utah.gov is fronted by a filter that is unfriendly to non-browser agents, and the project UA is
 # unprobed there; 07-utah-bill-detail.py proved the passed-bills list AND bill detail pages answer
@@ -114,12 +137,30 @@ _ROW_RE = re.compile(
     r'<a[^>]+href=["\']([^"\']+)["\'][^>]*>\s*([HS]B\d{4})[^<]*</a>(.{0,300}?)(?=<a\s|</tr>|$)',
     re.S | re.I)
 
+# The row's own cells, for the ONE column read positionally: Effective Date. Measured live
+# 2026-08-04 — 2026GS (495/495), 2025GS (550/550) and 2024GS (547/547) all yield an Effective Date
+# in MM/DD/YYYY on every row, so this is a complete column, not a sometimes-present one.
+# See _effective_date_index for why the position is read from the header instead of hardcoded.
+# 07-utah-bill-detail.py's A6 is the fail-closed guard that goes red if the column ever goes dark.
+_TR_RE = re.compile(r"(?is)<tr\b[^>]*>(.*?)</tr\s*>")
+_TH_RE = re.compile(r"(?is)<th[^>]*>(.*?)</th\s*>")
+_TD_RE = re.compile(r"(?is)<td[^>]*>(.*?)</td\s*>")
+_UTAH_EFF_HEADER = "effective date"
 
-def _get(url, ua):
-    """One bounded request. Every network call in this module goes through here."""
-    req = urllib.request.Request(url, headers={"User-Agent": ua})
-    with urllib.request.urlopen(req, timeout=config.POLICY_TIMEOUT) as r:
-        return r.read(_MAX_BYTES)
+
+def _get(url, ua, what=None):
+    """One bounded request, retried on TRANSIENT failures only. Every network call in this module
+    goes through here — which is why the retry lives here and not at three call sites.
+
+    `what` is the label the retry log lines carry; it defaults to the URL so a future call site
+    cannot end up logging an anonymous retry. See scripts/data/retry.py for what counts as
+    transient (a 403 does, a 400 and a 404 deliberately do not) and for the per-run budget that
+    bounds the added wall time."""
+    def once():
+        req = urllib.request.Request(url, headers={"User-Agent": ua})
+        with urllib.request.urlopen(req, timeout=config.POLICY_TIMEOUT) as r:
+            return r.read(_MAX_BYTES)
+    return retry.call(what or url, once)
 
 
 # --- the keyword prefilter ---------------------------------------------------------------------
@@ -191,7 +232,12 @@ def _normalize_utah(row, session, detail_text, today):
         "title": row.get("title") or "",
         "abstract": (detail_text or "")[:_ABSTRACT_CHARS],
         "status": "Signed in Utah",
-        "effective_date": None,          # not published on the passed-bills row
+        # The date Utah publishes for THIS bill in the passed-bills table's Effective Date column
+        # (ISO, via _utah_date). Stays None only when the harvest could not read that column, or
+        # for a stub queued by a build that predates this field — never invented from a passage
+        # date. Without it a signed Utah bill could never reach policy_active / "What's coming",
+        # which is the one thing this section is for.
+        "effective_date": row.get("effective_date"),
         # NEVER None. The candidate sort key is a date string; a None here raises TypeError and
         # takes the entire briefing run down through main()'s crash handler.
         "published": today,
@@ -215,7 +261,7 @@ def _federal_candidates():
     """One request covering all six agencies. RAISES on zero results — see the module docstring."""
     since = (date.today() - timedelta(days=config.FR_WINDOW_DAYS)).isoformat()
     data = json.loads(_get(_fr_url(config.FR_AGENCIES, since, config.FR_PER_PAGE),
-                           config.USER_AGENT))
+                           config.USER_AGENT, "Federal Register"))
     results = data.get("results") or []
     if not results:
         raise ValueError(
@@ -251,16 +297,69 @@ def _strip_tags(html):
     return re.sub(r"\s+", " ", txt).strip()
 
 
+def _utah_date(raw):
+    """'05/06/2026' -> '2026-05-06', or None on anything else.
+
+    ISO, not the source's US format, because every consumer compares effective_date as a STRING:
+    build_briefing's `i["effective_date"] > today`, state.record_policy's sort, and app.js's
+    localDate(). 'MM/DD/YYYY' sorts and compares wrong in all three, silently."""
+    try:
+        return datetime.strptime((raw or "").strip(), "%m/%d/%Y").date().isoformat()
+    except (TypeError, ValueError):
+        return None
+
+
+def _effective_date_index(html):
+    """Position of the Effective Date column WITHIN a row's tail cells, or None.
+
+    Read from the table's OWN header row rather than hardcoded, and that is the whole point. The
+    tail cells are positional, so a column inserted upstream of Effective Date would shift a
+    DIFFERENT date into it — the passed date or the governor's action date — and a wrong effective
+    date renders exactly like a right one and feeds "What's coming" a deadline that is not the
+    deadline. Deriving the index from the header turns that same change into None (no date shown),
+    which is a visible absence instead of a plausible lie.
+
+    The -1: _ROW_RE consumes the bill-number cell and `tail` begins after it, so header column N is
+    tail cell N-1. A result below 1 means the header is not the layout this parse assumes.
+
+    Live header 2026GS + 2025GS (2026-08-03): Bill Number | Bill Title | Bill Sponsor | Date Passed
+    | Effective Date | Governor's Action | Gov's Action Date | Laws of Utah Chapter -> index 4 -> 3.
+    """
+    for block in _TR_RE.findall(html):
+        heads = [_strip_tags(h).lower() for h in _TH_RE.findall(block)]
+        if not heads:
+            continue                      # not the header row; keep looking
+        if _UTAH_EFF_HEADER in heads:
+            idx = heads.index(_UTAH_EFF_HEADER) - 1
+            if idx >= 1:
+                return idx
+        print(f"policy: Utah passed-bills header has no usable '{_UTAH_EFF_HEADER}' column "
+              f"({heads}) — bills will carry no effective date this run")
+        return None
+    print("policy: Utah passed-bills page has no header row — bills will carry no effective date")
+    return None
+
+
 def _parse_rows(html):
+    eff_idx = _effective_date_index(html)
     rows = []
     for href, num, tail in _ROW_RE.findall(html):
         txt = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", tail).replace("&nbsp;", "|")).strip()
         parts = [p.strip() for p in txt.split("|") if p.strip()]
         title = parts[0] if parts else ""
         if title:
+            cells = _TD_RE.findall(tail)
             rows.append({"number": num, "title": title, "href": href,
                          # only GSIGN bills were signed by the governor, i.e. BECAME LAW
-                         "signed": "GSIGN" in " ".join(parts[1:])})
+                         "signed": "GSIGN" in " ".join(parts[1:]),
+                         # The legislature's OWN published effective date for this bill. Not
+                         # derived, not the passage date, and not the statutory 60-days-after-sine-
+                         # die default: Utah prints the resolved date per row (and where it IS the
+                         # statutory default, the printed value already is that date — 368 of 491
+                         # signed 2026GS bills read 05/06/2026). Nothing here has to guess.
+                         "effective_date": (_utah_date(_strip_tags(cells[eff_idx]))
+                                            if eff_idx is not None and eff_idx < len(cells)
+                                            else None)})
     return rows
 
 
@@ -298,8 +397,8 @@ def _harvest_utah(session):
     """
     for candidate in _session_chain(session):
         try:
-            html = _get(config.UTAH_PASSED_URL.format(session=candidate),
-                        POLICY_UA).decode("utf-8", "replace")
+            html = _get(config.UTAH_PASSED_URL.format(session=candidate), POLICY_UA,
+                        f"Utah passed-bills {candidate}").decode("utf-8", "replace")
         except Exception as e:
             print(f"policy: Utah passed-bills unreachable for {candidate}: "
                   f"{type(e).__name__}: {e}")
@@ -309,9 +408,15 @@ def _harvest_utah(session):
             print(f"policy: Utah {candidate} yielded {len(signed)} signed bills "
                   f"(< {config.UTAH_MIN_SIGNED}) — not stamping it as harvested")
             continue
+        # The stub carries effective_date because the DATE ONLY EXISTS ON THE LIST PAGE: the
+        # per-bill JSON _fetch_bill_detail() reads has no effective-date field at all (probed
+        # 2026-08-03 across HB0068/SB0060/SB0236 — lastActionDate is the governor's action, not
+        # this). The queue drains over months, so dropping it here would mean re-scraping the list
+        # page per bill later, or losing the date entirely.
         stubs = [{"id": _utah_id(candidate, r["number"]),
                   "url": _utah_url(r["href"]),
-                  "title": r["title"]}
+                  "title": r["title"],
+                  "effective_date": r.get("effective_date")}
                  for r in signed if _matches_profile({"title": r["title"], "abstract": ""})]
         print(f"policy: Utah {candidate} harvest: {len(signed)} signed, "
               f"{len(stubs)} pass the prefilter")
@@ -340,7 +445,7 @@ def _utah_json_text(session, number):
     "the text names this bill" true even when this leg returned nothing, which is precisely the kind
     of self-satisfying check that let the nav-chrome defect ship."""
     data = json.loads(_get(_UTAH_BILL_JSON_URL.format(session=session, number=number),
-                           POLICY_UA).decode("utf-8", "replace"))
+                           POLICY_UA, f"Utah bill JSON {number}").decode("utf-8", "replace"))
     return _strip_tags(" ".join(str(data.get(f) or "") for f in _UTAH_JSON_FIELDS))
 
 
@@ -382,7 +487,8 @@ def _fetch_bill_detail(stub):
     else:
         print(f"policy: could not derive a session/number for {stub.get('id')} "
               f"({stub.get('url')}) — falling back to the page")
-    return _bill_page_text(_get(stub["url"], POLICY_UA).decode("utf-8", "replace"))
+    return _bill_page_text(_get(stub["url"], POLICY_UA,
+                                f"Utah bill page {stub.get('id')}").decode("utf-8", "replace"))
 
 
 def _maybe_harvest_utah(st, today):
@@ -406,6 +512,67 @@ def _maybe_harvest_utah(st, today):
     # Stamping session_used (not target) is what reopens the gate tomorrow when the fallback fired:
     # session_used != target, so the next run tries the real current session again.
     return {**st, "policy_utah_queue": queue, "policy_utah_session": session_used}
+
+
+def _backfill_utah_dates(st):
+    """Fill `effective_date` into stubs that were queued BEFORE the field existed. New state, pure
+    apart from at most one list request per session represented in the queue.
+
+    WITHOUT THIS THE WHOLE EFFECTIVE-DATE CHANGE SHIPS DEAD. Measured on the live state 2026-08-04:
+    `policy_utah_session` is already stamped `2026GS` and 14/14 queued stubs carry no
+    `effective_date` key, so `_maybe_harvest_utah()` returns early, the harvest that reads the
+    column never runs again until the 2027 general session, and every one of those 14 bills
+    normalizes to `effective_date: None` — i.e. the exact defect this change exists to fix, intact
+    for ~7 months, in a section built on deadlines.
+
+    KEY PRESENCE, not truthiness, is the "already handled" test: a bill whose row genuinely carries
+    no parseable date gets `effective_date: None` WRITTEN, so it is not re-fetched forever. That is
+    what makes this terminate — after one successful pass no stub is stale, and the function returns
+    before opening a socket on every subsequent run.
+
+    It refuses to stamp anything from a scrape it does not trust (short page, or a page from which
+    zero dates parsed — i.e. `_effective_date_index` came back None because the column moved). That
+    case retries next run, one request a day, next to the warning `_effective_date_index` already
+    prints. Writing None across the queue instead would silently make the repair unrepeatable.
+    """
+    queue = list(st.get("policy_utah_queue") or [])
+    stale = [s for s in queue if "effective_date" not in s]
+    if not stale:
+        return st
+    sessions = sorted({key[0] for key in (_utah_bill_key(s) for s in stale) if key})
+    dates, repaired = {}, set()
+    for session in sessions:
+        try:
+            html = _get(config.UTAH_PASSED_URL.format(session=session), POLICY_UA,
+                        f"Utah passed-bills {session} (effective-date backfill)"
+                        ).decode("utf-8", "replace")
+        except Exception as e:
+            print(f"policy: Utah effective-date backfill could not reach {session}: "
+                  f"{type(e).__name__}: {e} — retrying next run")
+            continue
+        rows = _parse_rows(html)
+        found = {_utah_id(session, r["number"]): r["effective_date"]
+                 for r in rows if r["effective_date"]}
+        if len(rows) < config.UTAH_MIN_SIGNED or not found:
+            print(f"policy: Utah effective-date backfill read {len(rows)} row(s) and {len(found)} "
+                  f"date(s) for {session} — not stamping, retrying next run")
+            continue
+        dates.update(found)
+        repaired.add(session)
+    if not repaired:
+        return st
+    out, filled = [], 0
+    for stub in queue:
+        key = _utah_bill_key(stub)
+        if "effective_date" in stub or not key or key[0] not in repaired:
+            out.append(stub)
+            continue
+        out.append({**stub, "effective_date": dates.get(stub.get("id"))})
+        filled += 1
+    print(f"policy: Utah effective-date backfill stamped {filled} queued stub(s) from "
+          f"{', '.join(sorted(repaired))} ({sum(1 for s in out if s.get('effective_date'))} of "
+          f"{len(out)} queued bills now carry a date)")
+    return {**st, "policy_utah_queue": out}
 
 
 def _release_utah(st, today):
@@ -458,9 +625,13 @@ def requeue_utah(st, candidates):
             if c.get("source") != "Utah Legislature" or not cid or cid in queued:
                 continue
             queued.add(cid)
-            # The stub shape {id, url, title} round-trips losslessly: _normalize_utah() copies all
-            # three straight off the stub, and only `abstract` (re-fetched next run) is derived.
-            back.append({"id": cid, "url": c.get("url"), "title": c.get("title") or ""})
+            # The stub shape {id, url, title, effective_date} round-trips losslessly:
+            # _normalize_utah() copies all four straight off the stub, and only `abstract`
+            # (re-fetched next run) is derived. effective_date MUST be carried back — it is only
+            # readable from the annual list-page harvest, so a bill that went out on the queue and
+            # came back without it would be dateless until the next general session.
+            back.append({"id": cid, "url": c.get("url"), "title": c.get("title") or "",
+                         "effective_date": c.get("effective_date")})
         if not back:
             return st
         print(f"policy: returning {len(back)} unreported Utah bill(s) to the front of the queue "
@@ -582,6 +753,14 @@ def get_policy(st, today):
         st = _maybe_harvest_utah(st, today)
     except Exception as e:
         print(f"policy: Utah harvest failed (availability unaffected): {type(e).__name__}: {e}")
+
+    try:
+        # Its OWN try, not folded into the harvest above: a failed backfill must not stop the
+        # release, and a bill with no date is still worth reporting today.
+        st = _backfill_utah_dates(st)
+    except Exception as e:
+        print(f"policy: Utah date backfill failed (availability unaffected): "
+              f"{type(e).__name__}: {e}")
 
     try:
         released, st = _release_utah(st, today)
