@@ -1,16 +1,16 @@
 {
-  "last_run": "2026-08-05",
-  "markets_last_ok": "2026-08-05",
+  "last_run": "2026-08-06",
+  "markets_last_ok": "2026-08-06",
   "breadth_last_good": {
     "sp500": {
-      "value": 70.7,
-      "matched": 499,
-      "asof": "2026-08-04"
+      "value": 70.4,
+      "matched": 500,
+      "asof": "2026-08-05"
     },
     "ndx100": {
-      "value": 68.0,
+      "value": 69.1,
       "matched": 97,
-      "asof": "2026-08-04"
+      "asof": "2026-08-05"
     }
   },
   "breadth": {
@@ -18,36 +18,18 @@
       "in_alert": false,
       "nag_days": 0,
       "warn_armed": true,
-      "last_value": 70.7,
-      "last_asof": "2026-08-04"
+      "last_value": 70.4,
+      "last_asof": "2026-08-05"
     },
     "ndx100": {
       "in_alert": false,
       "nag_days": 0,
       "warn_armed": true,
-      "last_value": 68.0,
-      "last_asof": "2026-08-04"
+      "last_value": 69.1,
+      "last_asof": "2026-08-05"
     }
   },
   "policy_utah_queue": [
-    {
-      "id": "2026GS:HB0492",
-      "url": "https://le.utah.gov/~2026/bills/static/HB0492.html",
-      "title": "Transportation, Infrastructure, and Housing Amendments",
-      "effective_date": "2026-05-06"
-    },
-    {
-      "id": "2026GS:HB0520",
-      "url": "https://le.utah.gov/~2026/bills/static/HB0520.html",
-      "title": "Higher Education Student Housing Study",
-      "effective_date": "2026-05-06"
-    },
-    {
-      "id": "2026GS:HB0565",
-      "url": "https://le.utah.gov/~2026/bills/static/HB0565.html",
-      "title": "City Library Property Tax Amendments",
-      "effective_date": "2026-05-06"
-    },
     {
       "id": "2026GS:SB0016",
       "url": "https://le.utah.gov/~2026/bills/static/SB0016.html",
@@ -109,12 +91,22 @@
     "2026-13370": "2026-07-02",
     "2026-13286": "2026-07-01",
     "2026-12943": "2026-06-26",
-    "2026-12750": "2026-06-24"
+    "2026-12750": "2026-06-24",
+    "2026GS:HB0565": "2026-08-06"
   },
   "policy_active": [],
   "policy_today": {
-    "date": "2026-08-05",
-    "items": [],
+    "date": "2026-08-06",
+    "items": [
+      {
+        "what_happened": "A bill modifies provisions related to a property tax imposed for a city library.",
+        "effect": "The county is obligated to separately state any levies imposed for city libraries on notices sent to owners of real property.",
+        "url": "https://le.utah.gov/~2026/bills/static/HB0565.html",
+        "status": "Signed in Utah",
+        "effective_date": "2026-05-06",
+        "source": "Utah Legislature"
+      }
+    ],
     "alerted": false
   }
 }
