@@ -55,6 +55,11 @@ GitHub Actions (cron, UTC) --> python -m scripts.build_briefing
                                            availability flag - called from run(), NOT from
                                            _get_policy(), so it can never be marked seen or pushed
   -> _get_lessons()                        OWEN'S ALPHABET SOUP — text only, audio comes later
+                                           IF the deck already holds an entry dated today: STOP
+                                           (no fetch, no model call, no audio) — a `--force`
+                                           dispatch is the normal manual path, and without this each
+                                           one would append another lesson and spend 3 more TTS
+                                           requests. Reported as HEALTHY, not degraded
      -> summarize.propose_lesson_titles()  THIRD Gemini call: exact article titles, NO prose at all
      -> lessons.first_usable()             en.wikipedia.org action API, keyless. Fails closed on a
                                            missing page, a disambiguation page or a stub, and walks

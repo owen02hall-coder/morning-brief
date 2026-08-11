@@ -459,8 +459,22 @@ LESSON_SYSTEM = (
     "if the article does not say it, you do not write it. Do not add facts from your own knowledge, "
     "and do not fill gaps with plausible detail. When the article does not cover something the "
     "lesson would need, write a shorter lesson instead. "
+    # The failure mode this paragraph exists to kill, measured on the first live run (2026-08-11):
+    # given the "Mortgage" article the model opened on the etymology of the word, and given "Home
+    # inspection" it wrote a definition of what an inspection is. Both were accurate, cited and
+    # useless — the reader could not do anything differently afterwards. Grounding was never the
+    # problem; the encyclopedia's own voice was, and an encyclopedia opens with what a thing IS.
+    "START WITH WHAT GOES WRONG OR WHAT IT COSTS, not with what the thing is called or what "
+    "category it belongs to. Teach the part a person can act on: how it fails, what it costs when "
+    "it fails, what people commonly get wrong about it, or what to check before it matters. Never "
+    "write etymology or word origins. Never write history unless the history IS the practical "
+    "point. A definition is worth writing only when the reader can do something differently "
+    "afterwards — if you find yourself explaining what a word means, you are writing the wrong "
+    "lesson. "
     "Write for the ear as well as the page: this is read aloud during a drive, so use plain "
-    "language, short sentences, no lists, no headings, no markdown, no emojis, and no URLs. Do not "
+    "language, no lists, no headings, no markdown, no emojis, and no URLs. Vary sentence length and "
+    "let the sentences connect — a run of short flat declaratives reads like a textbook being "
+    "recited. Do not "
     "address the reader by name and do not mention the article, Wikipedia, or 'the source'. "
     "FIGURES: include a number, dollar amount, percentage or year ONLY if that exact figure appears "
     "in the article text below. A figure that is not in the article is detected in code and the "
@@ -654,10 +668,13 @@ def summarize_lesson(domain, article):
             "quick stopped. Never restate quick; it is read immediately after it.\n"
             f"- deep: {targets['deep'][0]}-{targets['deep'][1]} words continuing again from more — "
             "the mechanism underneath, the exceptions, or the way it goes wrong.\n"
-            "- takeaway: one sentence naming the concrete thing to do, check, or remember. Not a "
-            "summary of the lesson.\n\n"
+            "- takeaway: one sentence naming a SPECIFIC thing to do, check, ask or look at, with "
+            "enough detail to act on it. It must start with a verb of action. \"Understand X\", "
+            "\"be aware of X\", \"know that X\" and \"remember X\" are not actions and are not "
+            "acceptable takeaways — neither is a summary of the lesson.\n\n"
             "Teach the mechanism, not the vocabulary: the reader should be able to act differently "
-            "afterwards. Include a figure only if it appears in the article text above."
+            "afterwards. Ask yourself what a person would regret not knowing here, and teach that. "
+            "Include a figure only if it appears in the article text above."
         )
         for model in (config.MODEL_ID, config.MODEL_FALLBACK):
             try:

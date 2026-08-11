@@ -199,6 +199,9 @@ Three lifecycle rules are worth stating outright because they are the ones easie
   a Gemini outage): the deck simply does not grow that day and the degraded ping lists "alphabet
   soup". The reader notices nothing unless they were already caught up, because their pointer is
   still sitting on whatever they have not finished. Nothing is stamped taught, so tomorrow retries.
+  A **same-date rebuild** also produces no lesson and is reported as HEALTHY, not degraded — the leg
+  returns an explicit `healthy` flag rather than letting the caller infer it from an empty list,
+  which is the same distinction `_get_policy()` draws when it re-emits.
 - **Only some lesson clips synthesize** (a per-minute rate limit, or the run passing
   `LESSON_AUDIO_DEADLINE`): the deck entry records exactly the clips that wrote. The client requires
   ALL the clips for the reader's chosen depth before using audio, and otherwise reads that lesson in

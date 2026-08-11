@@ -304,7 +304,12 @@ def _lesson_id(today, article_title, used_ids):
 
 
 def _get_lessons(st, today, deck):
-    """Write today's lesson(s) — text only, no audio. Returns (entries, state). NEVER raises.
+    """Write today's lesson(s) — text only, no audio. Returns (entries, healthy, state).
+
+    `healthy` is NOT `bool(entries)`: a same-date rebuild correctly produces nothing, and reporting
+    that as a degraded section would be a lie of exactly the kind `_get_policy()`'s re-emit branch
+    avoids by returning available=True. False means the leg genuinely failed to produce a lesson it
+    should have. NEVER raises.
 
     Two lessons on the very first run and one a day after that: the "new lesson" button needs
     somewhere to go on day one, and after that the reader's own unfinished lessons are the buffer.
@@ -315,6 +320,15 @@ def _get_lessons(st, today, deck):
     """
     entries = []
     try:
+        # Same-date guard, for the same reason `_get_policy()` re-emits before it fetches:
+        # briefing.yml dispatches with `--force` defaulting to true, so a second run of the day is
+        # the NORMAL manual path. Without this, every manual dispatch appends another lesson and
+        # spends three more TTS requests out of a free-tier daily budget — and unlike the policy
+        # case nothing would look wrong, the deck would just quietly grow at N per dispatch.
+        if any((e or {}).get("date") == today for e in deck.get("lessons") or []):
+            print(f"lesson: {today} already produced a lesson — no fetch, no model call, no audio")
+            return [], True, st
+
         want = 1 if st.get("lessons_bootstrapped") else config.LESSON_BOOTSTRAP_COUNT
         used_ids = {e.get("id") for e in deck.get("lessons") or []}
         for _ in range(want):
@@ -346,7 +360,7 @@ def _get_lessons(st, today, deck):
         # to raise, and this exists so a promise broken later degrades ONE section instead of
         # crashing the briefing and paging the user.
         print(f"lesson: leg failed (non-fatal): {type(e).__name__}: {e}")
-    return entries, st
+    return entries, bool(entries), st
 
 
 def _prune_lesson_audio(deck):
@@ -538,7 +552,7 @@ def run(do_notify=True, today=None):
     # (below), because the narration's sign-off depends on whether a lesson exists at all, and
     # because the lesson clips are the first work abandoned if the run is running long.
     deck = _load_deck()
-    lesson_entries, st = _get_lessons(st, today, deck)
+    lesson_entries, lesson_healthy, st = _get_lessons(st, today, deck)
 
     # Derive the weekday from the gate date so the build decision, the saved briefing date, and the
     # Sunday-recap choice all agree even if midnight crosses between _now() reads.
@@ -616,7 +630,8 @@ def run(do_notify=True, today=None):
     # the deck, not to a date. But a leg that quietly stops producing is exactly the kind of failure
     # this project refuses to leave silent — the reader would just see the same lesson forever and
     # assume they had not finished it. One low-priority line in the existing degraded ping.
-    if not lesson_entries:
+    # `lesson_healthy`, not `lesson_entries`: a same-date rebuild is a healthy no-op.
+    if not lesson_healthy:
         degraded.append("alphabet soup")
     if do_notify:
         for a in breadth_alerts:
