@@ -1,26 +1,26 @@
 {
   "project": "Morning Briefing",
-  "scope": "v1 core + v2 breadth/oversold alerts and audio edition + v3 policy section and mortgage rate",
+  "scope": "v1 core + v2 breadth/oversold alerts and audio edition + v3 policy section and mortgage rate + v4 Owen's Alphabet Soup (daily grounded lesson, client-owned pointer)",
   "note": "Project docs/ is the GitHub Pages web root (PWA), not documentation. Dev docs live in documentation/.",
   "docs": [
     {
       "path": "documentation/architecture.md",
       "title": "Architecture",
-      "summary": "System overview, data flow, modules, key design decisions (incl. the four monitors, the policy-section accuracy guarantees and the no-year static policy calendar), briefing.json schema, CLI entry points.",
+      "summary": "System overview, data flow, modules, key design decisions (incl. the four monitors, the policy-section accuracy guarantees, the no-year static policy calendar, and why the Alphabet Soup lesson pointer is client-side), briefing.json and lessons.json schemas, CLI entry points.",
       "source_files": ["scripts/", "docs/", ".github/workflows/briefing.yml", ".github/workflows/heartbeat.yml", ".github/workflows/data-smoke.yml", ".github/workflows/shell-guard.yml"],
       "entry_points": ["python -m scripts.build_briefing", "scripts/build_briefing.py:main", "python -m scripts.heartbeat"]
     },
     {
       "path": "documentation/integrations.md",
       "title": "Integrations",
-      "summary": "External services (Yahoo Finance, Gemini, ntfy, RSS, Federal Register, Utah Legislature, Freddie Mac PMMS, GitHub Pages/Actions, v2 Twelve Data), usage, invocation sites, env var names, the probed-dead source list, and the static POLICY_CALENDAR that stands in for the annual announcements no feed publishes.",
-      "source_files": ["scripts/data/market.py", "scripts/data/news.py", "scripts/data/policy.py", "scripts/data/mortgage.py", "scripts/summarize.py", "scripts/notify.py", "scripts/config.py", ".github/workflows/briefing.yml"],
+      "summary": "External services (Yahoo Finance, Gemini, ntfy, RSS, Federal Register, Utah Legislature, Freddie Mac PMMS, the Wikipedia action API behind Owen's Alphabet Soup, GitHub Pages/Actions, v2 Twelve Data), usage, invocation sites, per-build request budgets, env var names, the probed-dead source list, and the static POLICY_CALENDAR that stands in for the annual announcements no feed publishes.",
+      "source_files": ["scripts/data/market.py", "scripts/data/news.py", "scripts/data/policy.py", "scripts/data/mortgage.py", "scripts/data/lessons.py", "scripts/summarize.py", "scripts/tts.py", "scripts/notify.py", "scripts/config.py", ".github/workflows/briefing.yml"],
       "entry_points": ["GEMINI_API_KEY", "NTFY_SUB", "PAGE_URL", "TWELVE_API_KEY"]
     },
     {
       "path": "documentation/operations.md",
       "title": "Operations",
-      "summary": "Scheduling and DST, one-time deployment (secret/var name mapping), runtime, monitoring (4 alarms), run-state keys and their writers, failure modes and recovery, regression tests, cost.",
+      "summary": "Scheduling and DST, one-time deployment (secret/var name mapping), runtime, monitoring (4 alarms), run-state keys and their writers (and why the lesson pointer is deliberately not one), failure modes and recovery, regression tests, cost.",
       "source_files": [".github/workflows/briefing.yml", ".github/workflows/heartbeat.yml", ".github/workflows/data-smoke.yml", "scripts/build_briefing.py", "scripts/heartbeat.py", "scripts/notify.py", "scripts/state.py", "scripts/briefing-assumptions/"],
       "entry_points": [".github/workflows/briefing.yml", ".github/workflows/heartbeat.yml", "scripts/build_briefing.py:main", "scripts/heartbeat.py:main"]
     }

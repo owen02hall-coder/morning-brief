@@ -457,6 +457,95 @@ a.cardlink { display: block; color: inherit; text-decoration: none; }
 .recap .card { border-left: 3px solid var(--accent); }
 .recap p { font-family: var(--serif); font-size: 1.0rem; line-height: 1.65; margin: 0; }
 
+/* ---- Owen's Alphabet Soup ------------------------------------------------------------ */
+/* The one section that is not news. It reads as a page from something else on purpose: a serif
+   body at reading size rather than the scannable sans of every block above it. */
+.soup-card { border-left: 3px solid var(--accent); }
+.soup-title {
+  font-family: var(--serif);
+  font-size: 1.25rem;
+  line-height: 1.3;
+  font-weight: 700;
+  margin: 0.15rem 0 0.35rem;
+  color: var(--fg);
+  text-transform: none;      /* h3 elsewhere is a data label; here it is a headline */
+  letter-spacing: 0;
+}
+.soup-hook { margin: 0 0 0.7rem; color: var(--muted); font-size: 0.92rem; }
+.soup-body {
+  font-family: var(--serif);
+  font-size: 1.02rem;
+  line-height: 1.65;
+  margin: 0 0 0.8rem;
+}
+/* The action line. Same ink rule as .policy-effect, and for the same reason: on both sections it
+   is the sentence the reader is meant to leave with. */
+.soup-takeaway {
+  font-family: var(--serif);
+  font-size: 1.02rem;
+  line-height: 1.6;
+  margin: 0 0 0.9rem;
+  padding-left: 0.75rem;
+  border-left: 3px solid var(--accent);
+  font-weight: 600;
+}
+.soup-deeper {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 1rem 0 0.55rem;
+  padding-top: 0.7rem;
+  border-top: 1px solid var(--hairline);
+}
+.soup-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-top: 0.7rem;
+}
+.soup-lengths {
+  display: inline-flex;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--card);
+  padding: 3px;
+  box-shadow: var(--shadow);
+}
+.soup-length {
+  min-height: 38px;
+  padding: 0 0.95rem;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--muted);
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.soup-length.on { background: var(--accent); color: var(--card); }
+.soup-length:focus-visible, .soup-next:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.soup-next {
+  min-height: 44px;
+  padding: 0 1.1rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--card);
+  color: var(--link);
+  font-family: inherit;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+}
+.soup-next:active { transform: scale(0.96); }
+.soup-next[disabled] { color: var(--muted); opacity: 0.6; cursor: default; box-shadow: none; }
+.soup-count { font-size: 0.82rem; margin: 0.55rem 0 0; }
+
 /* ---- Archive ------------------------------------------------------------------------ */
 #archive-search {
   width: 100%;

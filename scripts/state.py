@@ -161,6 +161,54 @@ def eval_policy_alert(items, st, today):
     return alerts, {**st, "policy_today": {**block, "alerted": True}}
 
 
+LESSONS_TAUGHT_MAX = 500     # ~16 months at one lesson a day
+
+
+def taught_titles(st):
+    """The canonical article titles already used by Owen's Alphabet Soup, oldest first.
+
+    Read by `data/lessons.first_usable()` (the real dedupe, applied AFTER the fetch so redirects
+    collapse) and passed to the topic-proposal call as an avoid-list hint."""
+    return [t.get("article_title") for t in (st.get("lessons_taught") or []) if t.get("article_title")]
+
+
+def record_lesson(st, entries):
+    """The SINGLE writer of `lessons_taught`. Returns the new state (pure, no I/O).
+
+    `lessons_taught` is the LONG memory: {id, article_title, title, domain, date} per lesson, kept
+    well past what the published deck holds. The deck (docs/lessons.json) is pruned to
+    `config.LESSON_DECK_MAX` because the phone only ever walks the recent tail of it, but dedupe has
+    to remember much further back — a lesson repeating a year later is the failure this prevents.
+    Two stores, two jobs; this is the only place the memory is written, so they cannot drift.
+
+    Capped at LESSONS_TAUGHT_MAX entries. Unlike `policy_seen` (never pruned, ~200/yr of tiny
+    id->date pairs), each entry here carries titles, and this file is rewritten and committed daily.
+
+    NOTE: nothing here records whether a lesson was READ. That is not knowable on this side — the
+    build publishes a deck, and the pointer into it lives in the browser's localStorage, because
+    only the device can know the audio reached the end. Do not add a "current lesson" key here: it
+    would be a server-side guess at a client-side fact, and the whole feature turns on that
+    distinction.
+    """
+    taught = list(st.get("lessons_taught") or [])
+    for e in entries or []:
+        taught.append({"id": e["id"], "article_title": (e.get("source") or {}).get("title"),
+                       "title": e.get("title"), "domain": e.get("domain"), "date": e.get("date")})
+    return {**st, "lessons_taught": taught[-LESSONS_TAUGHT_MAX:], "lessons_bootstrapped": True}
+
+
+def forget_lessons(st, ids):
+    """Un-record lessons that were written but never published. Returns the new state (pure).
+
+    The counterpart to `record_lesson`, and the reason the deck write's success is checked at all:
+    an article stamped taught but never shipped is an article the reader can never be taught, and
+    nothing downstream would ever notice. `lessons_bootstrapped` is deliberately NOT reset — the
+    flag means "the first run has happened", not "a lesson exists"."""
+    drop = set(ids or [])
+    return {**st, "lessons_taught": [t for t in (st.get("lessons_taught") or [])
+                                     if t.get("id") not in drop]}
+
+
 def load():
     try:
         with open(config.STATE_PATH, encoding="utf-8") as f:

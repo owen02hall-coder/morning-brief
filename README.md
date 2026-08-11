@@ -12,9 +12,17 @@ Runs with your laptop and phone off. Cost: $0/month (all free tiers + your exist
 - Markets: S&P 500, Nasdaq Composite, 10-year Treasury yield, VIX (latest close, day change, and a plain-English why)
 - Emerging tech (a few cutting-edge items, cited)
 - World news (globally significant only, cited)
+- **Owen's Alphabet Soup** — one thing worth knowing for life, last on the page and last in the
+  audio: money mechanics, home/car repair, health and emergencies, or how judgement and persuasion
+  go wrong, rotating evenly. Every lesson is written from a real article that is fetched first (the
+  model never writes from memory), an invented figure or year discards it, and it carries the source
+  link. Pick Quick / Medium / Long on the phone. **A new lesson only comes up when you actually
+  finish the briefing, or when you tap "New lesson"** — leave it half-listened and it is still there
+  tomorrow
 - **Listen** — a daily audio edition (Gemini TTS, ~2-3 min drive-time cut: must-knows, percent
-  moves, tech, world) with lock-screen/CarPlay controls; falls back to the phone's built-in voice
-  offline, on archived briefings, or on a failed-TTS day
+  moves, tech, world) with lock-screen/CarPlay controls, then the day's Alphabet Soup lesson played
+  straight after it as one queue; falls back to the phone's built-in voice offline, on archived
+  briefings, or on a failed-TTS day
 - **Market breadth** — % of S&P 500 and Nasdaq-100 members above their 200-day average, computed
   daily (validated against the published $S5TH/$NDTH indexes), with two alert tiers per index: a
   one-shot warning when breadth falls below 40% and a daily high-priority oversold nag below 30%
@@ -28,12 +36,16 @@ Runs with your laptop and phone off. Cost: $0/month (all free tiers + your exist
 GitHub Actions (daily cron, UTC) --> python -m scripts.build_briefing
   Yahoo Finance chart API, keyless (S&P 500, Nasdaq Composite, VIX, 10-yr)  +  RSS feeds (news)
   --> Gemini writes a structured, cited briefing  (numbers injected as facts, never invented)
+  --> Alphabet Soup: Gemini names an article, Wikipedia is FETCHED, Gemini writes the lesson from
+      it, code checks the prose back against that text  (no article -> no lesson that day)
   --> scripts/tts.py narrates it + Gemini TTS synthesizes; lameenc encodes the mp3 in-process
-  --> writes docs/briefing.json + archive + state; workflow publishes docs/briefing-audio.mp3
-      (+ a date manifest, written only on success) and commits everything
+  --> writes docs/briefing.json + archive + state + docs/lessons.json (+ lesson clips); workflow
+      publishes docs/briefing-audio.mp3 (+ a date manifest, written only on success) and commits
   --> GitHub Pages serves the PWA; ntfy pushes "ready" only after git push succeeded
-PWA (docs/) reads briefing.json (network-first), renders it, shows the Listen player when the
-audio manifest matches today (device-voice fallback otherwise), archive + freshness banner
+PWA (docs/) reads briefing.json + lessons.json (network-first), renders it, plays the Listen queue
+(today's mp3 -> the current lesson's clips -> sign-off) when the audio manifest matches today
+(device-voice fallback otherwise), archive + freshness banner. Which lesson is current lives in the
+phone's localStorage, because only the phone knows whether the audio actually reached the end.
 ```
 
 Supply-chain hardening: workflows install with a CI-frozen `constraints.txt` and pin actions by
@@ -90,7 +102,13 @@ python -m scripts.build_briefing --local --no-notify   # write docs/briefing.jso
 
 `scripts/briefing-assumptions/` holds the pre-flight tests that proved the news/RSS boundary,
 the Gemini structured-output contract, and the (v2-only) Twelve Data budget before this was
-built. Note what they do NOT cover: the v1 market source itself (Yahoo's chart API) — the suite
+built — plus the regression gates for the policy and lesson sections. Two of them need nothing at
+all and are worth running after any edit to the lesson feature:
+
+```bash
+BRIEFING_SMOKE_ALLOW_DEV=true PYTHONPATH=. python scripts/briefing-assumptions/10-lesson-sources.py
+BRIEFING_SMOKE_ALLOW_DEV=true node scripts/briefing-assumptions/11-client-pointer.js
+``` Note what they do NOT cover: the v1 market source itself (Yahoo's chart API) — the suite
 predates the FRED→Yahoo move.
 
 Re-running the full suite needs dev-only extras and keys beyond requirements.txt: `pip install

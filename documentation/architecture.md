@@ -2,28 +2,31 @@
 title: Architecture
 source_files: [scripts/, docs/, .github/workflows/]
 entry_points: ["python -m scripts.build_briefing", "scripts/build_briefing.py:main", "python -m scripts.heartbeat", "python -m scripts.notify ready"]
-last_verified: 2026-08-03
+last_verified: 2026-08-11
 ---
 
 # Architecture
 
-A free, single-user morning briefing. A scheduled job gathers market numbers, news, and the
-government policy that changes a number or a deadline for this one reader; an AI writes a short
-cited summary; the result is published as a static web app and a push notification is sent.
-Everything runs in the cloud so the user's devices can be off. Cost is zero on free tiers.
+A free, single-user morning briefing. A scheduled job gathers market numbers, news, the government
+policy that changes a number or a deadline for this one reader, and one grounded lesson worth
+knowing for its own sake; an AI writes a short cited summary; the result is published as a static
+web app and a push notification is sent. Everything runs in the cloud so the user's devices can be
+off. Cost is zero on free tiers.
 
 ## Components
 
 - Scheduler: a GitHub Actions workflow (`.github/workflows/briefing.yml`) runs daily on cron.
 - Pipeline: a Python package (`scripts/`) that fetches data, summarizes, narrates, and writes output.
 - Web app: a static PWA (`docs/`) served by GitHub Pages that renders the output, with a Listen
-  player for the daily audio edition (on-device speech fallback).
+  player that plays the daily audio edition and then the current Alphabet Soup lesson as one queue
+  (on-device speech fallback for any part with no audio).
 - Notifications: ntfy delivers a post-publish "ready" push, breadth alerts (two tiers), a
   normal-priority push per newly-arrived federal final rule, and self-monitoring health pings.
 - Guards: `shell-guard.yml` fails any push that changes the PWA shell without a service-worker
   CACHE bump; `data-smoke.yml` (weekly + dispatch) proves every data leg — market spine, policy
-  sources, the Utah scrape, the keyword prefilter and the model's relevance judgement — from a
-  runner IP, and pushes ntfy when one goes red.
+  sources, the Utah scrape, the keyword prefilter, the lesson seed articles and prose guards, the
+  client-side lesson pointer, and the model's relevance judgement — from a runner IP, and pushes
+  ntfy when one goes red.
 
 ## Data flow
 
@@ -51,13 +54,30 @@ GitHub Actions (cron, UTC) --> python -m scripts.build_briefing
                                            forward against today. No fetch, no model, no state, no
                                            availability flag - called from run(), NOT from
                                            _get_policy(), so it can never be marked seen or pushed
+  -> _get_lessons()                        OWEN'S ALPHABET SOUP — text only, audio comes later
+     -> summarize.propose_lesson_titles()  THIRD Gemini call: exact article titles, NO prose at all
+     -> lessons.first_usable()             en.wikipedia.org action API, keyless. Fails closed on a
+                                           missing page, a disambiguation page or a stub, and walks
+                                           to the next candidate. NO ARTICLE, NO LESSON.
+     -> summarize.summarize_lesson()       FOURTH Gemini call: writes the lesson FROM that article
+                                           -> _validate_lesson() checks the prose back against the
+                                              article text in code (invented $/%/year, or anything
+                                              shaped like a dosage, discards the whole lesson)
+     -> state.record_lesson()              the only writer of lessons_taught (the long dedupe memory)
   -> summarize.summarize()                 Gemini structured output (numbers injected as facts)
   -> assemble briefing dict (incl. breadth, mortgage, policy, policy_upcoming, policy_calendar)
   -> write docs/briefing.json
             docs/archive/<date>.json
             docs/archive/index.json
             headline.txt                   (job-local handoff for the post-publish ready push)
-  -> tts.generate()                        deterministic narration -> Gemini TTS -> audio.mp3 (lameenc, in-process)
+  -> tts.generate(has_lesson=...)          deterministic narration -> Gemini TTS -> audio.mp3 (lameenc, in-process)
+                                           has_lesson only claims the DECK is non-empty — whether the
+                                           reader has an unfinished lesson is a fact on their phone
+  -> _publish_lessons()                    tts.ensure_outro() (once, ever) + 3 clips per new lesson
+                                           -> docs/lessons/, abandoned past LESSON_AUDIO_DEADLINE
+                                           -> prune audio outside the retention window
+                                           -> write docs/lessons.json (audio FIRST, deck SECOND: an
+                                              entry only ever claims clips already on disk)
   -> breadth alert eval (warning <40 one-shot / oversold <30 daily nag, per index) -> state
   -> policy alert eval (one normal-priority push per NEW federal final rule; one-shot per date) -> state
   -> state.save (last_run + markets_* + breadth + policy state; last_run rewritten daily -> renewing commit)
@@ -65,10 +85,12 @@ GitHub Actions (cron, UTC) --> python -m scripts.build_briefing
 workflow: Publish audio edition            audio.mp3 -> docs/briefing-audio.mp3 + date manifest (only on success)
 workflow: git commit + push (docs/, state/) --> GitHub Pages redeploys
 workflow: Send ready push                  python -m scripts.notify ready — ONLY after git push succeeded
-PWA (docs/app.js): fetch briefing.json (network-first) -> render; Listen player (mp3 when the
-  manifest date matches, else chunked speechSynthesis); archive + search; staleness banner;
-  the policy section is built by a function that returns null when nothing qualified and is
-  appended behind a guard (see the design decisions below)
+PWA (docs/app.js): fetch briefing.json + lessons.json (network-first) -> render; Listen player
+  plays a QUEUE (today's mp3 -> the current lesson's clips at the chosen depth -> the shared outro),
+  falling back to chunked speechSynthesis for any part with no audio; archive + search; staleness
+  banner; the policy section is built by a function that returns null when nothing qualified and is
+  appended behind a guard (see the design decisions below); Owen's Alphabet Soup renders LAST and
+  owns the deck pointer in localStorage
 
 Heartbeat (independent cron): python -m scripts.heartbeat
   -> fetch LIVE docs/briefing.json from Pages -> ntfy + non-zero exit if older than HEARTBEAT_STALE_HOURS
@@ -87,6 +109,12 @@ Heartbeat (independent cron): python -m scripts.heartbeat
   orderings (re-emit before fetch; mark seen only after a successful model call) and the first-run
   bootstrap suppression. It is called AFTER the breadth call, because `_get_breadth()` returns a new
   state dict and passing the pre-breadth `st` onward would silently discard `breadth_last_good`.
+- `scripts/data/lessons.py`: the source material for Owen's Alphabet Soup — one keyless English
+  Wikipedia article, fetched BEFORE any lesson prose exists. Returns None (with a distinct logged
+  reason) for a missing page, an invalid title, a disambiguation page, or an extract shorter than
+  `LESSON_MIN_SOURCE_CHARS`; `first_usable()` walks a candidate list until one answers and skips
+  articles already in `lessons_taught`. That dedupe runs AFTER the fetch on purpose: redirects mean
+  two proposed strings can resolve to one article, and only the fetch knows.
 - `scripts/heartbeat.py`: independent liveness check. Fetches the live Pages briefing and pings ntfy
   (and exits non-zero) if it is stale or unreachable. Run by `.github/workflows/heartbeat.yml`.
 - `scripts/data/market.py`: the four headline numbers from Yahoo's chart API, recent-window fetch, last-two
@@ -181,7 +209,9 @@ Heartbeat (independent cron): python -m scripts.heartbeat
   falling below `BREADTH_WARN` (40, re-armed at 42) and OVERSOLD daily nag below
   `BREADTH_OVERSOLD` (30, clears at 33, EXTREME below 20) — both freshness-gated; oversold
   supersedes warning. `record_policy()` is the single writer of `policy_seen` / `policy_active` /
-  `policy_today`, and `eval_policy_alert()` flips only the `policy_today.alerted` stamp. Every key,
+  `policy_today`, and `eval_policy_alert()` flips only the `policy_today.alerted` stamp.
+  `record_lesson()` is the single writer of `lessons_taught` (and `forget_lessons()` its only
+  eraser, used when a deck write failed and the lesson was therefore never published). Every key,
   its writer and its lifecycle are tabulated in `operations.md`.
 - `scripts/notify.py`: ntfy publish for the ready push, breadth alerts, policy alerts, and health
   pings. Also a CLI (`python -m scripts.notify ready`) the workflow calls AFTER `git push` succeeds,
@@ -197,6 +227,22 @@ Heartbeat (independent cron): python -m scripts.heartbeat
   compares the item's figures against the source's, after normalizing both sides so `$1,200.00` in
   the source accepts `$1,200` in the output); a hallucinated effective date would not be, which is
   exactly why the model is never asked for one.
+- **Owen's Alphabet Soup fetches its source BEFORE it writes.** It is the only section whose subject
+  matter has no feed behind it, which makes it the only place a model could write purely from memory
+  with nothing downstream to notice. So the order is inverted from how a "daily fact" feature is
+  normally built: a topic call proposes exact article titles and NO prose, a real Wikipedia article
+  is fetched (no article, no lesson that day), and only then is the lesson written with that text in
+  front of the model — after which `_validate_lesson` compares the prose back against the same text.
+  The guards are deliberately the policy section's, extended: an invented dollar amount, percentage
+  **or year** discards the whole lesson, and so does anything shaped like a drug dosage, whatever the
+  article says. The citation is re-taken from the fetch, never echoed from the model.
+- **The lesson pointer is client-side, and that is the feature, not a shortcut.** The build publishes
+  an append-only deck; the phone decides which entry is current and advances only when the audio
+  queue genuinely ended or the reader tapped "New lesson". Nothing on the server may key a lesson to
+  a date, which is why the deck is a separate file from `briefing.json` and why a lesson never enters
+  the archive. The consequence to preserve: a briefing that was not finished leaves the same lesson
+  in place tomorrow. `11-client-pointer.js` is the regression net, because no server-side check in
+  this repo can see that rule break.
 - Source links are validated in code. Any item URL not in the fetched article set is dropped, so an
   invented citation cannot reach the output. Policy items additionally pass a two-host allowlist
   (`www.federalregister.gov`, `le.utah.gov`), and the rendered `url` is re-taken from the candidate
@@ -330,6 +376,36 @@ null when all three are empty.
 Companion files: `docs/briefing-audio.mp3` (the day's narration) + `docs/briefing-audio.json`
 (`{date}` manifest — the player binds audio only when it matches the briefing's date).
 
+## lessons.json schema (Owen's Alphabet Soup)
+
+Published separately from `briefing.json` and deliberately NOT part of it or of the archive: a
+lesson belongs to the deck, not to a date, and an archived edition is a record of one day's news.
+
+```
+generated_at : ISO datetime of the last build that touched the deck
+outro        : path to the shared sign-off clip ("lessons/outro.mp3"), generated once and reused
+lessons      : append-only, oldest first, pruned to LESSON_DECK_MAX (60). Each entry:
+  id            : "<date>-<article-slug>"; also the audio filename stem and the client's pointer key
+  date          : the day the lesson was WRITTEN (not the day it is read)
+  domain        : one of config.LESSON_DOMAINS, rotated evenly by lessons-taught count
+  title, hook   : the headline and the one-sentence "why this matters"
+  quick         : the core lesson. Stands alone — many days it is the only tier read
+  more, deep    : cumulative extensions, each continuing where the last stopped
+  takeaway      : the one concrete action. Rendered and SPOKEN right after `quick`, because `quick`
+                  is a complete lesson and the deeper tiers are extensions after it
+  source        : { title, url } — joined in code from the fetched article, never from the model
+  audio         : { tier: path } for the clips that actually wrote. May be {} (a failed TTS day, or
+                  a lesson older than LESSON_AUDIO_RETAIN, whose clips have been pruned). The prose
+                  above is why that degrades to the device voice instead of to silence.
+```
+
+**What is NOT in this file, or in `state.json`, is the point of the feature:** which lesson is
+current. That pointer lives in the browser's `localStorage` under `soup.v1`
+(`{length, completed[], skipped[]}`), because it advances on exactly two events — the audio queue
+reached its end, or the reader tapped "New lesson" — and both are facts only the device can observe.
+A server-side "lesson of the day" would be a guess at a client-side fact, and would break the one
+rule the feature exists for: an unfinished lesson is still there tomorrow.
+
 Note: `market.ndx` is the Nasdaq Composite (Yahoo `^IXIC`), labeled "Nasdaq" in the UI. Each
 number carries its own `asof` date. Values are the latest SETTLED daily close — a bar belonging to
 a still-open session is dropped, never shipped as a close. `change` is the difference of the last
@@ -369,6 +445,22 @@ second that was listed here has since been closed:
   `09-policy-calendar.py`, rather than a paragraph.
 - **The audio edition excludes policy.** The narration stays deliberately leaner than the page
   (`scripts/tts.py`), and adding a fourth topic to a drive-time script was not worth the length.
+
+v4 adds **Owen's Alphabet Soup**: one grounded lesson a day, rendered last on the page and played
+last in the audio, advancing only when the briefing is actually finished or the reader asks for a
+new one. Known limits, all deliberate:
+
+- **One new lesson a day (two on the very first run).** The "New lesson" button can therefore run
+  out, and says so rather than inventing something. The reader's own unfinished lessons are the
+  buffer, which is the same property the completion rule creates.
+- **Lesson audio is kept for the last `LESSON_AUDIO_RETAIN` (10) lessons only.** Every daily commit
+  is permanent git history, so an unbounded window would grow the repo by ~1 MB a day forever. A
+  pointer that falls behind that window still works — the deck carries the prose, and the device
+  voice reads it.
+- **Wikipedia is the only source.** It is keyless, has plain-text extracts, and covers all four
+  subject areas with the mechanics a lesson needs. A `.gov`-style primary source would be better for
+  the money and health domains, but none of them publishes a machine-readable article API — the same
+  finding that produced `POLICY_CALENDAR`.
 
 One residual risk was found by the weekly gate and has been fixed by removing the mode rather than
 prompting around it. The model's selectivity was proven on a batch of 24 candidates, where it could

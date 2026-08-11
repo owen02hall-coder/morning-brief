@@ -341,6 +341,110 @@ POLICY_CALENDAR_HORIZON_DAYS = 30
 # to keep a calendar entry on screen every day would silently undo that decision by making the
 # section permanent. A 7-day horizon would swing the other way and give no planning lead at all.
 
+# --- Owen's Alphabet Soup: one grounded, useful-for-life lesson a day --------------------------
+# The last section of the page and the last thing in the audio edition. Everything else in this
+# briefing REACTS to a feed; this is the only section whose job is to teach something that is true
+# whether or not it happened today.
+#
+# THE ACCURACY MECHANISM IS THE SAME ONE THE POLICY SECTION USES, and it is the whole reason this
+# section is safe to ship: the model NEVER writes from memory. A real article is fetched first
+# (scripts/data/lessons.py), its text is handed to the model as untrusted source material, and the
+# prose that comes back is checked IN CODE against that text — an invented dollar figure, percentage
+# or year discards the lesson (summarize._validate_lesson). The citation is re-taken from the fetch,
+# never echoed from the model. "The model was told to be accurate" is a label; this is a mechanism.
+#
+# THE POINTER IS NOT HERE. The build publishes an append-only DECK (docs/lessons.json); which lesson
+# is "current" is decided on the phone, because only the phone can know whether the audio actually
+# reached the end. See docs/app.js (the `soup` object) and documentation/architecture.md.
+
+# Even rotation, picked by (number of lessons already taught) % len(LESSON_DOMAINS) — deterministic,
+# survives skipped days, and cannot cluster five money lessons in a row. Each `focus` line is the
+# only steering the topic-proposal call gets.
+LESSON_DOMAINS = [
+    {"name": "Money mechanics",
+     "focus": ("How money machinery actually works under the hood: credit, escrow, interest, "
+               "insurance, taxes, retirement accounts, closing costs, loan structure.")},
+    {"name": "Home, car and repair",
+     "focus": ("Owning and maintaining physical things: plumbing, electrical, heating, appliances, "
+               "tires, engines, tools, inspections, and the failures that get expensive when "
+               "ignored.")},
+    {"name": "Health and emergencies",
+     "focus": ("What to recognise and what to do when something goes wrong with a body: first aid, "
+               "warning signs, prevention, sleep, and when professional care is the answer.")},
+    {"name": "Thinking and people",
+     "focus": ("How judgement goes wrong and how people are persuaded: decision traps, statistics "
+               "literacy, negotiation, communication, scams and manipulation tactics.")},
+]
+
+# Fallback article titles, used ONLY when the proposal call fails or none of its candidates resolve
+# to a real, long-enough article. Deliberately concrete English Wikipedia titles, not search terms:
+# a title either fetches or it does not, which fails loudly instead of quietly returning something
+# adjacent. Same reasoning as POLICY_CALENDAR above — where there is no feed, a curated static list
+# is the honest mechanism, and it is a FLOOR under the model, not a replacement for it.
+LESSON_SEED_ARTICLES = {
+    "Money mechanics": [
+        "Credit score", "Escrow", "Amortization schedule", "Compound interest", "Index fund",
+        "Deductible", "Health savings account", "Annual percentage rate", "Title insurance",
+        "Individual retirement account", "Property tax", "Debt-to-income ratio", "Closing costs",
+    ],
+    "Home, car and repair": [
+        "Circuit breaker", "Water heater", "Residual-current device", "Smoke detector",
+        "Carbon monoxide poisoning", "Home inspection", "Motor oil", "Tire", "Water hammer",
+        "Antifreeze", "Jump start (vehicle)", "Air filter",
+    ],
+    "Health and emergencies": [
+        "Cardiopulmonary resuscitation", "Abdominal thrusts", "Burn", "Stroke", "Anaphylaxis",
+        "Hypothermia", "Heat stroke", "First aid", "Automated external defibrillator",
+        "Sleep hygiene", "Dehydration", "Concussion",
+    ],
+    "Thinking and people": [
+        "Confirmation bias", "Sunk cost", "Base rate fallacy", "Survivorship bias",
+        "Anchoring effect", "Availability heuristic", "Loss aversion", "Active listening",
+        "Negotiation", "Social engineering (security)", "Confidence trick", "Framing effect",
+    ],
+}
+
+# English Wikipedia's action API — keyless, no account, generous rate limits for one request a day.
+# `formatversion=2` gives a plain `pages` LIST (the legacy shape is a dict keyed by page id, with
+# "-1" for a miss, which is exactly the kind of shape a caller silently mis-reads).
+WIKI_API = "https://en.wikipedia.org/w/api.php"
+WIKI_TIMEOUT = 20
+LESSON_MIN_SOURCE_CHARS = 900     # below this an article is a stub — not enough to teach from, and
+                                  # the model would have to fill the gap from memory, which is the
+                                  # one thing this design exists to prevent.
+LESSON_SOURCE_CHARS = 7000        # slice of the article handed to the model. The figure guard reads
+                                  # the FULL extract, so (as in _policy_docs_block) truncation can
+                                  # only ever shrink what the model can copy — never cause a false drop.
+LESSON_TOPIC_CANDIDATES = 4       # asked of the proposal call, tried in order until one fetches.
+                                  # One call, several shots: a retry costs a request, this does not.
+
+# Length tiers. The reader picks one on the phone (localStorage), so the build must publish ALL
+# THREE — hence three prose fields per lesson and three audio segments, played cumulatively:
+# quick = [1], medium = [1,2], long = [1,2,3]. Segments (not three separate renderings) is what
+# keeps this to one lesson's worth of audio instead of three.
+LESSON_WORD_TARGETS = {"quick": (110, 170), "more": (110, 180), "deep": (130, 220)}
+LESSON_WORD_FLOOR = 55            # below this a segment is not a lesson; the whole item is rejected
+LESSON_WORD_CEILING = 320         # above this the audio blows past the tier the reader chose
+
+LESSON_DECK_MAX = 60              # entries kept in docs/lessons.json. The phone's pointer walks this
+                                  # list; anything older has been read or skipped many times over.
+LESSON_AUDIO_RETAIN = 10          # lessons whose mp3s stay in docs/lessons/. Bounded on purpose:
+                                  # audio is ~1 MB per lesson and every daily commit is permanent
+                                  # git history. A pointer that falls off this window still works —
+                                  # the client reads that lesson with the on-device voice.
+LESSON_BOOTSTRAP_COUNT = 2        # first run only: seed a small buffer so the "new lesson" button
+                                  # has somewhere to go on day one. 1/day after that.
+LESSON_TTS_MIN_INTERVAL = 20      # seconds between TTS requests. The free tier is rate-limited per
+                                  # MINUTE, and this feature takes the daily count from 1 to 4.
+LESSON_AUDIO_DEADLINE = 420       # seconds INTO run() past which no more lesson clips are
+                                  # synthesized. Measured from the start of the run, not from the
+                                  # start of the audio leg, because the thing being protected is
+                                  # briefing.yml's `timeout-minutes: 10` — a cancelled job ships NO
+                                  # briefing at all and fires the high-priority FAILED push, which
+                                  # is strictly worse than a lesson the phone has to read aloud
+                                  # itself. 420 leaves ~2.5 min of margin for the commit/push/notify
+                                  # legs that still have to run after this.
+
 # --- Audio edition (TTS) ------------------------------------------------------
 # One TTS request/day stays comfortably inside the Gemini free tier. The build writes a WAV to
 # AUDIO_WAV_PATH (job-local, gitignored); the workflow converts it to docs/briefing-audio.mp3 and
@@ -360,6 +464,13 @@ REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DOCS_DIR = os.path.join(REPO_ROOT, "docs")
 ARCHIVE_DIR = os.path.join(DOCS_DIR, "archive")
 BRIEFING_PATH = os.path.join(DOCS_DIR, "briefing.json")
+# Owen's Alphabet Soup. The deck is PUBLISHED (the PWA fetches it like briefing.json) and is
+# append-only + pruned; the audio for the most recent LESSON_AUDIO_RETAIN entries sits beside it.
+# Both are written directly into docs/ rather than handed to the workflow the way audio.mp3 is:
+# there is no manifest to keep honest here (a deck entry only claims audio that was actually
+# written), and `git add docs/` in briefing.yml already stages additions AND deletions.
+LESSONS_PATH = os.path.join(DOCS_DIR, "lessons.json")
+LESSON_AUDIO_DIR = os.path.join(DOCS_DIR, "lessons")
 # `or` (not a get() default), same reason as PAGES_URL: an unset-but-present env var arrives as "".
 # The override exists because state.save() runs UNCONDITIONALLY at the end of run() — outside
 # `if do_notify:` (build_briefing.py:228-231) — so a `--local` dev run writes REAL state: it burns

@@ -2,7 +2,7 @@
 title: Operations
 source_files: [.github/workflows/, scripts/build_briefing.py, scripts/heartbeat.py, scripts/notify.py, scripts/briefing-assumptions/]
 entry_points: [".github/workflows/briefing.yml", ".github/workflows/heartbeat.yml", ".github/workflows/shell-guard.yml", ".github/workflows/data-smoke.yml", "scripts/build_briefing.py:main", "scripts/heartbeat.py:main"]
-last_verified: 2026-08-03
+last_verified: 2026-08-11
 ---
 
 # Operations
@@ -146,8 +146,17 @@ pushes.
 | `policy_utah_queue` `[stub]` | `policy._maybe_harvest_utah()` appends; `policy._release_utah()` pops; `policy.requeue_utah()` pushes unreported ones back to the front; `policy._backfill_utah_dates()` repairs old entries | the release path | Drains at ≤`MAX_POLICY_ITEMS`/day; stubs are `{id, url, title, effective_date}`, detail text is fetched at release. Stubs queued before `effective_date` existed are repaired ONCE by `_backfill_utah_dates()` (one list request; key PRESENCE, not truthiness, marks a stub handled, so it terminates). Without that the field would stay null on every already-queued bill until the next general session |
 | `policy_utah_session` | `policy._maybe_harvest_utah()` — **only** when a harvest yielded ≥`UTAH_MIN_SIGNED` signed bills | the annual harvest gate | Annual. Stamped with the session actually USED, so a prior-year fallback leaves the gate open and the next run retries the real current session |
 | `policy_bootstrapped` | `build_briefing._get_policy()` on the first policy run whose FEDERAL fetch succeeded | the bootstrap suppression | Once, ever |
+| `lessons_taught` `[{id, article_title, title, domain, date}]` | `state.record_lesson()` when a lesson's prose is written; `state.forget_lessons()` removes entries whose deck write then FAILED | `data/lessons.first_usable()` (the real dedupe, applied after the fetch so redirects collapse), the topic-proposal avoid-list, and the domain rotation index | Capped at 500 (~16 months). The LONG memory: the published deck is pruned to 60, but a lesson repeating a year later is what this prevents |
+| `lessons_bootstrapped` | `state.record_lesson()` on the first lesson ever written | `_get_lessons()`'s "two on the first run, one a day after" branch | Once, ever. Means "the first run happened", NOT "a lesson exists" — it is not cleared by `forget_lessons()` |
 
-Two lifecycle rules are worth stating outright because they are the ones easiest to break:
+**The lesson pointer is NOT here, and must never be added.** Which lesson the reader is currently on
+lives in the browser's `localStorage` (`soup.v1`), because it advances only when the audio actually
+reached the end or the reader tapped "New lesson" — facts the build cannot observe. A "current
+lesson" key in this file would be a server-side guess at a client-side fact and would break the rule
+the feature exists for: an unfinished lesson is still there tomorrow. `state.json` remembers only
+what has been *taught*, never what has been *read*.
+
+Three lifecycle rules are worth stating outright because they are the ones easiest to break:
 
 - **`policy_seen` is written only after `summarize_policy()` returns ok, and only for what was
   REPORTED.** A Gemini outage therefore leaves the day's candidates unseen and tomorrow retries them,
@@ -162,6 +171,12 @@ Two lifecycle rules are worth stating outright because they are the ones easiest
   suppression entirely: blanket-suppressing run one would swallow the whole queue of a completed
   session (17 of 2026GS's 491 signed bills pass the prefilter) and leave Utah contributing nothing
   until the next general session in March.
+- **A lesson is stamped taught when it is WRITTEN, and un-stamped if the deck write then failed.**
+  Recording at write time is deliberate: the reader draws from the deck, and re-teaching an article
+  because they have not reached the first copy yet is the worse failure. But a lesson that was
+  stamped and never published would be an article the reader can never be taught, invisibly — so
+  `_publish_lessons()` returns whether the deck landed, and `run()` calls `forget_lessons()` and
+  re-saves when it did not.
 
 ## Failure modes and recovery
 
@@ -180,6 +195,21 @@ Two lifecycle rules are worth stating outright because they are the ones easiest
   briefing still ships; alerts are suppressed on stale values.
 - Gemini TTS fails: no manifest is written, the page's Listen button falls back to the on-device
   voice, and the degraded ping includes "audio". The briefing still ships.
+- **The Alphabet Soup lesson leg fails** (no proposal, no usable article, a validation rejection, or
+  a Gemini outage): the deck simply does not grow that day and the degraded ping lists "alphabet
+  soup". The reader notices nothing unless they were already caught up, because their pointer is
+  still sitting on whatever they have not finished. Nothing is stamped taught, so tomorrow retries.
+- **Only some lesson clips synthesize** (a per-minute rate limit, or the run passing
+  `LESSON_AUDIO_DEADLINE`): the deck entry records exactly the clips that wrote. The client requires
+  ALL the clips for the reader's chosen depth before using audio, and otherwise reads that lesson in
+  the device voice — one consistent voice rather than a hand-off mid-lesson.
+- **The reader's pointer falls behind the audio retention window** (`LESSON_AUDIO_RETAIN`, 10
+  lessons): the pruned entries keep their prose and lose only their `audio` paths, in the same pass
+  that deletes the files, so the deck can never advertise a clip that is gone. That lesson is read by
+  the device voice.
+- **The reader clears site data or gets a new phone:** the pointer is gone, and the deck restarts
+  from its oldest entry. Lessons are not news, so nothing is stale — the cost is re-hearing some.
+  There is no server-side copy to restore, by design.
 - Federal Register unreachable, or returning ZERO results: `data_availability.policy` goes false and
   the degraded ping lists "policy". Zero results across six agencies and 45 days is treated as a
   broken query rather than a quiet window — measured volume is ~21 documents — so it raises and is
@@ -282,12 +312,20 @@ Two lifecycle rules are worth stating outright because they are the ones easiest
   Utah list page), `07` (Utah bill detail: relative hrefs resolve, real text extracts, and **A6** —
   the passed-bills "Effective Date" column is still readable on >=95% of signed rows), `08` (keyword
   prefilter recall, precision and volume), `09` (the static policy calendar cannot go stale and no
-  label claims an unannounced date). `09` needs no network either, so it runs offline in
-  milliseconds. `06` needs a Gemini key; `03` needs a Gemini key; `01`/`02` need a Twelve Data key
-  and target the abandoned v2 breadth route.
+  label claims an unannounced date), `10` (every Alphabet Soup seed article resolves; the
+  invented-figure, dosage and length guards still bite; the tier list agrees across build, narration
+  and client). `09` needs no network either, so it runs offline in milliseconds. `11` is JavaScript —
+  it runs the shipped `docs/app.js` under Node against a stub DOM and is the ONLY gate on the lesson
+  pointer, since no server-side check can see that rule regress:
+  `BRIEFING_SMOKE_ALLOW_DEV=true node scripts/briefing-assumptions/11-client-pointer.js`.
+  `06` needs a Gemini key; `03` needs a Gemini key; `01`/`02` need a Twelve Data key and target the
+  abandoned v2 breadth route.
 - `run-all.sh` halts on the first non-zero exit and `01`/`02` exit 3 without `TWELVEDATA_API_KEY`, so
   in practice gate on the policy tests individually or just dispatch **Data Smoke**, which runs
-  05/07/08/09/06 from a runner with each step independent.
+  05/07/08/09/10/11/06 from a runner with each step independent.
+- **After editing `LESSON_SEED_ARTICLES`, run `10`.** Wikipedia titles move, and a title that no
+  longer resolves is a silently missing lesson, not an error — the fallback simply produces nothing.
+  `Credit utilization ratio` was in the shipped list for exactly as long as it took `10` to run once.
 
 ## Cost
 
@@ -300,6 +338,11 @@ Two lifecycle rules are worth stating outright because they are the ones easiest
   skipped only when that window is empty. That is the accepted, deliberate cost of the ranking fix —
   one small call beside the two the briefing already makes, still inside the free tier.
   `data-smoke.yml` adds three more calls per week (one batch + two single-candidate measurements).
+- Owen's Alphabet Soup adds two text calls a day (topic, then prose) and **three TTS calls**, taking
+  the daily audio total from 1 to 4. Its source, Wikipedia's action API, is free and keyless. The
+  real cost is disk: three clips per lesson at 48 kbps is roughly 1 MB a day of NEW blobs in a git
+  history that is already permanent, which is why `LESSON_AUDIO_RETAIN` bounds the working tree and
+  why the outro is synthesized once and reused forever instead of daily.
 
 ## Local development
 
@@ -314,9 +357,12 @@ BRIEFING_STATE_PATH=/tmp/policy-state.json \
 **Use `BRIEFING_STATE_PATH` for every local run that is not deliberately editing real state.**
 `state.save()` is called unconditionally at the end of `run()` — outside the `if do_notify:` block —
 so `--local` and `--no-notify` still WRITE `state/state.json`. Without the override a dev run burns
-`policy_bootstrapped`, marks the day's policy candidates seen, and pops the Utah queue, all of which
+`policy_bootstrapped`, marks the day's policy candidates seen, pops the Utah queue, and stamps the
+day's lesson article into `lessons_taught` (so that article is never chosen again), all of which
 silently suppress that content in the next real build; it can also stamp `last_run` and make the next
-scheduled run no-op. The override is the reason the mitigation is real rather than advice:
+scheduled run no-op. Note the override does NOT cover `docs/lessons.json` or `docs/lessons/` — a
+local run with a Gemini key writes a real deck entry and real clips there, so check `git status`
+before committing. The override is the reason the mitigation is real rather than advice:
 `config.STATE_PATH` used to be a plain constant with no environment hook.
 
 It is read with `or`, not `os.environ.get(default)`, on purpose: an unset-but-present variable

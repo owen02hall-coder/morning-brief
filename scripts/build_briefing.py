@@ -9,7 +9,8 @@ Run modes:
 
 Flow: date-gate -> load state -> market (Yahoo, all four numbers) + mortgage (PMMS) -> news (RSS)
 -> breadth -> policy (re-emit-or-fetch, then its own Gemini call; plus the static, model-free
-policy calendar) -> Gemini summary
+policy calendar) -> Owen's Alphabet Soup (pick a subject, fetch a real article, write a grounded
+lesson into the published deck) -> Gemini summary
 (with a no-AI fallback) -> write briefing.json + archive + state + headline handoff -> health
 pings. The daily "ready" push is NOT sent here: the build writes headline.txt and the workflow
 sends the push (scripts.notify CLI) only after the commit/push leg succeeds, so a failed publish
@@ -19,7 +20,9 @@ high-priority health ping and exits non-zero.
 import glob
 import json
 import os
+import re
 import sys
+import time
 import traceback
 from datetime import date, datetime
 from zoneinfo import ZoneInfo
@@ -30,6 +33,7 @@ from .data import market as market_mod
 from .data import news as news_mod
 from .data import mortgage as mortgage_mod
 from .data import policy as policy_mod
+from .data import lessons as lessons_mod
 from .breadth import percent_above_ma as breadth_mod
 from . import summarize as summarize_mod
 
@@ -256,6 +260,154 @@ def _get_policy(st, today):
         return [], False, policy_mod.requeue_utah(st, candidates)
 
 
+# =================================================================================================
+# Owen's Alphabet Soup — the daily lesson deck.
+# =================================================================================================
+#
+# READ THIS BEFORE CHANGING ANYTHING HERE. This section does not work like the others, and the
+# difference is the whole feature: the build publishes an APPEND-ONLY DECK of lessons and does not
+# decide which one is today's. The pointer into the deck lives in the phone's localStorage, and it
+# advances on exactly two events, both of which only the device can observe — the audio reached the
+# end, or the reader tapped "new lesson". That is what "only give me a new one if I actually
+# listened" means mechanically: an unfinished lesson is still sitting there tomorrow, because
+# nothing on this side ever moved past it.
+#
+# The consequences to respect:
+#   - Nothing here may be keyed to "today". The deck is date-ordered but not date-addressed, and a
+#     lesson is NOT written into briefing.json or the archive — an archived edition is a record of a
+#     day's news, and a lesson the reader had not reached yet on that day was never part of it.
+#   - The daily mp3 cannot contain the lesson (the build does not know which one), which is why the
+#     clips are separate files the client queues after it. See tts.generate_lesson_audio.
+#   - Audio retention is bounded and the pointer is not. A phone that is 20 unfinished lessons
+#     behind will find its clips pruned; the client falls back to the device voice for that lesson,
+#     which is why the deck stores the prose and not only a path to a file.
+
+def _load_deck():
+    try:
+        with open(config.LESSONS_PATH, encoding="utf-8") as f:
+            deck = json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        return {"generated_at": None, "lessons": []}
+    deck.setdefault("lessons", [])
+    return deck
+
+
+def _lesson_id(today, article_title, used_ids):
+    slug = re.sub(r"[^a-z0-9]+", "-", (article_title or "lesson").lower()).strip("-")[:40] or "lesson"
+    base = f"{today}-{slug}"
+    # The id is a FILENAME (docs/lessons/<id>-quick.mp3) and a client-side pointer key, so a
+    # collision would silently overwrite one lesson's audio with another's.
+    ident, n = base, 2
+    while ident in used_ids:
+        ident, n = f"{base}-{n}", n + 1
+    return ident
+
+
+def _get_lessons(st, today, deck):
+    """Write today's lesson(s) — text only, no audio. Returns (entries, state). NEVER raises.
+
+    Two lessons on the very first run and one a day after that: the "new lesson" button needs
+    somewhere to go on day one, and after that the reader's own unfinished lessons are the buffer.
+
+    Each lesson costs one topic-proposal call, one keyless Wikipedia fetch and one writing call. A
+    failure at any step yields no lesson and no state change — the deck simply does not grow today,
+    which the reader cannot even notice unless they were already caught up.
+    """
+    entries = []
+    try:
+        want = 1 if st.get("lessons_bootstrapped") else config.LESSON_BOOTSTRAP_COUNT
+        used_ids = {e.get("id") for e in deck.get("lessons") or []}
+        for _ in range(want):
+            taught = state.taught_titles(st)
+            # Even rotation over the subject areas, indexed by how many lessons have EVER been
+            # taught. Deterministic, survives skipped days, and cannot drift the way a stored
+            # cursor could.
+            domain = config.LESSON_DOMAINS[len(taught) % len(config.LESSON_DOMAINS)]
+            proposed = summarize_mod.propose_lesson_titles(domain, taught)
+            # The curated seeds are appended, never substituted: if all four proposals turn out to
+            # be articles that do not exist, the day still produces a lesson.
+            candidates = proposed + list(config.LESSON_SEED_ARTICLES.get(domain["name"], []))
+            article = lessons_mod.first_usable(candidates, taught)
+            if not article:
+                print(f"lesson: no usable article for {domain['name']} — no lesson added today")
+                break
+            lesson = summarize_mod.summarize_lesson(domain, article)
+            if not lesson:
+                break
+            entry = {"id": _lesson_id(today, article["title"], used_ids), "date": today, **lesson}
+            used_ids.add(entry["id"])
+            entries.append(entry)
+            # Recorded as taught the moment it is WRITTEN, not when it is read: the deck is what the
+            # reader draws from, and re-teaching the same article because they have not reached the
+            # first copy yet would be the worse failure.
+            st = state.record_lesson(st, [entry])
+    except Exception as e:
+        # Last-resort guard, same contract as _get_policy: every callee above already promises not
+        # to raise, and this exists so a promise broken later degrades ONE section instead of
+        # crashing the briefing and paging the user.
+        print(f"lesson: leg failed (non-fatal): {type(e).__name__}: {e}")
+    return entries, st
+
+
+def _prune_lesson_audio(deck):
+    """Keep clips for the newest LESSON_AUDIO_RETAIN lessons; delete every other file in docs/lessons/.
+
+    Audio is ~1 MB per lesson and every daily commit is permanent git history, so this window is a
+    real constraint rather than tidiness. The `audio` key is cleared on the entries whose files are
+    being removed IN THE SAME PASS — a deck that advertises a file that is no longer there would put
+    a 404 in the middle of the reader's playlist, where the honest outcome is the device voice.
+    """
+    lessons = deck.get("lessons") or []
+    keep = {e.get("id") for e in lessons[-config.LESSON_AUDIO_RETAIN:]}
+    for e in lessons:
+        if e.get("id") not in keep and e.get("audio"):
+            e["audio"] = {}
+    wanted = {os.path.basename(p) for e in lessons for p in (e.get("audio") or {}).values()}
+    wanted.add(tts_mod.OUTRO_FILENAME)   # generated once, reused forever — never a prune candidate
+    try:
+        for name in os.listdir(config.LESSON_AUDIO_DIR):
+            if name.endswith(".mp3") and name not in wanted:
+                os.remove(os.path.join(config.LESSON_AUDIO_DIR, name))
+                print(f"lesson: pruned old audio {name}")
+    except FileNotFoundError:
+        pass
+
+
+def _publish_lessons(deck, entries, now, deadline):
+    """Synthesize audio for the new entries, then write the deck. Returns True if the deck was
+    written. NEVER raises.
+
+    Audio first, deck second, and that order is the contract: an entry only ever claims clips that
+    are already on disk, which is the same rule briefing.yml follows when it writes the audio
+    manifest only alongside a real mp3.
+
+    The return value is not decoration — `run()` uses it to un-record the lessons. `_get_lessons()`
+    marks an article taught as soon as the prose exists, so a deck that never gets written would
+    leave the state claiming a lesson the reader will never be shown, and that article would then
+    never be chosen again. Silent, and it can recur on any write failure, so it gets a mechanism
+    rather than a comment.
+    """
+    try:
+        if entries:
+            outro = tts_mod.ensure_outro()
+            if outro:
+                deck["outro"] = outro
+            for e in entries:
+                e["audio"] = tts_mod.generate_lesson_audio(e, deadline=deadline)
+        deck["lessons"] = (list(deck.get("lessons") or []) + entries)[-config.LESSON_DECK_MAX:]
+        _prune_lesson_audio(deck)
+        deck["generated_at"] = now.isoformat()
+        os.makedirs(config.DOCS_DIR, exist_ok=True)
+        with open(config.LESSONS_PATH, "w", encoding="utf-8") as f:
+            json.dump(deck, f, indent=2)
+        print(f"lesson: deck has {len(deck['lessons'])} lesson(s) "
+              f"({len(entries)} added today)")
+        return True
+    except Exception as e:
+        print(f"lesson: publish failed (non-fatal): {type(e).__name__}: {e}")
+        return False
+
+
 def _fallback_items(news, bucket, limit):
     return [{"summary": a["title"], "source": a["source"], "url": a["url"]}
             for a in news.get(bucket, [])[:limit]]
@@ -354,6 +506,10 @@ def _write_archive_index():
 
 def run(do_notify=True, today=None):
     now = _now()
+    # Elapsed-time anchor for the lesson audio's deadline (see config.LESSON_AUDIO_DEADLINE): the
+    # newest section is the first thing dropped when the run is running long, because a job
+    # cancelled by `timeout-minutes: 10` ships no briefing at all.
+    started = time.monotonic()
     # `today` is the gate's date, passed from main() so the build decision and the saved state stamp
     # use one identical date (no midnight-cross skew between two _now() reads). Falls back for --force/
     # --local/direct callers that don't gate.
@@ -377,6 +533,12 @@ def run(do_notify=True, today=None):
     # through that function is what would let it drift into being marked seen, pushed, or counted in
     # data_availability.policy. It has no availability of its own because it cannot fail.
     policy_calendar = policy_mod.upcoming_calendar(today, config.POLICY_CALENDAR_HORIZON_DAYS)
+
+    # Owen's Alphabet Soup: TEXT only here. The audio is generated after the briefing's own mp3
+    # (below), because the narration's sign-off depends on whether a lesson exists at all, and
+    # because the lesson clips are the first work abandoned if the run is running long.
+    deck = _load_deck()
+    lesson_entries, st = _get_lessons(st, today, deck)
 
     # Derive the weekday from the gate date so the build decision, the saved briefing date, and the
     # Sunday-recap choice all agree even if midnight crosses between _now() reads.
@@ -431,13 +593,31 @@ def run(do_notify=True, today=None):
     # Audio edition (non-fatal): generate() swallows its own failures and returns False. A failed
     # audio day just means no manifest gets written downstream and the PWA's Listen button falls
     # back to the on-device voice — the page, push, and state above are already safe on disk.
-    audio_ok = tts_mod.generate(briefing)
+    #
+    # `has_lesson` only claims that the DECK is non-empty, which is all this side can honestly know:
+    # whether the reader has an unfinished lesson waiting is a fact that lives on their phone. When
+    # they happen to be caught up, the client answers the hand-off itself in the device voice.
+    has_lesson = bool(lesson_entries) or bool(deck.get("lessons"))
+    audio_ok = tts_mod.generate(briefing, has_lesson=has_lesson)
+    if not _publish_lessons(deck, lesson_entries, now, started + config.LESSON_AUDIO_DEADLINE) \
+            and lesson_entries:
+        # The deck never landed, so nothing was published — take the "taught" stamps back off,
+        # otherwise those articles are burned forever and the reader never sees the lesson.
+        # state.save() has already run above, hence the second write.
+        st = state.forget_lessons(st, [e["id"] for e in lesson_entries])
+        state.save(st, today)
 
     # health: report any degraded section (low priority); the run still succeeded
     degraded = [k for k, v in briefing["data_availability"].items()
                 if v is False or v == "unavailable"]
     if not audio_ok:
         degraded.append("audio")
+    # Deliberately NOT part of data_availability: that block is per-EDITION, and a lesson belongs to
+    # the deck, not to a date. But a leg that quietly stops producing is exactly the kind of failure
+    # this project refuses to leave silent — the reader would just see the same lesson forever and
+    # assume they had not finished it. One low-priority line in the existing degraded ping.
+    if not lesson_entries:
+        degraded.append("alphabet soup")
     if do_notify:
         for a in breadth_alerts:
             notify.breadth_alert(a["text"], a["level"])

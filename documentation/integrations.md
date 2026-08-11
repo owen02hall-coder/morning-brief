@@ -2,7 +2,7 @@
 title: Integrations
 source_files: [scripts/data/, scripts/breadth/, scripts/summarize.py, scripts/tts.py, scripts/notify.py, scripts/config.py, .github/workflows/]
 entry_points: [GEMINI_API_KEY, NTFY_SUB, PAGE_URL]
-last_verified: 2026-08-03
+last_verified: 2026-08-11
 ---
 
 # Integrations
@@ -48,6 +48,25 @@ values live in the repo. Environment variable names only are listed here.
 - Invoked in: `scripts/data/constituents.py`, stdlib regex over each page's `constituents`
   table. NOTE the row shapes differ: S&P tickers are LINKED first cells, Nasdaq-100 tickers are
   PLAIN-TEXT first cells. Fail-closed on implausible counts (450–520 / 90–110).
+
+## Wikipedia action API (Alphabet Soup source material)
+
+- Used for: the ONE article each Owen's Alphabet Soup lesson is written from. This is the section's
+  accuracy mechanism, not a convenience — the article is fetched before any lesson prose exists, and
+  a lesson that cannot be grounded is simply not written that day.
+- Auth: none. `https://en.wikipedia.org/w/api.php`, `action=query&prop=extracts|pageprops|info`,
+  `explaintext=1&redirects=1&formatversion=2`. Needs a contact-bearing User-Agent
+  (`lessons.WIKI_UA`, module-local like the PMMS and Utah UAs).
+- Invoked in: `scripts/data/lessons.py` (`fetch_article`, `first_usable`), through `data/retry.py`.
+- Why `formatversion=2`: it returns `pages` as a LIST. The legacy shape is a dict keyed by page id
+  with `"-1"` for a miss — exactly the shape a caller mis-reads as a hit.
+- Fail-closed on four shapes, each logged with its own reason: `missing`, `invalid`,
+  `pageprops.disambiguation`, and an extract under `LESSON_MIN_SOURCE_CHARS`. The disambiguation
+  check matters most: those pages are real and long and about nothing, so a lesson built on one
+  would pass every later guard.
+- Verified 2026-08-11 by `10-lesson-sources.py`: all 50 seed titles resolve (4,001–81,805 chars),
+  a nonexistent title and `Mercury` (a disambiguation page) both return None.
+- Redirects resolve server-side, so the citation points at the article that was actually read.
 
 ## Federal Register API
 
@@ -262,9 +281,15 @@ folding it in would let a healthy calendar mask a dead Federal Register leg.
 ## Google Gemini
 
 - Used for: writing the briefing prose (tldr, the why lines, tech and world items, weekly recap),
-  writing the policy section's two prose fields, and synthesizing the daily audio edition
-  (`scripts/tts.py`, model `TTS_MODEL` = `gemini-2.5-flash-preview-tts`, voice `TTS_VOICE` = Kore,
-  one request/day; mp3 encoded in-process with `lameenc`).
+  writing the policy section's two prose fields, choosing and writing the day's Alphabet Soup
+  lesson, and synthesizing the audio (`scripts/tts.py`, model `TTS_MODEL` =
+  `gemini-2.5-flash-preview-tts`, voice `TTS_VOICE` = Kore; mp3 encoded in-process with `lameenc`).
+- Request budget per build: **4 text calls** (narrative, policy, lesson topic, lesson prose — the
+  last two skipped when the deck already grew, the policy one skipped on an empty window) and
+  **4 TTS calls** (the briefing edition plus three lesson clips), up from 1 TTS call before v4.
+  `tts._pace()` keeps at least `LESSON_TTS_MIN_INTERVAL` (20s) between TTS requests because the free
+  tier limits per MINUTE as well as per day, and `LESSON_AUDIO_DEADLINE` (420s into the run)
+  abandons any remaining lesson clips rather than risk the job's 10-minute cap.
 - Auth: env var `GEMINI_API_KEY`. Free tier. Keep the Google project's billing disabled to stay free.
 - Invoked in: `scripts/summarize.py` via the `google-genai` SDK (`genai.Client`).
 - Model: `config.MODEL_ID` (`gemini-2.5-flash`) with `config.MODEL_FALLBACK` (`gemini-2.5-flash-lite`).
@@ -279,10 +304,19 @@ folding it in would let a healthy calendar mask a dead Federal Register leg.
   each. The asymmetry is deliberate: losing the narrative loses the briefing, but a failed policy
   call degrades one section and retries tomorrow, whereas overrunning `briefing.yml`'s
   `timeout-minutes: 10` cancels the job and ships nothing at all.
-- Both prompts fence untrusted third-party text and declare it non-instructional
-  (`ARTICLES_BEGIN`/`ARTICLES_END` for news, `DOCS_BEGIN`/`DOCS_END` for policy documents).
+- Third and fourth calls (Alphabet Soup): `propose_lesson_titles()` returns exact article titles and
+  NO prose — splitting subject choice from writing is what lets a real article be fetched in between,
+  and it is why the model can never write a lesson from memory. `summarize_lesson()` then writes from
+  that article and loops primary→fallback on a *validation* rejection as well as on an error, since
+  an invented figure is per-generation rather than per-prompt. Both return empty/None instead of
+  raising: a failed lesson leg means the deck does not grow that day, and the reader still has every
+  lesson they have not finished.
+- Every prompt fences untrusted third-party text and declares it non-instructional
+  (`ARTICLES_BEGIN`/`ARTICLES_END` for news, `DOCS_BEGIN`/`DOCS_END` for policy documents,
+  `ARTICLE_BEGIN`/`ARTICLE_END` for the lesson's source article).
 - `data-smoke.yml` also spends one Gemini call per weekly run, in `06-policy-relevance.py`, using the
-  same `GEMINI_API_KEY` secret.
+  same `GEMINI_API_KEY` secret. The two lesson gates (`10`, `11`) spend none — they exercise the
+  fetch boundary and the shipped guards, not the model.
 
 ## ntfy
 

@@ -257,7 +257,156 @@ function policySection(items, upcoming, calendar) {
   return sec;
 }
 
-function render(b, into) {
+// ---- Owen's Alphabet Soup ---------------------------------------------------------------------
+//
+// THE POINTER LIVES HERE, AND NOWHERE ELSE. The build publishes an append-only deck
+// (lessons.json); this file decides which entry is current, and it advances on exactly two events:
+// the audio genuinely reached the end, or the reader tapped "New lesson". Both are facts only this
+// device can observe, which is why the server deliberately does not pick a lesson of the day — an
+// unfinished lesson has to still be there tomorrow.
+//
+// Everything is stored under one localStorage key. Losing it (new phone, cleared site data) costs
+// the reading history and restarts the deck from its oldest entry — annoying, never broken.
+
+const SOUP_KEY = "soup.v1";
+// Cumulative depths: each tier plays/reads on top of the one before, never instead of it.
+const SOUP_TIERS = { quick: ["quick"], medium: ["quick", "more"], long: ["quick", "more", "deep"] };
+const SOUP_LENGTHS = [["quick", "Quick"], ["medium", "Medium"], ["long", "Long"]];
+const SOUP_CAUGHT_UP = "You're caught up on Alphabet Soup. The next one lands tomorrow morning.";
+const SOUP_OUTRO_SPOKEN = "That's your alphabet soup. Have a great day.";
+const SOUP_HISTORY_MAX = 400;   // ids kept per list; the deck itself is far shorter
+
+const soup = {
+  deck: [],
+  outro: null,
+  prefs: { length: "medium", completed: [], skipped: [] },
+
+  load() {
+    try {
+      const saved = JSON.parse(localStorage.getItem(SOUP_KEY) || "{}");
+      if (SOUP_TIERS[saved.length]) this.prefs.length = saved.length;
+      if (Array.isArray(saved.completed)) this.prefs.completed = saved.completed;
+      if (Array.isArray(saved.skipped)) this.prefs.skipped = saved.skipped;
+    } catch (e) { /* corrupt or unavailable storage — defaults are a working state */ }
+  },
+  save() {
+    try { localStorage.setItem(SOUP_KEY, JSON.stringify(this.prefs)); } catch (e) { /* private mode */ }
+  },
+  async fetchDeck() {
+    try {
+      const d = await (await fetch("lessons.json", { cache: "no-store" })).json();
+      this.deck = Array.isArray(d.lessons) ? d.lessons.filter((l) => l && l.id) : [];
+      this.outro = typeof d.outro === "string" ? d.outro : null;
+    } catch (e) {
+      this.deck = [];       // offline before the deck was ever cached — the section just hides
+      this.outro = null;
+    }
+  },
+  done() { return new Set(this.prefs.completed.concat(this.prefs.skipped)); },
+  // Oldest-unfinished first. Lessons are not news — nothing expires — so working forward through
+  // the deck means a week away costs nothing, where "newest each day" would silently drop the ones
+  // that were never heard.
+  current() { const d = this.done(); return this.deck.find((l) => !d.has(l.id)) || null; },
+  waiting() { const d = this.done(); return this.deck.filter((l) => !d.has(l.id)).length; },
+  tiers() { return SOUP_TIERS[this.prefs.length] || SOUP_TIERS.medium; },
+  advance(id, how) {
+    if (!id) return;
+    const list = how === "completed" ? this.prefs.completed : this.prefs.skipped;
+    if (!list.includes(id)) list.push(id);
+    if (list.length > SOUP_HISTORY_MAX) list.splice(0, list.length - SOUP_HISTORY_MAX);
+    this.save();
+  },
+};
+
+function soupSpeech(lesson, tiers) {
+  // Mirror of scripts/tts.py compose_lesson_segments — used whenever the clips for the chosen
+  // depth are not all on the server (a failed TTS day, or a lesson old enough that its audio has
+  // been pruned). The prose is in the deck precisely so this fallback is always possible.
+  const seg = {
+    quick: `${lesson.title}. ${lesson.hook} ${lesson.quick} ${lesson.takeaway}`,
+    more: lesson.more,
+    deep: lesson.deep,
+  };
+  return tiers.map((t) => seg[t]).filter(Boolean).join(" ") + " " + SOUP_OUTRO_SPOKEN;
+}
+
+function soupControls(lesson, onChange) {
+  const wrap = el("div", "soup-controls");
+  const lengths = el("div", "soup-lengths");
+  lengths.setAttribute("role", "group");
+  lengths.setAttribute("aria-label", "Lesson length");
+  SOUP_LENGTHS.forEach(([value, label]) => {
+    const b = el("button", "soup-length" + (soup.prefs.length === value ? " on" : ""), label);
+    b.type = "button";
+    b.setAttribute("aria-pressed", soup.prefs.length === value ? "true" : "false");
+    b.onclick = () => {
+      if (soup.prefs.length === value) return;
+      soup.prefs.length = value;
+      soup.save();
+      onChange();          // re-render + rebuild the playlist: the audio length changed too
+    };
+    lengths.appendChild(b);
+  });
+  wrap.appendChild(lengths);
+
+  const next = el("button", "soup-next", "New lesson");
+  next.type = "button";
+  if (lesson) {
+    // The explicit half of "only give me a new one if I listened": this is the manual override,
+    // and it records a SKIP, not a completion, so the two are distinguishable later.
+    next.onclick = () => { soup.advance(lesson.id, "skipped"); onChange(); };
+  } else {
+    next.disabled = true;
+  }
+  wrap.appendChild(next);
+  return wrap;
+}
+
+function soupSection(onChange) {
+  const sec = el("section", "soup");
+  sec.appendChild(el("h2", null, "Owen's Alphabet Soup"));
+  const lesson = soup.current();
+  const card = el("div", "card soup-card");
+
+  if (!lesson) {
+    card.appendChild(el("p", "muted", soup.deck.length
+      ? SOUP_CAUGHT_UP
+      : "The first lesson lands with tomorrow's briefing."));
+    sec.appendChild(card);
+    sec.appendChild(soupControls(null, onChange));
+    return sec;
+  }
+
+  if (lesson.domain) card.appendChild(el("p", "kicker", lesson.domain));
+  card.appendChild(el("h3", "soup-title", lesson.title));
+  card.appendChild(el("p", "soup-hook", lesson.hook));
+  card.appendChild(el("p", "soup-body", lesson.quick));
+  // The takeaway sits directly after `quick` and not at the very bottom, because that is exactly
+  // where the audio says it: `quick` is a complete lesson with its own action line, and the deeper
+  // tiers are extensions after it. Page and audio must not disagree about the shape.
+  card.appendChild(el("p", "soup-takeaway", lesson.takeaway));
+  const extra = soup.tiers().slice(1);
+  if (extra.length) {
+    card.appendChild(el("p", "soup-deeper", "Going deeper"));
+    extra.forEach((t) => { if (lesson[t]) card.appendChild(el("p", "soup-body", lesson[t])); });
+  }
+  const src = lesson.source || {};
+  const href = safeHref(src.url);
+  if (href) {
+    const a = el("a", "readmore", `Source: ${src.title || "read more"}`);
+    a.href = href;
+    a.target = "_blank";
+    a.rel = "noopener";
+    card.appendChild(a);
+  }
+  sec.appendChild(card);
+  sec.appendChild(soupControls(lesson, onChange));
+  const waiting = soup.waiting();
+  if (waiting > 1) sec.appendChild(el("p", "muted soup-count", `${waiting - 1} more waiting.`));
+  return sec;
+}
+
+function render(b, into, withSoup) {
   into.innerHTML = "";
 
   if (b.tldr && b.tldr.length) {
@@ -311,6 +460,22 @@ function render(b, into) {
     sec.appendChild(card);
     into.appendChild(sec);
   }
+
+  // Alphabet Soup goes LAST, after everything the briefing had to say — and only on the live page.
+  // An archived edition is a record of one day's news; the lesson the reader had not reached yet
+  // was never part of that day, and rendering it there would also give two live pointers into the
+  // same deck.
+  if (withSoup) refreshSoup(into);
+}
+
+function refreshSoup(into) {
+  const fresh = soupSection(() => refreshSoup(into));
+  const existing = into.querySelector("section.soup");
+  if (existing) into.replaceChild(fresh, existing);
+  else into.appendChild(fresh);
+  // The current lesson or the chosen depth just changed, so the queued audio is wrong. Replanning
+  // here is what keeps the button and the player from disagreeing about what is about to play.
+  player.replan();
 }
 
 function showFreshness(b) {
@@ -360,10 +525,12 @@ function fmtTime(s) {
   return `${m}:${String(sec).padStart(2, "0")}`;
 }
 
-function speechText(b) {
+function speechText(b, hasLesson) {
   // Mirror of scripts/tts.py compose_script — used when there is no audio file (fallback days,
   // archived briefings, offline). Deliberately LEANER than the page (user preference): must-knows,
   // the S&P/Nasdaq percent moves only (no levels, no 10-year/VIX/breadth, no whys), tech, world.
+  // `hasLesson` swaps the sign-off for the hand-off into Alphabet Soup, exactly as the server's
+  // narration does — the lesson's own text follows immediately after this string.
   const parts = [];
   const d = localDate(b.date);
   parts.push(`Good morning. This is your briefing for ${d
@@ -388,23 +555,10 @@ function speechText(b) {
     });
   });
   if (b.weekly_recap) parts.push(`Your weekly recap. ${b.weekly_recap}`);
-  parts.push("That's your briefing. Have a great day.");
+  parts.push(hasLesson ? "And now, Owen's Alphabet Soup."
+                       : "That's your briefing. Have a great day.");
   return parts.join(" ").replace(/https?:\/\/\S+/g, "");
 }
-
-const listen = {
-  mode: null,           // "audio" | "speech"
-  playing: false,
-  audio: null,
-  stopSpeech() {
-    if ("speechSynthesis" in window) window.speechSynthesis.cancel();
-  },
-  stopAll() {
-    this.stopSpeech();
-    if (this.audio) this.audio.pause();
-    this.playing = false;
-  },
-};
 
 function speakChunked(text, onDone) {
   // iOS quietly dies on very long utterances — queue sentence-sized chunks instead.
@@ -426,81 +580,258 @@ function setButton(btn, playing) {
   btn.setAttribute("aria-label", playing ? "Pause the audio briefing" : "Play the audio briefing");
 }
 
-async function setupListen(b) {
-  const bar = document.getElementById("listen");
-  const btn = document.getElementById("listen-btn");
-  const label = document.getElementById("listen-label");
-  const track = document.getElementById("listen-track");
-  const fill = document.getElementById("listen-fill");
-  const time = document.getElementById("listen-time");
-  const audio = document.getElementById("listen-audio");
-  listen.audio = audio;
-  listen.stopAll();
-  setButton(btn, false);
-  fill.style.width = "0%";
+// The one play button drives a QUEUE, not a file: today's briefing mp3, then the clips for the
+// current lesson at the chosen depth, then the shared sign-off. Reaching the end of that queue is
+// the signal the whole feature turns on — it is the only honest evidence the briefing was actually
+// heard all the way through, and it is the one thing that advances the deck pointer.
+//
+// The queue can end in SPEECH instead of a clip (`tail`): a day the server's TTS failed, a lesson
+// old enough that its audio was pruned, or a reader who is caught up and should be told so. The
+// prose is in the deck for exactly this reason, so a missing mp3 degrades the voice, never the
+// content.
+const player = {
+  bar: null, btn: null, label: null, track: null, fill: null, time: null, audio: null,
+  briefing: null,
+  hasEdition: false,        // today's mp3 exists AND its manifest date matches this edition
+  clips: [],                // [{src, label}]
+  durations: [],
+  idx: 0,
+  tail: "",                 // spoken by the device voice after the clips (may be the whole thing)
+  tailLabel: "",
+  lessonId: null,           // the lesson this queue would complete; null when caught up
+  playing: false,
+  speaking: false,
+  speechSeq: 0,             // guards against a cancelled utterance's onend counting as "finished"
 
+  bind() {
+    this.bar = document.getElementById("listen");
+    this.btn = document.getElementById("listen-btn");
+    this.label = document.getElementById("listen-label");
+    this.track = document.getElementById("listen-track");
+    this.fill = document.getElementById("listen-fill");
+    this.time = document.getElementById("listen-time");
+    this.audio = document.getElementById("listen-audio");
+    this.audio.onended = () => this.next();
+    this.audio.onpause = () => { if (!this.speaking) { this.playing = false; this.paint(); } };
+    this.audio.onplay = () => { this.playing = true; this.paint(); };
+    this.audio.ontimeupdate = () => this.paint();
+    this.audio.onloadedmetadata = () => { this.durations[this.idx] = this.audio.duration; this.paint(); };
+    this.track.onclick = (ev) => this.seek(ev);
+    this.btn.onclick = () => this.toggle();
+  },
+
+  stopAll() {
+    // playing=false FIRST, and the generation bump before cancel(): cancelling a speech queue fires
+    // every pending utterance's onend, and a stale callback that still believed it was playing
+    // would count an interrupted lesson as finished — the one mistake this feature must not make.
+    this.playing = false;
+    this.speaking = false;
+    this.speechSeq += 1;
+    if ("speechSynthesis" in window) window.speechSynthesis.cancel();
+    if (this.audio) this.audio.pause();
+  },
+
+  // Build the queue from the current briefing + the current lesson. Called on load, and again
+  // whenever the pointer or the length setting moves.
+  replan() {
+    // Both guards are load-bearing. render() -> refreshSoup() -> replan() runs BEFORE setupListen()
+    // has bound the DOM nodes on first load, and an unguarded `this.bar.classList` there throws
+    // inside render — leaving a half-built page with no error message, the same failure the policy
+    // section's appendChild(null) guard exists to prevent. setupListen replans immediately after
+    // binding, so bailing here costs nothing.
+    if (!this.briefing || !this.bar) return;
+    const wasPlaying = this.playing;
+    this.stopAll();
+    const b = this.briefing;
+    const lesson = soup.current();
+    const tiers = soup.tiers();
+    this.clips = [];
+    this.tail = "";
+    this.tailLabel = "";
+    this.lessonId = lesson ? lesson.id : null;
+
+    if (this.hasEdition) {
+      // date param defeats the 10-min HTTP cache
+      this.clips.push({ src: `briefing-audio.mp3?d=${b.date}`, label: "Today's briefing" });
+    } else {
+      this.tail = speechText(b, !!lesson);
+      this.tailLabel = "Listen (device voice)";
+    }
+
+    if (lesson) {
+      const paths = tiers.map((t) => (lesson.audio || {})[t]).filter(Boolean);
+      // ALL of the chosen tiers must be present, not some: a queue that plays the first clip and
+      // then falls into a different voice mid-lesson is worse than one consistent voice.
+      if (this.hasEdition && paths.length === tiers.length) {
+        paths.forEach((p, i) => this.clips.push({ src: p, label: "Owen's Alphabet Soup" + (i ? " (cont.)" : "") }));
+        if (soup.outro) this.clips.push({ src: soup.outro, label: "Owen's Alphabet Soup" });
+      } else {
+        this.tail = (this.tail ? this.tail + " " : "") + soupSpeech(lesson, tiers);
+        this.tailLabel = this.hasEdition ? "Owen's Alphabet Soup (device voice)" : "Listen (device voice)";
+      }
+    } else if (this.hasEdition) {
+      // The deck is not empty on the server (the narration handed off to the soup), but this reader
+      // has finished everything in it. Say so rather than ending on a dangling introduction.
+      this.tail = SOUP_CAUGHT_UP;
+      this.tailLabel = "Owen's Alphabet Soup";
+    }
+
+    const speechOnly = !this.clips.length;
+    if (speechOnly && !("speechSynthesis" in window)) { this.bar.classList.add("hidden"); return; }
+    this.bar.classList.remove("hidden");
+    this.idx = 0;
+    this.durations = this.clips.map(() => 0);
+    this.measure();
+    this.paint();
+    if (wasPlaying) this.start();     // a length change mid-drive must not silence the player
+  },
+
+  // Preload durations so the bar and the countdown describe the WHOLE queue, not the current file.
+  // Throwaway elements: the visible <audio> is busy being the transport.
+  measure() {
+    this.clips.forEach((c, i) => {
+      const probe = new Audio();
+      probe.preload = "metadata";
+      probe.onloadedmetadata = () => {
+        if (isFinite(probe.duration)) { this.durations[i] = probe.duration; this.paint(); }
+      };
+      probe.src = c.src;
+    });
+  },
+
+  total() { return this.durations.reduce((a, d) => a + (d || 0), 0); },
+  elapsed() {
+    let t = 0;
+    for (let i = 0; i < this.idx; i++) t += this.durations[i] || 0;
+    return t + (this.audio && isFinite(this.audio.currentTime) ? this.audio.currentTime : 0);
+  },
+
+  paint() {
+    setButton(this.btn, this.playing);
+    const known = this.clips.length && this.durations.every((d) => d > 0);
+    const cur = this.clips[this.idx];
+    this.label.textContent = this.speaking || !cur ? (this.tailLabel || "Listen (device voice)")
+                                                   : cur.label;
+    if (known && !this.speaking) {
+      const total = this.total();
+      this.track.classList.remove("hidden");
+      this.time.classList.remove("hidden");
+      this.fill.style.width = `${Math.min(100, (this.elapsed() / total) * 100)}%`;
+      this.time.textContent = fmtTime(Math.max(0, total - this.elapsed()));
+    } else {
+      this.track.classList.add("hidden");
+      this.time.classList.add("hidden");
+    }
+  },
+
+  toggle() {
+    if (this.playing) { this.stopAll(); this.paint(); return; }
+    this.primeSpeech();
+    this.start();
+  },
+
+  // iOS only allows speechSynthesis to start inside a user gesture, and the spoken tail of the
+  // queue begins from an `ended` event — a media callback, not a tap. Speaking one silent utterance
+  // here, inside the tap that started playback, unlocks the API for the rest of the session. Without
+  // it the device-voice fallback is simply silent on iPhone, which is the platform this is built for.
+  primeSpeech() {
+    if (!this.tail || !("speechSynthesis" in window)) return;
+    try { window.speechSynthesis.speak(new SpeechSynthesisUtterance(" ")); } catch (e) { /* ignore */ }
+  },
+
+  start() {
+    if (this.idx < this.clips.length) {
+      this.playing = true;
+      this.audio.src = this.clips[this.idx].src;
+      this.audio.play().catch(() => { this.playing = false; this.paint(); });
+      this.paint();
+      this.mediaSession();
+    } else if (this.tail) {
+      this.speak();
+    }
+  },
+
+  speak() {
+    if (!("speechSynthesis" in window)) { this.finish(); return; }
+    this.playing = true;
+    this.speaking = true;
+    const seq = ++this.speechSeq;
+    this.paint();
+    speakChunked(this.tail, () => {
+      if (seq !== this.speechSeq) return;   // a newer queue (or a stop) owns the player now
+      this.speaking = false;
+      if (this.playing) this.finish();      // only a queue that ran to its end counts as listened
+      else this.paint();
+    });
+  },
+
+  next() {
+    this.idx += 1;
+    if (this.idx < this.clips.length) { this.start(); return; }
+    if (this.tail) { this.speak(); return; }
+    this.finish();
+  },
+
+  // The queue ran out with nothing left to play: the briefing WAS heard all the way through.
+  finish() {
+    this.playing = false;
+    this.speaking = false;
+    const done = this.lessonId;
+    this.idx = 0;
+    if (done) {
+      soup.advance(done, "completed");
+      // Re-renders the section with the next lesson and replans the queue behind it.
+      refreshSoup(document.getElementById("briefing"));
+    } else {
+      this.paint();
+    }
+  },
+
+  seek(ev) {
+    if (this.speaking || !this.clips.length || !this.durations.every((d) => d > 0)) return;
+    const r = this.track.getBoundingClientRect();
+    let target = ((ev.clientX - r.left) / r.width) * this.total();
+    for (let i = 0; i < this.clips.length; i++) {
+      const d = this.durations[i];
+      if (target <= d || i === this.clips.length - 1) {
+        if (i !== this.idx) {
+          this.idx = i;
+          this.audio.src = this.clips[i].src;
+          if (this.playing) this.audio.play().catch(() => {});
+        }
+        this.audio.currentTime = Math.max(0, Math.min(d - 0.25, target));
+        this.paint();
+        return;
+      }
+      target -= d;
+    }
+  },
+
+  mediaSession() {
+    if (!("mediaSession" in navigator)) return;
+    const d = localDate(this.briefing.date);
+    navigator.mediaSession.metadata = new MediaMetadata({
+      title: "Morning Briefing" + (d ? " — " + d.toLocaleDateString(undefined,
+        { month: "long", day: "numeric" }) : ""),
+      artist: "Morning Briefing",
+      artwork: [{ src: "icon-512.png", sizes: "512x512", type: "image/png" }],
+    });
+    navigator.mediaSession.setActionHandler("play", () => this.start());
+    navigator.mediaSession.setActionHandler("pause", () => { this.stopAll(); this.paint(); });
+  },
+};
+
+async function setupListen(b) {
+  if (!player.audio) player.bind();
+  player.briefing = b;
   // Prefer the real audio edition; the manifest date must MATCH this briefing — yesterday's
   // mp3 must never play under today's page.
-  let hasAudio = false;
+  player.hasEdition = false;
   try {
     const r = await fetch("briefing-audio.json", { cache: "no-store" });
-    if (r.ok) hasAudio = (await r.json()).date === b.date;
+    if (r.ok) player.hasEdition = (await r.json()).date === b.date;
   } catch (e) { /* offline or absent — fall through to speech */ }
-
-  if (hasAudio) {
-    listen.mode = "audio";
-    audio.src = `briefing-audio.mp3?d=${b.date}`;   // date param defeats the 10-min HTTP cache
-    label.textContent = "Listen to today's briefing";
-    track.classList.remove("hidden");
-    time.classList.remove("hidden");
-    audio.onloadedmetadata = () => { time.textContent = fmtTime(audio.duration); };
-    audio.ontimeupdate = () => {
-      if (audio.duration) {
-        fill.style.width = `${(audio.currentTime / audio.duration) * 100}%`;
-        time.textContent = fmtTime(audio.duration - audio.currentTime);
-      }
-    };
-    audio.onended = () => { listen.playing = false; setButton(btn, false); fill.style.width = "0%"; };
-    audio.onpause = () => { listen.playing = false; setButton(btn, false); };
-    audio.onplay = () => { listen.playing = true; setButton(btn, true); };
-    track.onclick = (ev) => {
-      if (!audio.duration) return;
-      const r = track.getBoundingClientRect();
-      audio.currentTime = ((ev.clientX - r.left) / r.width) * audio.duration;
-    };
-    btn.onclick = () => { listen.playing ? audio.pause() : audio.play().catch(() => {}); };
-    if ("mediaSession" in navigator) {
-      const d = localDate(b.date);
-      navigator.mediaSession.metadata = new MediaMetadata({
-        title: "Morning Briefing" + (d ? " — " + d.toLocaleDateString(undefined,
-          { month: "long", day: "numeric" }) : ""),
-        artist: "Morning Briefing",
-        artwork: [{ src: "icon-512.png", sizes: "512x512", type: "image/png" }],
-      });
-      navigator.mediaSession.setActionHandler("play", () => audio.play().catch(() => {}));
-      navigator.mediaSession.setActionHandler("pause", () => audio.pause());
-    }
-    bar.classList.remove("hidden");
-  } else if ("speechSynthesis" in window) {
-    listen.mode = "speech";
-    audio.removeAttribute("src");
-    label.textContent = "Listen (device voice)";
-    track.classList.add("hidden");
-    time.classList.add("hidden");
-    btn.onclick = () => {
-      if (listen.playing) {
-        listen.stopAll();
-        setButton(btn, false);
-      } else {
-        listen.playing = true;
-        setButton(btn, true);
-        speakChunked(speechText(b), () => { listen.playing = false; setButton(btn, false); });
-      }
-    };
-    bar.classList.remove("hidden");
-  } else {
-    bar.classList.add("hidden");
-  }
+  player.replan();
 }
 
 async function loadArchive() {
@@ -538,14 +869,16 @@ async function loadArchive() {
               chip.type = "button";
               chip.onclick = () => {
                 if (chip.dataset.speaking === "1") {
-                  listen.stopAll();
+                  player.stopAll();
                   chip.dataset.speaking = "0";
                   chip.textContent = "Listen to this briefing";
                 } else {
-                  listen.stopAll();
+                  player.stopAll();
                   chip.dataset.speaking = "1";
                   chip.textContent = "Stop";
-                  speakChunked(speechText(b), () => {
+                  // No lesson tail here: an archived edition is a record of that day's news, and
+                  // finishing it must never advance the live deck pointer.
+                  speakChunked(speechText(b, false), () => {
                     chip.dataset.speaking = "0";
                     chip.textContent = "Listen to this briefing";
                   });
@@ -587,13 +920,23 @@ async function loadBriefing() {
   committedSeq = seq;
   if (b.generated_at !== lastGeneratedAt) { // only re-render on a new edition (no scroll jank)
     lastGeneratedAt = b.generated_at;
-    render(b, document.getElementById("briefing"));
+    // The deck is fetched BEFORE the render: the soup section and the audio queue both need to
+    // know the current lesson, and a section that appears a moment later would move the page under
+    // a reader who is already scrolling. A failed fetch leaves an empty deck, which renders as
+    // "the first lesson lands tomorrow" — never as a broken page.
+    await soup.fetchDeck();
+    // Before render(), because rendering the soup section replans the queue: without this, a
+    // day-change re-render would briefly build a queue against YESTERDAY's briefing date.
+    // setupListen re-plans a moment later once it knows whether today's mp3 exists.
+    player.briefing = b;
+    render(b, document.getElementById("briefing"), true);
     setupListen(b).catch(() => {}); // audio/speech wiring must never break the render path
   }
   showFreshness(b);
 }
 
 async function main() {
+  soup.load();     // the reader's length setting + which lessons they have already finished
   try {
     await loadBriefing();
   } catch (e) {

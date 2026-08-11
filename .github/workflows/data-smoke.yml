@@ -23,10 +23,10 @@ permissions:
 jobs:
   spine:
     runs-on: ubuntu-latest
-    # 10, not 5: the job now runs five assumption tests (05 fetches the Federal Register, the PMMS
-    # CSV and Utah's passed-bills page; 07 fetches bill detail pages; 09 is offline and instant)
-    # plus a real model call in 06.
-    timeout-minutes: 10
+    # 12, not 10: the job now runs six assumption tests (05 fetches the Federal Register, the PMMS
+    # CSV and Utah's passed-bills page; 07 fetches bill detail pages; 09 is offline and instant; 10
+    # fetches ~50 Wikipedia articles, one per seed title) plus a real model call in 06.
+    timeout-minutes: 12
     steps:
       - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3 (SHA-pinned: mutable tags are a supply-chain vector in a push-capable job)
 
@@ -88,6 +88,26 @@ jobs:
           BRIEFING_SMOKE_ALLOW_DEV: "true"
           PYTHONPATH: ${{ github.workspace }}
         run: python scripts/briefing-assumptions/09-policy-calendar.py
+
+      # Owen's Alphabet Soup is the only section with no feed behind its subject matter, so the
+      # article fetch IS its accuracy guarantee — and a rotted seed title or a guard that stopped
+      # matching produces a page that looks exactly as good as a working one. Keyless.
+      - name: Lesson sources (seed articles resolve; the invented-figure guard still bites)
+        if: always()
+        env:
+          BRIEFING_SMOKE_ALLOW_DEV: "true"
+          PYTHONPATH: ${{ github.workspace }}
+        run: python scripts/briefing-assumptions/10-lesson-sources.py
+
+      # The lesson pointer is the only rule in this project enforced entirely in the browser — the
+      # build CANNOT know whether the audio reached the end. A regression that advanced the pointer
+      # on a pause would burn lessons the reader never heard, and no server-side check could ever
+      # see it. Needs neither network nor key; the runner image ships Node.
+      - name: Client pointer (a lesson advances only when the briefing actually finished)
+        if: always()
+        env:
+          BRIEFING_SMOKE_ALLOW_DEV: "true"
+        run: node scripts/briefing-assumptions/11-client-pointer.js
 
       # Relevance is the whole product: ~80% of agency-filtered Federal Register documents are
       # irrelevant to this user, so "did the model pick the right ones" is the assumption that

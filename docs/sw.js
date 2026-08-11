@@ -2,7 +2,7 @@
 // briefing data so the freshest edition shows when online. Bump CACHE on any shell change.
 // Briefing data lives in its own UNversioned cache: a shell bump must never delete the
 // last-known-good briefing/archives that the offline fallback depends on.
-const CACHE = "briefing-shell-v12";  // v12: mortgage tile shows a week-over-week delta in bps; v11: static policy calendar in "What's coming"; v10: policy section + mortgage tile; v9: two-index breadth cards; v8: leaner narration; v7: breadth number
+const CACHE = "briefing-shell-v13";  // v13: Owen's Alphabet Soup (lesson deck + chained audio queue); v12: mortgage tile shows a week-over-week delta in bps; v11: static policy calendar in "What's coming"; v10: policy section + mortgage tile; v9: two-index breadth cards; v8: leaner narration; v7: breadth number
 const DATA_CACHE = "briefing-data-v1";
 const SHELL = ["./", "./index.html", "./app.js", "./styles.css", "./manifest.json",
                "./icon-192.png", "./icon-512.png"];
@@ -51,10 +51,19 @@ self.addEventListener("fetch", (e) => {
   // Audio edition: never intercept. Media playback needs native Range-request handling (SW
   // cache.match breaks seeking in Safari), and the manifest must always be network-fresh — a
   // cached manifest could bind yesterday's mp3 to today's page.
-  if (url.pathname.endsWith("briefing-audio.mp3") || url.pathname.endsWith("briefing-audio.json")) {
+  // Lesson clips are media too, and for the same reason: Range requests and seeking must reach the
+  // network untouched. They are also short-lived on the server (pruned to a rolling window), so a
+  // cached copy would outlive the deck entry that points at it.
+  if (url.pathname.endsWith("briefing-audio.mp3") || url.pathname.endsWith("briefing-audio.json") ||
+      (url.pathname.includes("/lessons/") && url.pathname.endsWith(".mp3"))) {
     return;
   }
-  const isData = url.pathname.endsWith("briefing.json") || url.pathname.includes("/archive/");
+  // lessons.json is DATA, not shell: network-first so a new lesson appears the morning it lands,
+  // last-known-good when offline. Cached in DATA_CACHE, which shell bumps never clear — the deck
+  // carries the prose the device voice falls back to, so losing it offline would silence the
+  // section entirely.
+  const isData = url.pathname.endsWith("briefing.json") || url.pathname.endsWith("lessons.json") ||
+                 url.pathname.includes("/archive/");
   if (isData) {
     // network-first for data: freshest when online, last-known when offline OR when the server
     // answers with an error (e.g. Pages mid-deploy 404) — an error body must neither overwrite
