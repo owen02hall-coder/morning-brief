@@ -3,12 +3,12 @@
   "markets_last_ok": "2026-08-11",
   "breadth_last_good": {
     "sp500": {
-      "value": 71.1,
+      "value": 71.9,
       "matched": 499,
       "asof": "2026-08-10"
     },
     "ndx100": {
-      "value": 70.1,
+      "value": 71.1,
       "matched": 97,
       "asof": "2026-08-10"
     }
@@ -18,14 +18,14 @@
       "in_alert": false,
       "nag_days": 0,
       "warn_armed": true,
-      "last_value": 71.1,
+      "last_value": 71.9,
       "last_asof": "2026-08-10"
     },
     "ndx100": {
       "in_alert": false,
       "nag_days": 0,
       "warn_armed": true,
-      "last_value": 70.1,
+      "last_value": 71.1,
       "last_asof": "2026-08-10"
     }
   },
@@ -71,5 +71,22 @@
     "date": "2026-08-11",
     "items": [],
     "alerted": false
-  }
+  },
+  "lessons_taught": [
+    {
+      "id": "2026-08-11-mortgage",
+      "article_title": "Mortgage",
+      "title": "How Mortgage Loans Are Secured",
+      "domain": "Money mechanics",
+      "date": "2026-08-11"
+    },
+    {
+      "id": "2026-08-11-home-inspection",
+      "article_title": "Home inspection",
+      "title": "Home Inspection Basics",
+      "domain": "Home, car and repair",
+      "date": "2026-08-11"
+    }
+  ],
+  "lessons_bootstrapped": true
 }

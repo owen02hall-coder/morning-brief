@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-08-11T06:39:28.116903-06:00",
+  "generated_at": "2026-08-11T11:42:22.329375-06:00",
   "date": "2026-08-11",
   "tldr": [
-    "Colombia experienced a devastating 7.4-magnitude earthquake, resulting in over 130 fatalities and widespread structural damage.",
-    "An exiled Syrian court issued a death sentence in absentia to former President Bashar al-Assad for war crimes committed during the civil war.",
-    "Geopolitical tensions between the U.S. and Iran regarding the Strait of Hormuz talks led to a surge in oil prices and contributed to rising Treasury yields."
+    "Russia released former US Marine Robert Gilman from detention on humanitarian grounds, following reports of his poor health.",
+    "Lebanon's parliament voted to abolish the death penalty, a decision that would make it the first country in the Middle East to do so, pending cabinet approval.",
+    "Global oil prices rose significantly following Iran's statement that the Strait of Hormuz would remain closed until specific conditions are met and President Trump's demand for reparations from Iran."
   ],
   "market": {
     "sp500": {
@@ -17,30 +17,30 @@
       "change": -85.26,
       "asof": "2026-08-10"
     },
-    "why": "The S&P 500 and Nasdaq Composite both declined at their most recent close on 2026-08-10, with oil prices surging as talks between the U.S. and Iran stalled over the Strait of Hormuz, creating economic uncertainty."
+    "why": "Both the S&P 500 and Nasdaq Composite closed lower on August 10, 2026, as Wall Street drifted lower due to a drag from the tech sector and fading optimism regarding US-Iran peace."
   },
   "yield_10y": {
     "value": 4.7,
     "change": 0.04,
     "asof": "2026-08-10",
-    "why": "The 10-year Treasury yield rose to 4.7% at its most recent close on 2026-08-10, as investors awaited upcoming inflation data and reacted to ongoing tensions with Iran, which contributed to higher oil prices."
+    "why": "The 10-year Treasury yield increased on August 10, 2026, amid rising oil prices spurred by heightened tensions with Iran."
   },
   "vix": {
     "value": 15.46,
     "change": 0.56,
     "asof": "2026-08-10",
-    "why": "The VIX increased to 15.46 at its most recent close on 2026-08-10, reflecting heightened market uncertainty driven by stalled talks between the U.S. and Iran over the Strait of Hormuz and related increases in oil prices."
+    "why": "The VIX, a measure of market volatility, rose on August 10, 2026, reflecting increased uncertainty as optimism for US-Iran peace faded and mixed signals emerged regarding the situation with Iran."
   },
   "breadth": {
     "sp500": {
-      "value": 71.1,
+      "value": 71.9,
       "asof": "2026-08-10",
       "status": "healthy",
       "matched": 499,
       "stale": false
     },
     "ndx100": {
-      "value": 70.1,
+      "value": 71.1,
       "asof": "2026-08-10",
       "status": "healthy",
       "matched": 97,
@@ -81,31 +81,36 @@
   ],
   "tech": [
     {
-      "summary": "Anthropic's AI model, Claude, will begin applying invisible watermarks to both generated text and images, adhering to European AI transparency regulations.",
+      "summary": "Apple is reportedly developing an iOS feature called \"Apple Reference Image\" to embed provenance metadata into iPhone photos, allowing users to verify if an image was taken by an iPhone camera and is not a deepfake.",
+      "source": "The Verge",
+      "url": "https://www.theverge.com/tech/977921/apple-reference-image-iphone-metadata"
+    },
+    {
+      "summary": "Researchers uncovered a major security vulnerability in Zoom, dubbed \"Zoomsday\" hack, which could allow an attacker to hijack a device during a meeting and was discovered using fewer than 20 prompts on publicly available AI models.",
+      "source": "The Verge",
+      "url": "https://www.theverge.com/ai-artificial-intelligence/977909/zoom-vulnerability-ai-attack"
+    },
+    {
+      "summary": "Anthropic announced it will apply invisible, machine-readable watermarks to Claude-generated text and images in an effort to comply with European AI transparency regulations.",
       "source": "The Verge",
       "url": "https://www.theverge.com/ai-artificial-intelligence/977823/anthropic-claude-ai-watermarks-c2pa-text-images"
-    },
-    {
-      "summary": "Mathematicians are reportedly engaging in \"soul searching\" as the discipline grapples with the accelerating influence of artificial intelligence on the field.",
-      "source": "The Verge",
-      "url": "https://www.theverge.com/ai-artificial-intelligence/977273/the-ai-takeover-of-mathematics-has-begun"
-    },
-    {
-      "summary": "Joby Aviation, a developer of electric aircraft, announced a $500 million acquisition of defense firm Resonant Sciences to expand its presence in the military sector.",
-      "source": "The Verge",
-      "url": "https://www.theverge.com/transportation/977533/joby-resonant-sciences-acquisition-evtol"
     }
   ],
   "world": [
     {
-      "summary": "A powerful 7.4-magnitude earthquake struck western Colombia, resulting in at least 130 deaths and significant damage to buildings in cities like Cali and Pereira.",
-      "source": "Guardian World",
-      "url": "https://www.theguardian.com/us-news/2026/aug/11/first-thing-colombia-earthquake"
+      "summary": "Russia released former U.S. Marine Robert Gilman from detention on humanitarian grounds, following reports of his poor health after being arrested in 2022.",
+      "source": "BBC World",
+      "url": "https://www.bbc.co.uk/news/articles/cvgj4m8e1ryo?at_medium=RSS&at_campaign=rss"
     },
     {
-      "summary": "A Syrian court has sentenced former President Bashar al-Assad and his brother Maher to death in absentia for war crimes and crimes against humanity committed during the country's 14-year civil war.",
-      "source": "Guardian World",
-      "url": "https://www.theguardian.com/world/2026/aug/11/syria-bashar-al-assad-death-sentence-war-crimes"
+      "summary": "Ukrainian President Volodymyr Zelensky stated that Russia is using North Korean ballistic missiles in its strikes against Ukraine, citing an attack in Zaporizhzhia that killed seven people.",
+      "source": "BBC World",
+      "url": "https://www.bbc.co.uk/news/articles/c151dpzwnvxo?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "summary": "Lebanon's parliament voted to abolish the death penalty, a measure that would make it the first country in the Middle East to end capital punishment if approved by the cabinet.",
+      "source": "BBC World",
+      "url": "https://www.bbc.co.uk/news/articles/c8enj8p1xwgo?at_medium=RSS&at_campaign=rss"
     }
   ],
   "weekly_recap": null,

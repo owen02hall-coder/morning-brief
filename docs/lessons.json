@@ -1,4 +1,46 @@
 {
-  "generated_at": null,
-  "lessons": []
+  "generated_at": "2026-08-11T11:42:22.329375-06:00",
+  "lessons": [
+    {
+      "id": "2026-08-11-mortgage",
+      "date": "2026-08-11",
+      "domain": "Money mechanics",
+      "title": "How Mortgage Loans Are Secured",
+      "hook": "Understanding the basics of a mortgage loan can help you prepare for one of the biggest financial steps many people take.",
+      "quick": "A mortgage loan is money you borrow either to purchase real estate or to raise funds by using existing property as collateral. This loan is 'secured' by the property itself, meaning a legal arrangement allows the lender to take possession and sell the secured property through a process called foreclosure if you do not repay the loan or abide by its terms. The word 'mortgage' comes from an old term meaning 'death pledge,' referring to the pledge ending when the obligation is met or the property is taken. Few individuals have enough savings to buy property outright, making mortgages a common way to finance home ownership. The property acts as security or collateral for the loan.",
+      "more": "The basic components of a mortgage loan are similar across many places. You, as the borrower, pledge your interest in the property as security. The lender is typically a financial institution like a bank. The 'principal' is the original loan amount, which decreases as you make payments. 'Interest' is the financial charge for using the lender's money. Mortgages have an interest rate and are scheduled to be paid off, or amortized, over a set period of time, typically 30 years in the United States. This structure allows the principal portion of the loan to be gradually reduced over time through consistent, regular payments.",
+      "deep": "Lenders provide these funds against property primarily to earn interest income, and they often borrow these funds themselves by taking deposits or issuing bonds. The price at which lenders borrow money directly influences the cost of your mortgage. The lender\u2019s rights over the secured property take priority over other creditors, meaning if a borrower becomes bankrupt, the mortgage lender is repaid in full from the sale of the property before other debts are addressed. Mortgage agreements may also include restrictions on the property's use or disposal, such as requirements to purchase home insurance and mortgage insurance, or to pay off any outstanding debt before selling the property. Governments often regulate many aspects of mortgage lending, either directly through legal requirements or indirectly by overseeing financial markets and institutions.",
+      "takeaway": "Before taking out a mortgage, understand how the property serves as security and what happens if you cannot repay the loan.",
+      "source": {
+        "title": "Mortgage",
+        "url": "https://en.wikipedia.org/wiki/Mortgage"
+      },
+      "audio": {
+        "quick": "lessons/2026-08-11-mortgage-quick.mp3",
+        "more": "lessons/2026-08-11-mortgage-more.mp3",
+        "deep": "lessons/2026-08-11-mortgage-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-08-11-home-inspection",
+      "date": "2026-08-11",
+      "domain": "Home, car and repair",
+      "title": "Home Inspection Basics",
+      "hook": "Understanding what a home inspection covers can save you from unexpected problems with a new house.",
+      "quick": "When buying a home, a home inspection is a key step. It is a look at the house's current condition. A trained inspector examines the property. They then give you a written report about what they found. It is a good idea to go with the inspector when they visit. This helps you understand their findings better. The inspection helps you make smart decisions about buying the house. However, an inspector only tells you about the condition at the time of the inspection. They do not promise how well the house will work in the future or how long its parts will last.",
+      "more": "A home inspection is different from a property appraisal. An appraiser decides the value of a property. A home inspector checks the condition of the structure itself. In some places, home inspectors must be licensed. This often involves completing a training course and passing an exam. Some states also require ongoing education to keep a license. Things like termite inspections are usually separate. You will need to get those from licensed companies and they often are required for a mortgage.",
+      "deep": "Professional associations like the International Association of Certified Home Inspectors or the American Society of Home Inspectors set standards for how inspections are done. In the United States, more than thirty states now regulate home inspections in some way. These regulations aim to ensure inspectors have the right training and follow certain procedures. While the inspection looks at the current state of the home, it is not a check to see if the building follows all local codes. That is called a building inspection. Sometimes, inspectors can also check for other things like radon, mold, or issues with private wells, but these are often extra services.",
+      "takeaway": "Ask your home inspector what their report covers and what is excluded.",
+      "source": {
+        "title": "Home inspection",
+        "url": "https://en.wikipedia.org/wiki/Home_inspection"
+      },
+      "audio": {
+        "quick": "lessons/2026-08-11-home-inspection-quick.mp3",
+        "more": "lessons/2026-08-11-home-inspection-more.mp3",
+        "deep": "lessons/2026-08-11-home-inspection-deep.mp3"
+      }
+    }
+  ],
+  "outro": "lessons/outro.mp3"
 }
