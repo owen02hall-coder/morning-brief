@@ -1,16 +1,16 @@
 {
-  "last_run": "2026-08-11",
-  "markets_last_ok": "2026-08-11",
+  "last_run": "2026-08-12",
+  "markets_last_ok": "2026-08-12",
   "breadth_last_good": {
     "sp500": {
-      "value": 71.9,
+      "value": 71.1,
       "matched": 499,
-      "asof": "2026-08-10"
+      "asof": "2026-08-11"
     },
     "ndx100": {
-      "value": 71.1,
+      "value": 69.1,
       "matched": 97,
-      "asof": "2026-08-10"
+      "asof": "2026-08-11"
     }
   },
   "breadth": {
@@ -18,15 +18,15 @@
       "in_alert": false,
       "nag_days": 0,
       "warn_armed": true,
-      "last_value": 71.9,
-      "last_asof": "2026-08-10"
+      "last_value": 71.1,
+      "last_asof": "2026-08-11"
     },
     "ndx100": {
       "in_alert": false,
       "nag_days": 0,
       "warn_armed": true,
-      "last_value": 71.1,
-      "last_asof": "2026-08-10"
+      "last_value": 69.1,
+      "last_asof": "2026-08-11"
     }
   },
   "policy_utah_queue": [],
@@ -68,7 +68,7 @@
     }
   ],
   "policy_today": {
-    "date": "2026-08-11",
+    "date": "2026-08-12",
     "items": [],
     "alerted": false
   },
@@ -86,6 +86,13 @@
       "title": "Home Inspection Basics",
       "domain": "Home, car and repair",
       "date": "2026-08-11"
+    },
+    {
+      "id": "2026-08-12-first-aid",
+      "article_title": "First aid",
+      "title": "Immediate Steps in a Medical Emergency",
+      "domain": "Health and emergencies",
+      "date": "2026-08-12"
     }
   ],
   "lessons_bootstrapped": true

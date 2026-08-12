@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-11T11:42:22.329375-06:00",
+  "generated_at": "2026-08-12T06:42:10.418846-06:00",
   "lessons": [
     {
       "id": "2026-08-11-mortgage",
@@ -39,6 +39,26 @@
         "quick": "lessons/2026-08-11-home-inspection-quick.mp3",
         "more": "lessons/2026-08-11-home-inspection-more.mp3",
         "deep": "lessons/2026-08-11-home-inspection-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-08-12-first-aid",
+      "date": "2026-08-12",
+      "domain": "Health and emergencies",
+      "title": "Immediate Steps in a Medical Emergency",
+      "hook": "When a medical emergency strikes, knowing what to do immediately can preserve life or prevent a situation from getting worse.",
+      "quick": "When someone faces a medical emergency, the quick assistance provided can be the difference between life and death or a worsening condition until professional help arrives. The very first action you should take is to assess the area around you for any dangers. For example, if an accident happens on a road, it is unsafe to deal with it there, so you must move to a secure location if the surroundings are not safe. After ensuring the immediate environment is secure, it is crucial to call for help, which means contacting professional medical services and also alerting any people nearby who might be able to assist, such as with CPR.",
+      "more": "Once help is on the way and the scene is safe, your next step is to perform suitable first aid depending on the specific injury or condition the person is experiencing. Following this, you must carefully evaluate the person for any critical signs of danger, and be ready to perform first aid again if needed. Many urgent situations call for this kind of immediate care, including heavy bleeding where blood escapes from veins or arteries, or choking, which is when breathing is obstructed. Cardiac arrest, the complete stop of heart function, is another critical emergency where immediate intervention can be vital.",
+      "deep": "Without these crucial first aid steps, a person's condition can rapidly deteriorate, making recovery much more challenging even after medical professionals arrive. Beyond sudden injuries, first aid is also essential for conditions like a heart attack, which is the sudden reduction in or lack of blood flow in one of the coronary arteries, leading to tissue death. People who have excessively high or low blood sugar levels due to diabetes also require swift attention to prevent serious complications. Even drowning, a type of suffocation caused by submersion in liquid, often needs first aid similar to that provided for a complete stop of heart and breathing. These basic, early actions bridge the gap until more advanced care takes over, working to prevent severe outcomes and support recovery.",
+      "takeaway": "Familiarize yourself with the five general steps of first aid: assess safety, move to safety, call for help, perform first aid, and evaluate the person's condition.",
+      "source": {
+        "title": "First aid",
+        "url": "https://en.wikipedia.org/wiki/First_aid"
+      },
+      "audio": {
+        "quick": "lessons/2026-08-12-first-aid-quick.mp3",
+        "more": "lessons/2026-08-12-first-aid-more.mp3",
+        "deep": "lessons/2026-08-12-first-aid-deep.mp3"
       }
     }
   ],
