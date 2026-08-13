@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-12T06:42:10.418846-06:00",
+  "generated_at": "2026-08-13T06:42:53.745051-06:00",
   "lessons": [
     {
       "id": "2026-08-11-mortgage",
@@ -59,6 +59,25 @@
         "quick": "lessons/2026-08-12-first-aid-quick.mp3",
         "more": "lessons/2026-08-12-first-aid-more.mp3",
         "deep": "lessons/2026-08-12-first-aid-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-08-13-negotiation",
+      "date": "2026-08-13",
+      "domain": "Thinking and people",
+      "title": "How to approach everyday negotiations",
+      "hook": "Treating every discussion as a contest can leave you with less than you might have gained.",
+      "quick": "When you negotiate, it's easy to assume there's a fixed amount to be divided, like splitting a single pie. This is known as a distributive negotiation, where one party's gain often means another's loss. Haggling over the price of a car or a home is a common example of this approach. In these situations, people typically start by adopting an extreme position they know won't be accepted, and then they seek to give up as little as possible before reaching a deal. This approach can often be contentious because people tend to prioritize the minimization of losses over the maximization of gains. However, this fixed-pie mindset might severely limit the potential for a better outcome, especially when dealing with ongoing relationships or complex transactions where more value could be created.",
+      "more": "Many daily interactions that you might not even consider negotiations actually are, and how you approach them significantly impacts the outcome. While some situations genuinely involve a fixed set of benefits, others offer the chance to create more value for everyone involved. This is where an integrative approach comes in, aiming to \"expand the pie\" rather than just dividing a static one. Integrative negotiation works by recognizing that different parties often value different outcomes, opening opportunities for trade-offs or reframing issues so both sides benefit. Thinking this way can transform a potential win-lose scenario into a win-win, fostering better relationships and more satisfactory agreements in the long run.",
+      "deep": "However, even when there's potential to expand the total benefits, people can sometimes underestimate this opportunity due to what is called the \"small pie bias\" or the \"incompatibility bias.\" These psychological tendencies can lead negotiators to miss chances to create more value. It is also important to know that conceding too quickly can reduce the likelihood of discovering these mutually beneficial solutions. While a degree of trust can be a helpful aid, focusing on promoting interdependence between parties can be an even more effective strategy for successful win-win negotiation. Even in these integrative scenarios, some distributive elements will always be present, especially when it comes to allocating the final details of an agreement.",
+      "takeaway": "Before entering a significant discussion, identify if the situation allows for creating more benefits for all parties rather than just dividing a fixed amount.",
+      "source": {
+        "title": "Negotiation",
+        "url": "https://en.wikipedia.org/wiki/Negotiation"
+      },
+      "audio": {
+        "more": "lessons/2026-08-13-negotiation-more.mp3",
+        "deep": "lessons/2026-08-13-negotiation-deep.mp3"
       }
     }
   ],
