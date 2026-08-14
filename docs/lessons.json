@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-13T06:42:53.745051-06:00",
+  "generated_at": "2026-08-14T06:39:18.305659-06:00",
   "lessons": [
     {
       "id": "2026-08-11-mortgage",
@@ -78,6 +78,25 @@
       "audio": {
         "more": "lessons/2026-08-13-negotiation-more.mp3",
         "deep": "lessons/2026-08-13-negotiation-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-08-14-credit-score",
+      "date": "2026-08-14",
+      "domain": "Money mechanics",
+      "title": "How lenders view your creditworthiness",
+      "hook": "Your credit score is a key factor in getting loans, setting interest rates, and even renting an apartment.",
+      "quick": "Lenders use your credit score to decide if they should lend you money and what terms to offer. It's a number that represents how likely you are to pay back what you borrow.  This score is based on your credit report, which contains information about your past borrowing and repayment habits. Banks and other financial institutions, like credit card companies, rely heavily on this number to assess the risk of lending to you. A good credit score can help you qualify for loans, secure lower interest rates, and get higher credit limits.  Conversely, a low score can make it harder to get approved for credit and may result in higher costs if you are approved.",
+      "more": "Credit scoring isn't just for banks. Other businesses also use credit scores to make decisions about you. For example, landlords might check your credit score when you apply to rent a place to live. Mobile phone companies and even some government departments may also use this information. This means that your creditworthiness, as reflected in your score, can impact various aspects of your financial life beyond just loans.  When you apply for any kind of credit or service that involves risk for the provider, they will likely look at your credit score to gauge your reliability as a customer.",
+      "deep": "The way credit scores are calculated and used can vary by country, but the underlying principle remains the same: assessing your risk as a borrower. In some places, like Australia, credit reporting has moved towards including positive information about how you pay your bills, not just negative incidents. Other systems, like Austria's, historically used blacklists for those who didn't pay bills, and while banks might check income and security for loans, these lists still impact contract approvals.  In Brazil, the system is now similar to the United States, using credit reports to predict the likelihood of on-time payments over the next 12 months, based on payment history, past debts, and financial relationships.",
+      "takeaway": "Check your credit report for free at least once a year.",
+      "source": {
+        "title": "Credit score",
+        "url": "https://en.wikipedia.org/wiki/Credit_score"
+      },
+      "audio": {
+        "quick": "lessons/2026-08-14-credit-score-quick.mp3",
+        "deep": "lessons/2026-08-14-credit-score-deep.mp3"
       }
     }
   ],
