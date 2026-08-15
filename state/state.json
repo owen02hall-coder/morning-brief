@@ -1,16 +1,16 @@
 {
-  "last_run": "2026-08-14",
-  "markets_last_ok": "2026-08-14",
+  "last_run": "2026-08-15",
+  "markets_last_ok": "2026-08-15",
   "breadth_last_good": {
     "sp500": {
-      "value": 73.0,
-      "matched": 500,
-      "asof": "2026-08-13"
+      "value": 72.7,
+      "matched": 499,
+      "asof": "2026-08-14"
     },
     "ndx100": {
       "value": 73.2,
       "matched": 97,
-      "asof": "2026-08-13"
+      "asof": "2026-08-14"
     }
   },
   "breadth": {
@@ -18,15 +18,15 @@
       "in_alert": false,
       "nag_days": 0,
       "warn_armed": true,
-      "last_value": 73.0,
-      "last_asof": "2026-08-13"
+      "last_value": 72.7,
+      "last_asof": "2026-08-14"
     },
     "ndx100": {
       "in_alert": false,
       "nag_days": 0,
       "warn_armed": true,
       "last_value": 73.2,
-      "last_asof": "2026-08-13"
+      "last_asof": "2026-08-14"
     }
   },
   "policy_utah_queue": [],
@@ -68,7 +68,7 @@
     }
   ],
   "policy_today": {
-    "date": "2026-08-14",
+    "date": "2026-08-15",
     "items": [],
     "alerted": false
   },
@@ -107,6 +107,13 @@
       "title": "How lenders view your creditworthiness",
       "domain": "Money mechanics",
       "date": "2026-08-14"
+    },
+    {
+      "id": "2026-08-15-water-heating",
+      "article_title": "Water heating",
+      "title": "What to know about your home's hot water supply",
+      "domain": "Home, car and repair",
+      "date": "2026-08-15"
     }
   ],
   "lessons_bootstrapped": true

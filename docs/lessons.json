@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-14T06:39:18.305659-06:00",
+  "generated_at": "2026-08-15T06:15:32.125796-06:00",
   "lessons": [
     {
       "id": "2026-08-11-mortgage",
@@ -97,6 +97,26 @@
       "audio": {
         "quick": "lessons/2026-08-14-credit-score-quick.mp3",
         "deep": "lessons/2026-08-14-credit-score-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-08-15-water-heating",
+      "date": "2026-08-15",
+      "domain": "Home, car and repair",
+      "title": "What to know about your home's hot water supply",
+      "hook": "Understanding how your hot water is heated can save money on energy bills and prevent cold showers.",
+      "quick": "A common frustration in many homes is running out of hot water, or receiving an unexpectedly high energy bill. This often happens because typical home water heaters store a large tank of hot water, keeping it continuously heated and ready for use. This design means that heat can escape through the tank walls over time, even when no one is using hot water, causing the system to reheat the water. Investing in a tank with better insulation can help improve this standby efficiency. However, even with good insulation, heavy use can exhaust the stored hot water, leading to a significant wait before more hot water becomes available. In the United States, most homes rely on either natural gas, electric resistance, or a heat pump to provide this hot water.",
+      "more": "While natural gas is often the cheapest option where it's conveniently piped, electric heat pump water heaters offer significant energy efficiency compared to standard electric resistance models, though they cost more upfront. Some energy utilities even offer funding to help customers manage the initial expense of these more efficient units. These tank-type water heaters are very popular in North America, with household sizes typically ranging from 75 to 400 liters, or 20 to 100 US gallons. They maintain water pressure close to the incoming mains supply. Although larger tanks can offer hot water with less temperature fluctuation during moderate use, the core issue of heat loss and recovery time remains for this common type of system.",
+      "deep": "The way your hot water is generated depends on the system's energy source, which could be fossil fuels, solid fuels, or electricity from various sources. Alternative energy options like solar, heat pumps, or geothermal heating are also used, often with backup systems that run on fossil fuels or electricity. In some densely populated urban areas, district heating systems provide hot water from central plants, supplying energy for both water and space heating. In these cases, tap water is heated in a heat exchanger located at the consumer's property, and redundancy is typically handled by the district heating supply, meaning no in-building backup is needed. For specific needs, tiny point-of-use electric storage water heaters are available, usually 8 to 32 liters, or 2 to 6 gallons, designed for hand washing or supplementing an existing hot water line. These small units use low power, about 1 to 1.5 kilowatts, but can only provide a continuous flow of hot water at extremely low rates due to their thermostatic maintenance of water temperature.",
+      "takeaway": "Check your water heater's insulation and consider its size and type to match your household's hot water needs and energy efficiency goals.",
+      "source": {
+        "title": "Water heating",
+        "url": "https://en.wikipedia.org/wiki/Water_heating"
+      },
+      "audio": {
+        "quick": "lessons/2026-08-15-water-heating-quick.mp3",
+        "more": "lessons/2026-08-15-water-heating-more.mp3",
+        "deep": "lessons/2026-08-15-water-heating-deep.mp3"
       }
     }
   ],
