@@ -1,6 +1,6 @@
 {
-  "last_run": "2026-08-15",
-  "markets_last_ok": "2026-08-15",
+  "last_run": "2026-08-16",
+  "markets_last_ok": "2026-08-16",
   "breadth_last_good": {
     "sp500": {
       "value": 72.7,
@@ -68,7 +68,7 @@
     }
   ],
   "policy_today": {
-    "date": "2026-08-15",
+    "date": "2026-08-16",
     "items": [],
     "alerted": false
   },
@@ -114,6 +114,13 @@
       "title": "What to know about your home's hot water supply",
       "domain": "Home, car and repair",
       "date": "2026-08-15"
+    },
+    {
+      "id": "2026-08-16-sleep-hygiene",
+      "article_title": "Sleep hygiene",
+      "title": "Improving Your Sleep Habits",
+      "domain": "Health and emergencies",
+      "date": "2026-08-16"
     }
   ],
   "lessons_bootstrapped": true
