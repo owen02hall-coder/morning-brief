@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-16T06:16:42.832418-06:00",
+  "generated_at": "2026-08-17T06:20:18.123412-06:00",
   "lessons": [
     {
       "id": "2026-08-11-mortgage",
@@ -137,6 +137,26 @@
         "quick": "lessons/2026-08-16-sleep-hygiene-quick.mp3",
         "more": "lessons/2026-08-16-sleep-hygiene-more.mp3",
         "deep": "lessons/2026-08-16-sleep-hygiene-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-08-17-scam",
+      "date": "2026-08-17",
+      "domain": "Thinking and people",
+      "title": "How scams trick you into making bad decisions",
+      "hook": "Scammers rely on more than just your gullibility; they actively manipulate your judgment and exploit your emotions.",
+      "quick": "Many people believe scams succeed because victims are simply naive, but these schemes are carefully designed to exploit specific human vulnerabilities. A con artist first gains your trust, sometimes through seemingly innocent interaction, and then presents an opportunity for you to profit. This \"build-up\" phase is crucial, as it encourages your greed, which can significantly impair your rational judgment. They might even give you a small \"pay-off\" or \"convincer,\" like a fake dividend from a supposed investment or a small winning bet in a rigged game. This is designed to demonstrate the scheme's purported effectiveness and make it seem very real. This initial success makes you much more likely to invest or participate further, believing the opportunity is legitimate and largely risk-free, making you overlook any early red flags by appealing to desires like quick, easy gains.",
+      "more": "Once you're convinced, scammers often create a sudden, manufactured crisis, known as the \"hurrah,\" which forces you to make an immediate decision. They might tell you a \"window of opportunity\" to make a large investment is about to close forever, creating immense urgency and panic. This rush prevents careful thought and research, pushing you to act quickly before you can second-guess the situation or consult others. Sometimes, an accomplice, who appears as an interested bystander, will also openly \"invest\" in the same scheme right in front of you. This \"in-and-in\" step adds another layer of apparent legitimacy, making you feel more secure and giving the con artist greater control over the transaction, especially when you are already feeling highly pressured.",
+      "deep": "These sophisticated tactics exploit common human traits and cognitive biases, not just simple gullibility. Researchers define confidence tricks as \"fraudulent conduct intending to further voluntary exchanges that are not mutually beneficial,\" meaning they are inherently designed to benefit the scammer entirely at your expense. While popular culture often highlights victim \"dishonesty\" or \"greed\" \u2013 such as being willing to participate in unlawful acts or believing in \"too-good-to-be-true\" gains that seem unrealistic \u2013 cons primarily succeed by inducing judgment errors. These errors stem from imperfect information and deeply ingrained cognitive biases. The con artist doesn't just hope you're foolish; they actively engineer situations to impair your rational assessment of risk and reward, playing on emotions like fear of missing out, or a deep desire for easy money, making anyone potentially vulnerable to their schemes. In 2021 alone, online fraud led to reported losses of 6.9 billion dollars in the US.",
+      "takeaway": "Before making any significant financial decision, especially under pressure, verify the opportunity independently and discuss it with a trusted, uninvolved third party.",
+      "source": {
+        "title": "Scam",
+        "url": "https://en.wikipedia.org/wiki/Scam"
+      },
+      "audio": {
+        "quick": "lessons/2026-08-17-scam-quick.mp3",
+        "more": "lessons/2026-08-17-scam-more.mp3",
+        "deep": "lessons/2026-08-17-scam-deep.mp3"
       }
     }
   ],
