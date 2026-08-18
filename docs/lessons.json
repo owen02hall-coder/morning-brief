@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-17T06:20:18.123412-06:00",
+  "generated_at": "2026-08-18T06:22:08.375945-06:00",
   "lessons": [
     {
       "id": "2026-08-11-mortgage",
@@ -157,6 +157,26 @@
         "quick": "lessons/2026-08-17-scam-quick.mp3",
         "more": "lessons/2026-08-17-scam-more.mp3",
         "deep": "lessons/2026-08-17-scam-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-08-18-escrow",
+      "date": "2026-08-18",
+      "domain": "Money mechanics",
+      "title": "Managing Property Taxes and Insurance with Escrow",
+      "hook": "Forgetting about certain required homeownership payments can create unexpected financial pressure, but escrow helps manage them.",
+      "quick": "A common way people face unexpected costs in homeownership is by not anticipating property taxes and insurance premiums. To address this, many mortgage lenders require an escrow account. This account is separate from your main mortgage loan and is specifically where funds are deposited to cover property taxes and insurance during the mortgage term. Lenders typically require this because they want to reduce the risk of homeowners failing to pay these obligations, which could jeopardize the property itself. The money you contribute each month ensures these critical payments are made on your behalf by a third party.",
+      "more": "The third party responsible for holding and disbursing these funds is known as an escrow agent. Their duty is to properly account for all money in the escrow account and ensure it is used explicitly for the intended purpose, such as paying your property taxes and insurance premiums. This arrangement helps protect both the homeowner by centralizing these payments, and the lender by reducing their exposure to financial risk. Escrow is most widely recognized in the United States within the context of the real estate industry for these very reasons.",
+      "deep": "While often associated with mortgages, the concept of escrow extends to other high-value transactions, where a neutral third party holds money or property until specific conditions are met, protecting both buyer and seller. For example, it\u2019s used in private property transactions for deposits, or when buying a second-hand car. However, when engaging in any transaction using an online escrow service, it is crucial to exercise caution. There are instances where fraudsters create fake escrow websites that closely resemble legitimate ones, aiming to trick people into sending payments or merchandise without receiving their expected return. To protect yourself, always verify that an online escrow company is genuine by checking a government register, as specific states like California and Arizona provide licenses for these services.",
+      "takeaway": "Before using any online escrow service, independently verify its legitimacy by checking for its listing on a relevant government online register.",
+      "source": {
+        "title": "Escrow",
+        "url": "https://en.wikipedia.org/wiki/Escrow"
+      },
+      "audio": {
+        "quick": "lessons/2026-08-18-escrow-quick.mp3",
+        "more": "lessons/2026-08-18-escrow-more.mp3",
+        "deep": "lessons/2026-08-18-escrow-deep.mp3"
       }
     }
   ],
