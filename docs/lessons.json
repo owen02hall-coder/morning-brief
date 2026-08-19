@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-18T06:22:08.375945-06:00",
+  "generated_at": "2026-08-19T06:21:40.956065-06:00",
   "lessons": [
     {
       "id": "2026-08-11-mortgage",
@@ -177,6 +177,26 @@
         "quick": "lessons/2026-08-18-escrow-quick.mp3",
         "more": "lessons/2026-08-18-escrow-more.mp3",
         "deep": "lessons/2026-08-18-escrow-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-08-19-heating-ventilation-and-air-conditioning",
+      "date": "2026-08-19",
+      "domain": "Home, car and repair",
+      "title": "Detecting Dangerous Gases from Home Heating",
+      "hook": "Many home heating systems can produce a dangerous, odorless gas that you won't detect without help.",
+      "quick": "When you heat your home using a furnace, space heater, or boiler, there's a serious risk of incomplete combustion occurring. This happens if there isn't enough oxygen available for the fuel to burn completely. When combustion is incomplete, these heating systems can release harmful byproducts into your indoor air, including carbon monoxide. This gas is especially dangerous because it is tasteless and odorless, making it impossible to detect without specialized equipment. The presence of carbon monoxide has serious adverse health effects. Beyond this invisible danger, incomplete combustion can also emit nitrogen oxides, formaldehyde, and various volatile organic compounds. These substances contribute to poorer indoor air quality and can come from furnaces, space heaters, and boilers if they are not operating correctly due to insufficient oxygen.",
+      "more": "The heating systems that rely on burning fuel, whether solid fuels, liquids, or gases, require a proper air supply to operate safely. Furnaces, for example, distribute heated air through ductwork, and boilers use water or steam through pipes. Both methods ultimately use a central source to transfer thermal energy. Heat pumps, on the other hand, operate differently by extracting heat from outside the structure and transferring it in, or vice versa for cooling, and are often supplemented by electrical heaters that use high-resistance wire. While heat pumps don't produce combustion byproducts, systems burning fuel are the ones where incomplete combustion is a risk, highlighting the importance of proper ventilation to ensure sufficient oxygen and to remove any potential contaminants.",
+      "deep": "Ensuring your home's HVAC system, especially those with combustion heating, is designed and installed correctly is crucial for safety. For very small buildings, contractors estimate system capacity and design it, selecting components and refrigerants. For larger buildings, mechanical engineers analyze and specify the systems. Regardless of size, local regulations typically require building permits and code-compliance inspections for all installations. These inspections are in place to confirm that systems meet safety standards and are properly integrated to provide thermal comfort while controlling airborne contaminants. Proper ventilation is key to removing moisture, odors, smoke, heat, dust, bacteria, and carbon dioxide, as well as replenishing oxygen, particularly when a heating system is consuming oxygen and producing combustion byproducts.",
+      "takeaway": "Install carbon monoxide detectors in your home to safeguard against tasteless and odorless gases produced by combustion heating systems.",
+      "source": {
+        "title": "Heating, ventilation, and air conditioning",
+        "url": "https://en.wikipedia.org/wiki/Heating,_ventilation,_and_air_conditioning"
+      },
+      "audio": {
+        "quick": "lessons/2026-08-19-heating-ventilation-and-air-conditioning-quick.mp3",
+        "more": "lessons/2026-08-19-heating-ventilation-and-air-conditioning-more.mp3",
+        "deep": "lessons/2026-08-19-heating-ventilation-and-air-conditioning-deep.mp3"
       }
     }
   ],
