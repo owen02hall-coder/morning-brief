@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-08-20T15:30:14.038587-06:00",
+  "generated_at": "2026-08-20T15:44:02.037744-06:00",
   "date": "2026-08-20",
   "tldr": [
-    "The US announced new sanctions against 10 individuals involved in an alleged Hezbollah cash-smuggling network and implemented further economic restrictions on Cuba's mining and construction industries.",
-    "Walmart's stock tumbled following a disappointing outlook, which indicated a retreat in US consumer spending, partly attributed to high fuel prices.",
-    "The bond market demonstrated anxiety, causing Treasury yields to rise amid skepticism regarding the effectiveness of recent efforts by the Treasury Secretary to stabilize the market."
+    "Concerns over persistent U.S. debt issues and rising Treasury yields contributed to a decline in stock market indices.",
+    "The U.S. has intensified economic pressure on Iran, with officials stating sanctions aim to collapse its economy, which also influenced global oil prices.",
+    "Pakistan's former Prime Minister Imran Khan was reportedly transferred from jail to a hospital following a court order."
   ],
   "market": {
     "sp500": {
@@ -17,19 +17,19 @@
       "change": -263.92,
       "asof": "2026-08-20"
     },
-    "why": "The S&P 500 and Nasdaq Composite declined as Walmart's stock fell following a disappointing outlook, reflecting a broader retreat in U.S. consumer spending, influenced by high fuel prices. This market movement also occurred amid an anxious bond market, which is sending troubling messages to investors about the U.S. debt and potential threats to overextended equities."
+    "why": "The S&P 500 and Nasdaq Composite both closed lower, as an anxious bond market sent troubling messages to investors regarding U.S. debt and suggested a potential threat to stock market valuations. Walmart also reported a sales drop and its stock declined, indicating a retreat in U.S. consumer spending."
   },
   "yield_10y": {
     "value": 4.7,
     "change": 0.04,
     "asof": "2026-08-20",
-    "why": "The 10-year Treasury yield increased due to an anxious bond market that signals no easy fix for U.S. debt issues. Treasury Secretary Scott Bessent's efforts to calm the market and tamp down long-term Treasury yields are reportedly being short-circuited and met with skepticism by market experts."
+    "why": "The 10-year Treasury yield rose, as efforts by the Treasury Secretary to calm markets and tamp down long-term yields have not yet shown success. Persistent concerns about the U.S. debt outlook and the Treasury's capacity to address it are contributing to upward pressure on yields."
   },
   "vix": {
     "value": 16.01,
     "change": 1.12,
     "asof": "2026-08-20",
-    "why": "The VIX rose as the S&P 500 and Nasdaq Composite experienced declines. This increase in the volatility index reflects heightened market anxiety and concerns among investors regarding the stability of overextended equities and the U.S. debt situation."
+    "why": "The VIX, an indicator of market volatility, increased. This rise occurred amidst anxieties in the bond market and concerns that rising yields could negatively impact equity markets. Geopolitical developments, such as sharpened U.S. rhetoric and sanctions against Iran, also contributed to overall market uncertainty and a rise in oil prices."
   },
   "breadth": {
     "sp500": {
@@ -51,7 +51,7 @@
     "value": 6.65,
     "change": -0.02,
     "asof": "2026-08-20",
-    "why": "The articles do not provide a specific reason for the decrease in the 30-year fixed mortgage rate in the latest weekly survey. Mortgage rates generally track the 10-year Treasury yield, which saw an increase in its most recent close."
+    "why": "The 30-year fixed mortgage rate, reported through a weekly survey by Freddie Mac, saw a slight decrease. While mortgage rates generally track the 10-year Treasury yield, and the 10-year yield increased on the day of this market report, the weekly mortgage rate reflects trends over the survey period. The provided articles do not offer a specific explanation for this particular weekly movement in mortgage rates relative to the day's yield change."
   },
   "policy": [],
   "policy_upcoming": [
@@ -83,36 +83,36 @@
   ],
   "tech": [
     {
-      "summary": "Stripe is expanding its presence in the artificial intelligence sector by acquiring OpenRouter, a move that deepens the fintech company's engagement in the AI model market.",
+      "summary": "Stripe is expanding its artificial intelligence capabilities by acquiring OpenRouter, a move that deepens the fintech company's presence in the AI model marketplace.",
       "source": "CNBC",
       "url": "https://www.cnbc.com/2026/08/19/stripe-openrouter-fintech-ai-model-marketplace-.html"
     },
     {
-      "summary": "Riot Games is discontinuing active development on 2XKO, its free-to-play League of Legends fighting game, less than a year after its launch, citing insufficient player retention for long-term sustainability.",
+      "summary": "Genesis, Hyundai's luxury brand, revealed its first full-size, three-row electric SUV for the U.S. market, the GV90, featuring unconventional designs and features like coach-style doors and heated floors.",
       "source": "The Verge",
-      "url": "https://www.theverge.com/games/982986/riot-games-league-of-legends-fighting-game-2xko-end-development"
+      "url": "https://www.theverge.com/transportation/982910/genesis-gv90-ev-suv-coach-door-heated-floor"
     },
     {
-      "summary": "Australia's online safety regulator, eSafety, has stated that Roblox needs to implement more changes to its child safety features after testing indicated the company had not sufficiently prevented contact between adults and children under 16.",
-      "source": "Ars Technica",
-      "url": "https://arstechnica.com/tech-policy/2026/08/weak-roblox-safeguards-failed-to-stop-adults-contacting-kids-regulator-says/"
+      "summary": "Debates surrounding AI consciousness are described as a trap, with current rhetoric from prominent tech leaders often portraying AI agents as 'awake and aware' or 'superhuman,' pushing for regulation of these systems.",
+      "source": "MIT Technology Review",
+      "url": "https://www.technologyreview.com/2026/08/20/1142571/ai-consciousness-debate-trap/"
     }
   ],
   "world": [
     {
-      "summary": "The U.S. Treasury Department imposed sanctions on 10 individuals accused of operating a courier network that smuggled hundreds of millions of dollars in cash to Hezbollah via commercial flights between Iran, Turkey, the UAE, and Lebanon.",
+      "summary": "Pakistan's former Prime Minister Imran Khan was reportedly transferred from Adiala jail to Shifa International Hospital, following a court order.",
+      "source": "Al Jazeera",
+      "url": "https://www.aljazeera.com/news/2026/8/20/pakistans-ex-pm-imran-khan-transferred-from-jail-to-hospital?traffic_source=rss"
+    },
+    {
+      "summary": "The U.S. Treasury Department announced sanctions against 10 individuals allegedly involved in a courier network that smuggled hundreds of millions of dollars to Hezbollah via commercial flights between Iran, Turkey, the UAE, and Lebanon.",
       "source": "Guardian World",
       "url": "https://www.theguardian.com/us-news/2026/aug/20/alleged-money-smuggling-sanctions-hezbollah"
     },
     {
-      "summary": "The United States has implemented new sanctions targeting Cuba's mining and construction sectors, further straining the island nation's economy, which is already experiencing blackouts and medical shortages.",
+      "summary": "The U.S. placed new sanctions on Cuba's mining and construction sectors, intensifying economic restrictions that have already strained the island's economy, leading to blackouts and medical shortages.",
       "source": "Al Jazeera",
       "url": "https://www.aljazeera.com/news/2026/8/20/us-pummels-cuban-economy-with-new-sanctions-on-mining-construction?traffic_source=rss"
-    },
-    {
-      "summary": "The Israeli military has admitted that its troops fired on a car in Gaza in 2024, resulting in the deaths of five-year-old Hind Rajab and six of her family members, and has ordered a criminal investigation into the incident.",
-      "source": "Guardian World",
-      "url": "https://www.theguardian.com/world/2026/aug/19/israel-admits-it-soldiers-fired-at-car-in-which-hind-rajab-was-killed"
     }
   ],
   "weekly_recap": null,
