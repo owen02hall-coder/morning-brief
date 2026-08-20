@@ -107,7 +107,35 @@ def _same_story(a, b):
     return len(wa & wb) / len(wa | wb) >= _STORY_OVERLAP
 
 
-def _dedupe_across(buckets):
+# The must-knows are read FIRST and are a compression of the very stories the sections below then
+# read again. Measured over 10 archived editions (162 must-know/item pairs), and the measurement is
+# why this uses a different metric from _same_story: a bullet is a SUBSET of the item it summarises,
+# so Jaccard is depressed by the length gap and misses obvious repeats. "Civilian deaths in Ukraine
+# reached their highest..." against its near-identical bullet scored 0.46 Jaccard; the Indonesia
+# earthquake pair scored 0.26. Containment — the shared words as a fraction of the SHORTER text —
+# scored those same pairs 0.85 and 0.60.
+#
+# Every pair down to 0.45 containment that was read by hand was genuinely the same story (Unitree,
+# Panama Canal fees, Apple/Alibaba), so 0.5 sits just below the confirmed true positives with a
+# margin. Erring slightly toward suppression is the right bias here because this affects the AUDIO
+# ONLY — the page still renders every item, so an over-suppressed story is one the reader can still
+# see, while an under-suppressed one is a paragraph they must sit through twice with no skip button.
+_TLDR_CONTAINMENT = 0.5
+
+
+def _covered_by_tldr(item, tldr_words):
+    """True when this item is a story the must-knows already told. `tldr_words` is a list of word
+    sets, prepared once by the caller rather than per item."""
+    wi = _key_words(item.get("summary"))
+    if not wi:
+        return False
+    for wt in tldr_words:
+        if wt and len(wi & wt) / min(len(wi), len(wt)) >= _TLDR_CONTAINMENT:
+            return True
+    return False
+
+
+def _dedupe_across(buckets, tldr_words=()):
     """`buckets` is [(label, items)] in SPOKEN order; returns the same shape with any item that
     repeats an earlier bucket's story removed. First occurrence wins, so tech keeps the story and
     world drops it — tech is narrated first, and reordering the sections to change that would be a
@@ -116,6 +144,8 @@ def _dedupe_across(buckets):
     for label, items in buckets:
         fresh = []
         for it in items or []:
+            if _covered_by_tldr(it, tldr_words):
+                continue
             if any(_same_story(it, prev) for prev in kept):
                 continue
             fresh.append(it)
@@ -273,7 +303,8 @@ def compose_script(briefing, has_lesson=False):
     # thing that happened at home.
     for label, items in _dedupe_across([("In tech", briefing.get("tech")),
                                         ("Across the country", briefing.get("us")),
-                                        ("Around the world", briefing.get("world"))]):
+                                        ("Around the world", briefing.get("world"))],
+                                       tldr_words=[_key_words(t) for t in tldr]):
         if items:
             parts.append(f"{label}.")
             for it in items:

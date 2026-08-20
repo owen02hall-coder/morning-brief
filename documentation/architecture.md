@@ -191,8 +191,13 @@ Heartbeat (independent cron): python -m scripts.heartbeat
   page gives for it, then the overall market "why"; the weekly policy digest on Mondays; tech;
   world) and synthesizes it with Gemini TTS (`TTS_MODEL`/`TTS_VOICE`), encoding mp3 in-process with
   `lameenc` (the runner has no ffmpeg). Non-fatal end to end. Still leaner than the page — breadth
-  and the policy calendar are page-only — and a story filed in BOTH tech and world is read once
-  (`_dedupe_across`, content-word overlap). Mirror narration changes in `docs/app.js`
+  and the policy calendar are page-only. Two kinds of repetition are cut from the AUDIO ONLY (the
+  page still renders everything): a story filed in two buckets is read once (`_dedupe_across`,
+  Jaccard >= 0.6 between buckets of similar length), and a section item that merely re-tells a
+  must-know is dropped (`_covered_by_tldr`, CONTAINMENT >= 0.5). The two metrics differ on purpose —
+  a must-know is a compression of the item it summarises, so Jaccard is depressed by the length gap
+  and missed obvious repeats (measured 0.26 on an earthquake story stated twice). Measured over the
+  archive, this removes 1-3 repeats a morning. Mirror narration changes in `docs/app.js`
   `speechText()`; `12-narration-mirror.py` fails the build if the two ever disagree.
 - `scripts/data/twelvedata.py`: a REST client. NOT used (v2 breadth shipped keyless via
   TradingView instead). Kept only as a possible future source.

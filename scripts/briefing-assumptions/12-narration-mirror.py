@@ -40,6 +40,9 @@ two strings are both empty. All three verified red at authoring time, 2026-08-20
   drop-rates   -> the rates readout vanishes from the mp3 script but not from the device voice.
   drop-policy  -> the Monday policy digest vanishes from the mp3 script but not from the device voice.
   no-dedupe    -> the mp3 script reads a cross-filed story twice; the device voice reads it once.
+  no-tldr-cut  -> the mp3 script re-reads a story the must-knows already told; the device voice does
+                  not. Guards the CONTAINMENT half specifically, which is a different metric from
+                  the Jaccard used between buckets and could rot independently of it.
 """
 import json
 import os
@@ -192,6 +195,22 @@ FIXTURES = [
         "mortgage": _num(6.67, -0.02, "2026-08-13", ""),
         "policy_week": [], "policy_upcoming": [], "tech": [], "us": [], "world": [],
     }},
+    {"name": "tldr-repeat", "hasLesson": False, "briefing": {
+        "date": "2026-08-19",
+        # The bullet is a COMPRESSION of the world item below — different wording, same story, and
+        # the exact shape Jaccard misses (measured 0.26 on the real Indonesia earthquake pair).
+        "tldr": ["A powerful 7.7-magnitude earthquake in eastern Indonesia killed at least 38 people."],
+        "market": FULL_MARKET,
+        "yield_10y": None, "vix": None, "mortgage": None,
+        "policy_week": [], "policy_upcoming": [], "tech": [], "us": [],
+        "world": [
+            _item("A powerful 7.7-magnitude earthquake struck eastern Indonesia, killing at least "
+                  "38 people and prompting a tsunami warning along the coast.", "BBC",
+                  "https://e.com/quake"),
+            _item("Separately, a national election concluded peacefully in Brazil.", "Guardian",
+                  "https://e.com/brazil"),
+        ],
+    }},
     {"name": "degraded-empty", "hasLesson": False, "briefing": {
         "date": "", "tldr": [], "market": {}, "yield_10y": None, "vix": None, "mortgage": None,
         "policy_week": [], "policy_upcoming": [], "tech": [], "us": [], "world": [],
@@ -206,8 +225,10 @@ def _apply_control(tts):
     elif CONTROL == "drop-policy":
         tts._policy_lines = lambda briefing, weekday: []
     elif CONTROL == "no-dedupe":
-        tts._dedupe_across = lambda buckets: [(label, list(items or []))
-                                              for label, items in buckets]
+        tts._dedupe_across = lambda buckets, tldr_words=(): [(label, list(items or []))
+                                                            for label, items in buckets]
+    elif CONTROL == "no-tldr-cut":
+        tts._covered_by_tldr = lambda item, tldr_words: False
     elif CONTROL:
         print(f"REFUSED: unknown NARRATION_MIRROR_CONTROL {CONTROL!r}", file=sys.stderr)
         sys.exit(2)
@@ -302,6 +323,11 @@ def main():
          "the US section vanished on a non-Monday, so it is wrongly coupled to the policy weekday"),
         ("degraded-empty", "Across the country.", False,
          "an empty US bucket still announced its heading, which would read as a broken section"),
+        ("tldr-repeat", "earthquake struck eastern Indonesia", False,
+         "the world section re-read a story the must-knows had already told — this is the "
+         "containment case Jaccard misses, so the tldr suppression is not working"),
+        ("tldr-repeat", "election concluded peacefully in Brazil", True,
+         "tldr suppression removed a genuinely DISTINCT item; it is over-matching"),
     ]
     for name, needle, want, why in checks:
         if (needle in by_name[name]) is not want:

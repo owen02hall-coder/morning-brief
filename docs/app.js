@@ -581,13 +581,31 @@ function sameStory(a, b) {
   return shared / (wa.size + wb.size - shared) >= STORY_OVERLAP;
 }
 
-function dedupeAcross(buckets) {
+// Mirror of tts._TLDR_CONTAINMENT and _covered_by_tldr. A different metric from sameStory on
+// purpose: a must-know is a COMPRESSION of the item it summarises, so its words are largely a
+// subset and Jaccard is depressed by the length gap. Containment — shared words over the SHORTER
+// text — is what actually catches "the section just re-read the headline".
+const TLDR_CONTAINMENT = 0.5;
+
+function coveredByTldr(item, tldrWords) {
+  const wi = keyWords(item.summary);
+  if (!wi.size) return false;
+  return tldrWords.some((wt) => {
+    if (!wt.size) return false;
+    let shared = 0;
+    wi.forEach((w) => { if (wt.has(w)) shared += 1; });
+    return shared / Math.min(wi.size, wt.size) >= TLDR_CONTAINMENT;
+  });
+}
+
+function dedupeAcross(buckets, tldrWords) {
   // Mirror of tts._dedupe_across. First occurrence wins, so tech keeps a shared story and world
   // drops it — tech is narrated first.
   const kept = [];
   return buckets.map(([label, items]) => {
     const fresh = [];
     (items || []).forEach((it) => {
+      if (coveredByTldr(it, tldrWords || [])) return;
       if (kept.some((prev) => sameStory(it, prev))) return;
       fresh.push(it);
       kept.push(it);
@@ -706,7 +724,8 @@ function speechText(b, hasLesson) {
   // Mirror of tts.compose_script: US before world, so a story that is both resolves to the
   // domestic framing. dedupeAcross keeps the FIRST bucket's copy.
   dedupeAcross([["In tech.", b.tech], ["Across the country.", b.us],
-                ["Around the world.", b.world]]).forEach(([label, items]) => {
+                ["Around the world.", b.world]],
+               (b.tldr || []).map((t) => keyWords(t))).forEach(([label, items]) => {
     if (items.length) parts.push(label);
     items.forEach((it) => {
       if (it.summary) parts.push(it.source ? `${it.summary} That's from ${it.source}.` : it.summary);
