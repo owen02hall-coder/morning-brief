@@ -128,6 +128,34 @@ LIFE_PROFILE_KEYWORDS = [
     "retirement", "401(k)", "ira", "contribution limit",
 ]
 
+# Topics the profile deliberately does NOT cover, with the reason. This is the companion to the list
+# above and exists to answer a question that list cannot: when the model picks a document the
+# prefilter rejected, is that a RECALL GAP (the prefilter is too narrow — add a keyword, as
+# "floodplain" was added on 2026-08-03) or a deliberate scope decision the prefilter got RIGHT?
+#
+# Without this, 06-policy-relevance.py's G2 has to read every such disagreement as a recall gap, so
+# the only way to make the gate green is to widen the prefilter — which is backwards when the honest
+# answer is "this genuinely does not affect me". A red gate that can only be silenced by importing
+# noise stops being a signal, and the pressure is to delete the check.
+#
+# Each entry must carry its reason, and this list must stay SHORT. It is not a mute button: an entry
+# here is a standing claim that a whole topic is out of scope, and 06 prints every skip it causes so
+# the claims stay visible on every run. If a topic here ever starts mattering, delete the entry and
+# add the keyword instead.
+LIFE_PROFILE_EXCLUSIONS = [
+    # 2026-08-20. The IRS/Treasury stream of single-employer DEFINED BENEFIT funding rules (target
+    # normal cost, funding target, segment rates, mortality tables) governs how an EMPLOYER must
+    # fund a pension plan, not what a participant receives, and this reader's retirement exposure is
+    # defined-CONTRIBUTION — which is why the keyword list carries 401(k)/IRA/contribution limit and
+    # no pension vocabulary. Federal Register abstracts on these routinely say they "affect
+    # participants in, beneficiaries of, employers maintaining, and administrators of" such plans,
+    # which is boilerplate broad enough to make the model select them; that is exactly the
+    # over-selection this entry records as intentional rather than as a prefilter bug.
+    ("pension funding / defined benefit plan mechanics",
+     ["defined benefit", "target normal cost", "funding target", "minimum funding",
+      "single-employer plan", "pension plan"]),
+]
+
 # Federal Register — one keyless request covers all six agencies, type-filtered and date-windowed.
 # It is the backbone rather than a collection of per-agency feeds because CFPB / FHFA / IRS / HUD
 # rulemaking all land here anyway, and their own feeds are dead or key-gated (05's KNOWN-DEAD list).

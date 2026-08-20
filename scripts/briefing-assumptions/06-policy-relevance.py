@@ -159,6 +159,22 @@ TODAY = date.today().isoformat()
 # scoring is not working and the section would ship noise. Publication dates are stamped RELATIVE to
 # the run so a decoy never becomes trivially rejectable for looking stale — the control has to stay
 # as fresh as the real candidates it is hiding among.
+def _deliberate_exclusion(candidate):
+    """The exclusion TOPIC when this candidate is one the profile deliberately does not cover, else
+    None.
+
+    Matches on the same text the production prefilter reads (title + abstract), so the decision is
+    made against the same evidence rather than against a title alone. Substring matching, not word
+    boundaries: the phrases in config.LIFE_PROFILE_EXCLUSIONS are multi-word and specific enough
+    that a substring hit is the intent ("defined benefit" cannot appear by accident), and it is what
+    lets "pension plan" catch "pension plans"."""
+    blob = f"{candidate.get('title') or ''} {candidate.get('abstract') or ''}".lower()
+    for topic, phrases in config.LIFE_PROFILE_EXCLUSIONS:
+        if any(ph.lower() in blob for ph in phrases):
+            return topic
+    return None
+
+
 def _ago(days):
     return (date.today() - timedelta(days=days)).isoformat()
 
@@ -358,6 +374,7 @@ def main():
     # gate is RECALL — a document the live model judged relevant that `_matches_profile` would have
     # thrown away never reaches the model in production, and the section just looks quiet.
     admitted = {c["id"]: policy._matches_profile(c) for c in candidates}
+    deliberate = []   # (id, title, topic) skipped via config.LIFE_PROFILE_EXCLUSIONS
 
     # --- the single-candidate MEASUREMENT's premise: the probe document must be on-profile --------
     # A note, not a failure, because the probe itself asserts nothing any more. The hard version of
@@ -413,11 +430,22 @@ def main():
                             f"({by_norm[_norm_url(it.url)]['title']!r}) — relevance scoring is not "
                             f"working; the section would ship noise")
         elif src is not None and not admitted.get(src["id"]):
-            # PREFILTER RECALL. Decoys are excluded because G4 already owns that failure and a
-            # prefilter that rejects a decoy is doing its job.
-            failures.append(f"G2/prefilter the model selected {src['id']} ({src['title'][:60]!r}) "
-                            f"but config.LIFE_PROFILE_KEYWORDS filters it OUT — in production this "
-                            f"document never reaches the model and the section just looks quiet")
+            # PREFILTER RECALL — but only when the disagreement is really a GAP. Decoys are excluded
+            # because G4 already owns that failure and a prefilter that rejects a decoy is doing its
+            # job; a documented out-of-scope topic is excluded for the same reason. The model sees
+            # every candidate here and its relevance bar is broad, so it will sometimes pick a
+            # document whose abstract claims to "affect participants" while the substance is
+            # employer-side machinery. Counting that as a recall gap would mean the only way to green
+            # this gate is to widen the prefilter into noise, which is how a check stops being a
+            # signal — so a deliberate exclusion is declared in config, printed below on every run,
+            # and not counted as a failure.
+            excluded_by = _deliberate_exclusion(src)
+            if excluded_by is None:
+                failures.append(f"G2/prefilter the model selected {src['id']} ({src['title'][:60]!r}) "
+                                f"but config.LIFE_PROFILE_KEYWORDS filters it OUT — in production this "
+                                f"document never reaches the model and the section just looks quiet")
+            else:
+                deliberate.append((src["id"], src["title"], excluded_by))
 
         # G5 — no invented dollar amounts or percentages (normalized on BOTH sides, as production)
         if src is not None:
@@ -570,6 +598,7 @@ def main():
                          "effect_chars": len(pos_hit.effect or "") if pos_hit else 0},
             "negative": {"id": DECOYS[0]["id"], "returned": len(neg_items)},
         },
+        "deliberate_exclusions": [{"document_number": d, "topic": t} for d, _, t in deliberate],
         "batch_invariant": {
             "window": len(window_a),
             "window_with_all_ids_seen": len(window_b),
@@ -580,6 +609,15 @@ def main():
 
     for n in notes:
         print(n)
+
+    # Every deliberate exclusion, on a green run as loudly as on a red one. This list is the one
+    # thing here that can HIDE a real recall gap, so it is never allowed to act silently: if an
+    # entry stops being true, the way that gets noticed is somebody reading these lines.
+    for doc_id, title, topic in deliberate:
+        print(f"NOTE deliberate exclusion (NOT a failure): the model selected {doc_id} "
+              f"({title[:70]!r}) and the prefilter rejected it, which "
+              f"config.LIFE_PROFILE_EXCLUSIONS declares intentional — topic: {topic}. "
+              f"If this topic now matters, delete that entry and add the keyword instead.")
 
     if failures:
         print("FAIL: 06-policy-relevance", file=sys.stderr)
@@ -593,7 +631,8 @@ def main():
         json.dump(fp, fh, indent=2)
     print(f"PASS: 06-policy-relevance — G1..G8 (model={MODEL}; {len(real)} federal + {len(DECOYS)} "
           f"decoy + {len(utah)} Utah candidates, {fp['candidates']['prefilter_admitted']} admitted "
-          f"by the prefilter; selected {len(items)}, zero decoys, zero invented figures, zero "
+          f"by the prefilter, {len(deliberate)} deliberate exclusion(s); selected {len(items)}, "
+          f"zero decoys, zero invented figures, zero "
           f"hedged final rules; G8: get_policy returned {len(window_a)} candidates and still "
           f"{len(window_b)} with every id marked seen)")
     for it in items:
