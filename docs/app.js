@@ -525,10 +525,161 @@ function fmtTime(s) {
   return `${m}:${String(sec).padStart(2, "0")}`;
 }
 
+// ---- Narration mirror -------------------------------------------------------------------------
+//
+// Everything from here to speechText() is a line-for-line mirror of scripts/tts.py. It is used
+// whenever there is no server-rendered mp3 (a day the build's TTS failed, an archived briefing,
+// offline), and the rule the whole feature rests on is that the device voice must say the SAME
+// briefing the good voice would have said — otherwise a fallback day silently becomes a different
+// product. Change one side, change the other.
+
+const STORY_OVERLAP = 0.6;   // mirror of tts._STORY_OVERLAP
+const STOPWORDS = new Set(
+  ("a an the and or but of to in on for with at by from as is are was were be been being it its "
+   + "this that these those has have had will would can could new after over into out up down more "
+   + "than then they them their there here about also said says").split(" "));
+
+function spokenBps(change) {
+  // Mirror of tts._spoken_bps. Basis points, because a yield move read as a percent of a percent
+  // is the most misheard figure in a rates readout.
+  if (change == null) return null;
+  const bps = Math.round(change * 100);
+  if (bps === 0) return "essentially unchanged";
+  return `${bps > 0 ? "up" : "down"} ${Math.abs(bps)} basis points`;
+}
+
+const SPOKEN_MONTHS = ["January", "February", "March", "April", "May", "June",
+                       "July", "August", "September", "October", "November", "December"];
+
+function spokenDay(iso, withYear) {
+  // Mirror of tts._spoken_day. Built off localDate so a date-only string is never shifted a day by
+  // UTC parsing — the same trap safeHref's neighbour documents above.
+  const d = localDate(iso);
+  if (!d) return null;
+  const base = `${SPOKEN_MONTHS[d.getMonth()]} ${d.getDate()}`;
+  return withYear ? `${base}, ${d.getFullYear()}` : base;
+}
+
+function keyWords(text) {
+  // Mirror of tts._key_words.
+  const out = new Set();
+  for (const w of (text || "").toLowerCase().match(/[a-z0-9]+/g) || []) {
+    if (w.length > 2 && !STOPWORDS.has(w)) out.add(w);
+  }
+  return out;
+}
+
+function sameStory(a, b) {
+  // Mirror of tts._same_story: identical URL is decisive, otherwise content-word overlap, which is
+  // what catches one event filed by two outlets under two headlines.
+  if (a.url && a.url === b.url) return true;
+  const wa = keyWords(a.summary), wb = keyWords(b.summary);
+  if (!wa.size || !wb.size) return false;
+  let shared = 0;
+  wa.forEach((w) => { if (wb.has(w)) shared += 1; });
+  return shared / (wa.size + wb.size - shared) >= STORY_OVERLAP;
+}
+
+function dedupeAcross(buckets) {
+  // Mirror of tts._dedupe_across. First occurrence wins, so tech keeps a shared story and world
+  // drops it — tech is narrated first.
+  const kept = [];
+  return buckets.map(([label, items]) => {
+    const fresh = [];
+    (items || []).forEach((it) => {
+      if (kept.some((prev) => sameStory(it, prev))) return;
+      fresh.push(it);
+      kept.push(it);
+    });
+    return [label, fresh];
+  });
+}
+
+function rateLines(b) {
+  // Mirror of tts._rate_lines: the 10-year, the 30-year mortgage and the VIX, each read as a level,
+  // then its move, then the reason the page already gives — then the overall market "why".
+  const out = [];
+  const y = b.yield_10y;
+  if (y && y.value != null) {
+    const move = spokenBps(y.change);
+    out.push(`The 10-year Treasury yield is ${y.value} percent${move ? ", " + move : ""}.`);
+    if (y.why) out.push(y.why);
+  }
+  const mg = b.mortgage;
+  if (mg && mg.value != null) {
+    const move = spokenBps(mg.change);
+    const day = spokenDay(mg.asof, false);
+    // The release date is spoken aloud on purpose: PMMS is a WEEKLY survey, so on most mornings
+    // this number is several days old and the listener would otherwise assume it is this morning's.
+    let line = `The 30-year fixed mortgage is ${mg.value} percent`;
+    if (move) line += `, ${move} in Freddie Mac's weekly survey`;
+    if (day) line += `, as of ${day}`;
+    out.push(line + ".");
+    if (mg.why) out.push(mg.why);
+  }
+  const v = b.vix;
+  if (v && v.value != null) {
+    let move = null;
+    if (v.change != null) {
+      const prev = v.value - v.change;
+      if (prev) {
+        const pct = (v.change / prev) * 100;
+        // Mirror of tts._spoken_pct: a move that rounds to 0.0% must not still claim a direction.
+        move = Math.abs(pct) < 0.05 ? "essentially unchanged"
+          : `${pct >= 0 ? "up" : "down"} ${Math.abs(pct).toFixed(1)} percent`;
+      }
+    }
+    out.push(`The VIX is ${v.value}${move ? ", " + move : ""}.`);
+    if (v.why) out.push(v.why);
+  }
+  if (b.market && b.market.why) out.push(b.market.why);
+  return out;
+}
+
+const POLICY_AUDIO_WEEKDAY = 1;   // mirror of config.POLICY_AUDIO_WEEKDAY (Monday). NOTE the
+                                  // different convention: Python's date.weekday() is Mon=0, but
+                                  // JavaScript's Date.getDay() is Sun=0, so Monday is 1 here and 0
+                                  // there. Same day, two numbering schemes — do not "fix" one to
+                                  // match the other.
+const MAX_POLICY_SPOKEN = 6;      // mirror of config.MAX_POLICY_SPOKEN
+
+function policyLines(b, d) {
+  // Mirror of tts._policy_lines. Reads the policy section aloud ONCE A WEEK, covering the whole
+  // week via b.policy_week (the build's projection of the rolling state record) rather than just
+  // the day it is read on.
+  if (!d || d.getDay() !== POLICY_AUDIO_WEEKDAY) return [];
+  const week = (b.policy_week || []).slice(0, MAX_POLICY_SPOKEN);
+  const out = ["This week, in policy that affects you."];
+  const describe = (it) => {
+    const parts = [(it.what_happened || "").trim(), (it.effect || "").trim()].filter(Boolean);
+    if (!parts.length) return null;
+    const when = spokenDay(it.effective_date, true);
+    return parts.join(" ") + (when ? ` That takes effect ${when}.` : "");
+  };
+  const spoken = week.map(describe).filter(Boolean);
+  // A positive "nothing landed" line on a quiet week: a section that simply vanishes is
+  // indistinguishable from a section that broke.
+  if (spoken.length) out.push(...spoken);
+  else out.push("No new rules or bills landed for you this week.");
+
+  const seen = new Set(week.map((i) => i.url).filter(Boolean));
+  const ahead = (b.policy_upcoming || []).filter((i) => !seen.has(i.url)).slice(0, MAX_POLICY_SPOKEN);
+  const aheadLines = ahead.map(describe).filter(Boolean);
+  if (aheadLines.length) { out.push("Still ahead of you."); out.push(...aheadLines); }
+  return out;
+}
+
 function speechText(b, hasLesson) {
   // Mirror of scripts/tts.py compose_script — used when there is no audio file (fallback days,
-  // archived briefings, offline). Deliberately LEANER than the page (user preference): must-knows,
-  // the S&P/Nasdaq percent moves only (no levels, no 10-year/VIX/breadth, no whys), tech, world.
+  // archived briefings, offline). Spoken order: must-knows, the S&P/Nasdaq percent moves, the rates
+  // readout (10-year, 30-year mortgage, VIX, each with its "why", then the market "why"), the
+  // weekly policy digest on Mondays only, tech, world, the Sunday recap.
+  //
+  // This was a leaner cut until 2026-08-20 — indices only, no rates, no whys. The reader asked for
+  // the three rate figures and the reasoning behind them. Breadth is still page-only.
+  //
+  // Tech and world are deduped against each other: one story filed in both buckets is read ONCE.
+  //
   // `hasLesson` swaps the sign-off for the hand-off into Alphabet Soup, exactly as the server's
   // narration does — the lesson's own text follows immediately after this string.
   const parts = [];
@@ -547,8 +698,11 @@ function speechText(b, hasLesson) {
         : `the ${name} is ${pct >= 0 ? "up" : "down"} ${Math.abs(pct).toFixed(1)} percent`);
     });
   if (moves.length) parts.push("Markets: " + moves.join(", and ") + ".");
-  [["tech", "In tech."], ["world", "Around the world."]].forEach(([k, label]) => {
-    const items = b[k] || [];
+  parts.push(...rateLines(b));
+  // Off the briefing's OWN date, never the clock: an archived Monday edition read on a Thursday is
+  // still Monday's edition, digest and all.
+  parts.push(...policyLines(b, d));
+  dedupeAcross([["In tech.", b.tech], ["Around the world.", b.world]]).forEach(([label, items]) => {
     if (items.length) parts.push(label);
     items.forEach((it) => {
       if (it.summary) parts.push(it.source ? `${it.summary} That's from ${it.source}.` : it.summary);

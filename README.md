@@ -19,10 +19,12 @@ Runs with your laptop and phone off. Cost: $0/month (all free tiers + your exist
   link. Pick Quick / Medium / Long on the phone. **A new lesson only comes up when you actually
   finish the briefing, or when you tap "New lesson"** — leave it half-listened and it is still there
   tomorrow
-- **Listen** — a daily audio edition (Gemini TTS, ~2-3 min drive-time cut: must-knows, percent
-  moves, tech, world) with lock-screen/CarPlay controls, then the day's Alphabet Soup lesson played
-  straight after it as one queue; falls back to the phone's built-in voice offline, on archived
-  briefings, or on a failed-TTS day
+- **Listen** — a daily audio edition (Gemini TTS) with lock-screen/CarPlay controls: must-knows,
+  percent moves, then the 10-year Treasury, the 30-year mortgage and the VIX with the reason behind
+  each and an overall read on the market, then tech and world (a story filed in both is read once),
+  and on Mondays a digest of the week's policy that affects you. The day's Alphabet Soup lesson
+  plays straight after it as one queue; falls back to the phone's built-in voice offline, on
+  archived briefings, or on a failed-TTS day
 - **Market breadth** — % of S&P 500 and Nasdaq-100 members above their 200-day average, computed
   daily (validated against the published $S5TH/$NDTH indexes), with two alert tiers per index: a
   one-shot warning when breadth falls below 40% and a daily high-priority oversold nag below 30%

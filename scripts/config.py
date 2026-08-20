@@ -226,6 +226,21 @@ MAX_POLICY_CANDIDATES = 25       # sent to the model (mirrors MAX_CANDIDATES_PER
 MAX_POLICY_UPCOMING = 5          # "What's coming": already-reported items with a future
                                  # effective_date, carried until that date passes.
 
+# --- The weekly spoken policy digest -------------------------------------------------------------
+# The audio reads the policy section ONCE A WEEK (Monday), not daily. A once-a-week readout can only
+# be honest if it covers the whole week, and `briefing.json` holds only TODAY's finds — so
+# state.record_policy keeps a rolling record of what was reported on each of the last
+# POLICY_WEEK_DAYS days and the narration reads that. Without it, an item found on Wednesday would
+# never be spoken at all: Monday's briefing does not contain it, and Wednesday's audio skipped the
+# section. That is a SILENT loss of the exact thing the reader asked to hear.
+POLICY_WEEK_DAYS = 7             # rolling window of reported policy items kept for the digest.
+POLICY_AUDIO_WEEKDAY = 0         # Monday (date.weekday(): Mon=0 .. Sun=6). The weekly recap rides
+                                 # Sunday; the policy digest is deliberately its own day so neither
+                                 # segment is buried behind the other in a single long edition.
+MAX_POLICY_SPOKEN = 6            # hard cap on items read aloud in the digest, newest first. The
+                                 # window is bounded by days, not by count, and a heavy federal week
+                                 # could otherwise turn the drive-time cut into a ten-minute recital.
+
 # --- The policy calendar: the recurring dates that have NO feed to watch ------------------------
 # The annual dollar figures this reader most wants — the conforming loan limit, the IRS brackets and
 # married-filing-jointly standard deduction, the 401(k)/IRA limits, the ACA enrollment window — are
@@ -428,10 +443,19 @@ LESSON_WORD_CEILING = 320         # above this the audio blows past the tier the
 
 LESSON_DECK_MAX = 60              # entries kept in docs/lessons.json. The phone's pointer walks this
                                   # list; anything older has been read or skipped many times over.
-LESSON_AUDIO_RETAIN = 10          # lessons whose mp3s stay in docs/lessons/. Bounded on purpose:
-                                  # audio is ~1 MB per lesson and every daily commit is permanent
-                                  # git history. A pointer that falls off this window still works —
-                                  # the client reads that lesson with the on-device voice.
+LESSON_AUDIO_RETAIN = 21          # lessons whose mp3s stay in docs/lessons/ (~900 KB each, three
+                                  # clips at ~300 KB). Raised from 10 on 2026-08-20. The old value
+                                  # was justified by "every daily commit is permanent git history",
+                                  # which is true of CREATING a clip and NOT of keeping it: the blob
+                                  # is in history from the commit that added it, so pruning reclaims
+                                  # working-tree/checkout bytes only and never shrinks the repo.
+                                  # The window therefore trades ~19 MB of checkout — not of history
+                                  # — against the reader's actual experience, and 10 was losing
+                                  # that trade badly: the pointer serves the OLDEST unfinished
+                                  # lesson, so a reader two weeks behind met the phone's own voice
+                                  # on every lesson they were behind by. 21 covers three weeks.
+                                  # A pointer that still falls off the window works — the client
+                                  # reads that lesson with the on-device voice.
 LESSON_BOOTSTRAP_COUNT = 2        # first run only: seed a small buffer so the "new lesson" button
                                   # has somewhere to go on day one. 1/day after that.
 LESSON_TTS_MIN_INTERVAL = 20      # seconds between TTS requests. The free tier is rate-limited per
@@ -444,6 +468,25 @@ LESSON_AUDIO_DEADLINE = 420       # seconds INTO run() past which no more lesson
                                   # is strictly worse than a lesson the phone has to read aloud
                                   # itself. 420 leaves ~2.5 min of margin for the commit/push/notify
                                   # legs that still have to run after this.
+
+LESSON_AUDIO_BACKFILL_MAX = 2     # missing clips repaired per run, for lessons STILL INSIDE the
+                                  # LESSON_AUDIO_RETAIN window. A tier lost to a transient TTS error
+                                  # used to be lost forever: generate_lesson_audio only ever ran for
+                                  # the entries created that day, so nothing revisited an older one.
+                                  # The reader then met the phone's own voice on that lesson — the
+                                  # deck's oldest unfinished entry is the one the pointer serves
+                                  # first, so a single bad morning could sit at the head of the queue
+                                  # for weeks. Bounded per run so the repair can never crowd out
+                                  # today's own clips or the free tier's daily budget.
+TTS_RETRY_ATTEMPTS = 2            # extra attempts per TTS request (so 3 tries total) on a TRANSIENT
+                                  # failure. The free tier answers 429/503 often enough that a
+                                  # single-shot request loses tiers in normal operation; that is how
+                                  # 2026-08-13 shipped with no `quick` clip and 2026-08-14 with no
+                                  # `more`. Retrying is what stops the backfill above from being a
+                                  # permanent cleanup crew for a leak upstream of it.
+TTS_RETRY_BACKOFF = 8             # seconds, multiplied by the attempt number. Deliberately larger
+                                  # than the data-fetch backoff: TTS rate limits are per MINUTE, so
+                                  # a fast retry is guaranteed to hit the same wall.
 
 # --- Audio edition (TTS) ------------------------------------------------------
 # One TTS request/day stays comfortably inside the Gemini free tier. The build writes a WAV to

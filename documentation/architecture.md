@@ -186,11 +186,14 @@ Heartbeat (independent cron): python -m scripts.heartbeat
   POST to TradingView's scanner (top `BREADTH_SCAN_LIMIT` US common stocks; the `type=stock`
   filter is load-bearing — without it ADR/fund rows displace ~90 S&P names), intersected with
   both constituent lists. Per-index `MIN_MATCH` gates. Validated vs published $S5TH / $NDTH.
-- `scripts/tts.py`: the audio edition. Composes a deterministic drive-time narration (must-knows,
-  S&P/Nasdaq percent moves only, tech, world — deliberately leaner than the page) and synthesizes
-  it with Gemini TTS (`TTS_MODEL`/`TTS_VOICE`), encoding mp3 in-process with `lameenc` (the
-  runner has no ffmpeg). Non-fatal end to end. Mirror narration changes in `docs/app.js`
-  `speechText()`.
+- `scripts/tts.py`: the audio edition. Composes a deterministic narration (must-knows; S&P/Nasdaq
+  percent moves; the 10-year, the 30-year mortgage and the VIX, each followed by the reason the
+  page gives for it, then the overall market "why"; the weekly policy digest on Mondays; tech;
+  world) and synthesizes it with Gemini TTS (`TTS_MODEL`/`TTS_VOICE`), encoding mp3 in-process with
+  `lameenc` (the runner has no ffmpeg). Non-fatal end to end. Still leaner than the page — breadth
+  and the policy calendar are page-only — and a story filed in BOTH tech and world is read once
+  (`_dedupe_across`, content-word overlap). Mirror narration changes in `docs/app.js`
+  `speechText()`; `12-narration-mirror.py` fails the build if the two ever disagree.
 - `scripts/data/twelvedata.py`: a REST client. NOT used (v2 breadth shipped keyless via
   TradingView instead). Kept only as a possible future source.
 - `scripts/summarize.py`: Gemini call with a response schema. Numbers are passed as facts and the
@@ -448,8 +451,11 @@ second that was listed here has since been closed:
   no source, no staleness story") is answered by a shape (month/day rules carrying no years), sources
   (a probed `.gov` URL and a sourcing note per entry) and a staleness story that is a runnable gate,
   `09-policy-calendar.py`, rather than a paragraph.
-- **The audio edition excludes policy.** The narration stays deliberately leaner than the page
-  (`scripts/tts.py`), and adding a fourth topic to a drive-time script was not worth the length.
+- **The audio edition reads policy once a week, not daily.** Adding a fourth topic to every
+  morning's script was not worth the length, so the digest rides `config.POLICY_AUDIO_WEEKDAY`
+  (Monday) and covers the whole week via `state.policy_week` — reading only that morning's `policy`
+  key would silently drop everything found on the other six days. Breadth and the policy calendar
+  stay page-only.
 
 v4 adds **Owen's Alphabet Soup**: one grounded lesson a day, rendered last on the page and played
 last in the audio, advancing only when the briefing is actually finished or the reader asks for a
@@ -458,10 +464,18 @@ new one. Known limits, all deliberate:
 - **One new lesson a day (two on the very first run).** The "New lesson" button can therefore run
   out, and says so rather than inventing something. The reader's own unfinished lessons are the
   buffer, which is the same property the completion rule creates.
-- **Lesson audio is kept for the last `LESSON_AUDIO_RETAIN` (10) lessons only.** Every daily commit
-  is permanent git history, so an unbounded window would grow the repo by ~1 MB a day forever. A
-  pointer that falls behind that window still works — the deck carries the prose, and the device
-  voice reads it.
+- **Lesson audio is kept for the last `LESSON_AUDIO_RETAIN` (21) lessons only.** Raised from 10 on
+  2026-08-20: the old value was justified by "every daily commit is permanent git history", which is
+  true of CREATING a clip and not of KEEPING it — the blob is in history from the commit that added
+  it, so pruning reclaims checkout bytes and never shrinks the repo. Since the pointer serves the
+  OLDEST unfinished lesson, a 10-lesson window meant a reader two weeks behind met the device voice
+  on every lesson they were behind by. A pointer that still falls off the window works — the deck
+  carries the prose, and the device voice reads it.
+- **Missing lesson clips are repaired, not written off.** `tts.backfill_lesson_audio()` re-synthesizes
+  up to `LESSON_AUDIO_BACKFILL_MAX` (2) missing clips per run for lessons inside the retention
+  window, oldest first, and `_synthesize()` retries transient TTS failures. Before both existed a
+  single 429 lost a tier permanently, because `generate_lesson_audio()` only ever ran for the entries
+  created that morning.
 - **Wikipedia is the only source.** It is keyless, has plain-text extracts, and covers all four
   subject areas with the mechanics a lesson needs. A `.gov`-style primary source would be better for
   the money and health domains, but none of them publishes a machine-readable article API — the same

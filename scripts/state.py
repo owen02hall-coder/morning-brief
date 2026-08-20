@@ -23,9 +23,17 @@ Policy keys (v3), all written by `record_policy()` — the single writer:
 - `policy_today` `{date, items, alerted}` — the day's reported items, replaced only when the stored
   date differs from today, so a `--force` same-date rebuild re-emits verbatim and keeps the
   `alerted` stamp. `eval_policy_alert()` flips that one stamp and touches nothing else.
+- `policy_week` `[{date, items}]` — a rolling `config.POLICY_WEEK_DAYS`-day record of what was
+  reported on each day, newest last, one entry per DATE. It exists for the weekly SPOKEN digest
+  (`tts.compose_script` reads it on `config.POLICY_AUDIO_WEEKDAY`): the audio narrates policy once a
+  week, and `briefing.json` only ever holds today's finds, so without this an item found on
+  Wednesday would never be spoken at all — Monday's briefing does not contain it and Wednesday's
+  audio skipped the section. Same-date rebuild REPLACES that date's entry rather than appending, so
+  a `--force` re-run cannot double-read an item to the listener.
 """
 import json
 import os
+from datetime import date, timedelta
 
 from . import config
 
@@ -102,6 +110,19 @@ def eval_breadth_alert(breadth, st, today):
     return alerts, {**st, "breadth": out}
 
 
+def _days_before(today, days):
+    """The ISO date `days` before `today`, as an EXCLUSIVE lower bound for the rolling window.
+
+    Returns a value that compares correctly as a string (ISO dates sort chronologically), which is
+    why the window filter can stay a plain `<` on strings. An unparseable `today` degrades to the
+    empty string: every stored date then sorts above it and the window keeps everything for one
+    run, which loses nothing — the alternative, raising, would take down the whole policy leg."""
+    try:
+        return (date.fromisoformat(today) - timedelta(days=days)).isoformat()
+    except (TypeError, ValueError):
+        return ""
+
+
 def record_policy(st, mark_seen, reported, today):
     """The SINGLE writer of every policy state key. Returns the new state (pure, no I/O).
 
@@ -130,7 +151,21 @@ def record_policy(st, mark_seen, reported, today):
     today_block = st.get("policy_today") or {}
     if today_block.get("date") != today:      # same-date rebuild keeps items AND the alerted stamp
         today_block = {"date": today, "items": list(reported or []), "alerted": False}
-    return {**st, "policy_seen": seen, "policy_active": active, "policy_today": today_block}
+
+    # The rolling window behind the weekly spoken digest. Keyed BY DATE and rebuilt every call, so a
+    # --force second run of the day overwrites today's entry instead of appending a duplicate — the
+    # listener must not hear the same rule twice because the build ran twice.
+    cutoff = _days_before(today, config.POLICY_WEEK_DAYS)
+    week = [w for w in (st.get("policy_week") or [])
+            if isinstance(w, dict) and w.get("date") and cutoff < w["date"] < today]
+    if reported:
+        week.append({"date": today, "items": list(reported)})
+    # Sort by date rather than trusting append order: a clock skew or a backfilled run would
+    # otherwise leave the digest reading the week out of order.
+    week = sorted(week, key=lambda w: w["date"])[-config.POLICY_WEEK_DAYS:]
+
+    return {**st, "policy_seen": seen, "policy_active": active, "policy_today": today_block,
+            "policy_week": week}
 
 
 def eval_policy_alert(items, st, today):

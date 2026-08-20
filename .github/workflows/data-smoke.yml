@@ -109,6 +109,16 @@ jobs:
           BRIEFING_SMOKE_ALLOW_DEV: "true"
         run: node scripts/briefing-assumptions/11-client-pointer.js
 
+      # The briefing is spoken by two hand-mirrored implementations — scripts/tts.py for the mp3 and
+      # docs/app.js for the device voice. Nothing in production compares them, so a change made on
+      # one side only turns a fallback day into a quietly different briefing. Needs neither network
+      # nor key; runs Python and Node against each other.
+      - name: Narration mirror (the mp3 script and the device-voice script say the same thing)
+        if: always()
+        env:
+          BRIEFING_SMOKE_ALLOW_DEV: "true"
+        run: python scripts/briefing-assumptions/12-narration-mirror.py
+
       # Relevance is the whole product: ~80% of agency-filtered Federal Register documents are
       # irrelevant to this user, so "did the model pick the right ones" is the assumption that
       # decides whether the policy section is worth shipping. Uses the GEMINI_API_KEY secret the

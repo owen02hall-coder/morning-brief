@@ -20,25 +20,212 @@ Everything here is non-fatal by design: no audio must never kill the briefing.
 import os
 import re
 import time
+from datetime import date, datetime
 
 from . import config
 
 
 def _spoken_pct(change, value):
-    """Day-over-day percent (vs previous close), spoken sign included."""
-    prev = (value or 0) - (change or 0)
+    """Day-over-day percent (vs previous close), spoken sign included. None when unknowable.
+
+    A move that rounds to 0.0% is spoken as "essentially unchanged" rather than "up 0.0 percent",
+    for the same reason the index moves below collapse to "flat" — the VIX trades in hundredths, so
+    a real 0.03% move would otherwise be read aloud as a zero that still claims a direction."""
+    if change is None:
+        return None
+    prev = (value or 0) - change
     if not prev:
         return None
     pct = (change / prev) * 100
+    if abs(pct) < 0.05:
+        return "essentially unchanged"
     direction = "up" if change >= 0 else "down"
     return f"{direction} {abs(pct):.1f} percent"
 
 
+def _spoken_bps(change):
+    """A rate move in basis points, spoken. None when the move itself is unknown.
+
+    Basis points rather than "point zero five percent": the page already speaks this number in bps
+    (docs/app.js numberCard, mode "bps") and a yield move read as a percent of a percent is the
+    single most misheard figure in a rates readout."""
+    if change is None:
+        return None
+    bps = round(change * 100)
+    if bps == 0:
+        return "essentially unchanged"
+    return f"{'up' if bps > 0 else 'down'} {abs(bps)} basis points"
+
+
+def _spoken_day(iso, with_year=False):
+    """'2026-08-13' -> 'August 13' (or 'January 1, 2027'). None if it will not parse.
+
+    `with_year` is on for POLICY effective dates and off for a market as-of: a rule that bites in a
+    different calendar year is a different fact from one that bites this month, and "January 1"
+    alone would let the listener assume the nearer one."""
+    try:
+        fmt = "%B %d, %Y" if with_year else "%B %d"
+        return datetime.strptime(iso, "%Y-%m-%d").strftime(fmt).replace(" 0", " ")
+    except (TypeError, ValueError):
+        return None
+
+
+# --- Cross-bucket repeats -------------------------------------------------------------------------
+#
+# The model fills `tech` and `world` from overlapping article pools, so one story (an export ban on
+# chips, a state-backed cyber incident) legitimately lands in both. On the PAGE that is two cards the
+# reader's eye skips in a second; in the AUDIO it is the same paragraph read twice with no way to
+# skip past it. Deduped here and in docs/app.js speechText ONLY — the page keeps both cards, because
+# this is a listening problem, not a data problem.
+
+_STORY_OVERLAP = 0.6      # Jaccard overlap of content words above which two items are one story.
+                          # Deliberately high: dropping a genuinely distinct item is the worse
+                          # error, since the listener has no way to discover what went missing.
+_STOPWORDS = frozenset(
+    "a an the and or but of to in on for with at by from as is are was were be been being it its "
+    "this that these those has have had will would can could new after over into out up down more "
+    "than then they them their there here about also said says".split())
+
+
+def _key_words(text):
+    """Content words of one item's summary, for the overlap test. Lowercased, punctuation dropped,
+    stopwords and 1-2 letter tokens removed so the comparison is about subject matter."""
+    return {w for w in re.findall(r"[a-z0-9]+", (text or "").lower())
+            if len(w) > 2 and w not in _STOPWORDS}
+
+
+def _same_story(a, b):
+    """True when two narration items are the same story. Mirror of docs/app.js sameStory().
+
+    An identical URL is decisive on its own. Otherwise it is content-word overlap, which is what
+    catches the same event filed by two different outlets under two different headlines."""
+    if a.get("url") and a.get("url") == b.get("url"):
+        return True
+    wa, wb = _key_words(a.get("summary")), _key_words(b.get("summary"))
+    if not wa or not wb:
+        return False
+    return len(wa & wb) / len(wa | wb) >= _STORY_OVERLAP
+
+
+def _dedupe_across(buckets):
+    """`buckets` is [(label, items)] in SPOKEN order; returns the same shape with any item that
+    repeats an earlier bucket's story removed. First occurrence wins, so tech keeps the story and
+    world drops it — tech is narrated first, and reordering the sections to change that would be a
+    bigger surprise than which section a shared story ends up filed under."""
+    kept, out = [], []
+    for label, items in buckets:
+        fresh = []
+        for it in items or []:
+            if any(_same_story(it, prev) for prev in kept):
+                continue
+            fresh.append(it)
+            kept.append(it)
+        out.append((label, fresh))
+    return out
+
+
+# --- The rates readout ----------------------------------------------------------------------------
+
+def _rate_lines(briefing):
+    """The 10-year, the 30-year mortgage and the VIX — each read as a level, then its move, then the
+    reason the page already gives for it, and finally the overall market 'why'.
+
+    The mortgage rate carries its release date out loud. PMMS is a WEEKLY survey, so on four mornings
+    out of five this number is several days old; saying "as of August 13" is the difference between a
+    figure the listener can act on and one they will assume is this morning's."""
+    out = []
+
+    y = briefing.get("yield_10y")
+    if y and y.get("value") is not None:
+        move = _spoken_bps(y.get("change"))
+        out.append(f"The 10-year Treasury yield is {y['value']} percent"
+                   + (f", {move}." if move else "."))
+        if y.get("why"):
+            out.append(y["why"])
+
+    mg = briefing.get("mortgage")
+    if mg and mg.get("value") is not None:
+        move = _spoken_bps(mg.get("change"))
+        day = _spoken_day(mg.get("asof"))
+        line = f"The 30-year fixed mortgage is {mg['value']} percent"
+        if move:
+            line += f", {move} in Freddie Mac's weekly survey"
+        if day:
+            line += f", as of {day}"
+        out.append(line + ".")
+        if mg.get("why"):
+            out.append(mg["why"])
+
+    v = briefing.get("vix")
+    if v and v.get("value") is not None:
+        move = _spoken_pct(v.get("change"), v.get("value"))
+        out.append(f"The VIX is {v['value']}" + (f", {move}." if move else "."))
+        if v.get("why"):
+            out.append(v["why"])
+
+    market_why = (briefing.get("market") or {}).get("why")
+    if market_why:
+        out.append(market_why)
+    return out
+
+
+# --- The weekly policy digest ---------------------------------------------------------------------
+
+def _policy_lines(briefing, weekday):
+    """Read the policy section ALOUD ONCE A WEEK (config.POLICY_AUDIO_WEEKDAY), covering the whole
+    week rather than only the day it happens to be read on.
+
+    `policy_week` is the rolling record built by state.record_policy. Today's briefing only ever
+    holds today's finds, so reading `policy` here would silently drop everything found on the other
+    six days — the exact opposite of what a weekly digest is for.
+
+    Returns [] on every other weekday, and a positive "nothing landed" line on a quiet week: a
+    section that simply vanishes is indistinguishable from a section that broke."""
+    if weekday != config.POLICY_AUDIO_WEEKDAY:
+        return []
+
+    week = (briefing.get("policy_week") or [])[:config.MAX_POLICY_SPOKEN]
+    out = ["This week, in policy that affects you."]
+
+    def describe(it):
+        parts = [p for p in ((it.get("what_happened") or "").strip(),
+                             (it.get("effect") or "").strip()) if p]
+        if not parts:
+            return None
+        when = _spoken_day(it.get("effective_date"), with_year=True)
+        return " ".join(parts) + (f" That takes effect {when}." if when else "")
+
+    spoken = [d for d in (describe(i) for i in week) if d]
+    if spoken:
+        out.extend(spoken)
+    else:
+        out.append("No new rules or bills landed for you this week.")
+
+    # "What's coming" minus anything already read out above, so a rule found this week is not
+    # described twice in one sitting — the same repeat the tech/world dedupe exists to stop.
+    seen = {i.get("url") for i in week if i.get("url")}
+    ahead = [i for i in (briefing.get("policy_upcoming") or [])
+             if i.get("url") not in seen][:config.MAX_POLICY_SPOKEN]
+    ahead_lines = [d for d in (describe(i) for i in ahead) if d]
+    if ahead_lines:
+        out.append("Still ahead of you.")
+        out.extend(ahead_lines)
+    return out
+
+
 def compose_script(briefing, has_lesson=False):
-    """Deterministic narration — deliberately LEANER than the page (user preference 2026-07-05):
-    must-knows, the S&P/Nasdaq percent moves only (no index levels, no 10-year/VIX/breadth
-    readouts, no 'why' paragraphs), then tech and world items. The page still shows everything;
-    the audio is the drive-time cut. Mirror any change here in docs/app.js speechText().
+    """Deterministic narration. Mirror any change here in docs/app.js speechText().
+
+    Shape, in spoken order: the must-knows, the S&P/Nasdaq percent moves, then the rates readout
+    (10-year, 30-year mortgage, VIX — each followed by the reason the page gives for it, then the
+    overall market 'why'), the weekly policy digest on config.POLICY_AUDIO_WEEKDAY only, tech,
+    world, and the Sunday recap.
+
+    This was a leaner cut until 2026-08-20 — indices only, no rates, no whys. The reader asked for
+    the three rate figures and the reasoning behind them, so the audio now carries them. Breadth is
+    still page-only, and the page still shows strictly more than the audio says.
+
+    Tech and world are deduped against each other: one story filed in both buckets is read ONCE.
 
     `has_lesson` swaps the sign-off for a hand-off into Owen's Alphabet Soup, which is a SEPARATE
     audio file the client queues immediately after this one. The build cannot bake the lesson into
@@ -48,7 +235,6 @@ def compose_script(briefing, has_lesson=False):
     parts = []
     d = None
     try:
-        from datetime import date
         d = date.fromisoformat(briefing.get("date", ""))
     except ValueError:
         pass
@@ -76,8 +262,13 @@ def compose_script(briefing, has_lesson=False):
     if moves:
         parts.append("Markets: " + ", and ".join(moves) + ".")
 
-    for bucket, label in (("tech", "In tech"), ("world", "Around the world")):
-        items = briefing.get(bucket) or []
+    parts.extend(_rate_lines(briefing))
+    # weekday() comes off the briefing's OWN date, never the clock: a --force rebuild of Monday's
+    # edition late on Tuesday must still be Monday's edition, digest and all.
+    parts.extend(_policy_lines(briefing, d.weekday() if d else None))
+
+    for label, items in _dedupe_across([("In tech", briefing.get("tech")),
+                                        ("Around the world", briefing.get("world"))]):
         if items:
             parts.append(f"{label}.")
             for it in items:
@@ -138,34 +329,90 @@ def _pace():
     _last_call[0] = time.monotonic()
 
 
+# Transient TTS failures, by the shape the Gemini SDK reports them in.
+#
+# Deliberately NOT scripts/data/retry.py. That module classifies `urllib` exceptions and spends a
+# per-run budget sized for the ~12 HTTP fetches of the policy + PMMS legs; the SDK raises its own
+# error types (which `transient_reason` fails closed on, so it would never retry at all), and the
+# limit being worked around here is the free tier's per-MINUTE quota, not a flaky third-party host.
+# Two different budgets protecting two different things, kept separate on purpose.
+_TTS_TRANSIENT_CODES = frozenset({408, 429, 500, 502, 503, 504})
+_TTS_TRANSIENT_TEXT = ("resource_exhausted", "unavailable", "deadline", "timeout", "internal",
+                       "rate limit", "overloaded", "too many requests")
+
+
+def _tts_transient(exc):
+    """A short reason string when `exc` looks retryable, else None.
+
+    None is the fail-closed answer, matching scripts/data/retry.py's rule: a malformed request or a
+    revoked key must fail immediately rather than burn three slow attempts proving it.
+
+    The SDK surfaces the status as `.code` on its own error classes; the text scan is the backstop
+    for transport errors raised by the underlying HTTP stack, which carry no code at all."""
+    code = getattr(exc, "code", None) or getattr(exc, "status_code", None)
+    if isinstance(code, int):
+        return f"HTTP {code}" if code in _TTS_TRANSIENT_CODES else None
+    if isinstance(exc, (TimeoutError, ConnectionError)):
+        return type(exc).__name__
+    blob = f"{type(exc).__name__}: {exc}".lower()
+    for needle in _TTS_TRANSIENT_TEXT:
+        if needle in blob:
+            return needle
+    return None
+
+
 def _synthesize(text, style):
-    """One TTS request. Returns (pcm_bytes, sample_rate), or None if the payload is unusable."""
+    """One TTS request, retried on TRANSIENT failures. Returns (pcm, sample_rate), or RAISES.
+
+    The retry is the load-bearing part, not a nicety. Before it existed a single 429 lost a lesson
+    tier PERMANENTLY: generate_lesson_audio() only ever ran for the entries created that morning, so
+    nothing ever revisited the gap, and the reader met the phone's own voice on that lesson for as
+    long as it sat at the head of their deck. 2026-08-13 shipped with no `quick` clip and 2026-08-14
+    with no `more` for exactly this reason. `backfill_lesson_audio()` repairs the ones already on
+    disk; this is what stops new ones being created.
+
+    It never returns None: an empty payload is retried like a transport failure and then raised,
+    because a 200 carrying no audio is the other way a tier used to go missing silently. Callers
+    therefore have no None branch to write — they already wrap this in the try/except that keeps
+    audio non-fatal, and that is where a permanent error or a spent attempt budget lands."""
     from google import genai
     from google.genai import types
 
-    _pace()
-    # Same client-side timeout rationale as summarize.py: an unbounded hang here would eat
-    # the 10-minute job budget that the publish leg still needs.
-    client = genai.Client(http_options=types.HttpOptions(timeout=180_000))
-    resp = client.models.generate_content(
-        model=config.TTS_MODEL,
-        contents=style + text,
-        config=types.GenerateContentConfig(
-            response_modalities=["AUDIO"],
-            speech_config=types.SpeechConfig(
-                voice_config=types.VoiceConfig(
-                    prebuilt_voice_config=types.PrebuiltVoiceConfig(
-                        voice_name=config.TTS_VOICE))),
-        ),
-    )
-    part = resp.candidates[0].content.parts[0]
-    pcm = part.inline_data.data
-    if not pcm or len(pcm) < 1000:
-        print("tts: empty/tiny audio payload — skipping")
-        return None
-    mime = part.inline_data.mime_type or ""
-    m = re.search(r"rate=(\d+)", mime)
-    return pcm, (int(m.group(1)) if m else 24000)
+    attempts = max(1, int(config.TTS_RETRY_ATTEMPTS) + 1)
+    for attempt in range(1, attempts + 1):
+        _pace()
+        try:
+            # Same client-side timeout rationale as summarize.py: an unbounded hang here would eat
+            # the 10-minute job budget that the publish leg still needs.
+            client = genai.Client(http_options=types.HttpOptions(timeout=180_000))
+            resp = client.models.generate_content(
+                model=config.TTS_MODEL,
+                contents=style + text,
+                config=types.GenerateContentConfig(
+                    response_modalities=["AUDIO"],
+                    speech_config=types.SpeechConfig(
+                        voice_config=types.VoiceConfig(
+                            prebuilt_voice_config=types.PrebuiltVoiceConfig(
+                                voice_name=config.TTS_VOICE))),
+                ),
+            )
+            part = resp.candidates[0].content.parts[0]
+            pcm = part.inline_data.data
+            if not pcm or len(pcm) < 1000:
+                # A 200 carrying no audio. Retried like a transport failure rather than accepted:
+                # an empty payload is the other way a tier used to go missing silently.
+                raise ValueError("empty/tiny audio payload")
+            mime = part.inline_data.mime_type or ""
+            m = re.search(r"rate=(\d+)", mime)
+            return pcm, (int(m.group(1)) if m else 24000)
+        except Exception as e:
+            reason = "empty payload" if isinstance(e, ValueError) else _tts_transient(e)
+            if reason is None or attempt >= attempts:
+                raise
+            delay = config.TTS_RETRY_BACKOFF * attempt
+            print(f"tts: {reason} on attempt {attempt}/{attempts} ({type(e).__name__}: {e}); "
+                  f"retrying in {delay}s")
+            time.sleep(delay)
 
 
 def _write_mp3(pcm, rate, path=None, bit_rate=48):
@@ -198,8 +445,6 @@ def generate(briefing, has_lesson=False):
         out = _synthesize(compose_script(briefing, has_lesson=has_lesson),
                           "Read this morning news briefing aloud in a warm, clear, unhurried "
                           "news-anchor voice: ")
-        if not out:
-            return False
         size = _write_mp3(*out)
         print(f"tts: wrote {size} bytes mp3 to {config.AUDIO_MP3_PATH} "
               f"({config.TTS_MODEL}/{config.TTS_VOICE})")
@@ -220,8 +465,6 @@ def ensure_outro():
         return None
     try:
         out = _synthesize(OUTRO_TEXT, "Read this warmly and unhurried, as a sign-off: ")
-        if not out:
-            return None
         _write_mp3(*out, path=path, bit_rate=48)
         print(f"tts: wrote the reusable lesson outro to {path}")
         return rel
@@ -255,11 +498,93 @@ def generate_lesson_audio(lesson, deadline=None):
         try:
             got = _synthesize(text, "Read this short explanatory lesson aloud in a warm, clear, "
                                     "unhurried voice, as if explaining it to a friend on a drive: ")
-            if not got:
-                continue
             size = _write_mp3(*got, path=path, bit_rate=48)
             out[tier] = f"lessons/{lesson['id']}-{tier}.mp3"
             print(f"tts: wrote {size} bytes for lesson clip '{tier}'")
         except Exception as e:
             print(f"tts: lesson clip '{tier}' failed (non-fatal): {e}")
     return out
+
+
+def missing_lesson_clips(deck):
+    """[(entry, [tier, ...])] for deck entries INSIDE the audio-retention window that are missing a
+    clip, oldest lesson first. A pure inspection — no network, no writes.
+
+    "Missing" means the deck does not claim the tier OR it claims a file that is not on disk. Both
+    are checked because they fail identically for the listener and arise differently: the first from
+    a synthesis error, the second from a half-finished commit or a manual delete.
+
+    Oldest-first is the whole point of the ordering. `docs/app.js soup.current()` serves the OLDEST
+    unfinished lesson, so the entry at the head of the reader's deck is the one whose missing clip
+    they actually hit — repairing the newest first would fix the one they reach last.
+
+    Only the last LESSON_AUDIO_RETAIN entries are considered: `_prune_lesson_audio()` deletes files
+    outside that window and clears their `audio` key, so synthesizing one would be work destroyed
+    minutes later in the same run."""
+    window = (deck.get("lessons") or [])[-config.LESSON_AUDIO_RETAIN:]
+    out = []
+    for e in window:
+        audio = e.get("audio") or {}
+        gaps = []
+        for tier, _text in compose_lesson_segments(e):
+            rel = audio.get(tier)
+            if not rel or not os.path.exists(os.path.join(config.DOCS_DIR, rel)):
+                gaps.append(tier)
+        if gaps:
+            out.append((e, gaps))
+    return out
+
+
+def backfill_lesson_audio(deck, deadline=None, limit=None):
+    """Re-synthesize clips that are missing from lessons still inside the retention window.
+
+    Returns the number of clips written. Mutates the `audio` dict on the entries it repairs; the
+    caller writes the deck. NEVER raises.
+
+    WHY THIS EXISTS. `generate_lesson_audio()` only ever runs for the entries created that morning,
+    so a tier lost to a transient TTS error was lost for good — and because the reader's pointer
+    serves the oldest unfinished lesson first, one bad morning parks a device-voice lesson at the
+    head of the queue until they skip past it. The retry inside `_synthesize()` stops new gaps
+    appearing; this closes the ones already on disk.
+
+    Bounded three ways, because this is repair work competing with today's own clips for a free-tier
+    budget and a 10-minute job: `limit` clips per run (config.LESSON_AUDIO_BACKFILL_MAX), the same
+    `deadline` the daily lesson leg honours, and the retention window itself."""
+    if not os.environ.get("GEMINI_API_KEY"):
+        return 0
+    limit = config.LESSON_AUDIO_BACKFILL_MAX if limit is None else limit
+    written = 0
+    try:
+        for entry, gaps in missing_lesson_clips(deck):
+            segments = dict(compose_lesson_segments(entry))
+            for tier in gaps:
+                if written >= limit:
+                    print(f"tts: backfill stopped at the {limit}-clip cap; "
+                          f"the rest are repaired on later runs")
+                    return written
+                if deadline is not None and time.monotonic() > deadline:
+                    print("tts: backfill out of time budget — the rest are repaired on later runs")
+                    return written
+                text = segments.get(tier)
+                if not text:
+                    # The deck entry has no prose for this tier, so there is nothing to synthesize
+                    # and nothing to repair. Reported rather than skipped in silence: it means the
+                    # entry itself is malformed, which no amount of TTS will fix.
+                    print(f"tts: backfill cannot repair '{entry.get('id')}' tier '{tier}' — "
+                          f"the deck entry carries no text for it")
+                    continue
+                path = os.path.join(config.LESSON_AUDIO_DIR, f"{entry['id']}-{tier}.mp3")
+                try:
+                    got = _synthesize(text, "Read this short explanatory lesson aloud in a warm, "
+                                            "clear, unhurried voice, as if explaining it to a "
+                                            "friend on a drive: ")
+                    size = _write_mp3(*got, path=path, bit_rate=48)
+                    entry.setdefault("audio", {})[tier] = f"lessons/{entry['id']}-{tier}.mp3"
+                    written += 1
+                    print(f"tts: backfilled {size} bytes for '{entry['id']}' tier '{tier}'")
+                except Exception as e:
+                    print(f"tts: backfill of '{entry.get('id')}' tier '{tier}' failed "
+                          f"(non-fatal): {type(e).__name__}: {e}")
+    except Exception as e:
+        print(f"tts: backfill pass failed (non-fatal): {type(e).__name__}: {e}")
+    return written

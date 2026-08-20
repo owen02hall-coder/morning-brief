@@ -409,6 +409,10 @@ def _publish_lessons(deck, entries, now, deadline):
             for e in entries:
                 e["audio"] = tts_mod.generate_lesson_audio(e, deadline=deadline)
         deck["lessons"] = (list(deck.get("lessons") or []) + entries)[-config.LESSON_DECK_MAX:]
+        # Repair gaps left by earlier runs BEFORE pruning, and after the deck list is final so the
+        # retention window it inspects is the one prune is about to enforce. Runs even when `entries`
+        # is empty (a same-date rebuild produces no new lesson but can still close an old gap).
+        tts_mod.backfill_lesson_audio(deck, deadline=deadline)
         _prune_lesson_audio(deck)
         deck["generated_at"] = now.isoformat()
         os.makedirs(config.DOCS_DIR, exist_ok=True)
@@ -429,7 +433,7 @@ def _fallback_items(news, bucket, limit):
 
 def _assemble(now, today, market, news, narrative, ai_ok, breadth=None,
               policy=None, policy_upcoming=None, mortgage=None, policy_available=True,
-              policy_calendar=None):
+              policy_calendar=None, policy_week=None):
     """`policy`, `policy_upcoming` and `mortgage` are KEYWORD-only in practice (the 7 positional
     args are the pre-existing call shape) and are emitted OUTSIDE the `if ai_ok:` branch: they come
     from a separate model call and a deterministic fetch, and both can succeed on a day when
@@ -460,6 +464,10 @@ def _assemble(now, today, market, news, narrative, ai_ok, breadth=None,
         market_block = {"sp500": market["sp500"], "ndx": market["ndx"], "why": narrative["market_why"]}
         yield_block = num(market["ten_year"], narrative["yield_why"])
         vix_block = num(market["vix"], narrative["vix_why"])
+        # `num()` produces exactly the mortgage shape plus `why`, so the tile and the narration read
+        # it the same way they read the yield and the VIX. Keyed off `mortgage` (not `market`), which
+        # is a separate fetch that can be None on a day the market numbers are fine.
+        mortgage_block = num(mortgage, narrative.get("mortgage_why", ""))
         tech, world = narrative["tech"], narrative["world"]
         recap = narrative.get("weekly_recap")
     else:
@@ -467,6 +475,7 @@ def _assemble(now, today, market, news, narrative, ai_ok, breadth=None,
         market_block = {"sp500": market["sp500"], "ndx": market["ndx"], "why": ""}
         yield_block = num(market["ten_year"], "")
         vix_block = num(market["vix"], "")
+        mortgage_block = num(mortgage, "")
         tech = _fallback_items(news, "tech", config.MAX_TECH_ITEMS)
         world = _fallback_items(news, "world", config.MAX_WORLD_ITEMS)
         recap = None
@@ -479,9 +488,14 @@ def _assemble(now, today, market, news, narrative, ai_ok, breadth=None,
         "yield_10y": yield_block,
         "vix": vix_block,
         "breadth": _breadth_block(breadth),
-        "mortgage": mortgage,
+        "mortgage": mortgage_block,
         "policy": list(policy or []),
         "policy_upcoming": list(policy_upcoming or []),
+        # Flattened, newest-first, deduped by url and capped: the audio reads the policy section
+        # once a week (tts._policy_lines) and needs the WHOLE week, which today's `policy` key
+        # cannot supply. Published rather than kept server-side so docs/app.js speechText can
+        # narrate the same digest in the device voice on a day the mp3 is missing.
+        "policy_week": list(policy_week or []),
         "policy_calendar": list(policy_calendar or []),
         "tech": tech,
         "world": world,
@@ -542,6 +556,22 @@ def run(do_notify=True, today=None):
     # null on proposed rules, and `None > "2026-08-03"` raises TypeError, which would kill the run.
     policy_upcoming = [i for i in (st.get("policy_active") or [])
                        if i.get("effective_date") and i["effective_date"] > today]
+    # Everything reported over the last config.POLICY_WEEK_DAYS days, newest day first, flattened and
+    # deduped by url. `state.record_policy` keeps the per-day record; this is the projection the
+    # weekly SPOKEN digest reads (tts._policy_lines). It must be built from state and not from
+    # `policy` above — `policy` is today's finds alone, and a digest built from it would silently
+    # drop every item found on the other six days, which is the one thing a weekly readout must not do.
+    policy_week = []
+    _week_seen = set()
+    for _day in reversed(st.get("policy_week") or []):
+        for _item in (_day.get("items") or []):
+            _url = _item.get("url")
+            if _url and _url in _week_seen:
+                continue
+            if _url:
+                _week_seen.add(_url)
+            policy_week.append(_item)
+    policy_week = policy_week[:config.MAX_POLICY_SPOKEN]
     # Static facts, exactly like the market numbers in summarize._facts_block: NO model involvement,
     # no fetch, no state. Deliberately computed here and not inside _get_policy() — routing it
     # through that function is what would let it drift into being marked seen, pushed, or counted in
@@ -558,11 +588,13 @@ def run(do_notify=True, today=None):
     # Sunday-recap choice all agree even if midnight crosses between _now() reads.
     is_sunday = date.fromisoformat(today).weekday() == 6
     narrative, ai_ok = summarize_mod.summarize(
-        market, news, is_sunday, recap_context=_recap_context() if is_sunday else "")
+        market, news, is_sunday, recap_context=_recap_context() if is_sunday else "",
+        mortgage=mortgage)
 
     briefing = _assemble(now, today, market, news, narrative, ai_ok, breadth,
                          policy=policy, policy_upcoming=policy_upcoming, mortgage=mortgage,
-                         policy_available=policy_available, policy_calendar=policy_calendar)
+                         policy_available=policy_available, policy_calendar=policy_calendar,
+                         policy_week=policy_week)
     _write(briefing)
 
     # Track the last day markets were fully healthy, so a SUSTAINED blackout (a dead data source, the

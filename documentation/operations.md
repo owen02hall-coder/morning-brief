@@ -205,11 +205,21 @@ Three lifecycle rules are worth stating outright because they are the ones easie
 - **Only some lesson clips synthesize** (a per-minute rate limit, or the run passing
   `LESSON_AUDIO_DEADLINE`): the deck entry records exactly the clips that wrote. The client requires
   ALL the clips for the reader's chosen depth before using audio, and otherwise reads that lesson in
-  the device voice — one consistent voice rather than a hand-off mid-lesson.
-- **The reader's pointer falls behind the audio retention window** (`LESSON_AUDIO_RETAIN`, 10
-  lessons): the pruned entries keep their prose and lose only their `audio` paths, in the same pass
-  that deletes the files, so the deck can never advertise a clip that is gone. That lesson is read by
-  the device voice.
+  the device voice — one consistent voice rather than a hand-off mid-lesson. This is now SELF-
+  HEALING: `_synthesize()` retries a transient failure (`TTS_RETRY_ATTEMPTS`), and every run calls
+  `tts.backfill_lesson_audio()`, which re-synthesizes up to `LESSON_AUDIO_BACKFILL_MAX` (2) missing
+  clips for lessons still inside the retention window, OLDEST FIRST — the order matters because the
+  pointer serves the oldest unfinished lesson, so that is the gap the reader actually hits. Before
+  2026-08-20 neither existed: `generate_lesson_audio()` only ever ran for the entries created that
+  morning, so one 429 lost a tier for good and parked a device-voice lesson at the head of the deck.
+  A backlog of gaps closes over several mornings rather than all at once, by design — the cap keeps
+  repair work from crowding out today's own clips or the free tier's daily budget.
+- **The reader's pointer falls behind the audio retention window** (`LESSON_AUDIO_RETAIN`, 21
+  lessons — raised from 10 on 2026-08-20): the pruned entries keep their prose and lose only their
+  `audio` paths, in the same pass that deletes the files, so the deck can never advertise a clip that
+  is gone. That lesson is read by the device voice. Three weeks of clips is the window because the
+  pointer serves the OLDEST unfinished lesson, so the retention window is really "how far behind a
+  reader may fall and still get the good voice".
 - **The reader clears site data or gets a new phone:** the pointer is gone, and the deck restarts
   from its oldest entry. Lessons are not news, so nothing is stale — the cost is re-hearing some.
   There is no server-side copy to restore, by design.
@@ -344,8 +354,12 @@ Three lifecycle rules are worth stating outright because they are the ones easie
 - Owen's Alphabet Soup adds two text calls a day (topic, then prose) and **three TTS calls**, taking
   the daily audio total from 1 to 4. Its source, Wikipedia's action API, is free and keyless. The
   real cost is disk: three clips per lesson at 48 kbps is roughly 1 MB a day of NEW blobs in a git
-  history that is already permanent, which is why `LESSON_AUDIO_RETAIN` bounds the working tree and
-  why the outro is synthesized once and reused forever instead of daily.
+  history that is already permanent, which is why the outro is synthesized once and reused forever
+  instead of daily. Note what `LESSON_AUDIO_RETAIN` does and does not buy: pruning reclaims
+  WORKING-TREE bytes only, never history, so widening the window costs checkout size and nothing
+  else — which is why it went from 10 to 21 once the reader's experience was weighed against it.
+  Backfill adds at most `LESSON_AUDIO_BACKFILL_MAX` (2) TTS calls on a run that finds a gap, so the
+  daily audio ceiling is 4 normally and 6 while a backlog drains.
 
 ## Local development
 

@@ -1,6 +1,6 @@
 {
   "project": "Morning Briefing",
-  "scope": "v1 core + v2 breadth/oversold alerts and audio edition + v3 policy section and mortgage rate + v4 Owen's Alphabet Soup (daily grounded lesson, client-owned pointer)",
+  "scope": "v1 core + v2 breadth/oversold alerts and audio edition + v3 policy section and mortgage rate + v4 Owen's Alphabet Soup (daily grounded lesson, client-owned pointer) + v5 spoken rates readout (10-year, 30-year mortgage, VIX, each with its why), the Monday policy digest, cross-bucket audio dedupe, and self-healing lesson audio",
   "note": "Project docs/ is the GitHub Pages web root (PWA), not documentation. Dev docs live in documentation/.",
   "docs": [
     {
