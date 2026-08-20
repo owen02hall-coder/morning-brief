@@ -126,6 +126,19 @@ LIFE_PROFILE_KEYWORDS = [
     "student loan", "repayment", "borrower", "pell", "direct loan",
     "health insurance", "health plan", "premium", "open enrollment", "hsa", "marketplace",
     "retirement", "401(k)", "ira", "contribution limit",
+    # Added 2026-08-20 after the model selected IRS 2026-16314 ("Employer Contributions to Trump
+    # Accounts and Nondiscrimination Rules for Dependent Care Assistance Programs") and 06's
+    # G2/prefilter caught that this list filtered it OUT. A real recall gap, and the same shape as
+    # the "floodplain" addition above: the profile already covers HSA, health plans and open
+    # enrollment, and a dependent care FSA is the same category of employer benefit — pre-tax money
+    # (~$5k/yr) that changes take-home pay, with nondiscrimination testing that can force a refund
+    # mid-year. Distinguish this from LIFE_PROFILE_EXCLUSIONS' pension entry: that document's
+    # "affects participants" was Federal Register boilerplate over employer-side actuarial
+    # machinery, whereas DCAP rules govern what an EMPLOYEE may actually set aside and keep.
+    # "Trump account" rides along because the same rulemaking stream carries both and it is a
+    # tax-advantaged account a family can hold.
+    "dependent care", "dependent care assistance", "childcare", "child care", "daycare",
+    "flexible spending", "fsa", "trump account",
 ]
 
 # Topics the profile deliberately does NOT cover, with the reason. This is the companion to the list
