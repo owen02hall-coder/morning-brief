@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-19T06:21:40.956065-06:00",
+  "generated_at": "2026-08-20T06:24:05.882448-06:00",
   "lessons": [
     {
       "id": "2026-08-11-mortgage",
@@ -15,11 +15,7 @@
         "title": "Mortgage",
         "url": "https://en.wikipedia.org/wiki/Mortgage"
       },
-      "audio": {
-        "quick": "lessons/2026-08-11-mortgage-quick.mp3",
-        "more": "lessons/2026-08-11-mortgage-more.mp3",
-        "deep": "lessons/2026-08-11-mortgage-deep.mp3"
-      }
+      "audio": {}
     },
     {
       "id": "2026-08-11-home-inspection",
@@ -197,6 +193,26 @@
         "quick": "lessons/2026-08-19-heating-ventilation-and-air-conditioning-quick.mp3",
         "more": "lessons/2026-08-19-heating-ventilation-and-air-conditioning-more.mp3",
         "deep": "lessons/2026-08-19-heating-ventilation-and-air-conditioning-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-08-20-emergency-medicine",
+      "date": "2026-08-20",
+      "domain": "Health and emergencies",
+      "title": "Understanding Emergency Room Care",
+      "hook": "Many people mistakenly believe the emergency room is the only option for immediate medical needs, which can lead to longer waits or higher costs for less urgent problems.",
+      "quick": "When an illness or injury needs immediate medical attention, the emergency room is the specialized setting to provide that care. Emergency physicians, often called ER doctors, are frontline providers who specialize in caring for unscheduled and undifferentiated patients of all ages, no matter their specific medical condition. Their main role is to initiate resuscitation, stabilize patients, and perform early interventions during the acute phase of a medical condition. This means they are trained to handle critical moments of a patient's health crisis, applying broad knowledge and procedural skills across a wide range of urgent issues. They generally practice in hospital emergency departments, in pre-hospital settings via emergency medical services, and sometimes in intensive care units, always focusing on the most critical needs.",
+      "more": "It is important to understand that while emergency physicians are equipped for the most severe cases, they also see many patients with conditions described as low-acuity, such as minor injuries or exacerbations of chronic diseases. While an emergency physician might provide episodic primary care to patients during off-hours or to those who do not have a primary care provider, this is a secondary function. Emergency medicine may also separate from urgent care, which refers to primary healthcare for less emergent medical issues, though there is obvious overlap and some emergency physicians do work in urgent care settings. Going to the emergency room for a condition that could be managed in an urgent care setting might mean a longer wait and possibly higher costs, as ER resources are prioritized for critical cases.",
+      "deep": "The broad training of an emergency physician means they have core skills from many medical specialties. This generalist approach is crucial because it allows them to quickly diagnose and manage diverse acute conditions without immediate referral to a specific specialist, potentially preventing delays in critical care. For instance, they can perform advanced cardiac life support, manage difficult airways, suture complex cuts, set fractured bones, treat heart attacks, manage strokes, and even assess pregnant patients with complications or control patients with severe mental health issues. This wide range of abilities helps overcome potential barriers to care that might arise in systems where patients in immediate need must first be seen by a narrow specialist. In rural areas, family physicians with additional emergency medicine skills are especially vital, often serving as the only healthcare providers in the community and needing to handle primary care as well as obstetrics.",
+      "takeaway": "Assess whether your medical issue truly requires immediate, acute intervention from an emergency room or if it's a less emergent concern suitable for an urgent care clinic or your primary doctor.",
+      "source": {
+        "title": "Emergency medicine",
+        "url": "https://en.wikipedia.org/wiki/Emergency_medicine"
+      },
+      "audio": {
+        "quick": "lessons/2026-08-20-emergency-medicine-quick.mp3",
+        "more": "lessons/2026-08-20-emergency-medicine-more.mp3",
+        "deep": "lessons/2026-08-20-emergency-medicine-deep.mp3"
       }
     }
   ],
