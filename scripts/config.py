@@ -18,7 +18,11 @@ MODEL_FALLBACK = "gemini-2.5-flash-lite"   # model ids move; documented fallback
 # --- News -------------------------------------------------------------------
 NEWS_WINDOW_HOURS = 72               # widen past 24h so Mondays/holidays aren't empty
 MAX_TECH_ITEMS = 3
-MAX_WORLD_ITEMS = 3
+MAX_WORLD_ITEMS = 4      # 3 -> 4 on 2026-08-20. The reader asked for "more of it" and a review of a
+                         # week of archives showed this bucket was already delivering the
+                         # things-to-be-aware-of he wanted; widening it beat adding a second,
+                         # duplicate world section.
+MAX_US_ITEMS = 3         # US national news. See US_FEEDS below for why this section exists at all.
 MAX_CANDIDATES_PER_BUCKET = 25       # cap fed to the model to control token use
 
 USER_AGENT = "morning-briefing/1.0 (personal use)"
@@ -28,6 +32,27 @@ WORLD_FEEDS = {
     "Al Jazeera": "https://www.aljazeera.com/xml/rss/all.xml",
     "Guardian World": "https://www.theguardian.com/world/rss",
     "NPR": "https://feeds.npr.org/1004/rss.xml",
+}
+# US national news. This section RE-ADMITS a category summarize.SYSTEM deliberately excluded
+# ("World news: only globally significant events, not granular or partisan US politics"). That
+# exclusion was the cheapest way to keep partisan shouting out, and it worked — but it also meant a
+# Supreme Court ruling, a hurricane landfall, a recall or a major federal action reached this reader
+# NOWHERE: the policy section only carries rules that affect him personally, and world only carries
+# the globally significant.
+#
+# Re-admitting the category safely needs a rule, not good intentions, so summarize.SYSTEM now
+# carries the events-not-contest rule and 13-us-news-editorial.py enforces it.
+#
+# The two feeds were chosen on PROBED CONTENT SHAPE, not availability — all four candidates were
+# alive on 2026-08-20; what separated them was what they emit. AP led with "Alfalfa sprouts linked to
+# food poisoning illnesses" and NPR National with "What we know about the Penn State cocaine
+# trafficking..." — both events. Guardian US led with "Melania Trump appears to nod to questions
+# about absence", which is precisely the political gossip the original exclusion existed to block,
+# so it is REJECTED rather than merely unused. CBS US is held in reserve: alive and event-based, but
+# heavily crime-weighted, and a briefing of daily crime is its own failure mode.
+US_FEEDS = {
+    "AP": "https://feedx.net/rss/ap.xml",
+    "NPR National": "https://feeds.npr.org/1003/rss.xml",
 }
 BUSINESS_FEEDS = {
     "MarketWatch": "https://feeds.content.dowjones.io/public/rss/mw_topstories",

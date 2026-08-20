@@ -13,6 +13,8 @@ TESTS=(
   "09-policy-calendar.py"           # no key, no network — the hardcoded calendar cannot go stale
   "12-narration-mirror.py"          # no key, no network (needs node) — the mp3 script and the
                                     # device-voice script cannot drift apart
+  "13-us-news-editorial.py"         # no key needed for C1/C2/C4 — the US section reports events,
+                                    # never the partisan contest about them
   "01-twelvedata-runner-pull.py"    # needs TWELVEDATA_API_KEY; run in CI for runner-IP proof
   "02-twelvedata-seed-budget.py"    # needs TWELVEDATA_API_KEY
   "03-gemini-structured.py"         # needs GEMINI_API_KEY

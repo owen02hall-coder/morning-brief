@@ -1,6 +1,6 @@
 """Fetch + parse RSS feeds into recent candidate items, isolated per-feed.
 
-Returns three buckets (world, business, tech) of {title, source, url, summary, published}.
+Returns four buckets (world, us, business, tech) of {title, source, url, summary, published}.
 A dead feed is tolerated (logged, skipped) so one outage never kills the briefing. Items older
 than NEWS_WINDOW_HOURS are dropped; near-duplicate titles/URLs are de-duped; each bucket is capped.
 """
@@ -63,14 +63,21 @@ def _bucket(feeds):
 
 
 def get_news():
-    """Return {world, business, tech, available} candidate lists for the summarizer."""
+    """Return {world, us, business, tech, available} candidate lists for the summarizer."""
     world = _bucket(config.WORLD_FEEDS)
+    us = _bucket(config.US_FEEDS)
     business = _bucket(config.BUSINESS_FEEDS)
     tech = _bucket(config.TECH_FEEDS)
     return {
         "world": world,
+        "us": us,
         "business": business,
         "tech": tech,
-        # world news must always ship; treat empty world as unavailable
-        "available": {"world": bool(world), "business": bool(business), "tech": bool(tech)},
+        # world news must always ship; treat empty world as unavailable. `us` is reported the same
+        # way and for the same reason: AP and NPR National are national wires that publish many
+        # times an hour, so an empty bucket inside the 72h window means the FETCH broke, not that
+        # America had a quiet day. (A section that is legitimately allowed to be silent — pop
+        # culture, sports — must NOT be wired up this way when it lands; see the 2026-08-20 brief.)
+        "available": {"world": bool(world), "us": bool(us),
+                      "business": bool(business), "tech": bool(tech)},
     }

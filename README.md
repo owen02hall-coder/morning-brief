@@ -25,6 +25,8 @@ Runs with your laptop and phone off. Cost: $0/month (all free tiers + your exist
   and on Mondays a digest of the week's policy that affects you. The day's Alphabet Soup lesson
   plays straight after it as one queue; falls back to the phone's built-in voice offline, on
   archived briefings, or on a failed-TTS day
+- **Across the country** — big US national news: what happened and what it means, never the
+  partisan argument about it. Sourced from AP and NPR National
 - **Market breadth** — % of S&P 500 and Nasdaq-100 members above their 200-day average, computed
   daily (validated against the published $S5TH/$NDTH indexes), with two alert tiers per index: a
   one-shot warning when breadth falls below 40% and a daily high-priority oversold nag below 30%

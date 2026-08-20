@@ -116,6 +116,15 @@ UPCOMING_ITEM = {
     "effective_date": "2027-01-01", "source": "Utah Legislature",
 }
 
+US_ITEM = _item("A federal appeals court ruled that a state may not enforce its new licensing "
+                "statute while litigation continues.", "AP", "https://example.com/us1")
+# Deliberately a near-duplicate of DUP_WORLD's story, filed in the US bucket. US is narrated BEFORE
+# world, so this must survive in "Across the country" and vanish from "Around the world" — which is
+# what pins the bucket ORDER, not merely the existence of a dedupe.
+US_DUP_OF_WORLD = _item(
+    "A new OLED manufacturing method from LG Display named FLiPP produces brighter and more "
+    "efficient longer-lasting display panels.", "AP", "https://example.com/us2")
+
 FULL_MARKET = {"sp500": _num(7707.98, 16.22, "2026-08-19"),
                "ndx": _num(26331.09, 41.38, "2026-08-19"),
                "why": "Indices closed higher on broad participation."}
@@ -131,8 +140,9 @@ FIXTURES = [
         "vix": _num(14.89, -0.95, "2026-08-19", "Volatility drifted lower into the close."),
         "mortgage": _num(6.67, -0.02, "2026-08-13", "Mortgage rates followed the 10-year lower."),
         "policy_week": [POLICY_ITEM], "policy_upcoming": [UPCOMING_ITEM],
-        "tech": [DUP_TECH], "world": [DUP_WORLD, _item("An unrelated global event occurred in Kyiv "
-                                                       "overnight.", "Guardian", "https://e.com/c")],
+        "tech": [], "us": [US_ITEM, US_DUP_OF_WORLD],
+        "world": [DUP_WORLD, _item("An unrelated global event occurred in Kyiv "
+                                   "overnight.", "Guardian", "https://e.com/c")],
     }},
     {"name": "tuesday-no-mortgage", "hasLesson": False, "briefing": {
         "date": "2026-08-18", "tldr": ["Only one takeaway today."],
@@ -142,6 +152,7 @@ FIXTURES = [
         "mortgage": None,
         "policy_week": [POLICY_ITEM], "policy_upcoming": [UPCOMING_ITEM],
         "tech": [_item("A chip fabricator announced a new node.", "Verge", "https://e.com/d")],
+        "us": [_item("A recall was issued for a household appliance.", "NPR National", "https://e.com/f")],
         "world": [_item("An election concluded in Brazil.", "Guardian", "https://e.com/e")],
     }},
     {"name": "null-changes", "hasLesson": True, "briefing": {
@@ -151,7 +162,7 @@ FIXTURES = [
         "yield_10y": _num(4.65, None, "2026-08-19", ""),
         "vix": _num(14.89, None, "2026-08-19", ""),
         "mortgage": _num(6.67, None, "2026-08-13", ""),
-        "policy_week": [], "policy_upcoming": [], "tech": [], "world": [],
+        "policy_week": [], "policy_upcoming": [], "tech": [], "us": [], "world": [],
     }},
     {"name": "sunday-recap", "hasLesson": False, "briefing": {
         "date": "2026-08-23", "tldr": ["A Sunday takeaway."],
@@ -160,7 +171,7 @@ FIXTURES = [
         "vix": _num(14.89, -0.95, "2026-08-19", "Volatility fell."),
         "mortgage": _num(6.67, -0.02, "2026-08-13", "Rates followed yields."),
         "policy_week": [POLICY_ITEM], "policy_upcoming": [],
-        "tech": [], "world": [],
+        "tech": [], "us": [], "world": [],
         "weekly_recap": "A short zoom-out of the week just gone and the week ahead.",
     }},
     {"name": "monday-quiet-policy", "hasLesson": False, "briefing": {
@@ -169,7 +180,7 @@ FIXTURES = [
         "yield_10y": _num(4.65, 0.0, "2026-08-19", ""),
         "vix": _num(14.89, -0.95, "2026-08-19", ""),
         "mortgage": _num(6.67, 0.0, "2026-08-13", ""),
-        "policy_week": [], "policy_upcoming": [], "tech": [], "world": [],
+        "policy_week": [], "policy_upcoming": [], "tech": [], "us": [], "world": [],
     }},
     {"name": "flat-vix", "hasLesson": False, "briefing": {
         "date": "2026-08-19", "tldr": ["A flat day."],
@@ -179,11 +190,11 @@ FIXTURES = [
         # A VIX move that rounds to 0.0% — the shape that must not be read as "up 0.0 percent".
         "vix": _num(14.89, 0.004, "2026-08-19", ""),
         "mortgage": _num(6.67, -0.02, "2026-08-13", ""),
-        "policy_week": [], "policy_upcoming": [], "tech": [], "world": [],
+        "policy_week": [], "policy_upcoming": [], "tech": [], "us": [], "world": [],
     }},
     {"name": "degraded-empty", "hasLesson": False, "briefing": {
         "date": "", "tldr": [], "market": {}, "yield_10y": None, "vix": None, "mortgage": None,
-        "policy_week": [], "policy_upcoming": [], "tech": [], "world": [],
+        "policy_week": [], "policy_upcoming": [], "tech": [], "us": [], "world": [],
     }},
 ]
 
@@ -283,6 +294,14 @@ def main():
          "a move that rounds to zero was still read aloud as \"0.0 percent\" with a direction"),
         ("flat-vix", "essentially unchanged", True,
          "the flat 10-year move was not collapsed either"),
+        ("monday-full", "Across the country.", True,
+         "the US national section was not narrated at all"),
+        ("monday-full", "federal appeals court ruled", True,
+         "the US section was announced but read none of its items"),
+        ("tuesday-no-mortgage", "Across the country.", True,
+         "the US section vanished on a non-Monday, so it is wrongly coupled to the policy weekday"),
+        ("degraded-empty", "Across the country.", False,
+         "an empty US bucket still announced its heading, which would read as a broken section"),
     ]
     for name, needle, want, why in checks:
         if (needle in by_name[name]) is not want:

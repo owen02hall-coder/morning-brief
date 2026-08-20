@@ -134,6 +134,7 @@ under Node with no network, no key and no dependencies:
 ```bash
 BRIEFING_SMOKE_ALLOW_DEV=true node scripts/briefing-assumptions/11-client-pointer.js
 BRIEFING_SMOKE_ALLOW_DEV=true python scripts/briefing-assumptions/12-narration-mirror.py
+BRIEFING_SMOKE_ALLOW_DEV=true python scripts/briefing-assumptions/13-us-news-editorial.py
 ```
 
 Tests 5, 6, 8 and 9 import from `scripts/` (`from scripts import config`; 6 imports the production

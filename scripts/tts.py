@@ -267,7 +267,12 @@ def compose_script(briefing, has_lesson=False):
     # edition late on Tuesday must still be Monday's edition, digest and all.
     parts.extend(_policy_lines(briefing, d.weekday() if d else None))
 
+    # Order is spoken order, and _dedupe_across resolves a shared story to whichever bucket comes
+    # FIRST here. US before world is deliberate: a story that is both a US event and globally
+    # significant (a hurricane, a federal action with worldwide reach) is more useful framed as the
+    # thing that happened at home.
     for label, items in _dedupe_across([("In tech", briefing.get("tech")),
+                                        ("Across the country", briefing.get("us")),
                                         ("Around the world", briefing.get("world"))]):
         if items:
             parts.append(f"{label}.")

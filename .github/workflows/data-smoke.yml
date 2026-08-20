@@ -119,6 +119,16 @@ jobs:
           BRIEFING_SMOKE_ALLOW_DEV: "true"
         run: python scripts/briefing-assumptions/12-narration-mirror.py
 
+      # The US national section re-admits a category summarize.SYSTEM excluded outright until
+      # 2026-08-20, so the narrower rule replacing that exclusion gets a machine. Uses the same
+      # GEMINI_API_KEY as the briefing for its live half; C1/C2/C4 run without it.
+      - name: US news editorial (events and outcomes, never the partisan contest)
+        if: always()
+        env:
+          BRIEFING_SMOKE_ALLOW_DEV: "true"
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python scripts/briefing-assumptions/13-us-news-editorial.py
+
       # Relevance is the whole product: ~80% of agency-filtered Federal Register documents are
       # irrelevant to this user, so "did the model pick the right ones" is the assumption that
       # decides whether the policy section is worth shipping. Uses the GEMINI_API_KEY secret the

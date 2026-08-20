@@ -469,6 +469,7 @@ def _assemble(now, today, market, news, narrative, ai_ok, breadth=None,
         # is a separate fetch that can be None on a day the market numbers are fine.
         mortgage_block = num(mortgage, narrative.get("mortgage_why", ""))
         tech, world = narrative["tech"], narrative["world"]
+        us = narrative.get("us") or []
         recap = narrative.get("weekly_recap")
     else:
         tldr = ["AI summary unavailable today — showing raw market numbers and headlines."]
@@ -478,6 +479,12 @@ def _assemble(now, today, market, news, narrative, ai_ok, breadth=None,
         mortgage_block = num(mortgage, "")
         tech = _fallback_items(news, "tech", config.MAX_TECH_ITEMS)
         world = _fallback_items(news, "world", config.MAX_WORLD_ITEMS)
+        # Raw headlines on a no-AI day. The US bucket degrades to raw titles like every other
+        # section — the events-not-contest rule is a MODEL instruction, and with no model there is
+        # nothing enforcing it, so this path leans on the feeds themselves (AP + NPR National) being
+        # event desks rather than opinion desks. That is a reason the feed choice is load-bearing
+        # and Guardian US was rejected outright rather than merely left unused.
+        us = _fallback_items(news, "us", config.MAX_US_ITEMS)
         recap = None
 
     return {
@@ -499,6 +506,7 @@ def _assemble(now, today, market, news, narrative, ai_ok, breadth=None,
         "policy_calendar": list(policy_calendar or []),
         "tech": tech,
         "world": world,
+        "us": us,
         "weekly_recap": recap,
         "data_availability": avail,
     }

@@ -451,6 +451,14 @@ second that was listed here has since been closed:
   no source, no staleness story") is answered by a shape (month/day rules carrying no years), sources
   (a probed `.gov` URL and a sourcing note per entry) and a staleness story that is a runnable gate,
   `09-policy-calendar.py`, rather than a paragraph.
+- **US national news is governed by a rule, not an exclusion.** `summarize.SYSTEM` excluded US
+  politics outright until 2026-08-20 — cheap and effective, but it also meant a Supreme Court
+  ruling, a hurricane landfall or a recall reached the reader nowhere (policy covers only what
+  affects him personally; world covers only the globally significant). The category is re-admitted
+  as its own "Across the country" section under the events-not-contest rule: report what happened,
+  never the fight about it. `13-us-news-editorial.py` enforces it, because relaxing a safety rule is
+  the moment it needs a machine. Feeds (AP + NPR National) were chosen on probed content shape —
+  Guardian US was rejected outright for leading with political gossip.
 - **The audio edition reads policy once a week, not daily.** Adding a fourth topic to every
   morning's script was not worth the length, so the digest rides `config.POLICY_AUDIO_WEEKDAY`
   (Monday) and covers the whole week via `state.policy_week` — reading only that morning's `policy`

@@ -450,6 +450,7 @@ function render(b, into, withSoup) {
   if (policy) into.appendChild(policy);
 
   into.appendChild(itemList("Emerging tech", b.tech));
+  into.appendChild(itemList("Across the country", b.us));
   into.appendChild(itemList("World", b.world));
 
   if (b.weekly_recap) {
@@ -702,7 +703,10 @@ function speechText(b, hasLesson) {
   // Off the briefing's OWN date, never the clock: an archived Monday edition read on a Thursday is
   // still Monday's edition, digest and all.
   parts.push(...policyLines(b, d));
-  dedupeAcross([["In tech.", b.tech], ["Around the world.", b.world]]).forEach(([label, items]) => {
+  // Mirror of tts.compose_script: US before world, so a story that is both resolves to the
+  // domestic framing. dedupeAcross keeps the FIRST bucket's copy.
+  dedupeAcross([["In tech.", b.tech], ["Across the country.", b.us],
+                ["Around the world.", b.world]]).forEach(([label, items]) => {
     if (items.length) parts.push(label);
     items.forEach((it) => {
       if (it.summary) parts.push(it.source ? `${it.summary} That's from ${it.source}.` : it.summary);
