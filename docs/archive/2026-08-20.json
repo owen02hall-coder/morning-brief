@@ -1,56 +1,57 @@
 {
-  "generated_at": "2026-08-20T06:24:05.882448-06:00",
+  "generated_at": "2026-08-20T15:30:14.038587-06:00",
   "date": "2026-08-20",
   "tldr": [
-    "The founder of China's Evergrande, Hui Ka Yan, was sentenced to life in prison for fraud and had all personal property confiscated.",
-    "The U.S. national debt has exceeded $40 trillion for the first time, doubling over the past decade with increased government spending.",
-    "Kyiv experienced one of the most intense Russian missile and drone bombardments since the war began, resulting in at least 15 deaths and hitting residential areas."
+    "The US announced new sanctions against 10 individuals involved in an alleged Hezbollah cash-smuggling network and implemented further economic restrictions on Cuba's mining and construction industries.",
+    "Walmart's stock tumbled following a disappointing outlook, which indicated a retreat in US consumer spending, partly attributed to high fuel prices.",
+    "The bond market demonstrated anxiety, causing Treasury yields to rise amid skepticism regarding the effectiveness of recent efforts by the Treasury Secretary to stabilize the market."
   ],
   "market": {
     "sp500": {
-      "value": 7707.98,
-      "change": 16.22,
-      "asof": "2026-08-19"
+      "value": 7641.16,
+      "change": -66.82,
+      "asof": "2026-08-20"
     },
     "ndx": {
-      "value": 26331.09,
-      "change": 41.38,
-      "asof": "2026-08-19"
+      "value": 26067.17,
+      "change": -263.92,
+      "asof": "2026-08-20"
     },
-    "why": "The S&P 500 and Nasdaq Composite both closed higher on August 19, 2026. While some individual stocks, like Walmart, experienced declines due to posting their weakest sales growth in years, and broader economic concerns about the U.S. national debt were noted, the provided articles do not offer a direct explanation for the overall market indices' upward movement."
+    "why": "The S&P 500 and Nasdaq Composite declined as Walmart's stock fell following a disappointing outlook, reflecting a broader retreat in U.S. consumer spending, influenced by high fuel prices. This market movement also occurred amid an anxious bond market, which is sending troubling messages to investors about the U.S. debt and potential threats to overextended equities."
   },
   "yield_10y": {
-    "value": 4.65,
-    "change": -0.05,
-    "asof": "2026-08-19",
-    "why": "The 10-year Treasury yield decreased by 0.05% as of August 19, 2026. This decline followed a sharp pullback in bond yields, which occurred after the Treasury's intervention, including a debt buyback plan."
+    "value": 4.7,
+    "change": 0.04,
+    "asof": "2026-08-20",
+    "why": "The 10-year Treasury yield increased due to an anxious bond market that signals no easy fix for U.S. debt issues. Treasury Secretary Scott Bessent's efforts to calm the market and tamp down long-term Treasury yields are reportedly being short-circuited and met with skepticism by market experts."
   },
   "vix": {
-    "value": 14.89,
-    "change": -0.95,
-    "asof": "2026-08-19",
-    "why": "The VIX decreased by 0.95 points as of August 19, 2026. The provided articles do not offer a direct explanation for the VIX's movement."
+    "value": 16.01,
+    "change": 1.12,
+    "asof": "2026-08-20",
+    "why": "The VIX rose as the S&P 500 and Nasdaq Composite experienced declines. This increase in the volatility index reflects heightened market anxiety and concerns among investors regarding the stability of overextended equities and the U.S. debt situation."
   },
   "breadth": {
     "sp500": {
-      "value": 72.2,
-      "asof": "2026-08-19",
+      "value": 70.6,
+      "asof": "2026-08-20",
       "status": "healthy",
       "matched": 500,
       "stale": false
     },
     "ndx100": {
-      "value": 70.1,
-      "asof": "2026-08-19",
+      "value": 69.1,
+      "asof": "2026-08-20",
       "status": "healthy",
       "matched": 97,
       "stale": false
     }
   },
   "mortgage": {
-    "value": 6.67,
+    "value": 6.65,
     "change": -0.02,
-    "asof": "2026-08-13"
+    "asof": "2026-08-20",
+    "why": "The articles do not provide a specific reason for the decrease in the 30-year fixed mortgage rate in the latest weekly survey. Mortgage rates generally track the 10-year Treasury yield, which saw an increase in its most recent close."
   },
   "policy": [],
   "policy_upcoming": [
@@ -71,6 +72,7 @@
       "source": "Utah Legislature"
     }
   ],
+  "policy_week": [],
   "policy_calendar": [
     {
       "date": "2026-08-31",
@@ -81,36 +83,36 @@
   ],
   "tech": [
     {
-      "summary": "LG Display has introduced FLiPP (FMM-Less innovative Pixel Patterning), a new OLED manufacturing method designed to produce brighter, more efficient, longer-lasting, and nearly any-size display panels.",
-      "source": "The Verge",
-      "url": "https://www.theverge.com/tech/982609/lg-oled-panel-flipp-display-technology"
+      "summary": "Stripe is expanding its presence in the artificial intelligence sector by acquiring OpenRouter, a move that deepens the fintech company's engagement in the AI model market.",
+      "source": "CNBC",
+      "url": "https://www.cnbc.com/2026/08/19/stripe-openrouter-fintech-ai-model-marketplace-.html"
     },
     {
-      "summary": "Slack is launching collaborative 'vibe-coding' channels that incorporate AI agents, aiming to allow teams to code together more seamlessly without switching between multiple tools and conversations.",
+      "summary": "Riot Games is discontinuing active development on 2XKO, its free-to-play League of Legends fighting game, less than a year after its launch, citing insufficient player retention for long-term sustainability.",
       "source": "The Verge",
-      "url": "https://www.theverge.com/tech/982628/slack-code-vibe-coding-channels-launch"
+      "url": "https://www.theverge.com/games/982986/riot-games-league-of-legends-fighting-game-2xko-end-development"
     },
     {
-      "summary": "Scientists are actively searching for new sources of hydrogen, with the potential for the gas or the conditions to produce it to be hidden underground, which could offer a significant climate solution.",
-      "source": "MIT Technology Review",
-      "url": "https://www.technologyreview.com/2026/08/20/1142512/geologic-hydrogen-hunt/"
+      "summary": "Australia's online safety regulator, eSafety, has stated that Roblox needs to implement more changes to its child safety features after testing indicated the company had not sufficiently prevented contact between adults and children under 16.",
+      "source": "Ars Technica",
+      "url": "https://arstechnica.com/tech-policy/2026/08/weak-roblox-safeguards-failed-to-stop-adults-contacting-kids-regulator-says/"
     }
   ],
   "world": [
     {
-      "summary": "Hui Ka Yan, the founder of Chinese property developer Evergrande, has been sentenced to life in prison for fraud, and all his personal property has been confiscated.",
+      "summary": "The U.S. Treasury Department imposed sanctions on 10 individuals accused of operating a courier network that smuggled hundreds of millions of dollars in cash to Hezbollah via commercial flights between Iran, Turkey, the UAE, and Lebanon.",
       "source": "Guardian World",
-      "url": "https://www.theguardian.com/business/2026/aug/20/evergrande-founder-jailed-life-fraud-hui-ka-yan"
+      "url": "https://www.theguardian.com/us-news/2026/aug/20/alleged-money-smuggling-sanctions-hezbollah"
     },
     {
-      "summary": "The U.S. gross national debt has surpassed $40 trillion for the first time, a figure that has doubled over the last decade due to increased spending under both the Trump and Biden administrations.",
-      "source": "Guardian World",
-      "url": "https://www.theguardian.com/us-news/live/2026/aug/20/donald-trump-national-debt-borrowing-record-michael-cohen-canada-iran-latest-news-updates"
+      "summary": "The United States has implemented new sanctions targeting Cuba's mining and construction sectors, further straining the island nation's economy, which is already experiencing blackouts and medical shortages.",
+      "source": "Al Jazeera",
+      "url": "https://www.aljazeera.com/news/2026/8/20/us-pummels-cuban-economy-with-new-sanctions-on-mining-construction?traffic_source=rss"
     },
     {
-      "summary": "Kyiv experienced one of the most intense Russian missile and drone bombardments since the start of the war, resulting in at least 15 fatalities and hitting residential areas and a children's hospital.",
+      "summary": "The Israeli military has admitted that its troops fired on a car in Gaza in 2024, resulting in the deaths of five-year-old Hind Rajab and six of her family members, and has ordered a criminal investigation into the incident.",
       "source": "Guardian World",
-      "url": "https://www.theguardian.com/world/2026/aug/20/ukraine-kyiv-deaths-russian-missile-attack"
+      "url": "https://www.theguardian.com/world/2026/aug/19/israel-admits-it-soldiers-fired-at-car-in-which-hind-rajab-was-killed"
     }
   ],
   "weekly_recap": null,

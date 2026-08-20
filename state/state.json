@@ -3,14 +3,14 @@
   "markets_last_ok": "2026-08-20",
   "breadth_last_good": {
     "sp500": {
-      "value": 72.2,
+      "value": 70.6,
       "matched": 500,
-      "asof": "2026-08-19"
+      "asof": "2026-08-20"
     },
     "ndx100": {
-      "value": 70.1,
+      "value": 69.1,
       "matched": 97,
-      "asof": "2026-08-19"
+      "asof": "2026-08-20"
     }
   },
   "breadth": {
@@ -18,15 +18,15 @@
       "in_alert": false,
       "nag_days": 0,
       "warn_armed": true,
-      "last_value": 72.2,
-      "last_asof": "2026-08-19"
+      "last_value": 70.6,
+      "last_asof": "2026-08-20"
     },
     "ndx100": {
       "in_alert": false,
       "nag_days": 0,
       "warn_armed": true,
-      "last_value": 70.1,
-      "last_asof": "2026-08-19"
+      "last_value": 69.1,
+      "last_asof": "2026-08-20"
     }
   },
   "policy_utah_queue": [],
@@ -152,5 +152,6 @@
       "date": "2026-08-20"
     }
   ],
-  "lessons_bootstrapped": true
+  "lessons_bootstrapped": true,
+  "policy_week": []
 }

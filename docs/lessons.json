@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-20T06:24:05.882448-06:00",
+  "generated_at": "2026-08-20T15:30:14.038587-06:00",
   "lessons": [
     {
       "id": "2026-08-11-mortgage",
@@ -15,7 +15,10 @@
         "title": "Mortgage",
         "url": "https://en.wikipedia.org/wiki/Mortgage"
       },
-      "audio": {}
+      "audio": {
+        "quick": "lessons/2026-08-11-mortgage-quick.mp3",
+        "more": "lessons/2026-08-11-mortgage-more.mp3"
+      }
     },
     {
       "id": "2026-08-11-home-inspection",
