@@ -41,6 +41,7 @@ class Narrative(BaseModel):
     tech: list[Item]
     world: list[Item]
     us: list[Item]
+    science: list[Item]
     weekly_recap: str | None = None
 
 
@@ -99,7 +100,7 @@ def _facts_block(market, mortgage=None):
 
 def _articles_block(news):
     lines = []
-    for bucket in ("world", "us", "business", "tech"):
+    for bucket in ("world", "us", "science", "business", "tech"):
         for a in news.get(bucket, []):
             lines.append(json.dumps({"bucket": bucket, "title": a["title"], "source": a["source"],
                                      "url": a["url"], "summary": a["summary"]}))
@@ -108,7 +109,7 @@ def _articles_block(news):
 
 def _allowed_urls(news):
     urls = set()
-    for bucket in ("world", "us", "business", "tech"):
+    for bucket in ("world", "us", "science", "business", "tech"):
         for a in news.get(bucket, []):
             urls.add(a["url"])
     return urls
@@ -176,6 +177,11 @@ def summarize(market, news, is_sunday, recap_context="", mortgage=None):
         "self-contained sentence that reads on its own; never split a single story across multiple "
         "bullets and never output a sentence fragment), market_why, yield_why, vix_why, mortgage_why, "
         "tech (<=3 items, cutting-edge developments), world (<=4 items, globally significant only), "
+        "science (<=2 items, health and science a person should be AWARE OF or can act on — a "
+        "treatment or trial result, an outbreak, a safety finding, a genuine discovery. Prefer "
+        "FINDINGS over the politics of science: an appointment to an agency, a funding fight or a "
+        "land-use decision belongs in the US section, not here, and lifestyle or food features "
+        "belong in neither), "
         "us (<=3 items, nationally significant US events, under the US NEWS RULE above — a ruling, "
         "a disaster, a recall, an agency action, a major crime or accident, a public-health finding; "
         "prefer the story a reader would want to KNOW ABOUT over the story people are arguing about)."
@@ -200,6 +206,7 @@ def summarize(market, news, is_sunday, recap_context="", mortgage=None):
             "tech": _validate_items(nar.tech, allowed)[: config.MAX_TECH_ITEMS],
             "world": _validate_items(nar.world, allowed)[: config.MAX_WORLD_ITEMS],
             "us": _validate_items(nar.us, allowed)[: config.MAX_US_ITEMS],
+            "science": _validate_items(nar.science, allowed)[: config.MAX_SCIENCE_ITEMS],
             "weekly_recap": nar.weekly_recap if is_sunday else None,
         }, True
     return None, False

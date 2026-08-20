@@ -470,6 +470,7 @@ def _assemble(now, today, market, news, narrative, ai_ok, breadth=None,
         mortgage_block = num(mortgage, narrative.get("mortgage_why", ""))
         tech, world = narrative["tech"], narrative["world"]
         us = narrative.get("us") or []
+        science = narrative.get("science") or []
         recap = narrative.get("weekly_recap")
     else:
         tldr = ["AI summary unavailable today — showing raw market numbers and headlines."]
@@ -485,6 +486,12 @@ def _assemble(now, today, market, news, narrative, ai_ok, breadth=None,
         # event desks rather than opinion desks. That is a reason the feed choice is load-bearing
         # and Guardian US was rejected outright rather than merely left unused.
         us = _fallback_items(news, "us", config.MAX_US_ITEMS)
+        # Weaker than the US fallback above, and knowingly so: NPR's health and science desks mix
+        # findings with science POLITICS (an FDA nomination, a logging decision), so a no-AI day can
+        # surface an item the prompt rule would have rejected. Accepted rather than filtered — a
+        # keyword blocklist here would be a second, silently-diverging copy of an editorial rule
+        # that lives in the prompt, and this path only runs when the model is already down.
+        science = _fallback_items(news, "science", config.MAX_SCIENCE_ITEMS)
         recap = None
 
     return {
@@ -507,6 +514,7 @@ def _assemble(now, today, market, news, narrative, ai_ok, breadth=None,
         "tech": tech,
         "world": world,
         "us": us,
+        "science": science,
         "weekly_recap": recap,
         "data_availability": avail,
     }

@@ -23,6 +23,9 @@ MAX_WORLD_ITEMS = 4      # 3 -> 4 on 2026-08-20. The reader asked for "more of i
                          # things-to-be-aware-of he wanted; widening it beat adding a second,
                          # duplicate world section.
 MAX_US_ITEMS = 3         # US national news. See US_FEEDS below for why this section exists at all.
+MAX_SCIENCE_ITEMS = 2    # Health and science. Deliberately the smallest news section: it is the
+                         # fourth added to a drive-time cut, and its value is awareness rather than
+                         # coverage — two things worth knowing beats five worth skimming.
 MAX_CANDIDATES_PER_BUCKET = 25       # cap fed to the model to control token use
 
 USER_AGENT = "morning-briefing/1.0 (personal use)"
@@ -53,6 +56,28 @@ WORLD_FEEDS = {
 US_FEEDS = {
     "AP": "https://feedx.net/rss/ap.xml",
     "NPR National": "https://feeds.npr.org/1003/rss.xml",
+}
+# Health and science. Named "disasters" in the 2026-08-20 brief and deliberately NOT built that way:
+# a disaster already reaches this reader through the sections that exist (Indonesia's earthquake came
+# through world, Indiana's nine-day outage through US), so a third home for it would have produced a
+# section that mostly re-tells the other two. `tts._dedupe_across` would then quietly suppress it,
+# which is a section whose main behaviour is disappearing.
+#
+# Sources chosen on probed content shape, 2026-08-20, and this category punished the obvious picks
+# hardest. BBC Health is the standout — "Vaccine breakthrough stops cancer returning in trial",
+# "Weekly type 2 diabetes jab could replace daily injections", "Vapes could lead to health harms in
+# children" — findings a person can act on. REJECTED: BBC Science & Environment (UK-domestic: UK
+# flood warnings, a UK glass-deposit scheme), Guardian Environment (US environmental POLITICS, which
+# the US NEWS RULE exists to keep out), NASA (press releases), ScienceDaily (journal churn, e.g.
+# "Schizophrenia's lost brain connections follow a surprising..."). CIDRAP's outbreak feed 404s.
+#
+# NPR's two desks carry real signal (a record cyclosporiasis outbreak, the fastest known star) mixed
+# with science POLITICS (an FDA nomination, a logging decision). The prompt rule for this section
+# asks for findings over politics; the same discipline as US_FEEDS, applied to a different failure.
+SCIENCE_FEEDS = {
+    "BBC Health": "https://feeds.bbci.co.uk/news/health/rss.xml",
+    "NPR Science": "https://feeds.npr.org/1007/rss.xml",
+    "NPR Health": "https://feeds.npr.org/1128/rss.xml",
 }
 BUSINESS_FEEDS = {
     "MarketWatch": "https://feeds.content.dowjones.io/public/rss/mw_topstories",

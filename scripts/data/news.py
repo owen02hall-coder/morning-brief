@@ -1,6 +1,6 @@
 """Fetch + parse RSS feeds into recent candidate items, isolated per-feed.
 
-Returns four buckets (world, us, business, tech) of {title, source, url, summary, published}.
+Returns five buckets (world, us, science, business, tech) of {title, source, url, summary, published}.
 A dead feed is tolerated (logged, skipped) so one outage never kills the briefing. Items older
 than NEWS_WINDOW_HOURS are dropped; near-duplicate titles/URLs are de-duped; each bucket is capped.
 """
@@ -66,11 +66,13 @@ def get_news():
     """Return {world, us, business, tech, available} candidate lists for the summarizer."""
     world = _bucket(config.WORLD_FEEDS)
     us = _bucket(config.US_FEEDS)
+    science = _bucket(config.SCIENCE_FEEDS)
     business = _bucket(config.BUSINESS_FEEDS)
     tech = _bucket(config.TECH_FEEDS)
     return {
         "world": world,
         "us": us,
+        "science": science,
         "business": business,
         "tech": tech,
         # world news must always ship; treat empty world as unavailable. `us` is reported the same
@@ -78,6 +80,6 @@ def get_news():
         # times an hour, so an empty bucket inside the 72h window means the FETCH broke, not that
         # America had a quiet day. (A section that is legitimately allowed to be silent — pop
         # culture, sports — must NOT be wired up this way when it lands; see the 2026-08-20 brief.)
-        "available": {"world": bool(world), "us": bool(us),
+        "available": {"world": bool(world), "us": bool(us), "science": bool(science),
                       "business": bool(business), "tech": bool(tech)},
     }

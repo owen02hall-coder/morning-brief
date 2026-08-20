@@ -302,6 +302,7 @@ def compose_script(briefing, has_lesson=False):
     # significant (a hurricane, a federal action with worldwide reach) is more useful framed as the
     # thing that happened at home.
     for label, items in _dedupe_across([("In tech", briefing.get("tech")),
+                                        ("Health and science", briefing.get("science")),
                                         ("Across the country", briefing.get("us")),
                                         ("Around the world", briefing.get("world"))],
                                        tldr_words=[_key_words(t) for t in tldr]):

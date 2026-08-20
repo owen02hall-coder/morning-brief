@@ -464,6 +464,12 @@ second that was listed here has since been closed:
   never the fight about it. `13-us-news-editorial.py` enforces it, because relaxing a safety rule is
   the moment it needs a machine. Feeds (AP + NPR National) were chosen on probed content shape —
   Guardian US was rejected outright for leading with political gossip.
+- **Health and science is sourced from news desks, and does not cover disasters.** The 2026-08-20
+  brief called it "health/science/disasters"; disasters were dropped because they already arrive
+  through world and US (Indonesia's earthquake, Indiana's outage) and a third home would have been a
+  section whose main behaviour is being suppressed by `_dedupe_across`. Feeds are BBC Health + NPR
+  Science/Health; BBC Science & Environment (UK-domestic), Guardian Environment (US environmental
+  politics), NASA (press releases) and ScienceDaily (journal churn) were all probed and rejected.
 - **The audio edition reads policy once a week, not daily.** Adding a fourth topic to every
   morning's script was not worth the length, so the digest rides `config.POLICY_AUDIO_WEEKDAY`
   (Monday) and covers the whole week via `state.policy_week` — reading only that morning's `policy`

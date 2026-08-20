@@ -143,7 +143,9 @@ FIXTURES = [
         "vix": _num(14.89, -0.95, "2026-08-19", "Volatility drifted lower into the close."),
         "mortgage": _num(6.67, -0.02, "2026-08-13", "Mortgage rates followed the 10-year lower."),
         "policy_week": [POLICY_ITEM], "policy_upcoming": [UPCOMING_ITEM],
-        "tech": [], "us": [US_ITEM, US_DUP_OF_WORLD],
+        "tech": [], "science": [_item("A trial found a vaccine prevented cancer from returning in "
+                                     "most participants.", "BBC Health", "https://e.com/sci1")],
+        "us": [US_ITEM, US_DUP_OF_WORLD],
         "world": [DUP_WORLD, _item("An unrelated global event occurred in Kyiv "
                                    "overnight.", "Guardian", "https://e.com/c")],
     }},
@@ -156,6 +158,7 @@ FIXTURES = [
         "policy_week": [POLICY_ITEM], "policy_upcoming": [UPCOMING_ITEM],
         "tech": [_item("A chip fabricator announced a new node.", "Verge", "https://e.com/d")],
         "us": [_item("A recall was issued for a household appliance.", "NPR National", "https://e.com/f")],
+        "science": [],
         "world": [_item("An election concluded in Brazil.", "Guardian", "https://e.com/e")],
     }},
     {"name": "null-changes", "hasLesson": True, "briefing": {
@@ -165,7 +168,7 @@ FIXTURES = [
         "yield_10y": _num(4.65, None, "2026-08-19", ""),
         "vix": _num(14.89, None, "2026-08-19", ""),
         "mortgage": _num(6.67, None, "2026-08-13", ""),
-        "policy_week": [], "policy_upcoming": [], "tech": [], "us": [], "world": [],
+        "policy_week": [], "policy_upcoming": [], "tech": [], "us": [], "science": [], "world": [],
     }},
     {"name": "sunday-recap", "hasLesson": False, "briefing": {
         "date": "2026-08-23", "tldr": ["A Sunday takeaway."],
@@ -174,7 +177,7 @@ FIXTURES = [
         "vix": _num(14.89, -0.95, "2026-08-19", "Volatility fell."),
         "mortgage": _num(6.67, -0.02, "2026-08-13", "Rates followed yields."),
         "policy_week": [POLICY_ITEM], "policy_upcoming": [],
-        "tech": [], "us": [], "world": [],
+        "tech": [], "us": [], "science": [], "world": [],
         "weekly_recap": "A short zoom-out of the week just gone and the week ahead.",
     }},
     {"name": "monday-quiet-policy", "hasLesson": False, "briefing": {
@@ -183,7 +186,7 @@ FIXTURES = [
         "yield_10y": _num(4.65, 0.0, "2026-08-19", ""),
         "vix": _num(14.89, -0.95, "2026-08-19", ""),
         "mortgage": _num(6.67, 0.0, "2026-08-13", ""),
-        "policy_week": [], "policy_upcoming": [], "tech": [], "us": [], "world": [],
+        "policy_week": [], "policy_upcoming": [], "tech": [], "us": [], "science": [], "world": [],
     }},
     {"name": "flat-vix", "hasLesson": False, "briefing": {
         "date": "2026-08-19", "tldr": ["A flat day."],
@@ -193,7 +196,7 @@ FIXTURES = [
         # A VIX move that rounds to 0.0% — the shape that must not be read as "up 0.0 percent".
         "vix": _num(14.89, 0.004, "2026-08-19", ""),
         "mortgage": _num(6.67, -0.02, "2026-08-13", ""),
-        "policy_week": [], "policy_upcoming": [], "tech": [], "us": [], "world": [],
+        "policy_week": [], "policy_upcoming": [], "tech": [], "us": [], "science": [], "world": [],
     }},
     {"name": "tldr-repeat", "hasLesson": False, "briefing": {
         "date": "2026-08-19",
@@ -202,7 +205,7 @@ FIXTURES = [
         "tldr": ["A powerful 7.7-magnitude earthquake in eastern Indonesia killed at least 38 people."],
         "market": FULL_MARKET,
         "yield_10y": None, "vix": None, "mortgage": None,
-        "policy_week": [], "policy_upcoming": [], "tech": [], "us": [],
+        "policy_week": [], "policy_upcoming": [], "tech": [], "us": [], "science": [],
         "world": [
             _item("A powerful 7.7-magnitude earthquake struck eastern Indonesia, killing at least "
                   "38 people and prompting a tsunami warning along the coast.", "BBC",
@@ -213,7 +216,7 @@ FIXTURES = [
     }},
     {"name": "degraded-empty", "hasLesson": False, "briefing": {
         "date": "", "tldr": [], "market": {}, "yield_10y": None, "vix": None, "mortgage": None,
-        "policy_week": [], "policy_upcoming": [], "tech": [], "us": [], "world": [],
+        "policy_week": [], "policy_upcoming": [], "tech": [], "us": [], "science": [], "world": [],
     }},
 ]
 
@@ -315,6 +318,12 @@ def main():
          "a move that rounds to zero was still read aloud as \"0.0 percent\" with a direction"),
         ("flat-vix", "essentially unchanged", True,
          "the flat 10-year move was not collapsed either"),
+        ("monday-full", "Health and science.", True,
+         "the health/science section was not narrated"),
+        ("monday-full", "vaccine prevented cancer", True,
+         "the science section was announced but read none of its items"),
+        ("degraded-empty", "Health and science.", False,
+         "an empty science bucket still announced its heading"),
         ("monday-full", "Across the country.", True,
          "the US national section was not narrated at all"),
         ("monday-full", "federal appeals court ruled", True,

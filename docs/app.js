@@ -450,6 +450,7 @@ function render(b, into, withSoup) {
   if (policy) into.appendChild(policy);
 
   into.appendChild(itemList("Emerging tech", b.tech));
+  into.appendChild(itemList("Health and science", b.science));
   into.appendChild(itemList("Across the country", b.us));
   into.appendChild(itemList("World", b.world));
 
@@ -723,8 +724,8 @@ function speechText(b, hasLesson) {
   parts.push(...policyLines(b, d));
   // Mirror of tts.compose_script: US before world, so a story that is both resolves to the
   // domestic framing. dedupeAcross keeps the FIRST bucket's copy.
-  dedupeAcross([["In tech.", b.tech], ["Across the country.", b.us],
-                ["Around the world.", b.world]],
+  dedupeAcross([["In tech.", b.tech], ["Health and science.", b.science],
+                ["Across the country.", b.us], ["Around the world.", b.world]],
                (b.tldr || []).map((t) => keyWords(t))).forEach(([label, items]) => {
     if (items.length) parts.push(label);
     items.forEach((it) => {
