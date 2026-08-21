@@ -1,6 +1,6 @@
 {
-  "last_run": "2026-08-20",
-  "markets_last_ok": "2026-08-20",
+  "last_run": "2026-08-21",
+  "markets_last_ok": "2026-08-21",
   "breadth_last_good": {
     "sp500": {
       "value": 70.6,
@@ -69,7 +69,7 @@
     }
   ],
   "policy_today": {
-    "date": "2026-08-20",
+    "date": "2026-08-21",
     "items": [],
     "alerted": false
   },
@@ -150,6 +150,13 @@
       "title": "Understanding Emergency Room Care",
       "domain": "Health and emergencies",
       "date": "2026-08-20"
+    },
+    {
+      "id": "2026-08-21-cognitive-bias",
+      "article_title": "Cognitive bias",
+      "title": "Understanding Why Quick Judgments Go Wrong",
+      "domain": "Thinking and people",
+      "date": "2026-08-21"
     }
   ],
   "lessons_bootstrapped": true,

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-20T15:44:02.037744-06:00",
+  "generated_at": "2026-08-21T06:23:35.282172-06:00",
   "lessons": [
     {
       "id": "2026-08-11-mortgage",
@@ -97,7 +97,8 @@
       },
       "audio": {
         "quick": "lessons/2026-08-14-credit-score-quick.mp3",
-        "deep": "lessons/2026-08-14-credit-score-deep.mp3"
+        "deep": "lessons/2026-08-14-credit-score-deep.mp3",
+        "more": "lessons/2026-08-14-credit-score-more.mp3"
       }
     },
     {
@@ -218,6 +219,26 @@
         "quick": "lessons/2026-08-20-emergency-medicine-quick.mp3",
         "more": "lessons/2026-08-20-emergency-medicine-more.mp3",
         "deep": "lessons/2026-08-20-emergency-medicine-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-08-21-cognitive-bias",
+      "date": "2026-08-21",
+      "domain": "Thinking and people",
+      "title": "Understanding Why Quick Judgments Go Wrong",
+      "hook": "Your brain sometimes takes shortcuts that can lead to predictable errors in how you see the world and make decisions.",
+      "quick": "When people make judgments, especially when things are uncertain, they often rely on mental shortcuts. These shortcuts, while efficient and allowing for faster decisions, can lead to systematic errors in judgment. Your brain constructs its own \"subjective reality\" based on what it perceives, and this perception, rather than the objective facts, can dictate your behavior. This means your quick assessments might cause you to misunderstand things, interpret information illogically, or make irrational choices. These patterns of deviation from rational judgment can potentially distort your perceptions and lead to inaccurate judgments about people and situations.",
+      "more": "These mental shortcuts, called heuristics, provide quick estimates about how likely things are to happen. While they are efficient and simple for the brain to compute, they also introduce predictable, systematic errors. For instance, you might judge how likely something is by how easily you can remember similar events, or by how much an event resembles a typical case. This can lead to issues like activating stereotypes or making judgments that aren't accurate because your brain prioritizes what seems representative or easy to recall over actual statistical probability.",
+      "deep": "Consider an example where people were described as being concerned about discrimination and social justice issues. Participants were then asked if that person was more likely to be a \"bank teller\" or a \"bank teller and active in the feminist movement.\" A majority chose the more restrictive \"bank teller and active in the feminist movement.\" This choice is statistically less likely than simply being a \"bank teller,\" yet it seemed more \"representative\" of the description. This specific error is called the conjunction fallacy. It illustrates how relying on what seems representative can lead to inaccurate judgments by making us prefer a specific, \"fitting\" scenario over a broader, more probable one. This happens because our brains have limitations in processing all available information.",
+      "takeaway": "Before making a significant decision based on a quick impression, check if your judgment about likelihood is influenced by how typical something seems or how easily you recall similar examples.",
+      "source": {
+        "title": "Cognitive bias",
+        "url": "https://en.wikipedia.org/wiki/Cognitive_bias"
+      },
+      "audio": {
+        "quick": "lessons/2026-08-21-cognitive-bias-quick.mp3",
+        "more": "lessons/2026-08-21-cognitive-bias-more.mp3",
+        "deep": "lessons/2026-08-21-cognitive-bias-deep.mp3"
       }
     }
   ],
