@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-22T06:17:06.354427-06:00",
+  "generated_at": "2026-08-23T06:17:24.852007-06:00",
   "lessons": [
     {
       "id": "2026-08-11-mortgage",
@@ -239,6 +239,26 @@
         "quick": "lessons/2026-08-21-cognitive-bias-quick.mp3",
         "more": "lessons/2026-08-21-cognitive-bias-more.mp3",
         "deep": "lessons/2026-08-21-cognitive-bias-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-08-23-compound-interest",
+      "date": "2026-08-23",
+      "domain": "Money mechanics",
+      "title": "How Compound Interest Affects Savings and Debt",
+      "hook": "Not understanding how interest compounds can significantly change how quickly your savings grow or how much your debts cost over time.",
+      "quick": "When you save or borrow money, compound interest means that any interest you earn or owe gets added to the original principal, and then the next period's interest is calculated on that larger total. This is different from simple interest, where interest is only calculated on the initial amount. This process of adding interest to the principal can make your money grow much faster when you are saving, but it also means that debt can accumulate more rapidly than if interest was only applied to the original amount borrowed. The speed at which this happens depends on how often the interest is calculated and added back into the principal.",
+      "more": "The frequency with which interest is compounded makes a significant difference. For example, monthly capitalization with an annual rate means the interest is compounded 12 times in a year. To help people compare different financial products fairly, many places require institutions to disclose the annual compound interest rate on a comparable basis. This might be called an annual equivalent rate or AER. This rate is designed to show the total accumulated interest that would be payable by the end of one year, divided by the original principal sum, allowing you to see the true annual cost or gain of a financial product regardless of its stated rate or compounding frequency.",
+      "deep": "Understanding these details is important because different financial products treat interest differently. For instance, the interest on corporate and government bonds is usually paid twice a year, meaning it compounds semi-annually. Canadian mortgage loans are generally compounded semi-annually, even if payments are made more frequently. However, U.S. mortgages work differently; they use what is called an amortizing loan. With these loans, the interest generated is paid off monthly as part of your regular payment and is not added to the principal to compound further. This means your payments are structured to slowly reduce the principal balance over time, rather than having interest compound on top of previous interest.",
+      "takeaway": "When comparing financial products, always look for the Annual Equivalent Rate to understand the true annual cost or return of interest.",
+      "source": {
+        "title": "Compound interest",
+        "url": "https://en.wikipedia.org/wiki/Compound_interest"
+      },
+      "audio": {
+        "quick": "lessons/2026-08-23-compound-interest-quick.mp3",
+        "more": "lessons/2026-08-23-compound-interest-more.mp3",
+        "deep": "lessons/2026-08-23-compound-interest-deep.mp3"
       }
     }
   ],
