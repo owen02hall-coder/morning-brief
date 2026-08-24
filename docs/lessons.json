@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-23T06:17:24.852007-06:00",
+  "generated_at": "2026-08-24T06:24:21.937730-06:00",
   "lessons": [
     {
       "id": "2026-08-11-mortgage",
@@ -259,6 +259,26 @@
         "quick": "lessons/2026-08-23-compound-interest-quick.mp3",
         "more": "lessons/2026-08-23-compound-interest-more.mp3",
         "deep": "lessons/2026-08-23-compound-interest-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-08-24-circuit-breaker",
+      "date": "2026-08-24",
+      "domain": "Home, car and repair",
+      "title": "Resetting a Tripped Circuit Breaker",
+      "hook": "An unexpected power outage can be frustrating, but knowing about your home's circuit breakers can help you safely restore power and prevent more serious problems.",
+      "quick": "When too much electricity flows through a circuit, it creates an overcurrent that can damage your electrical equipment and even cause a fire. To prevent this, a circuit breaker automatically interrupts the current flow, effectively shutting off power to that circuit. Unlike an old-fashioned fuse, which needs to be replaced after it trips, a circuit breaker can be reset. This means that if a breaker trips, often indicated by a switch moving to an 'off' or middle position on your electrical panel, you can usually flip it back to 'on' to restore power. Circuit breakers are found in what's often called a distribution board, acting as a crucial safety device in your home's electrical system.",
+      "more": "The circuit breaker detects an excessive current through the heating or magnetic effects of the electricity itself. Once it senses this fault condition, it uses stored mechanical energy, like a spring, or even the fault current's own magnetic field to quickly separate its internal contacts. This physical separation is what stops the electricity from flowing. Besides automatically cutting power during an overcurrent, a circuit breaker also serves as a main switch. You can manually flip a breaker to disconnect power to a specific part of your home, which is useful when doing electrical work or when you want to power down a sub-network for safety or maintenance.",
+      "deep": "When a circuit breaker interrupts a high current, an electrical arc is generated between the contacts as they open. This arc must be carefully managed, cooled, and extinguished to prevent damage and ensure the breaker can function properly again. In the miniature circuit breakers common in homes, this is often done using arc chutes, which are special metal plates that divide and cool the arc. Over time, the constant arcing erodes the contact material inside the breaker. While power circuit breakers and high-voltage breakers might have replaceable contacts, the smaller miniature and molded-case circuit breakers typically found in residential settings are designed to be discarded once their contacts wear out. If a breaker repeatedly trips, it could indicate an underlying electrical issue or that the breaker itself is beginning to fail due to worn contacts.",
+      "takeaway": "Inspect your electrical panel when power unexpectedly goes out, identify any tripped circuit breakers, and if a breaker repeatedly trips, have a qualified electrician check the circuit and the breaker for wear or underlying issues.",
+      "source": {
+        "title": "Circuit breaker",
+        "url": "https://en.wikipedia.org/wiki/Circuit_breaker"
+      },
+      "audio": {
+        "quick": "lessons/2026-08-24-circuit-breaker-quick.mp3",
+        "more": "lessons/2026-08-24-circuit-breaker-more.mp3",
+        "deep": "lessons/2026-08-24-circuit-breaker-deep.mp3"
       }
     }
   ],
