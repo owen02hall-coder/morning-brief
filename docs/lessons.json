@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-24T06:24:21.937730-06:00",
+  "generated_at": "2026-08-25T06:24:53.648537-06:00",
   "lessons": [
     {
       "id": "2026-08-11-mortgage",
@@ -279,6 +279,26 @@
         "quick": "lessons/2026-08-24-circuit-breaker-quick.mp3",
         "more": "lessons/2026-08-24-circuit-breaker-more.mp3",
         "deep": "lessons/2026-08-24-circuit-breaker-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-08-25-foodborne-illness",
+      "date": "2026-08-25",
+      "domain": "Health and emergencies",
+      "title": "Avoiding Hidden Risks in Your Food",
+      "hook": "Many times, when we feel sick to our stomach, we blame a common bug, but the culprit might actually be what we ate days ago.",
+      "quick": "It is easy to misattribute symptoms like vomiting, fever, aches, and diarrhea to a common illness when they are actually the result of foodborne disease. This confusion often happens because symptoms may not appear for hours or even days after eating contaminated food, making it hard to connect them to a specific meal. Foodborne illness usually comes from improper handling, preparation, or storage of food, and it can cause repeated bouts of vomiting even if the initial contaminated food is cleared from the stomach, because microbes can multiply in the intestines. These illnesses are a significant public health burden and can lead to substantial personal discomfort and lost time.",
+      "more": "To protect yourself at home, good hygiene practices are essential before, during, and after you prepare food. Public health experts agree that regular hand-washing is one of the most effective ways to prevent the spread of foodborne illness. While cooking food sufficiently can kill most bacteria and parasites, many toxins produced by bacteria are not destroyed by heat, so prevention goes beyond just heating food. Proper storage is also key, as bacteria grow most rapidly in temperatures between 40 and 140 degrees Fahrenheit. This range is known as the \"danger zone.\"",
+      "deep": "The reason symptoms can take so long to appear is that some contaminants require an incubation period, and the severity can depend on how much was consumed. Even after initial vomiting clears the stomach, bacteria can pass into the intestine and continue to multiply, leading to further illness. Beyond simple cooking, you can limit toxin production by storing food below 40 degrees or above 140 degrees Fahrenheit. For leftovers, placing them in shallow containers helps them cool more quickly and effectively. A common mistake is washing uncooked chicken, which actually increases the risk of spreading pathogens through splashing water droplets around your kitchen, rather than making the chicken safer.",
+      "takeaway": "Always keep hot foods hot and cold foods cold, storing food either below 40 degrees Fahrenheit or above 140 degrees Fahrenheit to prevent rapid bacterial growth.",
+      "source": {
+        "title": "Foodborne illness",
+        "url": "https://en.wikipedia.org/wiki/Foodborne_illness"
+      },
+      "audio": {
+        "quick": "lessons/2026-08-25-foodborne-illness-quick.mp3",
+        "more": "lessons/2026-08-25-foodborne-illness-more.mp3",
+        "deep": "lessons/2026-08-25-foodborne-illness-deep.mp3"
       }
     }
   ],
