@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-26T06:27:13.394940-06:00",
+  "generated_at": "2026-08-27T15:24:33.766907-06:00",
   "lessons": [
     {
       "id": "2026-08-11-mortgage",
@@ -319,6 +319,26 @@
         "quick": "lessons/2026-08-26-formal-fallacy-quick.mp3",
         "more": "lessons/2026-08-26-formal-fallacy-more.mp3",
         "deep": "lessons/2026-08-26-formal-fallacy-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-08-27-property-tax",
+      "date": "2026-08-27",
+      "domain": "Money mechanics",
+      "title": "Understanding Property Taxes When Buying a Home",
+      "hook": "Not knowing how property taxes work can lead to unexpected ongoing costs and upfront fees when you purchase a home.",
+      "quick": "When you buy a home, you'll face more than just the mortgage payment; property taxes are an ongoing expense that can vary significantly. These taxes are an ad valorem tax, meaning they are based on the value of your property, and different government authorities, such as states, counties, or municipalities, can levy them. This means you might be taxed by multiple jurisdictions on the same property. The government either requires or performs an appraisal to determine your property's monetary value, and your tax bill is assessed proportionally to that value. These taxes are typically imposed annually, adding to your regular housing costs, but some types of property tax are paid only once, at the time of a real estate transaction.",
+      "more": "Beyond the regular annual payments, you might also encounter a separate tax specifically at the time you purchase or transfer property, sometimes called a real estate transfer tax or stamp duty. This is an upfront cost, distinct from the ongoing annual property tax, and can represent a significant percentage of the purchase price, often paid by the buyer. Property taxes are often based on classifications like residential or commercial, with different rates applied to each class. The way your property's value is assessed and the specific tax rates applied can vary widely depending on where the property is located. Some jurisdictions might even have special assessments, which are different from property taxes because they are levied for a specific \"benefit\" to the property rather than its fair market value.",
+      "deep": "To calculate annual property tax, authorities typically multiply the property's assessed value by a specific rate, often expressed as a percentage or a millage rate. A millage rate represents an amount of tax per thousand currency units of property value. For instance, if a property has an assessed value and is in a municipality with a particular mill rate, you would calculate the property tax bill by multiplying the assessed value by the mill rate and then dividing by one thousand. What constitutes real property, and how its value is determined, also differs. Real property generally combines the land itself and any improvements made to it, such as buildings. These distinctions and variations in how values are determined and how rates are applied underscore why understanding the local property tax structure is crucial when considering a home purchase.",
+      "takeaway": "Before making an offer on a home, ask about the specific annual property tax rate and any applicable real estate transfer taxes in that jurisdiction to budget accurately for both upfront and ongoing costs.",
+      "source": {
+        "title": "Property tax",
+        "url": "https://en.wikipedia.org/wiki/Property_tax"
+      },
+      "audio": {
+        "more": "lessons/2026-08-27-property-tax-more.mp3",
+        "deep": "lessons/2026-08-27-property-tax-deep.mp3",
+        "quick": "lessons/2026-08-27-property-tax-quick.mp3"
       }
     }
   ],
