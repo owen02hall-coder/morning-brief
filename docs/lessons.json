@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-27T15:24:33.766907-06:00",
+  "generated_at": "2026-08-28T15:34:45.803541-06:00",
   "lessons": [
     {
       "id": "2026-08-11-mortgage",
@@ -339,6 +339,26 @@
         "more": "lessons/2026-08-27-property-tax-more.mp3",
         "deep": "lessons/2026-08-27-property-tax-deep.mp3",
         "quick": "lessons/2026-08-27-property-tax-quick.mp3"
+      }
+    },
+    {
+      "id": "2026-08-28-sump-pump",
+      "date": "2026-08-28",
+      "domain": "Home, car and repair",
+      "title": "Avoid Sump Pump Fines and Floods",
+      "hook": "A silent sump pump could be costing you money or failing when you need it most, leading to unexpected problems in your home.",
+      "quick": "Many homeowners unknowingly have sump pumps that discharge directly into the sanitary sewer, especially if the system was inherited with the house. This practice, once common, can now violate plumbing codes and municipal bylaws, leading to significant fines. Such a setup can overwhelm the local sewage treatment system, so municipalities often urge property owners to disconnect and reroute sump pump discharge away from sanitary sewers. Beyond discharge issues, if your main power goes out during a severe storm, your sump basin could overflow and cause flooding if it lacks a reliable backup system. Preventing water accumulation is the pump's job, and a power outage means it cannot perform that essential function.",
+      "more": "Having a backup system is crucial for when the main power is out for prolonged periods. Common options include battery backup systems, which typically have their own float switch set slightly higher than the primary pump, or separate generators, though these often require manual setup. When evaluating any backup power source, it is vital to ensure it provides enough electricity, not just for the pump's continuous running watts, but also for the extra burst of power, known as starting watts, needed to get the pump going. This initial power surge can be as much as 1.5 times the running requirement. Some backup pumps operate using the municipal pressurized water supply, which eliminates the need for electricity but consumes potable water, potentially making it more expensive to operate.",
+      "deep": "The primary point of failure for any sump pump is often the level control switch, which automatically turns the pump on and off. Modern submersible pumps, which are the most popular style today, offer improved designs with integrated or auxiliary \"piggyback\" switches, making replacement easier if the switch fails. These submersible pumps also have a compact design that allows the sump basin to be covered, which not only eliminates a trip and fall hazard but also helps reduce the potential for radon intrusion into your home. For consistent and safer operation, plugging your sump pump into a dedicated electrical circuit is recommended. This reduces the likelihood of power loss from a blown fuse or tripped circuit breaker, and can minimize false tripping due to electrical noise, especially during thunderstorms, ensuring the pump functions reliably when needed.",
+      "takeaway": "Inspect your home's sump pump to confirm where its discharge pipe routes water and verify that your backup power system is fully functional for emergencies.",
+      "source": {
+        "title": "Sump pump",
+        "url": "https://en.wikipedia.org/wiki/Sump_pump"
+      },
+      "audio": {
+        "quick": "lessons/2026-08-28-sump-pump-quick.mp3",
+        "more": "lessons/2026-08-28-sump-pump-more.mp3",
+        "deep": "lessons/2026-08-28-sump-pump-deep.mp3"
       }
     }
   ],
