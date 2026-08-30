@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-29T09:54:45.629340-06:00",
+  "generated_at": "2026-08-30T09:40:18.756474-06:00",
   "lessons": [
     {
       "id": "2026-08-11-mortgage",
@@ -359,6 +359,26 @@
         "quick": "lessons/2026-08-28-sump-pump-quick.mp3",
         "more": "lessons/2026-08-28-sump-pump-more.mp3",
         "deep": "lessons/2026-08-28-sump-pump-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-08-30-stroke",
+      "date": "2026-08-30",
+      "domain": "Health and emergencies",
+      "title": "Recognizing a Stroke Emergency",
+      "hook": "When blood flow to the brain is blocked or reduced, it can cause brain cells to die, leading to a medical emergency with potentially permanent effects.",
+      "quick": "If parts of the brain stop functioning properly, it could be a stroke, which is a medical emergency. The signs often appear soon after it happens and can include sudden facial drooping, or an inability to walk, move, or feel on one side of the body. Someone experiencing a stroke might also have problems understanding or speaking, feel dizzy, or lose vision to one side. Acting swiftly is crucial because certain treatments for ischemic strokes, which make up about 87% of all cases, are only effective if given within three to four-and-a-half hours. Delaying emergency help can lead to more permanent symptoms, so it is important to recognize these signs immediately.",
+      "more": "A stroke results from either a lack of blood flow to the brain, called an ischemic stroke, or bleeding in the brain, known as a hemorrhagic stroke. While both cause brain cells to stop working, a hemorrhagic stroke may also be associated with a severe headache. Sometimes, symptoms are temporary and last less than 24 hours; this is called a transient ischemic attack, or mini-stroke. Even though symptoms resolve, a mini-stroke is still a warning sign. These symptoms can be confused with other conditions, such as low blood sugar, which can cause similar effects. Regardless of the cause, any sudden onset of these symptoms requires immediate medical attention to prevent severe, lasting complications.",
+      "deep": "The biggest risk factor for a stroke is high blood pressure, but others include high blood cholesterol, tobacco smoking, obesity, diabetes, and a previous mini-stroke. Addressing these risk factors can help in prevention, and in some cases, physicians may recommend medications like aspirin or statins, or surgery for problematic carotid narrowing. When a stroke occurs, doctors use physical exams and medical imaging like CT or MRI scans to diagnose it and determine if it's due to a blockage or bleeding. This distinction is vital because treatments differ; for instance, clot-breaking medication for an ischemic stroke would be harmful for a hemorrhagic one. In 2015, strokes were the second most frequent cause of death after coronary artery disease, accounting for 6.3 million deaths, and about half of people who have a stroke live less than one year. Recognizing symptoms and getting immediate help can greatly affect the outcome.",
+      "takeaway": "If you observe sudden facial drooping, one-sided weakness, or speech difficulty, call emergency services immediately.",
+      "source": {
+        "title": "Stroke",
+        "url": "https://en.wikipedia.org/wiki/Stroke"
+      },
+      "audio": {
+        "quick": "lessons/2026-08-30-stroke-quick.mp3",
+        "more": "lessons/2026-08-30-stroke-more.mp3",
+        "deep": "lessons/2026-08-30-stroke-deep.mp3"
       }
     }
   ],

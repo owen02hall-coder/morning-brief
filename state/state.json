@@ -1,6 +1,6 @@
 {
-  "last_run": "2026-08-29",
-  "markets_last_ok": "2026-08-29",
+  "last_run": "2026-08-30",
+  "markets_last_ok": "2026-08-30",
   "breadth_last_good": {
     "sp500": {
       "value": 69.2,
@@ -70,7 +70,7 @@
     }
   ],
   "policy_today": {
-    "date": "2026-08-29",
+    "date": "2026-08-30",
     "items": [],
     "alerted": false
   },
@@ -200,22 +200,15 @@
       "title": "Avoid Sump Pump Fines and Floods",
       "domain": "Home, car and repair",
       "date": "2026-08-28"
+    },
+    {
+      "id": "2026-08-30-stroke",
+      "article_title": "Stroke",
+      "title": "Recognizing a Stroke Emergency",
+      "domain": "Health and emergencies",
+      "date": "2026-08-30"
     }
   ],
   "lessons_bootstrapped": true,
-  "policy_week": [
-    {
-      "date": "2026-08-23",
-      "items": [
-        {
-          "what_happened": "Proposed regulations would provide guidance on employer contributions to Trump accounts and related nondiscrimination rules.",
-          "effect": "Your employer's contributions to your Trump account would be subject to new guidance.",
-          "url": "https://www.federalregister.gov/documents/2026/08/11/2026-16314/employer-contributions-to-trump-accounts-and-nondiscrimination-rules-for-dependent-care-assistance",
-          "status": "Proposed",
-          "effective_date": null,
-          "source": "Federal Register"
-        }
-      ]
-    }
-  ]
+  "policy_week": []
 }
