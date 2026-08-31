@@ -76,6 +76,20 @@ def health(message, ok=True):
     return _publish("Briefing FAILED", message, priority="high")
 
 
+def monitoring(message):
+    """The MONITORING has a gap — the briefing itself is fine.
+
+    A separate title from health() because the two say opposite things about the reader's morning.
+    "Briefing degraded" means a section is missing from the edition he is about to read; this means
+    the edition is fine but something has stopped watching for the next failure. Titling that
+    "Briefing degraded" would send him looking for a problem that is not in the briefing.
+
+    Normal priority: nothing is broken for the reader right now, so this is a today problem, not a
+    3am one. It still has to arrive, because the whole point is that the silence was the bug.
+    """
+    return _publish("Monitoring gap", message, priority="default", click=config.PAGES_URL)
+
+
 def main(argv):
     """CLI entry so the workflow can send the ready-push AFTER the publish leg succeeds.
 

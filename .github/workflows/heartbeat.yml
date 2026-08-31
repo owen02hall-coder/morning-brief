@@ -9,6 +9,7 @@ on:
 
 permissions:
   contents: read              # never commits — read-only
+  actions: read               # reads data-smoke.yml's run history to prove its cron still fires
 
 concurrency:
   group: heartbeat
@@ -36,6 +37,9 @@ jobs:
           # Code reads env NTFY_TOPIC / PAGES_URL; the repo's secret/var are named NTFY_SUB / PAGE_URL.
           NTFY_TOPIC: ${{ secrets.NTFY_SUB }}
           PAGES_URL: ${{ vars.PAGE_URL }}
+          # Read-only, for the smoke-schedule watchdog in scripts/heartbeat.py.
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
         run: python -m scripts.heartbeat
 
       - name: Failure backstop (ntfy-independent of the python push)

@@ -304,6 +304,14 @@ RETRY_BACKOFF_SECONDS = (2, 5)   # before retry 1, before retry 2. Small on purp
                                  # briefing.yml's 10-minute budget with everything else, and a
                                  # rate-limit window that needs more than 7s of patience is not one
                                  # a morning build should sit through.
+# Days without a SCHEDULED Data Smoke run before the heartbeat says the drift detector has stopped
+# detecting drift. The smoke cron is weekly (Mondays 16:00 UTC), so 9 allows a late Monday plus a
+# full day of GitHub scheduling slop and still surfaces a genuinely dropped schedule inside ~2 days.
+# Counting SCHEDULED runs only is the whole point: a manual dispatch proves the tests pass, not that
+# the trigger still fires, and it was a missing trigger — not a missing test — that let Nasdaq-100
+# breadth stay dead for 22 days.
+SMOKE_STALE_DAYS = 9
+
 RETRY_AFTER_MAX_SECONDS = 15     # Ceiling on an honoured `Retry-After`. The header is used only when
                                  # it asks for MORE than RETRY_BACKOFF_SECONDS (see
                                  # retry.retry_after_seconds): a 429 that names its own window and
