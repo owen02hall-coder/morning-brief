@@ -20,6 +20,12 @@ name: Guard Triggers
 # So: every NN-named assumption test must be executed by some workflow, or be listed below as a
 # DELIBERATE exclusion with a reason. Unwired must be a decision somebody wrote down, never an
 # oversight. Cheap, offline, no network, no key.
+#
+# It checks run-all.sh too, and for the same reason. That script is what a human runs before a
+# change to prove the ground is solid, so a test missing from it hands back a false all-clear — the
+# most expensive kind of green. On 2026-08-31 it was missing 10, 11 and 14, and 11 could not have
+# run even if listed, because the loop hardcoded `python` for a .js test. No exclusions apply here:
+# the key-gated tests refuse cleanly without their keys, so "run everything" means everything.
 on:
   push:
     branches: [main]
@@ -49,6 +55,7 @@ jobs:
 
           TESTS_DIR = "scripts/briefing-assumptions"
           WF_DIR = ".github/workflows"
+          RUN_ALL = "scripts/briefing-assumptions/run-all.sh"
 
           # Tests deliberately NOT run by any workflow. Each needs a reason, and the reason is the
           # point: this list is how "unwired" stays a decision instead of an oversight.
@@ -61,11 +68,15 @@ jobs:
               "02-twelvedata-seed-budget.py":
                   "same metered Twelve Data quota and the same staged/unused path as 01.",
               "03-gemini-structured.py":
-                  "spends GEMINI_API_KEY quota on a free tier that the daily build also draws "
-                  "from, and its subject (the structured-output contract) is already exercised "
-                  "weekly by the live model calls in 06 and 13 — either would go red if the "
-                  "contract moved. Covered transitively; revisit if 06 and 13 ever stop making "
-                  "real calls.",
+                  "spends GEMINI_API_KEY quota on a free tier the daily build also draws from. "
+                  "Its POSITIVE path is covered transitively and this was checked, not assumed: "
+                  "summarize.py uses response_mime_type + response_schema in four places, one of "
+                  "them the PolicySection call that 06 exercises weekly, so a moved SDK contract "
+                  "turns 06 red (and breaks the daily build loudly). NOT covered: 03's negative "
+                  "control, which proves the validator REJECTS a wrong object — nothing else "
+                  "asserts that. Accepted, because a validator that wrongly accepts would still "
+                  "have to get past _validate_lesson and the policy figure checks. Revisit if 06 "
+                  "and 13 ever stop making real calls.",
           }
 
           tests = sorted(f for f in os.listdir(TESTS_DIR)
@@ -96,6 +107,16 @@ jobs:
                           if f"{TESTS_DIR}/{t}" in stripped:
                               executed.add(t)
 
+          # run-all.sh: the human-facing "prove the ground is solid" script. Every test belongs,
+          # including the key-gated ones, which refuse cleanly when the key is absent.
+          try:
+              with open(RUN_ALL, encoding="utf-8") as fh:
+                  run_all_src = fh.read()
+          except OSError as e:
+              print(f"::error::cannot read {RUN_ALL} ({e}) — this guard cannot prove local coverage")
+              sys.exit(1)
+          missing_local = [t for t in tests if t not in run_all_src]
+
           unwired = [t for t in tests if t not in executed and t not in ALLOWED]
           # A stale allowlist entry would silently pre-approve a future test that reuses the name,
           # so the list has to fail closed in BOTH directions.
@@ -117,6 +138,13 @@ jobs:
                     "`run:` step, or add an entry to ALLOWED in this workflow with a reason.")
               for t in unwired:
                   print(f"::error::  unwired: {t}")
+          if missing_local:
+              bad = True
+              print(f"::error::test(s) missing from {RUN_ALL}. That script is what a human runs to "
+                    "prove the ground is solid before a change, so an omission hands back a false "
+                    "all-clear. Add them to the TESTS list:")
+              for t in missing_local:
+                  print(f"::error::  not in run-all.sh: {t}")
           if ghosts:
               bad = True
               print("::error::ALLOWED names test(s) that no longer exist — a stale exclusion would "
@@ -132,8 +160,9 @@ jobs:
 
           if bad:
               sys.exit(1)
-          print(f"\nOK: {len(executed)} of {len(tests)} assumption tests are wired to a trigger; "
-                f"{len(ALLOWED)} deliberately excluded with a documented reason.")
+          print(f"\nOK: {len(executed)} of {len(tests)} assumption tests are wired to a trigger "
+                f"({len(ALLOWED)} deliberately excluded with a documented reason), and all "
+                f"{len(tests)} are listed in run-all.sh.")
           PY
 
       - name: Alert on guard trip (an unwired test is otherwise perfectly silent)
