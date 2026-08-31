@@ -171,9 +171,17 @@ mismatch on a later run means the environment drifted — re-validate before tru
 
 - **Pre-implementation:** run before `/implement`. All runnable tests must PASS; key-gated tests
   must PASS once keys exist.
+- **Every test here must be RUN by something.** `guard-triggers.yml` fails any push where an
+  `NN-`named test is executed by no workflow and is not on its documented exclusion list. This is a
+  fail-closed guard for a class that shipped twice: 04 caught the Nasdaq-100 drift in July 2026 and
+  nobody ran it for 22 days, then the 08-03 fix that added data-smoke's weekly schedule wired up
+  every other test and still left 04 out until 08-31. An unwired test is perfectly silent — it does
+  not error or warn, it just never runs while the directory implies coverage. Adding a test means
+  adding its `run:` step in the same change. A bare mention in a comment does NOT count as wired,
+  which is precisely the distinction that hid 04.
 - **Runner-IP proof:** run `01-twelvedata-runner-pull.py` inside a `workflow_dispatch` GitHub
   Actions job (not just locally) — local success does not prove the runner-IP case. Tests 05, 06,
-  07, 08 and 09 need no manual step: `data-smoke.yml` runs them from a runner every Monday. (09 has
+  07, 08 and 09 need no manual step: `data-smoke.yml` runs them from a runner every Monday (04 too, since 2026-08-31). (09 has
   no runner-IP question at all — it makes no request — but it rides along so a calendar edit merged
   without running it still surfaces within a week.)
 - **Post-ship regression:** re-run after each slice; any FAIL = regression. For the policy legs the

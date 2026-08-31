@@ -1,0 +1,148 @@
+name: Guard Triggers
+
+# Fail-closed machine guard for a bug-class that has now shipped TWICE.
+#
+# 2026-07-13: Wikipedia moved the Nasdaq-100 component table. `04-external-boundary-smoke.py`
+# detected it correctly and nobody ever ran the test, because data-smoke.yml was dispatch-only.
+# Nasdaq-100 breadth was null in every briefing for 22 days. The 08-03 fix gave data-smoke a weekly
+# `schedule:` so guards would stop going unrun.
+#
+# 2026-08-31: that same test was found STILL not running. The 08-03 fix wired up every other
+# assumption test and never added the one that motivated it. Its only appearance in data-smoke.yml
+# was a comment describing the outage it had caught.
+#
+# Twice is a class, not an accident, and the failure is perfectly silent: an unwired test does not
+# error, does not warn, and reports nothing. It simply never runs, and its subject rots unwatched
+# while a directory full of green-looking guards implies coverage that does not exist. A test added
+# next month is one forgotten `run:` line away from the same fate — 14-wikipedia-ua.py was added the
+# same day this guard was, and nothing else would have caught its author forgetting.
+#
+# So: every NN-named assumption test must be executed by some workflow, or be listed below as a
+# DELIBERATE exclusion with a reason. Unwired must be a decision somebody wrote down, never an
+# oversight. Cheap, offline, no network, no key.
+on:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/briefing-assumptions/**"
+      - ".github/workflows/**"
+  pull_request:
+    paths:
+      - "scripts/briefing-assumptions/**"
+      - ".github/workflows/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3 (SHA-pinned: mutable tags are a supply-chain vector in a push-capable job)
+
+      - name: Every assumption test must be wired to a trigger
+        run: |
+          python - <<'PY'
+          import os, re, sys
+
+          TESTS_DIR = "scripts/briefing-assumptions"
+          WF_DIR = ".github/workflows"
+
+          # Tests deliberately NOT run by any workflow. Each needs a reason, and the reason is the
+          # point: this list is how "unwired" stays a decision instead of an oversight.
+          ALLOWED = {
+              "01-twelvedata-runner-pull.py":
+                  "needs TWELVEDATA_API_KEY and spends ~650 credits of a metered quota per run; "
+                  "Twelve Data is the staged/unused v2 breadth path, so there is nothing in "
+                  "production for it to protect yet. Run by hand via workflow_dispatch if that "
+                  "path is ever switched on.",
+              "02-twelvedata-seed-budget.py":
+                  "same metered Twelve Data quota and the same staged/unused path as 01.",
+              "03-gemini-structured.py":
+                  "spends GEMINI_API_KEY quota on a free tier that the daily build also draws "
+                  "from, and its subject (the structured-output contract) is already exercised "
+                  "weekly by the live model calls in 06 and 13 — either would go red if the "
+                  "contract moved. Covered transitively; revisit if 06 and 13 ever stop making "
+                  "real calls.",
+          }
+
+          tests = sorted(f for f in os.listdir(TESTS_DIR)
+                         if re.match(r"^\d\d-.*\.(py|js)$", f) and "fingerprint" not in f)
+          if not tests:
+              print("::error::found no assumption tests at all — this guard is measuring nothing")
+              sys.exit(1)
+
+          # A test counts as wired only if some line actually INVOKES it: the full path, behind a
+          # python/node command, outside a comment. A bare mention does not count, which is the
+          # whole point — 04 was "mentioned" in data-smoke.yml for four weeks and never executed.
+          #
+          # This distinction bit THIS FILE on its first run: matching the bare filename made the
+          # ALLOWED dict below look like an invocation, and the guard cheerfully reported its own
+          # exclusion list as "wired". A guard that matches a label instead of the mechanism is the
+          # bug it exists to prevent.
+          RUNNER = re.compile(r"\b(python[0-9.]*|node)\b")
+          executed = set()
+          for wf in sorted(os.listdir(WF_DIR)):
+              if not wf.endswith((".yml", ".yaml")):
+                  continue
+              with open(os.path.join(WF_DIR, wf), encoding="utf-8") as fh:
+                  for line in fh:
+                      stripped = line.lstrip()
+                      if stripped.startswith("#") or not RUNNER.search(stripped):
+                          continue
+                      for t in tests:
+                          if f"{TESTS_DIR}/{t}" in stripped:
+                              executed.add(t)
+
+          unwired = [t for t in tests if t not in executed and t not in ALLOWED]
+          # A stale allowlist entry would silently pre-approve a future test that reuses the name,
+          # so the list has to fail closed in BOTH directions.
+          ghosts = [t for t in ALLOWED if t not in tests]
+          # An allowlisted test that IS wired means the reason above is now fiction. Not fatal, but
+          # it must not rot quietly.
+          contradictions = [t for t in tests if t in executed and t in ALLOWED]
+
+          for t in sorted(executed):
+              print(f"  wired    {t}")
+          for t in sorted(x for x in tests if x in ALLOWED):
+              print(f"  excluded {t}")
+
+          bad = False
+          if unwired:
+              bad = True
+              print("::error::assumption test(s) exist but NO workflow runs them. This is the "
+                    "22-day-breadth bug class: the guard exists, the trigger does not. Add a "
+                    "`run:` step, or add an entry to ALLOWED in this workflow with a reason.")
+              for t in unwired:
+                  print(f"::error::  unwired: {t}")
+          if ghosts:
+              bad = True
+              print("::error::ALLOWED names test(s) that no longer exist — a stale exclusion would "
+                    "pre-approve a future test that reuses the name. Remove them:")
+              for t in ghosts:
+                  print(f"::error::  ghost: {t}")
+          if contradictions:
+              bad = True
+              print("::error::test(s) are BOTH wired and listed as deliberately excluded — the "
+                    "written reason is now false. Drop them from ALLOWED:")
+              for t in contradictions:
+                  print(f"::error::  contradiction: {t}")
+
+          if bad:
+              sys.exit(1)
+          print(f"\nOK: {len(executed)} of {len(tests)} assumption tests are wired to a trigger; "
+                f"{len(ALLOWED)} deliberately excluded with a documented reason.")
+          PY
+
+      - name: Alert on guard trip (an unwired test is otherwise perfectly silent)
+        if: failure() || cancelled()
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_SUB }}
+        run: |
+          if [ -n "${NTFY_TOPIC}" ]; then
+            curl -s -H "Title: Guard-trigger check TRIPPED" -H "Priority: default" \
+              -d "An assumption test is not run by any workflow (or the exclusion list has rotted). A guard that never runs protects nothing — this is how Nasdaq-100 breadth stayed dead for 22 days." \
+              "https://ntfy.sh/${NTFY_TOPIC}" || true
+          fi

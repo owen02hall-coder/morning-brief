@@ -23,9 +23,9 @@ permissions:
 jobs:
   spine:
     runs-on: ubuntu-latest
-    # 12, not 10: the job now runs seven assumption tests (05 fetches the Federal Register, the PMMS
+    # 12, not 10: the job now runs eight assumption tests (05 fetches the Federal Register, the PMMS
     # CSV and Utah's passed-bills page; 07 fetches bill detail pages; 09 is offline and instant; 10
-    # fetches ~50 Wikipedia articles, one per seed title; 14 fires two 8-request Wikipedia bursts) plus a real model call in 06.
+    # fetches ~50 Wikipedia articles, one per seed title; 14 fires two 8-request Wikipedia bursts; 04 reads 11 RSS feeds and both constituent tables) plus a real model call in 06.
     timeout-minutes: 12
     steps:
       - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3 (SHA-pinned: mutable tags are a supply-chain vector in a push-capable job)
@@ -54,6 +54,29 @@ jobs:
       # PRODUCTION query shape, not a drifting local copy. `python -m` cannot address these files —
       # the names start with digits and contain hyphens, and the directory has no __init__.py — so
       # the import path is the route.
+      # THE TEST THIS WHOLE WORKFLOW'S SCHEDULE WAS ADDED FOR, and until 2026-08-31 the only place
+      # it appeared in this file was the comment at the top describing the outage it caught. The
+      # 08-03 fix gave data-smoke a weekly `schedule:` precisely so guards stop going unrun, wired up
+      # every other test, and never added this one. The guard existed; the trigger did not — again,
+      # written directly under the paragraph explaining why that is dangerous.
+      #
+      # Not redundant with the spine step above, which greps that breadth PRODUCED a number. A1 here
+      # checks all ELEVEN RSS feeds individually, and nothing else in CI does: the spine prints
+      # aggregate news counts, so one dead feed silently narrows the reader's news diet with no
+      # signal at all. A2 is the assertion that actually caught the Nasdaq-100 drift — it checks the
+      # constituent TABLES still parse to ~500/~100, which goes red earlier and more precisely than
+      # waiting for MIN_MATCH to fail-close downstream.
+      #
+      # Keyless, read-only. NOTE the known trap recorded in 04's own header: it hardcodes its copy of
+      # the feed URLs and wiki page names, so a change to config.py must be made in both places.
+      - name: External boundary (11 RSS feeds alive; constituent tables still parse)
+        id: boundary
+        if: always()
+        env:
+          BRIEFING_SMOKE_ALLOW_DEV: "true"
+          PYTHONPATH: ${{ github.workspace }}
+        run: python scripts/briefing-assumptions/04-external-boundary-smoke.py
+
       - name: Policy sources reachable from the runner
         id: policy_sources
         if: always()
@@ -196,6 +219,7 @@ jobs:
         env:
           NTFY_TOPIC: ${{ secrets.NTFY_SUB }}
           SPINE: ${{ steps.spine.outcome }}
+          BOUNDARY: ${{ steps.boundary.outcome }}
           POLICY_SOURCES: ${{ steps.policy_sources.outcome }}
           UTAH_DETAIL: ${{ steps.utah_detail.outcome }}
           PREFILTER: ${{ steps.prefilter.outcome }}
@@ -217,6 +241,7 @@ jobs:
           src() { [ "$1" = failure ] && bad_sources="$bad_sources $2"; return 0; }
           jdg() { [ "$1" = failure ] && bad_judgment="$bad_judgment $2"; return 0; }
           src "$SPINE"          "market-spine"
+          src "$BOUNDARY"       "external-boundary"
           src "$POLICY_SOURCES" "policy-sources"
           src "$UTAH_DETAIL"    "utah-detail"
           src "$PREFILTER"      "prefilter"
