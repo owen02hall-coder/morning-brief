@@ -37,7 +37,9 @@ values live in the repo. Environment variable names only are listed here.
   common stocks' `close` + `SMA200`. The `type=stock` filter is load-bearing: without it,
   ~430 ADR/fund rows displace S&P names and coverage collapses below the gate.
 - Deliberately NOT via the `tradingview-screener` library — that would add pandas+lxml to the
-  push-capable CI job for a one-endpoint JSON call.
+  push-capable CI job for a one-endpoint JSON call. That exclusion is real: no code that runs in
+  CI imports pandas. `04-external-boundary-smoke.py` violated it until 2026-08-31 and simply
+  exited 3 INFRA on every runner.
 - Validated vs published indexes ($S5TH, $NDTH) within <1 point.
 
 ## Wikipedia (index constituents)
@@ -48,6 +50,15 @@ values live in the repo. Environment variable names only are listed here.
 - Invoked in: `scripts/data/constituents.py`, stdlib regex over each page's `constituents`
   table. NOTE the row shapes differ: S&P tickers are LINKED first cells, Nasdaq-100 tickers are
   PLAIN-TEXT first cells. Fail-closed on implausible counts (450–520 / 90–110).
+- `04-external-boundary-smoke.py` imports that same parser (with its own hardcoded page URLs, so a
+  bad `config` URL still fails only in the spine step) — the boundary test and production must not
+  hold two different opinions about what the page looks like.
+- KNOWN GAP (open, not yet fixed): sent with `config.USER_AGENT`
+  (`morning-briefing/1.0 (personal use)`), NOT the contact-bearing `lessons.WIKI_UA` that the
+  Alphabet Soup fetches were moved to on 2026-08-31 after Wikimedia throttled the generic string
+  to 100% under burst. Breadth hits the same host with the same class of UA and would fail the
+  same way — silently, degrading to the last-good cache. `14-wikipedia-ua.py` measures
+  `lessons.WIKI_UA` only, so nothing currently watches this callsite.
 
 ## Wikipedia action API (Alphabet Soup source material)
 

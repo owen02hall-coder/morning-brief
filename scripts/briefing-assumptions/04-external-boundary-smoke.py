@@ -2,16 +2,23 @@
 """
 ASSUMPTION 4 (boundary smoke): the no-key external read-surfaces are alive and shaped as expected —
 (A1) the configured RSS feeds parse and enough items land within the news window; (A2) the Wikipedia
-constituent tables still parse to ~500 / ~100 via a header-matched symbol column; (A3) the symbol
+constituent tables still parse to ~500 / ~100 THROUGH THE PRODUCTION PARSER; (A3) the symbol
 normalization (Wikipedia 'BRK.B'/'BF.B' form) produces a stable, expected output.
 
-Runnable NOW (no API key). The live "do class-share symbols actually RESOLVE on Twelve Data" check
-lives in 01 (A3), which has the key. Read-only.
-Exit: 0 PASS / 1 FAIL / 2 REFUSED / 3 INFRA.
+Runnable NOW (no API key) and stdlib-only. A2 used pandas.read_html until 2026-08-31; pandas/lxml
+are deliberately absent from requirements.txt (config.py:108 — they are not going into the
+push-capable job for one table), so this test exited 3 INFRA on its first scheduled CI run and
+could never have run there. It now calls scripts.data.constituents, which is also strictly
+stronger: read_html tolerates cell-shape drift that breaks the shipping regex.
+
+The live "do class-share symbols actually RESOLVE on Twelve Data" check lives in 01 (A3), which has
+the key. Read-only.
+Exit: 0 PASS / 1 FAIL / 2 REFUSED / 3 INFRA — and 3 now means only "feedparser is missing", never
+"a dependency CI was never going to have".
 NEGATIVE CONTROL (controllable): set FRESH_HOURS_OVERRIDE=0 to force A1's freshness check red, and
 EXPECT_SP500_OVERRIDE to an absurd count to force A2 red.
 """
-import os, sys, json, io, urllib.request
+import os, sys, json, urllib.request
 from datetime import datetime, timezone, timedelta
 from calendar import timegm
 
@@ -20,10 +27,18 @@ if os.environ.get(GATE) != "true":
     print(f"REFUSED: set {GATE}=true to run assumption tests", file=sys.stderr); sys.exit(2)
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+# The workflow exports PYTHONPATH for this step; run-all.sh does not. Resolve the repo root from
+# __file__ so A2 reaches the production parser under both.
+REPO_ROOT = os.path.dirname(os.path.dirname(HERE))
+if REPO_ROOT not in sys.path:
+    sys.path.insert(0, REPO_ROOT)
+from scripts.data import constituents
 UA = {"User-Agent": "briefing-assumption-test/1.0"}
 FRESH_HOURS = int(os.environ.get("FRESH_HOURS_OVERRIDE", "72"))
 MIN_RECENT_ITEMS = 8
-EXPECT_SP500 = int(os.environ.get("EXPECT_SP500_OVERRIDE", "500"))
+# Negative control: an absurd value collapses A2's plausible-count window onto it, forcing red.
+_ov = os.environ.get("EXPECT_SP500_OVERRIDE")
+SP500_BOUND_OVERRIDE = int(_ov) if _ov else None
 
 WORLD = {"BBC World": "https://feeds.bbci.co.uk/news/world/rss.xml",
          "Al Jazeera": "https://www.aljazeera.com/xml/rss/all.xml",
@@ -44,10 +59,6 @@ def main():
         import feedparser
     except ImportError:
         print("INFRA: feedparser required — pip install feedparser", file=sys.stderr); sys.exit(3)
-    try:
-        import pandas as pd
-    except ImportError:
-        print("INFRA: pandas/lxml required — pip install pandas lxml", file=sys.stderr); sys.exit(3)
 
     cutoff = datetime.now(timezone.utc) - timedelta(hours=FRESH_HOURS)
     alive, recent_total, world_alive = [], 0, 0
@@ -73,28 +84,29 @@ def main():
     if world_alive < 1:
         failures.append("A1 no world feed alive — world news 'always ships' promise at risk")
 
-    # A2 — Wikipedia tables parse to plausible counts via a header-matched column
+    # A2 — the constituent tables still parse, THROUGH THE CODE THAT SHIPS
     counts = {}
     # These page names deliberately mirror config.SP500_WIKI_URL / config.NDX100_WIKI_URL rather
     # than importing them — an assumption test asserts the assumption, not whatever config happens
     # to say. The cost of that choice showed up on 2026-07-13: Wikipedia moved the Nasdaq-100
     # component table to its own list article, and BOTH copies had to be updated. If you change one,
-    # change the other.
-    for key, page, expect in (("sp500", "List_of_S%26P_500_companies", EXPECT_SP500),
-                              ("ndx", "List_of_NASDAQ-100_companies", 100)):
+    # change the other. (The spine step covers the other direction: it drives breadth through the
+    # CONFIG urls, so a bad config URL goes red there while this step stays honest about the page.)
+    #
+    # The PARSE, unlike the URL, is imported and not copied. A second implementation here is what
+    # made this test unrunnable in CI and blind to cell-shape drift at the same time; the regex,
+    # bounds and table anchor now live only in scripts/data/constituents.py.
+    for key, page, spec in (("sp500", "List_of_S%26P_500_companies", constituents.SP500_PARSE),
+                            ("ndx", "List_of_NASDAQ-100_companies", constituents.NDX100_PARSE)):
+        if key == "sp500" and SP500_BOUND_OVERRIDE is not None:
+            spec = {**spec, "lo": SP500_BOUND_OVERRIDE, "hi": SP500_BOUND_OVERRIDE}
         try:
-            html = urllib.request.urlopen(
-                urllib.request.Request("https://en.wikipedia.org/wiki/" + page, headers=UA), timeout=25).read().decode()
-            found = None
-            for tbl in pd.read_html(io.StringIO(html)):
-                col = next((c for c in tbl.columns if str(c).lower() in ("symbol", "ticker")), None)
-                if col is not None and len(tbl) >= expect * 0.8:
-                    found = [str(s).strip().upper() for s in tbl[col].tolist()]; break
-            counts[key] = len(found) if found else 0
-            if not found or not (expect * 0.8 <= len(found) <= expect * 1.2):
-                failures.append(f"A2 {key}: got {counts[key]} symbols, expected ~{expect} (fail-closed would trigger)")
+            html = constituents.fetch_page("https://en.wikipedia.org/wiki/" + page)
+            counts[key] = len(constituents.parse_constituents(html, **spec))
         except Exception as e:
-            failures.append(f"A2 {key}: Wikipedia parse failed: {str(e)[:160]}")
+            counts[key] = 0
+            failures.append(f"A2 {key}: {type(e).__name__}: {str(e)[:160]} "
+                            f"(this is exactly what fails breadth closed downstream)")
 
     # A3 — normalization produces the expected stable output (string-level)
     def normalize(s): return s.replace("​", "").strip().upper()

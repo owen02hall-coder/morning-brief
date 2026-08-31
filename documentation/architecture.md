@@ -182,7 +182,11 @@ Heartbeat (independent cron): python -m scripts.heartbeat
   the same caller; a separate module for one pure function would add an import for no boundary.
 - `scripts/data/constituents.py`: current S&P 500 (~503, linked ticker cell) and Nasdaq-100
   (~101, plain-text ticker cell) member lists from Wikipedia. stdlib regex parse, fail-closed on
-  implausible counts — a biased breadth number must never ship silently.
+  implausible counts — a biased breadth number must never ship silently. The parse contract
+  (`SP500_PARSE` / `NDX100_PARSE`) and the fetch/parse split are exported so
+  `04-external-boundary-smoke.py` asserts THIS parser rather than a second copy; its former
+  `pandas.read_html` copy both could not run in CI and stayed green under cell-shape drift that
+  breaks this regex.
 - `scripts/breadth/percent_above_ma.py`: % of index members above their 200-day MA. ONE daily
   POST to TradingView's scanner (top `BREADTH_SCAN_LIMIT` US common stocks; the `type=stock`
   filter is load-bearing — without it ADR/fund rows displace ~90 S&P names), intersected with

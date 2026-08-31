@@ -376,7 +376,12 @@ Three lifecycle rules are worth stating outright because they are the ones easie
   abandoned v2 breadth route.
 - `run-all.sh` halts on the first non-zero exit and `01`/`02` exit 3 without `TWELVEDATA_API_KEY`, so
   in practice gate on the policy tests individually or just dispatch **Data Smoke**, which runs
-  05/07/08/09/10/11/06 from a runner with each step independent.
+  04/05/07/08/09/10/14/11/12/13/06 from a runner with each step independent.
+- No assumption test that CI runs needs a package outside `requirements.txt`. `04` did until
+  2026-08-31 (`pandas.read_html`) and therefore exited 3 INFRA on every runner — its first scheduled
+  run after being wired up went red for that reason and paged as if a data source had drifted. It
+  now calls `scripts.data.constituents`, the same parser breadth ships. `01` still imports pandas
+  and is deliberately excluded from CI.
 - **After editing `LESSON_SEED_ARTICLES`, run `10`.** Wikipedia titles move, and a title that no
   longer resolves is a silently missing lesson, not an error — the fallback simply produces nothing.
   `Credit utilization ratio` was in the shipped list for exactly as long as it took `10` to run once.

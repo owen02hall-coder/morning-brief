@@ -117,13 +117,19 @@ BRIEFING_SMOKE_ALLOW_DEV=true node scripts/briefing-assumptions/11-client-pointe
 ``` Note what they do NOT cover: the v1 market source itself (Yahoo's chart API) — the suite
 predates the FRED→Yahoo move.
 
-Re-running the full suite needs dev-only extras and keys beyond requirements.txt: `pip install
-pandas lxml`, plus `TWELVEDATA_API_KEY` (tests 1–2, v2 key) and `GEMINI_API_KEY` (test 3); the
-runner halts at the first test missing its dependency. The keyless boundary test runs on its own:
+Re-running the full suite needs no packages beyond requirements.txt — only keys:
+`TWELVEDATA_API_KEY` (tests 1–2, v2 key) and `GEMINI_API_KEY` (tests 3 and 6). The runner halts at
+the first test missing its key. The keyless boundary test runs on its own:
 
 ```bash
-# everything (needs pandas+lxml and both keys):
+# everything (needs both keys):
 BRIEFING_SMOKE_ALLOW_DEV=true bash scripts/briefing-assumptions/run-all.sh
-# just the keyless RSS/boundary check (still needs pandas+lxml):
+# just the keyless RSS/boundary check (no key, no extra deps):
 BRIEFING_SMOKE_ALLOW_DEV=true python scripts/briefing-assumptions/04-external-boundary-smoke.py
 ```
+
+Until 2026-08-31 both of those commands also required `pip install pandas lxml`, which is why 04
+exited 3 INFRA on its first scheduled CI run: pandas is deliberately not a dependency of this
+project, so the test could never run on a runner. It now uses the shipping stdlib parser. Test 01
+still carries the same `pandas` import, and is excluded from CI for unrelated reasons (metered
+Twelve Data quota) — install pandas by hand if you ever run it.
