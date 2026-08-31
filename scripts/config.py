@@ -189,6 +189,19 @@ LIFE_PROFILE_KEYWORDS = [
     # tax-advantaged account a family can hold.
     "dependent care", "dependent care assistance", "childcare", "child care", "daycare",
     "flexible spending", "fsa", "trump account",
+    # Added 2026-08-31 after CI run 33430444119: the model selected 2026-17622 ("Federal Independent
+    # Dispute Resolution Operations; Correction") and 06's G2/prefilter caught that this list
+    # filtered it OUT — the third instance of the same shape as "floodplain" and "dependent care"
+    # above, and the same consequence: in production that document never reaches the model and the
+    # section merely looks quiet.
+    # This is the No Surprises Act machinery. The profile already carries health insurance, health
+    # plan, premium and marketplace, i.e. what coverage COSTS; IDR is what decides what the reader
+    # actually OWES when an out-of-network bill arrives from an in-network hospital, which is the
+    # same category of exposure arriving through a different door. Kept narrow on purpose: the
+    # specific statutory vocabulary, not a general "billing" or "dispute" term that would pull in
+    # every unrelated administrative-appeals rule the six agencies publish.
+    "surprise billing", "balance billing", "out-of-network", "independent dispute resolution",
+    "no surprises",
 ]
 
 # Topics the profile deliberately does NOT cover, with the reason. This is the companion to the list
