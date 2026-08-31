@@ -37,6 +37,7 @@ jobs:
       - run: pip install -r requirements.txt -c constraints.txt
 
       - name: Print the data spine (all four numbers + breadth + news counts)
+        id: spine
         run: |
           python -m scripts.build_briefing --spine | tee spine.txt
           grep -q "breadth: {'sp500': {'value'" spine.txt || { echo "::error::S&P breadth did not compute from the runner"; exit 1; }
@@ -54,6 +55,7 @@ jobs:
       # the names start with digits and contain hyphens, and the directory has no __init__.py — so
       # the import path is the route.
       - name: Policy sources reachable from the runner
+        id: policy_sources
         if: always()
         env:
           BRIEFING_SMOKE_ALLOW_DEV: "true"
@@ -63,6 +65,7 @@ jobs:
       # The Utah bill DETAIL page is the riskiest parse in the policy leg: the passed-bills rows
       # carry relative hrefs, and the detail text is what the invented-figure guard compares against.
       - name: Utah bill detail (relative hrefs resolve; detail text extracts)
+        id: utah_detail
         if: always()
         env:
           BRIEFING_SMOKE_ALLOW_DEV: "true"
@@ -72,6 +75,7 @@ jobs:
       # The keyword prefilter decides what the model never sees. A silent recall regression here
       # (a \b that can never match, a missing inflection) deletes candidates with no visible symptom.
       - name: Prefilter recall (the keyword gate does not silently drop candidates)
+        id: prefilter
         if: always()
         env:
           BRIEFING_SMOKE_ALLOW_DEV: "true"
@@ -83,6 +87,7 @@ jobs:
       # renders exactly like a good one, and the weekly run is where a "someone edited config"
       # regression surfaces as a push instead of as a wrong date on the page.
       - name: Policy calendar (no entry can go stale, no label claims an unannounced date)
+        id: calendar
         if: always()
         env:
           BRIEFING_SMOKE_ALLOW_DEV: "true"
@@ -93,6 +98,7 @@ jobs:
       # article fetch IS its accuracy guarantee — and a rotted seed title or a guard that stopped
       # matching produces a page that looks exactly as good as a working one. Keyless.
       - name: Lesson sources (seed articles resolve; the invented-figure guard still bites)
+        id: lesson_sources
         if: always()
         env:
           BRIEFING_SMOKE_ALLOW_DEV: "true"
@@ -106,6 +112,7 @@ jobs:
       # but only this one measures the User-Agent itself and controls with the old generic string,
       # so a PASS here means "not throttled" rather than "nobody is being throttled today".
       - name: Wikipedia User-Agent (policy-compliant, and survives a burst)
+        id: wikipedia_ua
         if: always()
         env:
           BRIEFING_SMOKE_ALLOW_DEV: "true"
@@ -117,6 +124,7 @@ jobs:
       # on a pause would burn lessons the reader never heard, and no server-side check could ever
       # see it. Needs neither network nor key; the runner image ships Node.
       - name: Client pointer (a lesson advances only when the briefing actually finished)
+        id: client_pointer
         if: always()
         env:
           BRIEFING_SMOKE_ALLOW_DEV: "true"
@@ -127,6 +135,7 @@ jobs:
       # one side only turns a fallback day into a quietly different briefing. Needs neither network
       # nor key; runs Python and Node against each other.
       - name: Narration mirror (the mp3 script and the device-voice script say the same thing)
+        id: narration
         if: always()
         env:
           BRIEFING_SMOKE_ALLOW_DEV: "true"
@@ -136,6 +145,7 @@ jobs:
       # 2026-08-20, so the narrower rule replacing that exclusion gets a machine. Uses the same
       # GEMINI_API_KEY as the briefing for its live half; C1/C2/C4 run without it.
       - name: US news editorial (events and outcomes, never the partisan contest)
+        id: editorial
         if: always()
         env:
           BRIEFING_SMOKE_ALLOW_DEV: "true"
@@ -148,6 +158,7 @@ jobs:
       # daily briefing already relies on — one model call per run. Seeded decoys make a
       # first-N-documents answer fail.
       - name: Policy relevance (model picks the right documents, invents no figures)
+        id: relevance
         if: always()
         env:
           BRIEFING_SMOKE_ALLOW_DEV: "true"
@@ -164,15 +175,77 @@ jobs:
       # `secrets.NTFY_TOPIC` would resolve to empty and the [ -n ] guard would skip without a word.
       # Hence the `else`: a guard that skips silently IS the dead alarm this step exists to prevent,
       # so an empty topic on a red run must annotate the run rather than report green and page nobody.
+      # WHY THIS IS TWO CLASSES AND NOT ONE. Until 2026-08-31 every red run sent one high-priority
+      # push saying "a data leg went red ... Check the Data Smoke run", whatever had actually
+      # broken. On 08-17 that page fired for a transient Gemini 5xx, and on 08-31 it fired again
+      # because a live news item happened to say "Republican". A pager that cannot tell a dead
+      # source from a model having an opinion about today's news is a pager you learn to swipe
+      # away — and the one it needs to survive is the Nasdaq-100-breadth-is-dead-for-22-days
+      # kind. So:
+      #
+      #   SOURCE steps   a feed, a scrape, a fetch or a deterministic rule. If one of these is red
+      #                  something is genuinely broken or has drifted, and it stays HIGH priority.
+      #   JUDGMENT steps a live model call scored against whatever the world published today. These
+      #                  flap. Still reported, still turns the RUN red (the run is the durable
+      #                  record and must not lie), but pushes at LOW priority and says so.
+      #
+      # The run being red is deliberately NOT softened with continue-on-error: a green checkmark
+      # over a failed assertion is how a guard rots. Only the interruption is graded.
       - name: Alert on a red data-smoke run (nothing else pages on this)
         if: failure() || cancelled()
         env:
           NTFY_TOPIC: ${{ secrets.NTFY_SUB }}
+          SPINE: ${{ steps.spine.outcome }}
+          POLICY_SOURCES: ${{ steps.policy_sources.outcome }}
+          UTAH_DETAIL: ${{ steps.utah_detail.outcome }}
+          PREFILTER: ${{ steps.prefilter.outcome }}
+          CALENDAR: ${{ steps.calendar.outcome }}
+          LESSON_SOURCES: ${{ steps.lesson_sources.outcome }}
+          WIKIPEDIA_UA: ${{ steps.wikipedia_ua.outcome }}
+          CLIENT_POINTER: ${{ steps.client_pointer.outcome }}
+          NARRATION: ${{ steps.narration.outcome }}
+          EDITORIAL: ${{ steps.editorial.outcome }}
+          RELEVANCE: ${{ steps.relevance.outcome }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: |
+          # A step that never ran (an earlier one cancelled the job) reports "" or "skipped" and must
+          # not be counted as broken — only an explicit "failure" is a failure.
+          bad_sources=""
+          bad_judgment=""
+          # `return 0` is load-bearing: this step runs under `bash -e`, and a bare `[ ] && x`
+          # exits non-zero when the test is false, which would abort the alert before it pages.
+          src() { [ "$1" = failure ] && bad_sources="$bad_sources $2"; return 0; }
+          jdg() { [ "$1" = failure ] && bad_judgment="$bad_judgment $2"; return 0; }
+          src "$SPINE"          "market-spine"
+          src "$POLICY_SOURCES" "policy-sources"
+          src "$UTAH_DETAIL"    "utah-detail"
+          src "$PREFILTER"      "prefilter"
+          src "$CALENDAR"       "policy-calendar"
+          src "$LESSON_SOURCES" "lesson-sources"
+          src "$WIKIPEDIA_UA"   "wikipedia-user-agent"
+          src "$CLIENT_POINTER" "client-pointer"
+          src "$NARRATION"      "narration-mirror"
+          jdg "$EDITORIAL"      "us-news-editorial"
+          jdg "$RELEVANCE"      "policy-relevance"
+          bad_sources="${bad_sources# }"; bad_judgment="${bad_judgment# }"
+
+          if [ -n "$bad_sources" ]; then
+            title="Data smoke FAILED"; prio="high"
+            body="A DATA SOURCE went red from the runner: ${bad_sources}. Something is broken or has drifted upstream."
+            [ -n "$bad_judgment" ] && body="${body} (Also flapping, lower stakes: ${bad_judgment}.)"
+          elif [ -n "$bad_judgment" ]; then
+            title="Data smoke: a judgment test flapped"; prio="low"
+            body="Every data source is HEALTHY. Only a live model-scored check went red: ${bad_judgment}. These depend on whatever the world published today, so this is usually not a regression — worth a look, not worth your morning."
+          else
+            # Red with no failed step of either class: a cancel, a timeout, or a step this alert does
+            # not know about. Fail loud rather than guess — silence here would be the bug.
+            title="Data smoke FAILED"; prio="high"
+            body="The run went red but no known step reported failure — it was cancelled, timed out, or a new step is missing from the alert's step list."
+          fi
+
           if [ -n "${NTFY_TOPIC}" ]; then
-            curl -s -H "Title: Data smoke FAILED" -H "Priority: high" \
-              -d "A data leg went red from the runner (market spine, policy sources, Utah detail, prefilter or model relevance). Check the Data Smoke run." \
-              "https://ntfy.sh/${NTFY_TOPIC}" || true
+            curl -s -H "Title: ${title}" -H "Priority: ${prio}" -H "Click: ${RUN_URL}"               -d "${body}" "https://ntfy.sh/${NTFY_TOPIC}" || true
+            echo "paged: [${prio}] ${title} — ${body}"
           else
             echo "::error::Data smoke went red and NTFY_TOPIC was EMPTY — this run paged NOBODY. The NTFY_SUB repo secret is missing, renamed or rotated; restore it under exactly that name (the workflow maps secrets.NTFY_SUB -> NTFY_TOPIC)."
           fi
