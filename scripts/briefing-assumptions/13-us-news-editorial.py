@@ -64,9 +64,26 @@ except Exception as e:                                  # noqa: BLE001 - any imp
 
 # The contest vocabulary. Two distinct kinds, deliberately: REACTION verbs (the shape of an
 # attack-quote story) and HORSE-RACE nouns (the shape of a who-is-winning story). A bare party name
-# is included because in a three-sentence summary there is essentially no way to name a party
-# without the item being about the fight — an EVENT summary says "a federal appeals court ruled",
-# not "Republicans said".
+# is included because in a three-sentence summary there is rarely a way to name a party without the
+# item being about the fight — an EVENT summary says "a federal appeals court ruled", not
+# "Republicans said".
+#
+# ONE MEASURED EXCEPTION, added 2026-08-31. "Rarely" is not "never", and the original rule said
+# never. A live run went red on "Former Republican congressman George Santos has received a lifetime
+# ban from the prediction-market platform Kalshi" — an event story about a betting platform, in
+# which the party word is BIOGRAPHY attached to a person, not a description of a fight. So a party
+# adjective immediately qualifying a person's role is not a hit.
+#
+# The carve-out is deliberately narrow, and note what it does NOT cover: the PLURAL collective
+# ("Republicans said", "Democrats blasted") is the party acting as a political actor and still
+# fires, as does a party word with no role noun behind it. C1 pins both directions — a
+# biographical sentence sits in EVENT_COPY and the plural forms sit in CONTEST_COPY — so this
+# exception cannot quietly widen into "party names are always fine".
+BIOGRAPHICAL = re.compile(
+    r"\b(Republican|Democratic|Democrat|GOP)\s+"
+    r"(congressman|congresswoman|congressmember|representative|rep\.?|senator|sen\.?|governor|"
+    r"gov\.?|lawmaker|legislator|mayor|attorney general|official|appointee|nominee|aide|"
+    r"strategist|donor|operative|chairman|chairwoman|chair)\b", re.I)
 CONTEST = re.compile(
     r"\b("
     r"slammed|blasted|lashed out|hit back|fired back|doubled down|rebuked|decried|denounced|"
@@ -83,18 +100,33 @@ EVENT_COPY = [
     "counties.",
     "Harvard agreed to a 53 million dollar settlement over body parts taken from its morgue.",
     "Health officials linked an outbreak of food poisoning to alfalfa sprouts sold in two states.",
+    # The 2026-08-31 false positive, kept verbatim as the regression it is: party as BIOGRAPHY in a
+    # story that is about a betting platform, not about a fight.
+    "Former Republican congressman George Santos has received a lifetime ban from the "
+    "prediction-market platform Kalshi after an investigation into wash trading.",
+    "A Democratic senator was named in the indictment unsealed by federal prosecutors on Tuesday.",
 ]
 CONTEST_COPY = [
     "Critics slammed the decision, and Democrats said they would fight it in the midterms.",
     "The governor hit back at Republicans, doubling down on his earlier comments.",
     "Polling shows the measure is deeply partisan, with approval ratings split along party lines.",
     "The backlash was immediate, and the campaign trail feud escalated over the weekend.",
+    # The other side of the carve-out: the PLURAL collective must still fire, or BIOGRAPHICAL has
+    # widened into "party names are always fine" and C3 stops measuring anything.
+    "Republicans said the vote proved their point, and Democrats accused them of stalling.",
 ]
 
 
 def contest_hits(text):
-    """Every contest word in one piece of copy. Empty list == clean."""
-    return sorted({m.group(0).lower() for m in CONTEST.finditer(text or "")})
+    """Every contest word in one piece of copy. Empty list == clean.
+
+    Biographical uses of a party name are blanked first (see BIOGRAPHICAL) so "Former Republican
+    congressman X was charged" reads as the event it is. Blanking rather than post-filtering the
+    match list is deliberate: a post-filter would have to guess WHICH "republican" a hit came from
+    when a summary contains two.
+    """
+    return sorted({m.group(0).lower()
+                   for m in CONTEST.finditer(BIOGRAPHICAL.sub(" ", text or ""))})
 
 
 def main():
@@ -166,8 +198,14 @@ def main():
                                 f"C3 a live US item carries contest vocabulary {hits}: "
                                 f"{it.get('summary','')[:110]!r} — the events-not-contest rule is "
                                 f"not holding against real wire copy")
+                    # Counted from THIS check's own findings, not assumed. Until 2026-08-31 this
+                    # line said "all clean" unconditionally and a real run printed the failure and
+                    # "all clean" together — a report that contradicts itself teaches the reader to
+                    # believe neither half.
+                    dirty = sum(1 for it in items if contest_hits(f"{it.get('summary','')}"))
+                    verdict = "all clean" if not dirty else f"{dirty} carrying contest vocabulary"
                     notes.append(f"NOTE C3 ran: {len(items)} US item(s) from {len(news['us'])} "
-                                 f"live candidates, all clean.")
+                                 f"live candidates, {verdict}.")
         except Exception as e:                          # noqa: BLE001
             notes.append(f"NOTE C3 SKIPPED (infrastructure): {type(e).__name__}: {e}")
 
