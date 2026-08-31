@@ -1,12 +1,12 @@
 {
-  "checked_at": "2026-08-04T16:09:26.927368+00:00",
+  "checked_at": "2026-08-31T21:28:57.786323+00:00",
   "federal_register": {
     "window_days": 45,
-    "since": "2026-06-20",
+    "since": "2026-07-17",
     "agencies": 6,
-    "count": 21,
+    "count": 25,
     "per_page": 100,
-    "returned": 21,
+    "returned": 25,
     "truncated": false,
     "types_seen": [
       "Proposed Rule",
@@ -14,9 +14,9 @@
     ]
   },
   "pmms": {
-    "rows": 2889,
-    "latest_date": "2026-07-30",
-    "age_days": 5,
+    "rows": 2893,
+    "latest_date": "2026-08-27",
+    "age_days": 4,
     "pmms30": "6.66"
   },
   "utah_legislature": {
