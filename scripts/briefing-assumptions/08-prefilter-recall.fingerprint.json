@@ -1,7 +1,7 @@
 {
-  "checked_at": "2026-08-20T22:04:20.587473+00:00",
+  "checked_at": "2026-08-31T19:34:04.812632+00:00",
   "keyword_source": "config.LIFE_PROFILE_KEYWORDS",
-  "keyword_count": 51,
+  "keyword_count": 56,
   "recall_federal": {
     "2026-13286": [
       "pell",
