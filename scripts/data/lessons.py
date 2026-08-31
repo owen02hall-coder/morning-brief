@@ -24,6 +24,7 @@ WHAT IS CHECKED HERE, before a single token is spent:
 None, and `first_usable()` walks a candidate list until one answers.
 """
 import json
+import urllib.error
 import urllib.parse
 import urllib.request
 
@@ -33,7 +34,20 @@ from . import retry
 # Wikipedia asks automated clients to identify themselves with a contact-bearing UA and throttles
 # generic ones. Module-local (not config.USER_AGENT) for the same reason mortgage.py and market.py
 # keep theirs local: a per-source quirk belongs next to the code that has the quirk.
-WIKI_UA = "morning-briefing/1.0 (personal daily briefing; https://github.com/) python-urllib"
+#
+# THE CONTACT IS LOAD-BEARING, NOT DECORATION. Until 2026-08-31 this string ended in a bare
+# "https://github.com/" — a hostname with no repo and no address, which Wikimedia's User-Agent
+# policy treats as unidentified. The effect is rate-limit class, not a block: at a slow trickle the
+# generic UA is let through, but the lesson leg fetches candidates in a tight burst and under burst
+# Wikimedia throttled it to 100%. Measured 2026-08-31, 12 distinct titles, alternating order, no
+# sleeps: generic UA 429 on 12/12, this UA 200 on 12/12. That is what killed Owen's Alphabet Soup
+# for days and produced the "degraded sections: alphabet soup" push.
+#
+# So: keep a real repo URL and a real contact address here. 14-wikipedia-ua.py asserts that shape
+# AND re-measures the burst, because the failure is silent-ish (one low-priority ping that does not
+# name a cause) and a future edit could re-generalise the string without anything going red.
+WIKI_UA = ("morning-brief/1.0 (https://github.com/owen02hall-coder/morning-brief; "
+           "owen02hall@gmail.com) python-urllib/3.12")
 
 
 def _get(params):
@@ -99,11 +113,29 @@ def first_usable(titles, already_taught):
 
     A transport failure on one candidate is logged and skipped, not raised — the next candidate is a
     free second chance, and the caller's own fallback (config.LESSON_SEED_ARTICLES) is behind that.
+
+    ONE EXCEPTION: a 429 ends the walk immediately. The candidates are not independent when the
+    failure is a rate limit — the limiter is keyed on this client, not on the title, so title N+1 is
+    guaranteed to get the same answer title N just got. On 2026-08-31 that guarantee played out
+    exactly: 16 candidates, 16 x 429, and the first two burned the whole process-global retry budget
+    (retry.py sizes RETRY_EXTRA_ATTEMPT_BUDGET for a documented 12-request policy/mortgage surface
+    that never counted this leg) so the other fourteen ran unprotected. Walking on costs the budget
+    the policy section needs, costs wall-clock inside a 10-minute job, and cannot succeed. Stopping
+    also makes the log say "rate-limited" once instead of hiding it under sixteen identical lines.
     """
     taught = {(t or "").strip().lower() for t in (already_taught or [])}
     for title in titles or []:
         try:
             article = fetch_article(title)
+        except urllib.error.HTTPError as e:
+            if e.code == 429:
+                print(f"lesson: RATE-LIMITED by Wikipedia on {title!r} (HTTP 429) — abandoning the "
+                      f"walk; every remaining candidate would get the same answer. Check WIKI_UA "
+                      f"against Wikimedia's User-Agent policy: an unidentified UA is throttled "
+                      f"under burst and that is what this looks like.")
+                return None
+            print(f"lesson: fetch failed for {title!r} ({type(e).__name__}: {e}) — next candidate")
+            continue
         except Exception as e:
             print(f"lesson: fetch failed for {title!r} ({type(e).__name__}: {e}) — next candidate")
             continue

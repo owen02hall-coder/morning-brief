@@ -291,6 +291,14 @@ RETRY_BACKOFF_SECONDS = (2, 5)   # before retry 1, before retry 2. Small on purp
                                  # briefing.yml's 10-minute budget with everything else, and a
                                  # rate-limit window that needs more than 7s of patience is not one
                                  # a morning build should sit through.
+RETRY_AFTER_MAX_SECONDS = 15     # Ceiling on an honoured `Retry-After`. The header is used only when
+                                 # it asks for MORE than RETRY_BACKOFF_SECONDS (see
+                                 # retry.retry_after_seconds): a 429 that names its own window and
+                                 # gets slept through for less is a wasted attempt. Capped because a
+                                 # server answering `Retry-After: 3600` must not park a 600s job —
+                                 # and because the worst case has to stay computable. Two honoured
+                                 # 15s waits is 30s, which keeps the added-worst-case arithmetic
+                                 # below inside its stated margin.
 RETRY_EXTRA_ATTEMPT_BUDGET = 4   # EXTRA attempts allowed across the WHOLE run (see retry.py). Not a
                                  # per-call number: the retried surface is up to 12 requests (PMMS,
                                  # Federal Register, <=2 Utah list pages, <=2 backfill list pages,

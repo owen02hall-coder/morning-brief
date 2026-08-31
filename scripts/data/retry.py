@@ -29,6 +29,17 @@ WHAT IS RETRIED — and what deliberately is NOT.
   authorization decision, and this whole module is a response to that one measurement. A 403 that
   is genuinely permanent costs 2 extra requests and 7 seconds once per run and then gives up.
 
+A LEG THIS BUDGET WAS NEVER SIZED FOR. The arithmetic below counts the policy + mortgage surface
+and nothing else, because that is all there was when it was written. Owen's Alphabet Soup arrived
+later and fetches up to ~16 Wikipedia candidates per run, sharing this same process-global budget
+and running LAST, so it inherits whatever policy left behind. On 2026-08-31 that mismatch bit: a
+rate-limited Wikipedia spent all 4 extras on the first TWO candidates and the remaining fourteen ran
+with no retries at all. The fix was not a bigger budget — it was upstream, in
+`lessons.first_usable()`, which now abandons the walk on the first 429 because a limiter is keyed on
+the client and not on the title, so candidate N+1 cannot do better than candidate N. Keep that
+property if this module changes: a per-item retry loop over a GLOBAL failure is how a budget
+evaporates.
+
 THE PER-RUN BUDGET is the reason this is safe to switch on across a dozen possible requests. The
 retried surface is PMMS + the Federal Register + up to 2 Utah list pages (the annual harvest chain)
 + up to 2 more (the one-time effective-date backfill) + up to 3 bill-JSON fetches + up to 3 HTML
@@ -106,6 +117,33 @@ def transient_reason(exc):
     return None
 
 
+def retry_after_seconds(exc):
+    """The server's own `Retry-After` in seconds, clamped, or None when it did not send a usable one.
+
+    A rate limiter that answers 429 usually says how long to wait, and ignoring that is how a retry
+    loop turns into three fast failures: on 2026-08-31 en.wikipedia.org sent `Retry-After: 3` on
+    every lesson fetch while this module slept its fixed 2s and 5s and gave up. Honouring the header
+    costs nothing when it is absent and is the difference between a retry and a formality.
+
+    Clamped to RETRY_AFTER_MAX_SECONDS because the header is attacker-adjacent input in the general
+    case and a job-timeout risk in this one: a server answering `Retry-After: 3600` must not park the
+    build for an hour. Only the delta-seconds form is parsed; the HTTP-date form is rare here and a
+    bad parse must fall back to the fixed backoff rather than raise inside the error path."""
+    headers = getattr(exc, "headers", None)
+    if headers is None:
+        return None
+    raw = headers.get("Retry-After")
+    if raw is None:
+        return None
+    try:
+        secs = int(str(raw).strip())
+    except (TypeError, ValueError):
+        return None                      # HTTP-date form or junk: fall back to the fixed backoff
+    if secs < 0:
+        return None
+    return min(secs, config.RETRY_AFTER_MAX_SECONDS)
+
+
 def call(what, fn):
     """Run `fn()`, retrying it on transient failures. Returns fn()'s value or re-raises its error.
 
@@ -135,7 +173,13 @@ def call(what, fn):
                 raise
             _budget -= 1
             delay = backoff[min(attempt - 1, len(backoff) - 1)]
+            # The server's own number wins when it is larger: sleeping less than a rate limiter asked
+            # for guarantees the retry re-fails and spends the budget for nothing.
+            asked = retry_after_seconds(e)
+            source = ""
+            if asked is not None and asked > delay:
+                delay, source = asked, " (server Retry-After)"
             print(f"retry: {what} — {reason} on attempt {attempt}/{attempts} "
-                  f"({type(e).__name__}: {e}); retrying in {delay}s "
+                  f"({type(e).__name__}: {e}); retrying in {delay}s{source} "
                   f"(retry budget left: {_budget})")
             time.sleep(delay)

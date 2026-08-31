@@ -23,9 +23,9 @@ permissions:
 jobs:
   spine:
     runs-on: ubuntu-latest
-    # 12, not 10: the job now runs six assumption tests (05 fetches the Federal Register, the PMMS
+    # 12, not 10: the job now runs seven assumption tests (05 fetches the Federal Register, the PMMS
     # CSV and Utah's passed-bills page; 07 fetches bill detail pages; 09 is offline and instant; 10
-    # fetches ~50 Wikipedia articles, one per seed title) plus a real model call in 06.
+    # fetches ~50 Wikipedia articles, one per seed title; 14 fires two 8-request Wikipedia bursts) plus a real model call in 06.
     timeout-minutes: 12
     steps:
       - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3 (SHA-pinned: mutable tags are a supply-chain vector in a push-capable job)
@@ -98,6 +98,19 @@ jobs:
           BRIEFING_SMOKE_ALLOW_DEV: "true"
           PYTHONPATH: ${{ github.workspace }}
         run: python scripts/briefing-assumptions/10-lesson-sources.py
+
+      # The 2026-08-31 regression this exists for: WIKI_UA ended in a bare "https://github.com/",
+      # Wikimedia read that as unidentified, and throttled the lesson leg to 100% UNDER BURST while
+      # a slow one-off fetch still succeeded. Alphabet Soup went dark for days behind a low-priority
+      # "degraded sections" push that named no cause. 10 above fetches seeds and would go red too,
+      # but only this one measures the User-Agent itself and controls with the old generic string,
+      # so a PASS here means "not throttled" rather than "nobody is being throttled today".
+      - name: Wikipedia User-Agent (policy-compliant, and survives a burst)
+        if: always()
+        env:
+          BRIEFING_SMOKE_ALLOW_DEV: "true"
+          PYTHONPATH: ${{ github.workspace }}
+        run: python scripts/briefing-assumptions/14-wikipedia-ua.py
 
       # The lesson pointer is the only rule in this project enforced entirely in the browser — the
       # build CANNOT know whether the audio reached the end. A regression that advanced the pointer

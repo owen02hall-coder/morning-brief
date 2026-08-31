@@ -112,7 +112,23 @@ for title in sample:
           f"{len(got['extract'])} chars" if got else "missing, a stub, or a disambiguation page")
 
 if NETWORK_DEAD and len(NETWORK_DEAD) == len(sample):
-    print("\nINFRA: en.wikipedia.org is unreachable from here — nothing was proved.", file=sys.stderr)
+    # "Everything failed" is TWO different verdicts and they must not share an exit. A dead
+    # network proves nothing and is INFRA. A wall of 429s proves something specific and
+    # reproducible: this client is being rate-limited, which on 2026-08-31 meant an unidentified
+    # WIKI_UA throttled under burst. Reporting that as "unreachable" is what invites the next
+    # reader to shrug it off as flakiness and lose another week of Alphabet Soup.
+    # 14-wikipedia-ua.py is the dedicated guard for the User-Agent itself.
+    if sum(1 for line in NETWORK_DEAD if "429" in line) > len(sample) // 2:
+        print("\nFAIL: en.wikipedia.org RATE-LIMITED every seed fetch (HTTP 429). This is not a "
+              "network outage — it is a limiter keyed on this client. Check WIKI_UA in "
+              "scripts/data/lessons.py against Wikimedia's User-Agent policy (it needs a real "
+              "repo URL and a contact address); 14-wikipedia-ua.py measures exactly this.",
+              file=sys.stderr)
+        for line in NETWORK_DEAD[:3]:
+            print(f"  {line}", file=sys.stderr)
+        sys.exit(1)
+    print("\nINFRA: en.wikipedia.org is unreachable from here — nothing was proved.",
+          file=sys.stderr)
     for line in NETWORK_DEAD[:3]:
         print(f"  {line}", file=sys.stderr)
     sys.exit(3)
