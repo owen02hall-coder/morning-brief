@@ -313,6 +313,42 @@ def _prompt(candidates, max_items):
     )
 
 
+def _describe(exc):
+    """Unwrap what ACTUALLY went wrong, with the HTTP status attached.
+
+    google-genai retries internally and surfaces tenacity's RetryError, whose str() is only
+    "RetryError[<Future ... raised ClientError>]". The status code, the API's own message and the
+    reason all sit inside the wrapped exception, and without them the failure is unactionable: a 429
+    (quota — wait, or slow the calls down) and a 400 (the request is malformed or too large — fix
+    the prompt) are opposite problems that print identically. Both 2026-08-31 and 2026-09-01 runs
+    died here and neither log said which it was.
+
+    Walks last_attempt (tenacity) then __cause__/__context__, bounded, and reports the whole chain.
+    """
+    chain, cur = [], exc
+    for _ in range(5):
+        parts = [type(cur).__name__]
+        for attr in ("code", "status"):
+            val = getattr(cur, attr, None)
+            if val is not None:
+                parts.append(f"{attr}={val}")
+        parts.append(str(getattr(cur, "message", None) or cur)[:300])
+        chain.append(" ".join(parts))
+        nxt = None
+        last_attempt = getattr(cur, "last_attempt", None)     # tenacity RetryError
+        if last_attempt is not None:
+            try:
+                nxt = last_attempt.exception()
+            except Exception:                                 # noqa: BLE001
+                nxt = None
+        if nxt is None:
+            nxt = cur.__cause__ or cur.__context__
+        if nxt is None or nxt is cur:
+            break
+        cur = nxt
+    return " <- ".join(chain)
+
+
 def _generate(candidates, max_items, timeout_ms):
     """Return (items, parse_error). Raises on a transport failure — the caller maps that to INFRA.
 
@@ -403,7 +439,12 @@ def main():
         # would be measuring a prompt production no longer sends.
         items, parse_err = _generate(candidates, config.MAX_POLICY_SELECTIONS, 60_000)
     except Exception as e:                              # noqa: BLE001
-        print(f"INFRA: model call failed: {e}", file=sys.stderr)
+        # Size is reported with the error because it is the other half of the diagnosis: a 400 on
+        # a large prompt points at the request, a 429 on any size points at the quota.
+        print(f"INFRA: model call failed: {_describe(e)}", file=sys.stderr)
+        print(f"INFRA:   request was {len(candidates)} candidate(s), "
+              f"{len(_prompt(candidates, config.MAX_POLICY_SELECTIONS)):,} prompt chars, "
+              f"model={MODEL}", file=sys.stderr)
         sys.exit(3)
     if parse_err:
         failures.append(f"G1 {parse_err}")
@@ -564,7 +605,7 @@ def main():
                 raise RuntimeError("forced by POLICY_PROBE_FAIL_CONTROL")
             items, err = _generate(docs, config.MAX_POLICY_SELECTIONS, 30_000)
         except Exception as e:                          # noqa: BLE001
-            return None, f"{which} probe DID NOT COMPLETE ({type(e).__name__}: {str(e)[:120]})"
+            return None, f"{which} probe DID NOT COMPLETE ({_describe(e)})"
         if err:
             return None, f"{which} probe returned an unparseable object ({str(err)[:80]})"
         return items, None
