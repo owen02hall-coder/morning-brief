@@ -1,4 +1,4 @@
-"""W1-W3: the Wikipedia User-Agent is policy-compliant AND survives a burst.
+"""W1-W4: the Wikipedia User-Agent is policy-compliant, REACHES every caller, and survives a burst.
 
 WHY THIS TEST EXISTS. Owen's Alphabet Soup went dark for days at the end of August 2026 and the only
 signal was a LOW-priority "degraded sections: alphabet soup" push that named no cause. The cause was
@@ -19,14 +19,19 @@ which is this project's two-part gate for enforcing a bug class with a machine i
 
   W1  SHAPE — the UA carries a repo URL with a real path and a contact address. Offline, so it fails
       in CI even on a day Wikipedia is unreachable. This is the half that pins the actual regression.
-  W2  BURST — the shipped UA really survives a rapid burst of distinct titles. Network. This is the
+  W2  REACH — every production module that actually FETCHES Wikipedia sends config.WIKI_UA. Offline.
+      Added 2026-09-01, because W1 reads ONE string and therefore stayed green through a second
+      instance of the same bug: the 08-31 fix reached data/lessons.py and left data/constituents.py
+      — breadth's constituent scrape — sending the generic config.USER_AGENT to the same host. A
+      correct constant that no caller reaches is not a fix, and nothing here could tell.
+  W3  BURST — the shipped UA really survives a rapid burst of distinct titles. Network. This is the
       half that would catch Wikimedia tightening policy again in a way W1's shape rule cannot predict.
-  W3  CONTROL — the deliberately-generic UA still gets throttled under the same burst. Without this,
-      W2 passes trivially the day Wikimedia stops rate-limiting anyone at all, and the test would go
+  W4  CONTROL — the deliberately-generic UA still gets throttled under the same burst. Without this,
+      W3 passes trivially the day Wikimedia stops rate-limiting anyone at all, and the test would go
       on reporting PASS while proving nothing.
 
-W3 is a measurement of someone else's live policy, not of our code, so it is reported and NOT failed
-on: if Wikimedia ever stops throttling generic UAs, W2 is what still matters and W3 turning yellow is
+W4 is a measurement of someone else's live policy, not of our code, so it is reported and NOT failed
+on: if Wikimedia ever stops throttling generic UAs, W3 is what still matters and W4 turning yellow is
 information, not a broken build.
 
   BRIEFING_SMOKE_ALLOW_DEV=true  required, like every test here.
@@ -59,7 +64,7 @@ def check(label, ok, detail=""):
 
 
 # The UA this test measures the SHIPPED one against. Kept verbatim as it stood when the outage
-# happened, so W3 controls with the real thing rather than an invented near-miss.
+# happened, so W4 controls with the real thing rather than an invented near-miss.
 GENERIC_UA = "morning-briefing/1.0 (personal daily briefing; https://github.com/) python-urllib"
 
 # Distinct titles, no repeats: a burst of the SAME title can be served from cache and would not
@@ -89,15 +94,41 @@ def burst(ua, titles):
 
 # ---------------------------------------------------------------- W1: shape (offline, no network)
 print("\nW1  the shipped User-Agent identifies this client the way Wikimedia's policy asks")
-ua = lessons.WIKI_UA
+ua = config.WIKI_UA
 check("names a contact address", "@" in ua, ua)
 check("carries a repo URL with a path, not a bare host",
       "https://github.com/" in ua and ua.split("https://github.com/", 1)[1][:1] not in ("", " ", ")"),
       "a bare https://github.com/ is what Wikimedia read as unidentified")
 check("is not the generic UA that caused the 2026-08-31 outage", ua != GENERIC_UA)
 
-# ---------------------------------------------------------------- W2 + W3: the live burst
-print(f"\nW2  the shipped UA survives a burst of {len(BURST_TITLES)} distinct titles, no sleeps")
+# ---------------------------------------------------------------- W2: reach (offline, no network)
+print("")
+print("W2  every production module that fetches Wikipedia sends config.WIKI_UA")
+WIKI_MARKERS = ("wikipedia.org", "WIKI_API", "_WIKI_URL")
+# A mention is not a fetch. retry.py names en.wikipedia.org in a comment about Retry-After and
+# builds no request at all, so requiring a marker AND request construction keeps this guard off
+# files it has no business grading — which is how a guard earns the right to stay un-muted.
+FETCH_MARKERS = ("urllib.request.Request(", "urlopen(")
+
+callers = []
+for _d in (os.path.join(REPO, "scripts", "data"), os.path.join(REPO, "scripts", "breadth")):
+    for _fn in sorted(os.listdir(_d)):
+        if not _fn.endswith(".py") or _fn == "__init__.py":
+            continue
+        with open(os.path.join(_d, _fn), encoding="utf-8") as _fh:
+            _src = _fh.read()
+        if any(m in _src for m in WIKI_MARKERS) and any(m in _src for m in FETCH_MARKERS):
+            callers.append((f"scripts/{os.path.basename(_d)}/{_fn}", "config.WIKI_UA" in _src))
+
+# Fail closed on an empty result: two modules fetch Wikipedia today, so "no callers found" means the
+# markers rotted and this check is grading nothing — never that the risk went away.
+check("the detector still finds the Wikipedia callers", len(callers) >= 2, f"found {len(callers)}")
+for _path, _uses in callers:
+    check(f"{_path} sends config.WIKI_UA", _uses,
+          "" if _uses else "fetches Wikipedia with some OTHER User-Agent — the 08-31 bug, again")
+
+# ---------------------------------------------------------------- W3 + W4: the live burst
+print(f"\nW3  the shipped UA survives a burst of {len(BURST_TITLES)} distinct titles, no sleeps")
 shipped = burst(ua, BURST_TITLES)
 ok200 = sum(1 for c in shipped if c == 200)
 n429 = sum(1 for c in shipped if c == 429)
@@ -113,14 +144,14 @@ if len(dead) == len(shipped):
 check(f"shipped UA is not throttled ({ok200}/{len(shipped)} OK, {n429} x 429)",
       n429 == 0, f"codes={shipped}")
 
-print("\nW3  control: the old generic UA is still throttled under the same burst")
+print("\nW4  control: the old generic UA is still throttled under the same burst")
 control = burst(GENERIC_UA, BURST_TITLES)
 c429 = sum(1 for c in control if c == 429)
 if c429:
-    print(f"  PASS  generic UA throttled {c429}/{len(control)} — W2 above is a real measurement")
+    print(f"  PASS  generic UA throttled {c429}/{len(control)} — W3 above is a real measurement")
 else:
     print(f"  NOTE  generic UA was NOT throttled this run (codes={control}). Wikimedia may have "
-          f"relaxed its limiter, or this host is under a quota the runner is not. W2 stands on its "
+          f"relaxed its limiter, or this host is under a quota the runner is not. W3 stands on its "
           f"own; this line is information, not a failure.")
 
 print("\n" + ("FAIL: " + ", ".join(FAILURES) if FAILURES

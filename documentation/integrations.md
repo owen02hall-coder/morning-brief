@@ -53,12 +53,14 @@ values live in the repo. Environment variable names only are listed here.
 - `04-external-boundary-smoke.py` imports that same parser (with its own hardcoded page URLs, so a
   bad `config` URL still fails only in the spine step) — the boundary test and production must not
   hold two different opinions about what the page looks like.
-- KNOWN GAP (open, not yet fixed): sent with `config.USER_AGENT`
-  (`morning-briefing/1.0 (personal use)`), NOT the contact-bearing `lessons.WIKI_UA` that the
-  Alphabet Soup fetches were moved to on 2026-08-31 after Wikimedia throttled the generic string
-  to 100% under burst. Breadth hits the same host with the same class of UA and would fail the
-  same way — silently, degrading to the last-good cache. `14-wikipedia-ua.py` measures
-  `lessons.WIKI_UA` only, so nothing currently watches this callsite.
+- Sent with `config.WIKI_UA`, the contact-bearing UA Wikimedia's policy asks for — the same
+  constant the Alphabet Soup fetches use. It was `config.USER_AGENT` until 2026-09-01: the
+  2026-08-31 throttling fix defined the compliant string inside `data/lessons.py` and so reached
+  the lesson leg only, leaving this callsite on a generic UA against the same host. Two requests a
+  day is a trickle and a trickle survives, which is why nothing went red; the exposure was to
+  whatever day Wikimedia tightened the limiter, and it would have surfaced as breadth quietly
+  serving its cached value. `14-wikipedia-ua.py` W2 now fails if any Wikipedia caller stops using
+  the shared constant.
 
 ## Wikipedia action API (Alphabet Soup source material)
 

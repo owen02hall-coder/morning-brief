@@ -186,7 +186,8 @@ Heartbeat (independent cron): python -m scripts.heartbeat
   (`SP500_PARSE` / `NDX100_PARSE`) and the fetch/parse split are exported so
   `04-external-boundary-smoke.py` asserts THIS parser rather than a second copy; its former
   `pandas.read_html` copy both could not run in CI and stayed green under cell-shape drift that
-  breaks this regex.
+  breaks this regex. Fetches with `config.WIKI_UA` (the contact-bearing Wikipedia UA shared with
+  `data/lessons.py`), not `config.USER_AGENT` — see integrations.md.
 - `scripts/breadth/percent_above_ma.py`: % of index members above their 200-day MA. ONE daily
   POST to TradingView's scanner (top `BREADTH_SCAN_LIMIT` US common stocks; the `type=stock`
   filter is load-bearing — without it ADR/fund rows displace ~90 S&P names), intersected with

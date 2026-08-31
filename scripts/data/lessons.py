@@ -31,28 +31,17 @@ import urllib.request
 from .. import config
 from . import retry
 
-# Wikipedia asks automated clients to identify themselves with a contact-bearing UA and throttles
-# generic ones. Module-local (not config.USER_AGENT) for the same reason mortgage.py and market.py
-# keep theirs local: a per-source quirk belongs next to the code that has the quirk.
-#
-# THE CONTACT IS LOAD-BEARING, NOT DECORATION. Until 2026-08-31 this string ended in a bare
-# "https://github.com/" — a hostname with no repo and no address, which Wikimedia's User-Agent
-# policy treats as unidentified. The effect is rate-limit class, not a block: at a slow trickle the
-# generic UA is let through, but the lesson leg fetches candidates in a tight burst and under burst
-# Wikimedia throttled it to 100%. Measured 2026-08-31, 12 distinct titles, alternating order, no
-# sleeps: generic UA 429 on 12/12, this UA 200 on 12/12. That is what killed Owen's Alphabet Soup
-# for days and produced the "degraded sections: alphabet soup" push.
-#
-# So: keep a real repo URL and a real contact address here. 14-wikipedia-ua.py asserts that shape
-# AND re-measures the burst, because the failure is silent-ish (one low-priority ping that does not
-# name a cause) and a future edit could re-generalise the string without anything going red.
-WIKI_UA = ("morning-brief/1.0 (https://github.com/owen02hall-coder/morning-brief; "
-           "owen02hall@gmail.com) python-urllib/3.12")
+# The contact-bearing Wikipedia UA. Was defined here until 2026-08-31, on the reasoning that a
+# per-source quirk belongs next to the code with the quirk — true while this was the only module
+# talking to Wikimedia, and false the moment breadth's constituent scrape counted too. It now lives
+# in config.WIKI_UA so both callers share one string; see the comment there for why the contact in
+# it is load-bearing and what the burst throttle did to this section. No local alias on purpose —
+# two names for one UA is how the two copies drifted apart in the first place.
 
 
 def _get(params):
     url = config.WIKI_API + "?" + urllib.parse.urlencode(params)
-    req = urllib.request.Request(url, headers={"User-Agent": WIKI_UA,
+    req = urllib.request.Request(url, headers={"User-Agent": config.WIKI_UA,
                                                "Accept": "application/json"})
     with urllib.request.urlopen(req, timeout=config.WIKI_TIMEOUT) as r:
         return json.loads(r.read().decode("utf-8"))

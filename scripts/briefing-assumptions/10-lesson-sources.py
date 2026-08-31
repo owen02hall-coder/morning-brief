@@ -121,7 +121,7 @@ if NETWORK_DEAD and len(NETWORK_DEAD) == len(sample):
     if sum(1 for line in NETWORK_DEAD if "429" in line) > len(sample) // 2:
         print("\nFAIL: en.wikipedia.org RATE-LIMITED every seed fetch (HTTP 429). This is not a "
               "network outage — it is a limiter keyed on this client. Check WIKI_UA in "
-              "scripts/data/lessons.py against Wikimedia's User-Agent policy (it needs a real "
+              "scripts/config.py against Wikimedia's User-Agent policy (it needs a real "
               "repo URL and a contact address); 14-wikipedia-ua.py measures exactly this.",
               file=sys.stderr)
         for line in NETWORK_DEAD[:3]:

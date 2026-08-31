@@ -29,8 +29,15 @@ NDX100_PARSE = {"row_pattern": r'<tr[^>]*>\s*<td[^>]*>([A-Z][A-Z0-9.\-]{0,6})\s*
 
 
 def fetch_page(url):
-    """Read a Wikipedia constituents article. Separate from the parse so a test can supply its own URL."""
-    req = urllib.request.Request(url, headers={"User-Agent": config.USER_AGENT})
+    """Read a Wikipedia constituents article. Separate from the parse so a test can supply its own URL.
+
+    config.WIKI_UA, not config.USER_AGENT: this is the same host that throttled the lesson leg to
+    100% under burst on 2026-08-31 for sending a UA with no contact in it. Two requests a day is a
+    trickle and a generic UA survives one, which is exactly why this sat here unnoticed after that
+    fix landed next door — the failure would arrive silently, as breadth degrading to its cached
+    value, on whatever day Wikimedia tightened the limiter.
+    """
+    req = urllib.request.Request(url, headers={"User-Agent": config.WIKI_UA})
     with urllib.request.urlopen(req, timeout=30) as r:
         return r.read().decode("utf-8", "replace")
 

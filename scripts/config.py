@@ -544,6 +544,24 @@ LESSON_SEED_ARTICLES = {
 # "-1" for a miss, which is exactly the kind of shape a caller silently mis-reads).
 WIKI_API = "https://en.wikipedia.org/w/api.php"
 WIKI_TIMEOUT = 20
+
+# Wikimedia asks automated clients to identify themselves with a contact-bearing UA and throttles
+# generic ones. THE CONTACT IS LOAD-BEARING, NOT DECORATION. Until 2026-08-31 the lesson leg's copy
+# of this ended in a bare "https://github.com/" — a hostname with no repo path and no address, which
+# the User-Agent policy treats as unidentified. The effect is a rate-limit CLASS, not a block: at a
+# trickle a generic UA is let through (so a one-off manual fetch looks fine), but under burst
+# Wikimedia throttled it to 100%. Measured that day, 12 distinct titles, no sleeps: generic UA 429
+# on 12/12, this UA 200 on 12/12. That is what took Owen's Alphabet Soup dark for days.
+#
+# THIS LIVES IN CONFIG, not next to one caller, because the quirk belongs to the SOURCE and there
+# are two callers: data/lessons.py (the action API) and data/constituents.py (the constituent
+# tables that breadth intersects against). It was module-local in lessons.py until 2026-08-31, and
+# the cost of that was exactly what you would expect — the 08-31 fix reached the lesson leg and left
+# breadth still hitting the same host with the same generic USER_AGENT, one burst away from the same
+# silent throttle. Keep a real repo URL and a real contact address here; 14-wikipedia-ua.py asserts
+# the shape, re-measures the burst, and (W4) fails if a Wikipedia caller stops using this constant.
+WIKI_UA = ("morning-brief/1.0 (https://github.com/owen02hall-coder/morning-brief; "
+           "owen02hall@gmail.com) python-urllib/3.12")
 LESSON_MIN_SOURCE_CHARS = 900     # below this an article is a stub — not enough to teach from, and
                                   # the model would have to fill the gap from memory, which is the
                                   # one thing this design exists to prevent.
