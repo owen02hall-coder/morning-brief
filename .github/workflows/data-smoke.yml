@@ -23,9 +23,11 @@ permissions:
 jobs:
   spine:
     runs-on: ubuntu-latest
-    # 12, not 10: the job now runs eight assumption tests (05 fetches the Federal Register, the PMMS
-    # CSV and Utah's passed-bills page; 07 fetches bill detail pages; 09 is offline and instant; 10
-    # fetches ~50 Wikipedia articles, one per seed title; 14 fires two 8-request Wikipedia bursts; 04 reads 11 RSS feeds and both constituent tables) plus a real model call in 06.
+    # 12, not 10: the job runs twelve assumption tests plus the spine. The network-heavy ones are 05
+    # (Federal Register, the PMMS CSV, Utah's passed-bills page), 07 (bill detail pages), 10 (~50
+    # Wikipedia articles, one per seed title), 14 (two 8-request Wikipedia bursts) and 04 (11 RSS
+    # feeds and both constituent tables); 06 makes a real model call. 09, 11, 12 and 15 need no
+    # network at all and finish in milliseconds.
     timeout-minutes: 12
     steps:
       - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3 (SHA-pinned: mutable tags are a supply-chain vector in a push-capable job)
@@ -39,9 +41,15 @@ jobs:
       - name: Print the data spine (all four numbers + breadth + news counts)
         id: spine
         run: |
-          python -m scripts.build_briefing --spine | tee spine.txt
-          grep -q "breadth: {'sp500': {'value'" spine.txt || { echo "::error::S&P breadth did not compute from the runner"; exit 1; }
-          grep -q "'ndx100': {'value'" spine.txt || { echo "::error::Nasdaq-100 breadth did not compute from the runner"; exit 1; }
+          rc=0
+          (
+            set -e
+            python -m scripts.build_briefing --spine | tee spine.txt
+            grep -q "breadth: {'sp500': {'value'" spine.txt || { echo "::error::S&P breadth did not compute from the runner"; exit 1; }
+            grep -q "'ndx100': {'value'" spine.txt || { echo "::error::Nasdaq-100 breadth did not compute from the runner"; exit 1; }
+          ) || rc=$?
+          echo "rc=$rc" >> "$GITHUB_OUTPUT"
+          exit $rc
 
       # Runner-IP proof for the planned policy section: .gov hosts and le.utah.gov are exactly the
       # kind of surface that answers a home connection but blocks/limits cloud egress. Passing
@@ -75,7 +83,10 @@ jobs:
         env:
           BRIEFING_SMOKE_ALLOW_DEV: "true"
           PYTHONPATH: ${{ github.workspace }}
-        run: python scripts/briefing-assumptions/04-external-boundary-smoke.py
+        run: |
+          rc=0; python scripts/briefing-assumptions/04-external-boundary-smoke.py || rc=$?
+          echo "rc=$rc" >> "$GITHUB_OUTPUT"
+          exit $rc
 
       - name: Policy sources reachable from the runner
         id: policy_sources
@@ -83,7 +94,10 @@ jobs:
         env:
           BRIEFING_SMOKE_ALLOW_DEV: "true"
           PYTHONPATH: ${{ github.workspace }}
-        run: python scripts/briefing-assumptions/05-policy-sources.py
+        run: |
+          rc=0; python scripts/briefing-assumptions/05-policy-sources.py || rc=$?
+          echo "rc=$rc" >> "$GITHUB_OUTPUT"
+          exit $rc
 
       # The Utah bill DETAIL page is the riskiest parse in the policy leg: the passed-bills rows
       # carry relative hrefs, and the detail text is what the invented-figure guard compares against.
@@ -93,7 +107,10 @@ jobs:
         env:
           BRIEFING_SMOKE_ALLOW_DEV: "true"
           PYTHONPATH: ${{ github.workspace }}
-        run: python scripts/briefing-assumptions/07-utah-bill-detail.py
+        run: |
+          rc=0; python scripts/briefing-assumptions/07-utah-bill-detail.py || rc=$?
+          echo "rc=$rc" >> "$GITHUB_OUTPUT"
+          exit $rc
 
       # The keyword prefilter decides what the model never sees. A silent recall regression here
       # (a \b that can never match, a missing inflection) deletes candidates with no visible symptom.
@@ -103,7 +120,10 @@ jobs:
         env:
           BRIEFING_SMOKE_ALLOW_DEV: "true"
           PYTHONPATH: ${{ github.workspace }}
-        run: python scripts/briefing-assumptions/08-prefilter-recall.py
+        run: |
+          rc=0; python scripts/briefing-assumptions/08-prefilter-recall.py || rc=$?
+          echo "rc=$rc" >> "$GITHUB_OUTPUT"
+          exit $rc
 
       # The static policy calendar is the one HARDCODED leg — nothing fetches it, so nothing can
       # report it broken. This step needs no network and no key; it is here because a rotted entry
@@ -115,7 +135,10 @@ jobs:
         env:
           BRIEFING_SMOKE_ALLOW_DEV: "true"
           PYTHONPATH: ${{ github.workspace }}
-        run: python scripts/briefing-assumptions/09-policy-calendar.py
+        run: |
+          rc=0; python scripts/briefing-assumptions/09-policy-calendar.py || rc=$?
+          echo "rc=$rc" >> "$GITHUB_OUTPUT"
+          exit $rc
 
       # Owen's Alphabet Soup is the only section with no feed behind its subject matter, so the
       # article fetch IS its accuracy guarantee — and a rotted seed title or a guard that stopped
@@ -126,7 +149,10 @@ jobs:
         env:
           BRIEFING_SMOKE_ALLOW_DEV: "true"
           PYTHONPATH: ${{ github.workspace }}
-        run: python scripts/briefing-assumptions/10-lesson-sources.py
+        run: |
+          rc=0; python scripts/briefing-assumptions/10-lesson-sources.py || rc=$?
+          echo "rc=$rc" >> "$GITHUB_OUTPUT"
+          exit $rc
 
       # The 2026-08-31 regression this exists for: WIKI_UA ended in a bare "https://github.com/",
       # Wikimedia read that as unidentified, and throttled the lesson leg to 100% UNDER BURST while
@@ -140,7 +166,10 @@ jobs:
         env:
           BRIEFING_SMOKE_ALLOW_DEV: "true"
           PYTHONPATH: ${{ github.workspace }}
-        run: python scripts/briefing-assumptions/14-wikipedia-ua.py
+        run: |
+          rc=0; python scripts/briefing-assumptions/14-wikipedia-ua.py || rc=$?
+          echo "rc=$rc" >> "$GITHUB_OUTPUT"
+          exit $rc
 
       # The lesson pointer is the only rule in this project enforced entirely in the browser — the
       # build CANNOT know whether the audio reached the end. A regression that advanced the pointer
@@ -151,7 +180,10 @@ jobs:
         if: always()
         env:
           BRIEFING_SMOKE_ALLOW_DEV: "true"
-        run: node scripts/briefing-assumptions/11-client-pointer.js
+        run: |
+          rc=0; node scripts/briefing-assumptions/11-client-pointer.js || rc=$?
+          echo "rc=$rc" >> "$GITHUB_OUTPUT"
+          exit $rc
 
       # The briefing is spoken by two hand-mirrored implementations — scripts/tts.py for the mp3 and
       # docs/app.js for the device voice. Nothing in production compares them, so a change made on
@@ -162,7 +194,10 @@ jobs:
         if: always()
         env:
           BRIEFING_SMOKE_ALLOW_DEV: "true"
-        run: python scripts/briefing-assumptions/12-narration-mirror.py
+        run: |
+          rc=0; python scripts/briefing-assumptions/12-narration-mirror.py || rc=$?
+          echo "rc=$rc" >> "$GITHUB_OUTPUT"
+          exit $rc
 
       # The US national section re-admits a category summarize.SYSTEM excluded outright until
       # 2026-08-20, so the narrower rule replacing that exclusion gets a machine. Uses the same
@@ -173,7 +208,10 @@ jobs:
         env:
           BRIEFING_SMOKE_ALLOW_DEV: "true"
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-        run: python scripts/briefing-assumptions/13-us-news-editorial.py
+        run: |
+          rc=0; python scripts/briefing-assumptions/13-us-news-editorial.py || rc=$?
+          echo "rc=$rc" >> "$GITHUB_OUTPUT"
+          exit $rc
 
       # Relevance is the whole product: ~80% of agency-filtered Federal Register documents are
       # irrelevant to this user, so "did the model pick the right ones" is the assumption that
@@ -187,7 +225,24 @@ jobs:
           BRIEFING_SMOKE_ALLOW_DEV: "true"
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           PYTHONPATH: ${{ github.workspace }}
-        run: python scripts/briefing-assumptions/06-policy-relevance.py
+        run: |
+          rc=0; python scripts/briefing-assumptions/06-policy-relevance.py || rc=$?
+          echo "rc=$rc" >> "$GITHUB_OUTPUT"
+          exit $rc
+
+      # The alarm is the only output of this job, and nothing else checks what it SAYS. On 08-31 it
+      # described an unrunnable test as an upstream data drift and sent the reader looking for a
+      # break that did not exist. Offline, instant, no key: it re-runs the shipped classifier over
+      # the cases that matter and fails if exit 3 ever pages as a dead source again.
+      - name: Alert classification (a test that could not run must not page as a dead source)
+        id: alert_class
+        if: always()
+        env:
+          BRIEFING_SMOKE_ALLOW_DEV: "true"
+        run: |
+          rc=0; python scripts/briefing-assumptions/15-alert-classification.py || rc=$?
+          echo "rc=$rc" >> "$GITHUB_OUTPUT"
+          exit $rc
 
       # A scheduled red run only emails the repo owner, and email is exactly the channel that gets
       # ignored — which is how Nasdaq-100 breadth stayed dead for 22 days with a working guard in
@@ -198,7 +253,7 @@ jobs:
       # `secrets.NTFY_TOPIC` would resolve to empty and the [ -n ] guard would skip without a word.
       # Hence the `else`: a guard that skips silently IS the dead alarm this step exists to prevent,
       # so an empty topic on a red run must annotate the run rather than report green and page nobody.
-      # WHY THIS IS TWO CLASSES AND NOT ONE. Until 2026-08-31 every red run sent one high-priority
+      # WHY THIS IS THREE CLASSES AND NOT ONE. Until 2026-08-31 every red run sent one high-priority
       # push saying "a data leg went red ... Check the Data Smoke run", whatever had actually
       # broken. On 08-17 that page fired for a transient Gemini 5xx, and on 08-31 it fired again
       # because a live news item happened to say "Republican". A pager that cannot tell a dead
@@ -211,6 +266,15 @@ jobs:
       #   JUDGMENT steps a live model call scored against whatever the world published today. These
       #                  flap. Still reported, still turns the RUN red (the run is the durable
       #                  record and must not lie), but pushes at LOW priority and says so.
+      #   HARNESS        (added 2026-09-01) ANY step that exits 2 REFUSED or 3 INFRA. The test did
+      #                  not fail - it never ran, so it proved nothing in either direction. HIGH
+      #                  priority, because an unrunnable guard is the 22-day-breadth failure mode,
+      #                  but a DIFFERENT message: the fault is in the runner, not upstream. This
+      #                  class exists because the 08-31 split above was still built on step
+      #                  outcome alone, and outcome cannot see an exit code. The very first
+      #                  scheduled run after 04 was wired in exited 3 on `import pandas` and paged
+      #                  "a DATA SOURCE went red ... drifted upstream", which was false in every
+      #                  particular and cost a morning looking upstream for it.
       #
       # The run being red is deliberately NOT softened with continue-on-error: a green checkmark
       # over a failed assertion is how a guard rots. Only the interruption is graded.
@@ -230,31 +294,72 @@ jobs:
           NARRATION: ${{ steps.narration.outcome }}
           EDITORIAL: ${{ steps.editorial.outcome }}
           RELEVANCE: ${{ steps.relevance.outcome }}
+          ALERT_CLASS: ${{ steps.alert_class.outcome }}
+          SPINE_RC: ${{ steps.spine.outputs.rc }}
+          BOUNDARY_RC: ${{ steps.boundary.outputs.rc }}
+          POLICY_SOURCES_RC: ${{ steps.policy_sources.outputs.rc }}
+          UTAH_DETAIL_RC: ${{ steps.utah_detail.outputs.rc }}
+          PREFILTER_RC: ${{ steps.prefilter.outputs.rc }}
+          CALENDAR_RC: ${{ steps.calendar.outputs.rc }}
+          LESSON_SOURCES_RC: ${{ steps.lesson_sources.outputs.rc }}
+          WIKIPEDIA_UA_RC: ${{ steps.wikipedia_ua.outputs.rc }}
+          CLIENT_POINTER_RC: ${{ steps.client_pointer.outputs.rc }}
+          NARRATION_RC: ${{ steps.narration.outputs.rc }}
+          EDITORIAL_RC: ${{ steps.editorial.outputs.rc }}
+          RELEVANCE_RC: ${{ steps.relevance.outputs.rc }}
+          ALERT_CLASS_RC: ${{ steps.alert_class.outputs.rc }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: |
           # A step that never ran (an earlier one cancelled the job) reports "" or "skipped" and must
           # not be counted as broken — only an explicit "failure" is a failure.
           bad_sources=""
           bad_judgment=""
+          broken=""
           # `return 0` is load-bearing: this step runs under `bash -e`, and a bare `[ ] && x`
           # exits non-zero when the test is false, which would abort the alert before it pages.
-          src() { [ "$1" = failure ] && bad_sources="$bad_sources $2"; return 0; }
-          jdg() { [ "$1" = failure ] && bad_judgment="$bad_judgment $2"; return 0; }
-          src "$SPINE"          "market-spine"
-          src "$BOUNDARY"       "external-boundary"
-          src "$POLICY_SOURCES" "policy-sources"
-          src "$UTAH_DETAIL"    "utah-detail"
-          src "$PREFILTER"      "prefilter"
-          src "$CALENDAR"       "policy-calendar"
-          src "$LESSON_SOURCES" "lesson-sources"
-          src "$WIKIPEDIA_UA"   "wikipedia-user-agent"
-          src "$CLIENT_POINTER" "client-pointer"
-          src "$NARRATION"      "narration-mirror"
-          jdg "$EDITORIAL"      "us-news-editorial"
-          jdg "$RELEVANCE"      "policy-relevance"
-          bad_sources="${bad_sources# }"; bad_judgment="${bad_judgment# }"
+          #
+          # $2 is the step's EXIT CODE, and it is the thing that tells a red assertion apart from a
+          # test that never ran. Every test here exits 0 PASS / 1 FAIL / 2 REFUSED / 3 INFRA, and
+          # until 2026-09-01 this alert read only the step OUTCOME, which collapses all three
+          # non-zero codes into "failure". On 08-31 that turned an exit 3 - 04 importing pandas,
+          # which is not and never was a dependency of this project - into a high-priority "a DATA
+          # SOURCE went red ... something is broken or has drifted upstream". Nothing had drifted.
+          # The one page this job exists to make trustworthy spent its credibility describing a
+          # missing package as an upstream outage, and sent the reader hunting for it.
+          #
+          # An UNSET $2 falls through to the old behaviour on purpose: if step outputs ever stop
+          # surviving a failed step, this degrades to exactly the pre-2026-09-01 classification
+          # instead of dropping the alert.
+          cls() {
+            [ "$1" = failure ] || return 0
+            case "$2" in
+              2|3) broken="$broken $3" ;;
+              *)   if [ "$4" = src ]; then bad_sources="$bad_sources $3"
+                   else bad_judgment="$bad_judgment $3"; fi ;;
+            esac
+            return 0
+          }
+          cls "$SPINE"          "$SPINE_RC"          "market-spine"         src
+          cls "$BOUNDARY"       "$BOUNDARY_RC"       "external-boundary"    src
+          cls "$POLICY_SOURCES" "$POLICY_SOURCES_RC" "policy-sources"       src
+          cls "$UTAH_DETAIL"    "$UTAH_DETAIL_RC"    "utah-detail"          src
+          cls "$PREFILTER"      "$PREFILTER_RC"      "prefilter"            src
+          cls "$CALENDAR"       "$CALENDAR_RC"       "policy-calendar"      src
+          cls "$LESSON_SOURCES" "$LESSON_SOURCES_RC" "lesson-sources"       src
+          cls "$WIKIPEDIA_UA"   "$WIKIPEDIA_UA_RC"   "wikipedia-user-agent" src
+          cls "$CLIENT_POINTER" "$CLIENT_POINTER_RC" "client-pointer"       src
+          cls "$NARRATION"      "$NARRATION_RC"      "narration-mirror"     src
+          cls "$EDITORIAL"      "$EDITORIAL_RC"      "us-news-editorial"    jdg
+          cls "$RELEVANCE"      "$RELEVANCE_RC"      "policy-relevance"     jdg
+          cls "$ALERT_CLASS"    "$ALERT_CLASS_RC"    "alert-classification" src
+          bad_sources="${bad_sources# }"; bad_judgment="${bad_judgment# }"; broken="${broken# }"
 
-          if [ -n "$bad_sources" ]; then
+          if [ -n "$broken" ]; then
+            title="Data smoke COULD NOT RUN"; prio="high"
+            body="A smoke test never got to make its assertion: ${broken}. That is a HARNESS fault - exit 2 (refused: the dev gate or a key is missing) or exit 3 (infra: a missing package, an unreachable host, a hang) - NOT a data source drifting. Fix the runner, not the upstream. And note what this does NOT say: those legs were never measured, so their sources are unproven rather than healthy."
+            [ -n "$bad_sources" ] && body="${body} (Separately, a data source IS red: ${bad_sources}.)"
+            [ -n "$bad_judgment" ] && body="${body} (Also flapping, lower stakes: ${bad_judgment}.)"
+          elif [ -n "$bad_sources" ]; then
             title="Data smoke FAILED"; prio="high"
             body="A DATA SOURCE went red from the runner: ${bad_sources}. Something is broken or has drifted upstream."
             [ -n "$bad_judgment" ] && body="${body} (Also flapping, lower stakes: ${bad_judgment}.)"

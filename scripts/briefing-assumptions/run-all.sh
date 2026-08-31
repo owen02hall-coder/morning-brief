@@ -19,6 +19,9 @@ TESTS=(
                                     # guard still bites
   "11-client-pointer.js"            # no key, no network (needs node) — the ONLY check on the
                                     # lesson pointer, which lives entirely in the browser
+  "15-alert-classification.py"      # no key, no network (needs bash) — the data-smoke alarm names
+                                    # the RIGHT cause: a test that could not run must never page as
+                                    # a data source that drifted
   "14-wikipedia-ua.py"              # no key — the Wikipedia UA is policy-compliant AND survives a
                                     # burst; controls with the old generic UA
   "01-twelvedata-runner-pull.py"    # needs TWELVEDATA_API_KEY; run in CI for runner-IP proof
