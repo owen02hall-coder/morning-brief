@@ -90,12 +90,22 @@ stamped) so neither the annual 491-row harvest nor any detail fetch runs. Read-o
 directory's fingerprint.
 Exit: 0 PASS / 1 FAIL / 2 REFUSED / 3 INFRA.
 
+The two single-candidate probes are INSTRUMENTATION and cannot fail this test: neither their answer
+nor their availability is asserted on. That was already the documented intent and was not true of
+the code until 2026-09-01, when a Gemini ClientError on the negative probe exited 3 and took a run
+red in which every real gate had passed. The BATCH call is the load-bearing one and still exits 3.
+
 NEGATIVE CONTROLS (authored 2026-08-03 and NOT yet exercised — this file cannot be run to green on a
 machine with no GEMINI_API_KEY; exercise them on the first CI dispatch and record the result here):
   POLICY_PROBE_DOC_OVERRIDE=<a document_number that is irrelevant to the profile>
       -> flips the recorded single-candidate MEASUREMENT and prints its premise NOTE. It forces
          nothing red: since 2026-08-03 the probe asserts nothing (see "WHAT G8 USED TO BE" above).
          The hard pin on that document lives in 08's R1.
+  POLICY_PROBE_FAIL_CONTROL=positive|negative|both
+      -> forces the named single-candidate probe to raise. The test must still exit 0, reporting the
+         probe as unavailable in its NOTES and as null in the fingerprint. This pins the 2026-09-01
+         fix: before it, a raising probe exited 3 and reddened the whole run. Needs GEMINI_API_KEY,
+         since the load-bearing batch call runs first.
   POLICY_SEEN_CONTROL=true
       -> forces the NEW G8 red: it re-applies the removed pre-prompt dedupe to `get_policy()`'s
          output, i.e. it simulates exactly the "optimization" G8 exists to catch.
@@ -535,38 +545,59 @@ def main():
                         f"get_policy() is reading the seen set")
 
     # --- the single-candidate MEASUREMENT (no longer an assertion — see the docstring) -------------
-    try:
-        pos_items, pos_err = _generate([probe_doc], config.MAX_POLICY_SELECTIONS, 30_000)
-    except Exception as e:                              # noqa: BLE001
-        print(f"INFRA: single-candidate positive probe failed: {e}", file=sys.stderr)
-        sys.exit(3)
-    if pos_err:
-        pos_items = []
-    pos_hit = next((i for i in pos_items
-                    if _norm_url(i.url) == _norm_url(probe_doc["url"])), None)
+    def _probe(docs, which):
+        """One single-candidate probe. NEVER fatal — this is a measurement, not a gate.
 
-    try:
-        neg_items, neg_err = _generate([DECOYS[0]], config.MAX_POLICY_SELECTIONS, 30_000)
-    except Exception as e:                              # noqa: BLE001
-        print(f"INFRA: single-candidate negative probe failed: {e}", file=sys.stderr)
-        sys.exit(3)
-    if neg_err:
-        neg_items = []
+        Until 2026-09-01 a transport failure in either probe exited 3 and turned the whole weekly
+        run red. Both probes are extra model calls whose RESULT this test explicitly does not assert
+        on ("It forces nothing red", per the negative-controls note above), so the old code could
+        fail the run on the way to not asserting anything — and on 2026-08-31 it did: a Gemini
+        ClientError on the negative probe took the run down and paged at high priority while every
+        real gate in this file had passed.
 
+        A probe that cannot run is reported as unavailable and tracked, exactly like a probe that
+        runs and answers badly. The load-bearing model call is the BATCH one above, which still
+        exits 3 when it fails, because every assertion here depends on it.
+        """
+        try:
+            if os.environ.get("POLICY_PROBE_FAIL_CONTROL") in (which, "both"):
+                raise RuntimeError("forced by POLICY_PROBE_FAIL_CONTROL")
+            items, err = _generate(docs, config.MAX_POLICY_SELECTIONS, 30_000)
+        except Exception as e:                          # noqa: BLE001
+            return None, f"{which} probe DID NOT COMPLETE ({type(e).__name__}: {str(e)[:120]})"
+        if err:
+            return None, f"{which} probe returned an unparseable object ({str(err)[:80]})"
+        return items, None
+
+    pos_items, pos_unavailable = _probe([probe_doc], "positive")
+    neg_items, neg_unavailable = _probe([DECOYS[0]], "negative")
+    pos_hit = None if pos_items is None else next(
+        (i for i in pos_items if _norm_url(i.url) == _norm_url(probe_doc["url"])), None)
+
+    def _count(items, unavailable):
+        return unavailable if unavailable else f"{len(items)} item(s)"
+
+    if pos_items is None or neg_items is None:
+        solo = ("the solo mode was NOT measured this run — a probe did not complete, which says "
+                "nothing about the model and nothing about the data")
+    elif pos_hit is None:
+        solo = "the solo mode still fails"
+    else:
+        solo = "the solo mode selected this time"
     notes = probe_note + [
-        f"NOTE single-candidate probe (measurement, NOT a gate): asked about ONE on-profile document "
-        f"({PROBE_DOC}, {probe_doc['title'][:50]!r}) the model returned {len(pos_items)} item(s), "
-        f"cited={pos_hit is not None}; asked about ONE decoy ({DECOYS[0]['title']!r}) it returned "
-        f"{len(neg_items)} item(s).",
-        f"NOTE   {'the solo mode still fails' if pos_hit is None else 'the solo mode selected this time'}"
-        f" — production does not use it: get_policy() sent {len(window_a)} candidates on this run and "
-        f"the seen-set dedupe runs after selection. Track this across runs; do NOT re-derive a "
-        f"pre-prompt dedupe from a green measurement.",
+        f"NOTE single-candidate probe (measurement, NOT a gate, and NEVER fatal): asked about ONE "
+        f"on-profile document ({PROBE_DOC}, {probe_doc['title'][:50]!r}) the model returned "
+        f"{_count(pos_items, pos_unavailable)}, cited={pos_hit is not None}; asked about ONE decoy "
+        f"({DECOYS[0]['title']!r}) it returned {_count(neg_items, neg_unavailable)}.",
+        f"NOTE   {solo} — production does not use it: get_policy() sent {len(window_a)} candidates "
+        f"on this run and the seen-set dedupe runs after selection. Track this across runs; do NOT "
+        f"re-derive a pre-prompt dedupe from a green measurement.",
     ]
-    if pos_err:
-        notes.append(f"NOTE   positive probe parse error: {pos_err}")
-    if neg_err:
-        notes.append(f"NOTE   negative probe parse error: {neg_err}")
+    for _unavailable in (pos_unavailable, neg_unavailable):
+        if _unavailable:
+            notes.append(f"NOTE   {_unavailable} — reported, never fatal: this probe asserts "
+                         f"nothing, so it must not be able to redden a run on its way to "
+                         f"asserting nothing.")
 
     # --- fingerprint --------------------------------------------------------------------------------
     fp = {
@@ -591,12 +622,15 @@ def main():
         # False is the 2026-08-03 state of the model and is exactly why production stopped sending
         # single candidates. See "WHAT G8 USED TO BE" in the docstring before acting on a True.
         "single_candidate_probe": {
-            "single_candidate_selects": pos_hit is not None,
+            "single_candidate_selects": None if pos_items is None else pos_hit is not None,
             "asserted": False,
             "positive": {"document_number": PROBE_DOC, "on_profile": probe_on_profile,
-                         "returned": len(pos_items), "cited": pos_hit is not None,
+                         "returned": None if pos_items is None else len(pos_items),
+                         "unavailable": pos_unavailable, "cited": pos_hit is not None,
                          "effect_chars": len(pos_hit.effect or "") if pos_hit else 0},
-            "negative": {"id": DECOYS[0]["id"], "returned": len(neg_items)},
+            "negative": {"id": DECOYS[0]["id"],
+                         "returned": None if neg_items is None else len(neg_items),
+                         "unavailable": neg_unavailable},
         },
         "deliberate_exclusions": [{"document_number": d, "topic": t} for d, _, t in deliberate],
         "batch_invariant": {

@@ -99,9 +99,28 @@ POLLING_PLACE = re.compile(
     r"\b(?:to|at|from|near|outside|inside)\s+the\s+polls\b"
     r"|\bpolling\s+(?:place|station|location|site|booth)s?\b", re.I)
 
+# The THIRD carve-out, 2026-09-01 — and it is the SAME STORY as the second. The run that added
+# POLLING_PLACE went red on "no plans to send troops to the polls for the November elections". The
+# next run went red on the model's re-wording of that same civil-military story: "no plans to deploy
+# military troops to polling sites for the upcoming midterm elections". `polling sites` was carved
+# out correctly and did not fire; `midterm` did.
+#
+# "Midterm elections" NAMES AN ELECTION — it is a date, the same way "the November elections" is a
+# date — where "the midterms" as a bare noun is the horse race itself. So only the full noun phrase
+# is blanked. C1 pins both sides: the sentence above sits in EVENT_COPY, and a bare-"midterms"
+# horse-race line sits in CONTEST_COPY, so this cannot widen into "midterm is always fine".
+#
+# THREE polysemy false positives in three consecutive runs, all three from ONE news story, is worth
+# saying plainly: a keyword detector matches strings, and an election-adjacent EVENT story will keep
+# borrowing election vocabulary to say when it happened. C3 is a JUDGMENT-class check for exactly
+# this reason — it is scored against whatever the world published today and it pages at low
+# priority. Each carve-out here is narrow and pinned; if a fourth arrives, the honest move is to
+# reconsider the mechanism, not to add a fourth hole.
+MIDTERM_DATE = re.compile(r"\bmidterm\s+elections?\b", re.I)
+
 # Blanked before the contest scan, in order. Extend deliberately: every entry here is a hole in the
 # detector, and it earns its place only with a C1 control on each side of it.
-CARVE_OUTS = (BIOGRAPHICAL, POLLING_PLACE)
+CARVE_OUTS = (BIOGRAPHICAL, POLLING_PLACE, MIDTERM_DATE)
 CONTEST = re.compile(
     r"\b("
     r"slammed|blasted|lashed out|hit back|fired back|doubled down|rebuked|decried|denounced|"
@@ -127,6 +146,10 @@ EVENT_COPY = [
     "The US military's top general stated there are no plans to send troops to the polls for the "
     "November elections.",
     "Two polling places in the county were relocated after the building failed a safety inspection.",
+    # The third false positive, kept verbatim: "midterm elections" as a DATE, in the same
+    # civil-military story that produced the second one.
+    "The top U.S. general confirmed that there are no plans to deploy military troops to polling "
+    "sites for the upcoming midterm elections.",
 ]
 CONTEST_COPY = [
     "Critics slammed the decision, and Democrats said they would fight it in the midterms.",
@@ -139,6 +162,10 @@ CONTEST_COPY = [
     # The other side of the polling carve-out: opinion polling is still the horse race.
     "A new poll shows the measure trailing by nine points, and polling has moved against it all "
     "month.",
+    # The other side of the MIDTERM_DATE carve-out. Deliberately built so "midterms" is the ONLY
+    # word here the detector can match — "parties" and "fight" are not in CONTEST — so this control
+    # fails the moment the carve-out widens from the noun phrase to the bare word.
+    "Both parties are pouring money into the midterms as they fight for control of the chamber.",
 ]
 
 

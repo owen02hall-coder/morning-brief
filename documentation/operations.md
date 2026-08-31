@@ -382,6 +382,12 @@ Three lifecycle rules are worth stating outright because they are the ones easie
   run after being wired up went red for that reason and paged as if a data source had drifted. It
   now calls `scripts.data.constituents`, the same parser breadth ships. `01` still imports pandas
   and is deliberately excluded from CI.
+- `06`'s two single-candidate probes are instrumentation and cannot redden the run (2026-09-01);
+  only its batch call and its real gates can. `13`'s C3 is JUDGMENT-class and scored against live
+  wire copy, so it flaps by design and pages at low priority — three consecutive false positives
+  (`Republican congressman` as biography, `the polls` as a place, `midterm elections` as a date) are
+  narrow carve-outs pinned in both directions by C1, not a widening of the rule. A fourth is a
+  signal to reconsider the keyword detector, not to cut a fourth hole in it.
 - The alarm itself is now under test. `15-alert-classification.py` runs the shipped ntfy classifier
   over eight scenarios and fails if a test that could not RUN (exit 2 REFUSED / 3 INFRA) is paged as
   a data source that drifted. That misclassification is what the 08-31 pandas failure produced, and
