@@ -84,6 +84,24 @@ BIOGRAPHICAL = re.compile(
     r"(congressman|congresswoman|congressmember|representative|rep\.?|senator|sen\.?|governor|"
     r"gov\.?|lawmaker|legislator|mayor|attorney general|official|appointee|nominee|aide|"
     r"strategist|donor|operative|chairman|chairwoman|chair)\b", re.I)
+
+# The SECOND carve-out, added the same day as the first and for the same reason: a contest word with
+# two meanings. "Polls" is opinion polling (contest), but "the polls" is a place people vote at, and
+# the run that added this went red on "The US military's top general stated there are no plans to
+# send troops to the polls for the November elections" — a civil-military story, an event by any
+# reading. Same for "polling place" and "polling station".
+#
+# TWO polysemy false positives in two consecutive runs is the honest limit of a keyword detector: it
+# matches strings, and some strings mean two things. The carve-outs stay narrow and each is pinned in
+# BOTH directions by C1, so the detector cannot quietly erode into matching nothing — which is the
+# failure mode that would let C3 pass forever while proving nothing.
+POLLING_PLACE = re.compile(
+    r"\b(?:to|at|from|near|outside|inside)\s+the\s+polls\b"
+    r"|\bpolling\s+(?:place|station|location|site|booth)s?\b", re.I)
+
+# Blanked before the contest scan, in order. Extend deliberately: every entry here is a hole in the
+# detector, and it earns its place only with a C1 control on each side of it.
+CARVE_OUTS = (BIOGRAPHICAL, POLLING_PLACE)
 CONTEST = re.compile(
     r"\b("
     r"slammed|blasted|lashed out|hit back|fired back|doubled down|rebuked|decried|denounced|"
@@ -105,6 +123,10 @@ EVENT_COPY = [
     "Former Republican congressman George Santos has received a lifetime ban from the "
     "prediction-market platform Kalshi after an investigation into wash trading.",
     "A Democratic senator was named in the indictment unsealed by federal prosecutors on Tuesday.",
+    # The second false positive, kept verbatim: "the polls" as a PLACE, in a civil-military story.
+    "The US military's top general stated there are no plans to send troops to the polls for the "
+    "November elections.",
+    "Two polling places in the county were relocated after the building failed a safety inspection.",
 ]
 CONTEST_COPY = [
     "Critics slammed the decision, and Democrats said they would fight it in the midterms.",
@@ -114,19 +136,24 @@ CONTEST_COPY = [
     # The other side of the carve-out: the PLURAL collective must still fire, or BIOGRAPHICAL has
     # widened into "party names are always fine" and C3 stops measuring anything.
     "Republicans said the vote proved their point, and Democrats accused them of stalling.",
+    # The other side of the polling carve-out: opinion polling is still the horse race.
+    "A new poll shows the measure trailing by nine points, and polling has moved against it all "
+    "month.",
 ]
 
 
 def contest_hits(text):
     """Every contest word in one piece of copy. Empty list == clean.
 
-    Biographical uses of a party name are blanked first (see BIOGRAPHICAL) so "Former Republican
-    congressman X was charged" reads as the event it is. Blanking rather than post-filtering the
-    match list is deliberate: a post-filter would have to guess WHICH "republican" a hit came from
-    when a summary contains two.
+    Every pattern in CARVE_OUTS is blanked first, so a contest word used in its OTHER sense reads as
+    the event it is: "Former Republican congressman X was charged", "troops sent to the polls".
+    Blanking rather than post-filtering the match list is deliberate — a post-filter would have to
+    guess WHICH "republican" a hit came from when a summary contains two.
     """
-    return sorted({m.group(0).lower()
-                   for m in CONTEST.finditer(BIOGRAPHICAL.sub(" ", text or ""))})
+    clean = text or ""
+    for pattern in CARVE_OUTS:
+        clean = pattern.sub(" ", clean)
+    return sorted({m.group(0).lower() for m in CONTEST.finditer(clean)})
 
 
 def main():
