@@ -1,7 +1,7 @@
 ---
 title: Operations
 source_files: [.github/workflows/, scripts/build_briefing.py, scripts/heartbeat.py, scripts/notify.py, scripts/briefing-assumptions/]
-entry_points: [".github/workflows/briefing.yml", ".github/workflows/heartbeat.yml", ".github/workflows/shell-guard.yml", ".github/workflows/data-smoke.yml", "scripts/build_briefing.py:main", "scripts/heartbeat.py:main"]
+entry_points: [".github/workflows/briefing.yml", ".github/workflows/heartbeat.yml", ".github/workflows/shell-guard.yml", ".github/workflows/data-smoke.yml", ".github/workflows/guard-triggers.yml", "scripts/build_briefing.py:main", "scripts/heartbeat.py:main"]
 last_verified: 2026-08-11
 ---
 
@@ -70,6 +70,14 @@ How the briefing is scheduled, deployed, monitored, and recovered.
 - Health ping: if any section is unavailable, a low-priority "degraded" ntfy lists the sections. If
   the run crashes, the Python layer sends a high-priority "FAILED" ntfy. A workflow `if: failure()`
   step sends a backstop ntfy in case the crash happens before Python can.
+  - This ping names a SECTION, not a cause, and that is its limit. On 2026-08-31 it correctly said
+    `degraded sections: alphabet soup` for days while the actual fault was a throttled Wikipedia
+    User-Agent. When one arrives, go to the run log and read the leg: `gh run view <id> --log`.
+- Monitoring gap (`notify.monitoring`, normal priority): a SEPARATE title from the health ping,
+  because the two say opposite things about the morning. "Briefing degraded" means a section is
+  missing from the edition about to be read; "Monitoring gap" means the edition is fine but
+  something has stopped watching for the next failure. Titling the second one like the first would
+  send the reader hunting for a problem that is not in the briefing.
 - Market blackout escalation: the build tracks `markets_last_ok` in `state.json`. A single day with
   all four numbers missing is a low-priority "degraded" ping, but once they've been unavailable for
   `MARKETS_STALE_DAYS` (2) days running — a dead source, not a blip — it escalates to a high-priority
@@ -84,6 +92,15 @@ How the briefing is scheduled, deployed, monitored, and recovered.
   at the same ntfy topic, an accepted v1 trade-off). Because it runs on its own schedule and checks
   the real page, it catches both a build that silently no-ops and a build cron that GitHub dropped
   entirely.
+  - It also WATCHES THE WATCHDOG. A red Data Smoke pages; a Data Smoke that never runs is silent,
+    and that is the same shape as the 22-day breadth outage. The heartbeat reads data-smoke.yml's
+    run history and sends a "Monitoring gap" ntfy past `SMOKE_STALE_DAYS` (9 — a weekly cron plus a
+    day of GitHub scheduling slop). It counts `event=schedule` runs ONLY: a manual dispatch proves
+    the tests pass, not that the trigger still fires, and the trigger is what goes missing. Needs
+    `actions: read` on the job. An unreachable API returns "unknown", which is deliberately NOT an
+    alert — the check runs daily against a 9-day threshold, so eight more attempts land before the
+    answer could matter, and a persistent failure still surfaces when the clock runs out. It never
+    exits non-zero, so a stale smoke schedule cannot masquerade as "Heartbeat FAILED".
 - Breadth alerts (per index, S&P 500 and Nasdaq-100): a one-shot normal-priority warning when
   breadth falls below 40% (re-armed only after recovering to 42), and a high-priority daily nag
   below 30% with a day counter (clears at 33, EXTREME below 20). Both suppressed on stale data.
@@ -96,11 +113,35 @@ How the briefing is scheduled, deployed, monitored, and recovered.
   never update (this class shipped broken once).
 - Data smoke: `data-smoke.yml` runs WEEKLY (`0 16 * * 1`, Mondays ~10am Denver) as well as on
   dispatch. It prints the data spine from a runner and fails if either index's breadth doesn't
-  compute, then runs assumption tests 05, 07, 08 and 06 — Federal Register, PMMS, the Utah list page,
-  Utah bill detail pages, the keyword prefilter, and one real model call. Each of those steps is
-  `if: always()` so one dead leg cannot mask the others (on 2026-08-03 a failed spine step skipped the
-  policy check entirely and hid whether `.gov` egress worked at all); the job still goes red if any
-  step fails. A red **or cancelled** run pushes a high-priority ntfy.
+  compute, then runs assumption tests 04, 05, 06, 07, 08, 09, 10, 11, 12, 13 and 14 — the RSS feeds
+  and constituent tables, Federal Register, PMMS, the Utah list page, Utah bill detail pages, the
+  keyword prefilter, the policy calendar, the lesson sources and Wikipedia User-Agent, the client
+  pointer, the narration mirror, and two real model calls. Each step is `if: always()` so one dead
+  leg cannot mask the others (on 2026-08-03 a failed spine step skipped the policy check entirely
+  and hid whether `.gov` egress worked at all); the job still goes red if any step fails.
+  - **The page is GRADED by what broke** (since 2026-08-31). Every step carries an `id:`, and the
+    alert splits them: SOURCE steps (feeds, scrapes, fetches, deterministic rules) page HIGH and are
+    NAMED in the message; JUDGMENT steps — the two live model calls, 06 and 13 — page LOW as "a
+    judgment test flapped", because they are scored against whatever the world published that day
+    and they flap. Before this, every red run sent one high-priority "a data leg went red" whatever
+    had happened: it fired for a transient Gemini 5xx on 08-17 and for a live news item containing
+    the word "Republican" on 08-31. A pager that cannot tell a dead source from a model having an
+    opinion is one you learn to swipe away, and the alert it has to survive is the 22-day kind.
+  - The RUN still goes red for either class, deliberately — no `continue-on-error`. A green check
+    over a failed assertion is how a guard rots; the run is the durable record. Only the
+    interruption is graded. A red run where NO known step reported failure (a cancel, a timeout, or
+    a new step missing from the alert's list) pages HIGH and says exactly that rather than guessing.
+  - **Every assumption test must be RUN by something** — `guard-triggers.yml` (push/PR, offline,
+    seconds) fails the push if an `NN-`named test is invoked by no workflow and is not on its
+    documented exclusion list. The class shipped twice: 04 caught the Nasdaq-100 drift and nobody
+    ran it for 22 days, then the 08-03 fix wired up every OTHER test and still left 04 out until
+    2026-08-31, when its own fingerprint showed it had last run on 08-04. An unwired test does not
+    error or warn — it simply never runs, while a directory of green-looking guards implies coverage
+    that does not exist. A mention in a comment does not count as wired; the check requires a real
+    `python`/`node` invocation of the path. The exclusion list fails closed both ways: a ghost entry
+    would pre-approve a future test reusing the name, and a test both wired and excluded means its
+    written reason is now fiction. Currently excluded: 01 and 02 (metered Twelve Data quota, staged
+    path) and 03 (Gemini quota; its subject is covered transitively by 06 and 13).
   - The schedule is the point, not a convenience. This workflow was dispatch-only until 2026-08-03,
     and that is exactly why Nasdaq-100 breadth stayed dead for 22 days: the guard existed, the
     trigger did not, and a scheduled failure only emails the repo owner — the channel that gets

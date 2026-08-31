@@ -23,7 +23,8 @@ off. Cost is zero on free tiers.
 - Notifications: ntfy delivers a post-publish "ready" push, breadth alerts (two tiers), a
   normal-priority push per newly-arrived federal final rule, and self-monitoring health pings.
 - Guards: `shell-guard.yml` fails any push that changes the PWA shell without a service-worker
-  CACHE bump; `data-smoke.yml` (weekly + dispatch) proves every data leg — market spine, policy
+  CACHE bump; `guard-triggers.yml` (push/PR) fails any push leaving an assumption test wired to no
+  trigger; `data-smoke.yml` (weekly + dispatch) proves every data leg — market spine, policy
   sources, the Utah scrape, the keyword prefilter, the lesson seed articles and prose guards, the
   client-side lesson pointer, and the model's relevance judgement — from a runner IP, and pushes
   ntfy when one goes red.

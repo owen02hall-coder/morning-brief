@@ -6,8 +6,8 @@
     {
       "path": "documentation/architecture.md",
       "title": "Architecture",
-      "summary": "System overview, data flow, modules, key design decisions (incl. the four monitors, the policy-section accuracy guarantees, the no-year static policy calendar, and why the Alphabet Soup lesson pointer is client-side), briefing.json and lessons.json schemas, CLI entry points.",
-      "source_files": ["scripts/", "docs/", ".github/workflows/briefing.yml", ".github/workflows/heartbeat.yml", ".github/workflows/data-smoke.yml", ".github/workflows/shell-guard.yml"],
+      "summary": "System overview, data flow, modules, key design decisions (incl. the monitors and their fail-closed guards, the policy-section accuracy guarantees, the no-year static policy calendar, and why the Alphabet Soup lesson pointer is client-side), briefing.json and lessons.json schemas, CLI entry points.",
+      "source_files": ["scripts/", "docs/", ".github/workflows/briefing.yml", ".github/workflows/heartbeat.yml", ".github/workflows/data-smoke.yml", ".github/workflows/shell-guard.yml", ".github/workflows/guard-triggers.yml"],
       "entry_points": ["python -m scripts.build_briefing", "scripts/build_briefing.py:main", "python -m scripts.heartbeat"]
     },
     {

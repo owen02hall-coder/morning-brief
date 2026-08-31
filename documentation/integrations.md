@@ -394,5 +394,6 @@ variable). The mapping lives in `briefing.yml` and `heartbeat.yml`.
 The daily job holds a write token plus the Gemini/ntfy secrets, so its inputs are pinned:
 `requirements.txt` is exact-pinned, transitives are locked by a CI-frozen `constraints.txt`
 (refresh: copy the "Successfully installed" line from a green run after changing requirements),
-and all actions are pinned by commit SHA. `shell-guard.yml` and `data-smoke.yml` are the
+and all actions are pinned by commit SHA. `shell-guard.yml`, `guard-triggers.yml` and
+`data-smoke.yml` are the
 fail-closed/diagnostic guards.
