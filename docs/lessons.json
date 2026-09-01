@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-31T12:22:53.236752-06:00",
+  "generated_at": "2026-09-01T09:43:02.435489-06:00",
   "lessons": [
     {
       "id": "2026-08-11-mortgage",
@@ -379,6 +379,26 @@
         "quick": "lessons/2026-08-30-stroke-quick.mp3",
         "more": "lessons/2026-08-30-stroke-more.mp3",
         "deep": "lessons/2026-08-30-stroke-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-09-01-manipulation-psychology",
+      "date": "2026-09-01",
+      "domain": "Thinking and people",
+      "title": "Recognizing Manipulation in Relationships",
+      "hook": "Being under someone else's control through subtle tactics can cost you your autonomy and lead to decisions you regret.",
+      "quick": "When someone acts to influence or control you in an underhanded or subtle way for their own personal gain, you are likely experiencing manipulation. This isn't just someone trying to convince you; it's a deliberate action that exploits your vulnerabilities. Manipulative people often use methods like seduction, suggestion, coercion, or even blackmail to achieve their objectives. Unlike general influence or persuasion, which can be harmless, manipulation is considered a dishonest form of social interaction because it works at your expense. It's important to remember that such behavior is fundamentally intentional, with the manipulator fully aware of their actions and what they intend to get from you.",
+      "more": "Manipulation differs significantly from simple persuasion because it actively exploits your weaknesses, rather than just presenting a viewpoint. Non-manipulative influence allows you the clear right to accept or reject it without undue pressure, but manipulation often feels coercive. The person manipulating you is typically driven by self-serving goals and engages in what is considered antisocial behavior, contrasting sharply with pro-social actions meant to help others. They know exactly what they want out of the situation and the consequences of their deliberate actions, even if those consequences are harmful to you.",
+      "deep": "People who frequently resort to manipulation often exhibit certain personality traits that contribute to their behavior. These can include a notable lack of empathy, a high degree of narcissism, and a tendency to create self-serving rationalizations for their actions. Their interpersonal style is frequently marked by dominance and a certain cold-heartedness. Manipulators may employ a range of tactics to shape their environment or relationships to fit their personal needs. These strategies can be as seemingly benign as charm or reason, but can also involve more direct forms like silent treatment, coercion, or even debasement, all designed to get a specific reaction or outcome from you.",
+      "takeaway": "Pay close attention to whether someone's influence feels coercive or if they are subtly exploiting your vulnerabilities to achieve their own aims.",
+      "source": {
+        "title": "Manipulation (psychology)",
+        "url": "https://en.wikipedia.org/wiki/Manipulation_(psychology)"
+      },
+      "audio": {
+        "quick": "lessons/2026-09-01-manipulation-psychology-quick.mp3",
+        "more": "lessons/2026-09-01-manipulation-psychology-more.mp3",
+        "deep": "lessons/2026-09-01-manipulation-psychology-deep.mp3"
       }
     }
   ],
