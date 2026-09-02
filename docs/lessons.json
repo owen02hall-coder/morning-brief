@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-01T09:43:02.435489-06:00",
+  "generated_at": "2026-09-02T09:32:50.838004-06:00",
   "lessons": [
     {
       "id": "2026-08-11-mortgage",
@@ -399,6 +399,26 @@
         "quick": "lessons/2026-09-01-manipulation-psychology-quick.mp3",
         "more": "lessons/2026-09-01-manipulation-psychology-more.mp3",
         "deep": "lessons/2026-09-01-manipulation-psychology-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-09-02-tax-deduction",
+      "date": "2026-09-02",
+      "domain": "Money mechanics",
+      "title": "Understanding Tax Deductions",
+      "hook": "Not knowing how tax deductions work could mean you're paying more in taxes than you need to.",
+      "quick": "A tax deduction reduces the amount of your income that is subject to tax, which means you pay less in taxes overall. It's important to understand that not all deductions work the same way. Some are \"above the line,\" meaning they reduce your income before a crucial number called adjusted gross income is calculated. Other deductions are \"below the line,\" and these are often called itemized deductions. These only lower your taxable income if their total amount exceeds the standard deduction. For instance, in tax year 2018, the standard deduction for a married couple was $24,000. If your combined below-the-line deductions are less than that figure, you would usually choose the standard deduction, effectively meaning those smaller deductions don't provide an additional tax benefit.",
+      "more": "Many people miss out on potential tax savings by not knowing the difference between these types of deductions. The \"below the line\" deductions include many common expenses, but their impact depends entirely on whether they add up to more than the standard deduction. Once you own a home, interest paid on your mortgage could become a significant itemized deduction, along with certain state and local taxes. However, it's not enough to simply have these expenses; you must track them to see if their sum surpasses the standard deduction. If your total itemized deductions don't exceed that threshold, taking the standard deduction is often simpler and results in the same, or even better, tax outcome. This decision is crucial because it directly affects your final tax bill.",
+      "deep": "One deduction that can be particularly useful for many, including those with educational debt, is the student loan interest deduction. This is an \"above the line\" deduction, which is distinct because it reduces your adjusted gross income directly, regardless of the standard deduction amount. This means you don't need to worry about whether your itemized deductions are large enough to be beneficial; this deduction applies independently. The article also points out that certain expenses that produce future benefits, rather than current ones, might need to be \"capitalized.\" This means their cost isn't deducted all at once but is recovered over a period of time, such as through depreciation. Understanding which expenses are immediately deductible and which must be capitalized can significantly impact your tax planning and the timing of your tax benefits, preventing you from missing out on legitimate savings or incorrectly claiming expenses.",
+      "takeaway": "Review your personal expenses, like student loan interest, and understand if they are above or below the line deductions to maximize your tax benefits.",
+      "source": {
+        "title": "Tax deduction",
+        "url": "https://en.wikipedia.org/wiki/Tax_deduction"
+      },
+      "audio": {
+        "quick": "lessons/2026-09-02-tax-deduction-quick.mp3",
+        "more": "lessons/2026-09-02-tax-deduction-more.mp3",
+        "deep": "lessons/2026-09-02-tax-deduction-deep.mp3"
       }
     }
   ],
