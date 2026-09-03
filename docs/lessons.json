@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-02T09:32:50.838004-06:00",
+  "generated_at": "2026-09-03T09:25:38.142806-06:00",
   "lessons": [
     {
       "id": "2026-08-11-mortgage",
@@ -15,11 +15,7 @@
         "title": "Mortgage",
         "url": "https://en.wikipedia.org/wiki/Mortgage"
       },
-      "audio": {
-        "quick": "lessons/2026-08-11-mortgage-quick.mp3",
-        "more": "lessons/2026-08-11-mortgage-more.mp3",
-        "deep": "lessons/2026-08-11-mortgage-deep.mp3"
-      }
+      "audio": {}
     },
     {
       "id": "2026-08-11-home-inspection",
@@ -419,6 +415,26 @@
         "quick": "lessons/2026-09-02-tax-deduction-quick.mp3",
         "more": "lessons/2026-09-02-tax-deduction-more.mp3",
         "deep": "lessons/2026-09-02-tax-deduction-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-09-03-tire",
+      "date": "2026-09-03",
+      "domain": "Home, car and repair",
+      "title": "Caring for Car Tires Prevents Serious Problems",
+      "hook": "Ignoring your vehicle's tires can lead to more than just a flat; it can result in dangerous situations and harm to the environment.",
+      "quick": "Unmaintained tires can cause severe hazards for vehicles and people. This neglect might lead to a flat tire, making your vehicle inoperable, or even a sudden blowout. A blowout means a tire explodes during operation, which can damage your vehicle and potentially injure anyone nearby. Modern tires are specifically designed to transfer a vehicle's weight from the axle to the ground, providing traction and absorbing shocks as you drive. They are made from various materials, including natural and synthetic rubber, fabric, and wire, and contain both a tread for grip and a body to hold compressed air. Because of these critical functions and the inherent risks, the manufacturing of tires is often highly regulated to ensure safety.",
+      "more": "Beyond the immediate safety risks, the regular use of tires also carries an environmental cost. As tires wear down, they release micro-plastic particles that contain chemicals into the environment. These tiny particles can elevate the risk of damage to human health as they spread. Furthermore, when tires reach the end of their life, they become a significant portion of global waste. If these waste tires are not properly recycled or are burned, they release toxic chemicals into the environment. There is a strong need for proper tire recycling, whether through mechanical methods, reusing materials like crumb rubber, or through chemical processes such as pyrolysis to create tire-derived fuel. Understanding these impacts highlights the importance of thoughtful tire management from purchase to disposal.",
+      "deep": "The primary components of a pneumatic tire, like those found on most cars, are the tread and the body. The tread is the part that touches the road, engineered to provide essential traction and match the vehicle's weight to the surface it rolls over. This design ensures that the pressure exerted by the tire avoids deforming the road surface, contributing to stability and control. The body of the tire is what contains the compressed air, creating a flexible cushion that absorbs shocks from rough road features. This shock absorption is crucial for a smooth ride and protecting the vehicle's suspension components. Before the development of modern rubber tires, wheels used metal bands, or even solid rubber, but these lacked the shock absorption and precise handling of today's inflated designs. Neglecting the maintenance of these complex components, such as overlooking proper inflation or wear, compromises their ability to perform safely and efficiently, increasing the likelihood of the hazards like flats or blowouts.",
+      "takeaway": "Regularly inspect your vehicle's tires for proper inflation and signs of wear to prevent sudden failures and reduce environmental impact.",
+      "source": {
+        "title": "Tire",
+        "url": "https://en.wikipedia.org/wiki/Tire"
+      },
+      "audio": {
+        "quick": "lessons/2026-09-03-tire-quick.mp3",
+        "more": "lessons/2026-09-03-tire-more.mp3",
+        "deep": "lessons/2026-09-03-tire-deep.mp3"
       }
     }
   ],

@@ -1,16 +1,16 @@
 {
-  "last_run": "2026-09-02",
-  "markets_last_ok": "2026-09-02",
+  "last_run": "2026-09-03",
+  "markets_last_ok": "2026-09-03",
   "breadth_last_good": {
     "sp500": {
-      "value": 65.7,
+      "value": 64.1,
       "matched": 501,
-      "asof": "2026-09-01"
+      "asof": "2026-09-02"
     },
     "ndx100": {
-      "value": 64.9,
+      "value": 61.9,
       "matched": 97,
-      "asof": "2026-09-01"
+      "asof": "2026-09-02"
     }
   },
   "breadth": {
@@ -18,15 +18,15 @@
       "in_alert": false,
       "nag_days": 0,
       "warn_armed": true,
-      "last_value": 65.7,
-      "last_asof": "2026-09-01"
+      "last_value": 64.1,
+      "last_asof": "2026-09-02"
     },
     "ndx100": {
       "in_alert": false,
       "nag_days": 0,
       "warn_armed": true,
-      "last_value": 64.9,
-      "last_asof": "2026-09-01"
+      "last_value": 61.9,
+      "last_asof": "2026-09-02"
     }
   },
   "policy_utah_queue": [],
@@ -70,7 +70,7 @@
     }
   ],
   "policy_today": {
-    "date": "2026-09-02",
+    "date": "2026-09-03",
     "items": [],
     "alerted": false
   },
@@ -221,6 +221,13 @@
       "title": "Understanding Tax Deductions",
       "domain": "Money mechanics",
       "date": "2026-09-02"
+    },
+    {
+      "id": "2026-09-03-tire",
+      "article_title": "Tire",
+      "title": "Caring for Car Tires Prevents Serious Problems",
+      "domain": "Home, car and repair",
+      "date": "2026-09-03"
     }
   ],
   "lessons_bootstrapped": true,
