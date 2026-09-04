@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-03T09:25:38.142806-06:00",
+  "generated_at": "2026-09-04T09:22:18.859837-06:00",
   "lessons": [
     {
       "id": "2026-08-11-mortgage",
@@ -31,11 +31,7 @@
         "title": "Home inspection",
         "url": "https://en.wikipedia.org/wiki/Home_inspection"
       },
-      "audio": {
-        "quick": "lessons/2026-08-11-home-inspection-quick.mp3",
-        "more": "lessons/2026-08-11-home-inspection-more.mp3",
-        "deep": "lessons/2026-08-11-home-inspection-deep.mp3"
-      }
+      "audio": {}
     },
     {
       "id": "2026-08-12-first-aid",
@@ -435,6 +431,26 @@
         "quick": "lessons/2026-09-03-tire-quick.mp3",
         "more": "lessons/2026-09-03-tire-more.mp3",
         "deep": "lessons/2026-09-03-tire-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-09-04-myocardial-infarction",
+      "date": "2026-09-04",
+      "domain": "Health and emergencies",
+      "title": "Recognize the Signs of a Heart Attack",
+      "hook": "Misunderstanding the signs of a heart attack can delay crucial care, potentially leading to serious complications.",
+      "quick": "Many people imagine a heart attack as sudden, crushing chest pain, but this isn't always how it happens. When blood flow to a part of the heart muscle is decreased or stops, that tissue begins to die. While classic chest discomfort is common, a heart attack can also present with subtle symptoms that are easily overlooked, especially by women, who frequently experience symptoms like unusual tiredness, neck pain, or arm pain without typical chest pain. Ignoring these less obvious signs can prevent someone from getting time-critical treatment that could limit damage to the heart muscle. In the United States, about one million people have an MI each year.",
+      "more": "Beyond the chest, symptoms can also include shortness of breath, nausea, feeling faint, or a cold sweat. The chest discomfort often feels like pressure, tightness, or squeezing and may radiate to the left arm, jaw, or shoulder, lasting for more than 20 minutes. For women, it's particularly important to recognize that symptoms like unexplained tiredness, nausea, vomiting, or back pain might be the only warning signs. Even those over 70-75 years old may experience a heart attack with few or no symptoms, emphasizing that not all heart attacks fit the dramatic picture often portrayed.",
+      "deep": "Most heart attacks result from coronary artery disease, where a blockage forms in one of the heart's arteries, often from a ruptured plaque. Risk factors for this include high blood pressure, smoking, diabetes, obesity, and a poor diet, though spasms of the arteries can also cause them, sometimes linked to significant emotional stress. Getting immediate medical help is critical because treatment aims to restore blood flow to the heart quickly. Without rapid intervention, a heart attack can lead to severe conditions like heart failure, an irregular heartbeat, or even cardiac arrest. In 2011, heart attack hospitalizations in the US cost about $11.5 billion.",
+      "takeaway": "Seek emergency medical attention immediately if you or someone else experiences persistent chest discomfort, or other unusual symptoms like unexplained tiredness, shortness of breath, or arm pain, particularly if they last longer than 20 minutes.",
+      "source": {
+        "title": "Myocardial infarction",
+        "url": "https://en.wikipedia.org/wiki/Myocardial_infarction"
+      },
+      "audio": {
+        "quick": "lessons/2026-09-04-myocardial-infarction-quick.mp3",
+        "more": "lessons/2026-09-04-myocardial-infarction-more.mp3",
+        "deep": "lessons/2026-09-04-myocardial-infarction-deep.mp3"
       }
     }
   ],
