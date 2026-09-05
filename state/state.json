@@ -1,16 +1,16 @@
 {
-  "last_run": "2026-09-04",
-  "markets_last_ok": "2026-09-04",
+  "last_run": "2026-09-05",
+  "markets_last_ok": "2026-09-05",
   "breadth_last_good": {
     "sp500": {
-      "value": 64.5,
+      "value": 64.1,
       "matched": 501,
-      "asof": "2026-09-03"
+      "asof": "2026-09-04"
     },
     "ndx100": {
-      "value": 62.9,
+      "value": 63.9,
       "matched": 97,
-      "asof": "2026-09-03"
+      "asof": "2026-09-04"
     }
   },
   "breadth": {
@@ -18,15 +18,15 @@
       "in_alert": false,
       "nag_days": 0,
       "warn_armed": true,
-      "last_value": 64.5,
-      "last_asof": "2026-09-03"
+      "last_value": 64.1,
+      "last_asof": "2026-09-04"
     },
     "ndx100": {
       "in_alert": false,
       "nag_days": 0,
       "warn_armed": true,
-      "last_value": 62.9,
-      "last_asof": "2026-09-03"
+      "last_value": 63.9,
+      "last_asof": "2026-09-04"
     }
   },
   "policy_utah_queue": [],
@@ -49,9 +49,18 @@
     "2026GS:SB0238": "2026-08-09",
     "2026GS:SB0319": "2026-08-09",
     "2026-16269": "2026-08-10",
-    "2026-16314": "2026-08-11"
+    "2026-16314": "2026-08-11",
+    "2026-18219": "2026-09-08"
   },
   "policy_active": [
+    {
+      "what_happened": "This document contains final regulations regarding the deduction for certain taxpayers for an amount up to $10,000 of qualified passenger vehicle loan interest.",
+      "effect": "You can deduct up to $10,000 of qualified passenger vehicle loan interest.",
+      "url": "https://www.federalregister.gov/documents/2026/09/08/2026-18219/car-loan-interest-deduction",
+      "status": "Final rule",
+      "effective_date": "2026-11-09",
+      "source": "Federal Register"
+    },
     {
       "what_happened": "A Utah bill modifies provisions related to the property tax exemption process.",
       "effect": "Once you own a home, you will have deadlines for filing an application for a property tax exemption with the county board of equalization and for the board to render a decision.",
@@ -70,9 +79,18 @@
     }
   ],
   "policy_today": {
-    "date": "2026-09-04",
-    "items": [],
-    "alerted": false
+    "date": "2026-09-05",
+    "items": [
+      {
+        "what_happened": "This document contains final regulations regarding the deduction for certain taxpayers for an amount up to $10,000 of qualified passenger vehicle loan interest.",
+        "effect": "You can deduct up to $10,000 of qualified passenger vehicle loan interest.",
+        "url": "https://www.federalregister.gov/documents/2026/09/08/2026-18219/car-loan-interest-deduction",
+        "status": "Final rule",
+        "effective_date": "2026-11-09",
+        "source": "Federal Register"
+      }
+    ],
+    "alerted": true
   },
   "lessons_taught": [
     {
@@ -235,8 +253,29 @@
       "title": "Recognize the Signs of a Heart Attack",
       "domain": "Health and emergencies",
       "date": "2026-09-04"
+    },
+    {
+      "id": "2026-09-05-social-engineering-security",
+      "article_title": "Social engineering (security)",
+      "title": "How Deceptive Tactics Threaten Your Information",
+      "domain": "Thinking and people",
+      "date": "2026-09-05"
     }
   ],
   "lessons_bootstrapped": true,
-  "policy_week": []
+  "policy_week": [
+    {
+      "date": "2026-09-05",
+      "items": [
+        {
+          "what_happened": "This document contains final regulations regarding the deduction for certain taxpayers for an amount up to $10,000 of qualified passenger vehicle loan interest.",
+          "effect": "You can deduct up to $10,000 of qualified passenger vehicle loan interest.",
+          "url": "https://www.federalregister.gov/documents/2026/09/08/2026-18219/car-loan-interest-deduction",
+          "status": "Final rule",
+          "effective_date": "2026-11-09",
+          "source": "Federal Register"
+        }
+      ]
+    }
+  ]
 }

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-04T09:22:18.859837-06:00",
+  "generated_at": "2026-09-05T09:52:33.113593-06:00",
   "lessons": [
     {
       "id": "2026-08-11-mortgage",
@@ -47,11 +47,7 @@
         "title": "First aid",
         "url": "https://en.wikipedia.org/wiki/First_aid"
       },
-      "audio": {
-        "quick": "lessons/2026-08-12-first-aid-quick.mp3",
-        "more": "lessons/2026-08-12-first-aid-more.mp3",
-        "deep": "lessons/2026-08-12-first-aid-deep.mp3"
-      }
+      "audio": {}
     },
     {
       "id": "2026-08-13-negotiation",
@@ -451,6 +447,26 @@
         "quick": "lessons/2026-09-04-myocardial-infarction-quick.mp3",
         "more": "lessons/2026-09-04-myocardial-infarction-more.mp3",
         "deep": "lessons/2026-09-04-myocardial-infarction-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-09-05-social-engineering-security",
+      "date": "2026-09-05",
+      "domain": "Thinking and people",
+      "title": "How Deceptive Tactics Threaten Your Information",
+      "hook": "Deceptive tactics can trick you into revealing personal details or taking actions that aren't in your best interest.",
+      "quick": "Many people are influenced by psychological pressure to perform actions or divulge confidential information, often without realizing they are being manipulated. These attacks are a form of confidence trick, but they frequently serve as just one step in a larger, more complex fraud scheme. Attackers exploit weaknesses in human decision-making, such as curiosity or trust, to get what they want. Someone might post a fake company bulletin with a new help desk number, for instance. When employees call this number seeking assistance, the individual on the other end might then ask for their passwords or IDs, gaining access to private company information. Such social engineering attacks have been increasing in intensity and number through 2024.",
+      "more": "Beyond manipulating you through fake help desk calls, attackers also craft elaborate lies, a method known as pretexting. They might create an invented scenario, often after some research, to make themselves seem legitimate. This could involve using a detail like your date of birth or a past bill amount to establish trust and convince you to share sensitive details or take specific actions you wouldn't normally consider. Another common trick is baiting, which uses physical items to pique your interest. Imagine finding a USB flash drive in a parking lot labeled \"Employee Salaries\" or \"Confidential.\" Curiosity or greed might lead you to plug it into your computer, potentially infecting your system and any attached networks with malicious software. A study in 2016 showed that of 297 USB drives left around a campus, 290 were picked up, and 135 of them \"called home,\" indicating they were accessed.",
+      "deep": "These deceptive strategies extend to your online activities as well. Water holing capitalizes on the trust you have in websites you regularly visit. Attackers prepare traps on these favored sites, knowing you feel safe enough there to click a link or perform an action you would otherwise avoid if it came from an unsolicited email. This method has even been used to gain access to supposedly very secure systems. Similarly, ad phishing uses malicious online advertisements that mimic trusted entities like banks, software providers, or customer support pages. These ads redirect you to fraudulent sites specifically designed to steal your passwords, credit card information, or other sensitive data. Even in physical spaces, an attacker might engage in tailgating, pretending to be a courier to get an employee to hold a door open, thereby gaining unauthorized access to a restricted area. Recognizing these various psychological manipulation tactics is key to protecting yourself.",
+      "takeaway": "Verify the legitimacy of any unexpected request for personal information or action, especially if it seems to come from a trusted source or offers something too good to be true.",
+      "source": {
+        "title": "Social engineering (security)",
+        "url": "https://en.wikipedia.org/wiki/Social_engineering_(security)"
+      },
+      "audio": {
+        "quick": "lessons/2026-09-05-social-engineering-security-quick.mp3",
+        "more": "lessons/2026-09-05-social-engineering-security-more.mp3",
+        "deep": "lessons/2026-09-05-social-engineering-security-deep.mp3"
       }
     }
   ],
