@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-05T09:52:33.113593-06:00",
+  "generated_at": "2026-09-06T08:34:07.781393-06:00",
   "lessons": [
     {
       "id": "2026-08-11-mortgage",
@@ -63,11 +63,7 @@
         "title": "Negotiation",
         "url": "https://en.wikipedia.org/wiki/Negotiation"
       },
-      "audio": {
-        "more": "lessons/2026-08-13-negotiation-more.mp3",
-        "deep": "lessons/2026-08-13-negotiation-deep.mp3",
-        "quick": "lessons/2026-08-13-negotiation-quick.mp3"
-      }
+      "audio": {}
     },
     {
       "id": "2026-08-14-credit-score",
@@ -467,6 +463,25 @@
         "quick": "lessons/2026-09-05-social-engineering-security-quick.mp3",
         "more": "lessons/2026-09-05-social-engineering-security-more.mp3",
         "deep": "lessons/2026-09-05-social-engineering-security-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-09-06-closing-costs",
+      "date": "2026-09-06",
+      "domain": "Money mechanics",
+      "title": "Planning for Home Closing Costs",
+      "hook": "When you save for a down payment on a home, there are other significant costs that you will need to pay at closing, which can add substantially to your upfront expenses.",
+      "quick": "Many people are surprised by the additional money required to close on a home beyond the down payment itself. These are called closing costs, and they are various fees paid at the time the property title officially transfers to the buyer. Many of these fees are not optional, as they are required by your lender or by law. Examples include attorney fees, costs for title services like a title search and insurance, recording costs to document the change of ownership, and an appraisal fee to verify the property's market value. Being prepared for these costs is crucial, as some like the first year's private mortgage insurance premium, if applicable, are often due in advance at closing.",
+      "more": "Lenders often require certain closing costs to protect their investment in your property. For instance, they typically require title insurance to ensure the property's title is clear of claims and an appraisal to confirm that the home's sale price does not exceed its fair market value. They also typically require you to pre-pay your homeowner's property insurance. Other costs cover the legal and administrative steps involved in transferring ownership, such as fees for preparing official documents or governmental excise taxes on the transaction. Some buyers also choose to pay \"points,\" which are a form of pre-paid interest that can reduce your mortgage loan's interest rate over time.",
+      "deep": "One of the most significant potential closing costs for buyers is private mortgage insurance, or PMI. If your down payment is less than 20 percent of the home's value, lenders usually require this insurance, and you'll typically pay the first full year's premium at closing. It\u2019s important to know that you can request the cancellation of PMI once your equity reaches 20 percent of the market value, and federal laws require lenders to automatically cancel it once your equity reaches 22 percent. Beyond this, you'll also likely pay prorated amounts for property taxes and homeowner association dues if the property has them, ensuring both you and the seller cover your share for the year of the transaction. These accumulated upfront costs, along with other fees, contribute to the total cash you need on closing day.",
+      "takeaway": "Before making an offer on a home, request a detailed estimate of all potential closing costs from your lender to understand the full upfront financial commitment.",
+      "source": {
+        "title": "Closing costs",
+        "url": "https://en.wikipedia.org/wiki/Closing_costs"
+      },
+      "audio": {
+        "more": "lessons/2026-09-06-closing-costs-more.mp3",
+        "deep": "lessons/2026-09-06-closing-costs-deep.mp3"
       }
     }
   ],
