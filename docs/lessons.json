@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-06T08:34:07.781393-06:00",
+  "generated_at": "2026-09-07T10:48:34.056299-06:00",
   "lessons": [
     {
       "id": "2026-08-11-mortgage",
@@ -79,11 +79,7 @@
         "title": "Credit score",
         "url": "https://en.wikipedia.org/wiki/Credit_score"
       },
-      "audio": {
-        "quick": "lessons/2026-08-14-credit-score-quick.mp3",
-        "deep": "lessons/2026-08-14-credit-score-deep.mp3",
-        "more": "lessons/2026-08-14-credit-score-more.mp3"
-      }
+      "audio": {}
     },
     {
       "id": "2026-08-15-water-heating",
@@ -481,7 +477,28 @@
       },
       "audio": {
         "more": "lessons/2026-09-06-closing-costs-more.mp3",
-        "deep": "lessons/2026-09-06-closing-costs-deep.mp3"
+        "deep": "lessons/2026-09-06-closing-costs-deep.mp3",
+        "quick": "lessons/2026-09-06-closing-costs-quick.mp3"
+      }
+    },
+    {
+      "id": "2026-09-07-automotive-battery",
+      "date": "2026-09-07",
+      "domain": "Home, car and repair",
+      "title": "Protecting your car battery",
+      "hook": "Ignoring how your car battery works could leave you stranded or facing an unexpected repair bill.",
+      "quick": "Many people don't realize that a car battery is designed for a very specific job: delivering a powerful burst of electricity to start your engine. It also powers basic accessories like lights or wipers when the engine is off. However, these batteries are not meant to provide sustained power for long periods. They are built to deliver a maximum electric current for a short time, and deep discharging them, such as by leaving lights on and draining the battery completely, can severely reduce its lifespan. Once the engine is running, the vehicle's alternator takes over, supplying power to the car's electrical systems and simultaneously recharging the battery. The battery also stabilizes potentially damaging voltage spikes, acting as a crucial backup during peak electrical demands.",
+      "more": "While the battery helps stabilize voltage and provides extra power when the alternator can't keep up, its primary design is for starting, lighting, and ignition, earning it the name SLI battery. Because starting typically uses less than three percent of the battery's capacity, they are optimized for quick, intense power delivery rather than a slow, continuous drain. Most passenger vehicles today use a nominal 12-volt system with lead-acid batteries that consist of six series-connected cells. These modern batteries often use plastic cases and woven sheets inside to prevent the internal plates from touching and short-circuiting. Knowing this design difference helps understand why letting a battery go completely flat is so damaging.",
+      "deep": "Modern automotive batteries, especially \"low-maintenance\" types, are particularly intolerant of deep discharge. When a car battery is fully drained, lead sulfate deposits can form on the internal lead plate electrodes, which can reduce the battery's lifespan by a third or more. Beyond lifespan concerns, there are serious safety risks. Explosions can occur if hydrogen gas builds up from blocked battery vents or poor ventilation, combined with an ignition source. Corroded or dirty battery posts are frequently associated with explosions during engine start-up. A significant percentage of battery explosion injuries happen while charging the battery, or during jump-starting, often due to improper connections, such as failing to connect to the dead battery first or connecting directly to the grounded battery post instead of the vehicle chassis.",
+      "takeaway": "Always turn off your lights and accessories before leaving your car, and avoid using them for long periods with the engine off, to prevent deep discharging your battery.",
+      "source": {
+        "title": "Automotive battery",
+        "url": "https://en.wikipedia.org/wiki/Automotive_battery"
+      },
+      "audio": {
+        "quick": "lessons/2026-09-07-automotive-battery-quick.mp3",
+        "more": "lessons/2026-09-07-automotive-battery-more.mp3",
+        "deep": "lessons/2026-09-07-automotive-battery-deep.mp3"
       }
     }
   ],

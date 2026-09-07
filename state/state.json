@@ -1,6 +1,6 @@
 {
-  "last_run": "2026-09-06",
-  "markets_last_ok": "2026-09-06",
+  "last_run": "2026-09-07",
+  "markets_last_ok": "2026-09-07",
   "breadth_last_good": {
     "sp500": {
       "value": 64.1,
@@ -79,7 +79,7 @@
     }
   ],
   "policy_today": {
-    "date": "2026-09-06",
+    "date": "2026-09-07",
     "items": [],
     "alerted": false
   },
@@ -258,6 +258,13 @@
       "title": "Planning for Home Closing Costs",
       "domain": "Money mechanics",
       "date": "2026-09-06"
+    },
+    {
+      "id": "2026-09-07-automotive-battery",
+      "article_title": "Automotive battery",
+      "title": "Protecting your car battery",
+      "domain": "Home, car and repair",
+      "date": "2026-09-07"
     }
   ],
   "lessons_bootstrapped": true,
