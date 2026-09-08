@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-07T10:48:34.056299-06:00",
+  "generated_at": "2026-09-08T09:36:10.022059-06:00",
   "lessons": [
     {
       "id": "2026-08-11-mortgage",
@@ -95,11 +95,7 @@
         "title": "Water heating",
         "url": "https://en.wikipedia.org/wiki/Water_heating"
       },
-      "audio": {
-        "quick": "lessons/2026-08-15-water-heating-quick.mp3",
-        "more": "lessons/2026-08-15-water-heating-more.mp3",
-        "deep": "lessons/2026-08-15-water-heating-deep.mp3"
-      }
+      "audio": {}
     },
     {
       "id": "2026-08-16-sleep-hygiene",
@@ -499,6 +495,26 @@
         "quick": "lessons/2026-09-07-automotive-battery-quick.mp3",
         "more": "lessons/2026-09-07-automotive-battery-more.mp3",
         "deep": "lessons/2026-09-07-automotive-battery-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-09-08-dehydration",
+      "date": "2026-09-08",
+      "domain": "Health and emergencies",
+      "title": "Recognizing Early Signs of Dehydration",
+      "hook": "Mild dehydration can affect your mental sharpness without you even realizing it.",
+      "quick": "Dehydration is a lack of total body water that disrupts essential bodily processes. Even a modest decrease in your body's water content can lead to fatigue and dizziness. If you lose more than a certain percentage of total body water, it can cause significant physical and mental deterioration. It commonly occurs from excessive sweating, certain health conditions, or simply not consuming enough water. Even a small body water loss of just one to two percent is shown to impair cognitive performance, affecting how clearly you think. Key early signs include thirst, headaches, a general feeling of discomfort, nausea, and a decrease in how often you need to urinate.",
+      "more": "As your body continues to lose water, these symptoms of dehydration become increasingly severe. While mild dehydration often improves by simply drinking more fluids, severe cases might require medical attention, such as receiving fluids intravenously. Dehydration can also lead to an imbalance in the blood, specifically causing high levels of sodium. Over a longer period, chronic dehydration is linked to the development of kidney stones and can contribute to chronic kidney disease. Factors that increase your risk include physical exertion in hot and humid weather, living at high altitudes, and engaging in endurance athletics. Additionally, some medications can have dehydration as a side effect, so it's wise to be aware of this possibility.",
+      "deep": "Your body has sophisticated mechanisms to try and maintain its water balance. When there is a deficit of free water, the concentration of dissolved molecules and ions in your body fluids increases. This elevated concentration is detected by specialized receptors in a part of your brain called the hypothalamus, which then triggers the release of antidiuretic hormone. This hormone works by increasing the absorption of water in your kidneys, helping your body conserve what it has. In more extreme situations of low blood pressure, this hormone also causes blood vessels to constrict, which helps to raise blood pressure. It's important to understand that a lack of total body water, or dehydration, is distinct from a loss of blood volume, known as hypovolemia; these are separate conditions with independent regulatory mechanisms and often require different treatments. Also, rehydrating too rapidly in severe cases can carry its own risks.",
+      "takeaway": "Monitor for initial signs like increased thirst, dry mouth, or headaches, especially when active or in warm conditions, to address dehydration promptly.",
+      "source": {
+        "title": "Dehydration",
+        "url": "https://en.wikipedia.org/wiki/Dehydration"
+      },
+      "audio": {
+        "quick": "lessons/2026-09-08-dehydration-quick.mp3",
+        "more": "lessons/2026-09-08-dehydration-more.mp3",
+        "deep": "lessons/2026-09-08-dehydration-deep.mp3"
       }
     }
   ],
