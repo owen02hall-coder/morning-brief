@@ -463,7 +463,13 @@ def _assemble(now, today, market, news, narrative, ai_ok, breadth=None,
              # Also NOT in markets_ok: these are ordinary tickers the reader chose, not the market
              # spine, and a delisting, a rename or a typo in watchlist.txt must not page as
              # "market data unavailable N days running".
-             "watchlist": not (watchlist_missing or [])}
+             # Something reported AND nothing went missing. The `bool(watchlist)` half looks
+             # redundant — the configured list is never empty (config._load_watchlist falls back to
+             # its defaults), so "no rows and no missing" is unreachable from run(). It is here
+             # because it is the DEFAULT: _assemble(...) called without these kwargs would
+             # otherwise publish "watchlist available" over an empty section, which is the exact
+             # shape of label-without-evidence that let ndx100 breadth sit dead for 22 days.
+             "watchlist": bool(watchlist) and not (watchlist_missing or [])}
 
     def num(n, why):
         if not n:
