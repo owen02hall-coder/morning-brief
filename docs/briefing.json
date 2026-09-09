@@ -47,12 +47,11 @@
       "stale": false
     }
   },
-  "leveraged": [
+  "watchlist": [
     {
       "symbol": "SOXL",
       "what": "3x semiconductors",
       "value": 123.27,
-      "change": 5.99,
       "day_move": 5.11,
       "asof": "2026-09-08",
       "rsi": 48.6,
@@ -61,13 +60,13 @@
       "high": 151.53,
       "band_pct": 38.1,
       "zone": "mid",
+      "action": "hold",
       "read": "Mid-range - 38% of the way up its 1-month band."
     },
     {
       "symbol": "SPXL",
       "what": "3x S&P 500",
       "value": 285.44,
-      "change": -4.85,
       "day_move": -1.67,
       "asof": "2026-09-08",
       "rsi": 49.7,
@@ -76,13 +75,13 @@
       "high": 301.35,
       "band_pct": 20.4,
       "zone": "low",
+      "action": "buy",
       "read": "Within 4% of its 1-month low."
     },
     {
       "symbol": "TQQQ",
       "what": "3x Nasdaq-100",
       "value": 72.16,
-      "change": -0.21,
       "day_move": -0.29,
       "asof": "2026-09-08",
       "rsi": 51.4,
@@ -91,9 +90,11 @@
       "high": 77.15,
       "band_pct": 38.7,
       "zone": "mid",
+      "action": "hold",
       "read": "Mid-range - 39% of the way up its 1-month band."
     }
   ],
+  "watchlist_missing": [],
   "mortgage": {
     "value": 6.71,
     "change": 0.05,
@@ -145,7 +146,7 @@
       "url": "https://www.theverge.com/tech/986331/apple-iphone-18-pro-max-september-2026-event"
     },
     {
-      "summary": "Google is making its largest single investment in Europe by selecting Finland for a \u20ac13 billion data center project, which is expected to create tens of thousands of jobs.",
+      "summary": "Google is making its largest single investment in Europe by selecting Finland for a €13 billion data center project, which is expected to create tens of thousands of jobs.",
       "source": "BBC World",
       "url": "https://www.bbc.co.uk/news/articles/c8r6y4me2g6o?at_medium=RSS&at_campaign=rss"
     },

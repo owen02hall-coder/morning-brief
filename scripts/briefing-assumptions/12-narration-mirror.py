@@ -43,19 +43,26 @@ two strings are both empty. All three verified red at authoring time, 2026-08-20
   no-tldr-cut  -> the mp3 script re-reads a story the must-knows already told; the device voice does
                   not. Guards the CONTAINMENT half specifically, which is a different metric from
                   the Jaccard used between buckets and could rot independently of it.
-  drop-etfs    -> the leveraged ETF pulse vanishes from the mp3 script but not from the device
+  drop-etfs    -> the watchlist vanishes from the mp3 script but not from the device
                   voice. (Added 2026-09-09 with the section; verified red.)
   etf-round    -> the mp3 script formats RSI with Python's "%.0f" instead of floor(x + 0.5), so an
                   RSI of exactly 48.5 is spoken as 48 in the mp3 and 49 in the phone's own voice.
                   The same cross-language shape as the Monday=0/Sunday=0 weekday split.
                   (Added 2026-09-09; verified red.)
+  etf-nofilter -> the mp3 script names every ticker on the watchlist instead of only the buy/trim
+                  ones, so it reads out a HOLD the phone's voice drops. The filter is the whole
+                  point of the section for the listener, and it lives on both sides of the
+                  language boundary. (Added 2026-09-09; verified red.)
 """
 import json
+import math
 import os
 import shutil
 import subprocess
 import sys
 import tempfile
+
+tts_mod = None   # bound in main(); the control variants read the real spoken wording from it
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(os.path.dirname(HERE))
@@ -134,23 +141,40 @@ US_DUP_OF_WORLD = _item(
     "A new OLED manufacturing method from LG Display named FLiPP produces brighter and more "
     "efficient longer-lasting display panels.", "AP", "https://example.com/us2")
 
-# Three tickers covering the three shapes the read can take, and one RSI chosen to be exactly
-# reachable at .5 — the value where Python's "%.0f" (round-half-to-EVEN -> 48) and JavaScript's
-# Math.round (half-up -> 49) disagree. Without a .5 in here, that trap ships silently.
-LEVERAGED = [
-    {"symbol": "SOXL", "what": "3x semiconductors", "value": 123.27, "change": 5.99,
-     "day_move": 5.11, "asof": "2026-08-19", "rsi": 48.5, "rsi_zone": "neutral",
-     "low": 105.91, "high": 151.53, "band_pct": 38.1, "zone": "mid",
-     "read": "Mid-range - 38% of the way up its 1-month band."},
-    {"symbol": "SPXL", "what": "3x S&P 500", "value": 285.44, "change": -4.85,
+# Four tickers covering every shape the section can take: a buy called by the band, a buy called by
+# RSI alone, a trim, and a HOLD that BOTH sides must drop (the audio names only buy/trim tickers).
+# Every row is internally consistent with scripts/data/watchlist.py — re-deriving zone/action from
+# value/low/high/rsi reproduces the stated fields, verified 2026-09-09.
+#
+# The 48.5 RSI is the value where Python's "%.0f" (round-half-to-EVEN -> 48) and JavaScript's
+# Math.round (half-up -> 49) disagree, and it sits on a ticker that is SPOKEN. It used to sit on the
+# mid-range one; once the audio started naming only buy/trim tickers, that would have filtered the
+# trap straight out of the comparison and left this gate passing while blind to it.
+#
+# AAPL is here for two reasons at once: the watchlist is the reader's to edit now (watchlist.txt)
+# and is no longer ETF-only, and a HOLD row is what makes C1 actually measure the buy/trim filter —
+# a side that forgot to filter would name it and the comparison would go red.
+WATCHLIST = [
+    {"symbol": "SOXL", "what": "3x semiconductors", "value": 108.90,
+     "day_move": -2.11, "asof": "2026-08-19", "rsi": 48.5, "rsi_zone": "neutral",
+     "low": 105.91, "high": 151.53, "band_pct": 6.6, "zone": "low", "action": "buy",
+     "read": "Within 4% of its 1-month low."},
+    {"symbol": "SPXL", "what": "3x S&P 500", "value": 293.00,
      "day_move": -1.67, "asof": "2026-08-19", "rsi": 28.4, "rsi_zone": "oversold",
-     "low": 281.35, "high": 301.35, "band_pct": 20.4, "zone": "low",
-     "read": "Near the bottom of its 1-month range and oversold on RSI."},
-    {"symbol": "TQQQ", "what": "3x Nasdaq-100", "value": 76.90, "change": 5.40,
+     "low": 281.35, "high": 301.35, "band_pct": 58.3, "zone": "mid", "action": "buy",
+     "read": "Oversold on RSI, mid-range for the month."},
+    {"symbol": "TQQQ", "what": "3x Nasdaq-100", "value": 76.90,
      "day_move": 7.55, "asof": "2026-08-19", "rsi": 71.2, "rsi_zone": "overbought",
-     "low": 69.01, "high": 77.15, "band_pct": 96.9, "zone": "high",
+     "low": 69.01, "high": 77.15, "band_pct": 96.9, "zone": "high", "action": "trim",
      "read": "Within 4% of its 1-month high and overbought on RSI. Big session: up 7.6% in a day."},
+    {"symbol": "AAPL", "what": "Apple", "value": 228.00,
+     "day_move": 0.42, "asof": "2026-08-19", "rsi": 51.0, "rsi_zone": "neutral",
+     "low": 220.00, "high": 235.00, "band_pct": 53.3, "zone": "mid", "action": "hold",
+     "read": "Mid-range - 53% of the way up its 1-month band."},
 ]
+# A day with nothing to do. Both sides must say so OUT LOUD rather than falling silent: a section
+# that vanishes is indistinguishable from a section that broke.
+WATCHLIST_QUIET = [WATCHLIST[3]]
 
 FULL_MARKET = {"sp500": _num(7707.98, 16.22, "2026-08-19"),
                "ndx": _num(26331.09, 41.38, "2026-08-19"),
@@ -162,7 +186,7 @@ FIXTURES = [
     {"name": "monday-full", "hasLesson": True, "briefing": {
         "date": "2026-08-17", "tldr": ["The first thing that matters today.",
                                        "The second thing that matters today."],
-        "leveraged": LEVERAGED,
+        "watchlist": WATCHLIST,
         "market": FULL_MARKET,
         "yield_10y": _num(4.65, -0.05, "2026-08-19", "Yields eased after a Treasury buyback plan."),
         "vix": _num(14.89, -0.95, "2026-08-19", "Volatility drifted lower into the close."),
@@ -197,6 +221,7 @@ FIXTURES = [
     }},
     {"name": "sunday-recap", "hasLesson": False, "briefing": {
         "date": "2026-08-23", "tldr": ["A Sunday takeaway."],
+        "watchlist": WATCHLIST_QUIET,
         "market": FULL_MARKET,
         "yield_10y": _num(4.65, -0.05, "2026-08-19", "Yields eased."),
         "vix": _num(14.89, -0.95, "2026-08-19", "Volatility fell."),
@@ -246,18 +271,32 @@ FIXTURES = [
 ]
 
 
-def _naive_round_leveraged_lines(briefing):
-    """tts._leveraged_lines with the ONE difference the `etf-round` control exists to expose."""
-    rows = briefing.get("leveraged") or []
+def _watchlist_lines_variant(briefing, naive_round=False, no_filter=False):
+    """tts._watchlist_lines with exactly ONE difference injected, for the two ETF controls.
+
+    Kept as one function with two flags rather than two near-copies: the controls have to differ
+    from the real implementation in the single respect they are testing and in nothing else, or a
+    red result would not point at the thing it claims to."""
+    rows = briefing.get("watchlist") or []
     if not rows:
         return []
-    out = ["Your leveraged E T Fs."]
-    for r in rows:
+    acting = rows if no_filter else [r for r in rows if r.get("action") in tts_mod.ACTION_SPOKEN]
+    if not acting:
+        return ["Your watchlist. Nothing in buy or trim range today."]
+    out = ["Your watchlist."]
+    for r in acting:
         spelled = " ".join(r.get("symbol") or "")
         rsi = r.get("rsi")
-        head = f"{spelled}, R S I {rsi:.0f}." if rsi is not None else f"{spelled}."
+        if rsi is None:
+            head = f"{spelled}."
+        elif naive_round:
+            head = f"{spelled}, R S I {rsi:.0f}."
+        else:
+            head = f"{spelled}, R S I {math.floor(rsi + 0.5):d}."
+        act = tts_mod.ACTION_SPOKEN.get(r.get("action"), "")
         read = (r.get("read") or "").strip()
-        out.append(f"{head} {read.replace('%', ' percent').replace(' - ', ', ')}" if read else head)
+        spoken = read.replace("%", " percent").replace(" - ", ", ")
+        out.append(f"{head} {act} {spoken}".strip() if read else f"{head} {act}".strip())
     return out
 
 
@@ -273,12 +312,18 @@ def _apply_control(tts):
     elif CONTROL == "no-tldr-cut":
         tts._covered_by_tldr = lambda item, tldr_words: False
     elif CONTROL == "drop-etfs":
-        tts._leveraged_lines = lambda briefing: []
+        tts._watchlist_lines = lambda briefing: []
     elif CONTROL == "etf-round":
         # The half-rounding split itself: Python's "%.0f" sends an RSI of 48.5 to the nearest EVEN
         # integer (48) while JavaScript's Math.round sends it up (49). Both sides use
         # floor(x + 0.5) precisely so they cannot disagree; this control puts the trap back.
-        tts._leveraged_lines = _naive_round_leveraged_lines
+        tts._watchlist_lines = lambda briefing: _watchlist_lines_variant(briefing, naive_round=True)
+    elif CONTROL == "etf-nofilter":
+        # The buy/trim filter itself. The listener asked to hear a ticker ONLY when there is
+        # something to do about it, and that rule now lives on both sides of the language boundary,
+        # so it needs a control of its own: here the mp3 script reads the HOLD ticker out and the
+        # phone's voice still drops it.
+        tts._watchlist_lines = lambda briefing: _watchlist_lines_variant(briefing, no_filter=True)
     elif CONTROL:
         print(f"REFUSED: unknown NARRATION_MIRROR_CONTROL {CONTROL!r}", file=sys.stderr)
         sys.exit(2)
@@ -296,6 +341,8 @@ def main():
         sys.exit(3)
 
     from scripts import tts
+    global tts_mod
+    tts_mod = tts        # the control variants read tts.ACTION_SPOKEN, the real spoken wording
     _apply_control(tts)
 
     py = [tts.compose_script(f["briefing"], has_lesson=f["hasLesson"]) for f in FIXTURES]
@@ -379,19 +426,31 @@ def main():
          "the US section vanished on a non-Monday, so it is wrongly coupled to the policy weekday"),
         ("degraded-empty", "Across the country.", False,
          "an empty US bucket still announced its heading, which would read as a broken section"),
-        ("monday-full", "Your leveraged E T Fs.", True,
-         "the leveraged ETF pulse was not spoken at all, so C1 proved nothing about it"),
+        ("monday-full", "Your watchlist.", True,
+         "the watchlist was not spoken at all, so C1 proved nothing about it"),
+        ("monday-full", "Buy range.", True,
+         "no ticker was called a buy, so the action the listener acts on never reached the audio"),
+        ("monday-full", "Trim range.", True,
+         "no ticker was called a trim, so only half the action vocabulary is being exercised"),
+        # The HOLD ticker must be dropped by BOTH sides. C1 catches only a DISAGREEMENT about it;
+        # this catches both sides quietly abandoning the filter together, which is the failure that
+        # turns the section back into the four-ticker recital the reader asked it not to be.
+        ("monday-full", "A A P L", False,
+         "a hold ticker was read out — the audio is supposed to name only buy and trim"),
+        ("sunday-recap", "Nothing in buy or trim range today.", True,
+         "a day with no actionable ticker fell silent instead of saying so, which is "
+         "indistinguishable from the section being broken"),
         # 49, not 48: floor(48.5 + 0.5) is what BOTH sides must produce. Python's "%.0f" would
         # say 48 here, which is exactly what the `etf-round` control puts back.
         ("monday-full", "R S I 49.", True,
          "the RSI 48.5 case did not reach the narration, so C1 is no longer measuring the "
          "Python-even / JavaScript-up half-rounding split that this fixture exists to pin"),
-        ("monday-full", "Near the bottom of its 1-month range and oversold on RSI.", True,
-         "the ETF read is not being spoken from the published `read` string, which is the only "
-         "thing keeping the mp3, the device voice and the card from classifying differently"),
-        ("degraded-empty", "Your leveraged E T Fs.", False,
-         "an edition with no ETF data still announced the heading, which would read as a broken "
-         "section on every archived briefing published before this feature existed"),
+        ("monday-full", "Oversold on RSI, mid-range for the month.", True,
+         "the watchlist read is not being spoken from the published `read` string, which is the "
+         "only thing keeping the mp3, the device voice and the card from classifying differently"),
+        ("degraded-empty", "Your watchlist.", False,
+         "an edition with no watchlist data still announced the heading, which would read as a "
+         "broken section on every archived briefing published before this feature existed"),
         ("tldr-repeat", "earthquake struck eastern Indonesia", False,
          "the world section re-read a story the must-knows had already told — this is the "
          "containment case Jaccard misses, so the tldr suppression is not working"),

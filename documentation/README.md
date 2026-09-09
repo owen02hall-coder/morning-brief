@@ -19,7 +19,7 @@ Anything written into `docs/` is published.
 - `architecture.md` — system overview, data flow, the module-by-module map, key design decisions and
   the reasons behind them, the `briefing.json` and `lessons.json` schemas, and the CLI entry points.
 - `integrations.md` — every external service (Yahoo Finance for the headline numbers and the
-  leveraged ETF pulse, the TradingView scanner and Wikipedia for breadth, Gemini for the summary and
+  watchlist pulse, the TradingView scanner and Wikipedia for breadth, Gemini for the summary and
   the audio, ntfy, RSS, the Federal Register, the Utah Legislature, Freddie Mac PMMS, the Wikipedia
   action API behind Alphabet Soup, GitHub Pages and Actions), what each is used for, where it is
   invoked, its per-build request budget, and the env var names. Also the probed-dead source list, so
@@ -53,6 +53,9 @@ This documents the project as shipped. Everything below is live, not planned:
   localStorage rather than in server state.
 - v5 — the spoken rates readout, the Monday policy digest, cross-bucket audio dedupe, and
   self-healing lesson audio. Plus the "Health and science" and "Across the country" sections.
+- v7 (2026-09-09) — the pulse becomes the WATCHLIST: any Yahoo ticker via `watchlist.txt`, a
+  buy/trim/hold action computed once and used by both the card colour and the audio, audio that
+  names only the actionable tickers, and configured-but-missing symbols named on the page.
 - v6 (2026-09-09) — the leveraged ETF pulse: SOXL, SPXL and TQQQ with RSI-14 and their 1-month
   closing band, rendered under the must-knows and spoken in the same slot.
 

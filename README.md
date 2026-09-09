@@ -9,10 +9,16 @@ Runs with your laptop and phone off. Cost: $0/month (all free tiers + your exist
 ## What's in v1
 
 - TL;DR (the 3 must-knows)
-- **Leveraged ETFs** — SOXL, SPXL and TQQQ, right under the must-knows and read in the same slot in
-  the audio: RSI-14 on daily closes (the 30/70 lines Webull draws) plus where the last close sits in
-  the month's closing band, drawn as a marker between the month's low and high. The band zones are
-  the ones the old hourly ETF monitor fired on (within 4% of the low / 4% of the high). Same keyless
+- **Watchlist** — the tickers in [`watchlist.txt`](watchlist.txt) (SOXL, SPXL and TQQQ by default,
+  but any Yahoo symbol: edit that file, on github.com from a phone if you like), right under the
+  must-knows: RSI-14 on daily closes (the 30/70 lines Webull draws) plus where the last close sits
+  in the month's closing band, drawn as a marker between the month's low and high. Each card carries
+  one **action — Buy, Trim or Hold** — and is coloured by it. The band zones are the ones the old
+  hourly ETF monitor fired on (within 4% of the low / 4% of the high), additionally gated on being
+  in the bottom/top third of the band so the rule keeps meaning something on a calm, non-3x ticker.
+  The AUDIO names only the Buy and Trim tickers (and says so out loud when there are none); the page
+  shows everything. A configured ticker that returns nothing is NAMED on the page rather than
+  quietly dropped — usually a typo in `watchlist.txt`. Same keyless
   Yahoo source as the numbers below, no new key; every figure is computed in code, so the section is
   intact on a day the AI summary fails. Fails closed per ticker — a ticker that stops reporting is
   absent and says so in the daily health ping, rather than showing a stale or invented number

@@ -292,10 +292,12 @@ h3 {
 .status.overbought { color: var(--warn-fg); background: var(--warn-bg); }
 .status.neutral    { color: var(--muted); background: var(--tldr-tint); }
 
-/* --- Leveraged ETF cards --- */
-/* Three cards in a two-column grid leaves the third alone in the left column; let it span.
+/* --- Watchlist cards --- */
+/* An ODD last card in a two-column grid is left alone in the left column; let it span. Written as
+   odd-child-and-last rather than :nth-child(3) because the watchlist is the reader's to edit now
+   (watchlist.txt) and can be any length — the old rule only tidied a list of exactly three.
    Scoped to .etf-grid so the 4- and 5-tile Markets grid is untouched. */
-.etf-grid > :nth-child(3):last-child { grid-column: 1 / -1; }
+.etf-grid > :nth-child(odd):last-child { grid-column: 1 / -1; }
 .etf-head { display: flex; align-items: baseline; gap: 0.4rem; flex-wrap: wrap; margin: 0; }
 .etf-symbol { font-weight: 700; font-size: 0.95rem; letter-spacing: 0.02em; }
 .etf-what { color: var(--muted); font-size: 0.75rem; }
@@ -328,6 +330,60 @@ h3 {
 }
 .etf-mark.low  { background: var(--down); }
 .etf-mark.high { background: var(--warn-fg); }
+
+/* --- Buy / Trim / Hold ---
+   The action is the whole point of the section: the rest of the card explains WHERE the price is,
+   this says what to do about it. It gets two carriers, a badge and a coloured card, because one
+   card in a scrolling column is easy to skim past.
+
+   Colour is by ACTION, not by direction, and it deliberately does not reuse the red/green the
+   day-move delta above it uses for down/up — a card can be down on the day and a buy, which is in
+   fact the common case, and the two readings must not look like the same one. Green is go, amber
+   is take something off, muted is nothing to do. Both are palette tokens the page already uses,
+   and both were checked against the dark theme.
+
+   The badge carries the WORD as well as the colour, so the meaning survives colour-blindness,
+   greyscale, and a phone in bright sun. */
+.etf-action {
+  margin-left: auto;
+  padding: 0.1rem 0.45rem;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+.etf-action.buy  { color: var(--up);      background: var(--up-tint);   border-color: var(--up); }
+.etf-action.trim { color: var(--warn-fg); background: var(--warn-bg);   border-color: var(--warn-fg); }
+.etf-action.hold { color: var(--muted);   background: var(--tldr-tint); border-color: var(--hairline); }
+
+/* Transparent on a hold card rather than absent, so every card in the grid keeps the same geometry
+   and the coloured ones read as emphasis instead of as a different size. */
+.etf-card { border-left: 4px solid transparent; }
+/* `.action-hold` is emitted by app.js but INTENTIONALLY has no rule here: nothing to do should look
+   like the rest of the page, and the transparent stripe above already reserves its space. Do not
+   "fix" it by adding one. */
+.etf-card.action-buy {
+  border-left-color: var(--up);
+  background: linear-gradient(90deg, var(--up-tint), var(--card) 65%);
+}
+.etf-card.action-trim {
+  border-left-color: var(--warn-fg);
+  background: linear-gradient(90deg, var(--warn-bg), var(--card) 65%);
+}
+
+/* A ticker asked for in watchlist.txt that returned nothing. Warn-coloured, not muted: the usual
+   cause is a typo in that file, and a silently absent ticker looks exactly like one never added. */
+.etf-missing {
+  margin: 0.5rem 0 0;
+  padding: 0.4rem 0.65rem;
+  border: 1px solid var(--warn-line);
+  border-radius: 10px;
+  background: var(--warn-bg);
+  color: var(--warn-fg);
+  font-size: 0.8rem;
+}
 .etf-ends {
   display: flex;
   justify-content: space-between;

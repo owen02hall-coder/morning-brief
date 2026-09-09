@@ -200,7 +200,7 @@ def _rate_lines(briefing):
     return out
 
 
-# --- The leveraged ETF pulse ----------------------------------------------------------------------
+# --- The watchlist ---------------------------------------------------------------------------------
 
 def _spoken_read(text):
     """The page's one-line read, made safe to speak. Mirror any change in docs/app.js.
@@ -211,21 +211,38 @@ def _spoken_read(text):
     return text.replace("%", " percent").replace(" - ", ", ")
 
 
-def _leveraged_lines(briefing):
-    """SOXL / SPXL / TQQQ, spoken straight after the must-knows - the same slot they occupy on the
-    page, and the reason the reader asked for them near the top.
+ACTION_SPOKEN = {"buy": "Buy range.", "trim": "Trim range."}
 
-    The spoken read is the SAME `read` string the page renders, lightly de-glyphed. Writing a
-    second set of if/else branches here to phrase it for speech would be a second copy of the
-    classification in scripts/data/leveraged.py, free to drift from the one the reader sees.
+
+def _watchlist_lines(briefing):
+    """The watchlist, spoken straight after the must-knows - the same slot it occupies on the page,
+    and the reason the reader asked for it near the top.
+
+    ONLY the tickers in buy or trim range are named. That is the reader's explicit instruction, and
+    it is also what makes the section survive a growing watchlist: a list of twelve tickers read out
+    in full every morning is a list nobody listens to, while "S O X L, buy range" in an otherwise
+    silent slot is impossible to miss. The PAGE is where everything is visible - it shows strictly
+    more than the audio says, exactly as breadth and the band already do.
+
+    A quiet day still gets a line. A section that simply vanishes is indistinguishable from a
+    section that broke, which is the failure this project has been bitten by before, so "nothing in
+    buy or trim range" is said out loud rather than implied by silence.
+
+    The action comes from the `action` field, classified once in scripts/data/watchlist.py. Deciding
+    here what counts as a buy would be a second copy of that rule, free to drift from the colour the
+    reader is looking at. The spoken read is likewise the SAME `read` string the page renders,
+    lightly de-glyphed.
 
     Tickers are spelled out - a voice saying "sock-sil" for SOXL is a voice the listener has to
     decode."""
-    rows = briefing.get("leveraged") or []
+    rows = briefing.get("watchlist") or []
     if not rows:
         return []
-    out = ["Your leveraged E T Fs."]
-    for r in rows:
+    acting = [r for r in rows if r.get("action") in ACTION_SPOKEN]
+    if not acting:
+        return ["Your watchlist. Nothing in buy or trim range today."]
+    out = ["Your watchlist."]
+    for r in acting:
         spelled = " ".join(r.get("symbol") or "")
         rsi = r.get("rsi")
         # floor(x + 0.5), NOT f"{:.0f}" — Python rounds a .5 to the nearest EVEN integer and
@@ -235,8 +252,11 @@ def _leveraged_lines(briefing):
         # split that assumption 12 already pins down.
         head = (f"{spelled}, R S I {math.floor(rsi + 0.5):d}." if rsi is not None
                 else f"{spelled}.")
+        # The action leads, before the reasoning. The listener is driving; "buy range" in the first
+        # second is the whole message, and the read line behind it is the supporting detail.
+        act = ACTION_SPOKEN[r["action"]]
         read = (r.get("read") or "").strip()
-        out.append(f"{head} {_spoken_read(read)}" if read else head)
+        out.append(f"{head} {act} {_spoken_read(read)}" if read else f"{head} {act}")
     return out
 
 
@@ -287,7 +307,8 @@ def _policy_lines(briefing, weekday):
 def compose_script(briefing, has_lesson=False):
     """Deterministic narration. Mirror any change here in docs/app.js speechText().
 
-    Shape, in spoken order: the must-knows, the leveraged ETF pulse, the S&P/Nasdaq percent moves,
+    Shape, in spoken order: the must-knows, the watchlist (buy/trim tickers ONLY), the S&P/Nasdaq
+    percent moves,
     then the rates readout
     (10-year, 30-year mortgage, VIX — each followed by the reason the page gives for it, then the
     overall market 'why'), the weekly policy digest on config.POLICY_AUDIO_WEEKDAY only, tech,
@@ -319,7 +340,7 @@ def compose_script(briefing, has_lesson=False):
         for i, t in enumerate(tldr, 1):
             parts.append(f"{i}. {t}")
 
-    parts.extend(_leveraged_lines(briefing))
+    parts.extend(_watchlist_lines(briefing))
 
     m = briefing.get("market") or {}
     moves = []

@@ -137,15 +137,32 @@ function breadthSection(breadth) {
   return sec;
 }
 
-// --- Leveraged ETF pulse ---------------------------------------------------------------------
+// --- Watchlist -------------------------------------------------------------------------------
 
 const ETF_RSI_LABEL = { oversold: "Oversold", overbought: "Overbought", neutral: "Neutral" };
+// The action badge. Keys are the values scripts/data/watchlist.py action_zone() emits — the page
+// never derives the action itself, or the colour the reader acts on could disagree with the voice.
+const ETF_ACTION_LABEL = { buy: "Buy", trim: "Trim", hold: "Hold" };
 
-function leveragedCard(r) {
-  const card = el("div", "card");
+// Briefings published before 2026-09-09 carry no section at all; the ones published that morning
+// carry it under the old `leveraged` key, from before the list became the reader's to edit. Read
+// both, so an archived edition still renders as the briefing that was actually delivered.
+function watchlistRows(b) {
+  return b.watchlist || b.leveraged || [];
+}
+
+function watchlistCard(r) {
+  // The action drives the card's whole colour treatment: stripe, border and tint. It is the one
+  // thing the reader is scanning for, and a badge alone is easy to miss on a scrolling phone.
+  // Absent on a 2026-09-09 archive, whose rows predate the classifier — those cards render exactly
+  // as they did that morning rather than being coloured by a reading nobody computed.
+  const card = el("div", r.action ? `card etf-card action-${r.action}` : "card etf-card");
   const head = el("p", "etf-head");
   head.appendChild(el("span", "etf-symbol", r.symbol));
   if (r.what) head.appendChild(el("span", "etf-what", r.what));
+  if (r.action) {
+    head.appendChild(el("span", `etf-action ${r.action}`, ETF_ACTION_LABEL[r.action] || r.action));
+  }
   card.appendChild(head);
 
   const fig = el("p", "figure", `$${fmtValue(r.value)}`);
@@ -181,19 +198,29 @@ function leveragedCard(r) {
   return card;
 }
 
-function leveragedSection(rows) {
-  // Absent on every edition archived before 2026-09-09, and on a day all three tickers failed
-  // closed. Returning null (rather than a section of "Information not available." tiles) keeps a
-  // reader's archive looking like the briefing they actually got that morning.
-  if (!rows || !rows.length) return null;
+function watchlistSection(b) {
+  // Absent on every edition archived before 2026-09-09, and on a day every ticker failed closed.
+  // Returning null (rather than a section of "Information not available." tiles) keeps a reader's
+  // archive looking like the briefing they actually got that morning.
+  const rows = watchlistRows(b);
+  const missing = b.watchlist_missing || [];
+  if (!rows.length && !missing.length) return null;
   const sec = el("section");
-  sec.appendChild(el("h2", null, "Leveraged ETFs"));
+  sec.appendChild(el("h2", null, "Watchlist"));
   const grid = el("div", "grid etf-grid");
-  rows.forEach((r) => grid.appendChild(leveragedCard(r)));
+  rows.forEach((r) => grid.appendChild(watchlistCard(r)));
   sec.appendChild(grid);
+  // Named, not swallowed. watchlist.txt is hand-edited, so the likeliest reason a symbol reports
+  // nothing is a typo in that file — and a ticker that silently never appears looks identical to
+  // one the reader believes they added. Deliberately louder than the footnote below it.
+  if (missing.length) {
+    sec.appendChild(el("p", "etf-missing",
+      `No data for ${missing.join(", ")} — check the symbol in watchlist.txt.`));
+  }
   sec.appendChild(el("p", "muted",
-    "RSI-14 on daily closes: below 30 oversold, above 70 overbought. The band is the last month of "
-    + "closing prices."));
+    "Buy or Trim means the close sits at the edge of its own 1-month range — near it in percent "
+    + "and in position — or RSI-14 is past 30/70. The audio reads only Buy and Trim; this page "
+    + "shows everything. Not advice: it is where the price sits, nothing more."));
   return sec;
 }
 
@@ -480,10 +507,10 @@ function render(b, into, withSoup) {
     into.appendChild(sec);
   }
 
-  // Directly after the must-knows and above Markets: this is a position the reader checks daily,
-  // and it is the reason the section exists at all. Guarded — leveragedSection returns null on a
+  // Directly after the must-knows and above Markets: these are positions the reader checks daily,
+  // and it is the reason the section exists at all. Guarded — watchlistSection returns null on a
   // pre-2026-09-09 archive and appendChild(null) throws (see the policy note below).
-  const etfs = leveragedSection(b.leveraged);
+  const etfs = watchlistSection(b);
   if (etfs) into.appendChild(etfs);
 
   const market = el("section");
@@ -761,28 +788,53 @@ function spokenRead(text) {
   return text.split("%").join(" percent").split(" - ").join(", ");
 }
 
-function leveragedLines(b) {
-  // Mirror of tts._leveraged_lines. Speaks the SAME `read` string the card renders, so the
-  // classification in scripts/data/leveraged.py has exactly one implementation and neither voice
-  // can drift from what the reader sees.
-  const rows = b.leveraged || [];
-  if (!rows.length) return [];
+const ACTION_SPOKEN = { buy: "Buy range.", trim: "Trim range." };
+
+// Math.floor(x + 0.5), matching the Python side exactly: Python's "%.0f" rounds a .5 to the nearest
+// EVEN integer while Math.round always rounds it up, and RSI is published to one decimal, so 48.5
+// is reachable and would be spoken as 48 in the mp3 and 49 here.
+function spokenHead(r) {
+  const spelled = (r.symbol || "").split("").join(" ");
+  return r.rsi != null ? `${spelled}, R S I ${Math.floor(r.rsi + 0.5)}.` : `${spelled}.`;
+}
+
+function watchlistLines(b) {
+  // Mirror of tts._watchlist_lines. Only the buy/trim tickers are named, and a day with none says
+  // so out loud — a section that vanishes is indistinguishable from a section that broke. The
+  // action is READ from the row, never re-derived here, so the classification in
+  // scripts/data/watchlist.py has exactly one implementation and neither voice can drift from the
+  // colour the reader is looking at.
+  if (b.watchlist) {
+    const rows = b.watchlist;
+    if (!rows.length) return [];
+    const acting = rows.filter((r) => ACTION_SPOKEN[r.action]);
+    if (!acting.length) return ["Your watchlist. Nothing in buy or trim range today."];
+    const out = ["Your watchlist."];
+    acting.forEach((r) => {
+      const read = (r.read || "").trim();
+      const act = ACTION_SPOKEN[r.action];
+      out.push(read ? `${spokenHead(r)} ${act} ${spokenRead(read)}` : `${spokenHead(r)} ${act}`);
+    });
+    return out;
+  }
+  // Legacy: the editions archived on 2026-09-09 carry `leveraged` rows with no `action` field.
+  // Filtering those by an action they never had would silently drop every ticker, and asserting
+  // "nothing in buy or trim range" about a day nothing was classified would be a fabrication — so
+  // an old archive is spoken the way it was spoken that morning. This branch has no Python
+  // counterpart by design: tts.py only ever narrates TODAY, which is always the new shape.
+  const legacy = b.leveraged || [];
+  if (!legacy.length) return [];
   const out = ["Your leveraged E T Fs."];
-  rows.forEach((r) => {
-    const spelled = (r.symbol || "").split("").join(" ");
-    // Math.floor(x + 0.5), matching the Python side exactly: Python's "%.0f" rounds a .5 to the
-    // nearest EVEN integer while Math.round always rounds it up, and RSI is published to one
-    // decimal, so 48.5 is reachable and would be spoken as 48 in the mp3 and 49 here.
-    const head = r.rsi != null ? `${spelled}, R S I ${Math.floor(r.rsi + 0.5)}.` : `${spelled}.`;
+  legacy.forEach((r) => {
     const read = (r.read || "").trim();
-    out.push(read ? `${head} ${spokenRead(read)}` : head);
+    out.push(read ? `${spokenHead(r)} ${spokenRead(read)}` : spokenHead(r));
   });
   return out;
 }
 
 function speechText(b, hasLesson) {
   // Mirror of scripts/tts.py compose_script — used when there is no audio file (fallback days,
-  // archived briefings, offline). Spoken order: must-knows, the leveraged ETF pulse, the
+  // archived briefings, offline). Spoken order: must-knows, the watchlist (buy/trim only), the
   // S&P/Nasdaq percent moves, the rates
   // readout (10-year, 30-year mortgage, VIX, each with its "why", then the market "why"), the
   // weekly policy digest on Mondays only, tech, world, the Sunday recap.
@@ -799,7 +851,7 @@ function speechText(b, hasLesson) {
   parts.push(`Good morning. This is your briefing for ${d
     ? d.toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric" }) : "today"}.`);
   (b.tldr || []).forEach((t, i) => parts.push(`${i === 0 ? "The must-knows. " : ""}${i + 1}. ${t}`));
-  parts.push(...leveragedLines(b));
+  parts.push(...watchlistLines(b));
   const moves = [];
   [["S and P 500", b.market && b.market.sp500], ["Nasdaq", b.market && b.market.ndx]]
     .forEach(([name, n]) => {

@@ -1,0 +1,21 @@
+# Morning Briefing — watchlist
+#
+# One ticker per line. Anything after the symbol is the description shown under it on the card
+# (optional). Lines starting with # are ignored, and so is a line whose symbol does not parse.
+#
+# Editable from a phone: open this file on github.com, tap the pencil, commit. The next daily
+# build picks it up — nothing else needs changing.
+#
+# Symbols are Yahoo Finance symbols, which is what the whole app already uses:
+#   AAPL        an ordinary stock
+#   BRK-B       a share class
+#   BTC-USD     crypto
+#   ^GSPC       an index
+#
+# Every ticker here is read once a day and shown on the page with its RSI, its position in its
+# 1-month range, and one of three actions: BUY, TRIM or HOLD. The AUDIO only reads out the ones in
+# BUY or TRIM — the page is where you look to see everything.
+
+SOXL   3x semiconductors
+SPXL   3x S&P 500
+TQQQ   3x Nasdaq-100

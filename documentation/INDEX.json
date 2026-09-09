@@ -1,6 +1,6 @@
 {
   "project": "Morning Briefing",
-  "scope": "v1 core + v2 breadth/oversold alerts and audio edition + v3 policy section and mortgage rate + v4 Owen's Alphabet Soup (daily grounded lesson, client-owned pointer) + v5 spoken rates readout (10-year, 30-year mortgage, VIX, each with its why), the Monday policy digest, cross-bucket audio dedupe, and self-healing lesson audio + v6 leveraged ETF pulse (SOXL/SPXL/TQQQ: RSI-14 and the 1-month closing band, page and audio)",
+  "scope": "v1 core + v2 breadth/oversold alerts and audio edition + v3 policy section and mortgage rate + v4 Owen's Alphabet Soup (daily grounded lesson, client-owned pointer) + v5 spoken rates readout (10-year, 30-year mortgage, VIX, each with its why), the Monday policy digest, cross-bucket audio dedupe, and self-healing lesson audio + v6 leveraged ETF pulse (SOXL/SPXL/TQQQ: RSI-14 and the 1-month closing band, page and audio) + v7 watchlist (any Yahoo ticker via watchlist.txt, a buy/trim/hold action classified once and used by both the card colour and the audio, audio limited to the actionable tickers, missing symbols named on the page)",
   "note": "Project docs/ is the GitHub Pages web root (PWA), not documentation. Dev docs live in documentation/.",
   "docs": [
     {
@@ -25,10 +25,10 @@
     {
       "path": "documentation/integrations.md",
       "title": "Integrations",
-      "summary": "External services (Yahoo Finance for both the headline numbers and the leveraged ETF pulse, Gemini, ntfy, RSS, Federal Register, Utah Legislature, Freddie Mac PMMS, the Wikipedia action API behind Owen's Alphabet Soup, the TradingView scanner behind breadth, GitHub Pages/Actions, v2 Twelve Data), usage, invocation sites, per-build request budgets, env var names, the probed-dead source list, and the static POLICY_CALENDAR that stands in for the annual announcements no feed publishes.",
+      "summary": "External services (Yahoo Finance for both the headline numbers and the watchlist pulse, Gemini, ntfy, RSS, Federal Register, Utah Legislature, Freddie Mac PMMS, the Wikipedia action API behind Owen's Alphabet Soup, the TradingView scanner behind breadth, GitHub Pages/Actions, v2 Twelve Data), usage, invocation sites, per-build request budgets, env var names, the probed-dead source list, and the static POLICY_CALENDAR that stands in for the annual announcements no feed publishes.",
       "source_files": [
         "scripts/data/market.py",
-        "scripts/data/leveraged.py",
+        "scripts/data/watchlist.py",
         "scripts/data/news.py",
         "scripts/data/policy.py",
         "scripts/data/mortgage.py",
@@ -49,7 +49,7 @@
     {
       "path": "documentation/operations.md",
       "title": "Operations",
-      "summary": "Scheduling and DST, one-time deployment (secret/var name mapping), runtime, monitoring (4 alarms), run-state keys and their writers (and why the lesson pointer is deliberately not one), failure modes and recovery per section (incl. the per-ticker fail-close on the leveraged ETF pulse and why it is not in markets_ok), regression tests and their negative controls (incl. the narration mirror and the empty-fixture trap), cost.",
+      "summary": "Scheduling and DST, one-time deployment (secret/var name mapping), runtime, monitoring (4 alarms), run-state keys and their writers (and why the lesson pointer is deliberately not one), failure modes and recovery per section (incl. the per-ticker fail-close on the watchlist pulse and why it is not in markets_ok), regression tests and their negative controls (incl. the narration mirror and the empty-fixture trap), cost.",
       "source_files": [
         ".github/workflows/briefing.yml",
         ".github/workflows/heartbeat.yml",

@@ -27,7 +27,7 @@ YAHOO_UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
 def drop_open_session_bar(points, meta):
     """Drop a final bar that belongs to the still-open trading session.
 
-    Public because leveraged.py reads the same Yahoo daily series under the same rule.
+    Public because watchlist.py reads the same Yahoo daily series under the same rule.
 
     During regular hours Yahoo's daily series includes the CURRENT session as its last bar, with the
     live intraday price in `close`. The briefing narrates figures as the most recent CLOSE (see

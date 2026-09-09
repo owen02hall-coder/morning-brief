@@ -34,7 +34,7 @@ from .data import news as news_mod
 from .data import mortgage as mortgage_mod
 from .data import policy as policy_mod
 from .data import lessons as lessons_mod
-from .data import leveraged as leveraged_mod
+from .data import watchlist as watchlist_mod
 from .breadth import percent_above_ma as breadth_mod
 from . import summarize as summarize_mod
 
@@ -434,7 +434,7 @@ def _fallback_items(news, bucket, limit):
 
 def _assemble(now, today, market, news, narrative, ai_ok, breadth=None,
               policy=None, policy_upcoming=None, mortgage=None, policy_available=True,
-              policy_calendar=None, policy_week=None, leveraged=None):
+              policy_calendar=None, policy_week=None, watchlist=None, watchlist_missing=None):
     """`policy`, `policy_upcoming` and `mortgage` are KEYWORD-only in practice (the 7 positional
     args are the pre-existing call shape) and are emitted OUTSIDE the `if ai_ok:` branch: they come
     from a separate model call and a deterministic fetch, and both can succeed on a day when
@@ -456,10 +456,14 @@ def _assemble(now, today, market, news, narrative, ai_ok, breadth=None,
              "mortgage": mortgage is not None,
              # True only when EVERY configured ticker reported. The module fails closed per ticker,
              # so a partial result is a real state, and a bool that called 1-of-3 "available" would
-             # be the kind of label this project keeps getting burned by. Also NOT in markets_ok:
-             # these are three ordinary ETFs, not the market spine, and a delisting or a ticker
-             # rename must not page as "market data unavailable N days running".
-             "leveraged": len(leveraged or []) == len(config.LEVERAGED_TICKERS)}
+             # be the kind of label this project keeps getting burned by. Derived from the module's
+             # own `missing` list rather than by comparing counts against config: the two agree
+             # today, but a length check would quietly start passing if the list ever grew a
+             # duplicate, and the module is the one that knows what it actually failed to fetch.
+             # Also NOT in markets_ok: these are ordinary tickers the reader chose, not the market
+             # spine, and a delisting, a rename or a typo in watchlist.txt must not page as
+             # "market data unavailable N days running".
+             "watchlist": not (watchlist_missing or [])}
 
     def num(n, why):
         if not n:
@@ -510,9 +514,13 @@ def _assemble(now, today, market, news, narrative, ai_ok, breadth=None,
         "vix": vix_block,
         "breadth": _breadth_block(breadth),
         # Outside the `if ai_ok` branch above, like policy and mortgage: every figure here is
-        # computed deterministically in scripts/data/leveraged.py and the one-line read is written
+        # computed deterministically in scripts/data/watchlist.py and the one-line read is written
         # in code, so the section is fully intact on a day the model call fails.
-        "leveraged": list(leveraged or []),
+        "watchlist": list(watchlist or []),
+        # Symbols asked for that returned nothing. Published so the page can NAME them: the list is
+        # hand-edited in watchlist.txt, and a ticker that just never appears is indistinguishable
+        # from one the reader never actually added.
+        "watchlist_missing": list(watchlist_missing or []),
         "mortgage": mortgage_block,
         "policy": list(policy or []),
         "policy_upcoming": list(policy_upcoming or []),
@@ -577,7 +585,7 @@ def run(do_notify=True, today=None):
     news = news_mod.get_news()
     # Same Yahoo source as the headline numbers, so it lives beside them. Per-ticker
     # fail-closed inside the module: a bad ticker is absent, never wrong, and never fatal.
-    leveraged = leveraged_mod.get_leveraged()
+    watchlist, watchlist_missing = watchlist_mod.get_watchlist()
     breadth, st = _get_breadth(st, today)   # degradable; may refresh st.breadth_last_good
     # AFTER the breadth reassignment: _get_breadth returns a NEW state dict, so calling the policy
     # leg with the pre-breadth `st` would silently discard breadth_last_good. The chain stays intact.
@@ -624,7 +632,8 @@ def run(do_notify=True, today=None):
     briefing = _assemble(now, today, market, news, narrative, ai_ok, breadth,
                          policy=policy, policy_upcoming=policy_upcoming, mortgage=mortgage,
                          policy_available=policy_available, policy_calendar=policy_calendar,
-                         policy_week=policy_week, leveraged=leveraged)
+                         policy_week=policy_week, watchlist=watchlist,
+                         watchlist_missing=watchlist_missing)
     _write(briefing)
 
     # Track the last day markets were fully healthy, so a SUSTAINED blackout (a dead data source, the
@@ -739,13 +748,14 @@ def spine():
     # shape this project has been bitten by before (ndx100 breadth, dead for 22 days) — so state
     # the count against the expected count rather than dumping rows and leaving it to the eye.
     try:
-        rows = leveraged_mod.get_leveraged()
-        print("leveraged: %d/%d tickers — %s" % (
-            len(rows), len(config.LEVERAGED_TICKERS),
-            ", ".join(f"{r['symbol']} {r['value']} RSI {r['rsi']} {r['zone']}" for r in rows)
-            or "none"))
+        rows, missing = watchlist_mod.get_watchlist()
+        print("watchlist: %d/%d tickers%s — %s" % (
+            len(rows), len(config.WATCHLIST_TICKERS),
+            (" (MISSING: %s)" % ", ".join(missing)) if missing else "",
+            ", ".join(f"{r['symbol']} {r['value']} RSI {r['rsi']} {r['zone']} {r['action']}"
+                      for r in rows) or "none"))
     except Exception as e:
-        print("leveraged: FAILED —", e)
+        print("watchlist: FAILED —", e)
     print("news candidates: world=%d business=%d tech=%d" %
           (len(n["world"]), len(n["business"]), len(n["tech"])))
     # Federal leg ONLY, and deliberately not via get_policy(): that would run the annual Utah

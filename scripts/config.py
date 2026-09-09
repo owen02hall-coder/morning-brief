@@ -3,7 +3,12 @@
 Everything tunable lives here so the rest of the code reads as plain wiring. No secrets in this
 file — keys come from environment variables (GEMINI_API_KEY, TWELVEDATA_API_KEY, NTFY_TOPIC).
 """
+import io
 import os
+
+# Defined up here rather than in the Paths section below because the watchlist block needs it:
+# the ticker list is read from a file at the repo root at import time.
+REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # --- Timing -----------------------------------------------------------------
 TIMEZONE = "America/Denver"          # user is in Utah (Mountain)
@@ -99,7 +104,7 @@ TECH_FEEDS = {
 YAHOO_CHART = "https://{host}.finance.yahoo.com/v8/finance/chart/{symbol}?range={range}&interval=1d"
 YAHOO_SYMBOLS = {"sp500": "^GSPC", "ndx": "^IXIC", "vix": "^VIX", "ten_year": "^TNX"}
 # One template, two windows: the headline numbers need only the last two settled closes,
-# while RSI-14 needs a long run-up (see LEVERAGED_MIN_BARS). Two URL constants that
+# while RSI-14 needs a long run-up (see WATCHLIST_MIN_BARS). Two URL constants that
 # differed only in `range=` would be the same string written twice.
 YAHOO_RANGE_HEADLINE = "5d"
 YAHOO_RANGE_HISTORY = "6mo"
@@ -134,9 +139,9 @@ BREADTH_CLEAR = 33               # nag clears at/above this (hysteresis; no 30/3
 BREADTH_EXTREME = 20             # flagged as extreme in the alert text
 BREADTH_STALE_TRADING_DAYS = 2   # alerts suppressed when the value is older than this many trading days
 
-# --- Leveraged ETF pulse ------------------------------------------------------
-# Where SOXL / SPXL / TQQQ sit in their own recent range, read once a day at the top of the
-# briefing. Same Yahoo daily closes the four headline numbers come from — no new source, no key.
+# --- Watchlist ----------------------------------------------------------------
+# Where each ticker on the watchlist sits in its own recent range, read once a day near the top of
+# the briefing. Same Yahoo daily closes the four headline numbers come from — no new source, no key.
 #
 # Two independent readings per ticker:
 #   RSI-14 (Wilder), the oscillator Webull and TradingView draw, with the conventional 30/70 lines.
@@ -144,24 +149,85 @@ BREADTH_STALE_TRADING_DAYS = 2   # alerts suppressed when the value is older tha
 #   actually fired on (reconstructed from its run emails, 2026-09-09): the bottom zone is
 #   price <= low * 1.04, the top zone is price >= high * 0.96.
 #
+# Those two collapse into ONE action per ticker — buy / trim / hold, watchlist.action_zone(). That
+# action is the only thing the page colours and the ONLY thing the audio reads out: the reader asked
+# to be told about a ticker only when there is something to do about it.
+#
 # Deliberately NOT carried over from that monitor: the add/trim state machine, the dedup log and
 # the suggested dollar tranche. All three existed to keep an HOURLY job from paging the same signal
 # seven times a day; a once-daily section that always renders has no such problem to solve. And the
 # tranche sizing needed a position size this app does not know and has no way to verify.
-LEVERAGED_TICKERS = (
+
+# The ticker list is a plain text file at the REPO ROOT, not a constant in here, so a ticker can be
+# added from a phone through GitHub's web editor without touching Python. One ticker per line, an
+# optional description after it. Every entry costs one Yahoo request per daily build (~1s), so a
+# long list is slower but not broken — there is deliberately no silent cap that would drop a ticker
+# the reader believed they were following.
+WATCHLIST_PATH = os.path.join(REPO_ROOT, "watchlist.txt")
+# Used when watchlist.txt is missing or unreadable. Fail SAFE, not closed: an empty section here
+# would look exactly like "nothing to do today", which is the one thing this section must never lie
+# about. These three are what the reader actually holds.
+WATCHLIST_DEFAULT = (
     ("SOXL", "3x semiconductors"),
     ("SPXL", "3x S&P 500"),
     ("TQQQ", "3x Nasdaq-100"),
 )
+# Yahoo symbols: letters, digits and the four punctuation marks its tickers actually use
+# (BRK-B, BTC-USD, ^GSPC, ES=F). Anything else in the file is a typo, and a typo must drop ONE line
+# rather than take the section down.
+WATCHLIST_SYMBOL_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.-^="
+
+
+def _load_watchlist(path=None):
+    """Parse watchlist.txt -> ((symbol, description), ...), falling back to WATCHLIST_DEFAULT.
+
+    Blank lines and lines starting with '#' are comments. The first whitespace run splits the
+    symbol from its description; a symbol with no description is fine (the card just omits it).
+
+    Symbols are upper-cased and de-duplicated, first spelling wins: a duplicate would be fetched,
+    rendered AND spoken twice, and the reader would have no way to tell that from two real signals.
+    """
+    try:
+        with io.open(path or WATCHLIST_PATH, encoding="utf-8") as f:
+            lines = f.read().splitlines()
+    except Exception:
+        return WATCHLIST_DEFAULT
+    out, seen = [], set()
+    for raw in lines:
+        line = raw.strip()
+        if not line or line.startswith("#"):
+            continue
+        parts = line.split(None, 1)
+        symbol = parts[0].upper()
+        if not symbol or any(c not in WATCHLIST_SYMBOL_CHARS for c in symbol) or len(symbol) > 12:
+            print("watchlist: ignoring unparseable line %r" % raw)
+            continue
+        if symbol in seen:
+            continue
+        seen.add(symbol)
+        out.append((symbol, parts[1].strip() if len(parts) > 1 else ""))
+    return tuple(out) or WATCHLIST_DEFAULT
+
+
+WATCHLIST_TICKERS = _load_watchlist()
 RSI_PERIOD = 14
 RSI_OVERSOLD = 30                # conventional Wilder lines, and the ones Webull draws
 RSI_OVERBOUGHT = 70
-LEVERAGED_BAND_DAYS = 21         # ~1 calendar month of trading days
-LEVERAGED_LOW_BAND = 0.04        # bottom zone: close <= 1-month low * (1 + this)
-LEVERAGED_HIGH_BAND = 0.04       # top zone:    close >= 1-month high * (1 - this)
-LEVERAGED_MOVER_PCT = 7.0        # single-session move called out as a big swing (the old monitor's
+WATCHLIST_BAND_DAYS = 21         # ~1 calendar month of trading days
+WATCHLIST_LOW_BAND = 0.04        # bottom zone: close <= 1-month low * (1 + this)
+WATCHLIST_HIGH_BAND = 0.04       # top zone:    close >= 1-month high * (1 - this)
+# The 4% rule alone was tuned on 3x ETFs, whose 1-month band is routinely 30-40% wide, so 4% is a
+# thin sliver at the edge of it. On an ordinary low-volatility stock the same 4% can span most of
+# the band — measured 2026-09-09 on a 220-235 month (6.8% wide), low * 1.04 sits at the 59th
+# percentile, so "within 4% of the low" would fire on nearly two thirds of all closes and the BUY
+# colour would mean nothing. This second gate makes the zone mean the same thing on both: a close
+# must be near the edge in PERCENT terms *and* in the bottom/top third of the band it actually has.
+# Verified inert for the three founding tickers on 2026-09-09 (SPXL was 20.4% up its band and still
+# reads "low"; TQQQ at 38.7% failed the percent test anyway).
+WATCHLIST_BAND_EDGE_PCT = 33.0
+WATCHLIST_MOVER_PCT = 7.0        # single-session move called out as a big swing (the old monitor's
                                  # line sat near 7%: +5.2% was neutral, +9.1% fired)
-LEVERAGED_MIN_BARS = 60          # RSI-14's Wilder smoothing is seeded, not windowed, so a short
+WATCHLIST_MIN_BARS = 60          # RSI-14's Wilder smoothing is seeded, not windowed, so a short
                                  # series gives a WRONG number rather than a missing one. 6mo is
                                  # ~128 bars; measured 2026-09-09, 60 bars lands within ~1 point of
                                  # the full series and 120 is identical to 2dp. Below this: None.
@@ -685,7 +751,7 @@ PAGES_URL = os.environ.get("PAGES_URL") or "https://example.github.io/morning-br
 NTFY_BASE = "https://ntfy.sh"
 
 # --- Paths ------------------------------------------------------------------
-REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# REPO_ROOT is defined at the top of this file (the watchlist block reads a file from it).
 DOCS_DIR = os.path.join(REPO_ROOT, "docs")
 ARCHIVE_DIR = os.path.join(DOCS_DIR, "archive")
 BRIEFING_PATH = os.path.join(DOCS_DIR, "briefing.json")

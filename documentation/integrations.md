@@ -13,9 +13,9 @@ values live in the repo. Environment variable names only are listed here.
 ## Yahoo Finance (chart API)
 
 - Used for: the four headline market numbers (S&P 500, Nasdaq Composite, VIX, 10-year Treasury yield)
-  AND the leveraged ETF pulse (SOXL, SPXL, TQQQ).
+  AND the watchlist pulse (the tickers in watchlist.txt).
 - Auth: none. Keyless chart endpoint (unlike most free tiers, it includes indices).
-- Invoked in: `scripts/data/market.py` (`_yahoo_series`) and `scripts/data/leveraged.py` (`_series`).
+- Invoked in: `scripts/data/market.py` (`_yahoo_series`) and `scripts/data/watchlist.py` (`_series`).
   The two differ only in the window they request: `config.YAHOO_RANGE_HEADLINE` (`5d`, enough for the
   last two settled closes) vs `config.YAHOO_RANGE_HISTORY` (`6mo`, ~128 bars, because Wilder's RSI is
   seeded rather than windowed and a short series returns a WRONG number rather than a missing one).
@@ -33,13 +33,13 @@ values live in the repo. Environment variable names only are listed here.
   keyless CSV is now behind a JS anti-bot challenge — Yahoo's chart API was the working keyless source
   that still includes indices.
 
-## Yahoo Finance (leveraged ETF pulse)
+## Yahoo Finance (watchlist pulse)
 
 - Used for: RSI-14 and the 1-month closing band for SOXL / SPXL / TQQQ, rendered above Markets and
   spoken straight after the must-knows.
 - Auth: none — the same keyless chart endpoint as above, so this section adds NO new provider,
   no key, and no scrape.
-- Invoked in: `scripts/data/leveraged.py` (`get_leveraged`), from `build_briefing.run()` and from
+- Invoked in: `scripts/data/watchlist.py` (`get_watchlist`), from `build_briefing.run()` and from
   `--spine` (so `data-smoke.yml`'s weekly run exercises the leg from a GitHub runner).
 - Request budget: 3 symbols x 1 request (2 hosts tried only on failure), once per build.
 - Accuracy: RSI-14 (Wilder) was cross-validated 2026-09-09 against TradingView's published `RSI`
@@ -49,9 +49,9 @@ values live in the repo. Environment variable names only are listed here.
   quoted independently in its own emails (SPXL 1-month high $301.35, TQQQ $77.15).
 - Thresholds: `RSI_OVERSOLD`/`RSI_OVERBOUGHT` (30/70, the lines Webull draws) and the band zones
   `close <= low * 1.04` / `close >= high * 0.96`, carried over from that old monitor.
-- Fail-closed, per ticker: a dead fetch, fewer than `LEVERAGED_MIN_BARS` settled bars, or a
+- Fail-closed, per ticker: a dead fetch, fewer than `WATCHLIST_MIN_BARS` settled bars, or a
   zero-width band drops THAT ticker; the others still publish. A partial result sets
-  `data_availability.leveraged` false, which surfaces in the existing low-priority "degraded
+  `data_availability.watchlist` false, which surfaces in the existing low-priority "degraded
   sections" health ping — the point being that a ticker which quietly stops reporting says so,
   rather than repeating the 22-day silent death of Nasdaq-100 breadth.
 - Not carried over from the old monitor: the add/trim state machine, the dedup log and the suggested
