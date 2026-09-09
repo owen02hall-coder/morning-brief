@@ -165,7 +165,13 @@ LEVERAGED_MIN_BARS = 60          # RSI-14's Wilder smoothing is seeded, not wind
                                  # series gives a WRONG number rather than a missing one. 6mo is
                                  # ~128 bars; measured 2026-09-09, 60 bars lands within ~1 point of
                                  # the full series and 120 is identical to 2dp. Below this: None.
-LEVERAGED_STALE_TRADING_DAYS = 3 # older than this and the section shows the date and says so
+# There is deliberately NO staleness threshold here, unlike BREADTH_STALE_TRADING_DAYS. Breadth
+# needs one because it SERVES a last-good cache, so an old value can be shown as if it were current.
+# This section has no cache: it either fetches a fresh series or the ticker is absent. An old `asof`
+# therefore means a holiday or a long weekend — normal, not a fault — and flagging it "stale" would
+# cry wolf every Tuesday after a Monday holiday. The card dates every figure ("close of <date>"),
+# which is the honest treatment. A constant was written here on 2026-09-09 and removed the same day
+# for having no call site and a comment promising behaviour the code did not have.
 
 # --- Policy that affects me ---------------------------------------------------
 # A narrow, EFFECT-TESTED reversal of the "no US politics" rule in summarize.SYSTEM: an item ships

@@ -171,7 +171,8 @@ def read_ticker(symbol, what):
 
     close = closes[-1]
     prev = closes[-2]
-    change = round(close - prev, 2)
+    # Percent only. The absolute dollar move was published until 2026-09-09 and read by nothing:
+    # on a 3x fund the percent is the meaningful unit, and both the card and the narration use it.
     day_move = (100.0 * (close - prev) / prev) if prev else None
 
     window = closes[-config.LEVERAGED_BAND_DAYS:]
@@ -185,7 +186,6 @@ def read_ticker(symbol, what):
         "symbol": symbol,
         "what": what,
         "value": round(close, 2),
-        "change": change,
         "day_move": round(day_move, 2) if day_move is not None else None,
         "asof": asof,
         "rsi": round(rsi, 1) if rsi is not None else None,

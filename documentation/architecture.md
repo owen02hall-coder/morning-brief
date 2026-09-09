@@ -368,7 +368,7 @@ tldr         : list of up to 3 strings
 market       : { sp500: {value, change, asof}, ndx: {value, change, asof}, why: str }
 yield_10y    : { value, change, asof, why }
 vix          : { value, change, asof, why }
-leveraged    : list of { symbol, what, value, change, day_move, asof, rsi, rsi_zone, low, high,
+leveraged    : list of { symbol, what, value, day_move, asof, rsi, rsi_zone, low, high,
                band_pct, zone, read } — one entry per configured ticker that reported. A ticker
                that failed closed is ABSENT rather than null, and the whole key is absent on every
                edition archived before 2026-09-09 (the PWA renders nothing for either case).
