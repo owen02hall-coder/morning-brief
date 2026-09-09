@@ -883,19 +883,39 @@ function speechText(b, hasLesson) {
   return parts.join(" ").replace(/https?:\/\/\S+/g, "");
 }
 
-function speakChunked(text, onDone) {
-  // iOS quietly dies on very long utterances — queue sentence-sized chunks instead.
+function speakChunked(text, rate, onDone) {
+  // iOS quietly dies on very long utterances — queue sentence-sized chunks instead. Every chunk is
+  // queued up front (iOS is far more reliable that way than chaining one utterance off the last
+  // one's onend), so the rate is fixed for the whole tail the moment it starts — which is why
+  // changing the speed mid-speech restarts it rather than pretending to take effect.
   const chunks = text.match(/[^.!?]+[.!?]+[\s]*/g) || [text];
   const synth = window.speechSynthesis;
   synth.cancel();
   let remaining = chunks.length;
   chunks.forEach((c) => {
     const u = new SpeechSynthesisUtterance(c);
+    u.rate = rate;
     u.onend = () => { remaining -= 1; if (remaining === 0 && onDone) onDone(); };
     u.onerror = () => { remaining -= 1; if (remaining === 0 && onDone) onDone(); };
     synth.speak(u);
   });
 }
+
+// Playback speed. Its own localStorage key: this is a property of how Owen listens, not of the
+// lesson deck, and it has to survive a cleared soup pointer (and vice versa).
+const LISTEN_RATE_KEY = "listen.rate.v1";
+const LISTEN_RATES = [1, 1.5, 2];
+
+function loadRate() {
+  try {
+    const r = parseFloat(localStorage.getItem(LISTEN_RATE_KEY));
+    return LISTEN_RATES.includes(r) ? r : 1;    // an unknown value is not a speed, it is a default
+  } catch (e) { return 1; }                     // private mode — 1x is a working state
+}
+function saveRate(r) {
+  try { localStorage.setItem(LISTEN_RATE_KEY, String(r)); } catch (e) { /* private mode */ }
+}
+function rateLabel(r) { return `${r}×`; }
 
 function setButton(btn, playing) {
   btn.textContent = "";
@@ -913,8 +933,9 @@ function setButton(btn, playing) {
 // prose is in the deck for exactly this reason, so a missing mp3 degrades the voice, never the
 // content.
 const player = {
-  bar: null, btn: null, label: null, track: null, fill: null, time: null, audio: null,
+  bar: null, btn: null, label: null, track: null, fill: null, time: null, audio: null, speed: null,
   briefing: null,
+  rate: 1,                  // 1 / 1.5 / 2 — applies to the mp3 clips AND to the spoken tail
   hasEdition: false,        // today's mp3 exists AND its manifest date matches this edition
   clips: [],                // [{src, label}]
   durations: [],
@@ -934,13 +955,47 @@ const player = {
     this.fill = document.getElementById("listen-fill");
     this.time = document.getElementById("listen-time");
     this.audio = document.getElementById("listen-audio");
+    this.speed = document.getElementById("listen-speed");
+    this.rate = loadRate();
+    this.applyRate();   // so the element agrees with the chip from the first frame, not first play
     this.audio.onended = () => this.next();
     this.audio.onpause = () => { if (!this.speaking) { this.playing = false; this.paint(); } };
     this.audio.onplay = () => { this.playing = true; this.paint(); };
     this.audio.ontimeupdate = () => this.paint();
-    this.audio.onloadedmetadata = () => { this.durations[this.idx] = this.audio.duration; this.paint(); };
+    // applyRate here, not only in start(): Safari resets playbackRate to 1 when a new source
+    // loads, so a queue that changes clips would silently drop back to normal speed mid-listen.
+    // This fires for every load — start()'s src, and seek()'s jump between clips.
+    this.audio.onloadedmetadata = () => {
+      this.durations[this.idx] = this.audio.duration;
+      this.applyRate();
+      this.paint();
+    };
     this.track.onclick = (ev) => this.seek(ev);
     this.btn.onclick = () => this.toggle();
+    this.speed.onclick = () => this.cycleRate();
+    this.paintSpeed();
+  },
+
+  applyRate() { if (this.audio) this.audio.playbackRate = this.rate; },
+
+  paintSpeed() {
+    if (!this.speed) return;
+    this.speed.textContent = rateLabel(this.rate);
+    this.speed.classList.toggle("is-default", this.rate === 1);
+    this.speed.setAttribute("aria-label", `Playback speed ${rateLabel(this.rate)} — tap to change`);
+  },
+
+  cycleRate() {
+    this.rate = LISTEN_RATES[(LISTEN_RATES.indexOf(this.rate) + 1) % LISTEN_RATES.length];
+    saveRate(this.rate);
+    this.applyRate();
+    this.paintSpeed();
+    // A queued speech tail has its rate baked into every utterance already on the synth queue, so
+    // the only honest way to change its speed is to say it again. Restart rather than let the
+    // button claim a speed the voice is not using. (This tap is itself a user gesture, so iOS
+    // still permits the new utterances.)
+    if (this.speaking && this.playing) { this.stopAll(); this.speak(); }
+    this.paint();
   },
 
   stopAll() {
@@ -1040,7 +1095,9 @@ const player = {
       this.track.classList.remove("hidden");
       this.time.classList.remove("hidden");
       this.fill.style.width = `${Math.min(100, (this.elapsed() / total) * 100)}%`;
-      this.time.textContent = fmtTime(Math.max(0, total - this.elapsed()));
+      // Divided by the rate: at 2x the listener has half as long left, and a countdown that
+      // ignored that would be describing a playback speed nobody chose.
+      this.time.textContent = fmtTime(Math.max(0, total - this.elapsed()) / this.rate);
     } else {
       this.track.classList.add("hidden");
       this.time.classList.add("hidden");
@@ -1066,6 +1123,7 @@ const player = {
     if (this.idx < this.clips.length) {
       this.playing = true;
       this.audio.src = this.clips[this.idx].src;
+      this.applyRate();
       this.audio.play().catch(() => { this.playing = false; this.paint(); });
       this.paint();
       this.mediaSession();
@@ -1080,7 +1138,7 @@ const player = {
     this.speaking = true;
     const seq = ++this.speechSeq;
     this.paint();
-    speakChunked(this.tail, () => {
+    speakChunked(this.tail, this.rate, () => {
       if (seq !== this.speechSeq) return;   // a newer queue (or a stop) owns the player now
       this.speaking = false;
       if (this.playing) this.finish();      // only a queue that ran to its end counts as listened
@@ -1200,8 +1258,9 @@ async function loadArchive() {
                   chip.dataset.speaking = "1";
                   chip.textContent = "Stop";
                   // No lesson tail here: an archived edition is a record of that day's news, and
-                  // finishing it must never advance the live deck pointer.
-                  speakChunked(speechText(b, false), () => {
+                  // finishing it must never advance the live deck pointer. It reads at the speed
+                  // chosen up in the Listen bar — one speed for the whole app, not per surface.
+                  speakChunked(speechText(b, false), player.rate, () => {
                     chip.dataset.speaking = "0";
                     chip.textContent = "Listen to this briefing";
                   });

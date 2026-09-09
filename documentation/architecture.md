@@ -102,7 +102,9 @@ workflow: git commit + push (docs/, state/) --> GitHub Pages redeploys
 workflow: Send ready push                  python -m scripts.notify ready — ONLY after git push succeeded
 PWA (docs/app.js): fetch briefing.json + lessons.json (network-first) -> render; Listen player
   plays a QUEUE (today's mp3 -> the current lesson's clips at the chosen depth -> the shared outro),
-  falling back to chunked speechSynthesis for any part with no audio; archive + search; staleness
+  falling back to chunked speechSynthesis for any part with no audio; a 1x/1.5x/2x speed chip
+  (localStorage `listen.rate.v1`) drives audio.playbackRate — reapplied on every source load
+  because Safari resets it — and the utterance rate of the fallback voice; archive + search; staleness
   banner; the policy section is built by a function that returns null when nothing qualified and is
   appended behind a guard (see the design decisions below); Owen's Alphabet Soup renders LAST and
   owns the deck pointer in localStorage

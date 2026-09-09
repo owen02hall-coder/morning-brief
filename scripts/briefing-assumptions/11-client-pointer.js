@@ -20,6 +20,9 @@
  *   (C7) A reader who has finished the whole deck is told so, instead of the narration handing off
  *        into nothing.
  *   (C8) The history survives a reload.
+ *   (C9) Changing the playback speed is not a completion. The speed chip stops and restarts what
+ *        is playing, which makes it a new way into the exact failure C4 exists to prevent — and
+ *        unlike a wrong speed (which the listener hears instantly), a burned lesson is silent.
  *
  * Read-only. Exit: 0 PASS / 1 FAIL / 2 REFUSED.
  */
@@ -49,7 +52,7 @@ function mkNode(tag) {
       if (i >= 0) this.children[i] = fresh; else this.children.push(fresh);
     },
     removeAttribute() {}, setAttribute(k, v) { this.attrs[k] = v; }, addEventListener() {},
-    classList: { add() {}, remove() {}, contains: () => false },
+    classList: { add() {}, remove() {}, toggle() {}, contains: () => false },
     getBoundingClientRect: () => ({ left: 0, width: 100 }),
     play() { this.paused = false; if (this.onplay) this.onplay(); return Promise.resolve(); },
     pause() { if (!this.paused) { this.paused = true; if (this.onpause) this.onpause(); } },
@@ -70,8 +73,8 @@ function mkNode(tag) {
 }
 const byId = {};
 ["updated", "stale", "edition", "briefing", "listen", "listen-btn", "listen-label", "listen-track",
- "listen-fill", "listen-time", "listen-audio", "archive-list", "archive-view", "archive-search",
- "ios-hint", "loading"].forEach((id) => { byId[id] = mkNode("div"); });
+ "listen-fill", "listen-time", "listen-audio", "listen-speed", "archive-list", "archive-view",
+ "archive-search", "ios-hint", "loading"].forEach((id) => { byId[id] = mkNode("div"); });
 
 global.document = {
   createElement: mkNode,
@@ -198,6 +201,22 @@ const saved = () => JSON.parse(store["soup.v1"] || "{}");
   check("length, completions and skips all reload",
     soup.prefs.length === "quick" && soup.prefs.completed.join() === "a,c" &&
     soup.prefs.skipped.join() === "b", JSON.stringify(soup.prefs));
+
+  console.log("\nC9  changing the playback speed is not a completion");
+  delete store["soup.v1"];
+  soup.prefs = { length: "medium", completed: [], skipped: [] };
+  player.replan();
+  check("back on the first lesson, with a queue to complete", player.lessonId === "a",
+    String(player.lessonId));
+  player.toggle();
+  check("playing", player.playing === true);
+  byId["listen-speed"].onclick();
+  check("the speed reached the audio element", byId["listen-audio"].playbackRate === 1.5,
+    String(byId["listen-audio"].playbackRate));
+  check("still playing — the speed chip is not a stop button", player.playing === true);
+  check("the pointer did NOT move", player.lessonId === "a", String(player.lessonId));
+  check("nothing was recorded as completed", (saved().completed || []).length === 0,
+    JSON.stringify(saved().completed || []));
 
   console.log(fails ? `\nFAIL: ${fails} check(s)` : "\nPASS: the client pointer behaves");
   process.exit(fails ? 1 : 0);

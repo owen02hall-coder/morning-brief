@@ -39,7 +39,9 @@ Runs with your laptop and phone off. Cost: $0/month (all free tiers + your exist
   each and an overall read on the market, then tech and world (a story filed in both is read once),
   and on Mondays a digest of the week's policy that affects you. The day's Alphabet Soup lesson
   plays straight after it as one queue; falls back to the phone's built-in voice offline, on
-  archived briefings, or on a failed-TTS day
+  archived briefings, or on a failed-TTS day. The chip beside the play button cycles the speed
+  1x / 1.5x / 2x — it applies to the whole queue and to the fallback voice, the countdown is the
+  time you will actually spend, and the phone remembers the choice
 - **Health and science** — findings worth knowing: trial results, outbreaks, safety findings,
   genuine discoveries. Not the politics of science funding
 - **Across the country** — big US national news: what happened and what it means, never the

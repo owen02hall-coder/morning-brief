@@ -76,7 +76,7 @@ APP_JS = os.path.join(REPO, "docs", "app.js")
 # The two markers the extractor slices `docs/app.js` between. Named here so that renaming a block in
 # app.js fails LOUDLY in this gate rather than silently extracting nothing and comparing empties.
 JS_BLOCK_START = "// ---- Narration mirror"
-JS_BLOCK_END = "function speakChunked(text, onDone) {"
+JS_BLOCK_END = "function speakChunked(text, rate, onDone) {"
 JS_HELPER_START = "function localDate(iso) {"
 JS_HELPER_END = "function safeHref(url) {"
 

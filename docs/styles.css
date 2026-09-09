@@ -154,6 +154,30 @@ header::after {
   border-radius: 999px;
   background: var(--accent);
 }
+.listen-speed {
+  position: relative;
+  flex: none;
+  min-width: 40px;
+  min-height: 30px;
+  padding: 0 0.45rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--muted);
+  font-family: inherit;
+  font-size: 0.78rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+}
+/* Anything but 1x is a deliberate choice — say so, the way the length chips do. */
+.listen-speed:not(.is-default) { background: var(--accent); color: var(--card); border-color: var(--accent); }
+/* The chip stays visually secondary to the play button, but the thing a thumb has to hit in a
+   moving car is a full 44px square. */
+.listen-speed::after { content: ""; position: absolute; inset: -7px; }
+.listen-speed:active { transform: scale(0.94); }
+.listen-speed:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
 .listen-time {
   flex: none;
   font-size: 0.75rem;
