@@ -41,7 +41,10 @@ values live in the repo. Environment variable names only are listed here.
   no key, and no scrape.
 - Invoked in: `scripts/data/watchlist.py` (`get_watchlist`), from `build_briefing.run()` and from
   `--spine` (so `data-smoke.yml`'s weekly run exercises the leg from a GitHub runner).
-- Request budget: 3 symbols x 1 request (2 hosts tried only on failure), once per build.
+- Request budget: one request per parseable line in `watchlist.txt` (2 hosts tried only on
+  failure), once per build. NOT a fixed 3 — the list is read at import by
+  `config._load_watchlist()` and is the reader's to edit; it is 3 today only because that file
+  currently lists SOXL, SPXL and TQQQ.
 - Accuracy: RSI-14 (Wilder) was cross-validated 2026-09-09 against TradingView's published `RSI`
   scanner column while the US session was open — SOXL 50.27 vs 50.14, SPXL 46.97 vs 46.73, TQQQ
   50.19 vs 50.20. The residual is live intraday drift, since TradingView was quoting the in-progress
@@ -54,10 +57,12 @@ values live in the repo. Environment variable names only are listed here.
   `data_availability.watchlist` false, which surfaces in the existing low-priority "degraded
   sections" health ping — the point being that a ticker which quietly stops reporting says so,
   rather than repeating the 22-day silent death of Nasdaq-100 breadth.
-- Not carried over from the old monitor: the add/trim state machine, the dedup log and the suggested
-  dollar tranche. All three existed to stop an HOURLY job from paging the same signal repeatedly; a
-  once-daily section that always renders has no such problem, and the tranche sizing needed a
-  position size this app does not know and cannot verify.
+- Carried over from the old monitor only where a push made it necessary. The add/trim state machine
+  is `watchlist.action_zone()` (buy/trim/hold); the dedup log is the `watchlist_actions` state key
+  behind the edge-triggered crossing push. Both were deliberately skipped while this was a page-only
+  section, because a once-daily card that always renders cannot nag — and both returned the same day
+  it grew a notification, which can. Still NOT carried over: the suggested dollar tranche, which
+  needed a position size this app does not know and cannot verify.
 
 ## TradingView scanner (breadth)
 
@@ -101,7 +106,8 @@ values live in the repo. Environment variable names only are listed here.
   a lesson that cannot be grounded is simply not written that day.
 - Auth: none. `https://en.wikipedia.org/w/api.php`, `action=query&prop=extracts|pageprops|info`,
   `explaintext=1&redirects=1&formatversion=2`. Needs a contact-bearing User-Agent
-  (`lessons.WIKI_UA`, module-local like the PMMS and Utah UAs).
+  (`config.WIKI_UA` — shared with `data/constituents.py`, NOT module-local; it was moved into
+  config on 2026-09-01, unlike the PMMS and Utah UAs which remain module-local).
 - Invoked in: `scripts/data/lessons.py` (`fetch_article`, `first_usable`), through `data/retry.py`.
 - Why `formatversion=2`: it returns `pages` as a LIST. The legacy shape is a dict keyed by page id
   with `"-1"` for a miss — exactly the shape a caller mis-reads as a hit.
@@ -367,9 +373,12 @@ folding it in would let a healthy calendar mask a dead Federal Register leg.
 
 - Used for: the morning "ready" push (sent by the workflow ONLY after `git push` succeeds — see
   `python -m scripts.notify ready`), two-tier market-breadth alerts per index (one-shot warning
-  below 40%, daily high-priority oversold nag below 30%), a policy push, self-monitoring health
-  pings, and the `data-smoke.yml` / `shell-guard.yml` failure alarms (both sent by curl from the
-  workflow, not by `notify.py`).
+  below 40%, daily high-priority oversold nag below 30%), a policy push, the watchlist crossing
+  push (`notify.watchlist_alert`, normal priority, fired from `build_briefing.run()` off
+  `state.eval_watchlist_alert` when a ticker crosses INTO buy or trim range — edge-triggered, so it
+  cannot repeat daily and never fires on leaving a range), self-monitoring health pings, and the
+  `data-smoke.yml` / `shell-guard.yml` / `guard-triggers.yml` / `heartbeat.yml` failure alarms (all
+  four sent by curl from the workflow, not by `notify.py`).
 - Policy pushes (`notify.policy_alert`) fire once per newly-reported FINAL rule, at NORMAL priority
   on purpose: a rule taking effect weeks from now is a heads-up, not the wake-you-up page that
   breadth OVERSOLD is. Proposed rules never push (nothing has taken effect) and queue-released Utah
@@ -386,9 +395,12 @@ folding it in would let a healthy calendar mask a dead Federal Register leg.
 
 ## RSS news feeds
 
-- Used for: world, business, and tech candidate articles fed to the summarizer.
+- Used for: world, business, tech, US national and health/science candidate articles fed to the
+  summarizer.
 - Auth: none. Parsed with `feedparser` in `scripts/data/news.py`.
-- Feed lists: `config.WORLD_FEEDS`, `config.BUSINESS_FEEDS`, `config.TECH_FEEDS`.
+- Feed lists: `config.WORLD_FEEDS`, `config.BUSINESS_FEEDS`, `config.TECH_FEEDS`,
+  `config.US_FEEDS` (NPR National, AP) and `config.SCIENCE_FEEDS` (BBC Health, NPR Science,
+  NPR Health).
 - Current feeds: BBC World, Al Jazeera, Guardian World, NPR (world); MarketWatch, Yahoo Finance,
   CNBC (business); Ars Technica, The Verge, MIT Technology Review, Hacker News (tech).
 - Notes: each feed is fetched in a try/except so one outage cannot abort the run. Items older than

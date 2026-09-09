@@ -119,12 +119,16 @@ How the briefing is scheduled, deployed, monitored, and recovered.
   rerun without a stamp of its own: the first run stores the new action, so the second sees no
   transition. Normal priority because it fires hours before the US open about a level that has held
   since the prior close — there is nothing a high-priority page would let the reader act on sooner.
+- Guard-trigger check: `guard-triggers.yml` (push + PR + `workflow_dispatch`, scoped to
+  `scripts/briefing-assumptions/**` and `.github/workflows/**`) fails any push that leaves an
+  assumption test wired to no trigger, and pushes its own normal-priority "Guard-trigger check
+  TRIPPED" ntfy on trip. A guard nothing runs is the failure it exists to prevent.
 - Shell guard: `shell-guard.yml` fails any push that changes `docs/` shell files without bumping
   the sw.js CACHE constant, and ntfy-pages on trip — installed PWAs would otherwise silently
   never update (this class shipped broken once).
 - Data smoke: `data-smoke.yml` runs WEEKLY (`0 16 * * 1`, Mondays ~10am Denver) as well as on
   dispatch. It prints the data spine from a runner and fails if either index's breadth doesn't
-  compute, then runs assumption tests 04, 05, 06, 07, 08, 09, 10, 11, 12, 13 and 14 — the RSS feeds
+  compute, then runs assumption tests 04, 05, 06, 07, 08, 09, 10, 11, 12, 13, 14 and 15 — the RSS feeds
   and constituent tables, Federal Register, PMMS, the Utah list page, Utah bill detail pages, the
   keyword prefilter, the policy calendar, the lesson sources and Wikipedia User-Agent, the client
   pointer, the narration mirror, and two real model calls. Each step is `if: always()` so one dead
@@ -167,7 +171,8 @@ How the briefing is scheduled, deployed, monitored, and recovered.
     `from scripts import config` and prove the PRODUCTION query shape rather than a drifting local
     copy. `python -m` cannot address these files (leading digits, hyphens, no `__init__.py`), so the
     import path is the only route.
-  - `timeout-minutes: 10`, raised from 5 when the three extra tests were added.
+  - `timeout-minutes: 12` (`data-smoke.yml`), raised as tests were added. Not to be confused
+    with `briefing.yml`'s own `timeout-minutes: 10`.
 - Transparency: `briefing.json` carries a `data_availability` map showing each section's status.
 
 ## Run state (`state/state.json`)
@@ -198,6 +203,7 @@ pushes.
 | `policy_utah_queue` `[stub]` | `policy._maybe_harvest_utah()` appends; `policy._release_utah()` pops; `policy.requeue_utah()` pushes unreported ones back to the front; `policy._backfill_utah_dates()` repairs old entries | the release path | Drains at ≤`MAX_POLICY_ITEMS`/day; stubs are `{id, url, title, effective_date}`, detail text is fetched at release. Stubs queued before `effective_date` existed are repaired ONCE by `_backfill_utah_dates()` (one list request; key PRESENCE, not truthiness, marks a stub handled, so it terminates). Without that the field would stay null on every already-queued bill until the next general session |
 | `policy_utah_session` | `policy._maybe_harvest_utah()` — **only** when a harvest yielded ≥`UTAH_MIN_SIGNED` signed bills | the annual harvest gate | Annual. Stamped with the session actually USED, so a prior-year fallback leaves the gate open and the next run retries the real current session |
 | `policy_bootstrapped` | `build_briefing._get_policy()` on the first policy run whose FEDERAL fetch succeeded | the bootstrap suppression | Once, ever |
+| `policy_week` `[{date, items}]` | `record_policy()`, every run | `tts.compose_script` on `POLICY_AUDIO_WEEKDAY` (Monday) and `run()`'s projection into `briefing.policy_week` | Rolling `POLICY_WEEK_DAYS` (7) days, one entry per DATE. Exists because the audio reads policy once a week while `briefing.policy` only ever holds today's finds — without it an item found on a Wednesday would never be spoken at all. A same-date `--force` rerun REPLACES that date's entry rather than appending, so the listener cannot hear one item twice |
 | `watchlist_actions` `{symbol: action}` | `eval_watchlist_alert()` — **only on notifying runs** | itself (the edge-trigger) | The action each symbol was LAST OBSERVED in, not the last one pushed: storing only what was pushed would silence a genuine re-entry weeks later. A symbol that did not report keeps its stored value, so a one-day Yahoo failure cannot manufacture a crossing on recovery; a symbol removed from `watchlist.txt` is pruned. The state write lives inside the evaluator rather than running every run, because the stored action is what suppresses the next push — advancing it on a `--no-notify` run would swallow the crossing |
 | `lessons_taught` `[{id, article_title, title, domain, date}]` | `state.record_lesson()` when a lesson's prose is written; `state.forget_lessons()` removes entries whose deck write then FAILED | `data/lessons.first_usable()` (the real dedupe, applied after the fetch so redirects collapse), the topic-proposal avoid-list, and the domain rotation index | Capped at 500 (~16 months). The LONG memory: the published deck is pruned to 60, but a lesson repeating a year later is what this prevents |
 | `lessons_bootstrapped` | `state.record_lesson()` on the first lesson ever written | `_get_lessons()`'s "two on the first run, one a day after" branch | Once, ever. Means "the first run happened", NOT "a lesson exists" — it is not cleared by `forget_lessons()` |

@@ -6,9 +6,10 @@
     {
       "path": "documentation/architecture.md",
       "title": "Architecture",
-      "summary": "System overview, data flow, modules, key design decisions (incl. the monitors and their fail-closed guards, the deterministic no-model ETF section, the policy-section accuracy guarantees, the no-year static policy calendar, and why the Alphabet Soup lesson pointer is client-side), briefing.json and lessons.json schemas, CLI entry points.",
+      "summary": "System overview, data flow, modules, key design decisions (incl. the monitors and their fail-closed guards, the deterministic no-model watchlist section, the buy/trim/hold action classified once and shared by the card and both voices, the policy-section accuracy guarantees, the no-year static policy calendar, and why the Alphabet Soup lesson pointer is client-side), briefing.json and lessons.json schemas, CLI entry points.",
       "source_files": [
         "scripts/",
+        "watchlist.txt",
         "docs/",
         ".github/workflows/briefing.yml",
         ".github/workflows/heartbeat.yml",
@@ -29,6 +30,7 @@
       "source_files": [
         "scripts/data/market.py",
         "scripts/data/watchlist.py",
+        "watchlist.txt",
         "scripts/data/news.py",
         "scripts/data/policy.py",
         "scripts/data/mortgage.py",
@@ -49,7 +51,7 @@
     {
       "path": "documentation/operations.md",
       "title": "Operations",
-      "summary": "Scheduling and DST, one-time deployment (secret/var name mapping), runtime, monitoring (4 alarms), run-state keys and their writers (and why the lesson pointer is deliberately not one), failure modes and recovery per section (incl. the per-ticker fail-close on the watchlist pulse and why it is not in markets_ok), regression tests and their negative controls (incl. the narration mirror and the empty-fixture trap), cost.",
+      "summary": "Scheduling and DST, one-time deployment (secret/var name mapping), runtime, monitoring (every alarm path: six notify.py publishers plus five workflow-level ntfy curls, incl. the watchlist crossing push and the guard-triggers trip), run-state keys and their writers (and why the lesson pointer is deliberately not one), failure modes and recovery per section (incl. the per-ticker fail-close on the watchlist pulse and why it is not in markets_ok), regression tests and their negative controls (incl. the narration mirror's seven controls and the empty-fixture trap), cost.",
       "source_files": [
         ".github/workflows/briefing.yml",
         ".github/workflows/heartbeat.yml",
@@ -58,7 +60,9 @@
         "scripts/heartbeat.py",
         "scripts/notify.py",
         "scripts/state.py",
-        "scripts/briefing-assumptions/"
+        "scripts/briefing-assumptions/",
+        ".github/workflows/guard-triggers.yml",
+        ".github/workflows/shell-guard.yml"
       ],
       "entry_points": [
         ".github/workflows/briefing.yml",

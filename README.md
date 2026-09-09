@@ -6,7 +6,7 @@ Pages web app you read on your phone, and sends a push notification via ntfy.
 
 Runs with your laptop and phone off. Cost: $0/month (all free tiers + your existing subscriptions).
 
-## What's in v1
+## What the briefing contains
 
 - TL;DR (the 3 must-knows)
 - **Watchlist** — the tickers in [`watchlist.txt`](watchlist.txt) (SOXL, SPXL and TQQQ by default,
@@ -56,7 +56,8 @@ Runs with your laptop and phone off. Cost: $0/month (all free tiers + your exist
 ```
 GitHub Actions (daily cron, UTC) --> python -m scripts.build_briefing
   Yahoo Finance chart API, keyless (S&P 500, Nasdaq Composite, VIX, 10-yr; and 6mo of daily closes
-      for SOXL/SPXL/TQQQ -> RSI-14 + the 1-month band)  +  RSS feeds (news)
+      for every ticker in watchlist.txt -> RSI-14 + the 1-month band + a buy/trim/hold action)
+      +  RSS feeds (news)
   --> Gemini writes a structured, cited briefing  (numbers injected as facts, never invented)
   --> Alphabet Soup: Gemini names an article, Wikipedia is FETCHED, Gemini writes the lesson from
       it, code checks the prose back against that text  (no article -> no lesson that day)
@@ -130,8 +131,12 @@ all and are worth running after any edit to the lesson feature:
 ```bash
 BRIEFING_SMOKE_ALLOW_DEV=true PYTHONPATH=. python scripts/briefing-assumptions/10-lesson-sources.py
 BRIEFING_SMOKE_ALLOW_DEV=true node scripts/briefing-assumptions/11-client-pointer.js
-``` Note what they do NOT cover: the v1 market source itself (Yahoo's chart API) — the suite
-predates the FRED→Yahoo move.
+```
+
+Note what they do NOT cover: the v1 market source itself (Yahoo's chart API) — the suite
+predates the FRED→Yahoo move. The watchlist is also uncovered by the assumption suite: its
+classifier and its crossing push were verified by execution when they shipped, in the same way
+`eval_breadth_alert` and `eval_policy_alert` are, rather than by a permanent gate.
 
 Test 12 is the one to run after ANY change to the spoken briefing — it proves `scripts/tts.py` and
 `docs/app.js` still produce byte-identical narration, and it carries negative controls that must go

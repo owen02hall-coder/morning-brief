@@ -21,13 +21,15 @@ off. Cost is zero on free tiers.
   player that plays the daily audio edition and then the current Alphabet Soup lesson as one queue
   (on-device speech fallback for any part with no audio).
 - Notifications: ntfy delivers a post-publish "ready" push, breadth alerts (two tiers), a
-  normal-priority push per newly-arrived federal final rule, and self-monitoring health pings.
+  normal-priority push per newly-arrived federal final rule, a normal-priority push when a
+  watchlist ticker crosses INTO buy or trim range, and self-monitoring health pings.
 - Guards: `shell-guard.yml` fails any push that changes the PWA shell without a service-worker
   CACHE bump; `guard-triggers.yml` (push/PR) fails any push leaving an assumption test wired to no
   trigger; `data-smoke.yml` (weekly + dispatch) proves every data leg — market spine, policy
   sources, the Utah scrape, the keyword prefilter, the lesson seed articles and prose guards, the
-  client-side lesson pointer, and the model's relevance judgement — from a runner IP, and pushes
-  ntfy when one goes red.
+  client-side lesson pointer, the Wikipedia User-Agent policy, the data-smoke alarm's own
+  classifier, and the model's relevance judgement — from a runner IP, and pushes ntfy when one goes
+  red. `guard-triggers.yml` and `heartbeat.yml` push ntfy on trip too.
 
 ## Data flow
 
@@ -90,7 +92,10 @@ GitHub Actions (cron, UTC) --> python -m scripts.build_briefing
                                               entry only ever claims clips already on disk)
   -> breadth alert eval (warning <40 one-shot / oversold <30 daily nag, per index) -> state
   -> policy alert eval (one normal-priority push per NEW federal final rule; one-shot per date) -> state
-  -> state.save (last_run + markets_* + breadth + policy state; last_run rewritten daily -> renewing commit)
+  -> watchlist alert eval (one push per morning a ticker crosses INTO buy/trim; edge-triggered off
+                           watchlist_actions, silent on a first observation and on leaving) -> state
+  -> state.save (last_run + markets_* + breadth + policy + watchlist_actions; last_run rewritten
+                 daily -> renewing commit)
   -> health pings if degraded/crashed; breadth alerts via ntfy
 workflow: Publish audio edition            audio.mp3 -> docs/briefing-audio.mp3 + date manifest (only on success)
 workflow: git commit + push (docs/, state/) --> GitHub Pages redeploys
@@ -255,10 +260,14 @@ Heartbeat (independent cron): python -m scripts.heartbeat
   supersedes warning. `record_policy()` is the single writer of `policy_seen` / `policy_active` /
   `policy_today`, and `eval_policy_alert()` flips only the `policy_today.alerted` stamp.
   `record_lesson()` is the single writer of `lessons_taught` (and `forget_lessons()` its only
-  eraser, used when a deck write failed and the lesson was therefore never published). Every key,
-  its writer and its lifecycle are tabulated in `operations.md`.
-- `scripts/notify.py`: ntfy publish for the ready push, breadth alerts, policy alerts, and health
-  pings. Also a CLI (`python -m scripts.notify ready`) the workflow calls AFTER `git push` succeeds,
+  eraser, used when a deck write failed and the lesson was therefore never published).
+  `eval_watchlist_alert()` is the single writer of `watchlist_actions`, the last-OBSERVED action per
+  symbol that makes the crossing push edge-triggered against a section that is level-triggered by
+  design. Every key, its writer and its lifecycle are tabulated in `operations.md`.
+- `scripts/notify.py`: ntfy publish for the ready push, breadth alerts, policy alerts, watchlist
+  crossing alerts, and health pings (`health` for the edition, `monitoring` for a gap in the
+  watching itself — deliberately different titles because they say opposite things about the
+  reader's morning). Also a CLI (`python -m scripts.notify ready`) the workflow calls AFTER `git push` succeeds,
   reading the headline the build wrote to `headline.txt` — so "ready" can never precede publication.
 
 ## Key design decisions
@@ -330,7 +339,9 @@ Heartbeat (independent cron): python -m scripts.heartbeat
   never touches do not travel through the model's plumbing.
 - The run degrades, it does not skip. A failed feed marks one section unavailable. A failed AI call
   falls back to a no-prose briefing of raw numbers and headlines. World news always ships if present.
-- Staleness is age-based. The PWA shows a notice when the briefing is older than `STALE_HOURS`.
+- Staleness is age-based. The PWA shows a notice when the briefing is older than `STALE_HOURS`,
+  which lives in `docs/app.js`, NOT in `config.py` — the PWA cannot read the Python config, so a
+  constant there would be a dead duplicate. `config.HEARTBEAT_STALE_HOURS` is a different knob.
 - The daily commit always changes `state.json` (last_run), which keeps the scheduled workflow from
   auto-disabling after 60 idle days.
 - The archive needs an index. GitHub Pages cannot list a directory, so the pipeline writes
@@ -415,13 +426,24 @@ policy_calendar : list of { date, label, note, url } — recurring annual events
                anchor and is used ONLY for ordering — the client never prints it, because the
                precision is not real; the timing lives in the label's words. No model involvement of
                any kind, and no entry in `data_availability`: it cannot fail.
+watchlist_missing : list of symbols configured in watchlist.txt that returned nothing this run.
+               Published so the PWA can NAME them rather than let a mistyped ticker vanish.
 tech         : list of { summary, source, url }
 world        : list of { summary, source, url }
+us           : list of { summary, source, url }   — US national ("Across the country")
+science      : list of { summary, source, url }   — health and science
+policy_week  : list of { date, items } — the rolling POLICY_WEEK_DAYS record projected from state,
+               deduped by url and capped at MAX_POLICY_SPOKEN. Exists because the audio narrates
+               policy once a week and today's `policy` key only ever holds today's finds.
 weekly_recap : string or null (Sundays only)
 data_availability : map of section -> true/false or "ok"/"unavailable"
-                    (adds `policy` — the FETCH's result, true on a re-emit and on a quiet day — and
-                    `mortgage`. Neither joins the `markets_ok` tuple: PMMS is a weekly release, so a
-                    normal publishing gap must not fire the high-priority market-blackout page.)
+                    (adds `policy` — the FETCH's result, true on a re-emit and on a quiet day —
+                    plus `mortgage`, `watchlist`, `news_us` and `news_science`. None of them join
+                    the `markets_ok` tuple: PMMS is a weekly release, so a normal publishing gap
+                    must not fire the high-priority market-blackout page, and the watchlist is
+                    ordinary tickers the reader chose, not the market spine — a delisting, a rename
+                    or a typo in watchlist.txt must not page as a market blackout. `watchlist` is
+                    true only when something reported AND nothing went missing.)
 ```
 
 Archived briefings written before the policy section shipped carry no `mortgage`, `policy`,

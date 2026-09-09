@@ -153,10 +153,13 @@ BREADTH_STALE_TRADING_DAYS = 2   # alerts suppressed when the value is older tha
 # action is the only thing the page colours and the ONLY thing the audio reads out: the reader asked
 # to be told about a ticker only when there is something to do about it.
 #
-# Deliberately NOT carried over from that monitor: the add/trim state machine, the dedup log and
-# the suggested dollar tranche. All three existed to keep an HOURLY job from paging the same signal
-# seven times a day; a once-daily section that always renders has no such problem to solve. And the
-# tranche sizing needed a position size this app does not know and has no way to verify.
+# Carried over from that monitor after all, but only where a push made it necessary. The add/trim
+# state machine is watchlist.action_zone(); the dedup log is the `watchlist_actions` state key that
+# makes the crossing push edge-triggered. Both were skipped when this was a page-only section on
+# 2026-09-09 morning, for the stated reason that a once-daily card that always renders cannot nag —
+# and both came straight back that afternoon when the section grew a notification, which can.
+# Still NOT carried over: the suggested dollar tranche. That needed a position size this app does
+# not know and has no way to verify.
 
 # The ticker list is a plain text file at the REPO ROOT, not a constant in here, so a ticker can be
 # added from a phone through GitHub's web editor without touching Python. One ticker per line, an

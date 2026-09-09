@@ -222,6 +222,6 @@
     "breadth": true,
     "policy": true,
     "mortgage": true,
-    "leveraged": true
+    "watchlist": true
   }
 }
