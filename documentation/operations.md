@@ -108,6 +108,17 @@ How the briefing is scheduled, deployed, monitored, and recovered.
   Proposed rules and queue-released Utah bills never push. The `policy_today.alerted` stamp makes it
   one-shot per date, which matters because `briefing.yml` dispatches with `force` defaulting to true,
   so a same-date rerun is the normal manual path and must not re-push.
+- Watchlist push: one normal-priority ntfy ("Watchlist") when a ticker CROSSES INTO buy or trim
+  range. Edge-triggered against `watchlist_actions`, unlike the card it watches, which is
+  level-triggered by design — a push repeating "SPXL is a buy" every morning for twelve days is a
+  push that gets swiped away. Leaving a range never pushes ("no longer a buy" is not an
+  instruction), which also bounds a ticker flapping across the 4% line to at most every other day.
+  A symbol seen for the FIRST time (cold start, or newly added to `watchlist.txt`) is recorded
+  silently, so "entered" always means entered. One push covers every crossing that morning rather
+  than one per ticker, because the list is the reader's to grow. Idempotent on a same-date `--force`
+  rerun without a stamp of its own: the first run stores the new action, so the second sees no
+  transition. Normal priority because it fires hours before the US open about a level that has held
+  since the prior close — there is nothing a high-priority page would let the reader act on sooner.
 - Shell guard: `shell-guard.yml` fails any push that changes `docs/` shell files without bumping
   the sw.js CACHE constant, and ntfy-pages on trip — installed PWAs would otherwise silently
   never update (this class shipped broken once).
@@ -187,6 +198,7 @@ pushes.
 | `policy_utah_queue` `[stub]` | `policy._maybe_harvest_utah()` appends; `policy._release_utah()` pops; `policy.requeue_utah()` pushes unreported ones back to the front; `policy._backfill_utah_dates()` repairs old entries | the release path | Drains at ≤`MAX_POLICY_ITEMS`/day; stubs are `{id, url, title, effective_date}`, detail text is fetched at release. Stubs queued before `effective_date` existed are repaired ONCE by `_backfill_utah_dates()` (one list request; key PRESENCE, not truthiness, marks a stub handled, so it terminates). Without that the field would stay null on every already-queued bill until the next general session |
 | `policy_utah_session` | `policy._maybe_harvest_utah()` — **only** when a harvest yielded ≥`UTAH_MIN_SIGNED` signed bills | the annual harvest gate | Annual. Stamped with the session actually USED, so a prior-year fallback leaves the gate open and the next run retries the real current session |
 | `policy_bootstrapped` | `build_briefing._get_policy()` on the first policy run whose FEDERAL fetch succeeded | the bootstrap suppression | Once, ever |
+| `watchlist_actions` `{symbol: action}` | `eval_watchlist_alert()` — **only on notifying runs** | itself (the edge-trigger) | The action each symbol was LAST OBSERVED in, not the last one pushed: storing only what was pushed would silence a genuine re-entry weeks later. A symbol that did not report keeps its stored value, so a one-day Yahoo failure cannot manufacture a crossing on recovery; a symbol removed from `watchlist.txt` is pruned. The state write lives inside the evaluator rather than running every run, because the stored action is what suppresses the next push — advancing it on a `--no-notify` run would swallow the crossing |
 | `lessons_taught` `[{id, article_title, title, domain, date}]` | `state.record_lesson()` when a lesson's prose is written; `state.forget_lessons()` removes entries whose deck write then FAILED | `data/lessons.first_usable()` (the real dedupe, applied after the fetch so redirects collapse), the topic-proposal avoid-list, and the domain rotation index | Capped at 500 (~16 months). The LONG memory: the published deck is pruned to 60, but a lesson repeating a year later is what this prevents |
 | `lessons_bootstrapped` | `state.record_lesson()` on the first lesson ever written | `_get_lessons()`'s "two on the first run, one a day after" branch | Once, ever. Means "the first run happened", NOT "a lesson exists" — it is not cleared by `forget_lessons()` |
 

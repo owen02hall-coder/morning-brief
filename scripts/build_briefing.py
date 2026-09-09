@@ -665,10 +665,16 @@ def run(do_notify=True, today=None):
     # The policy alert follows the same rule and for the same reason. Its state write (record_policy)
     # already happened above on EVERY run — only the ALERT is gated here, and eval_policy_alert reads
     # the `policy_today` block record_policy just wrote, so the order (record, then eval) is required.
-    breadth_alerts, policy_alerts = [], []
+    #
+    # The watchlist alert is gated the same way, and its state write lives INSIDE the evaluator
+    # rather than running unconditionally like record_policy's: the stored action is the thing that
+    # suppresses the next push, so advancing it on a run that delivered nothing would swallow the
+    # crossing entirely. Gating both together is what keeps a --local run from eating a real signal.
+    breadth_alerts, policy_alerts, watchlist_alerts = [], [], []
     if do_notify:
         breadth_alerts, st = state.eval_breadth_alert(breadth, st, today)
         policy_alerts, st = state.eval_policy_alert(policy, st, today)
+        watchlist_alerts, st = state.eval_watchlist_alert(watchlist, st, today)
     state.save(st, today)
 
     # Ready-push handoff: the "your briefing is ready" push must fire AFTER the commit/push/Pages
@@ -715,6 +721,8 @@ def run(do_notify=True, today=None):
             notify.breadth_alert(a["text"], a["level"])
         for a in policy_alerts:
             notify.policy_alert(a["text"])
+        for a in watchlist_alerts:
+            notify.watchlist_alert(a["text"])
         if degraded:
             notify.health("degraded sections: " + ", ".join(degraded), ok=True)
         # Loud escalation: markets blank for >= MARKETS_STALE_DAYS in a row means the source is likely

@@ -69,6 +69,17 @@ def policy_alert(message):
     return _publish("Policy that affects you", message, priority="default", click=config.PAGES_URL)
 
 
+def watchlist_alert(message):
+    """A ticker crossed into buy or trim range.
+
+    Normal priority, not the high that breadth OVERSOLD uses. This fires from the 06:00 build,
+    hours before the US open, about a level that has held since yesterday's close — there is
+    nothing here that a 3am page would let the reader act on any sooner. It is also edge-triggered
+    upstream (state.eval_watchlist_alert), so unlike the breadth nag it cannot repeat daily; a push
+    that can only arrive on a change has earned an ordinary priority."""
+    return _publish("Watchlist", message, priority="default", click=config.PAGES_URL)
+
+
 def health(message, ok=True):
     """Self-monitoring: loud high-priority on failure, low-priority on partial degradation."""
     if ok:

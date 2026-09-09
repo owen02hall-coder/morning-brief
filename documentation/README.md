@@ -53,7 +53,8 @@ This documents the project as shipped. Everything below is live, not planned:
   localStorage rather than in server state.
 - v5 — the spoken rates readout, the Monday policy digest, cross-bucket audio dedupe, and
   self-healing lesson audio. Plus the "Health and science" and "Across the country" sections.
-- v7 (2026-09-09) — the pulse becomes the WATCHLIST: any Yahoo ticker via `watchlist.txt`, a
+- v7 (2026-09-09) — the pulse becomes the WATCHLIST, plus an edge-triggered ntfy push the moment a
+  ticker crosses into buy or trim range: any Yahoo ticker via `watchlist.txt`, a
   buy/trim/hold action computed once and used by both the card colour and the audio, audio that
   names only the actionable tickers, and configured-but-missing symbols named on the page.
 - v6 (2026-09-09) — the leveraged ETF pulse: SOXL, SPXL and TQQQ with RSI-14 and their 1-month

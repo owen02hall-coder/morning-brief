@@ -18,7 +18,9 @@ Runs with your laptop and phone off. Cost: $0/month (all free tiers + your exist
   in the bottom/top third of the band so the rule keeps meaning something on a calm, non-3x ticker.
   The AUDIO names only the Buy and Trim tickers (and says so out loud when there are none); the page
   shows everything. A configured ticker that returns nothing is NAMED on the page rather than
-  quietly dropped — usually a typo in `watchlist.txt`. Same keyless
+  quietly dropped — usually a typo in `watchlist.txt`. A ticker that CROSSES INTO buy or trim also
+  sends one ntfy push that morning — only on the crossing, never as a daily nag, and never when it
+  leaves. Same keyless
   Yahoo source as the numbers below, no new key; every figure is computed in code, so the section is
   intact on a day the AI summary fails. Fails closed per ticker — a ticker that stops reporting is
   absent and says so in the daily health ping, rather than showing a stale or invented number

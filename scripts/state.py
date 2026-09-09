@@ -30,6 +30,12 @@ Policy keys (v3), all written by `record_policy()` — the single writer:
   Wednesday would never be spoken at all — Monday's briefing does not contain it and Wednesday's
   audio skipped the section. Same-date rebuild REPLACES that date's entry rather than appending, so
   a `--force` re-run cannot double-read an item to the listener.
+
+Watchlist key (v7), written by `eval_watchlist_alert()` — the single writer:
+
+- `watchlist_actions` `{symbol: action}` — the action each configured symbol was LAST OBSERVED in.
+  It exists to make the push edge-triggered while the page stays level-triggered; see that
+  function for why the two must differ.
 """
 import json
 import os
@@ -108,6 +114,79 @@ def eval_breadth_alert(breadth, st, today):
                     f"their 200-day average — weakening participation."})
         out[key] = s
     return alerts, {**st, "breadth": out}
+
+
+def eval_watchlist_alert(rows, st, today):
+    """Push when a ticker CROSSES INTO buy or trim range. Returns (alerts, new_state), the same
+    shape as `eval_breadth_alert`.
+
+    Edge-triggered, and deliberately unlike the section it watches. The card is level-triggered:
+    SPXL reads BUY every morning it stays near its 1-month low, which is right for something you
+    glance at. A push repeating that for twelve consecutive mornings is a push that gets swiped
+    away, and it is exactly the noise the reader's old hourly monitor kept a dedup log to prevent.
+    The daily card deliberately did NOT inherit that log because a once-a-day card has no such
+    problem to solve (see config); a push does, so the last observed action per symbol is kept here.
+
+    Only transitions INTO buy or trim page. Leaving one is silent: "SPXL is no longer a buy" is not
+    an instruction, and dropping it also halves what a ticker oscillating across the 4% line can
+    send — such a ticker can page every other day at worst, never two mornings running.
+
+    LAST OBSERVED, not last notified. Storing only what was pushed would mean a ticker that left buy
+    range and genuinely re-entered it a week later stayed silent forever, because its stored action
+    would still read `buy`.
+
+    Idempotent on a same-date rerun without needing a stamp of its own, unlike eval_policy_alert:
+    the first run stores the new action, so the second sees no transition. That matters because
+    briefing.yml dispatches with --force defaulting to true, making a same-day rerun the normal
+    manual path.
+
+    A symbol seen for the first time — a cold start, or a ticker just added to watchlist.txt — is
+    recorded WITHOUT paging, so the first push about it is a real crossing rather than a restatement
+    of where it already was.
+
+    A symbol that did not report today keeps its stored action instead of being dropped — otherwise
+    a one-day Yahoo failure would manufacture a fresh "entered buy range" the morning it recovered.
+    A symbol removed from watchlist.txt IS forgotten, or state would grow a permanent tail of
+    tickers the reader stopped following.
+
+    One push for the whole watchlist, not one per ticker: the list is the reader's to grow, and a
+    broad selloff that moves ten of them at once must not arrive as ten notifications."""
+    if not rows:
+        return [], st
+
+    known = {sym for sym, _ in config.WATCHLIST_TICKERS}
+    prev = {k: v for k, v in (st.get("watchlist_actions") or {}).items() if k in known}
+    out = dict(prev)
+
+    crossed = []
+    for r in rows:
+        sym, action = r.get("symbol"), r.get("action")
+        if not sym or action not in ("buy", "trim", "hold"):
+            continue
+        # `sym in prev`, not just a differing value: a symbol being observed for the FIRST time is
+        # recorded silently. "Entered buy range" has to mean entered. SPXL was already sitting in
+        # buy range the morning this shipped, and a first run that paged about it would be stating
+        # a transition that never happened — the same bootstrap problem policy_seen solves by
+        # marking its first federal window seen precisely because it is being withheld.
+        # Per symbol rather than a one-off global flag, so a ticker ADDED to watchlist.txt months
+        # later gets the same honest treatment on its first morning.
+        if action in ("buy", "trim") and sym in prev and prev[sym] != action:
+            crossed.append(r)
+        out[sym] = action
+
+    if not crossed:
+        return [], {**st, "watchlist_actions": out}
+
+    def line(r):
+        # Built from the PUBLISHED `read` string, like the card and both voices, so the push cannot
+        # describe the move differently from the page the reader opens when it arrives.
+        read = (r.get("read") or "").strip()
+        head = "{} entered {} range at ${}".format(
+            r["symbol"], r["action"].upper(), r.get("value"))
+        return "{}. {}".format(head, read) if read else head + "."
+
+    text = line(crossed[0]) if len(crossed) == 1 else "\n".join(line(r) for r in crossed)
+    return [{"level": "watchlist", "text": text}], {**st, "watchlist_actions": out}
 
 
 def _days_before(today, days):
