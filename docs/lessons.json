@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-08T09:36:10.022059-06:00",
+  "generated_at": "2026-09-09T09:30:34.613810-06:00",
   "lessons": [
     {
       "id": "2026-08-11-mortgage",
@@ -111,11 +111,7 @@
         "title": "Sleep hygiene",
         "url": "https://en.wikipedia.org/wiki/Sleep_hygiene"
       },
-      "audio": {
-        "quick": "lessons/2026-08-16-sleep-hygiene-quick.mp3",
-        "more": "lessons/2026-08-16-sleep-hygiene-more.mp3",
-        "deep": "lessons/2026-08-16-sleep-hygiene-deep.mp3"
-      }
+      "audio": {}
     },
     {
       "id": "2026-08-17-scam",
@@ -515,6 +511,26 @@
         "quick": "lessons/2026-09-08-dehydration-quick.mp3",
         "more": "lessons/2026-09-08-dehydration-more.mp3",
         "deep": "lessons/2026-09-08-dehydration-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-09-09-dark-pattern",
+      "date": "2026-09-09",
+      "domain": "Thinking and people",
+      "title": "Recognize Deceptive Online Designs",
+      "hook": "Online, it's easy to get tricked into spending extra money or giving away more of your private information than you intended.",
+      "quick": "Many websites and apps are carefully designed to trick you into making choices you wouldn\u2019t otherwise, often costing you money or your privacy. One common trick is \"bait-and-switch,\" where a product or service is advertised as free or very cheap, but then turns out to be unavailable or quickly pushed aside for a more expensive option. For instance, some tax filing services have historically advertised free options that most people don\u2019t qualify for, leading millions of customers to pay for tax preparation they thought would be free. These companies have even faced legal action and settlements because of these misleading practices.",
+      "more": "Another common tactic is \"drip pricing,\" where you see a low initial price advertised, but then additional fees, taxes, or charges are gradually added as you go through the purchase process. This makes you invest time and effort before revealing the true, higher final cost. You might also encounter \"confirmshaming,\" where declining an offer, like a newsletter, is worded to make you feel guilty for not accepting. These designs aim to subtly push you into decisions that benefit the company, not you, by playing on habit, emotion, or a lack of clear information.",
+      "deep": "Beyond just spending money, these deceptive designs can lead to unwanted software installations through \"misdirection,\" where a prominent button encourages you to accept terms for an unrelated program. Or, you might fall victim to \"privacy Zuckering,\" a practice that makes you unknowingly share more personal information than you intended, often by hiding opt-out options or making them difficult to find. For example, some companies have made it incredibly hard to opt out of having your data used for training AI, requiring multiple steps and even asking for reasons, despite claiming any reason would suffice. Once you're in, some services use a \"roach motel\" design, making it simple to sign up but extremely difficult to cancel, leading to continuous charges for services you no longer want.",
+      "takeaway": "Before clicking any \"accept,\" \"continue,\" or \"I agree\" button online, always pause to carefully read all text, especially fine print and alternative options, to avoid unexpected costs or privacy disclosures.",
+      "source": {
+        "title": "Dark pattern",
+        "url": "https://en.wikipedia.org/wiki/Dark_pattern"
+      },
+      "audio": {
+        "quick": "lessons/2026-09-09-dark-pattern-quick.mp3",
+        "more": "lessons/2026-09-09-dark-pattern-more.mp3",
+        "deep": "lessons/2026-09-09-dark-pattern-deep.mp3"
       }
     }
   ],
