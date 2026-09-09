@@ -2,7 +2,7 @@
 title: Integrations
 source_files: [scripts/data/, scripts/breadth/, scripts/summarize.py, scripts/tts.py, scripts/notify.py, scripts/config.py, .github/workflows/]
 entry_points: [GEMINI_API_KEY, NTFY_SUB, PAGE_URL]
-last_verified: 2026-08-11
+last_verified: 2026-09-09
 ---
 
 # Integrations

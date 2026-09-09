@@ -2,7 +2,7 @@
 title: Operations
 source_files: [.github/workflows/, scripts/build_briefing.py, scripts/heartbeat.py, scripts/notify.py, scripts/briefing-assumptions/]
 entry_points: [".github/workflows/briefing.yml", ".github/workflows/heartbeat.yml", ".github/workflows/shell-guard.yml", ".github/workflows/data-smoke.yml", ".github/workflows/guard-triggers.yml", "scripts/build_briefing.py:main", "scripts/heartbeat.py:main"]
-last_verified: 2026-08-11
+last_verified: 2026-09-09
 ---
 
 # Operations
@@ -264,6 +264,17 @@ Three lifecycle rules are worth stating outright because they are the ones easie
 - **The reader clears site data or gets a new phone:** the pointer is gone, and the deck restarts
   from its oldest entry. Lessons are not news, so nothing is stale — the cost is re-hearing some.
   There is no server-side copy to restore, by design.
+- A leveraged ETF ticker fails: `scripts/data/leveraged.py` fails closed PER TICKER, so a dead fetch,
+  fewer than `LEVERAGED_MIN_BARS` (60) settled bars, or a zero-width band drops THAT ticker and the
+  others still publish. A dropped ticker is ABSENT from the list, never null and never a stale
+  number. Any shortfall sets `data_availability.leveraged` false, so it appears in the low-priority
+  degraded ping as "leveraged" — the point being that a ticker which quietly stops reporting (a
+  delisting, a symbol rename, a Yahoo shape change) announces itself instead of repeating the
+  22-day silent death of Nasdaq-100 breadth. It is deliberately NOT part of the `markets_ok` tuple:
+  these are three ordinary ETFs, not the market spine, and a rename must not escalate to the
+  high-priority "market data unavailable N days running" page. There is deliberately no last-good
+  cache and no staleness threshold here (unlike breadth) — with no cache, an old `asof` means a
+  holiday or a long weekend, not a fault, and the card dates every figure.
 - Federal Register unreachable, or returning ZERO results: `data_availability.policy` goes false and
   the degraded ping lists "policy". Zero results across six agencies and 45 days is treated as a
   broken query rather than a quiet window — measured volume is ~21 documents — so it raises and is
@@ -394,6 +405,23 @@ Three lifecycle rules are worth stating outright because they are the ones easie
   it is invisible by construction: nothing reads the alarm's own output. The alert now has three
   classes — HARNESS (the test never ran; high priority, fix the runner), SOURCE (a feed or scrape is
   genuinely red; high priority) and JUDGMENT (a live model-scored check flapped; low priority).
+- **After ANY change to the spoken briefing, run `12`.** The narration exists twice — `scripts/tts.py`
+  `compose_script()` becomes the mp3, `docs/app.js` `speechText()` is what the phone reads when there
+  is no audio — and `12-narration-mirror.py` is the only thing that compares them. It needs no key
+  and no network (it does need `node`):
+  `BRIEFING_SMOKE_ALLOW_DEV=true PYTHONPATH=. python scripts/briefing-assumptions/12-narration-mirror.py`.
+  Its negative controls each break the Python side and must drive C1 red on demand:
+  `NARRATION_MIRROR_CONTROL=` `drop-rates` | `drop-policy` | `no-dedupe` | `no-tldr-cut` |
+  `drop-etfs` | `etf-round`. The last two arrived with the leveraged ETF section on 2026-09-09.
+  `etf-round` pins a genuine cross-language trap: Python's `f"{x:.0f}"` rounds a .5 to the nearest
+  EVEN integer while JavaScript's `Math.round` rounds it up, so an RSI of exactly 48.5 would be
+  spoken as 48 in the mp3 and 49 in the device voice. Both sides use `floor(x + 0.5)`. This is the
+  same shape as the Monday=0/Sunday=0 weekday split the file already guards.
+  - A caution learned when that section shipped: `12` passed IMMEDIATELY on the new code, because
+    none of its fixtures carried a `leveraged` key and both sides were comparing the same empty
+    output. A fixture had to be added before the gate measured anything. **An empty collection makes
+    a mirror test green forever** — when adding a section, add a fixture that carries it and watch
+    the gate go red before you trust it.
 - **After editing `LESSON_SEED_ARTICLES`, run `10`.** Wikipedia titles move, and a title that no
   longer resolves is a silently missing lesson, not an error — the fallback simply produces nothing.
   `Credit utilization ratio` was in the shipped list for exactly as long as it took `10` to run once.
