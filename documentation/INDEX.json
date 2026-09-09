@@ -1,6 +1,6 @@
 {
   "project": "Morning Briefing",
-  "scope": "v1 core + v2 breadth/oversold alerts and audio edition + v3 policy section and mortgage rate + v4 Owen's Alphabet Soup (daily grounded lesson, client-owned pointer) + v5 spoken rates readout (10-year, 30-year mortgage, VIX, each with its why), the Monday policy digest, cross-bucket audio dedupe, and self-healing lesson audio",
+  "scope": "v1 core + v2 breadth/oversold alerts and audio edition + v3 policy section and mortgage rate + v4 Owen's Alphabet Soup (daily grounded lesson, client-owned pointer) + v5 spoken rates readout (10-year, 30-year mortgage, VIX, each with its why), the Monday policy digest, cross-bucket audio dedupe, and self-healing lesson audio + v6 leveraged ETF pulse (SOXL/SPXL/TQQQ: RSI-14 and the 1-month closing band, page and audio)",
   "note": "Project docs/ is the GitHub Pages web root (PWA), not documentation. Dev docs live in documentation/.",
   "docs": [
     {
@@ -14,7 +14,7 @@
       "path": "documentation/integrations.md",
       "title": "Integrations",
       "summary": "External services (Yahoo Finance, Gemini, ntfy, RSS, Federal Register, Utah Legislature, Freddie Mac PMMS, the Wikipedia action API behind Owen's Alphabet Soup, GitHub Pages/Actions, v2 Twelve Data), usage, invocation sites, per-build request budgets, env var names, the probed-dead source list, and the static POLICY_CALENDAR that stands in for the annual announcements no feed publishes.",
-      "source_files": ["scripts/data/market.py", "scripts/data/news.py", "scripts/data/policy.py", "scripts/data/mortgage.py", "scripts/data/lessons.py", "scripts/summarize.py", "scripts/tts.py", "scripts/notify.py", "scripts/config.py", ".github/workflows/briefing.yml"],
+      "source_files": ["scripts/data/market.py", "scripts/data/leveraged.py", "scripts/data/news.py", "scripts/data/policy.py", "scripts/data/mortgage.py", "scripts/data/lessons.py", "scripts/summarize.py", "scripts/tts.py", "scripts/notify.py", "scripts/config.py", ".github/workflows/briefing.yml"],
       "entry_points": ["GEMINI_API_KEY", "NTFY_SUB", "PAGE_URL", "TWELVE_API_KEY"]
     },
     {

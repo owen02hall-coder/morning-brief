@@ -287,6 +287,55 @@ h3 {
    because "Final rule" and "Signed in Utah" contain spaces. */
 .status.final    { color: var(--accent); background: var(--accent-tint); }
 .status.proposed { color: var(--muted); background: var(--tldr-tint); }
+/* RSI zones. `oversold` is shared with breadth on purpose: it means the same thing on both
+   sections, and one meaning should not have two colours on one page. */
+.status.overbought { color: var(--warn-fg); background: var(--warn-bg); }
+.status.neutral    { color: var(--muted); background: var(--tldr-tint); }
+
+/* --- Leveraged ETF cards --- */
+/* Three cards in a two-column grid leaves the third alone in the left column; let it span.
+   Scoped to .etf-grid so the 4- and 5-tile Markets grid is untouched. */
+.etf-grid > :nth-child(3):last-child { grid-column: 1 / -1; }
+.etf-head { display: flex; align-items: baseline; gap: 0.4rem; flex-wrap: wrap; margin: 0; }
+.etf-symbol { font-weight: 700; font-size: 0.95rem; letter-spacing: 0.02em; }
+.etf-what { color: var(--muted); font-size: 0.75rem; }
+.etf-rsi {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0.3rem 0 0;
+  font-size: 0.85rem;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+/* The 1-month band, drawn: a track from the month's low to its high with the last close marked. */
+.etf-band {
+  position: relative;
+  height: 5px;
+  margin: 0.6rem 0 0.25rem;
+  border-radius: 999px;
+  background: linear-gradient(to right, var(--down-tint), var(--line), var(--warn-bg));
+}
+.etf-mark {
+  position: absolute;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--muted);
+  border: 2px solid var(--card);
+}
+.etf-mark.low  { background: var(--down); }
+.etf-mark.high { background: var(--warn-fg); }
+.etf-ends {
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-variant-numeric: tabular-nums;
+}
 
 .asof { color: var(--muted); font-size: 0.75rem; margin: 0.15rem 0 0; }
 .tile-why { font-size: 0.88rem; margin: 0.35rem 0 0; color: var(--fg); }

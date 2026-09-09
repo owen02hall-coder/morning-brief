@@ -9,6 +9,13 @@ Runs with your laptop and phone off. Cost: $0/month (all free tiers + your exist
 ## What's in v1
 
 - TL;DR (the 3 must-knows)
+- **Leveraged ETFs** — SOXL, SPXL and TQQQ, right under the must-knows and read in the same slot in
+  the audio: RSI-14 on daily closes (the 30/70 lines Webull draws) plus where the last close sits in
+  the month's closing band, drawn as a marker between the month's low and high. The band zones are
+  the ones the old hourly ETF monitor fired on (within 4% of the low / 4% of the high). Same keyless
+  Yahoo source as the numbers below, no new key; every figure is computed in code, so the section is
+  intact on a day the AI summary fails. Fails closed per ticker — a ticker that stops reporting is
+  absent and says so in the daily health ping, rather than showing a stale or invented number
 - Markets: S&P 500, Nasdaq Composite, 10-year Treasury yield, VIX (latest close, day change, and a plain-English why)
 - Emerging tech (a few cutting-edge items, cited)
 - World news (globally significant only, cited)
@@ -40,7 +47,8 @@ Runs with your laptop and phone off. Cost: $0/month (all free tiers + your exist
 
 ```
 GitHub Actions (daily cron, UTC) --> python -m scripts.build_briefing
-  Yahoo Finance chart API, keyless (S&P 500, Nasdaq Composite, VIX, 10-yr)  +  RSS feeds (news)
+  Yahoo Finance chart API, keyless (S&P 500, Nasdaq Composite, VIX, 10-yr; and 6mo of daily closes
+      for SOXL/SPXL/TQQQ -> RSI-14 + the 1-month band)  +  RSS feeds (news)
   --> Gemini writes a structured, cited briefing  (numbers injected as facts, never invented)
   --> Alphabet Soup: Gemini names an article, Wikipedia is FETCHED, Gemini writes the lesson from
       it, code checks the prose back against that text  (no article -> no lesson that day)
@@ -116,6 +124,15 @@ BRIEFING_SMOKE_ALLOW_DEV=true PYTHONPATH=. python scripts/briefing-assumptions/1
 BRIEFING_SMOKE_ALLOW_DEV=true node scripts/briefing-assumptions/11-client-pointer.js
 ``` Note what they do NOT cover: the v1 market source itself (Yahoo's chart API) — the suite
 predates the FRED→Yahoo move.
+
+Test 12 is the one to run after ANY change to the spoken briefing — it proves `scripts/tts.py` and
+`docs/app.js` still produce byte-identical narration, and it carries negative controls that must go
+red on demand (`NARRATION_MIRROR_CONTROL=drop-etfs`, `etf-round`, `drop-rates`, `drop-policy`,
+`no-dedupe`, `no-tldr-cut`). It needs no key and no network:
+
+```bash
+BRIEFING_SMOKE_ALLOW_DEV=true PYTHONPATH=. python scripts/briefing-assumptions/12-narration-mirror.py
+```
 
 Re-running the full suite needs no packages beyond requirements.txt — only keys:
 `TWELVEDATA_API_KEY` (tests 1–2, v2 key) and `GEMINI_API_KEY` (tests 3 and 6). The runner halts at

@@ -24,8 +24,10 @@ YAHOO_UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
             "(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36")
 
 
-def _drop_open_session_bar(points, meta):
+def drop_open_session_bar(points, meta):
     """Drop a final bar that belongs to the still-open trading session.
+
+    Public because leveraged.py reads the same Yahoo daily series under the same rule.
 
     During regular hours Yahoo's daily series includes the CURRENT session as its last bar, with the
     live intraday price in `close`. The briefing narrates figures as the most recent CLOSE (see
@@ -49,7 +51,7 @@ def _parse(data):
     ts = res["timestamp"]
     closes = res["indicators"]["quote"][0]["close"]
     points = [(t, c) for t, c in zip(ts, closes) if c is not None]   # drop nulls (holidays/gaps)
-    points = _drop_open_session_bar(points, res.get("meta") or {})
+    points = drop_open_session_bar(points, res.get("meta") or {})
     if not points:
         return None
     last_t, last_val = points[-1]
@@ -68,7 +70,8 @@ def _yahoo_series(symbol, retries=1):
     last_err = None
     for attempt in range(retries + 1):
         for host in ("query1", "query2"):
-            url = url_tmpl.format(host=host, symbol=urllib.parse.quote(symbol))
+            url = url_tmpl.format(host=host, symbol=urllib.parse.quote(symbol),
+                                  range=config.YAHOO_RANGE_HEADLINE)
             req = urllib.request.Request(
                 url, headers={"User-Agent": YAHOO_UA, "Accept": "application/json"})
             try:

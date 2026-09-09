@@ -17,6 +17,7 @@ no manifest to keep honest because the deck entry only ever claims the clips tha
 
 Everything here is non-fatal by design: no audio must never kill the briefing.
 """
+import math
 import os
 import re
 import time
@@ -199,6 +200,46 @@ def _rate_lines(briefing):
     return out
 
 
+# --- The leveraged ETF pulse ----------------------------------------------------------------------
+
+def _spoken_read(text):
+    """The page's one-line read, made safe to speak. Mirror any change in docs/app.js.
+
+    "%" is a glyph a voice has to guess at, and the " - " this project uses as a dash reads as a
+    pause that lands in the wrong place. Everything else in the string was already written as
+    ordinary prose, so nothing more is needed."""
+    return text.replace("%", " percent").replace(" - ", ", ")
+
+
+def _leveraged_lines(briefing):
+    """SOXL / SPXL / TQQQ, spoken straight after the must-knows - the same slot they occupy on the
+    page, and the reason the reader asked for them near the top.
+
+    The spoken read is the SAME `read` string the page renders, lightly de-glyphed. Writing a
+    second set of if/else branches here to phrase it for speech would be a second copy of the
+    classification in scripts/data/leveraged.py, free to drift from the one the reader sees.
+
+    Tickers are spelled out - a voice saying "sock-sil" for SOXL is a voice the listener has to
+    decode."""
+    rows = briefing.get("leveraged") or []
+    if not rows:
+        return []
+    out = ["Your leveraged E T Fs."]
+    for r in rows:
+        spelled = " ".join(r.get("symbol") or "")
+        rsi = r.get("rsi")
+        # floor(x + 0.5), NOT f"{:.0f}" — Python rounds a .5 to the nearest EVEN integer and
+        # JavaScript's Math.round always rounds it up, so an RSI of 48.5 would be spoken as
+        # 48 in the mp3 and 49 in the phone's own voice. RSI is published to one decimal, so
+        # .5 is reachable. This is the same class of trap as the Monday=0/Sunday=0 weekday
+        # split that assumption 12 already pins down.
+        head = (f"{spelled}, R S I {math.floor(rsi + 0.5):d}." if rsi is not None
+                else f"{spelled}.")
+        read = (r.get("read") or "").strip()
+        out.append(f"{head} {_spoken_read(read)}" if read else head)
+    return out
+
+
 # --- The weekly policy digest ---------------------------------------------------------------------
 
 def _policy_lines(briefing, weekday):
@@ -246,7 +287,8 @@ def _policy_lines(briefing, weekday):
 def compose_script(briefing, has_lesson=False):
     """Deterministic narration. Mirror any change here in docs/app.js speechText().
 
-    Shape, in spoken order: the must-knows, the S&P/Nasdaq percent moves, then the rates readout
+    Shape, in spoken order: the must-knows, the leveraged ETF pulse, the S&P/Nasdaq percent moves,
+    then the rates readout
     (10-year, 30-year mortgage, VIX — each followed by the reason the page gives for it, then the
     overall market 'why'), the weekly policy digest on config.POLICY_AUDIO_WEEKDAY only, tech,
     world, and the Sunday recap.
@@ -276,6 +318,8 @@ def compose_script(briefing, has_lesson=False):
         parts.append("The must-knows.")
         for i, t in enumerate(tldr, 1):
             parts.append(f"{i}. {t}")
+
+    parts.extend(_leveraged_lines(briefing))
 
     m = briefing.get("market") or {}
     moves = []

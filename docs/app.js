@@ -137,6 +137,66 @@ function breadthSection(breadth) {
   return sec;
 }
 
+// --- Leveraged ETF pulse ---------------------------------------------------------------------
+
+const ETF_RSI_LABEL = { oversold: "Oversold", overbought: "Overbought", neutral: "Neutral" };
+
+function leveragedCard(r) {
+  const card = el("div", "card");
+  const head = el("p", "etf-head");
+  head.appendChild(el("span", "etf-symbol", r.symbol));
+  if (r.what) head.appendChild(el("span", "etf-what", r.what));
+  card.appendChild(head);
+
+  const fig = el("p", "figure", `$${fmtValue(r.value)}`);
+  if (r.day_move != null) {
+    fig.appendChild(el("span", `delta ${r.day_move >= 0 ? "up" : "down"}`,
+      `${r.day_move >= 0 ? "+" : ""}${r.day_move.toFixed(1)}%`));
+  }
+  card.appendChild(fig);
+
+  // RSI is the headline reading — it is what the reader asked to see ("near their top 70 or 30").
+  const rsi = el("p", "etf-rsi", r.rsi != null ? `RSI ${r.rsi.toFixed(1)}` : "RSI unavailable");
+  if (r.rsi_zone) {
+    rsi.appendChild(el("span", `status ${r.rsi_zone}`, ETF_RSI_LABEL[r.rsi_zone] || r.rsi_zone));
+  }
+  card.appendChild(rsi);
+
+  // The 1-month band, drawn. A number saying "38% of the way up" is a fact the reader has to
+  // picture; a marker on a track is the same fact already pictured.
+  if (r.band_pct != null) {
+    const track = el("div", "etf-band");
+    const mark = el("div", `etf-mark ${r.zone || "mid"}`);
+    mark.style.left = `${Math.max(0, Math.min(100, r.band_pct))}%`;
+    track.appendChild(mark);
+    card.appendChild(track);
+    const ends = el("p", "etf-ends");
+    ends.appendChild(el("span", null, `$${fmtValue(r.low)}`));
+    ends.appendChild(el("span", null, `$${fmtValue(r.high)}`));
+    card.appendChild(ends);
+  }
+
+  if (r.read) card.appendChild(el("p", "tile-why", r.read));
+  if (r.asof) card.appendChild(el("p", "asof", `close of ${r.asof}`));
+  return card;
+}
+
+function leveragedSection(rows) {
+  // Absent on every edition archived before 2026-09-09, and on a day all three tickers failed
+  // closed. Returning null (rather than a section of "Information not available." tiles) keeps a
+  // reader's archive looking like the briefing they actually got that morning.
+  if (!rows || !rows.length) return null;
+  const sec = el("section");
+  sec.appendChild(el("h2", null, "Leveraged ETFs"));
+  const grid = el("div", "grid etf-grid");
+  rows.forEach((r) => grid.appendChild(leveragedCard(r)));
+  sec.appendChild(grid);
+  sec.appendChild(el("p", "muted",
+    "RSI-14 on daily closes: below 30 oversold, above 70 overbought. The band is the last month of "
+    + "closing prices."));
+  return sec;
+}
+
 // Status strings contain spaces ("Final rule"), so `status ${it.status}` would emit two bogus
 // classes. Map value -> class, the same way BREADTH_STATUS_LABEL maps value -> label.
 const POLICY_STATUS_CLASS = {
@@ -420,6 +480,12 @@ function render(b, into, withSoup) {
     into.appendChild(sec);
   }
 
+  // Directly after the must-knows and above Markets: this is a position the reader checks daily,
+  // and it is the reason the section exists at all. Guarded — leveragedSection returns null on a
+  // pre-2026-09-09 archive and appendChild(null) throws (see the policy note below).
+  const etfs = leveragedSection(b.leveraged);
+  if (etfs) into.appendChild(etfs);
+
   const market = el("section");
   market.appendChild(el("h2", null, "Markets"));
   const grid = el("div", "grid");
@@ -689,9 +755,35 @@ function policyLines(b, d) {
   return out;
 }
 
+function spokenRead(text) {
+  // Mirror of tts._spoken_read. "%" is a glyph a voice has to guess at, and the " - " this project
+  // uses as a dash reads as a pause in the wrong place.
+  return text.split("%").join(" percent").split(" - ").join(", ");
+}
+
+function leveragedLines(b) {
+  // Mirror of tts._leveraged_lines. Speaks the SAME `read` string the card renders, so the
+  // classification in scripts/data/leveraged.py has exactly one implementation and neither voice
+  // can drift from what the reader sees.
+  const rows = b.leveraged || [];
+  if (!rows.length) return [];
+  const out = ["Your leveraged E T Fs."];
+  rows.forEach((r) => {
+    const spelled = (r.symbol || "").split("").join(" ");
+    // Math.floor(x + 0.5), matching the Python side exactly: Python's "%.0f" rounds a .5 to the
+    // nearest EVEN integer while Math.round always rounds it up, and RSI is published to one
+    // decimal, so 48.5 is reachable and would be spoken as 48 in the mp3 and 49 here.
+    const head = r.rsi != null ? `${spelled}, R S I ${Math.floor(r.rsi + 0.5)}.` : `${spelled}.`;
+    const read = (r.read || "").trim();
+    out.push(read ? `${head} ${spokenRead(read)}` : head);
+  });
+  return out;
+}
+
 function speechText(b, hasLesson) {
   // Mirror of scripts/tts.py compose_script — used when there is no audio file (fallback days,
-  // archived briefings, offline). Spoken order: must-knows, the S&P/Nasdaq percent moves, the rates
+  // archived briefings, offline). Spoken order: must-knows, the leveraged ETF pulse, the
+  // S&P/Nasdaq percent moves, the rates
   // readout (10-year, 30-year mortgage, VIX, each with its "why", then the market "why"), the
   // weekly policy digest on Mondays only, tech, world, the Sunday recap.
   //
@@ -707,6 +799,7 @@ function speechText(b, hasLesson) {
   parts.push(`Good morning. This is your briefing for ${d
     ? d.toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric" }) : "today"}.`);
   (b.tldr || []).forEach((t, i) => parts.push(`${i === 0 ? "The must-knows. " : ""}${i + 1}. ${t}`));
+  parts.push(...leveragedLines(b));
   const moves = [];
   [["S and P 500", b.market && b.market.sp500], ["Nasdaq", b.market && b.market.ndx]]
     .forEach(([name, n]) => {

@@ -12,10 +12,16 @@ values live in the repo. Environment variable names only are listed here.
 
 ## Yahoo Finance (chart API)
 
-- Used for: the four headline market numbers (S&P 500, Nasdaq Composite, VIX, 10-year Treasury yield).
+- Used for: the four headline market numbers (S&P 500, Nasdaq Composite, VIX, 10-year Treasury yield)
+  AND the leveraged ETF pulse (SOXL, SPXL, TQQQ).
 - Auth: none. Keyless chart endpoint (unlike most free tiers, it includes indices).
-- Invoked in: `scripts/data/market.py` (`_yahoo_series`).
-- Endpoint shape: `https://<query1|query2>.finance.yahoo.com/v8/finance/chart/<SYMBOL>?range=5d&interval=1d`.
+- Invoked in: `scripts/data/market.py` (`_yahoo_series`) and `scripts/data/leveraged.py` (`_series`).
+  The two differ only in the window they request: `config.YAHOO_RANGE_HEADLINE` (`5d`, enough for the
+  last two settled closes) vs `config.YAHOO_RANGE_HISTORY` (`6mo`, ~128 bars, because Wilder's RSI is
+  seeded rather than windowed and a short series returns a WRONG number rather than a missing one).
+  Both go through `market.drop_open_session_bar` — one implementation, because a live intraday bar
+  would poison the RSI chain and the band extremes just as surely as it would poison a headline close.
+- Endpoint shape: `https://<query1|query2>.finance.yahoo.com/v8/finance/chart/<SYMBOL>?range=<5d|6mo>&interval=1d`.
 - Symbols: `^GSPC`, `^IXIC`, `^VIX`, `^TNX` (see `config.YAHOO_SYMBOLS`); `^TNX` is the 10-yr yield in
   percent. The last two SETTLED daily closes give value + day-over-day change; a bar belonging to the
   still-open session (per the payload's `currentTradingPeriod`) is dropped, and with only one settled
@@ -26,6 +32,32 @@ values live in the repo. Environment variable names only are listed here.
 - History: v1 originally used FRED's keyless CSV, which went unreachable from CI (and locally); Stooq's
   keyless CSV is now behind a JS anti-bot challenge — Yahoo's chart API was the working keyless source
   that still includes indices.
+
+## Yahoo Finance (leveraged ETF pulse)
+
+- Used for: RSI-14 and the 1-month closing band for SOXL / SPXL / TQQQ, rendered above Markets and
+  spoken straight after the must-knows.
+- Auth: none — the same keyless chart endpoint as above, so this section adds NO new provider,
+  no key, and no scrape.
+- Invoked in: `scripts/data/leveraged.py` (`get_leveraged`), from `build_briefing.run()` and from
+  `--spine` (so `data-smoke.yml`'s weekly run exercises the leg from a GitHub runner).
+- Request budget: 3 symbols x 1 request (2 hosts tried only on failure), once per build.
+- Accuracy: RSI-14 (Wilder) was cross-validated 2026-09-09 against TradingView's published `RSI`
+  scanner column while the US session was open — SOXL 50.27 vs 50.14, SPXL 46.97 vs 46.73, TQQQ
+  50.19 vs 50.20. The residual is live intraday drift, since TradingView was quoting the in-progress
+  bar this module drops. The band leg reproduced two figures the reader's old hourly ETF monitor
+  quoted independently in its own emails (SPXL 1-month high $301.35, TQQQ $77.15).
+- Thresholds: `RSI_OVERSOLD`/`RSI_OVERBOUGHT` (30/70, the lines Webull draws) and the band zones
+  `close <= low * 1.04` / `close >= high * 0.96`, carried over from that old monitor.
+- Fail-closed, per ticker: a dead fetch, fewer than `LEVERAGED_MIN_BARS` settled bars, or a
+  zero-width band drops THAT ticker; the others still publish. A partial result sets
+  `data_availability.leveraged` false, which surfaces in the existing low-priority "degraded
+  sections" health ping — the point being that a ticker which quietly stops reporting says so,
+  rather than repeating the 22-day silent death of Nasdaq-100 breadth.
+- Not carried over from the old monitor: the add/trim state machine, the dedup log and the suggested
+  dollar tranche. All three existed to stop an HOURLY job from paging the same signal repeatedly; a
+  once-daily section that always renders has no such problem, and the tranche sizing needed a
+  position size this app does not know and cannot verify.
 
 ## TradingView scanner (breadth)
 

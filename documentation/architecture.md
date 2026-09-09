@@ -2,7 +2,7 @@
 title: Architecture
 source_files: [scripts/, docs/, .github/workflows/]
 entry_points: ["python -m scripts.build_briefing", "scripts/build_briefing.py:main", "python -m scripts.heartbeat", "python -m scripts.notify ready"]
-last_verified: 2026-08-11
+last_verified: 2026-09-09
 ---
 
 # Architecture
@@ -38,6 +38,9 @@ GitHub Actions (cron, UTC) --> python -m scripts.build_briefing
   -> market.get_market()                   Yahoo Finance chart API, keyless (S&P 500, Nasdaq Comp, VIX, 10-yr)
   -> mortgage.get_rate()                   Freddie Mac PMMS CSV, 30-year fixed (weekly release; None on failure)
   -> news.get_news()                       RSS feeds (world, business, tech), per-feed isolation
+  -> leveraged.get_leveraged()             Yahoo chart API again, 6mo daily closes (SOXL/SPXL/TQQQ)
+                                           -> RSI-14 (Wilder) + 1-month closing band, per-ticker
+                                           fail-close. No model, no key, no new provider.
   -> breadth compute (TradingView scan ∩ Wikipedia constituents, S&P 500 + Nasdaq-100;
      per-index MIN_MATCH fail-close + last-good cache)
   -> _get_policy()                         IF state.policy_today.date == today: re-emit verbatim and STOP
@@ -71,7 +74,8 @@ GitHub Actions (cron, UTC) --> python -m scripts.build_briefing
                                               shaped like a dosage, discards the whole lesson)
      -> state.record_lesson()              the only writer of lessons_taught (the long dedupe memory)
   -> summarize.summarize()                 Gemini structured output (numbers injected as facts)
-  -> assemble briefing dict (incl. breadth, mortgage, policy, policy_upcoming, policy_calendar)
+  -> assemble briefing dict (incl. breadth, leveraged, mortgage, policy, policy_upcoming,
+     policy_calendar)
   -> write docs/briefing.json
             docs/archive/<date>.json
             docs/archive/index.json
@@ -188,12 +192,21 @@ Heartbeat (independent cron): python -m scripts.heartbeat
   `pandas.read_html` copy both could not run in CI and stayed green under cell-shape drift that
   breaks this regex. Fetches with `config.WIKI_UA` (the contact-bearing Wikipedia UA shared with
   `data/lessons.py`), not `config.USER_AGENT` — see integrations.md.
+- `scripts/data/leveraged.py`: the leveraged ETF pulse (SOXL / SPXL / TQQQ). RSI-14 with Wilder
+  smoothing plus position in the 1-month CLOSING band, both computed from the same Yahoo daily
+  closes `market.py` reads. Entirely deterministic — no model touches these figures and the
+  one-line read is written in code, which is why the section is intact on a no-AI day (it is
+  emitted outside `_assemble`'s `if ai_ok` branch). Fails closed PER TICKER: a dead fetch, fewer
+  than `LEVERAGED_MIN_BARS` settled bars (Wilder's average is seeded, not windowed, so a short
+  series yields a wrong number rather than a missing one), or a zero-width band drops that ticker
+  alone. RSI cross-validated against TradingView's published column; see integrations.md.
 - `scripts/breadth/percent_above_ma.py`: % of index members above their 200-day MA. ONE daily
   POST to TradingView's scanner (top `BREADTH_SCAN_LIMIT` US common stocks; the `type=stock`
   filter is load-bearing — without it ADR/fund rows displace ~90 S&P names), intersected with
   both constituent lists. Per-index `MIN_MATCH` gates. Validated vs published $S5TH / $NDTH.
-- `scripts/tts.py`: the audio edition. Composes a deterministic narration (must-knows; S&P/Nasdaq
-  percent moves; the 10-year, the 30-year mortgage and the VIX, each followed by the reason the
+- `scripts/tts.py`: the audio edition. Composes a deterministic narration (must-knows; the
+  leveraged ETF pulse, spoken from the SAME published `read` string the card renders so the
+  classification has one implementation; S&P/Nasdaq percent moves; the 10-year, the 30-year mortgage and the VIX, each followed by the reason the
   page gives for it, then the overall market "why"; the weekly policy digest on Mondays; tech;
   world) and synthesizes it with Gemini TTS (`TTS_MODEL`/`TTS_VOICE`), encoding mp3 in-process with
   `lameenc` (the runner has no ffmpeg). Non-fatal end to end. Still leaner than the page — breadth
@@ -355,6 +368,13 @@ tldr         : list of up to 3 strings
 market       : { sp500: {value, change, asof}, ndx: {value, change, asof}, why: str }
 yield_10y    : { value, change, asof, why }
 vix          : { value, change, asof, why }
+leveraged    : list of { symbol, what, value, change, day_move, asof, rsi, rsi_zone, low, high,
+               band_pct, zone, read } — one entry per configured ticker that reported. A ticker
+               that failed closed is ABSENT rather than null, and the whole key is absent on every
+               edition archived before 2026-09-09 (the PWA renders nothing for either case).
+               rsi_zone: oversold <30 | neutral | overbought >70. zone: low | mid | high, the old
+               ETF monitor's band thresholds. `read` is the deterministic one-line summary, and is
+               the string BOTH the card and the narration use.
 breadth      : { sp500: B, ndx100: B } where B = { value, asof, status, matched, stale }
                (status: oversold <30 | watch <40 | healthy >=40 | unavailable; value null when
                unavailable; stale=true when served from the last-good cache. Archives before
@@ -437,7 +457,8 @@ describes the figures as the latest close.
 - `python -m scripts.build_briefing` runs the daily flow with the once-per-day date-gate.
 - `--force` bypasses the date-gate and builds now (manual CI run).
 - `--local` bypasses the date-gate and builds now (dev).
-- `--spine` prints market numbers, news counts, breadth, and a federal policy-candidate count;
+- `--spine` prints market numbers, news counts, breadth, the leveraged ETF line (as `n/N tickers`,
+  so a silently short list is visible rather than merely absent), and a federal policy-candidate count;
   writes nothing. The policy line deliberately calls `policy._federal_candidates()` directly rather
   than `get_policy()`: the full entry point would run the annual 491-row Utah scrape plus detail
   fetches and touch state, and `data-smoke.yml` greps this output under a job timeout.

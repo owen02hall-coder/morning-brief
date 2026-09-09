@@ -43,6 +43,12 @@ two strings are both empty. All three verified red at authoring time, 2026-08-20
   no-tldr-cut  -> the mp3 script re-reads a story the must-knows already told; the device voice does
                   not. Guards the CONTAINMENT half specifically, which is a different metric from
                   the Jaccard used between buckets and could rot independently of it.
+  drop-etfs    -> the leveraged ETF pulse vanishes from the mp3 script but not from the device
+                  voice. (Added 2026-09-09 with the section; verified red.)
+  etf-round    -> the mp3 script formats RSI with Python's "%.0f" instead of floor(x + 0.5), so an
+                  RSI of exactly 48.5 is spoken as 48 in the mp3 and 49 in the phone's own voice.
+                  The same cross-language shape as the Monday=0/Sunday=0 weekday split.
+                  (Added 2026-09-09; verified red.)
 """
 import json
 import os
@@ -128,6 +134,24 @@ US_DUP_OF_WORLD = _item(
     "A new OLED manufacturing method from LG Display named FLiPP produces brighter and more "
     "efficient longer-lasting display panels.", "AP", "https://example.com/us2")
 
+# Three tickers covering the three shapes the read can take, and one RSI chosen to be exactly
+# reachable at .5 — the value where Python's "%.0f" (round-half-to-EVEN -> 48) and JavaScript's
+# Math.round (half-up -> 49) disagree. Without a .5 in here, that trap ships silently.
+LEVERAGED = [
+    {"symbol": "SOXL", "what": "3x semiconductors", "value": 123.27, "change": 5.99,
+     "day_move": 5.11, "asof": "2026-08-19", "rsi": 48.5, "rsi_zone": "neutral",
+     "low": 105.91, "high": 151.53, "band_pct": 38.1, "zone": "mid",
+     "read": "Mid-range - 38% of the way up its 1-month band."},
+    {"symbol": "SPXL", "what": "3x S&P 500", "value": 285.44, "change": -4.85,
+     "day_move": -1.67, "asof": "2026-08-19", "rsi": 28.4, "rsi_zone": "oversold",
+     "low": 281.35, "high": 301.35, "band_pct": 20.4, "zone": "low",
+     "read": "Near the bottom of its 1-month range and oversold on RSI."},
+    {"symbol": "TQQQ", "what": "3x Nasdaq-100", "value": 76.90, "change": 5.40,
+     "day_move": 7.55, "asof": "2026-08-19", "rsi": 71.2, "rsi_zone": "overbought",
+     "low": 69.01, "high": 77.15, "band_pct": 96.9, "zone": "high",
+     "read": "Within 4% of its 1-month high and overbought on RSI. Big session: up 7.6% in a day."},
+]
+
 FULL_MARKET = {"sp500": _num(7707.98, 16.22, "2026-08-19"),
                "ndx": _num(26331.09, 41.38, "2026-08-19"),
                "why": "Indices closed higher on broad participation."}
@@ -138,6 +162,7 @@ FIXTURES = [
     {"name": "monday-full", "hasLesson": True, "briefing": {
         "date": "2026-08-17", "tldr": ["The first thing that matters today.",
                                        "The second thing that matters today."],
+        "leveraged": LEVERAGED,
         "market": FULL_MARKET,
         "yield_10y": _num(4.65, -0.05, "2026-08-19", "Yields eased after a Treasury buyback plan."),
         "vix": _num(14.89, -0.95, "2026-08-19", "Volatility drifted lower into the close."),
@@ -221,6 +246,21 @@ FIXTURES = [
 ]
 
 
+def _naive_round_leveraged_lines(briefing):
+    """tts._leveraged_lines with the ONE difference the `etf-round` control exists to expose."""
+    rows = briefing.get("leveraged") or []
+    if not rows:
+        return []
+    out = ["Your leveraged E T Fs."]
+    for r in rows:
+        spelled = " ".join(r.get("symbol") or "")
+        rsi = r.get("rsi")
+        head = f"{spelled}, R S I {rsi:.0f}." if rsi is not None else f"{spelled}."
+        read = (r.get("read") or "").strip()
+        out.append(f"{head} {read.replace('%', ' percent').replace(' - ', ', ')}" if read else head)
+    return out
+
+
 def _apply_control(tts):
     """Break the PYTHON narration in one specific way, so C1 must go red."""
     if CONTROL == "drop-rates":
@@ -232,6 +272,13 @@ def _apply_control(tts):
                                                             for label, items in buckets]
     elif CONTROL == "no-tldr-cut":
         tts._covered_by_tldr = lambda item, tldr_words: False
+    elif CONTROL == "drop-etfs":
+        tts._leveraged_lines = lambda briefing: []
+    elif CONTROL == "etf-round":
+        # The half-rounding split itself: Python's "%.0f" sends an RSI of 48.5 to the nearest EVEN
+        # integer (48) while JavaScript's Math.round sends it up (49). Both sides use
+        # floor(x + 0.5) precisely so they cannot disagree; this control puts the trap back.
+        tts._leveraged_lines = _naive_round_leveraged_lines
     elif CONTROL:
         print(f"REFUSED: unknown NARRATION_MIRROR_CONTROL {CONTROL!r}", file=sys.stderr)
         sys.exit(2)
@@ -332,6 +379,19 @@ def main():
          "the US section vanished on a non-Monday, so it is wrongly coupled to the policy weekday"),
         ("degraded-empty", "Across the country.", False,
          "an empty US bucket still announced its heading, which would read as a broken section"),
+        ("monday-full", "Your leveraged E T Fs.", True,
+         "the leveraged ETF pulse was not spoken at all, so C1 proved nothing about it"),
+        # 49, not 48: floor(48.5 + 0.5) is what BOTH sides must produce. Python's "%.0f" would
+        # say 48 here, which is exactly what the `etf-round` control puts back.
+        ("monday-full", "R S I 49.", True,
+         "the RSI 48.5 case did not reach the narration, so C1 is no longer measuring the "
+         "Python-even / JavaScript-up half-rounding split that this fixture exists to pin"),
+        ("monday-full", "Near the bottom of its 1-month range and oversold on RSI.", True,
+         "the ETF read is not being spoken from the published `read` string, which is the only "
+         "thing keeping the mp3, the device voice and the card from classifying differently"),
+        ("degraded-empty", "Your leveraged E T Fs.", False,
+         "an edition with no ETF data still announced the heading, which would read as a broken "
+         "section on every archived briefing published before this feature existed"),
         ("tldr-repeat", "earthquake struck eastern Indonesia", False,
          "the world section re-read a story the must-knows had already told — this is the "
          "containment case Jaccard misses, so the tldr suppression is not working"),

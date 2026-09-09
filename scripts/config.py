@@ -96,8 +96,13 @@ TECH_FEEDS = {
 # Unlike most free tiers (incl. Twelve Data), Yahoo's chart endpoint includes indices, so it serves
 # all four with no key. "Nasdaq" = the Nasdaq Composite (^IXIC); ^TNX is the 10-yr yield in percent.
 # (FRED's keyless CSV was the prior source; it went unreachable from CI, so we moved to Yahoo.)
-YAHOO_CHART = "https://{host}.finance.yahoo.com/v8/finance/chart/{symbol}?range=5d&interval=1d"
+YAHOO_CHART = "https://{host}.finance.yahoo.com/v8/finance/chart/{symbol}?range={range}&interval=1d"
 YAHOO_SYMBOLS = {"sp500": "^GSPC", "ndx": "^IXIC", "vix": "^VIX", "ten_year": "^TNX"}
+# One template, two windows: the headline numbers need only the last two settled closes,
+# while RSI-14 needs a long run-up (see LEVERAGED_MIN_BARS). Two URL constants that
+# differed only in `range=` would be the same string written twice.
+YAHOO_RANGE_HEADLINE = "5d"
+YAHOO_RANGE_HISTORY = "6mo"
 MARKET_TIMEOUT = 20             # fail fast: a hung market source must not blow the 10-min job timeout.
                                 # Yahoo answers in ~1s; worst case 4 symbols x 2 attempts x 2 hosts x
                                 # 20s is bounded well under the cap. Markets degrade to None
@@ -128,6 +133,39 @@ BREADTH_OVERSOLD = 30            # daily nag enters below this
 BREADTH_CLEAR = 33               # nag clears at/above this (hysteresis; no 30/31 flapping)
 BREADTH_EXTREME = 20             # flagged as extreme in the alert text
 BREADTH_STALE_TRADING_DAYS = 2   # alerts suppressed when the value is older than this many trading days
+
+# --- Leveraged ETF pulse ------------------------------------------------------
+# Where SOXL / SPXL / TQQQ sit in their own recent range, read once a day at the top of the
+# briefing. Same Yahoo daily closes the four headline numbers come from — no new source, no key.
+#
+# Two independent readings per ticker:
+#   RSI-14 (Wilder), the oscillator Webull and TradingView draw, with the conventional 30/70 lines.
+#   Position in the 1-month CLOSING band, using the thresholds the reader's old hourly ETF monitor
+#   actually fired on (reconstructed from its run emails, 2026-09-09): the bottom zone is
+#   price <= low * 1.04, the top zone is price >= high * 0.96.
+#
+# Deliberately NOT carried over from that monitor: the add/trim state machine, the dedup log and
+# the suggested dollar tranche. All three existed to keep an HOURLY job from paging the same signal
+# seven times a day; a once-daily section that always renders has no such problem to solve. And the
+# tranche sizing needed a position size this app does not know and has no way to verify.
+LEVERAGED_TICKERS = (
+    ("SOXL", "3x semiconductors"),
+    ("SPXL", "3x S&P 500"),
+    ("TQQQ", "3x Nasdaq-100"),
+)
+RSI_PERIOD = 14
+RSI_OVERSOLD = 30                # conventional Wilder lines, and the ones Webull draws
+RSI_OVERBOUGHT = 70
+LEVERAGED_BAND_DAYS = 21         # ~1 calendar month of trading days
+LEVERAGED_LOW_BAND = 0.04        # bottom zone: close <= 1-month low * (1 + this)
+LEVERAGED_HIGH_BAND = 0.04       # top zone:    close >= 1-month high * (1 - this)
+LEVERAGED_MOVER_PCT = 7.0        # single-session move called out as a big swing (the old monitor's
+                                 # line sat near 7%: +5.2% was neutral, +9.1% fired)
+LEVERAGED_MIN_BARS = 60          # RSI-14's Wilder smoothing is seeded, not windowed, so a short
+                                 # series gives a WRONG number rather than a missing one. 6mo is
+                                 # ~128 bars; measured 2026-09-09, 60 bars lands within ~1 point of
+                                 # the full series and 120 is identical to 2dp. Below this: None.
+LEVERAGED_STALE_TRADING_DAYS = 3 # older than this and the section shows the date and says so
 
 # --- Policy that affects me ---------------------------------------------------
 # A narrow, EFFECT-TESTED reversal of the "no US politics" rule in summarize.SYSTEM: an item ships
