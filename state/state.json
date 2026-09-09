@@ -3,7 +3,7 @@
   "markets_last_ok": "2026-09-09",
   "breadth_last_good": {
     "sp500": {
-      "value": 56.9,
+      "value": 56.5,
       "matched": 501,
       "asof": "2026-09-08"
     },
@@ -18,7 +18,7 @@
       "in_alert": false,
       "nag_days": 0,
       "warn_armed": true,
-      "last_value": 56.9,
+      "last_value": 56.5,
       "last_asof": "2026-09-08"
     },
     "ndx100": {

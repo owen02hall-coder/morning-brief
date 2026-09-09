@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-09-09T09:30:34.613810-06:00",
+  "generated_at": "2026-09-09T11:55:15.224001-06:00",
   "date": "2026-09-09",
   "tldr": [
-    "Oil prices surpassed $100 a barrel for the first time since July, driven by escalating conflicts in the Middle East, intensifying global inflation fears.",
-    "An Anthropic safety researcher stated there is over a 10% chance AI could lead to human extinction by the end of the decade, following a colleague's resignation over AI safety concerns.",
-    "New York City released 170,000 documents indicating officials were aware of dangerous air quality around the World Trade Center after 9/11 but did not warn residents."
+    "Apple unveiled new iPhone 18 handsets, Apple Watch models, and AirPods 5, also introducing its Siri AI as a beta feature in the upcoming iOS 27.",
+    "Oil prices exceeded $100 a barrel for the first time since July, prompted by escalating strikes between the US and Iran near the Strait of Hormuz.",
+    "The US Treasury initiated a $6 billion government debt buyback to alleviate pressure in the bond market, where yields had risen to their highest point since 2008."
   ],
   "market": {
     "sp500": {
@@ -17,23 +17,23 @@
       "change": -85.58,
       "asof": "2026-09-08"
     },
-    "why": "The S&P 500 and Nasdaq Composite closed lower as oil prices rose above $100 a barrel for the first time since July, fueled by escalating Middle East conflict and Houthi attacks, which renewed global inflation fears."
+    "why": "The S&P 500 and Nasdaq Composite both declined, reflecting a general risk-off sentiment in the market. This decline coincided with oil prices rising above $100 a barrel due to intensified conflict in the Middle East, specifically after US and Iranian strikes."
   },
   "yield_10y": {
     "value": 4.81,
     "change": 0.02,
     "asof": "2026-09-08",
-    "why": "The 10-year Treasury yield increased amidst rising oil prices and renewed inflation concerns stemming from the escalating Middle East conflict. The Treasury Department also announced plans to buy back up to $6 billion in longer-term debt, a move three times the normal level."
+    "why": "The 10-year Treasury yield saw a slight increase. This occurred despite the US Treasury announcing a $6 billion government debt buyback intended to alleviate pressure in the bond market, where yields had reached their highest levels since 2008."
   },
   "vix": {
     "value": 15.72,
     "change": 0.42,
     "asof": "2026-09-08",
-    "why": "The VIX, a measure of market volatility, increased as stock indices declined and global concerns mounted due to escalating conflicts in the Middle East and renewed inflation fears."
+    "why": "The VIX, a measure of market volatility, rose, indicating increased investor apprehension. This aligns with broader 'risk-off sentiment' noted in the market."
   },
   "breadth": {
     "sp500": {
-      "value": 56.9,
+      "value": 56.5,
       "asof": "2026-09-08",
       "status": "healthy",
       "matched": 501,
@@ -47,11 +47,58 @@
       "stale": false
     }
   },
+  "leveraged": [
+    {
+      "symbol": "SOXL",
+      "what": "3x semiconductors",
+      "value": 123.27,
+      "change": 5.99,
+      "day_move": 5.11,
+      "asof": "2026-09-08",
+      "rsi": 48.6,
+      "rsi_zone": "neutral",
+      "low": 105.91,
+      "high": 151.53,
+      "band_pct": 38.1,
+      "zone": "mid",
+      "read": "Mid-range - 38% of the way up its 1-month band."
+    },
+    {
+      "symbol": "SPXL",
+      "what": "3x S&P 500",
+      "value": 285.44,
+      "change": -4.85,
+      "day_move": -1.67,
+      "asof": "2026-09-08",
+      "rsi": 49.7,
+      "rsi_zone": "neutral",
+      "low": 281.35,
+      "high": 301.35,
+      "band_pct": 20.4,
+      "zone": "low",
+      "read": "Within 4% of its 1-month low."
+    },
+    {
+      "symbol": "TQQQ",
+      "what": "3x Nasdaq-100",
+      "value": 72.16,
+      "change": -0.21,
+      "day_move": -0.29,
+      "asof": "2026-09-08",
+      "rsi": 51.4,
+      "rsi_zone": "neutral",
+      "low": 69.01,
+      "high": 77.15,
+      "band_pct": 38.7,
+      "zone": "mid",
+      "read": "Mid-range - 39% of the way up its 1-month band."
+    }
+  ],
   "mortgage": {
     "value": 6.71,
     "change": 0.05,
     "asof": "2026-09-03",
-    "why": "The 30-year fixed mortgage rate, a weekly Freddie Mac survey released on 2026-09-03, rose by 0.05% compared to the previous week. This change tracks the general upward movement of the 10-year Treasury yield over recent days, influenced by broader inflation concerns, though specific drivers for this week's increase are not detailed in the provided articles."
+    "why": "The 30-year fixed mortgage rate increased for the week ending September 3, 2026. This rise tracks the general upward movement in the 10-year Treasury yield, which had been experiencing significant increases, reaching its highest point since 2008."
   },
   "policy": [],
   "policy_upcoming": [
@@ -93,70 +140,70 @@
   "policy_calendar": [],
   "tech": [
     {
-      "summary": "An Anthropic safety researcher has stated there is more than a 10% chance that artificial intelligence could lead to the extinction of all humans by the end of the decade, following a colleague's resignation over similar fears.",
+      "summary": "Apple showcased its latest products, including the iPhone 18 Pro with a dynamic-aperture main camera, the Apple Watch Series 12 and Watch Ultra 4, and AirPods 5. The company also announced the launch of iOS 27 on September 14th, featuring the new Siri AI.",
       "source": "The Verge",
-      "url": "https://www.theverge.com/ai-artificial-intelligence/991927/anthropic-ai-kill-all-humans"
+      "url": "https://www.theverge.com/tech/986331/apple-iphone-18-pro-max-september-2026-event"
     },
     {
-      "summary": "Nintendo has announced a new 2D Metroid game, titled 'Metroid Ravenous,' which will be released for the Switch 2 console on January 28th, 2027.",
-      "source": "The Verge",
-      "url": "https://www.theverge.com/games/992053/the-switch-2-is-getting-a-2d-metroid-called-ravenous"
+      "summary": "Google is making its largest single investment in Europe by selecting Finland for a \u20ac13 billion data center project, which is expected to create tens of thousands of jobs.",
+      "source": "BBC World",
+      "url": "https://www.bbc.co.uk/news/articles/c8r6y4me2g6o?at_medium=RSS&at_campaign=rss"
     },
     {
-      "summary": "DeepSeek plans to release its V4.1 Flash AI model around September 10, 2026, claiming it will surpass the V4 Pro model in performance, cost, speed, and task completion.",
-      "source": "Hacker News",
-      "url": "https://news.ycombinator.com/item?id=49624603"
+      "summary": "Microsoft has established new AI privacy rules for schools through an agreement with the American Federation of Teachers, following concerns that led two major school systems to ban student-facing AI.",
+      "source": "The Verge",
+      "url": "https://www.theverge.com/policy/992359/microsoft-aft-schools-ai-privacy"
     }
   ],
   "world": [
     {
-      "summary": "Oil prices have risen above $100 a barrel for the first time since July, driven by escalating conflict between the US and Iran in the Gulf and Houthi attacks on Saudi cities, intensifying global inflation fears.",
+      "summary": "Oil prices have surged past $100 a barrel for the first time since July, following claims by Iran that it attacked 10 ships near the Strait of Hormuz in response to US strikes that reportedly sank five Iranian tankers.",
       "source": "Guardian World",
-      "url": "https://www.theguardian.com/business/2026/sep/09/oil-prices-rise-iran-war-brent-crude-inflation-higher-interest-rates"
+      "url": "https://www.theguardian.com/world/2026/sep/09/iran-claims-to-have-attacked-10-ships-near-strait-of-hormuz-after-us-strikes"
     },
     {
-      "summary": "Germany's Chancellor Friedrich Merz canceled a phone call with Donald Trump after a social media post from Trump celebrated the far-right AfD party's election win in Saxony-Anhalt, with Merz accusing the AfD of pursuing \"ethnic cleansing.\"",
+      "summary": "Prominent Israelis have expressed support for new UK sanctions targeting illegal Israeli settlements in the occupied West Bank, viewing them as a necessary response to expansion and violence in the region.",
       "source": "Guardian World",
-      "url": "https://www.theguardian.com/world/2026/sep/09/friedrich-merz-afd-far-right-accused-seeking-ethnic-cleansing-saxony-anhalt-election"
+      "url": "https://www.theguardian.com/world/2026/sep/09/israelis-welcome-uk-sanctions-on-settlements-palestine-west-bank"
     },
     {
-      "summary": "Tens of thousands of people lined the streets of Norway for the funeral procession of King Harald V, marking the end of 13 days of national mourning.",
+      "summary": "The Metropolitan police have launched an inquiry into allegations that Reform UK plotted to violate electoral law by accepting overseas donations, with the party stating it will cooperate fully.",
       "source": "Guardian World",
-      "url": "https://www.theguardian.com/world/2026/sep/09/norway-king-harald-v-funeral"
+      "url": "https://www.theguardian.com/politics/2026/sep/09/met-police-launch-inquiry-into-alleged-overseas-donations-to-reform-uk"
     },
     {
-      "summary": "Hurricane Lowell caused significant damage to Hawaii's western coastline, leaving 30,000 residents without power due to torrential rains and winds, with Kauai grappling with flooding and dangerous debris.",
-      "source": "Al Jazeera",
-      "url": "https://www.aljazeera.com/news/2026/9/9/torrential-rains-winds-from-hurricane-lowell-leaves-30000-without-power?traffic_source=rss"
+      "summary": "Drone attacks between Russia and Ukraine continue, with three deaths reported in Ukraine and four in Russia. Additionally, two people died at the Moldovan border during the ongoing conflict.",
+      "source": "BBC World",
+      "url": "https://www.bbc.co.uk/news/articles/cvgyvpxe3yjo?at_medium=RSS&at_campaign=rss"
     }
   ],
   "us": [
     {
-      "summary": "New York City has released 170,000 documents that reportedly show officials were aware that the air quality around the World Trade Center after 9/11 was dangerous for breathing but did not issue warnings to local residents.",
+      "summary": "Flight data indicates that an Amazon cargo plane attempted to abort an unsteady landing at Miami International Airport before crashing into a van, resulting in five fatalities.",
+      "source": "NPR National",
+      "url": "https://www.npr.org/2026/09/09/g-s1-142482/cargo-plane-crash-miami"
+    },
+    {
+      "summary": "New York City has released 170,000 documents that reportedly show city officials were aware of the dangerous air quality around the World Trade Center site after 9/11 but did not adequately warn residents.",
       "source": "NPR National",
       "url": "https://www.npr.org/2026/09/09/nx-s1-5961417/new-york-city-mayor-mamdani-releases-documents-related-to-post-9-11-air-quality"
     },
     {
-      "summary": "A new federal program implemented at 13 airports allows visitors with TSA PreCheck to pass through security checkpoints without a boarding pass to meet or drop off air travelers, reviving a practice largely discontinued after 9/11.",
+      "summary": "A National Guard member deployed in Washington, D.C., as part of a crime-fighting task force, was arrested for allegedly pulling a gun on a fellow Guard member during a dispute over haircut regulations.",
       "source": "NPR National",
-      "url": "https://www.npr.org/2026/09/09/nx-s1-5961303/new-tsa-program-allows-visitors-without-tickets-to-go-to-airport-gates"
-    },
-    {
-      "summary": "Flight data indicates that an Amazon cargo plane attempted to abort an unsteady landing at Miami International Airport before crashing into a van, killing five people inside.",
-      "source": "NPR National",
-      "url": "https://www.npr.org/2026/09/09/g-s1-142482/cargo-plane-crash-miami"
+      "url": "https://www.npr.org/2026/09/09/nx-s1-5962678/national-guard-arrested"
     }
   ],
   "science": [
     {
-      "summary": "Genetically modified pig kidneys have successfully kept two kidney failure patients alive long enough to receive human kidney transplants, marking a significant advancement in xenotransplantation.",
+      "summary": "Genetically modified pig kidneys have successfully kept two kidney failure patients alive long enough to receive human kidney transplants, marking a significant step in xenotransplantation.",
       "source": "NPR Health",
       "url": "https://www.npr.org/2026/09/07/nx-s1-5958008/pig-kidneys-keep-patients-alive-long-enough-to-get-human-kidneys-for-the-first-time"
     },
     {
-      "summary": "Experts advise that consuming very hot drinks may cause damage to the food pipe and increase the risk of cancer by harming the cell lining on the way to the stomach.",
-      "source": "BBC Health",
-      "url": "https://www.bbc.co.uk/news/articles/ce3r77d9n90o?at_medium=RSS&at_campaign=rss"
+      "summary": "Bangladesh is grappling with a severe measles outbreak, with over 50,000 confirmed or suspected cases this year and more than 1,000 child deaths, prompting efforts to control the spread.",
+      "source": "NPR Health",
+      "url": "https://www.npr.org/2026/09/09/g-s1-141466/measles-outbreak-vaccination-bangladesh"
     }
   ],
   "weekly_recap": null,
@@ -173,6 +220,7 @@
     "summary": "ok",
     "breadth": true,
     "policy": true,
-    "mortgage": true
+    "mortgage": true,
+    "leveraged": true
   }
 }
