@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-09T11:55:15.224001-06:00",
+  "generated_at": "2026-09-10T09:25:58.982006-06:00",
   "lessons": [
     {
       "id": "2026-08-11-mortgage",
@@ -127,11 +127,7 @@
         "title": "Scam",
         "url": "https://en.wikipedia.org/wiki/Scam"
       },
-      "audio": {
-        "quick": "lessons/2026-08-17-scam-quick.mp3",
-        "more": "lessons/2026-08-17-scam-more.mp3",
-        "deep": "lessons/2026-08-17-scam-deep.mp3"
-      }
+      "audio": {}
     },
     {
       "id": "2026-08-18-escrow",
@@ -531,6 +527,26 @@
         "quick": "lessons/2026-09-09-dark-pattern-quick.mp3",
         "more": "lessons/2026-09-09-dark-pattern-more.mp3",
         "deep": "lessons/2026-09-09-dark-pattern-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-09-10-amortization-accounting",
+      "date": "2026-09-10",
+      "domain": "Money mechanics",
+      "title": "How Company Expense Reporting Can Affect Your View",
+      "hook": "It's important to understand how companies report their expenses, because a misreading of their financial health can have unexpected implications.",
+      "quick": "When companies show their net income, it might not always reflect the full, immediate impact of certain large expenditures. Sometimes, what would otherwise be a one-time expense is treated differently in accounting. Instead of hitting the income statement all at once, the company might list it as a capital investment. Then, the cost is gradually \"paid off\" or spread out over time. This approach can make the company's net income appear more favorable in the fiscal year or quarter when that expense was actually incurred, potentially making its immediate financial picture seem stronger.",
+      "more": "This method primarily applies to intangible assets, which are things a company owns that don't have a physical form, like patents or trademarks. The accounting practice aims to show the decline in value of these assets over their useful life, similar to how physical items depreciate. However, not all such assets are handled this way; some, like goodwill or specific brands, are seen as having an indefinite useful life and are therefore not subject to this systematic expense allocation. For those looking at a company's financial reports, it means a significant cost that might typically be a big drain on profits in one period can be smoothed over, making the underlying cash flow appear steadier.",
+      "deep": "The way this works involves taking the acquisition cost of an intangible asset and systematically reducing its value over its economic life, after subtracting any residual value. While the theoretical purpose is to account for the decreasing value of an intangible asset, companies in practice can use it to manage how one-time expenses affect their reported profits. By listing these expenses as capital expenditures on the cash flow statement, they effectively spread the cost over multiple periods. This has the effect of boosting the reported net income in the specific period the expense actually happened, because the full cost isn't recorded all at once. Anyone relying on a company's reported income figures should be aware that these numbers might not immediately reflect the full brunt of all recent large expenditures.",
+      "takeaway": "When evaluating a company's reported income, consider that one-time expenses might be spread out over time, potentially presenting a smoother but not immediately complete financial picture.",
+      "source": {
+        "title": "Amortization (accounting)",
+        "url": "https://en.wikipedia.org/wiki/Amortization_(accounting)"
+      },
+      "audio": {
+        "quick": "lessons/2026-09-10-amortization-accounting-quick.mp3",
+        "more": "lessons/2026-09-10-amortization-accounting-more.mp3",
+        "deep": "lessons/2026-09-10-amortization-accounting-deep.mp3"
       }
     }
   ],
