@@ -1116,7 +1116,15 @@ const player = {
   // it the device-voice fallback is simply silent on iPhone, which is the platform this is built for.
   primeSpeech() {
     if (!this.tail || !("speechSynthesis" in window)) return;
-    try { window.speechSynthesis.speak(new SpeechSynthesisUtterance(" ")); } catch (e) { /* ignore */ }
+    // The primer carries the CHOSEN rate, never the default. It is one space long, but it is a real
+    // utterance sitting at the head of the synth queue microseconds before the tail is queued behind
+    // it, and cancel() is asynchronous on iOS — so a 1x primer is the app itself putting a speed
+    // nobody picked in front of the voice, on exactly the surface with no mp3 to fall back on.
+    try {
+      const u = new SpeechSynthesisUtterance(" ");
+      u.rate = this.rate;
+      window.speechSynthesis.speak(u);
+    } catch (e) { /* ignore */ }
   },
 
   start() {

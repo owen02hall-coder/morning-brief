@@ -23,6 +23,9 @@
  *   (C9) Changing the playback speed is not a completion. The speed chip stops and restarts what
  *        is playing, which makes it a new way into the exact failure C4 exists to prevent — and
  *        unlike a wrong speed (which the listener hears instantly), a burned lesson is silent.
+ *  (C10) The device voice speaks at the CHOSEN speed. The <audio> half of the speed chip proves
+ *        itself the moment you hear it; the speech half is a property of utterances queued in a
+ *        burst, where one utterance carrying the wrong rate is invisible to every other check here.
  *
  * Read-only. Exit: 0 PASS / 1 FAIL / 2 REFUSED.
  */
@@ -94,8 +97,9 @@ global.localStorage = {
 Object.defineProperty(global, "navigator", {
   value: { userAgent: "node", standalone: false }, configurable: true, writable: true,
 });
-// No speechSynthesis on purpose: the queue must be provably correct without it, and C6/C7 assert on
-// the TEXT the device would speak rather than on the speaking.
+// No speechSynthesis here on purpose: the queue must be provably correct without it, and C6/C7
+// assert on the TEXT the device would speak rather than on the speaking. C10 installs a recording
+// stub of its own, once the pointer checks that must not depend on a voice are done.
 global.window = { navigator: global.navigator };
 global.MediaMetadata = class {};
 global.Audio = class { set src(v) { this._src = v; } get src() { return this._src; } };
@@ -217,6 +221,46 @@ const saved = () => JSON.parse(store["soup.v1"] || "{}");
   check("the pointer did NOT move", player.lessonId === "a", String(player.lessonId));
   check("nothing was recorded as completed", (saved().completed || []).length === 0,
     JSON.stringify(saved().completed || []));
+
+  console.log("\nC10 the device voice speaks at the chosen speed");
+  // C1-C9 run with no speechSynthesis at all (see the note by the DOM). Here we install a recording
+  // stub, because the chip is only a LABEL unless the chosen rate reaches the utterances the device
+  // actually speaks — and that half of the feature is the half no <audio> element can prove.
+  const spoken = [];
+  global.SpeechSynthesisUtterance = class {
+    constructor(text) { this.text = text; this.rate = 1; }   // 1 is the browser default, on purpose
+  };
+  global.window.speechSynthesis = {
+    speaking: false, pending: false,
+    speak(u) { spoken.push(u); this.speaking = true; },
+    cancel() { spoken.push({ text: "<cancel>", rate: null }); this.speaking = false; },
+  };
+  const rates = () => spoken.filter((u) => u.rate !== null).map((u) => u.rate);
+
+  player.stopAll();
+  // A lesson whose clips are missing: the queue ends in SPEECH, which is the surface under test.
+  soup.prefs = { length: "medium", completed: ["a", "b"], skipped: [] };
+  player.replan();
+  check("the queue ends in a spoken tail", player.tail !== "", player.tail.slice(0, 40));
+  check("the speed is the 1.5x chosen in C9", player.rate === 1.5, String(player.rate));
+
+  spoken.length = 0;
+  player.toggle();                    // a tap: unlocks the speech API, then starts the clips
+  check("the silent primer is queued at the chosen speed, not at 1x",
+    rates().length === 1 && rates()[0] === 1.5, JSON.stringify(rates()));
+
+  spoken.length = 0;
+  player.speak();                     // the tail, as next() reaches it
+  check("every chunk of the tail carries the chosen speed",
+    rates().length > 0 && rates().every((r) => r === 1.5), JSON.stringify(rates()));
+
+  spoken.length = 0;
+  byId["listen-speed"].onclick();     // 1.5 -> 2 mid-speech: the tail is re-spoken, not relabelled
+  check("changing the speed mid-speech re-speaks at the NEW speed",
+    rates().length > 0 && rates().every((r) => r === 2), JSON.stringify(rates()));
+  check("the pointer did NOT move when that speech was cancelled", player.lessonId === "c",
+    String(player.lessonId));
+  player.stopAll();
 
   console.log(fails ? `\nFAIL: ${fails} check(s)` : "\nPASS: the client pointer behaves");
   process.exit(fails ? 1 : 0);

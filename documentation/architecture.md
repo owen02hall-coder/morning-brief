@@ -104,7 +104,9 @@ PWA (docs/app.js): fetch briefing.json + lessons.json (network-first) -> render;
   plays a QUEUE (today's mp3 -> the current lesson's clips at the chosen depth -> the shared outro),
   falling back to chunked speechSynthesis for any part with no audio; a 1x/1.5x/2x speed chip
   (localStorage `listen.rate.v1`) drives audio.playbackRate — reapplied on every source load
-  because Safari resets it — and the utterance rate of the fallback voice; archive + search; staleness
+  because Safari resets it — and the utterance rate of the fallback voice, INCLUDING the silent
+  primer that unlocks speech on iOS (it heads the same queue, and cancel() is async there, so a
+  default-rate primer is heard as "the speed chip does nothing to the voice"); archive + search; staleness
   banner; the policy section is built by a function that returns null when nothing qualified and is
   appended behind a guard (see the design decisions below); Owen's Alphabet Soup renders LAST and
   owns the deck pointer in localStorage
