@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-12T08:35:35.857136-06:00",
+  "generated_at": "2026-09-13T09:14:58.931844-06:00",
   "lessons": [
     {
       "id": "2026-08-11-mortgage",
@@ -159,11 +159,7 @@
         "title": "Heating, ventilation, and air conditioning",
         "url": "https://en.wikipedia.org/wiki/Heating,_ventilation,_and_air_conditioning"
       },
-      "audio": {
-        "quick": "lessons/2026-08-19-heating-ventilation-and-air-conditioning-quick.mp3",
-        "more": "lessons/2026-08-19-heating-ventilation-and-air-conditioning-more.mp3",
-        "deep": "lessons/2026-08-19-heating-ventilation-and-air-conditioning-deep.mp3"
-      }
+      "audio": {}
     },
     {
       "id": "2026-08-20-emergency-medicine",
@@ -563,6 +559,26 @@
         "quick": "lessons/2026-09-12-toilet-quick.mp3",
         "more": "lessons/2026-09-12-toilet-more.mp3",
         "deep": "lessons/2026-09-12-toilet-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-09-13-burn",
+      "date": "2026-09-13",
+      "domain": "Health and emergencies",
+      "title": "Identifying Burn Severity",
+      "hook": "Burns are a common injury that can happen unexpectedly in your home, especially in the kitchen, and knowing how severe one is can guide your next steps.",
+      "quick": "When skin or other tissues are damaged by heat, electricity, chemicals, or even friction, it's called a burn. The most noticeable burns affect only the superficial skin layers, appearing red without blisters, and the pain typically lasts about three days. These are often called first-degree burns. If the injury extends into the underlying skin layer, blisters frequently appear, and these burns are often very painful, sometimes taking up to eight weeks to heal and potentially leaving a scar. A burn that damages all layers of the skin, known as a full-thickness or third-degree burn, might surprisingly involve no pain, and the affected area can feel stiff. Even more severe, a fourth-degree burn reaches deeper tissues like muscle or bone, often turning the area black and frequently leading to the loss of the burned part.",
+      "more": "Recognizing the signs of a serious burn is crucial because healing for full-thickness burns usually does not happen on its own, and deeper burns often require surgical treatments, like skin grafting. Immediately after a burn, cooling the affected area with tap water can help reduce pain and limit damage; however, avoid prolonged cooling which might lead to a low body temperature. For burns with blisters, it's generally considered reasonable to leave small blisters intact and drain large ones, though guidance on managing them is not entirely clear. Many burns, particularly thermal ones from hot fluids or objects, happen at home, often in domestic kitchens involving stoves or hot liquids.",
+      "deep": "The primary complication with burns, especially more severe ones, is infection, so keeping the area clean is important. Beyond the visible skin damage, certain signs can indicate a more critical situation, such as burns around the mouth or singed hair inside the nose, which may suggest an airway injury. More concerning symptoms include shortness of breath, hoarseness, stridor, or wheezing, and these should prompt immediate attention. While significant burns can be fatal, and extensive burns often require substantial intravenous fluids due to fluid leakage and swelling, burns are generally preventable. Taking care with common risks in the home, like hot fluids and cooking appliances, can help avoid many of these injuries.",
+      "takeaway": "Carefully observe any burn for signs like blisters, stiffness, or blackening, and if there are symptoms of airway distress or the burn is deep, seek emergency medical attention.",
+      "source": {
+        "title": "Burn",
+        "url": "https://en.wikipedia.org/wiki/Burn"
+      },
+      "audio": {
+        "quick": "lessons/2026-09-13-burn-quick.mp3",
+        "more": "lessons/2026-09-13-burn-more.mp3",
+        "deep": "lessons/2026-09-13-burn-deep.mp3"
       }
     }
   ],
