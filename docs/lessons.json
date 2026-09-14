@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-13T09:14:58.931844-06:00",
+  "generated_at": "2026-09-14T11:12:06.931498-06:00",
   "lessons": [
     {
       "id": "2026-08-11-mortgage",
@@ -175,11 +175,7 @@
         "title": "Emergency medicine",
         "url": "https://en.wikipedia.org/wiki/Emergency_medicine"
       },
-      "audio": {
-        "quick": "lessons/2026-08-20-emergency-medicine-quick.mp3",
-        "more": "lessons/2026-08-20-emergency-medicine-more.mp3",
-        "deep": "lessons/2026-08-20-emergency-medicine-deep.mp3"
-      }
+      "audio": {}
     },
     {
       "id": "2026-08-21-cognitive-bias",
@@ -579,6 +575,26 @@
         "quick": "lessons/2026-09-13-burn-quick.mp3",
         "more": "lessons/2026-09-13-burn-more.mp3",
         "deep": "lessons/2026-09-13-burn-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-09-14-informal-fallacy",
+      "date": "2026-09-14",
+      "domain": "Thinking and people",
+      "title": "Spotting Hidden Flaws in Everyday Arguments",
+      "hook": "Misleading arguments can trick you into making poor decisions by appearing correct on the surface.",
+      "quick": "Incorrect arguments expressed in everyday language can seem perfectly sound, even though they contain hidden errors. These errors don't necessarily come from the structure of how someone says something, but from the actual content of their message or the situation where it's said. This deceptive appearance makes them attractive, often leading people to accept them without realizing their flaws. Often, these misleading arguments depend on words that are unclear, phrases that are too general, or assumptions that aren't stated openly. Because they look correct, these arguments can lead us to conclusions that aren't actually supported by the information given, potentially influencing our beliefs or choices in ways we wouldn't intend if we saw the flaw. Recognizing these subtle deceptions helps us think more clearly and make better judgments in daily life.",
+      "more": "The underlying problem is that an argument's foundation, its premises, can be shaky, or even if those premises seem solid, they might not genuinely support the conclusion being made. For an argument to be sound, its statements or reasons must truly lead to the final point it's trying to make. Many of these flawed arguments rely on unstated assumptions that are simply taken for granted, or use language in a way that shifts its meaning, making a weak link between the initial points and the conclusion. When we encounter these, they often present themselves as compelling logic, drawing us in with their apparent validity. However, their purpose isn't to expand our knowledge or build a bridge from what we know to what we don't; rather, they can steer us towards unjustified beliefs. Being able to spot when the stated reasons don't connect properly to the outcome is key.",
+      "deep": "These misleading arguments are distinct from simple mistakes made out of carelessness, possessing an 'alluring element' that actively seduces people into committing or accepting the error. This psychological aspect explains why they are so commonly used and believed. While arguments are made of premises leading to a conclusion, the flaw in these cases isn't just that the conclusion might be false; it's that the premises, even if true, don't logically justify that conclusion. Imagine building a house: the foundation, or premises, might seem fine, but if the house itself, the conclusion, isn't properly attached or designed to stand on that specific foundation, it will still fall. The study of these helps us evaluate arguments critically, allowing us to distinguish between truly supportive reasoning and arguments that merely appear to be so, particularly when language is used ambiguously or a critical piece of information is left unsaid.",
+      "takeaway": "Before accepting an argument, identify its main conclusion and check if the given reasons directly support it without relying on unstated assumptions or vague language.",
+      "source": {
+        "title": "Informal fallacy",
+        "url": "https://en.wikipedia.org/wiki/Informal_fallacy"
+      },
+      "audio": {
+        "quick": "lessons/2026-09-14-informal-fallacy-quick.mp3",
+        "more": "lessons/2026-09-14-informal-fallacy-more.mp3",
+        "deep": "lessons/2026-09-14-informal-fallacy-deep.mp3"
       }
     }
   ],
