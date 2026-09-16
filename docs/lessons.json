@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-15T09:52:08.506569-06:00",
+  "generated_at": "2026-09-16T11:34:36.742271-06:00",
   "lessons": [
     {
       "id": "2026-08-11-mortgage",
@@ -207,11 +207,7 @@
         "title": "Compound interest",
         "url": "https://en.wikipedia.org/wiki/Compound_interest"
       },
-      "audio": {
-        "quick": "lessons/2026-08-23-compound-interest-quick.mp3",
-        "more": "lessons/2026-08-23-compound-interest-more.mp3",
-        "deep": "lessons/2026-08-23-compound-interest-deep.mp3"
-      }
+      "audio": {}
     },
     {
       "id": "2026-08-24-circuit-breaker",
@@ -609,7 +605,28 @@
       },
       "audio": {
         "quick": "lessons/2026-09-15-tax-bracket-quick.mp3",
-        "more": "lessons/2026-09-15-tax-bracket-more.mp3"
+        "more": "lessons/2026-09-15-tax-bracket-more.mp3",
+        "deep": "lessons/2026-09-15-tax-bracket-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-09-16-electrical-wiring",
+      "date": "2026-09-16",
+      "domain": "Home, car and repair",
+      "title": "Why Electrical Wires Overheat",
+      "hook": "Improper electrical wiring can lead to dangerous overheating and even fire in your home.",
+      "quick": "The biggest problem with household electrical wiring happens when it can't safely handle the electricity flowing through it, leading to dangerous overheating and even fire. Wires and cables are designed with specific limits for the amount of current they can carry, and these limits are heavily affected by how and where they are installed. If wires are too small for the load or are installed improperly, they cannot dissipate heat efficiently. For example, when multiple conductors are bundled together inside a single cable, they cannot dissipate heat as easily as individual wires. This means that circuits with bundled conductors are always rated at a lower current capacity than single, unbundled conductors. Ignoring these limitations can cause wires to heat up beyond their maximum conductor surface temperature rating, potentially damaging insulation or surrounding materials, which creates a significant safety hazard.",
+      "more": "This reduction in safe current capacity due to bundling is a critical factor, and it is not the only environmental condition that matters. The overall rating for a continuous run of cable is always determined by the weakest link, meaning the section with the lowest allowable current rating, whether that is due to higher ambient temperature, moisture exposure, or other factors. For instance, a cable rated for dry installations might have a different, lower rating if it passes through a damp basement or a hot attic, even if the wire itself is the same gauge. Different types of insulation materials are also chosen specifically to withstand varying environmental conditions like moisture, sunlight, oil, or chemicals, further impacting their safe operating limits.",
+      "deep": "Wiring systems in a typical single-family home have relatively low power requirements and usually operate in dry, moderate temperatures. However, cables used outdoors or for direct underground burial, for instance, must have a moisture-resistant construction and be formulated for UV resistance if exposure to sunlight is a possibility. In contrast, cables routed through air-handling spaces in commercial buildings are required either to be encased in metal conduit or specifically rated for low flame and smoke production. Even the conductor size plays a role, with smaller single conductor building wire often being solid, while conductors larger than 10 AWG are typically stranded for flexibility during installation. If the specific environmental conditions are not matched to the cable's ratings and required features, such as appropriate insulation or protective jacketing, the electrical system risks operating unsafely, potentially failing to dissipate heat effectively and exceeding its maximum conductor surface temperature rating.",
+      "takeaway": "Before installing or upgrading any electrical wiring, consult local safety codes and cable specifications to ensure the chosen wire type, size, and insulation are appropriate for the entire intended use and environmental conditions.",
+      "source": {
+        "title": "Electrical wiring",
+        "url": "https://en.wikipedia.org/wiki/Electrical_wiring"
+      },
+      "audio": {
+        "quick": "lessons/2026-09-16-electrical-wiring-quick.mp3",
+        "more": "lessons/2026-09-16-electrical-wiring-more.mp3",
+        "deep": "lessons/2026-09-16-electrical-wiring-deep.mp3"
       }
     }
   ],
