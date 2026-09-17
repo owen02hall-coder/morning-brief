@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-16T11:34:36.742271-06:00",
+  "generated_at": "2026-09-17T09:50:11.910421-06:00",
   "lessons": [
     {
       "id": "2026-08-11-mortgage",
@@ -223,11 +223,7 @@
         "title": "Circuit breaker",
         "url": "https://en.wikipedia.org/wiki/Circuit_breaker"
       },
-      "audio": {
-        "quick": "lessons/2026-08-24-circuit-breaker-quick.mp3",
-        "more": "lessons/2026-08-24-circuit-breaker-more.mp3",
-        "deep": "lessons/2026-08-24-circuit-breaker-deep.mp3"
-      }
+      "audio": {}
     },
     {
       "id": "2026-08-25-foodborne-illness",
@@ -627,6 +623,26 @@
         "quick": "lessons/2026-09-16-electrical-wiring-quick.mp3",
         "more": "lessons/2026-09-16-electrical-wiring-more.mp3",
         "deep": "lessons/2026-09-16-electrical-wiring-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-09-17-choking",
+      "date": "2026-09-17",
+      "domain": "Health and emergencies",
+      "title": "Recognizing the signs of choking",
+      "hook": "Knowing the subtle signs of choking can be crucial when every second counts.",
+      "quick": "Choking occurs when something blocks the airway, preventing oxygen from reaching the lungs. This quickly leads to oxygen deprivation. Although your body has some oxygen stored in the blood and lungs, choking often leads to death and is the fourth leading cause of unintentional injury death in the United States. Many choking events go unreported if they resolve quickly, but signs can be subtle. They might include a cough, gurgling, gagging, or shortness of breath. More obvious signs can involve a person clutching their throat, attempting to use hand signals, or trying to force vomiting because they cannot speak.",
+      "more": "Even if initial symptoms appear to improve, it doesn't always mean the blockage is resolved. These initial episodes typically last seconds to several minutes but can be followed by symptom improvement that is mistakenly taken as resolution. If breathing is not restored, a person may lose consciousness. Oxygen deprivation can cause brain damage when a person remains without air for approximately three minutes, though this time can vary. Death can occur if breathing is not restored in six to ten minutes, also varying by individual. The face or fingertips might also turn blue from lack of oxygen, but this visual sign is observed in only 15 to 20 percent of choking episodes in healthy adults and children.",
+      "deep": "Choking can be caused by food, or by small non-food objects like coins or toy parts. Foods that are small, round, or hard pose a high risk, such as hard candy, nuts, or marshmallows. Children younger than three years old are especially at risk because they have not fully developed chewing habits and explore their environment by putting objects in their mouths. Their airways are smaller, making them more susceptible to blockages from smaller objects, and their coughs are less forceful. For adults, risk factors can include consuming alcohol or sedatives, or having medical conditions like stroke, Alzheimer's disease, or Parkinson's disease that cause difficulty swallowing or impair the cough reflex. Living alone and wearing dentures are also risk factors for older adults.",
+      "takeaway": "Recognize the signs of choking, including subtle coughs or shortness of breath, because oxygen deprivation can quickly lead to brain damage and death.",
+      "source": {
+        "title": "Choking",
+        "url": "https://en.wikipedia.org/wiki/Choking"
+      },
+      "audio": {
+        "quick": "lessons/2026-09-17-choking-quick.mp3",
+        "more": "lessons/2026-09-17-choking-more.mp3",
+        "deep": "lessons/2026-09-17-choking-deep.mp3"
       }
     }
   ],
