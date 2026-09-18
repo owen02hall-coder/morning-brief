@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-17T09:50:11.910421-06:00",
+  "generated_at": "2026-09-18T09:23:28.093697-06:00",
   "lessons": [
     {
       "id": "2026-08-11-mortgage",
@@ -239,11 +239,7 @@
         "title": "Foodborne illness",
         "url": "https://en.wikipedia.org/wiki/Foodborne_illness"
       },
-      "audio": {
-        "quick": "lessons/2026-08-25-foodborne-illness-quick.mp3",
-        "more": "lessons/2026-08-25-foodborne-illness-more.mp3",
-        "deep": "lessons/2026-08-25-foodborne-illness-deep.mp3"
-      }
+      "audio": {}
     },
     {
       "id": "2026-08-26-formal-fallacy",
@@ -643,6 +639,26 @@
         "quick": "lessons/2026-09-17-choking-quick.mp3",
         "more": "lessons/2026-09-17-choking-more.mp3",
         "deep": "lessons/2026-09-17-choking-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-09-18-sunk-cost",
+      "date": "2026-09-18",
+      "domain": "Thinking and people",
+      "title": "Deciding when to quit a project",
+      "hook": "Many people find themselves continuing endeavors that are no longer beneficial, simply because of what they've already put into them.",
+      "quick": "It is easy to get trapped in a situation, whether it's a car repair, a house renovation, or even a relationship, by focusing on what you've already spent. This happens when people believe their past investments, like money, effort, or time, justify putting in even more. This common behavior, often described as 'throwing good money after bad,' can lead you to persist in endeavors that are no longer serving you. Rational decision-making, however, suggests that only future costs and potential future benefits should guide your next steps. What you've already spent is gone and cannot be recovered, meaning it should not influence your decision to continue or stop.",
+      "more": "To make better choices, consider any cost that has already been incurred as 'water under the bridge.' This means your past expenditures should be irrelevant when deciding what to do next. For instance, if a new factory project was expected to cost a large sum and generate significant value, but after a portion of that sum is spent, the projected value drops considerably, a rational company would abandon the project if the cost to complete it now outweighs its reduced future value. The crucial point is to focus on what can still occur and the consequences of future actions, rather than dwelling on how the current situation was reached.",
+      "deep": "This tendency to let past, unrecoverable expenditures sway future decisions is known as the sunk cost fallacy. People often demonstrate a greater inclination to continue an endeavor once an investment has been made, even if it goes against their best interests. This behavior can be seen in individuals who keep investing time, money, and emotional energy in psychologically manipulative scams, despite having doubts. It has also been observed in managers of utility companies who were reluctant to terminate economically unviable nuclear plant projects in the 1970s and 1980s. While economic theory generally advises against considering sunk costs, there can be specific, often personal, reasons why someone might factor them in, such as wanting to be seen as persevering or to avoid blame for earlier mistakes. Yet, for most everyday situations, ignoring these past costs is essential for making sound and logical decisions.",
+      "takeaway": "Before committing more resources to any project or situation, assess only the future costs and potential benefits, completely disregarding any investments you have already made.",
+      "source": {
+        "title": "Sunk cost",
+        "url": "https://en.wikipedia.org/wiki/Sunk_cost"
+      },
+      "audio": {
+        "quick": "lessons/2026-09-18-sunk-cost-quick.mp3",
+        "more": "lessons/2026-09-18-sunk-cost-more.mp3",
+        "deep": "lessons/2026-09-18-sunk-cost-deep.mp3"
       }
     }
   ],
