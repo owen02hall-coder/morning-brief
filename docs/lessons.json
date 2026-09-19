@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-18T09:23:28.093697-06:00",
+  "generated_at": "2026-09-19T08:59:56.101162-06:00",
   "lessons": [
     {
       "id": "2026-08-11-mortgage",
@@ -255,11 +255,7 @@
         "title": "Formal fallacy",
         "url": "https://en.wikipedia.org/wiki/Formal_fallacy"
       },
-      "audio": {
-        "quick": "lessons/2026-08-26-formal-fallacy-quick.mp3",
-        "more": "lessons/2026-08-26-formal-fallacy-more.mp3",
-        "deep": "lessons/2026-08-26-formal-fallacy-deep.mp3"
-      }
+      "audio": {}
     },
     {
       "id": "2026-08-27-property-tax",
@@ -659,6 +655,26 @@
         "quick": "lessons/2026-09-18-sunk-cost-quick.mp3",
         "more": "lessons/2026-09-18-sunk-cost-more.mp3",
         "deep": "lessons/2026-09-18-sunk-cost-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-09-19-loan",
+      "date": "2026-09-19",
+      "domain": "Money mechanics",
+      "title": "How Loan Types Affect Your Cost and Risk",
+      "hook": "The cost of borrowing money can be significantly different depending on whether your loan is backed by an asset or not.",
+      "quick": "If you need to borrow money, you might find that the interest rate charged varies widely, and this often comes down to whether the loan is secured. A secured loan means you pledge an asset, like a car or a house, as collateral. Because the lender has something to recover if you can't pay, they face less risk. This reduced risk for the lender typically results in lower interest rates for you. For example, a mortgage loan to buy property is a common type of secured loan, where the property itself acts as security until the loan is fully paid.",
+      "more": "In contrast, an unsecured loan isn't backed by any of your assets. Examples include credit cards or personal loans. Because there's no specific collateral for the lender to take if you default, their risk is much higher. This increased risk is reflected in the interest rates you pay, which are almost always higher for unsecured loans compared to secured ones. If you were to face severe financial difficulty, secured lenders traditionally have priority over unsecured lenders when any assets are divided by a court.",
+      "deep": "When an unsecured borrower defaults, the lender cannot simply repossess an asset like with a secured loan. Instead, the unsecured lender usually has to sue the borrower, obtain a judgment for breach of contract, and then pursue the execution of that judgment against any assets the borrower has that are not already pledged to other lenders. This legal process can be lengthy and uncertain, which contributes to the higher risk for the unsecured lender and, consequently, the higher interest rates for the borrower. Whether a loan is secured or unsecured significantly impacts both the lender's recourse and your borrowing cost.",
+      "takeaway": "Before committing to a loan, confirm if it is secured by an asset and understand how that impacts the interest rate and the lender's ability to recover funds.",
+      "source": {
+        "title": "Loan",
+        "url": "https://en.wikipedia.org/wiki/Loan"
+      },
+      "audio": {
+        "quick": "lessons/2026-09-19-loan-quick.mp3",
+        "more": "lessons/2026-09-19-loan-more.mp3",
+        "deep": "lessons/2026-09-19-loan-deep.mp3"
       }
     }
   ],
