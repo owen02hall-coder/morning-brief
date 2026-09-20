@@ -1,6 +1,6 @@
 {
-  "last_run": "2026-09-19",
-  "markets_last_ok": "2026-09-19",
+  "last_run": "2026-09-20",
+  "markets_last_ok": "2026-09-20",
   "breadth_last_good": {
     "sp500": {
       "value": 49.3,
@@ -80,7 +80,7 @@
     }
   ],
   "policy_today": {
-    "date": "2026-09-19",
+    "date": "2026-09-20",
     "items": [],
     "alerted": false
   },
@@ -343,6 +343,13 @@
       "title": "How Loan Types Affect Your Cost and Risk",
       "domain": "Money mechanics",
       "date": "2026-09-19"
+    },
+    {
+      "id": "2026-09-20-foundation-engineering",
+      "article_title": "Foundation (engineering)",
+      "title": "Understanding Home Foundation Settlement",
+      "domain": "Home, car and repair",
+      "date": "2026-09-20"
     }
   ],
   "lessons_bootstrapped": true,
