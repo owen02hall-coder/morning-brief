@@ -1,14 +1,14 @@
 {
-  "last_run": "2026-09-20",
-  "markets_last_ok": "2026-09-20",
+  "last_run": "2026-09-21",
+  "markets_last_ok": "2026-09-21",
   "breadth_last_good": {
     "sp500": {
-      "value": 49.3,
+      "value": 50.3,
       "matched": 501,
       "asof": "2026-09-18"
     },
     "ndx100": {
-      "value": 54.2,
+      "value": 56.2,
       "matched": 96,
       "asof": "2026-09-18"
     }
@@ -18,14 +18,14 @@
       "in_alert": false,
       "nag_days": 0,
       "warn_armed": true,
-      "last_value": 49.3,
+      "last_value": 50.3,
       "last_asof": "2026-09-18"
     },
     "ndx100": {
       "in_alert": false,
       "nag_days": 0,
       "warn_armed": true,
-      "last_value": 54.2,
+      "last_value": 56.2,
       "last_asof": "2026-09-18"
     }
   },
@@ -80,7 +80,7 @@
     }
   ],
   "policy_today": {
-    "date": "2026-09-20",
+    "date": "2026-09-21",
     "items": [],
     "alerted": false
   },
@@ -350,6 +350,13 @@
       "title": "Understanding Home Foundation Settlement",
       "domain": "Home, car and repair",
       "date": "2026-09-20"
+    },
+    {
+      "id": "2026-09-21-anaphylaxis",
+      "article_title": "Anaphylaxis",
+      "title": "Recognizing and Responding to Anaphylaxis",
+      "domain": "Health and emergencies",
+      "date": "2026-09-21"
     }
   ],
   "lessons_bootstrapped": true,

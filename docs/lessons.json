@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-20T10:43:46.818311-06:00",
+  "generated_at": "2026-09-21T11:21:32.157629-06:00",
   "lessons": [
     {
       "id": "2026-08-11-mortgage",
@@ -287,11 +287,7 @@
         "title": "Sump pump",
         "url": "https://en.wikipedia.org/wiki/Sump_pump"
       },
-      "audio": {
-        "quick": "lessons/2026-08-28-sump-pump-quick.mp3",
-        "more": "lessons/2026-08-28-sump-pump-more.mp3",
-        "deep": "lessons/2026-08-28-sump-pump-deep.mp3"
-      }
+      "audio": {}
     },
     {
       "id": "2026-08-30-stroke",
@@ -691,6 +687,26 @@
         "quick": "lessons/2026-09-20-foundation-engineering-quick.mp3",
         "more": "lessons/2026-09-20-foundation-engineering-more.mp3",
         "deep": "lessons/2026-09-20-foundation-engineering-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-09-21-anaphylaxis",
+      "date": "2026-09-21",
+      "domain": "Health and emergencies",
+      "title": "Recognizing and Responding to Anaphylaxis",
+      "hook": "Knowing the signs of a severe allergic reaction and how to respond can be life-saving, as this condition can worsen very quickly.",
+      "quick": "Anaphylaxis is a serious and potentially fatal allergic reaction that can progress rapidly, affecting more than one body system. This can quickly lead to severe symptoms such as an itchy rash, swelling that closes the throat or tongue, shortness of breath, vomiting, lightheadedness, or even loss of consciousness and low blood pressure. If someone experiences these symptoms, urgent medical treatment is required immediately to prevent serious harm or death. This is true even if the person has already used an epinephrine autoinjector or taken other medications, and even if their symptoms appear to be improving.",
+      "more": "Common triggers for anaphylaxis include insect bites and stings, certain foods like nuts, peanuts, milk, fish, and eggs, or specific medications such as some antibiotics and non-steroidal anti-inflammatory drugs. Physical exercise can also be a cause. The symptoms typically begin within minutes to hours, then increase very rapidly to life-threatening levels. Because of this rapid progression and the potential for severe outcomes, immediately contacting ambulance or EMT services is strongly recommended, regardless of any initial on-site treatment provided.",
+      "deep": "The reaction involves a rapidly escalating cascade where inflammatory mediators are released from certain white blood cells. While skin reactions like hives and itching are common, the symptoms often involve two or more body systems, indicating a systemic issue. Beyond skin symptoms, respiratory issues like wheezing or difficulty swallowing may occur, or cardiovascular effects such as a drop in blood pressure, leading to lightheadedness or even loss of consciousness. Gastrointestinal symptoms like severe abdominal pain and vomiting can also happen, along with a feeling of anxiety or impending doom. Anaphylaxis occurs most often in young people, and sometimes there is no obvious cause.",
+      "takeaway": "If you suspect someone is experiencing anaphylaxis, immediately contact ambulance or EMT services, as urgent medical attention is vital even if symptoms seem to improve.",
+      "source": {
+        "title": "Anaphylaxis",
+        "url": "https://en.wikipedia.org/wiki/Anaphylaxis"
+      },
+      "audio": {
+        "quick": "lessons/2026-09-21-anaphylaxis-quick.mp3",
+        "more": "lessons/2026-09-21-anaphylaxis-more.mp3",
+        "deep": "lessons/2026-09-21-anaphylaxis-deep.mp3"
       }
     }
   ],
