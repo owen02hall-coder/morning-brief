@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-21T11:21:32.157629-06:00",
+  "generated_at": "2026-09-22T09:54:21.869986-06:00",
   "lessons": [
     {
       "id": "2026-08-11-mortgage",
@@ -303,11 +303,7 @@
         "title": "Stroke",
         "url": "https://en.wikipedia.org/wiki/Stroke"
       },
-      "audio": {
-        "quick": "lessons/2026-08-30-stroke-quick.mp3",
-        "more": "lessons/2026-08-30-stroke-more.mp3",
-        "deep": "lessons/2026-08-30-stroke-deep.mp3"
-      }
+      "audio": {}
     },
     {
       "id": "2026-09-01-manipulation-psychology",
@@ -707,6 +703,26 @@
         "quick": "lessons/2026-09-21-anaphylaxis-quick.mp3",
         "more": "lessons/2026-09-21-anaphylaxis-more.mp3",
         "deep": "lessons/2026-09-21-anaphylaxis-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-09-22-data-and-information-visualization",
+      "date": "2026-09-22",
+      "domain": "Thinking and people",
+      "title": "How to spot misleading data visuals",
+      "hook": "Misleading charts and graphs can quietly shape your decisions without you even realizing it.",
+      "quick": "Poorly made or intentionally deceptive visual representations of data can spread misinformation, manipulate how people see things, and change public opinion. Many visual displays are designed to help you quickly understand complex information, spot trends, and make decisions, but not all of them are created with your best interest in mind. Some use visual elements not just to present numbers, but to tell a story, and this storytelling approach can be a powerful tool to convince an audience to take a specific action or make a decision. Because of this, learning to interpret visual data effectively is now as important as reading or basic math.",
+      "more": "To protect yourself from being misled, it is important to understand what makes a visualization effective and reliable. Effective data visualizations come from good sources, have appropriate context, and are presented simply and without clutter. The numbers used to create the visual should be accurate and current so that any insights you gain from them are trustworthy. The pictures, shapes, and colors used in the visual should be chosen carefully and used meaningfully without being distracting. Additionally, good visuals are supported by text, with both words and graphics working together to help you understand quickly and remember the key points clearly.",
+      "deep": "Visualizations are often created by combining principles from various fields, including graphic design and how people think and process information. This means they are both an art and a science, requiring design, statistical, and computing skills. However, research shows that people can both read and misread different types of visualizations. This understanding helps determine which visuals are most effective for clear communication. When a visualization is poor, whether by accident or on purpose, it can become a powerful way to spread false information or steer public opinion. It's crucial to remember that these tools are meant to help you explore and understand large amounts of information by using the human eye's ability to process visuals, but that same power can be used to lead you astray.",
+      "takeaway": "Before acting on information from a chart or graph, examine its source, look for supporting text, and check if the underlying data appears accurate and current.",
+      "source": {
+        "title": "Data and information visualization",
+        "url": "https://en.wikipedia.org/wiki/Data_and_information_visualization"
+      },
+      "audio": {
+        "quick": "lessons/2026-09-22-data-and-information-visualization-quick.mp3",
+        "more": "lessons/2026-09-22-data-and-information-visualization-more.mp3",
+        "deep": "lessons/2026-09-22-data-and-information-visualization-deep.mp3"
       }
     }
   ],
