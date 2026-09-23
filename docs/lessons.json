@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-22T09:54:21.869986-06:00",
+  "generated_at": "2026-09-23T09:44:02.613845-06:00",
   "lessons": [
     {
       "id": "2026-08-11-mortgage",
@@ -319,11 +319,7 @@
         "title": "Manipulation (psychology)",
         "url": "https://en.wikipedia.org/wiki/Manipulation_(psychology)"
       },
-      "audio": {
-        "quick": "lessons/2026-09-01-manipulation-psychology-quick.mp3",
-        "more": "lessons/2026-09-01-manipulation-psychology-more.mp3",
-        "deep": "lessons/2026-09-01-manipulation-psychology-deep.mp3"
-      }
+      "audio": {}
     },
     {
       "id": "2026-09-02-tax-deduction",
@@ -723,6 +719,26 @@
         "quick": "lessons/2026-09-22-data-and-information-visualization-quick.mp3",
         "more": "lessons/2026-09-22-data-and-information-visualization-more.mp3",
         "deep": "lessons/2026-09-22-data-and-information-visualization-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-09-23-health-savings-account",
+      "date": "2026-09-23",
+      "domain": "Money mechanics",
+      "title": "Understanding Health Savings Accounts",
+      "hook": "Understanding how a health savings account works can offer significant tax advantages for managing your health care expenses.",
+      "quick": "Managing medical costs can be a challenge, especially when faced with unexpected expenses. One approach that can make health care more complex, but also offers a tax advantage, involves pairing your insurance with a health savings account, or HSA. An HSA is only available to those enrolled in a high-deductible health plan. This type of plan means you pay more out-of-pocket before your insurance coverage begins to cover costs. However, money you contribute to an HSA is not subject to federal income tax when deposited, giving you an immediate tax benefit. Unlike some other savings accounts for health costs, HSA funds roll over from year to year, allowing them to accumulate over time.",
+      "more": "These accumulated HSA funds can be used to pay for qualified medical expenses at any time without federal tax liability or penalty. This means you can save up your contributions and use them for doctor visits, prescriptions, and other approved medical costs whenever needed, potentially years later. For example, over-the-counter medications that previously needed a doctor's prescription for HSA payment can now be paid for with HSA funds directly. This flexibility is a key difference from other types of health spending accounts which often have a \"use it or lose it\" rule. Crucially, these accounts are owned by the individual, so they remain with you even if you change employers, continuing to roll over and accumulate.",
+      "deep": "While HSAs offer compelling tax benefits, they tie directly into your health insurance choice. They are part of a consumer-driven health care approach where individuals are expected to take more responsibility for their health care decisions due to the high-deductible requirement. This structure can complicate the decision to seek medical treatment, as it involves weighing immediate health needs against the tax implications of withdrawing funds and long-term saving goals. It\u2019s important to note that a significant portion of individuals who are eligible for HSAs through their high-deductible plans do not actually open the associated health savings accounts. Additionally, tax filers who report activity in these accounts tend to have higher average incomes than other tax filers. Withdrawals for non-medical expenses before retirement age are subject to penalties, similar to some retirement accounts.",
+      "takeaway": "Check your employer's health insurance options to see if a high-deductible health plan is offered, as this is a requirement to open and contribute to a health savings account.",
+      "source": {
+        "title": "Health savings account",
+        "url": "https://en.wikipedia.org/wiki/Health_savings_account"
+      },
+      "audio": {
+        "more": "lessons/2026-09-23-health-savings-account-more.mp3",
+        "deep": "lessons/2026-09-23-health-savings-account-deep.mp3",
+        "quick": "lessons/2026-09-23-health-savings-account-quick.mp3"
       }
     }
   ],
