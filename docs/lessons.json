@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-24T10:05:28.264182-06:00",
+  "generated_at": "2026-09-25T10:05:39.553024-06:00",
   "lessons": [
     {
       "id": "2026-08-11-mortgage",
@@ -351,11 +351,7 @@
         "title": "Tire",
         "url": "https://en.wikipedia.org/wiki/Tire"
       },
-      "audio": {
-        "quick": "lessons/2026-09-03-tire-quick.mp3",
-        "more": "lessons/2026-09-03-tire-more.mp3",
-        "deep": "lessons/2026-09-03-tire-deep.mp3"
-      }
+      "audio": {}
     },
     {
       "id": "2026-09-04-myocardial-infarction",
@@ -756,6 +752,22 @@
         "deep": "lessons/2026-09-24-drain-plumbing-deep.mp3",
         "more": "lessons/2026-09-24-drain-plumbing-more.mp3"
       }
+    },
+    {
+      "id": "2026-09-25-appendicitis",
+      "date": "2026-09-25",
+      "domain": "Health and emergencies",
+      "title": "Sudden Abdominal Pain Can Signal Appendicitis",
+      "hook": "Severe abdominal pain might mean your appendix needs immediate medical attention to prevent dangerous complications.",
+      "quick": "Appendicitis is a common cause of sudden, severe abdominal pain that often requires surgery. While typical symptoms include pain in the lower right abdomen, nausea, vomiting, and fever, about 40% of people don't experience these classic signs. The pain can start as a dull ache near the navel and then migrate to the lower right side, becoming sharp and tender to the touch. Sometimes, even pressing on the area or releasing pressure quickly causes significant pain. It's crucial to seek medical help if you develop sudden, intense abdominal pain, as untreated appendicitis can lead to a ruptured appendix. A rupture releases bacteria into the abdominal cavity, causing widespread inflammation and potentially life-threatening sepsis.",
+      "more": "A ruptured appendix is a serious medical emergency that can have severe consequences. When the appendix bursts, it spills infectious material into the entire abdominal cavity, leading to a painful and widespread inflammation of the abdominal lining called peritonitis. This can quickly progress to sepsis, a dangerous body-wide response to infection that can cause organ damage and even death. While antibiotics can sometimes treat non-ruptured appendicitis, surgery to remove the appendix is often essential to prevent these severe complications. Annually, over 300,000 people in the United States undergo this surgery, highlighting how common and significant it is.",
+      "deep": "The underlying cause of appendicitis is typically a blockage in the hollow part of the appendix. This obstruction is often caused by a hardened piece of stool, known as a fecalith or appendicolith. Other causes can include inflamed tissue from an infection, parasites, gallstones, or tumors. When the appendix is blocked, pressure builds up inside, blood flow is reduced, and bacteria multiply, leading to inflammation and tissue death. If this process isn't stopped, the appendix can rupture. Interestingly, some studies suggest a link between a diet low in fiber and an increased frequency of appendicitis, possibly due to slower digestion and stool movement which can contribute to blockages. The appendix's location can also affect symptoms; if it's behind the main part of the large intestine or within the pelvis, tenderness might not be felt in the usual spot, making diagnosis trickier.",
+      "takeaway": "See a doctor immediately for sudden, severe abdominal pain, especially if it's migrating to the lower right side.",
+      "source": {
+        "title": "Appendicitis",
+        "url": "https://en.wikipedia.org/wiki/Appendicitis"
+      },
+      "audio": {}
     }
   ],
   "outro": "lessons/outro.mp3"
