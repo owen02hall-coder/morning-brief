@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-25T10:05:39.553024-06:00",
+  "generated_at": "2026-09-26T09:19:24.693333-06:00",
   "lessons": [
     {
       "id": "2026-08-11-mortgage",
@@ -367,11 +367,7 @@
         "title": "Myocardial infarction",
         "url": "https://en.wikipedia.org/wiki/Myocardial_infarction"
       },
-      "audio": {
-        "quick": "lessons/2026-09-04-myocardial-infarction-quick.mp3",
-        "more": "lessons/2026-09-04-myocardial-infarction-more.mp3",
-        "deep": "lessons/2026-09-04-myocardial-infarction-deep.mp3"
-      }
+      "audio": {}
     },
     {
       "id": "2026-09-05-social-engineering-security",
@@ -767,7 +763,30 @@
         "title": "Appendicitis",
         "url": "https://en.wikipedia.org/wiki/Appendicitis"
       },
-      "audio": {}
+      "audio": {
+        "quick": "lessons/2026-09-25-appendicitis-quick.mp3",
+        "more": "lessons/2026-09-25-appendicitis-more.mp3"
+      }
+    },
+    {
+      "id": "2026-09-26-bait-and-switch",
+      "date": "2026-09-26",
+      "domain": "Thinking and people",
+      "title": "Protecting Yourself from Tricky Sales Tactics",
+      "hook": "Aggressive sales tactics can cost you money or leave you with a product that isn't what you wanted.",
+      "quick": "Have you ever been lured by an incredibly low price on an advertised item, only to find it unavailable when you went to buy it? This common tactic is called bait-and-switch, and it can leave you spending more than you planned. A merchant first advertises a product or service at an attractive, low price to 'bait' you in. But when you arrive, that specific item is suddenly out of stock, or perhaps was never truly available. The goal is not to sell you the advertised item, but to 'switch' you to a similar, more expensive product, or one of lower quality at a similar price. The seller expects to earn a higher profit margin on this substituted item, banking on your disappointment or inconvenience to make you accept a less desirable alternative rather than walk away empty-handed.",
+      "more": "While this tactic feels dishonest, it isn't always illegal. In the United States, a seller might avoid legal issues if they can actually sell the advertised goods, even if they strongly push you toward a different product. Similarly, advertising a sale on an item they know will sell out quickly, often called a 'loss-leader,' is permissible. The key is whether they make it clear in their advertisements that quantities are limited or if they offer a rain check for items that are sold out. Without these disclosures, the purveyor could face lawsuits for false advertising from customers or even trademark infringement from competing manufacturers if they profit from the original product used as bait.",
+      "deep": "This tactic appears in many places beyond just retail stores. Car dealerships, for instance, are known to advertise vehicles online at what seems like a bargain price. Once you arrive, you might discover that specific car is no longer available, leading them to pressure you into purchasing a different vehicle, or even adding many additional fees to the initially advertised price when you're close to closing a sale. Online, a seller might show a desired item in a photograph, secure your purchase, but then ship a cheaper copy or sometimes even just a picture of the item. The underlying intention is to make you feel like you\u2019ve already invested time and effort, your \u2018sunk cost,\u2019 making you more likely to accept a substitute rather than abandoning the entire process and feeling your time was wasted.",
+      "takeaway": "Before committing to a purchase, confirm the specific details and availability of any advertised item, especially if it seems like an unusually good deal.",
+      "source": {
+        "title": "Bait-and-switch",
+        "url": "https://en.wikipedia.org/wiki/Bait-and-switch"
+      },
+      "audio": {
+        "quick": "lessons/2026-09-26-bait-and-switch-quick.mp3",
+        "more": "lessons/2026-09-26-bait-and-switch-more.mp3",
+        "deep": "lessons/2026-09-26-bait-and-switch-deep.mp3"
+      }
     }
   ],
   "outro": "lessons/outro.mp3"
