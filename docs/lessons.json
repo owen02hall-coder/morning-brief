@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-26T09:19:24.693333-06:00",
+  "generated_at": "2026-09-27T09:57:54.430393-06:00",
   "lessons": [
     {
       "id": "2026-08-11-mortgage",
@@ -383,11 +383,7 @@
         "title": "Social engineering (security)",
         "url": "https://en.wikipedia.org/wiki/Social_engineering_(security)"
       },
-      "audio": {
-        "quick": "lessons/2026-09-05-social-engineering-security-quick.mp3",
-        "more": "lessons/2026-09-05-social-engineering-security-more.mp3",
-        "deep": "lessons/2026-09-05-social-engineering-security-deep.mp3"
-      }
+      "audio": {}
     },
     {
       "id": "2026-09-06-closing-costs",
@@ -765,7 +761,8 @@
       },
       "audio": {
         "quick": "lessons/2026-09-25-appendicitis-quick.mp3",
-        "more": "lessons/2026-09-25-appendicitis-more.mp3"
+        "more": "lessons/2026-09-25-appendicitis-more.mp3",
+        "deep": "lessons/2026-09-25-appendicitis-deep.mp3"
       }
     },
     {
@@ -786,6 +783,26 @@
         "quick": "lessons/2026-09-26-bait-and-switch-quick.mp3",
         "more": "lessons/2026-09-26-bait-and-switch-more.mp3",
         "deep": "lessons/2026-09-26-bait-and-switch-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-09-27-annual-percentage-rate",
+      "date": "2026-09-27",
+      "domain": "Money mechanics",
+      "title": "Understanding Your Loan's True Cost",
+      "hook": "Comparing loans can seem straightforward, but a single percentage might hide the true cost of borrowing.",
+      "quick": "If you are comparing loan offers, looking only at the advertised interest rate can be deceptive, making one loan appear cheaper than it actually is. The Annual Percentage Rate, or APR, is designed to show the interest rate for a whole year, plus finance charges, to help you compare. However, some lenders might quote a nominal APR, which is a simple interest rate. The more comprehensive figure is the effective APR, which includes compound interest and certain fees, giving you a truer picture of the cost over time. The challenge is that the calculation of this effective APR can vary significantly depending on what fees are included.",
+      "more": "The difference in how effective APR is calculated means that even if two loans have similar nominal rates, their actual cost to you can differ greatly. This often comes down to how upfront charges, such as loan origination fees or participation fees, are handled. One method might add these fees to the total loan balance before computing compound interest, while another might treat these fees as a separate short-term loan due in your initial payments. When these start-up fees are paid as first payment, the balance due might accrue more interest, as being delayed by the extra payment periods. This variability can lead to vastly different effective APRs for what seems like a similar loan.",
+      "deep": "In the United States, the Truth in Lending Act requires lenders to disclose the APR within 3 days of applying for a mortgage. This crucial figure, along with an amortization schedule, appears on your truth in lending disclosure statement. For a mortgage, the APR includes the periodic interest rate multiplied by the number of compounding periods in a year, plus certain non-interest charges. It's important to know that if the final APR on your mortgage changes by more than 0.125% from what was initially disclosed, the lender must re-disclose the terms, and you will have to wait another three business days before you can close on the transaction. This rule is in place to give you time to consider the updated costs.",
+      "takeaway": "Before committing to a loan, carefully examine the loan's truth in lending disclosure statement to understand exactly which fees are included in the APR calculation.",
+      "source": {
+        "title": "Annual percentage rate",
+        "url": "https://en.wikipedia.org/wiki/Annual_percentage_rate"
+      },
+      "audio": {
+        "quick": "lessons/2026-09-27-annual-percentage-rate-quick.mp3",
+        "more": "lessons/2026-09-27-annual-percentage-rate-more.mp3",
+        "deep": "lessons/2026-09-27-annual-percentage-rate-deep.mp3"
       }
     }
   ],
