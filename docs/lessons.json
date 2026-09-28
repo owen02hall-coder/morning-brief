@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-27T09:57:54.430393-06:00",
+  "generated_at": "2026-09-28T12:54:29.494707-06:00",
   "lessons": [
     {
       "id": "2026-08-11-mortgage",
@@ -399,11 +399,7 @@
         "title": "Closing costs",
         "url": "https://en.wikipedia.org/wiki/Closing_costs"
       },
-      "audio": {
-        "more": "lessons/2026-09-06-closing-costs-more.mp3",
-        "deep": "lessons/2026-09-06-closing-costs-deep.mp3",
-        "quick": "lessons/2026-09-06-closing-costs-quick.mp3"
-      }
+      "audio": {}
     },
     {
       "id": "2026-09-07-automotive-battery",
@@ -803,6 +799,26 @@
         "quick": "lessons/2026-09-27-annual-percentage-rate-quick.mp3",
         "more": "lessons/2026-09-27-annual-percentage-rate-more.mp3",
         "deep": "lessons/2026-09-27-annual-percentage-rate-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-09-28-service-motor-vehicle",
+      "date": "2026-09-28",
+      "domain": "Home, car and repair",
+      "title": "Keeping Your Car Running Well",
+      "hook": "Without regular attention, your car can become unsafe to drive, fail inspections, and even lose value.",
+      "quick": "Not regularly servicing a car can lead to parts failing or operating outside normal conditions, potentially making the vehicle unsafe for the road. Manufacturers provide a service schedule, recommending maintenance procedures at set time intervals or after certain distances, to keep the engine running as it should. Neglecting this maintenance can also mean your car might not pass required safety inspection tests in many states, which can lead to fines for continuing to drive a car that has failed.",
+      "more": "These maintenance tasks usually involve visually inspecting vehicle components for wear or leaks, and performing diagnostics to identify electrical failures or parts operating outside of normal conditions. Manufacturers recommend replacing certain lubricants that break down over time due to heat and wear, along with any parts nearing their expected failure to avoid issues while operating the vehicle. Some components may also need adjustment as they wear, such as a parking brake cable. A complete service history, usually recorded in a service book or digital record, also typically adds to the resale value of a vehicle.",
+      "deep": "There are different levels of service, such as a major service, which is more comprehensive than a full service. A major service includes all the checks of a full service but with more detailed inspections and replacements of additional wearable parts like pollen filters and brake fluid if required. As a guideline, minor services are often carried out every 6,200 to 9,300 miles, or every twelve months, whichever comes first, while major services are suggested every 19,000 to 28,000 miles. However, the actual schedule varies based on factors like the car's year, make, and model, as well as driving conditions such as extreme climate, heavy stop-and-go traffic, or towing heavy loads. Service advisors can help determine appropriate schedule intervals based on these impact parameters.",
+      "takeaway": "Review your car's service schedule from the vehicle manufacturer to understand the recommended maintenance intervals based on mileage, time, and your typical driving conditions.",
+      "source": {
+        "title": "Service (motor vehicle)",
+        "url": "https://en.wikipedia.org/wiki/Service_(motor_vehicle)"
+      },
+      "audio": {
+        "quick": "lessons/2026-09-28-service-motor-vehicle-quick.mp3",
+        "more": "lessons/2026-09-28-service-motor-vehicle-more.mp3",
+        "deep": "lessons/2026-09-28-service-motor-vehicle-deep.mp3"
       }
     }
   ],
