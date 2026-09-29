@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-28T12:54:29.494707-06:00",
+  "generated_at": "2026-09-29T11:12:42.400159-06:00",
   "lessons": [
     {
       "id": "2026-08-11-mortgage",
@@ -415,11 +415,7 @@
         "title": "Automotive battery",
         "url": "https://en.wikipedia.org/wiki/Automotive_battery"
       },
-      "audio": {
-        "quick": "lessons/2026-09-07-automotive-battery-quick.mp3",
-        "more": "lessons/2026-09-07-automotive-battery-more.mp3",
-        "deep": "lessons/2026-09-07-automotive-battery-deep.mp3"
-      }
+      "audio": {}
     },
     {
       "id": "2026-09-08-dehydration",
@@ -819,6 +815,26 @@
         "quick": "lessons/2026-09-28-service-motor-vehicle-quick.mp3",
         "more": "lessons/2026-09-28-service-motor-vehicle-more.mp3",
         "deep": "lessons/2026-09-28-service-motor-vehicle-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-09-29-carbon-monoxide-poisoning",
+      "date": "2026-09-29",
+      "domain": "Health and emergencies",
+      "title": "Carbon Monoxide Poisoning Risks and Prevention",
+      "hook": "Misdiagnosing common symptoms of carbon monoxide poisoning can have severe, even fatal, consequences.",
+      "quick": "Carbon monoxide poisoning can lead to loss of consciousness, seizures, or even death, and is responsible for more than 400 non-fire related deaths in the United States each year. It happens from breathing in too much carbon monoxide, a gas that has no color or odor and doesn't irritate. People often mistake the early signs for the flu, food poisoning, or another illness because symptoms commonly include headache, dizziness, weakness, vomiting, chest pain, and confusion. The most common acute symptom is a dull, continuous headache. Poisonings happen more often in winter, especially when people use portable generators during power outages. If you suspect carbon monoxide poisoning, it's an emergency, and emergency services are the answer.",
+      "more": "Carbon monoxide causes harm by combining with hemoglobin in the blood, which stops your blood from carrying oxygen and expelling carbon dioxide effectively. This interference with oxygen transport is why the body's most oxygen-dependent systems, like the central nervous system and the heart, are most affected. Increasing exposure can lead to a fast heart rate, low blood pressure, and irregular heart rhythms, along with severe confusion and eventually respiratory arrest. Long-term effects can include chronic fatigue and problems with memory. To help prevent this danger, make sure you have carbon monoxide detectors in your home. It is also important to properly vent gas appliances and keep chimneys clean.",
+      "deep": "Beyond detectors, also keep your vehicle's exhaust system in good repair, as motor vehicles are another source of carbon monoxide produced by incomplete burning of fuel. In general, exposures at 100 parts per million or greater are considered dangerous to human health. When diagnosis is made, it is typically based on a specific level of carboxyhemoglobin, which is the product of carbon monoxide binding with hemoglobin. For non-smokers, a level of more than 3% indicates poisoning, while for smokers, it is more than 10%. Toxicity is consistently observed at levels exceeding 15% carboxyhemoglobin, and 30% is generally considered severe carbon monoxide poisoning. If poisoning is diagnosed, treatment often involves giving 100% oxygen and supportive care until symptoms are gone and the carboxyhemoglobin level drops below 3% for non-smokers or 10% for smokers.",
+      "takeaway": "Install carbon monoxide detectors in your home and regularly check that gas appliances are properly vented and chimneys are clean.",
+      "source": {
+        "title": "Carbon monoxide poisoning",
+        "url": "https://en.wikipedia.org/wiki/Carbon_monoxide_poisoning"
+      },
+      "audio": {
+        "quick": "lessons/2026-09-29-carbon-monoxide-poisoning-quick.mp3",
+        "more": "lessons/2026-09-29-carbon-monoxide-poisoning-more.mp3",
+        "deep": "lessons/2026-09-29-carbon-monoxide-poisoning-deep.mp3"
       }
     }
   ],
