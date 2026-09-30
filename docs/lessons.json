@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-29T11:12:42.400159-06:00",
+  "generated_at": "2026-09-30T11:10:43.922011-06:00",
   "lessons": [
     {
       "id": "2026-08-11-mortgage",
@@ -431,11 +431,7 @@
         "title": "Dehydration",
         "url": "https://en.wikipedia.org/wiki/Dehydration"
       },
-      "audio": {
-        "quick": "lessons/2026-09-08-dehydration-quick.mp3",
-        "more": "lessons/2026-09-08-dehydration-more.mp3",
-        "deep": "lessons/2026-09-08-dehydration-deep.mp3"
-      }
+      "audio": {}
     },
     {
       "id": "2026-09-09-dark-pattern",
@@ -835,6 +831,26 @@
         "quick": "lessons/2026-09-29-carbon-monoxide-poisoning-quick.mp3",
         "more": "lessons/2026-09-29-carbon-monoxide-poisoning-more.mp3",
         "deep": "lessons/2026-09-29-carbon-monoxide-poisoning-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-09-30-misuse-of-statistics",
+      "date": "2026-09-30",
+      "domain": "Thinking and people",
+      "title": "How to spot misleading statistics",
+      "hook": "Misleading statistics can trick you into believing falsehoods, sometimes with severe consequences for real-world decisions.",
+      "quick": "Misleading statistics can trick us into believing falsehoods, sometimes with serious consequences. In medicine, correcting a falsehood can take decades and cost lives, while in society, it can distort public understanding and lead to harmful policies. Even professional scientists, mathematicians, and statisticians can be fooled by these misuses, sometimes accidentally due to gaps in their own understanding of probability or a lack of standardized tests. The problem isn't always intentional deception; sometimes it's just ignorance or carelessness in how numbers are presented, leading to conclusions that aren't actually justified by the data. These misinterpretations happen when statistical arguments assert something that isn't true.",
+      "more": "Part of the challenge is that statistics typically provide provisional conclusions, which inherently come with errors and error rates. For example, about 5% of these provisional conclusions from significance testing are simply wrong, even when the methods are applied correctly. Statistical methods also rely on specific assumptions that are rarely met completely in the real world, and gathering data is often limited by ethical, practical, or financial constraints. This complexity means that even when the numbers themselves are provided, people can draw conclusions that are unjustified or incorrect, especially given that common human intuition isn't always statistically sound.",
+      "deep": "Many misinterpretations arise because the person providing the data might be an expert in the subject, but not in statistics, leading them to use methods incorrectly or misinterpret results. Conversely, a statistician might not fully grasp the subject matter, comparing numbers that describe fundamentally different things, especially when legal definitions or political boundaries change over time. It's also common for the subject being studied to be poorly defined, or for aspects to be easy to quantify while others are not, like trying to measure \"intelligence\" or \"publishing impact.\" Even seemingly objective numbers like clothing sizes can be misleading due to poor data quality, varying by manufacturer and country, making simple statistical analysis difficult without careful consideration. The popular press and advertisers also contribute, often having limited expertise and mixed motives, sometimes exaggerating facts to make them \"newsworthy.\"",
+      "takeaway": "When encountering statistics, always consider whether the source is an expert in both the subject and statistical methods, and look for what context or assumptions might be missing from the presented numbers.",
+      "source": {
+        "title": "Misuse of statistics",
+        "url": "https://en.wikipedia.org/wiki/Misuse_of_statistics"
+      },
+      "audio": {
+        "quick": "lessons/2026-09-30-misuse-of-statistics-quick.mp3",
+        "more": "lessons/2026-09-30-misuse-of-statistics-more.mp3",
+        "deep": "lessons/2026-09-30-misuse-of-statistics-deep.mp3"
       }
     }
   ],
