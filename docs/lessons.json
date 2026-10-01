@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-30T11:10:43.922011-06:00",
+  "generated_at": "2026-10-01T11:40:14.131229-06:00",
   "lessons": [
     {
       "id": "2026-08-11-mortgage",
@@ -447,11 +447,7 @@
         "title": "Dark pattern",
         "url": "https://en.wikipedia.org/wiki/Dark_pattern"
       },
-      "audio": {
-        "quick": "lessons/2026-09-09-dark-pattern-quick.mp3",
-        "more": "lessons/2026-09-09-dark-pattern-more.mp3",
-        "deep": "lessons/2026-09-09-dark-pattern-deep.mp3"
-      }
+      "audio": {}
     },
     {
       "id": "2026-09-10-amortization-accounting",
@@ -851,6 +847,26 @@
         "quick": "lessons/2026-09-30-misuse-of-statistics-quick.mp3",
         "more": "lessons/2026-09-30-misuse-of-statistics-more.mp3",
         "deep": "lessons/2026-09-30-misuse-of-statistics-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-10-01-lenders-mortgage-insurance",
+      "date": "2026-10-01",
+      "domain": "Money mechanics",
+      "title": "Paying for Private Mortgage Insurance",
+      "hook": "Paying for private mortgage insurance can add a significant cost to your monthly mortgage payment without directly benefiting you.",
+      "quick": "When you buy a home with a mortgage, you might find yourself paying for an extra type of insurance known as private mortgage insurance, or PMI. This insurance is not for your benefit, but rather protects your lender if you can't repay your loan and they can't recover their costs after a foreclosure. Typically, lenders require PMI if your down payment is less than 20% of the home's value, meaning you're financing 80% or more. The yearly cost of PMI can vary based on factors like the loan term, loan type, and the portion of the home value being financed. These premiums can be paid monthly, annually, or sometimes even up front or capitalized into the loan itself.",
+      "more": "Once you've paid down your loan principal so it represents 80% or less of the home's original value, lenders often no longer require PMI on conventional loans. This reduction can happen either by making regular payments that decrease your principal balance, or through your home's value increasing, or a combination of both. The financial savings from removing PMI can be considerable, effectively reducing your overall borrowing cost. However, some loans, like FHA loans, often require you to refinance the entire loan to remove PMI, even after your equity stake grows. It's also worth knowing that some \"No MI Required\" loans actually have lender-paid mortgage insurance, which is funded through a higher interest rate on your loan, so you're still paying for it indirectly.",
+      "deep": "Lenders might sometimes require PMI for a fixed period, like 2 or 3 years, even if your principal reaches 80% sooner. Legally, the lender is not obligated to allow cancellation of PMI until the loan principal has amortized to a 78% loan-to-value ratio based on the original purchase price. To remove it, the cancellation request must come from your mortgage servicer to the insurance company. Often, the servicer will ask for a new appraisal to confirm the current loan-to-value. If a full 20% down payment isn't feasible, another option to avoid PMI is using a second mortgage, sometimes called a \"piggy-back loan.\" Arrangements like the 80/10/10 or 80/15/5 involve taking a primary mortgage for 80% of the home value and a second mortgage for a smaller portion, reducing the need for PMI. Mortgage interest payments on these loans could be deductible for income taxes, which historically offered an advantage over mortgage insurance premiums, which were tax deductible for some homeowners earning up to $109,000 annually from 2007 through 2021, but not for 2022.",
+      "takeaway": "Before agreeing to a mortgage, ask your lender for the specific conditions under which private mortgage insurance will be required, how it can be removed, and if \"piggy-back\" loan options are available.",
+      "source": {
+        "title": "Lenders mortgage insurance",
+        "url": "https://en.wikipedia.org/wiki/Lenders_mortgage_insurance"
+      },
+      "audio": {
+        "quick": "lessons/2026-10-01-lenders-mortgage-insurance-quick.mp3",
+        "more": "lessons/2026-10-01-lenders-mortgage-insurance-more.mp3",
+        "deep": "lessons/2026-10-01-lenders-mortgage-insurance-deep.mp3"
       }
     }
   ],
