@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-01T11:40:14.131229-06:00",
+  "generated_at": "2026-10-02T10:59:22.912547-06:00",
   "lessons": [
     {
       "id": "2026-08-11-mortgage",
@@ -463,11 +463,7 @@
         "title": "Amortization (accounting)",
         "url": "https://en.wikipedia.org/wiki/Amortization_(accounting)"
       },
-      "audio": {
-        "quick": "lessons/2026-09-10-amortization-accounting-quick.mp3",
-        "more": "lessons/2026-09-10-amortization-accounting-more.mp3",
-        "deep": "lessons/2026-09-10-amortization-accounting-deep.mp3"
-      }
+      "audio": {}
     },
     {
       "id": "2026-09-12-toilet",
@@ -867,6 +863,26 @@
         "quick": "lessons/2026-10-01-lenders-mortgage-insurance-quick.mp3",
         "more": "lessons/2026-10-01-lenders-mortgage-insurance-more.mp3",
         "deep": "lessons/2026-10-01-lenders-mortgage-insurance-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-10-02-smoke-detector",
+      "date": "2026-10-02",
+      "domain": "Home, car and repair",
+      "title": "Smoke Detector Types",
+      "hook": "A smoke detector can save your life, but the wrong type in the wrong place might not alert you fast enough.",
+      "quick": "Smoke detectors are designed to sense smoke, usually as a sign of fire. They generally sound an audible alarm or flash a light to alert you. Many homes use interconnected units, meaning if one alarm detects smoke, all of them will sound, even if the power is out. These alarms are typically powered by batteries, like a 9-volt, or by being wired into your home's electricity, often with a battery backup. While the risk of dying in a home fire is cut in half with working smoke detectors, it's important to know that not all detectors are suited for every location. For instance, a kitchen might be better suited for a heat detector rather than a smoke detector.",
+      "more": "There are two main ways smoke detectors sense smoke: optically, using light, or by ionization, which relies on a physical process. Optical detectors use a light source and a sensor. In some designs, smoke entering a chamber scatters the light, hitting the sensor and triggering the alarm. In other types, particularly those used in large open spaces, a beam of light is sent across the area, and when smoke particles block or scatter the beam, the sensor detects the change and alarms. Ionization detectors, on the other hand, work by monitoring a small electric current. When smoke particles enter the detector's chamber, they interfere with this current, causing the alarm to sound. Both types are effective, but they react differently to various types of fires.",
+      "deep": "The type of smoke detector technology can affect how quickly it responds to different kinds of fires. Ionization alarms tend to react faster to fast-flaming fires, which produce smaller particles. Photoelectric alarms, which use light, are generally quicker to detect slow, smoldering fires that create larger smoke particles. Because some fires can start slow and become fast, or vice versa, many modern detectors use both sensing methods to provide broader protection. If you have a detector that only uses one method, placing it strategically is even more important. For example, while a heat detector is better for a kitchen where cooking fumes might trigger a smoke alarm, an ionization detector might be faster for a bedroom where a smoldering electrical fire could ignite.",
+      "takeaway": "Check your smoke detectors to see if they are ionization, photoelectric, or dual-sensor models, and ensure they are placed appropriately for the types of fires they best detect.",
+      "source": {
+        "title": "Smoke detector",
+        "url": "https://en.wikipedia.org/wiki/Smoke_detector"
+      },
+      "audio": {
+        "quick": "lessons/2026-10-02-smoke-detector-quick.mp3",
+        "more": "lessons/2026-10-02-smoke-detector-more.mp3",
+        "deep": "lessons/2026-10-02-smoke-detector-deep.mp3"
       }
     }
   ],
