@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-02T10:59:22.912547-06:00",
+  "generated_at": "2026-10-03T09:22:56.398915-06:00",
   "lessons": [
     {
       "id": "2026-08-11-mortgage",
@@ -479,11 +479,7 @@
         "title": "Toilet",
         "url": "https://en.wikipedia.org/wiki/Toilet"
       },
-      "audio": {
-        "quick": "lessons/2026-09-12-toilet-quick.mp3",
-        "more": "lessons/2026-09-12-toilet-more.mp3",
-        "deep": "lessons/2026-09-12-toilet-deep.mp3"
-      }
+      "audio": {}
     },
     {
       "id": "2026-09-13-burn",
@@ -883,6 +879,26 @@
         "quick": "lessons/2026-10-02-smoke-detector-quick.mp3",
         "more": "lessons/2026-10-02-smoke-detector-more.mp3",
         "deep": "lessons/2026-10-02-smoke-detector-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-10-03-concussion",
+      "date": "2026-10-03",
+      "domain": "Health and emergencies",
+      "title": "Recognizing and Responding to a Concussion",
+      "hook": "A common head injury can temporarily disrupt your life, making simple tasks difficult and potentially leading to serious long-term issues if not handled correctly.",
+      "quick": "A head injury can suddenly disrupt your ability to think clearly, focus, or even maintain your balance, making it difficult to return to work or other daily activities for days or weeks. If you hit your head, symptoms like a headache, dizziness, or trouble concentrating might appear immediately, or they could be delayed by one to two days. These temporary changes to brain functioning, often called a concussion, require attention. It is critical to suspect a concussion if any symptoms follow a head impact, because these signs indicate a temporary effect on your brain. Ignoring these signs can prolong recovery, and getting another concussion before the first one has fully resolved is associated with worse outcomes, increasing risks for later life.",
+      "more": "Common causes for concussions include motor vehicle collisions, falls, and bicycle accidents. While many people think of severe blows, even forces elsewhere on the body transmitted to the head can cause this injury. A thorough evaluation by a qualified medical provider, such as a physician or nurse practitioner, is required to rule out more serious, life-threatening head injuries, as well as neck injuries or other neurological conditions. Though diagnostic imaging like a CT scan or MRI may be used to exclude severe head injuries, routine imaging is typically normal after a concussion and is not needed for diagnosis. Initial treatment often involves relative rest, but for no more than one to two days.",
+      "deep": "Instead of prolonged rest, active recovery through prescribed aerobic exercise to increase heart rate, and a gradual step-wise return to activities, school, and work, may improve recovery. Extended periods of rest, in fact, can actually slow healing and contribute to greater depression and anxiety. Symptoms in adults often last about two weeks, but for up to one-third of people, they can persist for more than fourteen days, which is known as persisting symptoms after concussion. This occurs because the injury temporarily affects neuron function, increasing glucose needs without enough blood supply. The severity of the initial symptoms is the strongest predictor of an adult's recovery time. Repeated concussions may also increase the risk of conditions like chronic traumatic encephalopathy, Parkinson's disease, and depression in later life.",
+      "takeaway": "Seek a medical evaluation from a qualified provider promptly after any head impact that causes symptoms like headache, dizziness, or confusion, even if they appear a day or two later.",
+      "source": {
+        "title": "Concussion",
+        "url": "https://en.wikipedia.org/wiki/Concussion"
+      },
+      "audio": {
+        "quick": "lessons/2026-10-03-concussion-quick.mp3",
+        "more": "lessons/2026-10-03-concussion-more.mp3",
+        "deep": "lessons/2026-10-03-concussion-deep.mp3"
       }
     }
   ],
