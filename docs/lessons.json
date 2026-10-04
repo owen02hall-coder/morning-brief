@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-03T09:22:56.398915-06:00",
+  "generated_at": "2026-10-04T10:07:24.573883-06:00",
   "lessons": [
     {
       "id": "2026-08-11-mortgage",
@@ -495,11 +495,7 @@
         "title": "Burn",
         "url": "https://en.wikipedia.org/wiki/Burn"
       },
-      "audio": {
-        "quick": "lessons/2026-09-13-burn-quick.mp3",
-        "more": "lessons/2026-09-13-burn-more.mp3",
-        "deep": "lessons/2026-09-13-burn-deep.mp3"
-      }
+      "audio": {}
     },
     {
       "id": "2026-09-14-informal-fallacy",
@@ -899,6 +895,26 @@
         "quick": "lessons/2026-10-03-concussion-quick.mp3",
         "more": "lessons/2026-10-03-concussion-more.mp3",
         "deep": "lessons/2026-10-03-concussion-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-10-04-information-asymmetry",
+      "date": "2026-10-04",
+      "domain": "Thinking and people",
+      "title": "Unequal Information Harms Transactions",
+      "hook": "When you're making a big decision, what one party knows more than the other can cost you money or lead to a bad deal.",
+      "quick": "You might pay too much or miss out on a better outcome because of what one party knows and the other doesn't. This happens when one side in a transaction has more or better information than the other, creating an imbalance of power. For instance, a used car seller usually understands the vehicle's true condition much better than a potential buyer. This superior knowledge means the transaction will more likely favor the seller, making the exchange less efficient and potentially causing the buyer to get a less valuable deal. In the worst cases, this kind of information gap can even lead to market failure.",
+      "more": "This problem isn't always about a seller having the upper hand. Sometimes, the buyer holds more key information. When purchasing health insurance, for example, a buyer is not always required to share every detail about their future health risks with the insurance company. By not fully providing this information, the buyer might pay the same premium as someone who is less likely to require a payout, despite having a higher personal risk. This also creates an imbalance, shifting power to the buyer and preventing an efficient market where premiums accurately reflect individual risk.",
+      "deep": "This imbalance of information can lead to wider issues, even causing entire markets to fail. If buyers consistently cannot tell the difference between high-quality products and low-quality ones, and sellers of good products find they cannot get a fair price, those high-quality sellers may exit the market. This leaves behind a market increasingly filled with lower-quality items, purely because buyers can't trust the information available. This phenomenon highlights a significant 'cost of dishonesty' across various markets, including insurance and credit, and underscores why designing systems to encourage participants to reveal their information honestly is crucial for healthy commerce.",
+      "takeaway": "Before making a significant financial commitment, actively seek out and verify independent information to narrow any knowledge gap between yourself and the other party.",
+      "source": {
+        "title": "Information asymmetry",
+        "url": "https://en.wikipedia.org/wiki/Information_asymmetry"
+      },
+      "audio": {
+        "quick": "lessons/2026-10-04-information-asymmetry-quick.mp3",
+        "more": "lessons/2026-10-04-information-asymmetry-more.mp3",
+        "deep": "lessons/2026-10-04-information-asymmetry-deep.mp3"
       }
     }
   ],
