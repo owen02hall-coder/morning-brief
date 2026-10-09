@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-08T12:07:28.877038-06:00",
+  "generated_at": "2026-10-09T11:41:02.487868-06:00",
   "lessons": [
     {
       "id": "2026-08-11-mortgage",
@@ -575,11 +575,7 @@
         "title": "Sunk cost",
         "url": "https://en.wikipedia.org/wiki/Sunk_cost"
       },
-      "audio": {
-        "quick": "lessons/2026-09-18-sunk-cost-quick.mp3",
-        "more": "lessons/2026-09-18-sunk-cost-more.mp3",
-        "deep": "lessons/2026-09-18-sunk-cost-deep.mp3"
-      }
+      "audio": {}
     },
     {
       "id": "2026-09-19-loan",
@@ -979,6 +975,26 @@
         "quick": "lessons/2026-10-08-correlation-does-not-imply-causation-quick.mp3",
         "more": "lessons/2026-10-08-correlation-does-not-imply-causation-more.mp3",
         "deep": "lessons/2026-10-08-correlation-does-not-imply-causation-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-10-09-down-payment",
+      "date": "2026-10-09",
+      "domain": "Money mechanics",
+      "title": "Understanding Your Home Down Payment",
+      "hook": "Saving for a home involves understanding how your down payment affects both your loan and the lender's risk.",
+      "quick": "When you put a down payment on a home, you risk forfeiting that entire amount if you are unable to pay off the loan in its entirety. This initial payment reduces the amount a lender might lose if you default on your mortgage. If you fail to repay the loan, the lender can sell the property, which is used as collateral, to recover the outstanding balance, including any fees and interest. Your down payment lessens the gap the lender has to recover from that sale, making it more probable they will get their full amount back. From the lender\u2019s perspective, a down payment ensures they have capital and helps them recover costs if you default. It also serves as evidence that you are financially sound and capable of raising money for a significant, long-term investment, suggesting you are not borrowing beyond your financial capacity.",
+      "more": "The size of your down payment directly affects how much protection the lender has against factors that might decrease the property's value or against lost profits between the last payment and a potential sale after default. Standard down payments for home purchases in the United States typically range from 3.5% to 20% of the purchase price. Some specific loan programs, such as those offered by the Federal Housing Administration, allow for a down payment as low as 3.5%. The Department of Veterans Affairs and the USDA Home Loan program even offer complete financing with no down payment for qualifying borrowers, often for homes in rural areas. However, for investment properties, lenders see more risk and may require a higher down payment or charge a higher interest rate.",
+      "deep": "In the years between 2000 and 2007, as home prices increased, lenders sometimes accepted smaller or even no down payments, utilizing methods like 100% financing, assistance from sellers, or combining an 80% first mortgage with a 20% second mortgage. Today, various state finance housing agencies often provide down payment assistance programs, which can differ significantly in their requirements. These programs are typically set up by state or local housing authorities, non-profit organizations, or lenders, and some even ask that you or your loan officer complete a short course for first-time homebuyers. These assistance programs vary by state and can help cover up to three percent of the loan amount for either the down payment itself or for closing costs. Some states also have special programs supporting home purchases in specific geographic areas.",
+      "takeaway": "Investigate state and local down payment assistance programs to understand their specific requirements and conditions, as these can help reduce your initial home purchase costs.",
+      "source": {
+        "title": "Down payment",
+        "url": "https://en.wikipedia.org/wiki/Down_payment"
+      },
+      "audio": {
+        "quick": "lessons/2026-10-09-down-payment-quick.mp3",
+        "more": "lessons/2026-10-09-down-payment-more.mp3",
+        "deep": "lessons/2026-10-09-down-payment-deep.mp3"
       }
     }
   ],
