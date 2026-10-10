@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-09T11:41:02.487868-06:00",
+  "generated_at": "2026-10-10T10:32:37.257450-06:00",
   "lessons": [
     {
       "id": "2026-08-11-mortgage",
@@ -591,11 +591,7 @@
         "title": "Loan",
         "url": "https://en.wikipedia.org/wiki/Loan"
       },
-      "audio": {
-        "quick": "lessons/2026-09-19-loan-quick.mp3",
-        "more": "lessons/2026-09-19-loan-more.mp3",
-        "deep": "lessons/2026-09-19-loan-deep.mp3"
-      }
+      "audio": {}
     },
     {
       "id": "2026-09-20-foundation-engineering",
@@ -995,6 +991,26 @@
         "quick": "lessons/2026-10-09-down-payment-quick.mp3",
         "more": "lessons/2026-10-09-down-payment-more.mp3",
         "deep": "lessons/2026-10-09-down-payment-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-10-10-refrigerator",
+      "date": "2026-10-10",
+      "domain": "Home, car and repair",
+      "title": "Maintaining Refrigerator and Freezer Temperatures for Food Safety",
+      "hook": "Setting your refrigerator and freezer to the correct temperatures can help prevent food waste and keep your food safe to eat.",
+      "quick": "Food can spoil quickly if your refrigerator is not cold enough, leading to wasted groceries and potential health risks. This happens because warmer temperatures allow bacteria to reproduce faster. To keep food fresh, your refrigerator should ideally maintain a temperature between 3 to 5 \u00b0C, which is 37 to 41 \u00b0F. The United States Food and Drug Administration recommends keeping it at or below 4 \u00b0C, or 40 \u00b0F. For frozen items, your freezer should be regulated at \u221218 \u00b0C, or 0 \u00b0F. Checking these settings ensures your food stays safe and lasts longer, saving you money in the long run.",
+      "more": "Maintaining the proper low temperature inside your refrigerator actively reduces the reproduction rate of bacteria, slowing down the rate at which food spoils. This cooling process works by a heat pump transferring heat from inside the compartment to the outside environment. Freezers, on the other hand, are specialized parts of a refrigerator, or entirely separate units, designed to keep contents below the freezing point of water. This deep cold allows people to buy perishable food in bulk and store it for extended periods, making frozen foods a common way to manage groceries and reduce shopping frequency.",
+      "deep": "A refrigerator's main function is to cool its interior by constantly transferring heat out, ensuring the compartment stays below the ambient room temperature. This is crucial for food storage as it keeps food fresh for longer than older methods like iceboxes. While a refrigerator keeps items a few degrees above freezing, a freezer maintains its temperature well below the freezing point, essential for long-term preservation of items. Many modern units use a vapor compression cycle to achieve these temperatures and may even include features like automatic defrosting or in-door dispensers for chilled water and ice, all built upon the core principle of removing heat to preserve your groceries.",
+      "takeaway": "Check your refrigerator and freezer temperature settings to ensure your refrigerator is at or below 4 \u00b0C (40 \u00b0F) and your freezer is regulated at \u221218 \u00b0C (0 \u00b0F).",
+      "source": {
+        "title": "Refrigerator",
+        "url": "https://en.wikipedia.org/wiki/Refrigerator"
+      },
+      "audio": {
+        "quick": "lessons/2026-10-10-refrigerator-quick.mp3",
+        "more": "lessons/2026-10-10-refrigerator-more.mp3",
+        "deep": "lessons/2026-10-10-refrigerator-deep.mp3"
       }
     }
   ],
