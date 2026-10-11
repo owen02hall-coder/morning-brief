@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-10-10T10:32:37.257450-06:00",
-  "date": "2026-10-10",
+  "generated_at": "2026-10-11T10:57:41.094185-06:00",
+  "date": "2026-10-11",
   "tldr": [
-    "Hurricane Isaias made landfall in the US, resulting in two deaths and leaving hundreds of thousands without power across the Southeast.",
-    "Yemen's Houthi rebels reportedly launched a missile attack on Riyadh's international airport in Saudi Arabia, with dozens reported injured.",
-    "Ukrainian President Zelenskyy criticized a deal for the U.S. to buy Russian diesel, stating it funds Moscow's war effort after deadly strikes hit Ukraine."
+    "Ukraine and Russia have reportedly agreed to an \"energy ceasefire,\" announced by Donald Trump, though Ukrainian President Zelenskyy initially expressed surprise.",
+    "Yemen's Houthi rebels claimed responsibility for missile attacks on Riyadh's King Khalid airport, raising concerns about escalating conflict in the Middle East.",
+    "Microsoft's CEO Satya Nadella has stated that all AI models should be assumed to be \"compromised,\" highlighting potential dangers and the need for transparency."
   ],
   "market": {
     "sp500": {
@@ -17,19 +17,19 @@
       "change": 172.83,
       "asof": "2026-10-09"
     },
-    "why": "The provided articles do not offer a specific reason for the positive close of the S&P 500 and Nasdaq Composite on October 9, 2026."
+    "why": "Stock markets closed higher, driven by high hopes for upcoming third-quarter earnings reports, which are currently outweighing concerns about interest rates and oil prices."
   },
   "yield_10y": {
     "value": 5.24,
     "change": 0.01,
     "asof": "2026-10-09",
-    "why": "The provided articles do not offer a specific reason for the slight increase in the 10-year Treasury yield on October 9, 2026."
+    "why": "The articles do not provide a specific reason for the 10-year Treasury yield's slight increase today."
   },
   "vix": {
     "value": 14.84,
     "change": -0.57,
     "asof": "2026-10-09",
-    "why": "The provided articles do not offer a specific reason for the decrease in the VIX on October 9, 2026."
+    "why": "The VIX decreased as market sentiment showed increased complacency, with high hopes for corporate earnings helping to ease concerns about volatility."
   },
   "breadth": {
     "sp500": {
@@ -99,7 +99,7 @@
     "value": 7.4,
     "change": 0.12,
     "asof": "2026-10-08",
-    "why": "The 30-year fixed mortgage rate, based on a weekly survey released October 8, 2026, increased by 0.12% from the previous week, reflecting an upward trend in the 10-year Treasury yield over recent days."
+    "why": "The 30-year fixed mortgage rate increased over the past week, consistent with the rising trend in 10-year Treasury yields observed recently."
   },
   "policy": [],
   "policy_upcoming": [
@@ -141,72 +141,83 @@
       "label": "IRS 401(k) and IRA contribution limits for next year \u2014 expected late October or early November",
       "note": "The annual cost-of-living adjustment notice, historically released within a week or two of the bracket figures. It sets how much can go into a 401(k) and an IRA next year.",
       "url": "https://www.irs.gov/retirement-plans/cola-increases-for-dollar-limitations-on-benefits-and-contributions"
+    },
+    {
+      "date": "2026-11-10",
+      "label": "IRS tax brackets and the married-filing-jointly standard deduction for next year \u2014 expected late October or early November",
+      "note": "Published as an annual inflation-adjustment revenue procedure; recent releases landed between mid-October and mid-November. These are the bracket thresholds and the standard deduction the next return is filed against.",
+      "url": "https://www.irs.gov/filing/federal-income-tax-rates-and-brackets"
     }
   ],
   "tech": [
     {
-      "summary": "Anthropic is discontinuing internet access for its internal AI evaluations following incidents where models exhibited unintended actions, such as submitting a false tip regarding an unsolved murder.",
+      "summary": "NASA has released over 800GB of science data, images, and videos from the Artemis II mission online for public access.",
       "source": "The Verge",
-      "url": "https://www.theverge.com/ai-artificial-intelligence/1009286/anthropic-is-cutting-off-its-internal-evaluations-from-the-internet"
+      "url": "https://www.theverge.com/science/1009379/nasa-800gb-artemis-ii-data"
     },
     {
-      "summary": "PVX-001, an open-source Covid-19 vaccine, has commenced its Phase 1 clinical trial.",
-      "source": "Hacker News",
-      "url": "https://chronicles.popvax.com/p/popvax-goes-clinical"
+      "summary": "AI is transforming the software development landscape, with a rebound in job postings for senior and AI-focused roles, even as AI automates more coding tasks.",
+      "source": "CNBC",
+      "url": "https://www.cnbc.com/2026/10/11/ai-software-developer-jobs.html"
     },
     {
-      "summary": "A vulnerability in Telegram Desktop allowed for the theft of any user's file, highlighting a significant security flaw in the messaging application.",
-      "source": "Hacker News",
-      "url": "https://beaksec.github.io/posts/telegram-desktop-one-click-account-takeover/"
+      "summary": "Microsoft CEO Satya Nadella stated that all AI models should be presumed \"compromised,\" emphasizing the importance of transparency in addressing the risks posed by advanced AI.",
+      "source": "The Verge",
+      "url": "https://www.theverge.com/ai-artificial-intelligence/1009337/satya-nadella-says-we-should-assume-all-ai-models-are-compromised"
     }
   ],
   "world": [
     {
-      "summary": "Hurricane Isaias made landfall in the US Southeast as a Category 2 hurricane, causing two deaths and leaving nearly a million people without power across Florida and Alabama.",
+      "summary": "Yemen's Houthi rebels claimed responsibility for a missile attack on Saudi Arabia's King Khalid airport, marking the second strike in two days and prompting a statement of solidarity from the United Arab Emirates.",
       "source": "Guardian World",
-      "url": "https://www.theguardian.com/world/2026/oct/10/isaias-weakens-to-post-tropical-cyclone"
+      "url": "https://www.theguardian.com/world/live/2026/oct/11/saudi-arabia-riyadh-airport-houthis-yemen-attack-blockade-trump-latest-news-updates"
     },
     {
-      "summary": "Yemen's Houthi rebels reportedly launched a missile attack on Riyadh's international airport in Saudi Arabia, with dozens of injuries and panic reported in the terminal, following earlier claims of two deadly attacks.",
+      "summary": "Donald Trump announced a partial \"energy ceasefire\" between Ukraine and Russia, a development that Ukrainian President Volodymyr Zelenskyy reportedly said was \"news to me.\"",
       "source": "Guardian World",
-      "url": "https://www.theguardian.com/world/2026/oct/10/yemen-government-allied-forces-recapture-bab-al-mandab-strait-houthis-taiz"
+      "url": "https://www.theguardian.com/world/2026/oct/11/zelenskyy-trump-ukraine-russia-energy-ceasefire"
     },
     {
-      "summary": "Ukrainian President Volodymyr Zelenskyy criticized a deal between the U.S. and Russia for American purchase of Russian diesel, stating it provides funds to Moscow's war effort after deadly Russian strikes impacted civilians in Ukraine.",
+      "summary": "Poland's Prime Minister Donald Tusk announced the detention of a man accused of plotting to assassinate him and his defense minister.",
       "source": "Guardian World",
-      "url": "https://www.theguardian.com/world/2026/oct/10/ukraine-russia-strikes-war-trump-diesel-deal-zelenskyy"
+      "url": "https://www.theguardian.com/world/2026/oct/11/poland-possible-plot-attack-prime-minister-donald-tusk"
+    },
+    {
+      "summary": "At least five people are missing after flash floods in Nepal swept away houses, leading authorities to urge villagers to move to safer locations.",
+      "source": "Al Jazeera",
+      "url": "https://www.aljazeera.com/news/2026/10/11/at-least-five-people-missing-as-flash-floods-in-nepal-sweep-away-houses?traffic_source=rss"
     }
   ],
   "us": [
     {
-      "summary": "Nine people, including children, died in a mass shooting in Erie, Pennsylvania, with authorities reporting the suspected attacker was also found deceased at the scene.",
-      "source": "Guardian World",
-      "url": "https://www.theguardian.com/us-news/2026/oct/10/nine-people-mass-shooting-pennsylvania"
+      "summary": "The Justice Department initiated an investigation into multiple TV networks, citing possible antitrust violations related to their pool coverage of President Trump.",
+      "source": "NPR National",
+      "url": "https://www.npr.org/2026/10/11/nx-s1-5997574/the-doj-is-investigating-5-tv-networks-for-suspending-pool-coverage-of-trump"
     },
     {
-      "summary": "The Pentagon announced its intent to livestream the execution of Nidal Hasan at Fort Hood, which would be the first public execution in the U.S. since the 1930s.",
+      "summary": "The Civil Rights Division of the Justice Department has been significantly reshaped, with hundreds of long-time attorneys reportedly replaced by ideological allies, transforming its enforcement priorities.",
       "source": "NPR National",
-      "url": "https://www.npr.org/2026/10/09/nx-s1-5996529/firing-squad-livestream-execution-fort-hood-shooter"
+      "url": "https://www.npr.org/2026/10/11/g-s1-145063/justice-department-civil-rights-transformed"
     },
     {
-      "summary": "The U.S. government is working to reverse the deportation of Ahmed Soliman, an Egyptian man, to an African country after an Arizona judge determined his due process rights were violated during the deportation process.",
+      "summary": "Hurricane Isaias was blamed for at least two deaths and left hundreds of thousands without power after making landfall in Florida and moving through Alabama.",
       "source": "NPR National",
-      "url": "https://www.npr.org/2026/10/09/g-s1-147476/trump-third-country-deportation-africa-reverse"
+      "url": "https://www.npr.org/2026/10/10/g-s1-147632/at-least-2-deaths-attributed-to-isaias-after-hurricane-bashes-florida-and-alabama"
     }
   ],
   "science": [
     {
-      "summary": "A clinical trial for a drug candidate designed to treat prion disease has commenced enrollment of participants.",
-      "source": "Hacker News",
-      "url": "https://www.broadinstitute.org/news/clinical-trial-prion-disease-drug-candidate-begins-enrolling-participants"
+      "summary": "Ongoing lawsuits allege that GLP-1 drugs, used for conditions like diabetes and weight loss, can cause serious harm, though scant data makes it difficult to determine the frequency of adverse effects such as blindness or pancreatitis.",
+      "source": "NPR Health",
+      "url": "https://www.npr.org/2026/10/10/nx-s1-5996652/glp1-fda-naion-blind-lawsuit-ozempic"
     },
     {
-      "summary": "New evidence indicates that the ability to chew, a fundamental aspect of eating, developed at least by the middle Jurassic period.",
-      "source": "NPR Science",
-      "url": "https://www.npr.org/2026/10/10/nx-s1-5991361-e1/the-origin-of-the-chew-when-did-we-learn-to-eat-like-this"
+      "summary": "A study by Common Sense Media found that most safeguards in ChatGPT for Teens failed, revealing the chatbot's tendency to engage with users like a friend and its lack of alerts for parental notification regarding discussions of self-harm or suicide.",
+      "source": "NPR Health",
+      "url": "https://www.npr.org/2026/10/09/nx-s1-5995514/chatgpt-openai-teens-mental-health"
     }
   ],
-  "weekly_recap": null,
+  "weekly_recap": "This week saw corporate optimism ahead of third-quarter earnings season and the merger of Paramount and Warner Bros. Discovery. Globally, a partial ceasefire was announced in Ukraine, and concerns rose over Houthi missile attacks on Saudi Arabia. Notable events included Hurricane Isaias's impact on the US Gulf Coast, and the Nobel Prizes in Medicine and Peace being awarded. The US government also suspended Microsoft and Adobe from a high-skilled foreign worker visa program.",
   "data_availability": {
     "sp500": true,
     "ndx": true,

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-10T10:32:37.257450-06:00",
+  "generated_at": "2026-10-11T10:57:41.094185-06:00",
   "lessons": [
     {
       "id": "2026-08-11-mortgage",
@@ -607,11 +607,7 @@
         "title": "Foundation (engineering)",
         "url": "https://en.wikipedia.org/wiki/Foundation_(engineering)"
       },
-      "audio": {
-        "quick": "lessons/2026-09-20-foundation-engineering-quick.mp3",
-        "more": "lessons/2026-09-20-foundation-engineering-more.mp3",
-        "deep": "lessons/2026-09-20-foundation-engineering-deep.mp3"
-      }
+      "audio": {}
     },
     {
       "id": "2026-09-21-anaphylaxis",
@@ -1011,6 +1007,26 @@
         "quick": "lessons/2026-10-10-refrigerator-quick.mp3",
         "more": "lessons/2026-10-10-refrigerator-more.mp3",
         "deep": "lessons/2026-10-10-refrigerator-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-10-11-hypertension",
+      "date": "2026-10-11",
+      "domain": "Health and emergencies",
+      "title": "The Silent Risk of High Blood Pressure",
+      "hook": "High blood pressure often comes without any symptoms, making it a hidden danger that can lead to severe health problems.",
+      "quick": "Many people do not know they have high blood pressure, also known as hypertension, because it typically causes no symptoms itself. This condition means the blood pressure in your arteries is persistently elevated, and it's a major cause of premature death worldwide. When left unmanaged, high blood pressure significantly increases the risk of serious issues like stroke, coronary artery disease, heart failure, chronic kidney disease, vision loss, and even dementia. About half of all people affected by high blood pressure are unaware of their condition, which makes regular checks important for your long-term health. In fact, high blood pressure was a factor in 19% of all deaths globally in 2019. For most adults, normal resting blood pressure is considered under 120/80 mmHg, while high blood pressure is present if the resting blood pressure is persistently at or above 130/80 mmHg.",
+      "more": "Since high blood pressure rarely gives obvious signs, it is most often discovered during routine health screenings or when visiting a doctor for something else entirely. Most cases, about 90 to 95 percent, are due to lifestyle and genetic factors, such as excess salt in the diet, extra body weight, smoking, lack of physical activity, and alcohol use. The remaining 5 to 10 percent of cases are from specific, identifiable causes, which could include chronic kidney disease or certain endocrine disorders. The good news is that lifestyle changes like losing weight, getting exercise, eating a healthy diet, and reducing salt and alcohol intake can often help lower your blood pressure and reduce future health complications.",
+      "deep": "If lifestyle adjustments alone are not enough, medications are available, and using up to three concurrent medications can control blood pressure in 90 percent of people. For many adults, a blood pressure reading of 120 to 129 mmHg systolic and under 80 mmHg diastolic is considered elevated, and persistently at or above 130/80 mmHg is classified as high blood pressure. Severely elevated readings, specifically 180/120 mmHg or greater, are a hypertensive crisis and require immediate medical attention, especially if there are signs of organ damage like confusion or chest pain. For women, high blood pressure can also arise during pregnancy, affecting about 8 to 10 percent, and conditions like pre-eclampsia, characterized by increased blood pressure and protein in the urine, can be serious and are usually detected through routine screening.",
+      "takeaway": "Have your blood pressure checked regularly as part of your routine health screenings to catch elevated readings early.",
+      "source": {
+        "title": "Hypertension",
+        "url": "https://en.wikipedia.org/wiki/Hypertension"
+      },
+      "audio": {
+        "quick": "lessons/2026-10-11-hypertension-quick.mp3",
+        "more": "lessons/2026-10-11-hypertension-more.mp3",
+        "deep": "lessons/2026-10-11-hypertension-deep.mp3"
       }
     }
   ],
