@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-11T10:57:41.094185-06:00",
+  "generated_at": "2026-10-12T14:33:16.743681-06:00",
   "lessons": [
     {
       "id": "2026-08-11-mortgage",
@@ -623,11 +623,7 @@
         "title": "Anaphylaxis",
         "url": "https://en.wikipedia.org/wiki/Anaphylaxis"
       },
-      "audio": {
-        "quick": "lessons/2026-09-21-anaphylaxis-quick.mp3",
-        "more": "lessons/2026-09-21-anaphylaxis-more.mp3",
-        "deep": "lessons/2026-09-21-anaphylaxis-deep.mp3"
-      }
+      "audio": {}
     },
     {
       "id": "2026-09-22-data-and-information-visualization",
@@ -1027,6 +1023,26 @@
         "quick": "lessons/2026-10-11-hypertension-quick.mp3",
         "more": "lessons/2026-10-11-hypertension-more.mp3",
         "deep": "lessons/2026-10-11-hypertension-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-10-12-ponzi-scheme",
+      "date": "2026-10-12",
+      "domain": "Thinking and people",
+      "title": "Protect Your Savings from Investment Scams",
+      "hook": "Knowing how to spot certain types of investment fraud can protect your future financial security.",
+      "quick": "Many people lose all or most of their money in a Ponzi scheme, which is a type of fraud that promises very high investment returns with little to no risk. These schemes don't actually generate profit from legitimate business activities; instead, they take money from new investors to pay off earlier investors. The operator might claim profits come from a secret idea or an exaggerated business, but in reality, they're just moving new money around to create an illusion of success. This deception allows the fraud to continue as long as a steady stream of new funds keeps flowing in.",
+      "more": "The core problem is that without genuine earnings, a Ponzi scheme needs a constant inflow of new money to survive. If new investors become hard to find, or if too many existing investors try to cash out, the entire scheme collapses, leaving most people with significant losses. Operators often divert clients' funds for their own personal use, further depleting the money available. They might also encourage investors to leave their money in the scheme, simply sending statements that show false earnings to maintain the deception.",
+      "deep": "Several warning signs can help you identify this kind of fraud. Be suspicious of investments offering guaranteed high returns without risk, or those that show overly consistent profits even when market conditions fluctuate. A major red flag is if the investment hasn't been registered with financial regulators, or if the person selling it isn't a licensed professional. You should also be wary if the investment strategy is secretive or overly complex, if there are problems with your account paperwork, or if you have difficulty receiving payments or cashing out your investment. Sometimes, operators will even pressure you to roll over your principal and profits or offer even higher returns to prevent you from withdrawing funds.",
+      "takeaway": "Before investing, always check that the investment opportunity is registered with financial regulators and that the seller is a licensed professional.",
+      "source": {
+        "title": "Ponzi scheme",
+        "url": "https://en.wikipedia.org/wiki/Ponzi_scheme"
+      },
+      "audio": {
+        "quick": "lessons/2026-10-12-ponzi-scheme-quick.mp3",
+        "more": "lessons/2026-10-12-ponzi-scheme-more.mp3",
+        "deep": "lessons/2026-10-12-ponzi-scheme-deep.mp3"
       }
     }
   ],

@@ -1,47 +1,47 @@
 {
-  "generated_at": "2026-10-11T10:57:41.094185-06:00",
-  "date": "2026-10-11",
+  "generated_at": "2026-10-12T14:33:16.743681-06:00",
+  "date": "2026-10-12",
   "tldr": [
-    "Ukraine and Russia have reportedly agreed to an \"energy ceasefire,\" announced by Donald Trump, though Ukrainian President Zelenskyy initially expressed surprise.",
-    "Yemen's Houthi rebels claimed responsibility for missile attacks on Riyadh's King Khalid airport, raising concerns about escalating conflict in the Middle East.",
-    "Microsoft's CEO Satya Nadella has stated that all AI models should be assumed to be \"compromised,\" highlighting potential dangers and the need for transparency."
+    "Meta has released new AI models, Muse Wonder and Muse Wonder Full, aiming to compete with leading industry models and drive new business opportunities.",
+    "US government restrictions on Chinese-made drones are reportedly increasing costs for police departments across the country.",
+    "NATO has affirmed its commitment to collective defense, stating it would respond with \"anything and everything\" if the alliance were attacked."
   ],
   "market": {
     "sp500": {
-      "value": 7811.54,
-      "change": 46.18,
-      "asof": "2026-10-09"
+      "value": 7807.24,
+      "change": -4.3,
+      "asof": "2026-10-12"
     },
     "ndx": {
-      "value": 27366.17,
-      "change": 172.83,
-      "asof": "2026-10-09"
+      "value": 27245.9,
+      "change": -120.27,
+      "asof": "2026-10-12"
     },
-    "why": "Stock markets closed higher, driven by high hopes for upcoming third-quarter earnings reports, which are currently outweighing concerns about interest rates and oil prices."
+    "why": "Major stock indices, including the S&P 500 and Nasdaq Composite, closed lower. This occurred amid comments from a Federal Reserve official suggesting that higher interest rates might be necessary to prevent an 'inflationary mindset' from taking hold, and as oil markets struggled to assess the impact of a proposed 'energy ceasefire' on a deepening global oil crisis."
   },
   "yield_10y": {
     "value": 5.24,
-    "change": 0.01,
-    "asof": "2026-10-09",
-    "why": "The articles do not provide a specific reason for the 10-year Treasury yield's slight increase today."
+    "change": -0.0,
+    "asof": "2026-10-12",
+    "why": "The 10-year Treasury yield remained unchanged. The provided articles do not offer a specific explanation for why it stayed flat, despite some Federal Reserve commentary indicating a need for potentially higher rates."
   },
   "vix": {
-    "value": 14.84,
-    "change": -0.57,
-    "asof": "2026-10-09",
-    "why": "The VIX decreased as market sentiment showed increased complacency, with high hopes for corporate earnings helping to ease concerns about volatility."
+    "value": 15.21,
+    "change": 0.37,
+    "asof": "2026-10-12",
+    "why": "The VIX, a measure of market volatility, rose. This increase corresponds with the decline in the S&P 500 and Nasdaq Composite, reflecting heightened investor uncertainty driven by concerns over inflation, potential interest rate hikes, and an unresolved global oil crisis."
   },
   "breadth": {
     "sp500": {
-      "value": 47.7,
-      "asof": "2026-10-09",
+      "value": 49.3,
+      "asof": "2026-10-12",
       "status": "healthy",
       "matched": 499,
       "stale": false
     },
     "ndx100": {
-      "value": 61.5,
-      "asof": "2026-10-09",
+      "value": 62.5,
+      "asof": "2026-10-12",
       "status": "healthy",
       "matched": 96,
       "stale": false
@@ -51,29 +51,29 @@
     {
       "symbol": "SOXL",
       "what": "3x semiconductors",
-      "value": 139.76,
-      "day_move": -1.94,
-      "asof": "2026-10-09",
-      "rsi": 49.2,
+      "value": 128.4,
+      "day_move": -8.13,
+      "asof": "2026-10-12",
+      "rsi": 43.4,
       "rsi_zone": "neutral",
       "low": 101.13,
       "high": 164.27,
-      "band_pct": 61.2,
+      "band_pct": 43.2,
       "zone": "mid",
       "action": "hold",
-      "read": "Mid-range - 61% of the way up its 1-month band."
+      "read": "Mid-range - 43% of the way up its 1-month band. Big session: down 8.1% in a day."
     },
     {
       "symbol": "SPXL",
       "what": "3x S&P 500",
-      "value": 297.97,
-      "day_move": 1.68,
-      "asof": "2026-10-09",
-      "rsi": 58.7,
+      "value": 297.37,
+      "day_move": -0.2,
+      "asof": "2026-10-12",
+      "rsi": 58.0,
       "rsi_zone": "neutral",
       "low": 271.57,
       "high": 299.21,
-      "band_pct": 95.5,
+      "band_pct": 93.3,
       "zone": "high",
       "action": "trim",
       "read": "Within 4% of its 1-month high."
@@ -81,17 +81,17 @@
     {
       "symbol": "TQQQ",
       "what": "3x Nasdaq-100",
-      "value": 81.28,
-      "day_move": 1.31,
-      "asof": "2026-10-09",
-      "rsi": 59.3,
+      "value": 79.61,
+      "day_move": -2.05,
+      "asof": "2026-10-12",
+      "rsi": 54.9,
       "rsi_zone": "neutral",
       "low": 67.9,
       "high": 84.25,
-      "band_pct": 81.8,
-      "zone": "high",
-      "action": "trim",
-      "read": "Within 4% of its 1-month high."
+      "band_pct": 71.6,
+      "zone": "mid",
+      "action": "hold",
+      "read": "Mid-range - 72% of the way up its 1-month band."
     }
   ],
   "watchlist_missing": [],
@@ -99,7 +99,7 @@
     "value": 7.4,
     "change": 0.12,
     "asof": "2026-10-08",
-    "why": "The 30-year fixed mortgage rate increased over the past week, consistent with the rising trend in 10-year Treasury yields observed recently."
+    "why": "The 30-year fixed mortgage rate increased by 0.12% in the latest weekly survey. This rise tracks the direction of 10-year Treasury yields over recent days and reflects broader expectations of tighter monetary policy, as a Federal Reserve official suggested higher rates might be needed to combat inflation."
   },
   "policy": [],
   "policy_upcoming": [
@@ -151,73 +151,73 @@
   ],
   "tech": [
     {
-      "summary": "NASA has released over 800GB of science data, images, and videos from the Artemis II mission online for public access.",
-      "source": "The Verge",
-      "url": "https://www.theverge.com/science/1009379/nasa-800gb-artemis-ii-data"
+      "summary": "Meta has introduced new AI models, Muse Wonder and Muse Wonder Full, which the company claims are competitive with the industry's best and are expected to drive new business opportunities through paid subscriptions.",
+      "source": "MarketWatch",
+      "url": "https://www.marketwatch.com/story/meta-is-back-on-the-ai-leaderboard-with-its-new-family-of-wonder-models-a704b6cc?mod=mw_rss_topstories"
     },
     {
-      "summary": "AI is transforming the software development landscape, with a rebound in job postings for senior and AI-focused roles, even as AI automates more coding tasks.",
+      "summary": "Quantum computing company IonQ announced its acquisition of cybersecurity firm Elisity in an all-stock transaction valued at up to $1.3 billion.",
       "source": "CNBC",
-      "url": "https://www.cnbc.com/2026/10/11/ai-software-developer-jobs.html"
+      "url": "https://www.cnbc.com/2026/10/12/ionq-elisity-acquisition-cybersecurity.html"
     },
     {
-      "summary": "Microsoft CEO Satya Nadella stated that all AI models should be presumed \"compromised,\" emphasizing the importance of transparency in addressing the risks posed by advanced AI.",
-      "source": "The Verge",
-      "url": "https://www.theverge.com/ai-artificial-intelligence/1009337/satya-nadella-says-we-should-assume-all-ai-models-are-compromised"
+      "summary": "Hundreds of French supermarket fridges were affected by a cyber attack, resulting in millions of euros worth of spoiled fresh and frozen food.",
+      "source": "BBC World",
+      "url": "https://www.bbc.co.uk/news/articles/crq5nzxv9q4yo?at_medium=RSS&at_campaign=rss"
     }
   ],
   "world": [
     {
-      "summary": "Yemen's Houthi rebels claimed responsibility for a missile attack on Saudi Arabia's King Khalid airport, marking the second strike in two days and prompting a statement of solidarity from the United Arab Emirates.",
-      "source": "Guardian World",
-      "url": "https://www.theguardian.com/world/live/2026/oct/11/saudi-arabia-riyadh-airport-houthis-yemen-attack-blockade-trump-latest-news-updates"
-    },
-    {
-      "summary": "Donald Trump announced a partial \"energy ceasefire\" between Ukraine and Russia, a development that Ukrainian President Volodymyr Zelenskyy reportedly said was \"news to me.\"",
-      "source": "Guardian World",
-      "url": "https://www.theguardian.com/world/2026/oct/11/zelenskyy-trump-ukraine-russia-energy-ceasefire"
-    },
-    {
-      "summary": "Poland's Prime Minister Donald Tusk announced the detention of a man accused of plotting to assassinate him and his defense minister.",
-      "source": "Guardian World",
-      "url": "https://www.theguardian.com/world/2026/oct/11/poland-possible-plot-attack-prime-minister-donald-tusk"
-    },
-    {
-      "summary": "At least five people are missing after flash floods in Nepal swept away houses, leading authorities to urge villagers to move to safer locations.",
+      "summary": "NATO has declared that it will do \"anything and everything\" if any member of the alliance is attacked, following warnings about potential Russian actions.",
       "source": "Al Jazeera",
-      "url": "https://www.aljazeera.com/news/2026/10/11/at-least-five-people-missing-as-flash-floods-in-nepal-sweep-away-houses?traffic_source=rss"
+      "url": "https://www.aljazeera.com/news/2026/10/12/nato-says-will-do-anything-and-everything-if-alliance-is-attacked?traffic_source=rss"
+    },
+    {
+      "summary": "The UK government has attributed recent incidents at RAF airbases to Iran, with the Prime Minister stating they were \"likely coordinated\" by the country and announcing sanctions against two Iranian nationals.",
+      "source": "Al Jazeera",
+      "url": "https://www.aljazeera.com/news/2026/10/12/uk-blames-iran-for-airbase-plot-sanctions-two-iranian-nationals?traffic_source=rss"
+    },
+    {
+      "summary": "Ethiopian forces have reportedly entered the strategic Tigray town of Adwa without resistance, according to witness accounts.",
+      "source": "Al Jazeera",
+      "url": "https://www.aljazeera.com/news/2026/10/12/ethiopian-troops-capture-adwa-without-a-fight-witnesses-say?traffic_source=rss"
+    },
+    {
+      "summary": "An Israeli strike on a tent in Khan Younis, Gaza, resulted in the deaths of three individuals.",
+      "source": "Al Jazeera",
+      "url": "https://www.aljazeera.com/video/newsfeed/2026/10/12/israeli-strike-on-tent-in-gazas-khan-younis-kills-three?traffic_source=rss"
     }
   ],
   "us": [
     {
-      "summary": "The Justice Department initiated an investigation into multiple TV networks, citing possible antitrust violations related to their pool coverage of President Trump.",
+      "summary": "US government restrictions on Chinese-made drones are causing financial strain for police departments, which rely on these high-quality, low-cost devices.",
+      "source": "NPR National",
+      "url": "https://www.npr.org/2026/10/12/nx-s1-5888604/police-chinese-drones-bans-costs"
+    },
+    {
+      "summary": "The Justice Department has initiated an investigation into several TV networks, citing potential anti-trust violations.",
       "source": "NPR National",
       "url": "https://www.npr.org/2026/10/11/nx-s1-5997574/the-doj-is-investigating-5-tv-networks-for-suspending-pool-coverage-of-trump"
     },
     {
-      "summary": "The Civil Rights Division of the Justice Department has been significantly reshaped, with hundreds of long-time attorneys reportedly replaced by ideological allies, transforming its enforcement priorities.",
+      "summary": "Tropical Storm Rachel was downgraded, but its remnants caused flooding that stranded approximately 70 ultramarathon runners on a race route in Utah, who were subsequently evacuated.",
       "source": "NPR National",
-      "url": "https://www.npr.org/2026/10/11/g-s1-145063/justice-department-civil-rights-transformed"
-    },
-    {
-      "summary": "Hurricane Isaias was blamed for at least two deaths and left hundreds of thousands without power after making landfall in Florida and moving through Alabama.",
-      "source": "NPR National",
-      "url": "https://www.npr.org/2026/10/10/g-s1-147632/at-least-2-deaths-attributed-to-isaias-after-hurricane-bashes-florida-and-alabama"
+      "url": "https://www.npr.org/2026/10/11/nx-s1-5998124/tropical-storm-rachel-downgraded-as-high-winds-and-rain-turn-inward"
     }
   ],
   "science": [
     {
-      "summary": "Ongoing lawsuits allege that GLP-1 drugs, used for conditions like diabetes and weight loss, can cause serious harm, though scant data makes it difficult to determine the frequency of adverse effects such as blindness or pancreatitis.",
+      "summary": "An international group of researchers is advocating for rigorous scientific study into the potential health benefits of sauna and other heat therapies to establish their legitimacy.",
       "source": "NPR Health",
-      "url": "https://www.npr.org/2026/10/10/nx-s1-5996652/glp1-fda-naion-blind-lawsuit-ozempic"
+      "url": "https://www.npr.org/2026/10/11/nx-s1-5996655/heat-therapy-sauna-thermoregulation-health-benefits"
     },
     {
-      "summary": "A study by Common Sense Media found that most safeguards in ChatGPT for Teens failed, revealing the chatbot's tendency to engage with users like a friend and its lack of alerts for parental notification regarding discussions of self-harm or suicide.",
+      "summary": "Lawsuits currently allege that GLP-1 medications can lead to serious adverse effects like blindness or pancreatitis, though there is currently scant data on the frequency of these occurrences.",
       "source": "NPR Health",
-      "url": "https://www.npr.org/2026/10/09/nx-s1-5995514/chatgpt-openai-teens-mental-health"
+      "url": "https://www.npr.org/2026/10/10/nx-s1-5996652/glp1-fda-naion-blind-lawsuit-ozempic"
     }
   ],
-  "weekly_recap": "This week saw corporate optimism ahead of third-quarter earnings season and the merger of Paramount and Warner Bros. Discovery. Globally, a partial ceasefire was announced in Ukraine, and concerns rose over Houthi missile attacks on Saudi Arabia. Notable events included Hurricane Isaias's impact on the US Gulf Coast, and the Nobel Prizes in Medicine and Peace being awarded. The US government also suspended Microsoft and Adobe from a high-skilled foreign worker visa program.",
+  "weekly_recap": null,
   "data_availability": {
     "sp500": true,
     "ndx": true,
