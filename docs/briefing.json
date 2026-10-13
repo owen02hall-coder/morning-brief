@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-10-12T14:33:16.743681-06:00",
-  "date": "2026-10-12",
+  "generated_at": "2026-10-13T12:37:59.021976-06:00",
+  "date": "2026-10-13",
   "tldr": [
-    "Meta has released new AI models, Muse Wonder and Muse Wonder Full, aiming to compete with leading industry models and drive new business opportunities.",
-    "US government restrictions on Chinese-made drones are reportedly increasing costs for police departments across the country.",
-    "NATO has affirmed its commitment to collective defense, stating it would respond with \"anything and everything\" if the alliance were attacked."
+    "Major stock indices closed lower, influenced by concerns over AI fatigue impacting chip stocks and reports of a global stock rout caused by a Chinese chipmaker.",
+    "Pope Leo successfully underwent surgery to remove a lung lump, which the Vatican confirmed was found at an early stage.",
+    "Federal agents searched the Washington, D.C. home of Representative Ilhan Omar as part of an ongoing federal investigation."
   ],
   "market": {
     "sp500": {
@@ -17,30 +17,30 @@
       "change": -120.27,
       "asof": "2026-10-12"
     },
-    "why": "Major stock indices, including the S&P 500 and Nasdaq Composite, closed lower. This occurred amid comments from a Federal Reserve official suggesting that higher interest rates might be necessary to prevent an 'inflationary mindset' from taking hold, and as oil markets struggled to assess the impact of a proposed 'energy ceasefire' on a deepening global oil crisis."
+    "why": "Major stock indices closed lower as reports indicated \"AI fatigue\" impacting chip stocks and a \"global stock rout\" driven by a Chinese chipmaker."
   },
   "yield_10y": {
     "value": 5.24,
     "change": -0.0,
     "asof": "2026-10-12",
-    "why": "The 10-year Treasury yield remained unchanged. The provided articles do not offer a specific explanation for why it stayed flat, despite some Federal Reserve commentary indicating a need for potentially higher rates."
+    "why": "The articles do not provide a reason for the 10-year Treasury yield remaining unchanged."
   },
   "vix": {
     "value": 15.21,
     "change": 0.37,
     "asof": "2026-10-12",
-    "why": "The VIX, a measure of market volatility, rose. This increase corresponds with the decline in the S&P 500 and Nasdaq Composite, reflecting heightened investor uncertainty driven by concerns over inflation, potential interest rate hikes, and an unresolved global oil crisis."
+    "why": "The VIX increased, reflecting heightened market volatility amid reports of \"AI fatigue\" in chip stocks and a broader \"global stock rout\" linked to a Chinese chipmaker."
   },
   "breadth": {
     "sp500": {
-      "value": 49.3,
+      "value": 49.6,
       "asof": "2026-10-12",
       "status": "healthy",
-      "matched": 499,
+      "matched": 500,
       "stale": false
     },
     "ndx100": {
-      "value": 62.5,
+      "value": 63.5,
       "asof": "2026-10-12",
       "status": "healthy",
       "matched": 96,
@@ -99,7 +99,7 @@
     "value": 7.4,
     "change": 0.12,
     "asof": "2026-10-08",
-    "why": "The 30-year fixed mortgage rate increased by 0.12% in the latest weekly survey. This rise tracks the direction of 10-year Treasury yields over recent days and reflects broader expectations of tighter monetary policy, as a Federal Reserve official suggested higher rates might be needed to combat inflation."
+    "why": "The articles do not provide a reason for the change in the 30-year fixed mortgage rate."
   },
   "policy": [],
   "policy_upcoming": [
@@ -151,70 +151,70 @@
   ],
   "tech": [
     {
-      "summary": "Meta has introduced new AI models, Muse Wonder and Muse Wonder Full, which the company claims are competitive with the industry's best and are expected to drive new business opportunities through paid subscriptions.",
-      "source": "MarketWatch",
-      "url": "https://www.marketwatch.com/story/meta-is-back-on-the-ai-leaderboard-with-its-new-family-of-wonder-models-a704b6cc?mod=mw_rss_topstories"
+      "summary": "Apple has released HomeView, its first smart home display featuring a 7-inch touchscreen and built-in Siri AI, priced at $299.",
+      "source": "Ars Technica",
+      "url": "https://arstechnica.com/apple/2026/10/apple-homeview-smart-home-hub-opens-for-preorders-at-299/"
     },
     {
-      "summary": "Quantum computing company IonQ announced its acquisition of cybersecurity firm Elisity in an all-stock transaction valued at up to $1.3 billion.",
-      "source": "CNBC",
-      "url": "https://www.cnbc.com/2026/10/12/ionq-elisity-acquisition-cybersecurity.html"
+      "summary": "Google is making it easier for users to launch personal, AI-generated \"vibe-coded\" apps directly through the Play Store, removing the need for phone-to-computer connections.",
+      "source": "The Verge",
+      "url": "https://www.theverge.com/tech/1009066/google-play-vibe-coded-android-apps-launch"
     },
     {
-      "summary": "Hundreds of French supermarket fridges were affected by a cyber attack, resulting in millions of euros worth of spoiled fresh and frozen food.",
-      "source": "BBC World",
-      "url": "https://www.bbc.co.uk/news/articles/crq5nzxv9q4yo?at_medium=RSS&at_campaign=rss"
+      "summary": "Gemini 4 Argon, a new Google AI model, has begun rolling out in the Gemini app and Antigravity, with discounted API rates available for developers through November.",
+      "source": "Ars Technica",
+      "url": "https://arstechnica.com/ai/2026/10/gemini-4-argon-begins-rolling-out-in-gemini-app-and-antigravity-but-only-if-you-pay/"
     }
   ],
   "world": [
     {
-      "summary": "NATO has declared that it will do \"anything and everything\" if any member of the alliance is attacked, following warnings about potential Russian actions.",
-      "source": "Al Jazeera",
-      "url": "https://www.aljazeera.com/news/2026/10/12/nato-says-will-do-anything-and-everything-if-alliance-is-attacked?traffic_source=rss"
+      "summary": "Vatican officials announced that Pope Leo's surgery to remove a lung lump was successfully concluded, after the growth was found at an early stage.",
+      "source": "BBC World",
+      "url": "https://www.bbc.co.uk/news/articles/ck1wvd9dvv22o?at_medium=RSS&at_campaign=rss"
     },
     {
-      "summary": "The UK government has attributed recent incidents at RAF airbases to Iran, with the Prime Minister stating they were \"likely coordinated\" by the country and announcing sanctions against two Iranian nationals.",
+      "summary": "China has sentenced three individuals to death for operating scam centers in Myanmar, with dozens more imprisoned for various related crimes including fraud, trafficking, prostitution, and murder.",
       "source": "Al Jazeera",
-      "url": "https://www.aljazeera.com/news/2026/10/12/uk-blames-iran-for-airbase-plot-sanctions-two-iranian-nationals?traffic_source=rss"
+      "url": "https://www.aljazeera.com/news/2026/10/13/china-sentences-three-people-to-death-for-running-myanmar-scam-centres?traffic_source=rss"
     },
     {
-      "summary": "Ethiopian forces have reportedly entered the strategic Tigray town of Adwa without resistance, according to witness accounts.",
-      "source": "Al Jazeera",
-      "url": "https://www.aljazeera.com/news/2026/10/12/ethiopian-troops-capture-adwa-without-a-fight-witnesses-say?traffic_source=rss"
+      "summary": "Tensions have escalated between the UK and Argentina over the Falkland Islands, with Argentina lodging a legal claim against the UK's oil exploration and Britain asking Interpol to reject Argentina's arrest requests.",
+      "source": "BBC World",
+      "url": "https://www.bbc.co.uk/news/articles/cmp3g14p3z2ko?at_medium=RSS&at_campaign=rss"
     },
     {
-      "summary": "An Israeli strike on a tent in Khan Younis, Gaza, resulted in the deaths of three individuals.",
-      "source": "Al Jazeera",
-      "url": "https://www.aljazeera.com/video/newsfeed/2026/10/12/israeli-strike-on-tent-in-gazas-khan-younis-kills-three?traffic_source=rss"
+      "summary": "The conflict between Saudi Arabia and Houthi forces in Yemen has intensified with Saudi strikes on strategic oil depots near Sana'a, as the WHO reported a surge in cholera cases in the country.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/world/2026/oct/13/saudi-arabia-strikes-strategic-oil-depots-near-yemen-capital"
     }
   ],
   "us": [
     {
-      "summary": "US government restrictions on Chinese-made drones are causing financial strain for police departments, which rely on these high-quality, low-cost devices.",
+      "summary": "Federal agents searched the Washington, D.C. home of Representative Ilhan Omar as part of an ongoing federal investigation.",
       "source": "NPR National",
-      "url": "https://www.npr.org/2026/10/12/nx-s1-5888604/police-chinese-drones-bans-costs"
+      "url": "https://www.npr.org/2026/10/13/nx-s1-5998873/federal-agents-search-rep-ilhan-omars-dc-home"
     },
     {
-      "summary": "The Justice Department has initiated an investigation into several TV networks, citing potential anti-trust violations.",
-      "source": "NPR National",
-      "url": "https://www.npr.org/2026/10/11/nx-s1-5997574/the-doj-is-investigating-5-tv-networks-for-suspending-pool-coverage-of-trump"
+      "summary": "Florida carried out an execution, which was the state's 17th this year, amid scrutiny following a botched lethal injection attempt in Tennessee.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/us-news/2026/oct/13/florida-prision-execution-james-robertson"
     },
     {
-      "summary": "Tropical Storm Rachel was downgraded, but its remnants caused flooding that stranded approximately 70 ultramarathon runners on a race route in Utah, who were subsequently evacuated.",
-      "source": "NPR National",
-      "url": "https://www.npr.org/2026/10/11/nx-s1-5998124/tropical-storm-rachel-downgraded-as-high-winds-and-rain-turn-inward"
+      "summary": "Kimberly Guilfoyle resigned as US ambassador to Greece after the White House requested her departure, following reports of alleged misconduct.",
+      "source": "CNBC",
+      "url": "https://www.cnbc.com/2026/10/13/kimberly-guilfoyle-resign-trump-ambassador.html"
     }
   ],
   "science": [
     {
-      "summary": "An international group of researchers is advocating for rigorous scientific study into the potential health benefits of sauna and other heat therapies to establish their legitimacy.",
-      "source": "NPR Health",
-      "url": "https://www.npr.org/2026/10/11/nx-s1-5996655/heat-therapy-sauna-thermoregulation-health-benefits"
+      "summary": "Clinicians are recommending reduced screen time in English schools to prevent long-term health issues, including a rise in short-sightedness among students.",
+      "source": "BBC Health",
+      "url": "https://www.bbc.co.uk/news/articles/cq4g18prn4l4o?at_medium=RSS&at_campaign=rss"
     },
     {
-      "summary": "Lawsuits currently allege that GLP-1 medications can lead to serious adverse effects like blindness or pancreatitis, though there is currently scant data on the frequency of these occurrences.",
+      "summary": "Emergency room departments are reporting a significant increase in pediatric trauma accidents related to micromobility devices like e-bikes, prompting calls for federal regulation.",
       "source": "NPR Health",
-      "url": "https://www.npr.org/2026/10/10/nx-s1-5996652/glp1-fda-naion-blind-lawsuit-ozempic"
+      "url": "https://www.npr.org/2026/10/12/nx-s1-5969944/rise-in-accidents-involving-kids-and-e-bikes-sparks-debate-about-regulation"
     }
   ],
   "weekly_recap": null,
