@@ -1,22 +1,6 @@
 {
-  "generated_at": "2026-10-13T12:37:59.021976-06:00",
+  "generated_at": "2026-10-14T10:07:32.326231-06:00",
   "lessons": [
-    {
-      "id": "2026-08-11-mortgage",
-      "date": "2026-08-11",
-      "domain": "Money mechanics",
-      "title": "How Mortgage Loans Are Secured",
-      "hook": "Understanding the basics of a mortgage loan can help you prepare for one of the biggest financial steps many people take.",
-      "quick": "A mortgage loan is money you borrow either to purchase real estate or to raise funds by using existing property as collateral. This loan is 'secured' by the property itself, meaning a legal arrangement allows the lender to take possession and sell the secured property through a process called foreclosure if you do not repay the loan or abide by its terms. The word 'mortgage' comes from an old term meaning 'death pledge,' referring to the pledge ending when the obligation is met or the property is taken. Few individuals have enough savings to buy property outright, making mortgages a common way to finance home ownership. The property acts as security or collateral for the loan.",
-      "more": "The basic components of a mortgage loan are similar across many places. You, as the borrower, pledge your interest in the property as security. The lender is typically a financial institution like a bank. The 'principal' is the original loan amount, which decreases as you make payments. 'Interest' is the financial charge for using the lender's money. Mortgages have an interest rate and are scheduled to be paid off, or amortized, over a set period of time, typically 30 years in the United States. This structure allows the principal portion of the loan to be gradually reduced over time through consistent, regular payments.",
-      "deep": "Lenders provide these funds against property primarily to earn interest income, and they often borrow these funds themselves by taking deposits or issuing bonds. The price at which lenders borrow money directly influences the cost of your mortgage. The lender\u2019s rights over the secured property take priority over other creditors, meaning if a borrower becomes bankrupt, the mortgage lender is repaid in full from the sale of the property before other debts are addressed. Mortgage agreements may also include restrictions on the property's use or disposal, such as requirements to purchase home insurance and mortgage insurance, or to pay off any outstanding debt before selling the property. Governments often regulate many aspects of mortgage lending, either directly through legal requirements or indirectly by overseeing financial markets and institutions.",
-      "takeaway": "Before taking out a mortgage, understand how the property serves as security and what happens if you cannot repay the loan.",
-      "source": {
-        "title": "Mortgage",
-        "url": "https://en.wikipedia.org/wiki/Mortgage"
-      },
-      "audio": {}
-    },
     {
       "id": "2026-08-11-home-inspection",
       "date": "2026-08-11",
@@ -639,11 +623,7 @@
         "title": "Data and information visualization",
         "url": "https://en.wikipedia.org/wiki/Data_and_information_visualization"
       },
-      "audio": {
-        "quick": "lessons/2026-09-22-data-and-information-visualization-quick.mp3",
-        "more": "lessons/2026-09-22-data-and-information-visualization-more.mp3",
-        "deep": "lessons/2026-09-22-data-and-information-visualization-deep.mp3"
-      }
+      "audio": {}
     },
     {
       "id": "2026-09-23-health-savings-account",
@@ -1043,6 +1023,26 @@
         "quick": "lessons/2026-10-12-ponzi-scheme-quick.mp3",
         "more": "lessons/2026-10-12-ponzi-scheme-more.mp3",
         "deep": "lessons/2026-10-12-ponzi-scheme-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-10-14-joint-and-several-liability",
+      "date": "2026-10-14",
+      "domain": "Money mechanics",
+      "title": "Who pays when multiple people owe a debt",
+      "hook": "If you co-sign a loan or go into business with someone, you could end up responsible for their share of the debt if they don't pay.",
+      "quick": "When two or more people owe the same debt, they can be responsible in different ways. They might be severally liable, meaning each person is only on the hook for their own part. If one person defaults, you can only go after them for their portion. Alternatively, they could be jointly liable, where each person is responsible for the full amount of the debt. If one person doesn't pay, the creditor can demand the entire payment from anyone else who is jointly liable. However, with joint liability, the creditor generally only gets one chance to sue for the debt. If that lawsuit fails for any reason, they can't try again with another party.",
+      "more": "The most common arrangement, and often the one that carries the most risk for individuals, is joint and several liability. Under this structure, a creditor can pursue any one of the debtors for the full amount of the debt, or they can pursue all of them at once. If one person pays more than their fair share, they usually have the right to seek reimbursement from the others involved. This system is designed so that the injured party, the creditor, has a better chance of recovering the full amount owed, especially if one of the debtors is insolvent or difficult to find. The idea is that it's better for a responsible party to potentially overpay and then chase their co-debtors than for the creditor to be left with an uncollectible debt.",
+      "deep": "The concept of joint and several liability is particularly important in situations like accidents where multiple parties might be found at fault. A plaintiff injured by the actions of several people could potentially recover all their damages from any single defendant, even if that defendant was only minimally responsible. This shifts the risk of non-recovery from the injured party to the defendants. Some states have modified or abolished this doctrine to prevent unfairness. For instance, Utah is listed as a state that has abolished joint and several liability, though there might be exceptions, such as when defendants act in concert. Other states limit it, like requiring a defendant to be over 50% responsible to be jointly and severally liable for economic losses.",
+      "takeaway": "Ask your lender or legal agreement documents if you are jointly and severally liable for any debts you share with another person.",
+      "source": {
+        "title": "Joint and several liability",
+        "url": "https://en.wikipedia.org/wiki/Joint_and_several_liability"
+      },
+      "audio": {
+        "quick": "lessons/2026-10-14-joint-and-several-liability-quick.mp3",
+        "more": "lessons/2026-10-14-joint-and-several-liability-more.mp3",
+        "deep": "lessons/2026-10-14-joint-and-several-liability-deep.mp3"
       }
     }
   ],

@@ -1,47 +1,47 @@
 {
-  "generated_at": "2026-10-13T12:37:59.021976-06:00",
-  "date": "2026-10-13",
+  "generated_at": "2026-10-14T10:07:32.326231-06:00",
+  "date": "2026-10-14",
   "tldr": [
-    "Major stock indices closed lower, influenced by concerns over AI fatigue impacting chip stocks and reports of a global stock rout caused by a Chinese chipmaker.",
-    "Pope Leo successfully underwent surgery to remove a lung lump, which the Vatican confirmed was found at an early stage.",
-    "Federal agents searched the Washington, D.C. home of Representative Ilhan Omar as part of an ongoing federal investigation."
+    "US inflation rose to 3.7% in September, fueling concerns about potential interest rate hikes and contributing to a market downturn.",
+    "Ukrainian officials reported new restrictions on Starlink satellite internet services, impacting the country's drone operations and missions.",
+    "Pope Leo's recovery from lung cancer surgery is progressing as expected, with doctors reporting he has begun walking and is eating normally."
   ],
   "market": {
     "sp500": {
-      "value": 7807.24,
-      "change": -4.3,
-      "asof": "2026-10-12"
+      "value": 7805.45,
+      "change": -1.79,
+      "asof": "2026-10-13"
     },
     "ndx": {
-      "value": 27245.9,
-      "change": -120.27,
-      "asof": "2026-10-12"
+      "value": 27204.38,
+      "change": -41.52,
+      "asof": "2026-10-13"
     },
-    "why": "Major stock indices closed lower as reports indicated \"AI fatigue\" impacting chip stocks and a \"global stock rout\" driven by a Chinese chipmaker."
+    "why": "Major US stock indices declined, influenced by a higher-than-expected US inflation rate of 3.7% for September, driven largely by increased energy prices. This inflation report fueled fears of potential interest rate hikes, adding to market uncertainty. Additionally, Bank of America's shares fell following a revenue miss and a regulatory penalty."
   },
   "yield_10y": {
-    "value": 5.24,
-    "change": -0.0,
-    "asof": "2026-10-12",
-    "why": "The articles do not provide a reason for the 10-year Treasury yield remaining unchanged."
+    "value": 5.22,
+    "change": -0.02,
+    "asof": "2026-10-13",
+    "why": "The 10-year Treasury yield decreased by 0.02% as of October 13. However, the provided articles do not offer a specific reason for this particular decrease, with one article reporting that the yield moved higher on October 14 after the latest inflation data."
   },
   "vix": {
-    "value": 15.21,
-    "change": 0.37,
-    "asof": "2026-10-12",
-    "why": "The VIX increased, reflecting heightened market volatility amid reports of \"AI fatigue\" in chip stocks and a broader \"global stock rout\" linked to a Chinese chipmaker."
+    "value": 15.27,
+    "change": 0.06,
+    "asof": "2026-10-13",
+    "why": "The VIX, a measure of market volatility, increased slightly by 0.06. This rise can be attributed to increased market uncertainty stemming from the higher-than-expected US inflation report for September and the associated fears of potential interest rate hikes."
   },
   "breadth": {
     "sp500": {
-      "value": 49.6,
-      "asof": "2026-10-12",
+      "value": 47.4,
+      "asof": "2026-10-13",
       "status": "healthy",
       "matched": 500,
       "stale": false
     },
     "ndx100": {
-      "value": 63.5,
-      "asof": "2026-10-12",
+      "value": 60.4,
+      "asof": "2026-10-13",
       "status": "healthy",
       "matched": 96,
       "stale": false
@@ -51,29 +51,29 @@
     {
       "symbol": "SOXL",
       "what": "3x semiconductors",
-      "value": 128.4,
-      "day_move": -8.13,
-      "asof": "2026-10-12",
-      "rsi": 43.4,
+      "value": 127.57,
+      "day_move": -0.65,
+      "asof": "2026-10-13",
+      "rsi": 43.0,
       "rsi_zone": "neutral",
-      "low": 101.13,
+      "low": 102.32,
       "high": 164.27,
-      "band_pct": 43.2,
+      "band_pct": 40.8,
       "zone": "mid",
       "action": "hold",
-      "read": "Mid-range - 43% of the way up its 1-month band. Big session: down 8.1% in a day."
+      "read": "Mid-range - 41% of the way up its 1-month band."
     },
     {
       "symbol": "SPXL",
       "what": "3x S&P 500",
-      "value": 297.37,
-      "day_move": -0.2,
-      "asof": "2026-10-12",
-      "rsi": 58.0,
+      "value": 297.42,
+      "day_move": 0.02,
+      "asof": "2026-10-13",
+      "rsi": 58.1,
       "rsi_zone": "neutral",
       "low": 271.57,
       "high": 299.21,
-      "band_pct": 93.3,
+      "band_pct": 93.5,
       "zone": "high",
       "action": "trim",
       "read": "Within 4% of its 1-month high."
@@ -81,17 +81,17 @@
     {
       "symbol": "TQQQ",
       "what": "3x Nasdaq-100",
-      "value": 79.61,
-      "day_move": -2.05,
-      "asof": "2026-10-12",
-      "rsi": 54.9,
+      "value": 78.81,
+      "day_move": -1.0,
+      "asof": "2026-10-13",
+      "rsi": 52.9,
       "rsi_zone": "neutral",
       "low": 67.9,
       "high": 84.25,
-      "band_pct": 71.6,
+      "band_pct": 66.7,
       "zone": "mid",
       "action": "hold",
-      "read": "Mid-range - 72% of the way up its 1-month band."
+      "read": "Mid-range - 67% of the way up its 1-month band."
     }
   ],
   "watchlist_missing": [],
@@ -99,7 +99,7 @@
     "value": 7.4,
     "change": 0.12,
     "asof": "2026-10-08",
-    "why": "The articles do not provide a reason for the change in the 30-year fixed mortgage rate."
+    "why": "The 30-year fixed mortgage rate increased by 0.12% to 7.4%, as reported in Freddie Mac's weekly survey released on October 8. The provided articles do not offer a direct explanation for this specific weekly increase, as the latest inflation data and a revised mortgage rate forecast from Fannie Mae were reported on October 14, after the survey's release date."
   },
   "policy": [],
   "policy_upcoming": [
@@ -151,70 +151,70 @@
   ],
   "tech": [
     {
-      "summary": "Apple has released HomeView, its first smart home display featuring a 7-inch touchscreen and built-in Siri AI, priced at $299.",
-      "source": "Ars Technica",
-      "url": "https://arstechnica.com/apple/2026/10/apple-homeview-smart-home-hub-opens-for-preorders-at-299/"
-    },
-    {
-      "summary": "Google is making it easier for users to launch personal, AI-generated \"vibe-coded\" apps directly through the Play Store, removing the need for phone-to-computer connections.",
+      "summary": "Microsoft has developed a new machine learning tool capable of providing more accurate weather forecasts two to six weeks in advance, potentially benefiting sectors like farming and emergency response.",
       "source": "The Verge",
-      "url": "https://www.theverge.com/tech/1009066/google-play-vibe-coded-android-apps-launch"
+      "url": "https://www.theverge.com/science/1011127/ai-weather-forecast-microsoft"
     },
     {
-      "summary": "Gemini 4 Argon, a new Google AI model, has begun rolling out in the Gemini app and Antigravity, with discounted API rates available for developers through November.",
+      "summary": "Anthropic has issued a warning that small AI models could self-replicate and spread across internet-of-things (IoT) devices, potentially creating a new generation of difficult-to-contain computer worms.",
       "source": "Ars Technica",
-      "url": "https://arstechnica.com/ai/2026/10/gemini-4-argon-begins-rolling-out-in-gemini-app-and-antigravity-but-only-if-you-pay/"
+      "url": "https://arstechnica.com/security/2026/10/anthropic-warns-small-ai-models-could-self-replicate-through-iot-devices/"
+    },
+    {
+      "summary": "ASML reported strong new orders, which helped alleviate concerns that the recent boom in AI spending might be losing momentum.",
+      "source": "Reuters",
+      "url": "https://www.reuters.com/business/asml-forecasts-q4-sales-above-expectations-ai-chip-demand-2026-10-14/"
     }
   ],
   "world": [
     {
-      "summary": "Vatican officials announced that Pope Leo's surgery to remove a lung lump was successfully concluded, after the growth was found at an early stage.",
-      "source": "BBC World",
-      "url": "https://www.bbc.co.uk/news/articles/ck1wvd9dvv22o?at_medium=RSS&at_campaign=rss"
-    },
-    {
-      "summary": "China has sentenced three individuals to death for operating scam centers in Myanmar, with dozens more imprisoned for various related crimes including fraud, trafficking, prostitution, and murder.",
-      "source": "Al Jazeera",
-      "url": "https://www.aljazeera.com/news/2026/10/13/china-sentences-three-people-to-death-for-running-myanmar-scam-centres?traffic_source=rss"
-    },
-    {
-      "summary": "Tensions have escalated between the UK and Argentina over the Falkland Islands, with Argentina lodging a legal claim against the UK's oil exploration and Britain asking Interpol to reject Argentina's arrest requests.",
-      "source": "BBC World",
-      "url": "https://www.bbc.co.uk/news/articles/cmp3g14p3z2ko?at_medium=RSS&at_campaign=rss"
-    },
-    {
-      "summary": "The conflict between Saudi Arabia and Houthi forces in Yemen has intensified with Saudi strikes on strategic oil depots near Sana'a, as the WHO reported a surge in cholera cases in the country.",
+      "summary": "A container ship sank near the Strait of Hormuz, and another cargo vessel was reportedly sinking, amidst a significant increase in Iranian attacks on shipping in the region.",
       "source": "Guardian World",
-      "url": "https://www.theguardian.com/world/2026/oct/13/saudi-arabia-strikes-strategic-oil-depots-near-yemen-capital"
+      "url": "https://www.theguardian.com/world/2026/oct/14/container-ship-sinks-strait-of-hormuz-surge-iranian-attacks-iran-us-midterm-elections"
+    },
+    {
+      "summary": "Pope Leo's recovery from lung cancer surgery is progressing as planned, with doctors stating he has begun walking in his hospital room and is eating normally after the operation.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/world/2026/oct/14/pope-leo-recovery-lung-cancer-surgery-progressing-as-planned"
+    },
+    {
+      "summary": "Mont Blanc, Europe's highest peak, has decreased in height by more than a meter over the past year, now measuring 4,807.47 meters above sea level due to changes in the Alpine climate.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/environment/2026/oct/14/mont-blanc-loses-metre-height"
+    },
+    {
+      "summary": "UK Prime Minister Andy Burnham hosted Ukrainian President Volodymyr Zelenskyy at Downing Street, stating his desire to \"repair bridges\" between Ukraine and the United States.",
+      "source": "BBC World",
+      "url": "https://www.bbc.co.uk/news/articles/cq98z59xdny5o?at_medium=RSS&at_campaign=rss"
     }
   ],
   "us": [
     {
-      "summary": "Federal agents searched the Washington, D.C. home of Representative Ilhan Omar as part of an ongoing federal investigation.",
-      "source": "NPR National",
-      "url": "https://www.npr.org/2026/10/13/nx-s1-5998873/federal-agents-search-rep-ilhan-omars-dc-home"
-    },
-    {
-      "summary": "Florida carried out an execution, which was the state's 17th this year, amid scrutiny following a botched lethal injection attempt in Tennessee.",
-      "source": "Guardian World",
-      "url": "https://www.theguardian.com/us-news/2026/oct/13/florida-prision-execution-james-robertson"
-    },
-    {
-      "summary": "Kimberly Guilfoyle resigned as US ambassador to Greece after the White House requested her departure, following reports of alleged misconduct.",
+      "summary": "The Social Security Administration announced a 3.6% cost-of-living adjustment (COLA) for 2027, which will increase average monthly retirement benefit checks by $75.",
       "source": "CNBC",
-      "url": "https://www.cnbc.com/2026/10/13/kimberly-guilfoyle-resign-trump-ambassador.html"
+      "url": "https://www.cnbc.com/2026/10/14/social-security-cola-2027.html"
+    },
+    {
+      "summary": "A federal judge ruled to extend White House access for media outlets CNN, MS Now, and Politico, maintaining that President Trump's previous ban on their coverage was likely illegal.",
+      "source": "NPR National",
+      "url": "https://www.npr.org/2026/10/14/nx-s1-6001398/white-house-media-ban"
+    },
+    {
+      "summary": "Organized criminal rings are reportedly targeting SNAP recipients through EBT card skimming, taking millions of dollars due to the government program's outdated security features.",
+      "source": "NPR National",
+      "url": "https://www.npr.org/2026/10/14/nx-s1-5985198/snap-fraud-ebt-card-skimming-chip-cards"
     }
   ],
   "science": [
     {
-      "summary": "Clinicians are recommending reduced screen time in English schools to prevent long-term health issues, including a rise in short-sightedness among students.",
-      "source": "BBC Health",
-      "url": "https://www.bbc.co.uk/news/articles/cq4g18prn4l4o?at_medium=RSS&at_campaign=rss"
+      "summary": "Researchers across North America are attaching tiny transmitters to Monarch butterflies to track their migration to Mexico and gain further insight into their journey and challenges.",
+      "source": "NPR Science",
+      "url": "https://www.npr.org/2026/10/13/nx-s1-5986256-e1/researchers-are-tracking-monarch-butterflies-to-learn-more-about-their-journey"
     },
     {
-      "summary": "Emergency room departments are reporting a significant increase in pediatric trauma accidents related to micromobility devices like e-bikes, prompting calls for federal regulation.",
-      "source": "NPR Health",
-      "url": "https://www.npr.org/2026/10/12/nx-s1-5969944/rise-in-accidents-involving-kids-and-e-bikes-sparks-debate-about-regulation"
+      "summary": "Clinicians are urging a reduction in screen time in English classrooms, warning that extensive technology use is contributing to a rise in health issues such as short-sightedness among students.",
+      "source": "BBC Health",
+      "url": "https://www.bbc.co.uk/news/articles/cq4g18prn4l4o?at_medium=RSS&at_campaign=rss"
     }
   ],
   "weekly_recap": null,
