@@ -1,47 +1,47 @@
 {
-  "generated_at": "2026-10-14T10:07:32.326231-06:00",
-  "date": "2026-10-14",
+  "generated_at": "2026-10-15T09:55:30.626455-06:00",
+  "date": "2026-10-15",
   "tldr": [
-    "US inflation rose to 3.7% in September, fueling concerns about potential interest rate hikes and contributing to a market downturn.",
-    "Ukrainian officials reported new restrictions on Starlink satellite internet services, impacting the country's drone operations and missions.",
-    "Pope Leo's recovery from lung cancer surgery is progressing as expected, with doctors reporting he has begun walking and is eating normally."
+    "Global tech markets experienced a significant sell-off driven by concerns over US inflation and the financial health of the AI sector.",
+    "The ongoing conflict between Russia and Ukraine escalated with renewed strikes on energy infrastructure by both sides.",
+    "A school roof collapse in Pakistan tragically killed at least 33 pupils and a teacher."
   ],
   "market": {
     "sp500": {
-      "value": 7805.45,
-      "change": -1.79,
-      "asof": "2026-10-13"
+      "value": 7718.94,
+      "change": -86.51,
+      "asof": "2026-10-14"
     },
     "ndx": {
-      "value": 27204.38,
-      "change": -41.52,
-      "asof": "2026-10-13"
+      "value": 26692.87,
+      "change": -511.51,
+      "asof": "2026-10-14"
     },
-    "why": "Major US stock indices declined, influenced by a higher-than-expected US inflation rate of 3.7% for September, driven largely by increased energy prices. This inflation report fueled fears of potential interest rate hikes, adding to market uncertainty. Additionally, Bank of America's shares fell following a revenue miss and a regulatory penalty."
+    "why": "Global tech markets experienced a significant sell-off, with chip makers and tech investors seeing plunges, driven by fears over US inflation and the financial health of the AI sector, which spooked markets. Wholesale prices also saw their biggest annual jump since 2022, adding to inflation concerns."
   },
   "yield_10y": {
-    "value": 5.22,
-    "change": -0.02,
-    "asof": "2026-10-13",
-    "why": "The 10-year Treasury yield decreased by 0.02% as of October 13. However, the provided articles do not offer a specific reason for this particular decrease, with one article reporting that the yield moved higher on October 14 after the latest inflation data."
+    "value": 5.19,
+    "change": -0.03,
+    "asof": "2026-10-14",
+    "why": "Treasury yields slid as investors moved towards the perceived safety of government bonds amidst the tech market rout, indicating a broader flight to safety."
   },
   "vix": {
-    "value": 15.27,
-    "change": 0.06,
-    "asof": "2026-10-13",
-    "why": "The VIX, a measure of market volatility, increased slightly by 0.06. This rise can be attributed to increased market uncertainty stemming from the higher-than-expected US inflation report for September and the associated fears of potential interest rate hikes."
+    "value": 16.87,
+    "change": 1.6,
+    "asof": "2026-10-14",
+    "why": "The VIX increased amid a broad tech market sell-off and heightened investor fears regarding US inflation and the financial stability within the AI ecosystem."
   },
   "breadth": {
     "sp500": {
-      "value": 47.4,
-      "asof": "2026-10-13",
+      "value": 52.2,
+      "asof": "2026-10-14",
       "status": "healthy",
       "matched": 500,
       "stale": false
     },
     "ndx100": {
       "value": 60.4,
-      "asof": "2026-10-13",
+      "asof": "2026-10-14",
       "status": "healthy",
       "matched": 96,
       "stale": false
@@ -51,47 +51,47 @@
     {
       "symbol": "SOXL",
       "what": "3x semiconductors",
-      "value": 127.57,
-      "day_move": -0.65,
-      "asof": "2026-10-13",
-      "rsi": 43.0,
+      "value": 110.54,
+      "day_move": -13.35,
+      "asof": "2026-10-14",
+      "rsi": 35.7,
       "rsi_zone": "neutral",
-      "low": 102.32,
+      "low": 103.97,
       "high": 164.27,
-      "band_pct": 40.8,
+      "band_pct": 10.9,
       "zone": "mid",
       "action": "hold",
-      "read": "Mid-range - 41% of the way up its 1-month band."
+      "read": "Mid-range - 11% of the way up its 1-month band. Big session: down 13.3% in a day."
     },
     {
       "symbol": "SPXL",
       "what": "3x S&P 500",
-      "value": 297.42,
-      "day_move": 0.02,
-      "asof": "2026-10-13",
-      "rsi": 58.1,
+      "value": 287.63,
+      "day_move": -3.29,
+      "asof": "2026-10-14",
+      "rsi": 48.3,
       "rsi_zone": "neutral",
       "low": 271.57,
       "high": 299.21,
-      "band_pct": 93.5,
-      "zone": "high",
-      "action": "trim",
-      "read": "Within 4% of its 1-month high."
+      "band_pct": 58.1,
+      "zone": "mid",
+      "action": "hold",
+      "read": "Mid-range - 58% of the way up its 1-month band."
     },
     {
       "symbol": "TQQQ",
       "what": "3x Nasdaq-100",
-      "value": 78.81,
-      "day_move": -1.0,
-      "asof": "2026-10-13",
-      "rsi": 52.9,
+      "value": 74.12,
+      "day_move": -5.95,
+      "asof": "2026-10-14",
+      "rsi": 43.1,
       "rsi_zone": "neutral",
-      "low": 67.9,
+      "low": 67.93,
       "high": 84.25,
-      "band_pct": 66.7,
+      "band_pct": 37.9,
       "zone": "mid",
       "action": "hold",
-      "read": "Mid-range - 67% of the way up its 1-month band."
+      "read": "Mid-range - 38% of the way up its 1-month band."
     }
   ],
   "watchlist_missing": [],
@@ -99,7 +99,7 @@
     "value": 7.4,
     "change": 0.12,
     "asof": "2026-10-08",
-    "why": "The 30-year fixed mortgage rate increased by 0.12% to 7.4%, as reported in Freddie Mac's weekly survey released on October 8. The provided articles do not offer a direct explanation for this specific weekly increase, as the latest inflation data and a revised mortgage rate forecast from Fannie Mae were reported on October 14, after the survey's release date."
+    "why": "The recent weekly survey showed a slight increase in 30-year fixed mortgage rates. The provided articles do not offer a specific explanation for this particular weekly change, though general discussions on rising interest rates and the prospect of rates remaining above 7% in 2027 are noted."
   },
   "policy": [],
   "policy_upcoming": [
@@ -151,70 +151,70 @@
   ],
   "tech": [
     {
-      "summary": "Microsoft has developed a new machine learning tool capable of providing more accurate weather forecasts two to six weeks in advance, potentially benefiting sectors like farming and emergency response.",
+      "summary": "TSMC is experiencing a fierce battle for chip manufacturing capacity among major AI customers like Nvidia, Apple, Broadcom, and AMD, despite reporting a record quarter.",
+      "source": "CNBC",
+      "url": "https://www.cnbc.com/2026/10/15/nvidia-apple-broadcom-in-fierce-battle-to-make-chips-at-tsmc.html"
+    },
+    {
+      "summary": "Amazon has launched new 'personal AI' devices, the Bee Frontier and Bee Eclipse, designed to listen to conversations; the Bee Frontier is an upgraded wearable bracelet and the Bee Eclipse attaches to smartphones.",
+      "source": "CNBC",
+      "url": "https://www.cnbc.com/2026/10/15/amazon-bee-frontier-eclipse-ai-devices.html"
+    },
+    {
+      "summary": "Security researchers have found evidence that an Israeli ad tech firm worked with spyware companies to infect devices, including those at Al Jazeera, through zero-click attacks delivered via online ads.",
       "source": "The Verge",
-      "url": "https://www.theverge.com/science/1011127/ai-weather-forecast-microsoft"
-    },
-    {
-      "summary": "Anthropic has issued a warning that small AI models could self-replicate and spread across internet-of-things (IoT) devices, potentially creating a new generation of difficult-to-contain computer worms.",
-      "source": "Ars Technica",
-      "url": "https://arstechnica.com/security/2026/10/anthropic-warns-small-ai-models-could-self-replicate-through-iot-devices/"
-    },
-    {
-      "summary": "ASML reported strong new orders, which helped alleviate concerns that the recent boom in AI spending might be losing momentum.",
-      "source": "Reuters",
-      "url": "https://www.reuters.com/business/asml-forecasts-q4-sales-above-expectations-ai-chip-demand-2026-10-14/"
+      "url": "https://www.theverge.com/tech/1011956/discover-tech-zero-click-ads-spyware"
     }
   ],
   "world": [
     {
-      "summary": "A container ship sank near the Strait of Hormuz, and another cargo vessel was reportedly sinking, amidst a significant increase in Iranian attacks on shipping in the region.",
+      "summary": "The conflict in Ukraine escalated as Russia launched drone attacks on infrastructure and President Zelenskyy announced a resumption of strikes on Russian oil refineries, effectively collapsing a previous 'energy ceasefire' effort.",
       "source": "Guardian World",
-      "url": "https://www.theguardian.com/world/2026/oct/14/container-ship-sinks-strait-of-hormuz-surge-iranian-attacks-iran-us-midterm-elections"
+      "url": "https://www.theguardian.com/world/2026/oct/15/us-effort-to-get-russia-ukraine-energy-ceasefire-collapses"
     },
     {
-      "summary": "Pope Leo's recovery from lung cancer surgery is progressing as planned, with doctors stating he has begun walking in his hospital room and is eating normally after the operation.",
-      "source": "Guardian World",
-      "url": "https://www.theguardian.com/world/2026/oct/14/pope-leo-recovery-lung-cancer-surgery-progressing-as-planned"
-    },
-    {
-      "summary": "Mont Blanc, Europe's highest peak, has decreased in height by more than a meter over the past year, now measuring 4,807.47 meters above sea level due to changes in the Alpine climate.",
-      "source": "Guardian World",
-      "url": "https://www.theguardian.com/environment/2026/oct/14/mont-blanc-loses-metre-height"
-    },
-    {
-      "summary": "UK Prime Minister Andy Burnham hosted Ukrainian President Volodymyr Zelenskyy at Downing Street, stating his desire to \"repair bridges\" between Ukraine and the United States.",
+      "summary": "At least 33 pupils and one teacher were killed after a school roof collapsed in Peshawar, north-west Pakistan, burying children under debris.",
       "source": "BBC World",
-      "url": "https://www.bbc.co.uk/news/articles/cq98z59xdny5o?at_medium=RSS&at_campaign=rss"
+      "url": "https://www.bbc.co.uk/news/articles/cked326llddgo?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "summary": "The cost of balancing Great Britain's power grid has soared to nearly \u00a350 million a day, due to the grid operator paying to switch off windfarms in areas of excess electricity and simultaneously turning on gas plants elsewhere.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/business/2026/oct/15/cost-of-balancing-great-britain-power-grid-50m-daily"
+    },
+    {
+      "summary": "Delegates from over 10 countries walked out during an address by Israeli President Isaac Herzog at a summit in Baku.",
+      "source": "Al Jazeera",
+      "url": "https://www.aljazeera.com/video/newsfeed/2026/10/15/delegates-walk-out-as-israeli-president-addresses-summit?traffic_source=rss"
     }
   ],
   "us": [
     {
-      "summary": "The Social Security Administration announced a 3.6% cost-of-living adjustment (COLA) for 2027, which will increase average monthly retirement benefit checks by $75.",
-      "source": "CNBC",
-      "url": "https://www.cnbc.com/2026/10/14/social-security-cola-2027.html"
+      "summary": "President Trump reversed an earlier plan to livestream the execution of Fort Hood shooter Nidal Hasan, following a widespread outcry.",
+      "source": "Al Jazeera",
+      "url": "https://www.aljazeera.com/news/2026/10/15/trump-says-fort-hood-shooter-execution-will-not-be-livestreamed?traffic_source=rss"
     },
     {
-      "summary": "A federal judge ruled to extend White House access for media outlets CNN, MS Now, and Politico, maintaining that President Trump's previous ban on their coverage was likely illegal.",
+      "summary": "The Social Security program could face financial shortfalls as early as 2032, potentially impacting full payments to retirees, with various solutions under examination.",
       "source": "NPR National",
-      "url": "https://www.npr.org/2026/10/14/nx-s1-6001398/white-house-media-ban"
+      "url": "https://www.npr.org/2026/10/15/nx-s1-6000635/social-security-could-soon-run-out-of-money-here-are-some-possible-solutions"
     },
     {
-      "summary": "Organized criminal rings are reportedly targeting SNAP recipients through EBT card skimming, taking millions of dollars due to the government program's outdated security features.",
+      "summary": "Survivors of the 2025 wildfires in Los Angeles are encountering further delays with a FEMA program intended to assist the most vulnerable victims in rebuilding their homes.",
       "source": "NPR National",
-      "url": "https://www.npr.org/2026/10/14/nx-s1-5985198/snap-fraud-ebt-card-skimming-chip-cards"
+      "url": "https://www.npr.org/2026/10/15/nx-s1-5983664/la-fire-survivors-face-another-setback-with-fema-program-delays"
     }
   ],
   "science": [
     {
-      "summary": "Researchers across North America are attaching tiny transmitters to Monarch butterflies to track their migration to Mexico and gain further insight into their journey and challenges.",
-      "source": "NPR Science",
-      "url": "https://www.npr.org/2026/10/13/nx-s1-5986256-e1/researchers-are-tracking-monarch-butterflies-to-learn-more-about-their-journey"
+      "summary": "New guidance from NHS England states that trans patients should be cared for in single-sex hospital wards or bays that align with their biological sex.",
+      "source": "BBC Health",
+      "url": "https://www.bbc.co.uk/news/articles/cry83dyddv6no?at_medium=RSS&at_campaign=rss"
     },
     {
-      "summary": "Clinicians are urging a reduction in screen time in English classrooms, warning that extensive technology use is contributing to a rise in health issues such as short-sightedness among students.",
-      "source": "BBC Health",
-      "url": "https://www.bbc.co.uk/news/articles/cq4g18prn4l4o?at_medium=RSS&at_campaign=rss"
+      "summary": "Researchers have successfully revived pig kidneys that were cooled to -150 \u00b0C and stored in a freezer for months, demonstrating a potential breakthrough in organ preservation.",
+      "source": "MIT Technology Review",
+      "url": "https://www.technologyreview.com/2026/10/15/1146755/the-download-reviving-frozen-pig-kidneys-boosting-nuclear-power/"
     }
   ],
   "weekly_recap": null,

@@ -1,22 +1,6 @@
 {
-  "generated_at": "2026-10-14T10:07:32.326231-06:00",
+  "generated_at": "2026-10-15T09:55:30.626455-06:00",
   "lessons": [
-    {
-      "id": "2026-08-11-home-inspection",
-      "date": "2026-08-11",
-      "domain": "Home, car and repair",
-      "title": "Home Inspection Basics",
-      "hook": "Understanding what a home inspection covers can save you from unexpected problems with a new house.",
-      "quick": "When buying a home, a home inspection is a key step. It is a look at the house's current condition. A trained inspector examines the property. They then give you a written report about what they found. It is a good idea to go with the inspector when they visit. This helps you understand their findings better. The inspection helps you make smart decisions about buying the house. However, an inspector only tells you about the condition at the time of the inspection. They do not promise how well the house will work in the future or how long its parts will last.",
-      "more": "A home inspection is different from a property appraisal. An appraiser decides the value of a property. A home inspector checks the condition of the structure itself. In some places, home inspectors must be licensed. This often involves completing a training course and passing an exam. Some states also require ongoing education to keep a license. Things like termite inspections are usually separate. You will need to get those from licensed companies and they often are required for a mortgage.",
-      "deep": "Professional associations like the International Association of Certified Home Inspectors or the American Society of Home Inspectors set standards for how inspections are done. In the United States, more than thirty states now regulate home inspections in some way. These regulations aim to ensure inspectors have the right training and follow certain procedures. While the inspection looks at the current state of the home, it is not a check to see if the building follows all local codes. That is called a building inspection. Sometimes, inspectors can also check for other things like radon, mold, or issues with private wells, but these are often extra services.",
-      "takeaway": "Ask your home inspector what their report covers and what is excluded.",
-      "source": {
-        "title": "Home inspection",
-        "url": "https://en.wikipedia.org/wiki/Home_inspection"
-      },
-      "audio": {}
-    },
     {
       "id": "2026-08-12-first-aid",
       "date": "2026-08-12",
@@ -639,11 +623,7 @@
         "title": "Health savings account",
         "url": "https://en.wikipedia.org/wiki/Health_savings_account"
       },
-      "audio": {
-        "more": "lessons/2026-09-23-health-savings-account-more.mp3",
-        "deep": "lessons/2026-09-23-health-savings-account-deep.mp3",
-        "quick": "lessons/2026-09-23-health-savings-account-quick.mp3"
-      }
+      "audio": {}
     },
     {
       "id": "2026-09-24-drain-plumbing",
@@ -1043,6 +1023,26 @@
         "quick": "lessons/2026-10-14-joint-and-several-liability-quick.mp3",
         "more": "lessons/2026-10-14-joint-and-several-liability-more.mp3",
         "deep": "lessons/2026-10-14-joint-and-several-liability-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-10-15-dishwasher",
+      "date": "2026-10-15",
+      "domain": "Home, car and repair",
+      "title": "Choosing an Efficient Dishwasher",
+      "hook": "Picking the right dishwasher can make a difference in how much water and energy you use, and how well it fits your home.",
+      "quick": "A common regret for new homeowners is realizing their appliances aren't as efficient or convenient as they could be, sometimes leading to higher utility bills or frustration from less effective cleaning. When it comes to dishwashers, older models or those without certain features can waste water and energy, or leave dishes less than spotless. Modern dishwashers clean by spraying hot water, typically between 45 and 75 degrees Celsius, mixed with detergent. This mixture is recirculated to save water and energy. Following a pre-rinse, a main wash, and one or more rinse cycles, the dishes are dried. To help prevent water spots, especially if you have hard water, many machines use a chemical rinse-aid to reduce the surface tension of the water, ensuring a clearer finish. Considering these details can help you choose a machine that cleans effectively without unnecessary costs over time.",
+      "more": "Beyond just cleaning, how a dishwasher is built and its specialized features greatly impact its long-term value. One key difference lies in the wash chamber construction, which can be made from either plastic or stainless steel. Stainless steel generally provides advantages over plastic for durability and performance. Additionally, you can find dishwashers in standard or tall tub designs. A standard tub model includes a service kickplate below the door, which can make maintenance and installation simpler. However, a tall tub dishwasher offers approximately 20% more capacity, meaning you can wash more dishes per load, and it often has better sound dampening because of its continuous front door design. These choices affect both the upfront cost and your daily experience.",
+      "deep": "Even within a category, dishwashers can vary significantly in their operational intelligence, which directly translates to savings. Some of the most valuable innovations for efficiency began appearing in the late 1990s, focusing on energy conservation. These include \"soil sensors,\" which are computerized tools inside the dishwasher that constantly measure the food particles coming off the dishes. When these sensors detect that the dishes are no longer releasing additional food particles, they report the dishes as clean. This technology works alongside variable washing time. If the sensors indicate that dishes are particularly dirty, the dishwasher will run for a longer period. Conversely, if dishes are detected as cleaner, the machine runs for a shorter duration. This adaptive approach ensures the dishwasher operates only as long as necessary, saving both energy and water with each cycle, which can add up to significant savings over the years you own the appliance.",
+      "takeaway": "Before buying a dishwasher, check if it has a stainless steel wash chamber and features like soil sensors and variable wash time to ensure long-term efficiency and durability.",
+      "source": {
+        "title": "Dishwasher",
+        "url": "https://en.wikipedia.org/wiki/Dishwasher"
+      },
+      "audio": {
+        "quick": "lessons/2026-10-15-dishwasher-quick.mp3",
+        "more": "lessons/2026-10-15-dishwasher-more.mp3",
+        "deep": "lessons/2026-10-15-dishwasher-deep.mp3"
       }
     }
   ],
