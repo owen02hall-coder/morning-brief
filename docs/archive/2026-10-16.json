@@ -1,0 +1,237 @@
+{
+  "generated_at": "2026-10-16T09:43:39.792408-06:00",
+  "date": "2026-10-16",
+  "tldr": [
+    "A school shooting in Bend, Oregon, resulted in the deaths of three children and one teacher, with the 16-year-old suspect also killed by an armed bystander.",
+    "A new \"zero-click\" malware attack developed by an Israeli firm is highlighted as posing a global security risk by targeting victims through advertisements without requiring any user action.",
+    "Israeli settlers attacked Palestinians and a Washington Post journalist during the annual olive harvest in the occupied West Bank, burning cars and trees and causing injuries."
+  ],
+  "market": {
+    "sp500": {
+      "value": 7744.06,
+      "change": 25.12,
+      "asof": "2026-10-15"
+    },
+    "ndx": {
+      "value": 26713.03,
+      "change": 20.16,
+      "asof": "2026-10-15"
+    },
+    "why": "The provided articles do not offer specific reasons for the S&P 500 and Nasdaq Composite closing higher, though one report noted that a stock-market 'sell' signal had been silenced."
+  },
+  "yield_10y": {
+    "value": 5.09,
+    "change": -0.1,
+    "asof": "2026-10-15",
+    "why": "The 10-year Treasury yield declined, with reports indicating some relief for bond markets following October's correction and a Federal Reserve official withholding a signal for a further interest rate hike this month."
+  },
+  "vix": {
+    "value": 16.46,
+    "change": -0.41,
+    "asof": "2026-10-15",
+    "why": "The VIX decreased, potentially reflecting reduced market anxiety due to relief in bond markets and the Federal Reserve's lack of a new interest rate hike signal."
+  },
+  "breadth": {
+    "sp500": {
+      "value": 53.6,
+      "asof": "2026-10-15",
+      "status": "healthy",
+      "matched": 500,
+      "stale": false
+    },
+    "ndx100": {
+      "value": 57.3,
+      "asof": "2026-10-15",
+      "status": "healthy",
+      "matched": 96,
+      "stale": false
+    }
+  },
+  "watchlist": [
+    {
+      "symbol": "SOXL",
+      "what": "3x semiconductors",
+      "value": 107.35,
+      "day_move": -2.89,
+      "asof": "2026-10-15",
+      "rsi": 34.5,
+      "rsi_zone": "neutral",
+      "low": 107.35,
+      "high": 164.27,
+      "band_pct": 0.0,
+      "zone": "low",
+      "action": "buy",
+      "read": "Within 4% of its 1-month low."
+    },
+    {
+      "symbol": "SPXL",
+      "what": "3x S&P 500",
+      "value": 290.0,
+      "day_move": 0.82,
+      "asof": "2026-10-15",
+      "rsi": 50.5,
+      "rsi_zone": "neutral",
+      "low": 280.76,
+      "high": 299.21,
+      "band_pct": 50.1,
+      "zone": "mid",
+      "action": "hold",
+      "read": "Mid-range - 50% of the way up its 1-month band."
+    },
+    {
+      "symbol": "TQQQ",
+      "what": "3x Nasdaq-100",
+      "value": 73.82,
+      "day_move": -0.4,
+      "asof": "2026-10-15",
+      "rsi": 42.5,
+      "rsi_zone": "neutral",
+      "low": 71.38,
+      "high": 84.25,
+      "band_pct": 19.0,
+      "zone": "low",
+      "action": "buy",
+      "read": "Within 4% of its 1-month low."
+    }
+  ],
+  "watchlist_missing": [],
+  "mortgage": {
+    "value": 7.4,
+    "change": 0.0,
+    "asof": "2026-10-15",
+    "why": "The 30-year fixed mortgage rate remained unchanged at 7.4% in the latest weekly survey, even as the 10-year Treasury yield saw a decline at its most recent close."
+  },
+  "policy": [],
+  "policy_upcoming": [
+    {
+      "what_happened": "This document contains final regulations regarding the deduction for certain taxpayers for an amount up to $10,000 of qualified passenger vehicle loan interest.",
+      "effect": "You can deduct up to $10,000 of qualified passenger vehicle loan interest.",
+      "url": "https://www.federalregister.gov/documents/2026/09/08/2026-18219/car-loan-interest-deduction",
+      "status": "Final rule",
+      "effective_date": "2026-11-09",
+      "source": "Federal Register"
+    },
+    {
+      "what_happened": "A Utah bill modifies provisions related to the property tax exemption process.",
+      "effect": "Once you own a home, you will have deadlines for filing an application for a property tax exemption with the county board of equalization and for the board to render a decision.",
+      "url": "https://le.utah.gov/~2026/bills/static/SB0236.html",
+      "status": "Signed in Utah",
+      "effective_date": "2027-01-01",
+      "source": "Utah Legislature"
+    },
+    {
+      "what_happened": "A bill amends requirements for health insurance preauthorization in Utah.",
+      "effect": "Your health insurer must make an authorization or adverse preauthorization determination within a defined maximum time.",
+      "url": "https://le.utah.gov/~2026/bills/static/SB0319.html",
+      "status": "Signed in Utah",
+      "effective_date": "2027-01-01",
+      "source": "Utah Legislature"
+    }
+  ],
+  "policy_week": [],
+  "policy_calendar": [
+    {
+      "date": "2026-11-01",
+      "label": "ACA marketplace open enrollment opens \u2014 expected early November",
+      "note": "healthcare.gov has opened enrollment on November 1 each year, and currently publishes December 15 as the deadline for coverage starting January 1. The window is set by federal rule and has been changed by rulemaking before.",
+      "url": "https://www.healthcare.gov/quick-guide/dates-and-deadlines/"
+    },
+    {
+      "date": "2026-11-05",
+      "label": "IRS 401(k) and IRA contribution limits for next year \u2014 expected late October or early November",
+      "note": "The annual cost-of-living adjustment notice, historically released within a week or two of the bracket figures. It sets how much can go into a 401(k) and an IRA next year.",
+      "url": "https://www.irs.gov/retirement-plans/cola-increases-for-dollar-limitations-on-benefits-and-contributions"
+    },
+    {
+      "date": "2026-11-10",
+      "label": "IRS tax brackets and the married-filing-jointly standard deduction for next year \u2014 expected late October or early November",
+      "note": "Published as an annual inflation-adjustment revenue procedure; recent releases landed between mid-October and mid-November. These are the bracket thresholds and the standard deduction the next return is filed against.",
+      "url": "https://www.irs.gov/filing/federal-income-tax-rates-and-brackets"
+    }
+  ],
+  "tech": [
+    {
+      "summary": "Meta's updated business terms, effective October 30th, reportedly grant the company permission to crawl and scrape websites associated with businesses using its platforms, including online publishers, to train and improve its AI models.",
+      "source": "The Verge",
+      "url": "https://www.theverge.com/tech/1012846/meta-business-terms-scrape-news-publishers"
+    },
+    {
+      "summary": "An Israeli firm's new \"zero-click\" malware, which uses advertisements to target victims without requiring any interaction, has been identified as a significant global security risk.",
+      "source": "Al Jazeera",
+      "url": "https://www.aljazeera.com/news/2026/10/16/how-israeli-firms-zero-click-malware-attack-poses-global-security-risk?traffic_source=rss"
+    },
+    {
+      "summary": "Preorders for Apple's new foldable iPhone Duo began on Friday but delivery estimates quickly slipped into early 2027, indicating high demand for the device which is set to launch in stores on October 23rd.",
+      "source": "The Verge",
+      "url": "https://www.theverge.com/tech/1012805/apple-iphone-duo-preorder-delay"
+    }
+  ],
+  "world": [
+    {
+      "summary": "Ukraine's President Zelenskyy stated his country's right to self-defense, receiving support from EU leaders, following new criticism from Donald Trump regarding recent strikes.",
+      "source": "BBC World",
+      "url": "https://www.bbc.co.uk/news/articles/c58jz174w89ro?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "summary": "Israeli settlers attacked Palestinians and a Washington Post photographer during the annual olive harvest in the occupied West Bank, burning trees and cars and injuring several individuals.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/world/2026/oct/16/israeli-settlers-attack-olive-farmers-west-bank-washington-post-journalist-heidi-levine"
+    },
+    {
+      "summary": "Qatar announced a \"massive\" solar plant project in Lebanon and its foreign minister called for an Israeli withdrawal from Lebanese territory, reaffirming support for Lebanon.",
+      "source": "Al Jazeera",
+      "url": "https://www.aljazeera.com/news/2026/10/16/qatar-announces-massive-solar-plant-project-in-lebanon?traffic_source=rss"
+    },
+    {
+      "summary": "Ethiopia has announced the establishment of an interim government in Tigray, following a military pushback against a TPLF uprising, with promises of free elections within six months.",
+      "source": "Al Jazeera",
+      "url": "https://www.aljazeera.com/news/2026/10/16/ethiopia-announces-instalment-of-interim-government-in-tigray?traffic_source=rss"
+    }
+  ],
+  "us": [
+    {
+      "summary": "A shooting at an elementary school in Bend, Oregon, resulted in the deaths of three children and one teacher, with a 16-year-old suspect also killed by an armed bystander.",
+      "source": "NPR National",
+      "url": "https://www.npr.org/2026/10/16/g-s1-148373/up-first-newsletter-bend-oregon-school-shooting-california-doj-voters-presidential-papers"
+    },
+    {
+      "summary": "The Justice Department has initiated a lawsuit against California over alleged noncitizen voters.",
+      "source": "NPR National",
+      "url": "https://www.npr.org/2026/10/16/g-s1-148373/up-first-newsletter-bend-oregon-school-shooting-california-doj-voters-presidential-papers"
+    },
+    {
+      "summary": "Several brushfires, exacerbated by hot and windy weather, forced evacuations in southern California and led to power shutoffs for tens of thousands of customers as a precautionary measure.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/us-news/2026/oct/16/southern-california-brush-fires-force-evacuations"
+    }
+  ],
+  "science": [
+    {
+      "summary": "Pioneering same-day metagenomics tests are offering a new method for detecting infections in intensive care patients, with one 10-year-old child benefiting from this technology.",
+      "source": "BBC Health",
+      "url": "https://www.bbc.co.uk/news/articles/cw5yn83m8gypo?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "summary": "Ministers in the UK have promised to reform the Covid vaccine compensation scheme, which provides financial support for individuals injured or bereaved by vaccines, following criticism from an inquiry.",
+      "source": "BBC Health",
+      "url": "https://www.bbc.co.uk/news/articles/c3pwgqd4gz9xo?at_medium=RSS&at_campaign=rss"
+    }
+  ],
+  "weekly_recap": null,
+  "data_availability": {
+    "sp500": true,
+    "ndx": true,
+    "vix": true,
+    "ten_year": true,
+    "news_world": true,
+    "news_us": true,
+    "news_science": true,
+    "news_business": true,
+    "news_tech": true,
+    "summary": "ok",
+    "breadth": true,
+    "policy": true,
+    "mortgage": true,
+    "watchlist": true
+  }
+}

@@ -1,16 +1,16 @@
 {
-  "last_run": "2026-10-15",
-  "markets_last_ok": "2026-10-15",
+  "last_run": "2026-10-16",
+  "markets_last_ok": "2026-10-16",
   "breadth_last_good": {
     "sp500": {
-      "value": 52.2,
+      "value": 53.6,
       "matched": 500,
-      "asof": "2026-10-14"
+      "asof": "2026-10-15"
     },
     "ndx100": {
-      "value": 60.4,
+      "value": 57.3,
       "matched": 96,
-      "asof": "2026-10-14"
+      "asof": "2026-10-15"
     }
   },
   "breadth": {
@@ -18,15 +18,15 @@
       "in_alert": false,
       "nag_days": 0,
       "warn_armed": true,
-      "last_value": 52.2,
-      "last_asof": "2026-10-14"
+      "last_value": 53.6,
+      "last_asof": "2026-10-15"
     },
     "ndx100": {
       "in_alert": false,
       "nag_days": 0,
       "warn_armed": true,
-      "last_value": 60.4,
-      "last_asof": "2026-10-14"
+      "last_value": 57.3,
+      "last_asof": "2026-10-15"
     }
   },
   "policy_utah_queue": [],
@@ -86,7 +86,7 @@
     }
   ],
   "policy_today": {
-    "date": "2026-10-15",
+    "date": "2026-10-16",
     "items": [],
     "alerted": false
   },
@@ -524,13 +524,20 @@
       "title": "Choosing an Efficient Dishwasher",
       "domain": "Home, car and repair",
       "date": "2026-10-15"
+    },
+    {
+      "id": "2026-10-16-heat-stroke",
+      "article_title": "Heat stroke",
+      "title": "Recognizing and Responding to Heat Stroke",
+      "domain": "Health and emergencies",
+      "date": "2026-10-16"
     }
   ],
   "lessons_bootstrapped": true,
   "policy_week": [],
   "watchlist_actions": {
-    "SOXL": "hold",
+    "SOXL": "buy",
     "SPXL": "hold",
-    "TQQQ": "hold"
+    "TQQQ": "buy"
   }
 }

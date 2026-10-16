@@ -1,47 +1,47 @@
 {
-  "generated_at": "2026-10-15T09:55:30.626455-06:00",
-  "date": "2026-10-15",
+  "generated_at": "2026-10-16T09:43:39.792408-06:00",
+  "date": "2026-10-16",
   "tldr": [
-    "Global tech markets experienced a significant sell-off driven by concerns over US inflation and the financial health of the AI sector.",
-    "The ongoing conflict between Russia and Ukraine escalated with renewed strikes on energy infrastructure by both sides.",
-    "A school roof collapse in Pakistan tragically killed at least 33 pupils and a teacher."
+    "A school shooting in Bend, Oregon, resulted in the deaths of three children and one teacher, with the 16-year-old suspect also killed by an armed bystander.",
+    "A new \"zero-click\" malware attack developed by an Israeli firm is highlighted as posing a global security risk by targeting victims through advertisements without requiring any user action.",
+    "Israeli settlers attacked Palestinians and a Washington Post journalist during the annual olive harvest in the occupied West Bank, burning cars and trees and causing injuries."
   ],
   "market": {
     "sp500": {
-      "value": 7718.94,
-      "change": -86.51,
-      "asof": "2026-10-14"
+      "value": 7744.06,
+      "change": 25.12,
+      "asof": "2026-10-15"
     },
     "ndx": {
-      "value": 26692.87,
-      "change": -511.51,
-      "asof": "2026-10-14"
+      "value": 26713.03,
+      "change": 20.16,
+      "asof": "2026-10-15"
     },
-    "why": "Global tech markets experienced a significant sell-off, with chip makers and tech investors seeing plunges, driven by fears over US inflation and the financial health of the AI sector, which spooked markets. Wholesale prices also saw their biggest annual jump since 2022, adding to inflation concerns."
+    "why": "The provided articles do not offer specific reasons for the S&P 500 and Nasdaq Composite closing higher, though one report noted that a stock-market 'sell' signal had been silenced."
   },
   "yield_10y": {
-    "value": 5.19,
-    "change": -0.03,
-    "asof": "2026-10-14",
-    "why": "Treasury yields slid as investors moved towards the perceived safety of government bonds amidst the tech market rout, indicating a broader flight to safety."
+    "value": 5.09,
+    "change": -0.1,
+    "asof": "2026-10-15",
+    "why": "The 10-year Treasury yield declined, with reports indicating some relief for bond markets following October's correction and a Federal Reserve official withholding a signal for a further interest rate hike this month."
   },
   "vix": {
-    "value": 16.87,
-    "change": 1.6,
-    "asof": "2026-10-14",
-    "why": "The VIX increased amid a broad tech market sell-off and heightened investor fears regarding US inflation and the financial stability within the AI ecosystem."
+    "value": 16.46,
+    "change": -0.41,
+    "asof": "2026-10-15",
+    "why": "The VIX decreased, potentially reflecting reduced market anxiety due to relief in bond markets and the Federal Reserve's lack of a new interest rate hike signal."
   },
   "breadth": {
     "sp500": {
-      "value": 52.2,
-      "asof": "2026-10-14",
+      "value": 53.6,
+      "asof": "2026-10-15",
       "status": "healthy",
       "matched": 500,
       "stale": false
     },
     "ndx100": {
-      "value": 60.4,
-      "asof": "2026-10-14",
+      "value": 57.3,
+      "asof": "2026-10-15",
       "status": "healthy",
       "matched": 96,
       "stale": false
@@ -51,55 +51,55 @@
     {
       "symbol": "SOXL",
       "what": "3x semiconductors",
-      "value": 110.54,
-      "day_move": -13.35,
-      "asof": "2026-10-14",
-      "rsi": 35.7,
+      "value": 107.35,
+      "day_move": -2.89,
+      "asof": "2026-10-15",
+      "rsi": 34.5,
       "rsi_zone": "neutral",
-      "low": 103.97,
+      "low": 107.35,
       "high": 164.27,
-      "band_pct": 10.9,
-      "zone": "mid",
-      "action": "hold",
-      "read": "Mid-range - 11% of the way up its 1-month band. Big session: down 13.3% in a day."
+      "band_pct": 0.0,
+      "zone": "low",
+      "action": "buy",
+      "read": "Within 4% of its 1-month low."
     },
     {
       "symbol": "SPXL",
       "what": "3x S&P 500",
-      "value": 287.63,
-      "day_move": -3.29,
-      "asof": "2026-10-14",
-      "rsi": 48.3,
+      "value": 290.0,
+      "day_move": 0.82,
+      "asof": "2026-10-15",
+      "rsi": 50.5,
       "rsi_zone": "neutral",
-      "low": 271.57,
+      "low": 280.76,
       "high": 299.21,
-      "band_pct": 58.1,
+      "band_pct": 50.1,
       "zone": "mid",
       "action": "hold",
-      "read": "Mid-range - 58% of the way up its 1-month band."
+      "read": "Mid-range - 50% of the way up its 1-month band."
     },
     {
       "symbol": "TQQQ",
       "what": "3x Nasdaq-100",
-      "value": 74.12,
-      "day_move": -5.95,
-      "asof": "2026-10-14",
-      "rsi": 43.1,
+      "value": 73.82,
+      "day_move": -0.4,
+      "asof": "2026-10-15",
+      "rsi": 42.5,
       "rsi_zone": "neutral",
-      "low": 67.93,
+      "low": 71.38,
       "high": 84.25,
-      "band_pct": 37.9,
-      "zone": "mid",
-      "action": "hold",
-      "read": "Mid-range - 38% of the way up its 1-month band."
+      "band_pct": 19.0,
+      "zone": "low",
+      "action": "buy",
+      "read": "Within 4% of its 1-month low."
     }
   ],
   "watchlist_missing": [],
   "mortgage": {
     "value": 7.4,
-    "change": 0.12,
-    "asof": "2026-10-08",
-    "why": "The recent weekly survey showed a slight increase in 30-year fixed mortgage rates. The provided articles do not offer a specific explanation for this particular weekly change, though general discussions on rising interest rates and the prospect of rates remaining above 7% in 2027 are noted."
+    "change": 0.0,
+    "asof": "2026-10-15",
+    "why": "The 30-year fixed mortgage rate remained unchanged at 7.4% in the latest weekly survey, even as the 10-year Treasury yield saw a decline at its most recent close."
   },
   "policy": [],
   "policy_upcoming": [
@@ -151,70 +151,70 @@
   ],
   "tech": [
     {
-      "summary": "TSMC is experiencing a fierce battle for chip manufacturing capacity among major AI customers like Nvidia, Apple, Broadcom, and AMD, despite reporting a record quarter.",
-      "source": "CNBC",
-      "url": "https://www.cnbc.com/2026/10/15/nvidia-apple-broadcom-in-fierce-battle-to-make-chips-at-tsmc.html"
-    },
-    {
-      "summary": "Amazon has launched new 'personal AI' devices, the Bee Frontier and Bee Eclipse, designed to listen to conversations; the Bee Frontier is an upgraded wearable bracelet and the Bee Eclipse attaches to smartphones.",
-      "source": "CNBC",
-      "url": "https://www.cnbc.com/2026/10/15/amazon-bee-frontier-eclipse-ai-devices.html"
-    },
-    {
-      "summary": "Security researchers have found evidence that an Israeli ad tech firm worked with spyware companies to infect devices, including those at Al Jazeera, through zero-click attacks delivered via online ads.",
+      "summary": "Meta's updated business terms, effective October 30th, reportedly grant the company permission to crawl and scrape websites associated with businesses using its platforms, including online publishers, to train and improve its AI models.",
       "source": "The Verge",
-      "url": "https://www.theverge.com/tech/1011956/discover-tech-zero-click-ads-spyware"
+      "url": "https://www.theverge.com/tech/1012846/meta-business-terms-scrape-news-publishers"
+    },
+    {
+      "summary": "An Israeli firm's new \"zero-click\" malware, which uses advertisements to target victims without requiring any interaction, has been identified as a significant global security risk.",
+      "source": "Al Jazeera",
+      "url": "https://www.aljazeera.com/news/2026/10/16/how-israeli-firms-zero-click-malware-attack-poses-global-security-risk?traffic_source=rss"
+    },
+    {
+      "summary": "Preorders for Apple's new foldable iPhone Duo began on Friday but delivery estimates quickly slipped into early 2027, indicating high demand for the device which is set to launch in stores on October 23rd.",
+      "source": "The Verge",
+      "url": "https://www.theverge.com/tech/1012805/apple-iphone-duo-preorder-delay"
     }
   ],
   "world": [
     {
-      "summary": "The conflict in Ukraine escalated as Russia launched drone attacks on infrastructure and President Zelenskyy announced a resumption of strikes on Russian oil refineries, effectively collapsing a previous 'energy ceasefire' effort.",
-      "source": "Guardian World",
-      "url": "https://www.theguardian.com/world/2026/oct/15/us-effort-to-get-russia-ukraine-energy-ceasefire-collapses"
-    },
-    {
-      "summary": "At least 33 pupils and one teacher were killed after a school roof collapsed in Peshawar, north-west Pakistan, burying children under debris.",
+      "summary": "Ukraine's President Zelenskyy stated his country's right to self-defense, receiving support from EU leaders, following new criticism from Donald Trump regarding recent strikes.",
       "source": "BBC World",
-      "url": "https://www.bbc.co.uk/news/articles/cked326llddgo?at_medium=RSS&at_campaign=rss"
+      "url": "https://www.bbc.co.uk/news/articles/c58jz174w89ro?at_medium=RSS&at_campaign=rss"
     },
     {
-      "summary": "The cost of balancing Great Britain's power grid has soared to nearly \u00a350 million a day, due to the grid operator paying to switch off windfarms in areas of excess electricity and simultaneously turning on gas plants elsewhere.",
+      "summary": "Israeli settlers attacked Palestinians and a Washington Post photographer during the annual olive harvest in the occupied West Bank, burning trees and cars and injuring several individuals.",
       "source": "Guardian World",
-      "url": "https://www.theguardian.com/business/2026/oct/15/cost-of-balancing-great-britain-power-grid-50m-daily"
+      "url": "https://www.theguardian.com/world/2026/oct/16/israeli-settlers-attack-olive-farmers-west-bank-washington-post-journalist-heidi-levine"
     },
     {
-      "summary": "Delegates from over 10 countries walked out during an address by Israeli President Isaac Herzog at a summit in Baku.",
+      "summary": "Qatar announced a \"massive\" solar plant project in Lebanon and its foreign minister called for an Israeli withdrawal from Lebanese territory, reaffirming support for Lebanon.",
       "source": "Al Jazeera",
-      "url": "https://www.aljazeera.com/video/newsfeed/2026/10/15/delegates-walk-out-as-israeli-president-addresses-summit?traffic_source=rss"
+      "url": "https://www.aljazeera.com/news/2026/10/16/qatar-announces-massive-solar-plant-project-in-lebanon?traffic_source=rss"
+    },
+    {
+      "summary": "Ethiopia has announced the establishment of an interim government in Tigray, following a military pushback against a TPLF uprising, with promises of free elections within six months.",
+      "source": "Al Jazeera",
+      "url": "https://www.aljazeera.com/news/2026/10/16/ethiopia-announces-instalment-of-interim-government-in-tigray?traffic_source=rss"
     }
   ],
   "us": [
     {
-      "summary": "President Trump reversed an earlier plan to livestream the execution of Fort Hood shooter Nidal Hasan, following a widespread outcry.",
-      "source": "Al Jazeera",
-      "url": "https://www.aljazeera.com/news/2026/10/15/trump-says-fort-hood-shooter-execution-will-not-be-livestreamed?traffic_source=rss"
+      "summary": "A shooting at an elementary school in Bend, Oregon, resulted in the deaths of three children and one teacher, with a 16-year-old suspect also killed by an armed bystander.",
+      "source": "NPR National",
+      "url": "https://www.npr.org/2026/10/16/g-s1-148373/up-first-newsletter-bend-oregon-school-shooting-california-doj-voters-presidential-papers"
     },
     {
-      "summary": "The Social Security program could face financial shortfalls as early as 2032, potentially impacting full payments to retirees, with various solutions under examination.",
+      "summary": "The Justice Department has initiated a lawsuit against California over alleged noncitizen voters.",
       "source": "NPR National",
-      "url": "https://www.npr.org/2026/10/15/nx-s1-6000635/social-security-could-soon-run-out-of-money-here-are-some-possible-solutions"
+      "url": "https://www.npr.org/2026/10/16/g-s1-148373/up-first-newsletter-bend-oregon-school-shooting-california-doj-voters-presidential-papers"
     },
     {
-      "summary": "Survivors of the 2025 wildfires in Los Angeles are encountering further delays with a FEMA program intended to assist the most vulnerable victims in rebuilding their homes.",
-      "source": "NPR National",
-      "url": "https://www.npr.org/2026/10/15/nx-s1-5983664/la-fire-survivors-face-another-setback-with-fema-program-delays"
+      "summary": "Several brushfires, exacerbated by hot and windy weather, forced evacuations in southern California and led to power shutoffs for tens of thousands of customers as a precautionary measure.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/us-news/2026/oct/16/southern-california-brush-fires-force-evacuations"
     }
   ],
   "science": [
     {
-      "summary": "New guidance from NHS England states that trans patients should be cared for in single-sex hospital wards or bays that align with their biological sex.",
+      "summary": "Pioneering same-day metagenomics tests are offering a new method for detecting infections in intensive care patients, with one 10-year-old child benefiting from this technology.",
       "source": "BBC Health",
-      "url": "https://www.bbc.co.uk/news/articles/cry83dyddv6no?at_medium=RSS&at_campaign=rss"
+      "url": "https://www.bbc.co.uk/news/articles/cw5yn83m8gypo?at_medium=RSS&at_campaign=rss"
     },
     {
-      "summary": "Researchers have successfully revived pig kidneys that were cooled to -150 \u00b0C and stored in a freezer for months, demonstrating a potential breakthrough in organ preservation.",
-      "source": "MIT Technology Review",
-      "url": "https://www.technologyreview.com/2026/10/15/1146755/the-download-reviving-frozen-pig-kidneys-boosting-nuclear-power/"
+      "summary": "Ministers in the UK have promised to reform the Covid vaccine compensation scheme, which provides financial support for individuals injured or bereaved by vaccines, following criticism from an inquiry.",
+      "source": "BBC Health",
+      "url": "https://www.bbc.co.uk/news/articles/c3pwgqd4gz9xo?at_medium=RSS&at_campaign=rss"
     }
   ],
   "weekly_recap": null,
