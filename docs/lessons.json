@@ -1,22 +1,6 @@
 {
-  "generated_at": "2026-10-16T09:43:39.792408-06:00",
+  "generated_at": "2026-10-17T08:35:59.707264-06:00",
   "lessons": [
-    {
-      "id": "2026-08-13-negotiation",
-      "date": "2026-08-13",
-      "domain": "Thinking and people",
-      "title": "How to approach everyday negotiations",
-      "hook": "Treating every discussion as a contest can leave you with less than you might have gained.",
-      "quick": "When you negotiate, it's easy to assume there's a fixed amount to be divided, like splitting a single pie. This is known as a distributive negotiation, where one party's gain often means another's loss. Haggling over the price of a car or a home is a common example of this approach. In these situations, people typically start by adopting an extreme position they know won't be accepted, and then they seek to give up as little as possible before reaching a deal. This approach can often be contentious because people tend to prioritize the minimization of losses over the maximization of gains. However, this fixed-pie mindset might severely limit the potential for a better outcome, especially when dealing with ongoing relationships or complex transactions where more value could be created.",
-      "more": "Many daily interactions that you might not even consider negotiations actually are, and how you approach them significantly impacts the outcome. While some situations genuinely involve a fixed set of benefits, others offer the chance to create more value for everyone involved. This is where an integrative approach comes in, aiming to \"expand the pie\" rather than just dividing a static one. Integrative negotiation works by recognizing that different parties often value different outcomes, opening opportunities for trade-offs or reframing issues so both sides benefit. Thinking this way can transform a potential win-lose scenario into a win-win, fostering better relationships and more satisfactory agreements in the long run.",
-      "deep": "However, even when there's potential to expand the total benefits, people can sometimes underestimate this opportunity due to what is called the \"small pie bias\" or the \"incompatibility bias.\" These psychological tendencies can lead negotiators to miss chances to create more value. It is also important to know that conceding too quickly can reduce the likelihood of discovering these mutually beneficial solutions. While a degree of trust can be a helpful aid, focusing on promoting interdependence between parties can be an even more effective strategy for successful win-win negotiation. Even in these integrative scenarios, some distributive elements will always be present, especially when it comes to allocating the final details of an agreement.",
-      "takeaway": "Before entering a significant discussion, identify if the situation allows for creating more benefits for all parties rather than just dividing a fixed amount.",
-      "source": {
-        "title": "Negotiation",
-        "url": "https://en.wikipedia.org/wiki/Negotiation"
-      },
-      "audio": {}
-    },
     {
       "id": "2026-08-14-credit-score",
       "date": "2026-08-14",
@@ -639,11 +623,7 @@
         "title": "Appendicitis",
         "url": "https://en.wikipedia.org/wiki/Appendicitis"
       },
-      "audio": {
-        "quick": "lessons/2026-09-25-appendicitis-quick.mp3",
-        "more": "lessons/2026-09-25-appendicitis-more.mp3",
-        "deep": "lessons/2026-09-25-appendicitis-deep.mp3"
-      }
+      "audio": {}
     },
     {
       "id": "2026-09-26-bait-and-switch",
@@ -1043,6 +1023,26 @@
         "quick": "lessons/2026-10-16-heat-stroke-quick.mp3",
         "more": "lessons/2026-10-16-heat-stroke-more.mp3",
         "deep": "lessons/2026-10-16-heat-stroke-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-10-17-groupthink",
+      "date": "2026-10-17",
+      "domain": "Thinking and people",
+      "title": "Avoid Bad Decisions Caused by Group Harmony",
+      "hook": "When making important decisions with others, prioritizing agreement can lead to surprisingly poor outcomes.",
+      "quick": "When people in a group prioritize harmony and agreement above all else, they risk making irrational or dysfunctional decisions. This happens because the desire for group cohesiveness makes members minimize conflict and agree at all costs, leading them to reach a consensus without truly evaluating all options. Instead of independent critical thinking, the group may settle on a choice that is far from optimal. This process leads to a deterioration in mental efficiency, reality testing, and moral judgments. Historical examples, like the failed American invasion of Cuba in 1961, highlight how such group pressures can prevent contradictory views from being expressed and properly considered, resulting in significant failures. This demonstrates the real cost of failing to critically assess decisions.",
+      "more": "This problem arises when seeking agreement becomes so overwhelmingly dominant within a close-knit group that it overrides any realistic appraisal of different courses of action. It's more than just instinctive conformity; it's a rationalized conformity where the group comes to believe its collective values are not only convenient but also inherently right and good. This open philosophy can crush individuality and make a group instinctively hostile to any view that challenges the collective perspective. Such an environment makes it difficult for anyone to express doubts, leading the group down a path of flawed decision-making, even if individual members privately hold reservations.",
+      "deep": "This risk of poor decision-making becomes even greater when there is a strong sense of amiability and team spirit among the members of a group tasked with making important policy choices. Paradoxically, the more pleasant and unified the group feels, the higher the danger that independent critical thinking will be replaced by a collective mindset. This can even result in irrational actions. One symptom that indicates this phenomenon is when a group overestimates its own power and capability. This behavior isn't confined to high-stakes political blunders; it's observed in everyday situations, such as the \"hive mind\" critics describe on social media, where individual thoughts can be submerged in favor of conforming to the collective view, reducing the likelihood of reality testing.",
+      "takeaway": "When making significant decisions together, specifically designate time for each person to articulate potential downsides and alternative solutions without immediate challenge from the other.",
+      "source": {
+        "title": "Groupthink",
+        "url": "https://en.wikipedia.org/wiki/Groupthink"
+      },
+      "audio": {
+        "quick": "lessons/2026-10-17-groupthink-quick.mp3",
+        "more": "lessons/2026-10-17-groupthink-more.mp3",
+        "deep": "lessons/2026-10-17-groupthink-deep.mp3"
       }
     }
   ],

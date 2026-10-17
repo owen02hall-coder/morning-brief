@@ -1,47 +1,47 @@
 {
-  "generated_at": "2026-10-16T09:43:39.792408-06:00",
-  "date": "2026-10-16",
+  "generated_at": "2026-10-17T08:35:59.707264-06:00",
+  "date": "2026-10-17",
   "tldr": [
-    "A school shooting in Bend, Oregon, resulted in the deaths of three children and one teacher, with the 16-year-old suspect also killed by an armed bystander.",
-    "A new \"zero-click\" malware attack developed by an Israeli firm is highlighted as posing a global security risk by targeting victims through advertisements without requiring any user action.",
-    "Israeli settlers attacked Palestinians and a Washington Post journalist during the annual olive harvest in the occupied West Bank, burning cars and trees and causing injuries."
+    "Major US stock indices experienced a significant decline, primarily driven by a tech sell-off amidst concerns over artificial intelligence and interest rates.",
+    "Ukrainian President Volodymyr Zelenskyy warned that President Trump's decision to pause new US sanctions against Russia would intensify the war.",
+    "The US federal deficit for the fiscal year that recently ended reached nearly $2 trillion, marking the largest budget gap since 2021."
   ],
   "market": {
     "sp500": {
-      "value": 7744.06,
-      "change": 25.12,
-      "asof": "2026-10-15"
+      "value": 7659.44,
+      "change": -84.62,
+      "asof": "2026-10-16"
     },
     "ndx": {
-      "value": 26713.03,
-      "change": 20.16,
-      "asof": "2026-10-15"
+      "value": 26140.03,
+      "change": -573.0,
+      "asof": "2026-10-16"
     },
-    "why": "The provided articles do not offer specific reasons for the S&P 500 and Nasdaq Composite closing higher, though one report noted that a stock-market 'sell' signal had been silenced."
+    "why": "The S&P 500 and Nasdaq Composite experienced a notable decline, with the S&P 500's tech sector recording its worst week in 18 months. This sell-off in technology stocks, particularly in software and chip sectors, was influenced by concerns regarding artificial intelligence and rising interest rates (MarketWatch, CNBC)."
   },
   "yield_10y": {
-    "value": 5.09,
-    "change": -0.1,
-    "asof": "2026-10-15",
-    "why": "The 10-year Treasury yield declined, with reports indicating some relief for bond markets following October's correction and a Federal Reserve official withholding a signal for a further interest rate hike this month."
+    "value": 5.1,
+    "change": 0.01,
+    "asof": "2026-10-16",
+    "why": "The 10-year Treasury yield slightly increased to 5.1%, as the U.S. budget deficit swelled to nearly $2 trillion for fiscal year 2026. Treasury yields above 5% are increasing borrowing costs for both households and the federal government, posing a significant economic challenge (CNBC)."
   },
   "vix": {
-    "value": 16.46,
-    "change": -0.41,
-    "asof": "2026-10-15",
-    "why": "The VIX decreased, potentially reflecting reduced market anxiety due to relief in bond markets and the Federal Reserve's lack of a new interest rate hike signal."
+    "value": 19.99,
+    "change": 3.53,
+    "asof": "2026-10-16",
+    "why": "The VIX, an indicator of market volatility, rose significantly. This increase is consistent with the broader market sell-off, especially in the tech sector, which was driven by investor concerns over AI developments and interest rates (MarketWatch)."
   },
   "breadth": {
     "sp500": {
-      "value": 53.6,
-      "asof": "2026-10-15",
+      "value": 51.8,
+      "asof": "2026-10-16",
       "status": "healthy",
       "matched": 500,
       "stale": false
     },
     "ndx100": {
-      "value": 57.3,
-      "asof": "2026-10-15",
+      "value": 55.2,
+      "asof": "2026-10-16",
       "status": "healthy",
       "matched": 96,
       "stale": false
@@ -51,47 +51,47 @@
     {
       "symbol": "SOXL",
       "what": "3x semiconductors",
-      "value": 107.35,
-      "day_move": -2.89,
-      "asof": "2026-10-15",
-      "rsi": 34.5,
-      "rsi_zone": "neutral",
-      "low": 107.35,
+      "value": 93.67,
+      "day_move": -12.74,
+      "asof": "2026-10-16",
+      "rsi": 30.0,
+      "rsi_zone": "oversold",
+      "low": 93.67,
       "high": 164.27,
+      "band_pct": 0.0,
+      "zone": "low",
+      "action": "buy",
+      "read": "Near the bottom of its 1-month range and oversold on RSI. Big session: down 12.7% in a day."
+    },
+    {
+      "symbol": "SPXL",
+      "what": "3x S&P 500",
+      "value": 280.17,
+      "day_move": -3.39,
+      "asof": "2026-10-16",
+      "rsi": 42.5,
+      "rsi_zone": "neutral",
+      "low": 280.17,
+      "high": 299.21,
       "band_pct": 0.0,
       "zone": "low",
       "action": "buy",
       "read": "Within 4% of its 1-month low."
     },
     {
-      "symbol": "SPXL",
-      "what": "3x S&P 500",
-      "value": 290.0,
-      "day_move": 0.82,
-      "asof": "2026-10-15",
-      "rsi": 50.5,
-      "rsi_zone": "neutral",
-      "low": 280.76,
-      "high": 299.21,
-      "band_pct": 50.1,
-      "zone": "mid",
-      "action": "hold",
-      "read": "Mid-range - 50% of the way up its 1-month band."
-    },
-    {
       "symbol": "TQQQ",
       "what": "3x Nasdaq-100",
-      "value": 73.82,
-      "day_move": -0.4,
-      "asof": "2026-10-15",
-      "rsi": 42.5,
+      "value": 68.21,
+      "day_move": -7.6,
+      "asof": "2026-10-16",
+      "rsi": 33.8,
       "rsi_zone": "neutral",
-      "low": 71.38,
+      "low": 68.21,
       "high": 84.25,
-      "band_pct": 19.0,
+      "band_pct": 0.0,
       "zone": "low",
       "action": "buy",
-      "read": "Within 4% of its 1-month low."
+      "read": "Within 4% of its 1-month low. Big session: down 7.6% in a day."
     }
   ],
   "watchlist_missing": [],
@@ -99,7 +99,7 @@
     "value": 7.4,
     "change": 0.0,
     "asof": "2026-10-15",
-    "why": "The 30-year fixed mortgage rate remained unchanged at 7.4% in the latest weekly survey, even as the 10-year Treasury yield saw a decline at its most recent close."
+    "why": "The 30-year fixed mortgage rate remained at 7.4% for the week ending October 15, according to Freddie Mac's weekly survey. The articles do not provide specific daily drivers for the weekly mortgage rate, which tracks the 10-year Treasury yield over recent days."
   },
   "policy": [],
   "policy_upcoming": [
@@ -151,70 +151,65 @@
   ],
   "tech": [
     {
-      "summary": "Meta's updated business terms, effective October 30th, reportedly grant the company permission to crawl and scrape websites associated with businesses using its platforms, including online publishers, to train and improve its AI models.",
-      "source": "The Verge",
-      "url": "https://www.theverge.com/tech/1012846/meta-business-terms-scrape-news-publishers"
+      "summary": "Globally, solar power has for the first time surpassed nuclear power in terms of energy generation capacity.",
+      "source": "Hacker News",
+      "url": "https://www.pv-magazine.com/2026/09/29/solar-surpasses-nuclear-power-globally-for-first-time/"
     },
     {
-      "summary": "An Israeli firm's new \"zero-click\" malware, which uses advertisements to target victims without requiring any interaction, has been identified as a significant global security risk.",
-      "source": "Al Jazeera",
-      "url": "https://www.aljazeera.com/news/2026/10/16/how-israeli-firms-zero-click-malware-attack-poses-global-security-risk?traffic_source=rss"
+      "summary": "Many websites are beginning to block autonomous AI agents from accessing their content, posing a challenge to AI tools designed to scour the internet.",
+      "source": "The Verge",
+      "url": "https://www.theverge.com/ai-artificial-intelligence/1013195/ai-agents-blocked-web"
     },
     {
-      "summary": "Preorders for Apple's new foldable iPhone Duo began on Friday but delivery estimates quickly slipped into early 2027, indicating high demand for the device which is set to launch in stores on October 23rd.",
+      "summary": "Apple introduced its new foldable device, the iPhone Duo, featuring dual displays and Touch ID on the power button.",
       "source": "The Verge",
-      "url": "https://www.theverge.com/tech/1012805/apple-iphone-duo-preorder-delay"
+      "url": "https://www.theverge.com/tech/1010131/apple-iphone-duo-news-announcements"
     }
   ],
   "world": [
     {
-      "summary": "Ukraine's President Zelenskyy stated his country's right to self-defense, receiving support from EU leaders, following new criticism from Donald Trump regarding recent strikes.",
+      "summary": "Ukrainian President Volodymyr Zelenskyy warned that President Trump's decision to pause new US sanctions against Russia would escalate the conflict in Ukraine.",
+      "source": "NPR",
+      "url": "https://www.npr.org/2026/10/17/nx-s1-6006745/us-sanctions-russia"
+    },
+    {
+      "summary": "Pope Leo has been discharged from a Rome hospital after undergoing surgery to remove a cancerous tumor from his lung.",
       "source": "BBC World",
-      "url": "https://www.bbc.co.uk/news/articles/c58jz174w89ro?at_medium=RSS&at_campaign=rss"
+      "url": "https://www.bbc.co.uk/news/articles/c5x2vkddrkrko?at_medium=RSS&at_campaign=rss"
     },
     {
-      "summary": "Israeli settlers attacked Palestinians and a Washington Post photographer during the annual olive harvest in the occupied West Bank, burning trees and cars and injuring several individuals.",
+      "summary": "The United Arab Emirates has agreed with Saudi Arabia to re-engage in the Yemen conflict by resuming payments to Yemeni forces, following gains by Houthi fighters.",
       "source": "Guardian World",
-      "url": "https://www.theguardian.com/world/2026/oct/16/israeli-settlers-attack-olive-farmers-west-bank-washington-post-journalist-heidi-levine"
-    },
-    {
-      "summary": "Qatar announced a \"massive\" solar plant project in Lebanon and its foreign minister called for an Israeli withdrawal from Lebanese territory, reaffirming support for Lebanon.",
-      "source": "Al Jazeera",
-      "url": "https://www.aljazeera.com/news/2026/10/16/qatar-announces-massive-solar-plant-project-in-lebanon?traffic_source=rss"
-    },
-    {
-      "summary": "Ethiopia has announced the establishment of an interim government in Tigray, following a military pushback against a TPLF uprising, with promises of free elections within six months.",
-      "source": "Al Jazeera",
-      "url": "https://www.aljazeera.com/news/2026/10/16/ethiopia-announces-instalment-of-interim-government-in-tigray?traffic_source=rss"
+      "url": "https://www.theguardian.com/world/2026/oct/17/uae-yemen-conflict-agreement-saudi-arabia-houthi-gains"
     }
   ],
   "us": [
     {
-      "summary": "A shooting at an elementary school in Bend, Oregon, resulted in the deaths of three children and one teacher, with a 16-year-old suspect also killed by an armed bystander.",
+      "summary": "The suspect in a deadly elementary school shooting in Bend, Oregon, which killed three children and one teacher, has been identified as a 16-year-old former student of the school.",
       "source": "NPR National",
-      "url": "https://www.npr.org/2026/10/16/g-s1-148373/up-first-newsletter-bend-oregon-school-shooting-california-doj-voters-presidential-papers"
+      "url": "https://www.npr.org/2026/10/17/nx-s1-6006236/suspect-in-deadly-oregon-elementary-school-shooting-was-a-former-student"
     },
     {
-      "summary": "The Justice Department has initiated a lawsuit against California over alleged noncitizen voters.",
+      "summary": "The federal deficit for the fiscal year that just concluded reached nearly $2 trillion, marking the largest budget gap since 2021.",
       "source": "NPR National",
-      "url": "https://www.npr.org/2026/10/16/g-s1-148373/up-first-newsletter-bend-oregon-school-shooting-california-doj-voters-presidential-papers"
+      "url": "https://www.npr.org/2026/10/16/nx-s1-6005243/red-ink-federal-deficit-hits-nearly-2-trillion"
     },
     {
-      "summary": "Several brushfires, exacerbated by hot and windy weather, forced evacuations in southern California and led to power shutoffs for tens of thousands of customers as a precautionary measure.",
-      "source": "Guardian World",
-      "url": "https://www.theguardian.com/us-news/2026/oct/16/southern-california-brush-fires-force-evacuations"
+      "summary": "High winds are fueling fast-moving fires in Southern California, leading to the destruction of coastal homes and prompting thousands of evacuations.",
+      "source": "NPR National",
+      "url": "https://www.npr.org/2026/10/17/g-s1-148569/coastal-homes-burn-in-california-fires"
     }
   ],
   "science": [
     {
-      "summary": "Pioneering same-day metagenomics tests are offering a new method for detecting infections in intensive care patients, with one 10-year-old child benefiting from this technology.",
-      "source": "BBC Health",
-      "url": "https://www.bbc.co.uk/news/articles/cw5yn83m8gypo?at_medium=RSS&at_campaign=rss"
+      "summary": "The American College of Obstetricians and Gynecologists has updated its guidelines for treating symptoms commonly associated with menopause, marking the first revision since 2014.",
+      "source": "NPR Science",
+      "url": "https://www.npr.org/2026/10/16/nx-s1-6005201/health-treatment-menopause-hot-flash-night-sweats-insomnia"
     },
     {
-      "summary": "Ministers in the UK have promised to reform the Covid vaccine compensation scheme, which provides financial support for individuals injured or bereaved by vaccines, following criticism from an inquiry.",
+      "summary": "A Russian man linked to the 2024 cyberattack on blood-test firm Synnovis, which affected London hospitals, has been arrested by German police.",
       "source": "BBC Health",
-      "url": "https://www.bbc.co.uk/news/articles/c3pwgqd4gz9xo?at_medium=RSS&at_campaign=rss"
+      "url": "https://www.bbc.co.uk/news/articles/c9vgr61kml3mo?at_medium=RSS&at_campaign=rss"
     }
   ],
   "weekly_recap": null,
