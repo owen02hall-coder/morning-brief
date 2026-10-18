@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-10-17T08:35:59.707264-06:00",
-  "date": "2026-10-17",
+  "generated_at": "2026-10-18T09:03:13.546121-06:00",
+  "date": "2026-10-18",
   "tldr": [
-    "Major US stock indices experienced a significant decline, primarily driven by a tech sell-off amidst concerns over artificial intelligence and interest rates.",
-    "Ukrainian President Volodymyr Zelenskyy warned that President Trump's decision to pause new US sanctions against Russia would intensify the war.",
-    "The US federal deficit for the fiscal year that recently ended reached nearly $2 trillion, marking the largest budget gap since 2021."
+    "Protests across France escalated with nearly 1,800 arrests and widespread damage in Paris, prompting President Macron to address the nation.",
+    "Russia and Ukraine traded strikes on each other\u2019s power infrastructure, resulting in two deaths and 17 injuries.",
+    "US stock markets saw declines, with the S&P 500 and Nasdaq Composite closing lower amidst a tech sell-off and concerns over rising borrowing costs."
   ],
   "market": {
     "sp500": {
@@ -17,19 +17,19 @@
       "change": -573.0,
       "asof": "2026-10-16"
     },
-    "why": "The S&P 500 and Nasdaq Composite experienced a notable decline, with the S&P 500's tech sector recording its worst week in 18 months. This sell-off in technology stocks, particularly in software and chip sectors, was influenced by concerns regarding artificial intelligence and rising interest rates (MarketWatch, CNBC)."
+    "why": "The S&P 500 and Nasdaq Composite closed lower, with markets facing a high-stakes showdown where strong earnings are colliding with rising borrowing costs. A silent market rotation inside the S&P 500 warned of potential weakness, and AI stocks experienced a plunge."
   },
   "yield_10y": {
     "value": 5.1,
     "change": 0.01,
     "asof": "2026-10-16",
-    "why": "The 10-year Treasury yield slightly increased to 5.1%, as the U.S. budget deficit swelled to nearly $2 trillion for fiscal year 2026. Treasury yields above 5% are increasing borrowing costs for both households and the federal government, posing a significant economic challenge (CNBC)."
+    "why": "The 10-year Treasury yield saw a slight increase as investors reacted to rising borrowing costs and fears of potential rate hikes. Hedge fund activities were also noted as a potential factor that could increase the risk of a global bond market shock."
   },
   "vix": {
     "value": 19.99,
     "change": 3.53,
     "asof": "2026-10-16",
-    "why": "The VIX, an indicator of market volatility, rose significantly. This increase is consistent with the broader market sell-off, especially in the tech sector, which was driven by investor concerns over AI developments and interest rates (MarketWatch)."
+    "why": "The VIX increased, reflecting heightened market volatility and investor uncertainty. This rise was consistent with the significant declines observed in the S&P 500 and Nasdaq Composite, as AI stocks plunged and broader market weakness was anticipated."
   },
   "breadth": {
     "sp500": {
@@ -99,7 +99,7 @@
     "value": 7.4,
     "change": 0.0,
     "asof": "2026-10-15",
-    "why": "The 30-year fixed mortgage rate remained at 7.4% for the week ending October 15, according to Freddie Mac's weekly survey. The articles do not provide specific daily drivers for the weekly mortgage rate, which tracks the 10-year Treasury yield over recent days."
+    "why": "The 30-year fixed mortgage rate remained stable this week, which aligns with the minimal change observed in the 10-year Treasury yield over recent days, as mortgage rates typically track the direction of bond yields."
   },
   "policy": [],
   "policy_upcoming": [
@@ -151,68 +151,73 @@
   ],
   "tech": [
     {
-      "summary": "Globally, solar power has for the first time surpassed nuclear power in terms of energy generation capacity.",
-      "source": "Hacker News",
-      "url": "https://www.pv-magazine.com/2026/09/29/solar-surpasses-nuclear-power-globally-for-first-time/"
+      "summary": "Meta has updated its terms to remove language that previously suggested it could scrape content from websites, including news sites, to train its AI models, following public backlash.",
+      "source": "The Verge",
+      "url": "https://www.theverge.com/tech/1013409/meta-removes-language-that-may-have-allowed-it-to-scrape-news-sites"
     },
     {
-      "summary": "Many websites are beginning to block autonomous AI agents from accessing their content, posing a challenge to AI tools designed to scour the internet.",
-      "source": "The Verge",
-      "url": "https://www.theverge.com/ai-artificial-intelligence/1013195/ai-agents-blocked-web"
+      "summary": "Microsoft has withdrawn from a large AI datacentre project in Essex, UK, citing concerns over power supply, posing a setback for the development heralded by ministers.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/uk-news/2026/oct/18/microsoft-drops-huge-ai-datacentre-project-in-essex-over-power-supply-concerns"
     },
     {
-      "summary": "Apple introduced its new foldable device, the iPhone Duo, featuring dual displays and Touch ID on the power button.",
-      "source": "The Verge",
-      "url": "https://www.theverge.com/tech/1010131/apple-iphone-duo-news-announcements"
+      "summary": "New AI devices, including always-listening wearables from major tech companies, are pushing legal boundaries regarding privacy and raising concerns about potential covert recordings.",
+      "source": "CNBC",
+      "url": "https://www.cnbc.com/2026/10/18/ai-wearables-privacy-wiretap-laws.html"
     }
   ],
   "world": [
     {
-      "summary": "Ukrainian President Volodymyr Zelenskyy warned that President Trump's decision to pause new US sanctions against Russia would escalate the conflict in Ukraine.",
-      "source": "NPR",
-      "url": "https://www.npr.org/2026/10/17/nx-s1-6006745/us-sanctions-russia"
-    },
-    {
-      "summary": "Pope Leo has been discharged from a Rome hospital after undergoing surgery to remove a cancerous tumor from his lung.",
-      "source": "BBC World",
-      "url": "https://www.bbc.co.uk/news/articles/c5x2vkddrkrko?at_medium=RSS&at_campaign=rss"
-    },
-    {
-      "summary": "The United Arab Emirates has agreed with Saudi Arabia to re-engage in the Yemen conflict by resuming payments to Yemeni forces, following gains by Houthi fighters.",
+      "summary": "France has seen widespread protests, with approximately 1,800 arrests and significant damage to streets in Paris as anger over school conditions combines with frustration over high living costs.",
       "source": "Guardian World",
-      "url": "https://www.theguardian.com/world/2026/oct/17/uae-yemen-conflict-agreement-saudi-arabia-houthi-gains"
+      "url": "https://www.theguardian.com/world/live/2026/oct/18/paris-protests-france-demonstrations-europe-live-latest-news"
+    },
+    {
+      "summary": "Russia and Ukraine have continued to trade strikes on each other\u2019s power infrastructure, resulting in two fatalities and at least 17 injuries after a previously declared \"energy ceasefire\" broke down.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/world/2026/oct/18/killed-injured-russia-ukraine-strikes-power-infrastructure"
+    },
+    {
+      "summary": "Attacks by Israeli settlers on Palestinians and foreign officials in the West Bank have escalated, coinciding with the annual olive harvest season, prompting condemnation from France and Belgium.",
+      "source": "Al Jazeera",
+      "url": "https://www.aljazeera.com/news/2026/10/18/a-timeline-of-west-bank-attacks-on-palestinians-and-foreign-officials?traffic_source=rss"
+    },
+    {
+      "summary": "Pope Leo XIV has stated he will gradually resume his duties after undergoing cancer surgery, thanking faithful followers for their prayers during his hospitalization.",
+      "source": "NPR",
+      "url": "https://www.npr.org/2026/10/18/g-s1-148654/pope-leo-says-he-will-gradually-resume-duties-after-cancer-surgery"
     }
   ],
   "us": [
     {
-      "summary": "The suspect in a deadly elementary school shooting in Bend, Oregon, which killed three children and one teacher, has been identified as a 16-year-old former student of the school.",
+      "summary": "Authorities identified the 16-year-old suspect in a deadly school shooting at an elementary school in Bend, Oregon, as a former student of the institution.",
       "source": "NPR National",
       "url": "https://www.npr.org/2026/10/17/nx-s1-6006236/suspect-in-deadly-oregon-elementary-school-shooting-was-a-former-student"
     },
     {
-      "summary": "The federal deficit for the fiscal year that just concluded reached nearly $2 trillion, marking the largest budget gap since 2021.",
+      "summary": "$86 million in federal funds intended for teen pregnancy prevention programs nationwide has been redirected to a single large contractor with connections to the Trump administration.",
       "source": "NPR National",
-      "url": "https://www.npr.org/2026/10/16/nx-s1-6005243/red-ink-federal-deficit-hits-nearly-2-trillion"
+      "url": "https://www.npr.org/2026/10/17/nx-s1-6003966/86m-in-teen-pregnancy-prevention-funds-diverted-to-trump-linked-contractor"
     },
     {
-      "summary": "High winds are fueling fast-moving fires in Southern California, leading to the destruction of coastal homes and prompting thousands of evacuations.",
+      "summary": "In states with paid family leave programs, men are now filing the majority of claims, surpassing women in some areas as they utilize the benefit to bond with new children.",
       "source": "NPR National",
-      "url": "https://www.npr.org/2026/10/17/g-s1-148569/coastal-homes-burn-in-california-fires"
+      "url": "https://www.npr.org/2026/10/18/nx-s1-5977811/dad-shift-men-now-file-majority-of-paid-family-leave-claims-in-key-states"
     }
   ],
   "science": [
     {
-      "summary": "The American College of Obstetricians and Gynecologists has updated its guidelines for treating symptoms commonly associated with menopause, marking the first revision since 2014.",
+      "summary": "The American College of Obstetricians and Gynecologists has updated its guidelines for the treatment of menopause symptoms for the first time since 2014.",
       "source": "NPR Science",
       "url": "https://www.npr.org/2026/10/16/nx-s1-6005201/health-treatment-menopause-hot-flash-night-sweats-insomnia"
     },
     {
-      "summary": "A Russian man linked to the 2024 cyberattack on blood-test firm Synnovis, which affected London hospitals, has been arrested by German police.",
+      "summary": "A pioneering same-day test using metagenomics is offering a new method for detecting infections in intensive care patients, with reports indicating it has saved lives.",
       "source": "BBC Health",
-      "url": "https://www.bbc.co.uk/news/articles/c9vgr61kml3mo?at_medium=RSS&at_campaign=rss"
+      "url": "https://www.bbc.co.uk/news/articles/cw5yn83m8gypo?at_medium=RSS&at_campaign=rss"
     }
   ],
-  "weekly_recap": null,
+  "weekly_recap": "This week, global markets experienced significant downturns, influenced by concerns over AI fatigue impacting chip stocks, reports of a global stock rout by a Chinese chipmaker, and rising US inflation. Geopolitically, the \"energy ceasefire\" between Ukraine and Russia broke down, leading to renewed strikes on power infrastructure. Tensions also escalated in the West Bank with settler attacks. Amidst these events, Pope Leo underwent successful lung cancer surgery, and a school shooting occurred in Bend, Oregon.",
   "data_availability": {
     "sp500": true,
     "ndx": true,
