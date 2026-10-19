@@ -1,22 +1,6 @@
 {
-  "generated_at": "2026-10-18T09:03:13.546121-06:00",
+  "generated_at": "2026-10-19T11:54:39.411623-06:00",
   "lessons": [
-    {
-      "id": "2026-08-14-credit-score",
-      "date": "2026-08-14",
-      "domain": "Money mechanics",
-      "title": "How lenders view your creditworthiness",
-      "hook": "Your credit score is a key factor in getting loans, setting interest rates, and even renting an apartment.",
-      "quick": "Lenders use your credit score to decide if they should lend you money and what terms to offer. It's a number that represents how likely you are to pay back what you borrow.  This score is based on your credit report, which contains information about your past borrowing and repayment habits. Banks and other financial institutions, like credit card companies, rely heavily on this number to assess the risk of lending to you. A good credit score can help you qualify for loans, secure lower interest rates, and get higher credit limits.  Conversely, a low score can make it harder to get approved for credit and may result in higher costs if you are approved.",
-      "more": "Credit scoring isn't just for banks. Other businesses also use credit scores to make decisions about you. For example, landlords might check your credit score when you apply to rent a place to live. Mobile phone companies and even some government departments may also use this information. This means that your creditworthiness, as reflected in your score, can impact various aspects of your financial life beyond just loans.  When you apply for any kind of credit or service that involves risk for the provider, they will likely look at your credit score to gauge your reliability as a customer.",
-      "deep": "The way credit scores are calculated and used can vary by country, but the underlying principle remains the same: assessing your risk as a borrower. In some places, like Australia, credit reporting has moved towards including positive information about how you pay your bills, not just negative incidents. Other systems, like Austria's, historically used blacklists for those who didn't pay bills, and while banks might check income and security for loans, these lists still impact contract approvals.  In Brazil, the system is now similar to the United States, using credit reports to predict the likelihood of on-time payments over the next 12 months, based on payment history, past debts, and financial relationships.",
-      "takeaway": "Check your credit report for free at least once a year.",
-      "source": {
-        "title": "Credit score",
-        "url": "https://en.wikipedia.org/wiki/Credit_score"
-      },
-      "audio": {}
-    },
     {
       "id": "2026-08-15-water-heating",
       "date": "2026-08-15",
@@ -639,11 +623,7 @@
         "title": "Bait-and-switch",
         "url": "https://en.wikipedia.org/wiki/Bait-and-switch"
       },
-      "audio": {
-        "quick": "lessons/2026-09-26-bait-and-switch-quick.mp3",
-        "more": "lessons/2026-09-26-bait-and-switch-more.mp3",
-        "deep": "lessons/2026-09-26-bait-and-switch-deep.mp3"
-      }
+      "audio": {}
     },
     {
       "id": "2026-09-27-annual-percentage-rate",
@@ -1043,6 +1023,26 @@
         "quick": "lessons/2026-10-17-groupthink-quick.mp3",
         "more": "lessons/2026-10-17-groupthink-more.mp3",
         "deep": "lessons/2026-10-17-groupthink-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-10-19-underwriting",
+      "date": "2026-10-19",
+      "domain": "Money mechanics",
+      "title": "Understanding How Banks Approve Your Loan",
+      "hook": "Many people find their plans for a big purchase, like a house, can hit a wall if their loan application doesn't get approved.",
+      "quick": "When you apply for a loan, especially for a major purchase like a home, the bank carefully examines your financial situation to decide if they will lend you money. This thorough evaluation is called underwriting. Its purpose is to assess the risk the bank takes by lending to you. If your financial profile doesn't meet their standards, the loan application might be denied, potentially delaying your plans and wasting the time and effort you invested. During this process, lenders will verify key details such as your employment history, confirm your salary, and review your financial statements to understand your income and assets. They also look closely at your credit history, which is detailed in a credit report, to see how reliably you have managed past debts. These steps help the bank decide your ability to pay back the loan.",
+      "more": "This detailed credit analysis is fundamental because the bank accepts a significant financial risk when they grant a loan. They need assurance that you have a stable financial foundation and a consistent record of meeting your financial obligations. The underwriting process helps them evaluate not only your historical financial behavior but also your current capacity to take on new debt. Lenders scrutinize your credit needs and, crucially, your ability to repay the specific loan you are requesting. For instance, in mortgage underwriting, they are looking for reliable indicators that you can manage the monthly payments over the long term, making sure the risk they are taking on is manageable for their business. This deep dive into your finances directly shapes their final lending decision and the terms they might offer.",
+      "deep": "To make this decision, underwriters perform a comprehensive review of your credit report, checking for patterns of on-time payments, the amount of existing debt you carry, and any past defaults. Your financial statements are verified to confirm the income and assets you\u2019ve disclosed, ensuring they align with the information provided in your application. They also analyze elements like your debt-to-worth ratio and available liquidity to gauge your financial health. Beyond traditional methods, some lenders are now applying machine learning to their underwriting processes. These advanced algorithms can analyze a wider range of data sources, moving beyond conventional scorecards. For example, they might consider banking information from your SMS or email, use location data to verify addresses, or even attempt to quantify your willingness to pay by analyzing social media data. This expanding use of data allows lenders to build more complex financial models and make a more nuanced assessment of your risk profile, ultimately influencing whether your loan is approved and on what specific terms.",
+      "takeaway": "Before applying for any significant loan, thoroughly review your personal credit report for accuracy and organize all documents verifying your employment, salary, and financial statements to streamline the underwriting process.",
+      "source": {
+        "title": "Underwriting",
+        "url": "https://en.wikipedia.org/wiki/Underwriting"
+      },
+      "audio": {
+        "quick": "lessons/2026-10-19-underwriting-quick.mp3",
+        "more": "lessons/2026-10-19-underwriting-more.mp3",
+        "deep": "lessons/2026-10-19-underwriting-deep.mp3"
       }
     }
   ],

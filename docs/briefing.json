@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-10-18T09:03:13.546121-06:00",
-  "date": "2026-10-18",
+  "generated_at": "2026-10-19T11:54:39.411623-06:00",
+  "date": "2026-10-19",
   "tldr": [
-    "Protests across France escalated with nearly 1,800 arrests and widespread damage in Paris, prompting President Macron to address the nation.",
-    "Russia and Ukraine traded strikes on each other\u2019s power infrastructure, resulting in two deaths and 17 injuries.",
-    "US stock markets saw declines, with the S&P 500 and Nasdaq Composite closing lower amidst a tech sell-off and concerns over rising borrowing costs."
+    "Global financial markets experienced significant downturns, influenced by civil unrest in France and heightened geopolitical tensions in the Middle East.",
+    "A new report indicates that men are now filing the majority of paid family leave claims in several key US states.",
+    "Scientists have detected a Kelvin wave, an underwater phenomenon, raising sea levels on the West Coast, with more such occurrences anticipated due to El Ni\nR&D."
   ],
   "market": {
     "sp500": {
@@ -17,30 +17,30 @@
       "change": -573.0,
       "asof": "2026-10-16"
     },
-    "why": "The S&P 500 and Nasdaq Composite closed lower, with markets facing a high-stakes showdown where strong earnings are colliding with rising borrowing costs. A silent market rotation inside the S&P 500 warned of potential weakness, and AI stocks experienced a plunge."
+    "why": "The S&P 500 and Nasdaq Composite experienced significant declines. This was influenced by civil unrest in France, which compounded fears of a debt crisis and led to a fall in Paris-listed stocks and bonds. Additionally, an unraveling in a key relationship in global financial markets caused investor uncertainty, and Saudi Arabia postponed a major investor conference due to escalating Houthi attacks."
   },
   "yield_10y": {
     "value": 5.1,
     "change": 0.01,
     "asof": "2026-10-16",
-    "why": "The 10-year Treasury yield saw a slight increase as investors reacted to rising borrowing costs and fears of potential rate hikes. Hedge fund activities were also noted as a potential factor that could increase the risk of a global bond market shock."
+    "why": "The 10-year Treasury yield saw a minor increase. The provided articles do not offer a specific explanation for this particular movement in U.S. Treasury yields."
   },
   "vix": {
     "value": 19.99,
     "change": 3.53,
     "asof": "2026-10-16",
-    "why": "The VIX increased, reflecting heightened market volatility and investor uncertainty. This rise was consistent with the significant declines observed in the S&P 500 and Nasdaq Composite, as AI stocks plunged and broader market weakness was anticipated."
+    "why": "The VIX increased, signaling higher market volatility and investor uncertainty. This can be linked to the reported unraveling of an important relationship in global financial markets, which caused investor scrambling, and the broader instability suggested by civil unrest in France and escalating geopolitical tensions from Houthi attacks on Saudi Arabia."
   },
   "breadth": {
     "sp500": {
-      "value": 51.8,
+      "value": 50.9,
       "asof": "2026-10-16",
       "status": "healthy",
-      "matched": 500,
+      "matched": 499,
       "stale": false
     },
     "ndx100": {
-      "value": 55.2,
+      "value": 58.3,
       "asof": "2026-10-16",
       "status": "healthy",
       "matched": 96,
@@ -99,7 +99,7 @@
     "value": 7.4,
     "change": 0.0,
     "asof": "2026-10-15",
-    "why": "The 30-year fixed mortgage rate remained stable this week, which aligns with the minimal change observed in the 10-year Treasury yield over recent days, as mortgage rates typically track the direction of bond yields."
+    "why": "The 30-year fixed mortgage rate remained unchanged at 7.4%, according to Freddie Mac's latest weekly survey. The provided articles do not offer specific reasons for this stability, and the mortgage rate is a weekly average that tracks the general direction of the 10-year Treasury yield over several days rather than a single day's movement."
   },
   "policy": [],
   "policy_upcoming": [
@@ -151,73 +151,73 @@
   ],
   "tech": [
     {
-      "summary": "Meta has updated its terms to remove language that previously suggested it could scrape content from websites, including news sites, to train its AI models, following public backlash.",
+      "summary": "A cybersecurity firm reported that a hacker used an army of AI agents to breach over 100 websites, including those of John Deere, SharkNinja, and Cummins.",
       "source": "The Verge",
-      "url": "https://www.theverge.com/tech/1013409/meta-removes-language-that-may-have-allowed-it-to-scrape-news-sites"
+      "url": "https://www.theverge.com/ai-artificial-intelligence/1013643/ai-agents-hack-john-deere-shark-ninja-cummins"
     },
     {
-      "summary": "Microsoft has withdrawn from a large AI datacentre project in Essex, UK, citing concerns over power supply, posing a setback for the development heralded by ministers.",
-      "source": "Guardian World",
-      "url": "https://www.theguardian.com/uk-news/2026/oct/18/microsoft-drops-huge-ai-datacentre-project-in-essex-over-power-supply-concerns"
+      "summary": "CERN and Mistral have announced a partnership to advance the use of artificial intelligence in scientific research.",
+      "source": "Hacker News",
+      "url": "https://home.cern/cern-and-mistral-join-forces-to-accelerate-ai-for-science/"
     },
     {
-      "summary": "New AI devices, including always-listening wearables from major tech companies, are pushing legal boundaries regarding privacy and raising concerns about potential covert recordings.",
+      "summary": "Anthropic, an AI company, has committed 5% of its shares to a new public benefit fund, aiming to address potential job disruption caused by AI advancements.",
       "source": "CNBC",
-      "url": "https://www.cnbc.com/2026/10/18/ai-wearables-privacy-wiretap-laws.html"
+      "url": "https://www.cnbc.com/2026/10/18/anthropic-ai-public-benefit-fund.html"
     }
   ],
   "world": [
     {
-      "summary": "France has seen widespread protests, with approximately 1,800 arrests and significant damage to streets in Paris as anger over school conditions combines with frustration over high living costs.",
+      "summary": "At least 53 people were killed and over 200 injured in a Houthi ballistic missile attack on a training camp for Yemeni government forces, marking the largest single loss of life since the country's civil war reignited in September.",
       "source": "Guardian World",
-      "url": "https://www.theguardian.com/world/live/2026/oct/18/paris-protests-france-demonstrations-europe-live-latest-news"
+      "url": "https://www.theguardian.com/world/2026/oct/19/houthi-attack-yemen-al-alam-camp-biggest-single-loss-of-life-civil-war"
     },
     {
-      "summary": "Russia and Ukraine have continued to trade strikes on each other\u2019s power infrastructure, resulting in two fatalities and at least 17 injuries after a previously declared \"energy ceasefire\" broke down.",
+      "summary": "French authorities have announced a partial curfew in Paris, effective from 11 pm to 6 am, with the Prime Minister attributing the exploitation of recent protests to the 'ultra-left.'",
       "source": "Guardian World",
-      "url": "https://www.theguardian.com/world/2026/oct/18/killed-injured-russia-ukraine-strikes-power-infrastructure"
+      "url": "https://www.theguardian.com/world/live/2026/oct/19/europe-france-protests-riots-macron-ukraine-russia-zelenskyy-sweden-latest-news-updates"
     },
     {
-      "summary": "Attacks by Israeli settlers on Palestinians and foreign officials in the West Bank have escalated, coinciding with the annual olive harvest season, prompting condemnation from France and Belgium.",
+      "summary": "A Kenyan court found cult leader Paul Mackenzie and approximately 30 others guilty of murder in connection with the deaths of 190 children and one adult, who prosecutors say were ordered to starve themselves.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/world/2026/oct/19/kenya-starvation-cult-leader-guilty-murder-190-children"
+    },
+    {
+      "summary": "Two separate boat incidents off the Greek islands of Lesbos and Samos resulted in the deaths of 12 migrants, including an infant.",
       "source": "Al Jazeera",
-      "url": "https://www.aljazeera.com/news/2026/10/18/a-timeline-of-west-bank-attacks-on-palestinians-and-foreign-officials?traffic_source=rss"
-    },
-    {
-      "summary": "Pope Leo XIV has stated he will gradually resume his duties after undergoing cancer surgery, thanking faithful followers for their prayers during his hospitalization.",
-      "source": "NPR",
-      "url": "https://www.npr.org/2026/10/18/g-s1-148654/pope-leo-says-he-will-gradually-resume-duties-after-cancer-surgery"
+      "url": "https://www.aljazeera.com/video/newsfeed/2026/10/19/12-migrants-including-an-infant-drown-in-two-incidents-off-greece?traffic_source=rss"
     }
   ],
   "us": [
     {
-      "summary": "Authorities identified the 16-year-old suspect in a deadly school shooting at an elementary school in Bend, Oregon, as a former student of the institution.",
-      "source": "NPR National",
-      "url": "https://www.npr.org/2026/10/17/nx-s1-6006236/suspect-in-deadly-oregon-elementary-school-shooting-was-a-former-student"
-    },
-    {
-      "summary": "$86 million in federal funds intended for teen pregnancy prevention programs nationwide has been redirected to a single large contractor with connections to the Trump administration.",
-      "source": "NPR National",
-      "url": "https://www.npr.org/2026/10/17/nx-s1-6003966/86m-in-teen-pregnancy-prevention-funds-diverted-to-trump-linked-contractor"
-    },
-    {
-      "summary": "In states with paid family leave programs, men are now filing the majority of claims, surpassing women in some areas as they utilize the benefit to bond with new children.",
+      "summary": "In states with paid family leave programs, men are now filing the majority of claims to bond with their new children, a significant shift in parental leave usage.",
       "source": "NPR National",
       "url": "https://www.npr.org/2026/10/18/nx-s1-5977811/dad-shift-men-now-file-majority-of-paid-family-leave-claims-in-key-states"
+    },
+    {
+      "summary": "Protesters in Arizona are raising concerns about the removal of 250-year-old cottonwood trees for the expansion of the border wall, following a temporary halt to similar actions in Texas.",
+      "source": "NPR National",
+      "url": "https://www.npr.org/2026/10/19/nx-s1-5995629/activists-decry-the-clearing-250-year-old-trees-for-border-wall-expansion"
+    },
+    {
+      "summary": "A large underwater Kelvin wave, driven by El Ni\nR&D, has moved up the West Coast, causing sea levels to rise, and scientists anticipate more such events.",
+      "source": "NPR National",
+      "url": "https://www.npr.org/2026/10/19/nx-s1-6001744/el-nino-kelvin-wave-west-coast"
     }
   ],
   "science": [
     {
-      "summary": "The American College of Obstetricians and Gynecologists has updated its guidelines for the treatment of menopause symptoms for the first time since 2014.",
+      "summary": "Scientists have reported that a significant underwater Kelvin wave has been detected moving up the West Coast, contributing to rising sea levels, with further occurrences expected due to El Ni\nR&D.",
       "source": "NPR Science",
-      "url": "https://www.npr.org/2026/10/16/nx-s1-6005201/health-treatment-menopause-hot-flash-night-sweats-insomnia"
+      "url": "https://www.npr.org/2026/10/19/nx-s1-6001744/el-nino-kelvin-wave-west-coast"
     },
     {
-      "summary": "A pioneering same-day test using metagenomics is offering a new method for detecting infections in intensive care patients, with reports indicating it has saved lives.",
-      "source": "BBC Health",
-      "url": "https://www.bbc.co.uk/news/articles/cw5yn83m8gypo?at_medium=RSS&at_campaign=rss"
+      "summary": "Dozens of critically endangered orangutans have been rescued from ongoing wildfires in Indonesia, as the species struggles for survival amidst habitat destruction during the fire season.",
+      "source": "NPR Science",
+      "url": "https://www.npr.org/2026/10/17/nx-s1-6004881/dozens-of-critically-endangered-orangutans-rescued-from-indonesian-wildfires"
     }
   ],
-  "weekly_recap": "This week, global markets experienced significant downturns, influenced by concerns over AI fatigue impacting chip stocks, reports of a global stock rout by a Chinese chipmaker, and rising US inflation. Geopolitically, the \"energy ceasefire\" between Ukraine and Russia broke down, leading to renewed strikes on power infrastructure. Tensions also escalated in the West Bank with settler attacks. Amidst these events, Pope Leo underwent successful lung cancer surgery, and a school shooting occurred in Bend, Oregon.",
+  "weekly_recap": null,
   "data_availability": {
     "sp500": true,
     "ndx": true,
