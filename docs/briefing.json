@@ -1,47 +1,47 @@
 {
-  "generated_at": "2026-10-19T11:54:39.411623-06:00",
-  "date": "2026-10-19",
+  "generated_at": "2026-10-20T09:59:03.446651-06:00",
+  "date": "2026-10-20",
   "tldr": [
-    "Global financial markets experienced significant downturns, influenced by civil unrest in France and heightened geopolitical tensions in the Middle East.",
-    "A new report indicates that men are now filing the majority of paid family leave claims in several key US states.",
-    "Scientists have detected a Kelvin wave, an underwater phenomenon, raising sea levels on the West Coast, with more such occurrences anticipated due to El Ni\nR&D."
+    "An inquiry found that government failings, including a lack of PPE and improper patient discharges, contributed to the rapid spread of Covid in care homes.",
+    "Salesforce announced a $5.66 billion acquisition of Braze, causing Braze's stock to surge significantly.",
+    "Pending home sales in the U.S. fell to a 25-year low in September, as buyers reacted to elevated mortgage rates."
   ],
   "market": {
     "sp500": {
-      "value": 7659.44,
-      "change": -84.62,
-      "asof": "2026-10-16"
+      "value": 7690.73,
+      "change": 31.29,
+      "asof": "2026-10-19"
     },
     "ndx": {
-      "value": 26140.03,
-      "change": -573.0,
-      "asof": "2026-10-16"
+      "value": 26430.89,
+      "change": 290.86,
+      "asof": "2026-10-19"
     },
-    "why": "The S&P 500 and Nasdaq Composite experienced significant declines. This was influenced by civil unrest in France, which compounded fears of a debt crisis and led to a fall in Paris-listed stocks and bonds. Additionally, an unraveling in a key relationship in global financial markets caused investor uncertainty, and Saudi Arabia postponed a major investor conference due to escalating Houthi attacks."
+    "why": "The S&P 500 and Nasdaq Composite closed higher, driven by positive sentiment in the tech sector following Salesforce's $5.66 billion acquisition of Braze and ongoing investment interest in AI-related ventures, including potential new data center deals and a new AI manufacturing startup."
   },
   "yield_10y": {
-    "value": 5.1,
-    "change": 0.01,
-    "asof": "2026-10-16",
-    "why": "The 10-year Treasury yield saw a minor increase. The provided articles do not offer a specific explanation for this particular movement in U.S. Treasury yields."
+    "value": 5.14,
+    "change": 0.04,
+    "asof": "2026-10-19",
+    "why": "The articles do not directly state reasons for the daily increase in the 10-year Treasury yield."
   },
   "vix": {
-    "value": 19.99,
-    "change": 3.53,
-    "asof": "2026-10-16",
-    "why": "The VIX increased, signaling higher market volatility and investor uncertainty. This can be linked to the reported unraveling of an important relationship in global financial markets, which caused investor scrambling, and the broader instability suggested by civil unrest in France and escalating geopolitical tensions from Houthi attacks on Saudi Arabia."
+    "value": 18.44,
+    "change": -1.55,
+    "asof": "2026-10-19",
+    "why": "The VIX declined, suggesting a reduction in anticipated market volatility. This shift could be linked to hopes for diplomatic progress in the Middle East, which contributed to a fall in oil prices, and investor focus shifting towards corporate earnings."
   },
   "breadth": {
     "sp500": {
-      "value": 50.9,
-      "asof": "2026-10-16",
+      "value": 52.9,
+      "asof": "2026-10-19",
       "status": "healthy",
       "matched": 499,
       "stale": false
     },
     "ndx100": {
-      "value": 58.3,
-      "asof": "2026-10-16",
+      "value": 59.4,
+      "asof": "2026-10-19",
       "status": "healthy",
       "matched": 96,
       "stale": false
@@ -51,29 +51,29 @@
     {
       "symbol": "SOXL",
       "what": "3x semiconductors",
-      "value": 93.67,
-      "day_move": -12.74,
-      "asof": "2026-10-16",
-      "rsi": 30.0,
-      "rsi_zone": "oversold",
+      "value": 98.65,
+      "day_move": 5.32,
+      "asof": "2026-10-19",
+      "rsi": 33.4,
+      "rsi_zone": "neutral",
       "low": 93.67,
       "high": 164.27,
-      "band_pct": 0.0,
-      "zone": "low",
-      "action": "buy",
-      "read": "Near the bottom of its 1-month range and oversold on RSI. Big session: down 12.7% in a day."
+      "band_pct": 7.1,
+      "zone": "mid",
+      "action": "hold",
+      "read": "Mid-range - 7% of the way up its 1-month band."
     },
     {
       "symbol": "SPXL",
       "what": "3x S&P 500",
-      "value": 280.17,
-      "day_move": -3.39,
-      "asof": "2026-10-16",
-      "rsi": 42.5,
+      "value": 283.62,
+      "day_move": 1.23,
+      "asof": "2026-10-19",
+      "rsi": 45.7,
       "rsi_zone": "neutral",
       "low": 280.17,
       "high": 299.21,
-      "band_pct": 0.0,
+      "band_pct": 18.1,
       "zone": "low",
       "action": "buy",
       "read": "Within 4% of its 1-month low."
@@ -81,17 +81,17 @@
     {
       "symbol": "TQQQ",
       "what": "3x Nasdaq-100",
-      "value": 68.21,
-      "day_move": -7.6,
-      "asof": "2026-10-16",
-      "rsi": 33.8,
+      "value": 70.64,
+      "day_move": 3.56,
+      "asof": "2026-10-19",
+      "rsi": 39.6,
       "rsi_zone": "neutral",
       "low": 68.21,
       "high": 84.25,
-      "band_pct": 0.0,
+      "band_pct": 15.1,
       "zone": "low",
       "action": "buy",
-      "read": "Within 4% of its 1-month low. Big session: down 7.6% in a day."
+      "read": "Within 4% of its 1-month low."
     }
   ],
   "watchlist_missing": [],
@@ -99,7 +99,7 @@
     "value": 7.4,
     "change": 0.0,
     "asof": "2026-10-15",
-    "why": "The 30-year fixed mortgage rate remained unchanged at 7.4%, according to Freddie Mac's latest weekly survey. The provided articles do not offer specific reasons for this stability, and the mortgage rate is a weekly average that tracks the general direction of the 10-year Treasury yield over several days rather than a single day's movement."
+    "why": "The 30-year fixed mortgage rate remained unchanged at 7.4% in the latest weekly survey released on October 15, 2026. This rate generally tracks the direction of the 10-year Treasury yield over recent days. High mortgage rates continue to impact the housing market, contributing to pending home sales falling to a 25-year low and builders cutting prices as buyer traffic decreased to a 14-year low."
   },
   "policy": [],
   "policy_upcoming": [
@@ -151,70 +151,70 @@
   ],
   "tech": [
     {
-      "summary": "A cybersecurity firm reported that a hacker used an army of AI agents to breach over 100 websites, including those of John Deere, SharkNinja, and Cummins.",
+      "summary": "Adobe Lightroom mobile can now use generative AI to automatically open closed eyes in photos with a single tap, adding a new editing capability for users.",
       "source": "The Verge",
-      "url": "https://www.theverge.com/ai-artificial-intelligence/1013643/ai-agents-hack-john-deere-shark-ninja-cummins"
+      "url": "https://www.theverge.com/tech/1014246/adobe-lightroom-mobile-ai-quick-action-open-eyes-closed-blink-repair"
     },
     {
-      "summary": "CERN and Mistral have announced a partnership to advance the use of artificial intelligence in scientific research.",
+      "summary": "An open-source Rust AI gateway called Respan has been launched, featuring a plugin-based architecture that allows for integration with various AI providers, protocols, and modalities.",
       "source": "Hacker News",
-      "url": "https://home.cern/cern-and-mistral-join-forces-to-accelerate-ai-for-science/"
+      "url": "https://news.ycombinator.com/item?id=50167583"
     },
     {
-      "summary": "Anthropic, an AI company, has committed 5% of its shares to a new public benefit fund, aiming to address potential job disruption caused by AI advancements.",
-      "source": "CNBC",
-      "url": "https://www.cnbc.com/2026/10/18/anthropic-ai-public-benefit-fund.html"
+      "summary": "Research has demonstrated that fabricated statistics published online can be easily cited by large language models, raising concerns about the integrity of information propagated by AI.",
+      "source": "Hacker News",
+      "url": "https://peec.ai/blog/publish-stats-get-cited-the-tactic-that-put-my-data-all-over-the-web"
     }
   ],
   "world": [
     {
-      "summary": "At least 53 people were killed and over 200 injured in a Houthi ballistic missile attack on a training camp for Yemeni government forces, marking the largest single loss of life since the country's civil war reignited in September.",
-      "source": "Guardian World",
-      "url": "https://www.theguardian.com/world/2026/oct/19/houthi-attack-yemen-al-alam-camp-biggest-single-loss-of-life-civil-war"
+      "summary": "Ukrainian President Zelensky is holding talks with US envoys and Nordic leaders in Oslo amid ongoing discussions about international support and intelligence sharing.",
+      "source": "BBC World",
+      "url": "https://www.bbc.co.uk/news/articles/ck9qzn193lrlo?at_medium=RSS&at_campaign=rss"
     },
     {
-      "summary": "French authorities have announced a partial curfew in Paris, effective from 11 pm to 6 am, with the Prime Minister attributing the exploitation of recent protests to the 'ultra-left.'",
+      "summary": "France announced it will deploy military forces to reinforce police during anticipated weekend protests across the country.",
       "source": "Guardian World",
-      "url": "https://www.theguardian.com/world/live/2026/oct/19/europe-france-protests-riots-macron-ukraine-russia-zelenskyy-sweden-latest-news-updates"
+      "url": "https://www.theguardian.com/world/live/2026/oct/20/france-protests-paris-curfews-italy-europe-ukraine-latest-news-updates"
     },
     {
-      "summary": "A Kenyan court found cult leader Paul Mackenzie and approximately 30 others guilty of murder in connection with the deaths of 190 children and one adult, who prosecutors say were ordered to starve themselves.",
-      "source": "Guardian World",
-      "url": "https://www.theguardian.com/world/2026/oct/19/kenya-starvation-cult-leader-guilty-murder-190-children"
-    },
-    {
-      "summary": "Two separate boat incidents off the Greek islands of Lesbos and Samos resulted in the deaths of 12 migrants, including an infant.",
+      "summary": "The eastern Libyan parliament has approved a 2019 maritime deal with Turkey, officially ending a boycott of the agreement that began in 2020.",
       "source": "Al Jazeera",
-      "url": "https://www.aljazeera.com/video/newsfeed/2026/10/19/12-migrants-including-an-infant-drown-in-two-incidents-off-greece?traffic_source=rss"
+      "url": "https://www.aljazeera.com/news/2026/10/20/eastern-libya-parliament-approves-maritime-deal-with-turkey-lifts-2020-boy?traffic_source=rss"
+    },
+    {
+      "summary": "In Sudan, army drones reportedly struck mourners and a fuel market, resulting in over 200 deaths, while in Yemen, local authorities state that a Houthi missile strike killed 73 security recruits at a training camp.",
+      "source": "BBC World",
+      "url": "https://www.bbc.co.uk/news/articles/cr3el70jz1nqo?at_medium=RSS&at_campaign=rss"
     }
   ],
   "us": [
     {
-      "summary": "In states with paid family leave programs, men are now filing the majority of claims to bond with their new children, a significant shift in parental leave usage.",
+      "summary": "A federal judge chastised the Trump administration for continuing with the overhaul of a historic public golf course in Washington D.C., including the removal of hundreds of trees, despite a prior court order.",
+      "source": "NPR National",
+      "url": "https://www.npr.org/2026/10/19/nx-s1-6007746/golf-course-potomac-white-house-tree-removal"
+    },
+    {
+      "summary": "In states with their own paid family leave programs, men are now filing the majority of claims to bond with new children, indicating a shift in usage patterns for parental benefits.",
       "source": "NPR National",
       "url": "https://www.npr.org/2026/10/18/nx-s1-5977811/dad-shift-men-now-file-majority-of-paid-family-leave-claims-in-key-states"
     },
     {
-      "summary": "Protesters in Arizona are raising concerns about the removal of 250-year-old cottonwood trees for the expansion of the border wall, following a temporary halt to similar actions in Texas.",
-      "source": "NPR National",
-      "url": "https://www.npr.org/2026/10/19/nx-s1-5995629/activists-decry-the-clearing-250-year-old-trees-for-border-wall-expansion"
-    },
-    {
-      "summary": "A large underwater Kelvin wave, driven by El Ni\nR&D, has moved up the West Coast, causing sea levels to rise, and scientists anticipate more such events.",
-      "source": "NPR National",
-      "url": "https://www.npr.org/2026/10/19/nx-s1-6001744/el-nino-kelvin-wave-west-coast"
+      "summary": "In North Carolina, five police officers resigned and one was suspended following the discovery of alleged racist text messages during an investigation into the misuse of a camera system, prompting a review of arrest records.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/us-news/2026/oct/20/north-carolina-police-officers-alleged-racist-texts"
     }
   ],
   "science": [
     {
-      "summary": "Scientists have reported that a significant underwater Kelvin wave has been detected moving up the West Coast, contributing to rising sea levels, with further occurrences expected due to El Ni\nR&D.",
-      "source": "NPR Science",
-      "url": "https://www.npr.org/2026/10/19/nx-s1-6001744/el-nino-kelvin-wave-west-coast"
+      "summary": "A Covid inquiry found that government failures, including inadequate provision of PPE and problematic patient discharges from hospitals, allowed the virus to spread extensively in care homes.",
+      "source": "BBC Health",
+      "url": "https://www.bbc.co.uk/news/articles/ck1l38z0v3v6o?at_medium=RSS&at_campaign=rss"
     },
     {
-      "summary": "Dozens of critically endangered orangutans have been rescued from ongoing wildfires in Indonesia, as the species struggles for survival amidst habitat destruction during the fire season.",
-      "source": "NPR Science",
-      "url": "https://www.npr.org/2026/10/17/nx-s1-6004881/dozens-of-critically-endangered-orangutans-rescued-from-indonesian-wildfires"
+      "summary": "A late-stage analysis revealed that Novo's experimental obesity drug, CagriSema, demonstrated a 25% weight loss in women, potentially surpassing the efficacy of current treatments like Wegovy.",
+      "source": "CNBC",
+      "url": "https://www.cnbc.com/2026/10/20/novo-cagrisema-women-weight-loss-analysis.html"
     }
   ],
   "weekly_recap": null,

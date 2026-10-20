@@ -1,22 +1,6 @@
 {
-  "generated_at": "2026-10-19T11:54:39.411623-06:00",
+  "generated_at": "2026-10-20T09:59:03.446651-06:00",
   "lessons": [
-    {
-      "id": "2026-08-15-water-heating",
-      "date": "2026-08-15",
-      "domain": "Home, car and repair",
-      "title": "What to know about your home's hot water supply",
-      "hook": "Understanding how your hot water is heated can save money on energy bills and prevent cold showers.",
-      "quick": "A common frustration in many homes is running out of hot water, or receiving an unexpectedly high energy bill. This often happens because typical home water heaters store a large tank of hot water, keeping it continuously heated and ready for use. This design means that heat can escape through the tank walls over time, even when no one is using hot water, causing the system to reheat the water. Investing in a tank with better insulation can help improve this standby efficiency. However, even with good insulation, heavy use can exhaust the stored hot water, leading to a significant wait before more hot water becomes available. In the United States, most homes rely on either natural gas, electric resistance, or a heat pump to provide this hot water.",
-      "more": "While natural gas is often the cheapest option where it's conveniently piped, electric heat pump water heaters offer significant energy efficiency compared to standard electric resistance models, though they cost more upfront. Some energy utilities even offer funding to help customers manage the initial expense of these more efficient units. These tank-type water heaters are very popular in North America, with household sizes typically ranging from 75 to 400 liters, or 20 to 100 US gallons. They maintain water pressure close to the incoming mains supply. Although larger tanks can offer hot water with less temperature fluctuation during moderate use, the core issue of heat loss and recovery time remains for this common type of system.",
-      "deep": "The way your hot water is generated depends on the system's energy source, which could be fossil fuels, solid fuels, or electricity from various sources. Alternative energy options like solar, heat pumps, or geothermal heating are also used, often with backup systems that run on fossil fuels or electricity. In some densely populated urban areas, district heating systems provide hot water from central plants, supplying energy for both water and space heating. In these cases, tap water is heated in a heat exchanger located at the consumer's property, and redundancy is typically handled by the district heating supply, meaning no in-building backup is needed. For specific needs, tiny point-of-use electric storage water heaters are available, usually 8 to 32 liters, or 2 to 6 gallons, designed for hand washing or supplementing an existing hot water line. These small units use low power, about 1 to 1.5 kilowatts, but can only provide a continuous flow of hot water at extremely low rates due to their thermostatic maintenance of water temperature.",
-      "takeaway": "Check your water heater's insulation and consider its size and type to match your household's hot water needs and energy efficiency goals.",
-      "source": {
-        "title": "Water heating",
-        "url": "https://en.wikipedia.org/wiki/Water_heating"
-      },
-      "audio": {}
-    },
     {
       "id": "2026-08-16-sleep-hygiene",
       "date": "2026-08-16",
@@ -639,11 +623,7 @@
         "title": "Annual percentage rate",
         "url": "https://en.wikipedia.org/wiki/Annual_percentage_rate"
       },
-      "audio": {
-        "quick": "lessons/2026-09-27-annual-percentage-rate-quick.mp3",
-        "more": "lessons/2026-09-27-annual-percentage-rate-more.mp3",
-        "deep": "lessons/2026-09-27-annual-percentage-rate-deep.mp3"
-      }
+      "audio": {}
     },
     {
       "id": "2026-09-28-service-motor-vehicle",
@@ -1043,6 +1023,26 @@
         "quick": "lessons/2026-10-19-underwriting-quick.mp3",
         "more": "lessons/2026-10-19-underwriting-more.mp3",
         "deep": "lessons/2026-10-19-underwriting-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-10-20-residual-current-device",
+      "date": "2026-10-20",
+      "domain": "Home, car and repair",
+      "title": "Electrical Safety Devices for Shock Protection",
+      "hook": "An electric shock can cause serious injury or even death, but conventional circuit breakers often don't prevent these dangers.",
+      "quick": "If you touch a live wire, a dangerous electrical current can pass through your body, potentially causing severe injury or cardiac arrest. While standard circuit breakers and fuses protect against total current overload, they often won't react to the smaller, but still deadly, amount of current that might leak through a person. This means a circuit could still carry enough power to harm you without tripping a conventional safety device. Residual-current devices, also called RCDs or GFCIs, are specifically designed to detect this dangerous leakage. They constantly monitor the electrical current, and if they detect an imbalance between the current flowing out and the current returning, it signals that electricity is escaping through an unintended path, such as through a person's body. The device then rapidly cuts off the power.",
+      "more": "This imbalance detection is key because even a relatively small amount of alternating current, if it persists for more than a brief moment, can be enough to drive the heart into ventricular fibrillation, a common cause of death from electric shock. RCDs are engineered to disconnect the power quickly enough\u2014within milliseconds\u2014to potentially prevent this serious injury. While a traditional circuit breaker might need thousands of times the current to trip, an RCD can respond to a leakage as small as 5 to 30 milliamperes. This rapid and sensitive response means it provides a layer of shock protection that standard circuit breakers simply cannot offer, acting as a crucial part of modern electrical safety by automatically shutting off power when a fault develops.",
+      "deep": "These devices achieve this protection by using a differential current transformer to measure the precise balance between the current in the line and neutral conductors. If the sum isn't zero, it indicates a leakage to ground or another circuit, prompting the device to open its contacts and disconnect the power. This means an RCD can still provide automatic disconnection and shock protection even if the building's earth wiring is damaged or incomplete, because it doesn't rely on current flowing back through that specific wire to detect a fault. You'll find RCDs integrated into electrical plugs for certain appliances, in-line on extension cords, or as wall receptacles in areas like bathrooms and kitchens. It is important to know that these devices are testable and resettable; a test button safely creates a small leakage condition to confirm the device is working, and you can reset it after the fault is cleared. However, an RCD cannot protect a person who touches both circuit conductors at the same time, as it cannot distinguish normal current from current passing through a person in that specific scenario.",
+      "takeaway": "Identify the RCD or GFCI outlets in your home, particularly in wet areas like kitchens and bathrooms, and regularly press their test buttons to verify they operate correctly, then reset them.",
+      "source": {
+        "title": "Residual-current device",
+        "url": "https://en.wikipedia.org/wiki/Residual-current_device"
+      },
+      "audio": {
+        "quick": "lessons/2026-10-20-residual-current-device-quick.mp3",
+        "more": "lessons/2026-10-20-residual-current-device-more.mp3",
+        "deep": "lessons/2026-10-20-residual-current-device-deep.mp3"
       }
     }
   ],
