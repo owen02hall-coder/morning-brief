@@ -59,6 +59,10 @@ How the briefing is scheduled, deployed, monitored, and recovered.
 - `permissions: contents: write` lets the token push. No personal access token is used, so the push
   does not retrigger the workflow (but it DOES trigger `shell-guard.yml`, which no-ops unless PWA
   shell files changed).
+- Checkout runs with `persist-credentials: false` (2026-10-21), so that token is NOT in `.git/config`
+  while the build parses untrusted feed text; the commit step alone hands it to git
+  (`git remote set-url` with `x-access-token`). Do not add a git step before it without passing the
+  token there too.
 - `timeout-minutes: 10` bounds the job; the failure backstop fires on `failure() || cancelled()`
   so a timeout-kill still alerts. That budget is the reason every policy-leg bound exists: each
   request carries `POLICY_TIMEOUT` (25s) and a byte cap, the second Gemini call uses a 60s timeout

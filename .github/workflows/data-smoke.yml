@@ -249,7 +249,7 @@ jobs:
       # place. This job IS the alarm, so it has to be able to ring.
       # `failure() || cancelled()`, not `failure()`: a timeout-minutes kill is a CANCELLATION, and
       # this job has a timeout — `failure()` alone would silently miss the slowest failure mode.
-      # The secret is NTFY_SUB while the code reads env NTFY_TOPIC (briefing.yml:46-47);
+      # The secret is NTFY_SUB while the code reads env NTFY_TOPIC (briefing.yml, "Build briefing" env);
       # `secrets.NTFY_TOPIC` would resolve to empty and the [ -n ] guard would skip without a word.
       # Hence the `else`: a guard that skips silently IS the dead alarm this step exists to prevent,
       # so an empty topic on a red run must annotate the run rather than report green and page nobody.

@@ -24,7 +24,9 @@ jobs:
 
       # Same guard as briefing.yml: a missing NTFY_SUB would make this watchdog itself silent.
       - name: Fail fast if alerting is unwired
-        run: '[ -n "${{ secrets.NTFY_SUB }}" ] || { echo "::error::NTFY_SUB secret missing — all alerting would be silent"; exit 1; }'
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_SUB }}   # via env, never ${{ }} inside run: (script-injection shape)
+        run: '[ -n "$NTFY_TOPIC" ] || { echo "::error::NTFY_SUB secret missing — all alerting would be silent"; exit 1; }'
 
       - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0 (SHA-pinned)
         with:

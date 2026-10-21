@@ -18,9 +18,8 @@ ntfy topic, so it is the cheapest honest place to assert that a SCHEDULED smoke 
 import json
 import os
 import sys
-import urllib.error
 import urllib.request
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timezone
 from zoneinfo import ZoneInfo
 
 from . import config, notify

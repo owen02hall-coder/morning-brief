@@ -30,11 +30,19 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3 (SHA-pinned: mutable tags are a supply-chain vector in a push-capable job)
+        with:
+          # The build parses untrusted RSS / Wikipedia / Federal Register text. With the default
+          # (true), the push token sits in .git/config the whole time that runs, so a parser exploit
+          # could push a rewritten docs/app.js straight to the phone. The token is handed to git
+          # only in the commit step below, after every untrusted byte has been processed.
+          persist-credentials: false
 
       # A missing/renamed NTFY_SUB secret would silently disable EVERY alarm path (ready push,
       # degraded pings, failure backstop). Fail loudly before doing any work.
       - name: Fail fast if alerting is unwired
-        run: '[ -n "${{ secrets.NTFY_SUB }}" ] || { echo "::error::NTFY_SUB secret missing — all alerting would be silent"; exit 1; }'
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_SUB }}   # via env, never ${{ }} inside run: (script-injection shape)
+        run: '[ -n "$NTFY_TOPIC" ] || { echo "::error::NTFY_SUB secret missing — all alerting would be silent"; exit 1; }'
 
       - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0 (SHA-pinned)
         with:
@@ -44,7 +52,7 @@ jobs:
 
       - name: Build briefing
         env:
-          # v1 uses Yahoo Finance chart API (keyless) + Gemini + ntfy. TWELVE_API_KEY is NOT needed until v2 breadth.
+          # Market data (Yahoo) and breadth (TradingView) are keyless; Gemini + ntfy are the only keys.
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           # Code reads env NTFY_TOPIC / PAGES_URL; the repo's secret/var are named NTFY_SUB / PAGE_URL.
           NTFY_TOPIC: ${{ secrets.NTFY_SUB }}
@@ -70,7 +78,10 @@ jobs:
           fi
 
       - name: Commit briefing + state
+        env:
+          PUSH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          git remote set-url origin "https://x-access-token:${PUSH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add docs/ state/

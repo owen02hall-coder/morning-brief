@@ -72,8 +72,8 @@ def policy_alert(message):
 def watchlist_alert(message):
     """A ticker crossed into buy or trim range.
 
-    Normal priority, not the high that breadth OVERSOLD uses. This fires from the 06:00 build,
-    hours before the US open, about a level that has held since yesterday's close — there is
+    Normal priority, not the high that breadth OVERSOLD uses. This fires from the early-morning
+    build, hours before the US open, about a level that has held since yesterday's close — there is
     nothing here that a 3am page would let the reader act on any sooner. It is also edge-triggered
     upstream (state.eval_watchlist_alert), so unlike the breadth nag it cannot repeat daily; a push
     that can only arrive on a change has earned an ordinary priority."""

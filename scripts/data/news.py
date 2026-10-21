@@ -44,7 +44,9 @@ def _bucket(feeds):
                 continue
             title = (e.get("title") or "").strip()
             link = (e.get("link") or "").strip()
-            if not title or not link:
+            # http(s) only, here at the source: on a no-model day _fallback_items ships these links
+            # unfiltered, and the page's safeHref would be the last line of defence.
+            if not title or not link.lower().startswith(("http://", "https://")):
                 continue
             key = _norm(title)[:80] or link
             if key in seen:
