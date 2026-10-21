@@ -69,7 +69,8 @@ GitHub Actions (daily cron, UTC) --> python -m scripts.build_briefing
   --> GitHub Pages serves the PWA; ntfy pushes "ready" only after git push succeeded
 PWA (docs/) reads briefing.json + lessons.json (network-first), renders it, plays the Listen queue
 (today's mp3 -> the current lesson's clips -> sign-off) when the audio manifest matches today
-(device-voice fallback otherwise), archive + freshness banner. Which lesson is current lives in the
+(device-voice fallback for the briefing otherwise — never for a lesson; an unrecorded lesson is
+passed over), archive + freshness banner. Which lesson is current lives in the
 phone's localStorage, because only the phone knows whether the audio actually reached the end.
 ```
 

@@ -16,13 +16,17 @@
  *   (C5) The "New lesson" button advances it too, but records a SKIP — the two must stay
  *        distinguishable, or "did he listen" stops meaning anything.
  *   (C6) A lesson whose clips are missing (a failed TTS day, or audio pruned off the retention
- *        window) falls back to the device voice rather than to silence.
+ *        window) is PASSED OVER — never read by the device voice (the reader's call, 2026-10-21;
+ *        until then this check asserted the opposite). "Missing" means ANY tier of the chosen
+ *        length, so a half-recorded lesson cannot hand off between voices mid-lesson.
  *   (C7) A reader who has finished the whole deck is told so, instead of the narration handing off
  *        into nothing.
  *   (C8) The history survives a reload.
  *   (C9) Changing the playback speed is not a completion. The speed chip stops and restarts what
  *        is playing, which makes it a new way into the exact failure C4 exists to prevent — and
  *        unlike a wrong speed (which the listener hears instantly), a burned lesson is silent.
+ *  (C11) A day with no briefing mp3: the device voice reads the BRIEFING only, the lesson is not
+ *        queued after it, and finishing that queue completes nothing.
  *  (C10) The device voice speaks at the CHOSEN speed. The <audio> half of the speed chip proves
  *        itself the moment you hear it; the speech half is a property of utterances queued in a
  *        burst, where one utterance carrying the wrong rate is invisible to every other check here.
@@ -119,7 +123,7 @@ const lesson = (id, withAudio) => ({
     ? { quick: `lessons/${id}-quick.mp3`, more: `lessons/${id}-more.mp3`, deep: `lessons/${id}-deep.mp3` }
     : {},
 });
-const DECK = { lessons: [lesson("a", true), lesson("b", true), lesson("c", false)],
+const DECK = { lessons: [lesson("a", true), lesson("b", true), lesson("c", false), lesson("d", true)],
                outro: "lessons/outro.mp3" };
 global.fetch = async (url) => {
   const body = url.startsWith("briefing.json") ? BRIEFING
@@ -182,15 +186,20 @@ const saved = () => JSON.parse(store["soup.v1"] || "{}");
 
   console.log("\nC5  the button advances too, but records a skip");
   section().querySelector("button.soup-next").onclick();
-  check("advanced again", shownTitle() === "Lesson c", String(shownTitle()));
+  check("advanced again — past the unrecorded lesson c", shownTitle() === "Lesson d",
+    String(shownTitle()));
   check("recorded as SKIPPED, not completed",
     saved().skipped.join() === "b" && saved().completed.join() === "a");
 
-  console.log("\nC6  a lesson with no clips falls back to the device voice, not to silence");
-  check("only the briefing clip is queued", player.clips.length === 1,
-    player.clips.map((c) => c.src).join());
-  check("the lesson's own prose is what gets spoken", player.tail.includes("Lesson c"),
-    player.tail.slice(0, 60));
+  console.log("\nC6  a lesson with no clips is passed over, never read by the device voice");
+  check("the next RECORDED lesson's clips are queued", player.lessonId === "d" &&
+    player.clips.some((c) => c.src === "lessons/d-quick.mp3"), player.clips.map((c) => c.src).join());
+  check("nothing is left for the device voice to say", player.tail === "", player.tail.slice(0, 60));
+  const half = { id: "h", audio: { quick: "lessons/h-quick.mp3" } };
+  check("a half-recorded lesson is playable at Quick", soup.playable(half) === true);
+  soup.prefs.length = "medium";
+  check("...and passed over at Medium, not finished in another voice", soup.playable(half) === false);
+  soup.prefs.length = "quick";
 
   console.log("\nC7  the end of the deck is stated, not left dangling");
   player.finish();
@@ -198,12 +207,14 @@ const saved = () => JSON.parse(store["soup.v1"] || "{}");
   check("the page says so", !!msg && msg.textContent.includes("caught up"));
   check("the audio says so too", player.tail.includes("caught up"), player.tail);
   check("nothing is left to complete", player.lessonId === null);
+  check("the unrecorded lesson is not what ends the queue", !player.tail.includes("Lesson c"),
+    player.tail);
 
   console.log("\nC8  the history survives a reload");
   soup.prefs = { length: "medium", completed: [], skipped: [] };
   soup.load();
   check("length, completions and skips all reload",
-    soup.prefs.length === "quick" && soup.prefs.completed.join() === "a,c" &&
+    soup.prefs.length === "quick" && soup.prefs.completed.join() === "a,d" &&
     soup.prefs.skipped.join() === "b", JSON.stringify(soup.prefs));
 
   console.log("\nC9  changing the playback speed is not a completion");
@@ -238,16 +249,29 @@ const saved = () => JSON.parse(store["soup.v1"] || "{}");
   const rates = () => spoken.filter((u) => u.rate !== null).map((u) => u.rate);
 
   player.stopAll();
-  // A lesson whose clips are missing: the queue ends in SPEECH, which is the surface under test.
-  soup.prefs = { length: "medium", completed: ["a", "b"], skipped: [] };
+  console.log("\nC11 no briefing mp3 today: the device voice reads the briefing, never the lesson");
+  // The only surface left where the queue ends in SPEECH, and so the surface C10 measures too.
+  soup.prefs = { length: "medium", completed: [], skipped: [] };
+  player.hasEdition = false;
   player.replan();
+  check("nothing but speech is queued", player.clips.length === 0, player.clips.map((c) => c.src).join());
+  check("the briefing is spoken", player.tail.includes("A thing happened"), player.tail.slice(0, 60));
+  check("the lesson is NOT spoken", !player.tail.includes("Lesson a") && !player.tail.includes("Quick body"),
+    player.tail);
+  check("no hand-off into a soup that will not play", !player.tail.includes("Alphabet Soup"), player.tail);
+  check("finishing this queue would complete nothing", player.lessonId === null, String(player.lessonId));
+  check("the lesson still waits for a recorded day", soup.current() && soup.current().id === "a",
+    String(soup.current() && soup.current().id));
+
+  console.log("\nC10 the device voice speaks at the chosen speed (on that briefing-only tail)");
   check("the queue ends in a spoken tail", player.tail !== "", player.tail.slice(0, 40));
   check("the speed is the 1.5x chosen in C9", player.rate === 1.5, String(player.rate));
 
   spoken.length = 0;
-  player.toggle();                    // a tap: unlocks the speech API, then starts the clips
+  player.toggle();                    // a tap: unlocks the speech API, then (no clips) speaks at once
+  const primer = spoken.find((u) => u.text === " ");
   check("the silent primer is queued at the chosen speed, not at 1x",
-    rates().length === 1 && rates()[0] === 1.5, JSON.stringify(rates()));
+    !!primer && primer.rate === 1.5 && rates().every((r) => r === 1.5), JSON.stringify(rates()));
 
   spoken.length = 0;
   player.speak();                     // the tail, as next() reaches it
@@ -258,8 +282,8 @@ const saved = () => JSON.parse(store["soup.v1"] || "{}");
   byId["listen-speed"].onclick();     // 1.5 -> 2 mid-speech: the tail is re-spoken, not relabelled
   check("changing the speed mid-speech re-speaks at the NEW speed",
     rates().length > 0 && rates().every((r) => r === 2), JSON.stringify(rates()));
-  check("the pointer did NOT move when that speech was cancelled", player.lessonId === "c",
-    String(player.lessonId));
+  check("the pointer did NOT move when that speech was cancelled",
+    soup.current().id === "a" && (saved().completed || []).length === 0, JSON.stringify(saved()));
   player.stopAll();
 
   console.log(fails ? `\nFAIL: ${fails} check(s)` : "\nPASS: the client pointer behaves");

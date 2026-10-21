@@ -206,8 +206,8 @@ if m:
           f"app.js={sorted(client_tiers)}")
     check("client length names are exactly quick/medium/long",
           client_lengths == {"quick", "medium", "long"}, f"app.js={sorted(client_lengths)}")
-check("the client mirrors the outro line",
-      tts.OUTRO_TEXT in APP_JS, "SOUP_OUTRO_SPOKEN must equal tts.OUTRO_TEXT")
+# (The client-side outro mirror was retired 2026-10-21: the device voice no longer speaks a lesson,
+# so the outro is only ever the recorded lessons/outro.mp3 and there is no second copy to drift.)
 
 print("\n" + ("FAIL: " + ", ".join(FAILURES) if FAILURES else "PASS: all lesson assumptions hold"))
 sys.exit(1 if FAILURES else 0)

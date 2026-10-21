@@ -559,8 +559,10 @@ new one. Known limits, all deliberate:
   true of CREATING a clip and not of KEEPING it — the blob is in history from the commit that added
   it, so pruning reclaims checkout bytes and never shrinks the repo. Since the pointer serves the
   OLDEST unfinished lesson, a 10-lesson window meant a reader two weeks behind met the device voice
-  on every lesson they were behind by. A pointer that still falls off the window works — the deck
-  carries the prose, and the device voice reads it.
+  on every lesson they were behind by. **Since 2026-10-21 the device voice never teaches a lesson**
+  (the reader's call): `soup.playable()` admits only a lesson with every clip for the chosen length,
+  so a lesson that falls off the window is passed over — page and audio both move on to the oldest
+  unfinished lesson that is still recorded.
 - **Missing lesson clips are repaired, not written off.** `tts.backfill_lesson_audio()` re-synthesizes
   up to `LESSON_AUDIO_BACKFILL_MAX` (2) missing clips per run for lessons inside the retention
   window, oldest first, and `_synthesize()` retries transient TTS failures. Before both existed a

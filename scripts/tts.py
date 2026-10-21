@@ -400,7 +400,8 @@ OUTRO_FILENAME = "outro.mp3"
 
 
 def compose_lesson_segments(lesson):
-    """The three cumulative clips, in play order. Mirror any change in docs/app.js soupSpeech()."""
+    """The three cumulative clips, in play order. The client plays these clips and never speaks the
+    lesson itself (2026-10-21), so there is no client-side mirror of this text to keep in step."""
     # No "and now, the soup" opener here: the briefing narration already hands off (compose_script's
     # has_lesson branch), and this clip also plays on its own when the reader is catching up on an
     # older lesson. Announcing it twice is the more likely mistake, so it is announced once, there.

@@ -360,7 +360,6 @@ const SOUP_KEY = "soup.v1";
 const SOUP_TIERS = { quick: ["quick"], medium: ["quick", "more"], long: ["quick", "more", "deep"] };
 const SOUP_LENGTHS = [["quick", "Quick"], ["medium", "Medium"], ["long", "Long"]];
 const SOUP_CAUGHT_UP = "You're caught up on Alphabet Soup. The next one lands tomorrow morning.";
-const SOUP_OUTRO_SPOKEN = "That's your alphabet soup. Have a great day.";
 const SOUP_HISTORY_MAX = 400;   // ids kept per list; the deck itself is far shorter
 
 const soup = {
@@ -390,11 +389,17 @@ const soup = {
     }
   },
   done() { return new Set(this.prefs.completed.concat(this.prefs.skipped)); },
-  // Oldest-unfinished first. Lessons are not news — nothing expires — so working forward through
-  // the deck means a week away costs nothing, where "newest each day" would silently drop the ones
-  // that were never heard.
-  current() { const d = this.done(); return this.deck.find((l) => !d.has(l.id)) || null; },
-  waiting() { const d = this.done(); return this.deck.filter((l) => !d.has(l.id)).length; },
+  // A lesson is taught only in the recorded voice — every clip for the chosen length must be on the
+  // server. The reader's call (2026-10-21): the device voice never teaches a lesson. Lessons whose
+  // audio was pruned off LESSON_AUDIO_RETAIN (or lost a tier to a TTS error) are passed over, not
+  // read aloud; until then, falling behind meant EVERY lesson came out of the device voice, because
+  // the oldest unfinished one was always one whose clips were already gone.
+  playable(l) { const a = l.audio || {}; return this.tiers().every((t) => typeof a[t] === "string" && a[t]); },
+  // Oldest-unfinished-playable first. Working forward means a few days away costs nothing, where
+  // "newest each day" would silently drop the ones that were never heard.
+  pending() { const d = this.done(); return this.deck.filter((l) => !d.has(l.id) && this.playable(l)); },
+  current() { return this.pending()[0] || null; },
+  waiting() { return this.pending().length; },
   tiers() { return SOUP_TIERS[this.prefs.length] || SOUP_TIERS.medium; },
   advance(id, how) {
     if (!id) return;
@@ -404,18 +409,6 @@ const soup = {
     this.save();
   },
 };
-
-function soupSpeech(lesson, tiers) {
-  // Mirror of scripts/tts.py compose_lesson_segments — used whenever the clips for the chosen
-  // depth are not all on the server (a failed TTS day, or a lesson old enough that its audio has
-  // been pruned). The prose is in the deck precisely so this fallback is always possible.
-  const seg = {
-    quick: `${lesson.title}. ${lesson.hook} ${lesson.quick} ${lesson.takeaway}`,
-    more: lesson.more,
-    deep: lesson.deep,
-  };
-  return tiers.map((t) => seg[t]).filter(Boolean).join(" ") + " " + SOUP_OUTRO_SPOKEN;
-}
 
 function soupControls(lesson, onChange) {
   const wrap = el("div", "soup-controls");
@@ -942,7 +935,7 @@ const player = {
   idx: 0,
   tail: "",                 // spoken by the device voice after the clips (may be the whole thing)
   tailLabel: "",
-  lessonId: null,           // the lesson this queue would complete; null when caught up
+  lessonId: null,           // the lesson this queue would complete; null when none is queued
   playing: false,
   speaking: false,
   speechSeq: 0,             // guards against a cancelled utterance's onend counting as "finished"
@@ -1021,33 +1014,29 @@ const player = {
     const wasPlaying = this.playing;
     this.stopAll();
     const b = this.briefing;
+    // current() only ever returns a lesson with every chosen clip on the server (soup.playable).
     const lesson = soup.current();
-    const tiers = soup.tiers();
     this.clips = [];
     this.tail = "";
     this.tailLabel = "";
-    this.lessonId = lesson ? lesson.id : null;
+    this.lessonId = null;
 
     if (this.hasEdition) {
       // date param defeats the 10-min HTTP cache
       this.clips.push({ src: `briefing-audio.mp3?d=${b.date}`, label: "Today's briefing" });
     } else {
-      this.tail = speechText(b, !!lesson);
+      // No mp3 today: the device voice reads the BRIEFING, and signs off without the soup. The
+      // lesson clips are not queued after it — the lesson waits on the page for a day with a real
+      // edition, and finishing this queue completes nothing (lessonId stays null).
+      this.tail = speechText(b, false);
       this.tailLabel = "Listen (device voice)";
     }
 
-    if (lesson) {
-      const paths = tiers.map((t) => (lesson.audio || {})[t]).filter(Boolean);
-      // ALL of the chosen tiers must be present, not some: a queue that plays the first clip and
-      // then falls into a different voice mid-lesson is worse than one consistent voice.
-      if (this.hasEdition && paths.length === tiers.length) {
-        paths.forEach((p, i) => this.clips.push({ src: p, label: "Owen's Alphabet Soup" + (i ? " (cont.)" : "") }));
-        if (soup.outro) this.clips.push({ src: soup.outro, label: "Owen's Alphabet Soup" });
-      } else {
-        this.tail = (this.tail ? this.tail + " " : "") + soupSpeech(lesson, tiers);
-        this.tailLabel = this.hasEdition ? "Owen's Alphabet Soup (device voice)" : "Listen (device voice)";
-      }
-    } else if (this.hasEdition) {
+    if (lesson && this.hasEdition) {
+      soup.tiers().forEach((t, i) => this.clips.push({ src: lesson.audio[t], label: "Owen's Alphabet Soup" + (i ? " (cont.)" : "") }));
+      if (soup.outro) this.clips.push({ src: soup.outro, label: "Owen's Alphabet Soup" });
+      this.lessonId = lesson.id;
+    } else if (!lesson && this.hasEdition) {
       // The deck is not empty on the server (the narration handed off to the soup), but this reader
       // has finished everything in it. Say so rather than ending on a dangling introduction.
       this.tail = SOUP_CAUGHT_UP;

@@ -267,22 +267,25 @@ Three lifecycle rules are worth stating outright because they are the ones easie
   which is the same distinction `_get_policy()` draws when it re-emits.
 - **Only some lesson clips synthesize** (a per-minute rate limit, or the run passing
   `LESSON_AUDIO_DEADLINE`): the deck entry records exactly the clips that wrote. The client requires
-  ALL the clips for the reader's chosen depth before using audio, and otherwise reads that lesson in
-  the device voice — one consistent voice rather than a hand-off mid-lesson. This is now SELF-
+  ALL the clips for the reader's chosen depth, and otherwise passes that lesson over (since
+  2026-10-21 the device voice never teaches a lesson — the reader's call). This is now SELF-
   HEALING: `_synthesize()` retries a transient failure (`TTS_RETRY_ATTEMPTS`), and every run calls
   `tts.backfill_lesson_audio()`, which re-synthesizes up to `LESSON_AUDIO_BACKFILL_MAX` (2) missing
   clips for lessons still inside the retention window, OLDEST FIRST — the order matters because the
   pointer serves the oldest unfinished lesson, so that is the gap the reader actually hits. Before
   2026-08-20 neither existed: `generate_lesson_audio()` only ever ran for the entries created that
-  morning, so one 429 lost a tier for good and parked a device-voice lesson at the head of the deck.
+  morning, so one 429 lost a tier for good. A repaired lesson becomes playable again and, being
+  older, returns to the head of the queue.
   A backlog of gaps closes over several mornings rather than all at once, by design — the cap keeps
   repair work from crowding out today's own clips or the free tier's daily budget.
 - **The reader's pointer falls behind the audio retention window** (`LESSON_AUDIO_RETAIN`, 21
   lessons — raised from 10 on 2026-08-20): the pruned entries keep their prose and lose only their
   `audio` paths, in the same pass that deletes the files, so the deck can never advertise a clip that
-  is gone. That lesson is read by the device voice. Three weeks of clips is the window because the
-  pointer serves the OLDEST unfinished lesson, so the retention window is really "how far behind a
-  reader may fall and still get the good voice".
+  is gone. That lesson is passed over, not read by the device voice. Three weeks of clips is the
+  window because the pointer serves the OLDEST unfinished lesson, so the retention window is really
+  "how far behind a reader may fall before lessons start expiring unheard".
+- **No briefing mp3 today** (the TTS leg failed): the device voice reads the briefing and signs off
+  WITHOUT the soup; the lesson stays on the page and is not completed by that listen.
 - **The reader clears site data or gets a new phone:** the pointer is gone, and the deck restarts
   from its oldest entry. Lessons are not news, so nothing is stale — the cost is re-hearing some.
   There is no server-side copy to restore, by design.
