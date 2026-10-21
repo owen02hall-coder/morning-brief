@@ -11,11 +11,15 @@ How the briefing is scheduled, deployed, monitored, and recovered.
 
 ## Schedule
 
-- Defined in `.github/workflows/briefing.yml` with two cron entries: `0 12 * * *` and `0 13 * * *`
-  (UTC). GitHub cron is UTC only.
-- 6am America/Denver is 12:00 UTC during daylight time and 13:00 UTC during standard time. Both
-  crons fire. The script de-dupes by date (`state.last_run`): whichever cron lands first that day
-  does real work, the rest see `last_run == today` and no-op. There is no hour comparison.
+- Defined in `.github/workflows/briefing.yml` as one hourly cron, `17 7-14 * * *` (UTC: 07:17 through
+  14:17). GitHub cron is UTC only.
+- Why hourly and early: until 2026-10-21 there were two crons at 6am Denver (`0 12` / `0 13`), and
+  GitHub was starting them 3-8 hours late, so the edition landed mid-morning or after lunch. Starting
+  earlier absorbs a ~4h delay; `:17` avoids the congested top-of-the-hour slot.
+- The script de-dupes by date (`state.last_run`): the first cron to land each day does real work, the
+  rest see `last_run == today` and no-op. Runs before `config.BUILD_NOT_BEFORE_HOUR` (5am local) also
+  no-op, so an on-time 07:17 UTC (~1am) does not publish overnight. That is a floor, not an hour gate:
+  delay only pushes runs later, and 14:17 UTC is always past 5am local, so it cannot cost a day.
 - The date stamp uses `zoneinfo("America/Denver")` via `_now()`, which needs the `tzdata` package
   (in requirements.txt).
 - Scheduled runs can be delayed at peak load by GitHub — often by hours. The date-gate is built for

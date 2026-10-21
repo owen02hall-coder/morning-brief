@@ -37,6 +37,7 @@ NEGATIVE CONTROLS (`US_EDITORIAL_CONTROL=<mode>`), both verified red at authorin
                     this gate would decay into a rubber stamp.
   drop-rule      -> C2 red. Strips the US NEWS RULE out of the SYSTEM text before checking it.
 """
+import datetime
 import json
 import glob
 import os
@@ -80,8 +81,8 @@ except Exception as e:                                  # noqa: BLE001 - any imp
 # biographical sentence sits in EVENT_COPY and the plural forms sit in CONTEST_COPY — so this
 # exception cannot quietly widen into "party names are always fine".
 BIOGRAPHICAL = re.compile(
-    r"\b(Republican|Democratic|Democrat|GOP)\s+"
-    r"(congressman|congresswoman|congressmember|representative|rep\.?|senator|sen\.?|governor|"
+    r"\b(Republican|Democratic|Democrat|GOP)\s+(?:(?:House|Senate)\s+)?"
+    r"(speaker|congressman|congresswoman|congressmember|representative|rep\.?|senator|sen\.?|governor|"
     r"gov\.?|lawmaker|legislator|mayor|attorney general|official|appointee|nominee|aide|"
     r"strategist|donor|operative|chairman|chairwoman|chair)\b", re.I)
 
@@ -116,11 +117,19 @@ POLLING_PLACE = re.compile(
 # this reason — it is scored against whatever the world published today and it pages at low
 # priority. Each carve-out here is narrow and pinned; if a fourth arrives, the honest move is to
 # reconsider the mechanism, not to add a fourth hole.
-MIDTERM_DATE = re.compile(r"\bmidterm\s+elections?\b", re.I)
+#
+# 2026-10-21, the fourth hit — and it is NOT a fourth hole, it is the third carve-out's own phrase
+# with a modifier: "restrictions for the midterm general election" names the election exactly as
+# "midterm elections" does. The same day the BIOGRAPHICAL role list gained "speaker" (with an
+# optional House/Senate before it) for "the longest-serving Republican House speaker". The mechanism
+# change that came with them is in C4: see there.
+MIDTERM_DATE = re.compile(r"\bmidterm\s+(?:general\s+|primary\s+)?elections?\b", re.I)
 
 # Blanked before the contest scan, in order. Extend deliberately: every entry here is a hole in the
 # detector, and it earns its place only with a C1 control on each side of it.
 CARVE_OUTS = (BIOGRAPHICAL, POLLING_PLACE, MIDTERM_DATE)
+
+C4_WINDOW_DAYS = 7    # data-smoke.yml runs weekly; one window per run (see C4)
 CONTEST = re.compile(
     r"\b("
     r"slammed|blasted|lashed out|hit back|fired back|doubled down|rebuked|decried|denounced|"
@@ -150,6 +159,11 @@ EVENT_COPY = [
     # civil-military story that produced the second one.
     "The top U.S. general confirmed that there are no plans to deploy military troops to polling "
     "sites for the upcoming midterm elections.",
+    # The 2026-10-21 pair, kept verbatim (both shipped, and C4 re-flagged them for weeks).
+    "The Supreme Court rejected the Trump administration's request to implement new mail-in voting "
+    "restrictions for the midterm general election.",
+    "Dennis Hastert, who served as the longest-serving Republican House speaker before his political "
+    "legacy was marred by scandal, has died.",
 ]
 CONTEST_COPY = [
     "Critics slammed the decision, and Democrats said they would fight it in the midterms.",
@@ -264,8 +278,15 @@ def main():
             notes.append(f"NOTE C3 SKIPPED (infrastructure): {type(e).__name__}: {e}")
 
     # --- C4: shipped editions ---------------------------------------------------------------------
+    # Only the editions since the last weekly run. A shipped edition never changes, so re-reading the
+    # last 30 meant ONE keyword hit kept this run red for four straight weeks (2026-09-14..10-12, all
+    # false positives, zero true ones) — and a weekly page that is always red trains the reader to
+    # ignore the week it is real. Each edition is now judged once, in the week it shipped.
+    cutoff = (datetime.date.today() - datetime.timedelta(days=C4_WINDOW_DAYS)).isoformat()
     checked = 0
-    for path in sorted(glob.glob(os.path.join(REPO, "docs", "archive", "*.json")))[-30:]:
+    for path in sorted(glob.glob(os.path.join(REPO, "docs", "archive", "*.json"))):
+        if os.path.basename(path)[:10] <= cutoff:
+            continue
         try:
             with open(path, encoding="utf-8") as fh:
                 b = json.load(fh)
@@ -280,8 +301,8 @@ def main():
                 failures.append(f"C4 shipped edition {b.get('date')} carries contest vocabulary "
                                 f"{hits} in its US section: {(it.get('summary') or '')[:100]!r}")
     if checked == 0:
-        notes.append("NOTE C4 no archived edition carries a `us` section yet (the section shipped "
-                     "2026-08-20) — this check becomes a real regression net as archives accumulate.")
+        notes.append(f"NOTE C4 no edition from the last {C4_WINDOW_DAYS} days carries a `us` section "
+                     "— nothing was judged (the heartbeat, not this test, pages a stalled build).")
 
     for n in notes:
         print(n)

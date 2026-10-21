@@ -792,12 +792,18 @@ def main(argv):
     force = "--force" in argv
     do_notify = "--no-notify" not in argv and not local
 
-    today = _now().date().isoformat()
+    now = _now()
+    today = now.date().isoformat()
     if not (local or force):
         # Once-per-day gate: whichever cron lands first that day builds; the rest (and retries) no-op.
         # De-duping by DATE, not by hour, makes GitHub's multi-hour schedule delays irrelevant.
         if state.load().get("last_run") == today:
             print("no-op exit (already built today)")
+            return 0
+        # A floor, not an exact-hour gate: refuses only the EARLY crons (see config).
+        if now.hour < config.BUILD_NOT_BEFORE_HOUR:
+            print("no-op exit (before %02d:00 %s; a later cron builds)" %
+                  (config.BUILD_NOT_BEFORE_HOUR, config.TIMEZONE))
             return 0
 
     try:

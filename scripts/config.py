@@ -15,6 +15,14 @@ TIMEZONE = "America/Denver"          # user is in Utah (Mountain)
 # The daily build de-dupes by DATE, not by hour (see build_briefing.main): the first cron to land
 # each day builds, the rest no-op. GitHub delays scheduled jobs by hours, so an exact-hour gate
 # would no-op every run — do not reintroduce one.
+#
+# A FLOOR is not that gate. Measured 2026-10-21: GitHub was starting this repo's scheduled jobs 3-8h
+# late (the "6am" cron landed ~10am-2:30pm local), so the edition missed the morning drive it exists
+# for. The fix is crons that START earlier (briefing.yml: hourly 07:17-14:17 UTC). An on-time early
+# cron would then build at ~1am, so builds refuse to run before this local hour. Delay only ever
+# pushes a run LATER, and the last cron (14:17 UTC = 7:17am MST / 8:17am MDT) always lands past the
+# floor — so the floor can never cost a day the way the old exact-hour gate did.
+BUILD_NOT_BEFORE_HOUR = 5            # local (TIMEZONE) hour; matches the reader's 5-7am window
 
 # --- AI (proven: gemini-2.5-flash + response_mime_type/response_schema) ------
 MODEL_ID = os.environ.get("MODEL_ID", "gemini-2.5-flash")
