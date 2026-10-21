@@ -3,14 +3,14 @@
   "markets_last_ok": "2026-10-21",
   "breadth_last_good": {
     "sp500": {
-      "value": 54.3,
+      "value": 54.5,
       "matched": 499,
-      "asof": "2026-10-20"
+      "asof": "2026-10-21"
     },
     "ndx100": {
-      "value": 59.4,
+      "value": 56.2,
       "matched": 96,
-      "asof": "2026-10-20"
+      "asof": "2026-10-21"
     }
   },
   "breadth": {
@@ -18,15 +18,15 @@
       "in_alert": false,
       "nag_days": 0,
       "warn_armed": true,
-      "last_value": 54.3,
-      "last_asof": "2026-10-20"
+      "last_value": 54.5,
+      "last_asof": "2026-10-21"
     },
     "ndx100": {
       "in_alert": false,
       "nag_days": 0,
       "warn_armed": true,
-      "last_value": 59.4,
-      "last_asof": "2026-10-20"
+      "last_value": 56.2,
+      "last_asof": "2026-10-21"
     }
   },
   "policy_utah_queue": [],
@@ -565,7 +565,7 @@
   "policy_week": [],
   "watchlist_actions": {
     "SOXL": "hold",
-    "SPXL": "buy",
-    "TQQQ": "buy"
+    "SPXL": "hold",
+    "TQQQ": "hold"
   }
 }
