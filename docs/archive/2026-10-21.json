@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-10-21T16:43:48.599298-06:00",
+  "generated_at": "2026-10-21T16:53:58.071601-06:00",
   "date": "2026-10-21",
   "tldr": [
-    "Meta has been ordered to pay a $25 billion fine for privacy violations related to user data.",
-    "Russia released American Stephen Hubbard from prison following a request from President Trump, coinciding with US efforts to facilitate Ukraine peace talks.",
-    "Tesla reported flat revenues and a 4% drop in profits for the third quarter, despite beating analyst expectations on earnings and sales."
+    "President Putin ordered the release of American Stephen Hubbard from Russian prison following a request from President Trump, while simultaneously meeting with a Trump envoy for Ukraine peace talks.",
+    "Meta has been fined $25 billion for lying to users about data privacy, one of the largest fines against the company to date.",
+    "The U.S. is the only major economy to see a dramatic increase in planet-warming pollution last year, according to a United Nations report, which warns the planet is on track for catastrophic warming."
   ],
   "market": {
     "sp500": {
@@ -17,19 +17,19 @@
       "change": 278.04,
       "asof": "2026-10-21"
     },
-    "why": "The S&P 500 and Nasdaq Composite both closed higher, influenced by better-than-expected third-quarter earnings reports from companies like Tesla and IBM. Additionally, investors have reportedly propelled the healthcare sector to a record high, contributing to the overall positive market sentiment."
+    "why": "The S&P 500 and Nasdaq Composite closed higher on October 21, 2026, driven by gains in technology and positive earnings reports from companies like Tesla and IBM. Increased investor confidence in artificial intelligence and a potential boost from companies like Apple contributed to the upward trend."
   },
   "yield_10y": {
     "value": 5.15,
     "change": 0.03,
     "asof": "2026-10-21",
-    "why": "The 10-year Treasury yield saw a slight increase, as indicated by reports noting bond yields spiking, which eroded market confidence for some companies like CoreWeave."
+    "why": "The 10-year Treasury yield increased by 0.03% to 5.15% as of October 21, 2026. This rise may be influenced by ongoing market dynamics and investor sentiment, although the provided articles do not directly explain this specific yield movement."
   },
   "vix": {
     "value": 16.68,
     "change": -0.63,
     "asof": "2026-10-21",
-    "why": "The VIX, a measure of market volatility, declined. This movement likely reflects a decrease in market uncertainty, consistent with the positive earnings reports from major companies such as Tesla and IBM that contributed to the rise in major stock indices."
+    "why": "The VIX decreased by 0.63 to 16.68 as of October 21, 2026. This suggests a reduction in expected market volatility, though the specific drivers for this change are not detailed in the provided articles."
   },
   "breadth": {
     "sp500": {
@@ -99,7 +99,7 @@
     "value": 7.4,
     "change": 0.0,
     "asof": "2026-10-15",
-    "why": "The articles do not provide specific reasons for the 30-year fixed mortgage rate's stability, which remained at 7.4% in the latest weekly survey released on October 15, 2026. Mortgage rates generally follow the trends in the 10-year Treasury yield, which saw a slight increase on the most recent closing date."
+    "why": "The 30-year fixed mortgage rate was 7.4% as of the weekly survey released on October 15, 2026. The articles do not provide specific reasons for this rate or its movement relative to the previous week's survey."
   },
   "policy": [],
   "policy_upcoming": [
@@ -151,70 +151,60 @@
   ],
   "tech": [
     {
-      "summary": "Meta announced plans to issue a new class of shares to help fund its artificial intelligence initiatives, alongside potential acquisitions and employee compensation.",
+      "summary": "Meta is creating a new class of non-voting shares to fund its AI initiatives, acquisitions, and employee compensation, with trading expected to begin in 2027.",
       "source": "The Verge",
       "url": "https://www.theverge.com/tech/1015799/meta-shares-class-ai-q3-2026-earnings"
     },
     {
-      "summary": "Anthropic introduced Claude Duet, a new AI agent designed for professionals and small business owners, launching as a research preview available on standalone apps and Claude on the web.",
+      "summary": "Data centers, crucial for AI infrastructure, are raising concerns about potential negative impacts on air quality, with some regions facing a significant increase in pollution levels.",
       "source": "The Verge",
-      "url": "https://www.theverge.com/ai-artificial-intelligence/1015843/anthropic-claude-duet-ai-agent"
+      "url": "https://www.theverge.com/ai-artificial-intelligence/1015958/data-center-pollution-rising-report"
     },
     {
-      "summary": "OpenAI's latest AI models, including GPT 6.1 Astra, Sol, and Luna, are expected to be integrated into Google Cloud and Antigravity in the coming weeks.",
-      "source": "Ars Technica",
-      "url": "https://arstechnica.com/ai/2026/10/openais-latest-ai-models-are-coming-to-google-cloud-and-antigravity/"
+      "summary": "Critical vulnerabilities discovered in the PHP programming language are causing widespread internet disruptions, affecting major websites like 4chan, Wikipedia, and DeviantArt.",
+      "source": "The Verge",
+      "url": "https://www.theverge.com/tech/1015906/php2shell-vulnerability-october-2026"
     }
   ],
   "world": [
     {
-      "summary": "Russian President Vladimir Putin ordered the release of American Stephen Hubbard from prison after a request from President Trump, occurring during meetings aimed at resuming Ukraine peace talks.",
-      "source": "Guardian World",
-      "url": "https://www.theguardian.com/world/2026/oct/21/putin-witkoff-russia-ukraine-trump-stephen-hubbard-release"
+      "summary": "President Vladimir Putin has ordered the release of American Stephen Hubbard from a Russian prison, following a request from President Trump and concurrent with peace talks concerning Ukraine.",
+      "source": "NPR",
+      "url": "https://www.npr.org/2026/10/21/nx-s1-6010608/putin-releases-american-stephen-hubbard-from-russian-prison"
     },
     {
-      "summary": "Meta has been ordered to pay a $25 billion fine by a judge in New Mexico for privacy violations related to user data, marking the largest penalty to date against Facebook's owner.",
-      "source": "Al Jazeera",
-      "url": "https://www.aljazeera.com/news/2026/10/21/judge-orders-meta-to-pay-25bn-in-fines-for-facebook-privacy-violations?traffic_source=rss"
-    },
-    {
-      "summary": "House prices are falling across every Australian capital city for the first time in 15 years, with Sydney experiencing a 4.7% drop in the September quarter to a two-year low.",
-      "source": "Guardian World",
-      "url": "https://www.theguardian.com/australia-news/2026/oct/22/house-prices-fall-sydney-melbourne-perth-brisbane-adelaide-hobart-darwin"
-    },
-    {
-      "summary": "A Canadian publisher, Boreal, has severed ties with best-selling Haitian-Canadian writer Thelyson Orelien after investigations confirmed he used AI in his breakthrough novel.",
-      "source": "Al Jazeera",
-      "url": "https://www.aljazeera.com/news/2026/10/21/canadian-publisher-cuts-ties-with-best-selling-writer-orelien-over-ai-use?traffic_source=rss"
-    }
-  ],
-  "us": [
-    {
-      "summary": "The Supreme Court has upheld a pause on the Trump administration's policy regarding gender-affirming care for inmates in federal prisons, requiring its continuation as litigation proceeds.",
-      "source": "NPR National",
-      "url": "https://www.npr.org/2026/10/21/nx-s1-5993878/supreme-court-trump-trans-prison-policy"
-    },
-    {
-      "summary": "The FAA has cleared the way for airlines to put Boeing's 737 Max 10 into service, nearly a decade after the largest 737 Max jet was unveiled.",
-      "source": "NPR National",
-      "url": "https://www.npr.org/2026/10/21/g-s1-149032/faa-boeing-737-max-10"
-    },
-    {
-      "summary": "A United Nations report indicates that the U.S. was the only major economy to experience a dramatic increase in planet-warming pollution last year, a development the UN warns could lead to catastrophic warming.",
+      "summary": "A United Nations report indicates that the U.S. is the sole major economy experiencing a significant rise in climate-warming pollution, putting the planet on a trajectory toward catastrophic warming.",
       "source": "NPR National",
       "url": "https://www.npr.org/2026/10/21/nx-s1-6003553/america-oil-gas-coal-climate-change-trump-carbon-emissions"
     }
   ],
+  "us": [
+    {
+      "summary": "The Supreme Court has maintained a pause on the Trump administration's policy to restrict gender-affirming care for federal prison inmates, allowing such care to continue while litigation proceeds.",
+      "source": "NPR National",
+      "url": "https://www.npr.org/2026/10/21/nx-s1-5993878/supreme-court-trump-trans-prison-policy"
+    },
+    {
+      "summary": "The FAA has approved Boeing's 737 Max 10 aircraft, clearing a significant obstacle for the plane's entry into service after years of delays.",
+      "source": "NPR National",
+      "url": "https://www.npr.org/2026/10/21/g-s1-149032/faa-boeing-737-max-10"
+    },
+    {
+      "summary": "Arrests for minor offenses such as vagrancy have increased in the U.S., even as the rates of violent crime have fallen to historic lows, according to an analysis by FWD.us.",
+      "source": "NPR National",
+      "url": "https://www.npr.org/2026/10/21/nx-s1-6003663/crime-data-down-low-level-offenses-increase"
+    }
+  ],
   "science": [
     {
-      "summary": "New human data suggests that psychedelics like psilocybin have the potential to lower inflammation, which could be protective for patients with neurodegenerative diseases such as Parkinson's.",
+      "summary": "New human data suggests that psychedelics like psilocybin may have the potential to reduce inflammation and offer protection for a range of illnesses, including neurodegenerative diseases.",
       "source": "NPR Science",
       "url": "https://www.npr.org/2026/10/21/nx-s1-6009441/psychedelics-brain-inflammation-immune-system"
     },
     {
-      "summary": "Test results have confirmed that Pope Francis's diagnosis following lung cancer surgery was a localized lung adenocarcinoma, and he does not require further treatment.",
+      "summary": "A BBC inquiry found that government failures, including a lack of personal protective equipment and improper patient discharge procedures, contributed to the spread of COVID-19 in care homes.",
       "source": "BBC Health",
-      "url": "https://www.bbc.co.uk/news/articles/cqrly2dg5xzzo?at_medium=RSS&at_campaign=rss"
+      "url": "https://www.bbc.co.uk/news/articles/ck1l38z0v3v6o?at_medium=RSS&at_campaign=rss"
     }
   ],
   "weekly_recap": null,
