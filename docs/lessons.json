@@ -1,22 +1,6 @@
 {
-  "generated_at": "2026-10-20T09:59:03.446651-06:00",
+  "generated_at": "2026-10-21T10:15:51.085369-06:00",
   "lessons": [
-    {
-      "id": "2026-08-16-sleep-hygiene",
-      "date": "2026-08-16",
-      "domain": "Health and emergencies",
-      "title": "Improving Your Sleep Habits",
-      "hook": "Getting enough quality sleep is essential for preventing various physical and mental health issues, but many everyday habits can secretly sabotage your rest.",
-      "quick": "Many people struggle to fall asleep or stay asleep, often unknowingly hindering their own rest through common daily activities. For example, exercising too close to bedtime, taking long naps, or being exposed to bright light in the hours before sleep can all disrupt your natural sleep-wake cycle. Even engaging in mentally demanding tasks like work or planning right before bed, or thinking about worries while in bed, can delay you falling asleep. To prevent these issues, it is generally recommended to establish a regular sleep schedule, aiming for seven to eight hours of sleep consistently at night, and to use your bed only for sleeping and sex, getting out of bed if sleep doesn't come easily.",
-      "more": "Beyond your activities, what you consume can also significantly impact your sleep. Avoiding stimulants like nicotine and caffeine, which includes coffee, energy drinks, and even some pain relievers, in the hours before bedtime is crucial because these substances activate systems that keep you awake. Alcohol, though it might initially make you feel sleepy, can lead to disrupted and fragmented sleep as your body metabolizes it. Eating a large meal just before bed or, conversely, going to bed hungry can also disturb your rest. Instead, clinicians often suggest a light snack if needed and limiting liquids to prevent nighttime urination interruptions.",
-      "deep": "Even your sleep environment plays a vital role in the quality of your rest, as noise, light, and uncomfortable temperatures are known to disrupt continuous sleep. Creating a quiet, very dark, and cool room can help. While the specific effects of comfortable mattresses, bedding, and pillows are less studied, they are frequently recommended. There is strong evidence, however, that consistently following more than one sleep hygiene recommendation can lead to positive sleep outcomes, even though the evidence for any single recommendation improving sleep quality alone is considered weak and inconclusive as of 2014. For instance, the negative effects of noisy sleep environments, alcohol consumption before sleep, and engaging in mentally difficult tasks before sleep are among the more robustly supported recommendations.",
-      "takeaway": "Evaluate your bedtime routine for stimulating activities, substance intake, and your sleep environment to create a quiet, dark, and cool space and avoid caffeine, nicotine, alcohol, and mentally demanding tasks in the hours before sleep.",
-      "source": {
-        "title": "Sleep hygiene",
-        "url": "https://en.wikipedia.org/wiki/Sleep_hygiene"
-      },
-      "audio": {}
-    },
     {
       "id": "2026-08-17-scam",
       "date": "2026-08-17",
@@ -639,11 +623,7 @@
         "title": "Service (motor vehicle)",
         "url": "https://en.wikipedia.org/wiki/Service_(motor_vehicle)"
       },
-      "audio": {
-        "quick": "lessons/2026-09-28-service-motor-vehicle-quick.mp3",
-        "more": "lessons/2026-09-28-service-motor-vehicle-more.mp3",
-        "deep": "lessons/2026-09-28-service-motor-vehicle-deep.mp3"
-      }
+      "audio": {}
     },
     {
       "id": "2026-09-29-carbon-monoxide-poisoning",
@@ -1043,6 +1023,26 @@
         "quick": "lessons/2026-10-20-residual-current-device-quick.mp3",
         "more": "lessons/2026-10-20-residual-current-device-more.mp3",
         "deep": "lessons/2026-10-20-residual-current-device-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-10-21-cardiopulmonary-resuscitation",
+      "date": "2026-10-21",
+      "domain": "Health and emergencies",
+      "title": "Providing Emergency Life Support",
+      "hook": "When someone collapses and isn't breathing, understanding the immediate steps can significantly impact their chances of survival without lasting harm.",
+      "quick": "If a person is unresponsive and not breathing normally, brain damage can begin within minutes, becoming irreversible after about seven minutes without blood flow. Without intervention, body cells eventually die. Cardiopulmonary resuscitation, or CPR, is an emergency procedure used during this critical time. It's not primarily meant to restart the heart, but rather to circulate oxygenated blood to the brain and heart, delaying tissue death. For adults, current recommendations emphasize immediate, high-quality chest compressions. If you're untrained, a simplified CPR method involving only chest compressions is recommended, and the most crucial first step, generally, is to call for emergency medical services immediately.",
+      "more": "The objective of CPR is to extend the brief window of opportunity for successful resuscitation without permanent brain damage, keeping vital organs alive until professional help arrives. It works by restoring a partial flow of oxygenated blood. While CPR maintains this partial flow, restoring a viable heart rhythm often requires an electric shock, known as defibrillation. CPR can make the heart more responsive to these defibrillation attempts, which are effective only for specific heart rhythms. Continuing compressions at the correct rate is crucial, as an incorrect compression rate, such as one consistently above 120 compressions per minute, can negatively affect survival rates and outcomes for the victim.",
+      "deep": "For adults, chest compressions should be between 5 cm and 6 cm deep, at a rate of at least 100 to 120 per minute. Going above 120 compressions per minute consistently, for example, can decrease the necessary venous return of blood to fill the heart, impacting the victim. In most situations, after asking for help, calling emergency services is the next priority, and then seeking an automated defibrillator if one is nearby and quickly accessible. However, there are exceptions; if you are alone with a drowning victim or a child who was already unconscious, you should perform about two minutes of CPR first, as in these cases, the problem often stems from a lack of oxygen, making immediate ventilation from CPR maneuvers particularly important before calling for help.",
+      "takeaway": "Learn the proper rate and depth for adult chest compressions, and understand when to call emergency services immediately versus performing two minutes of CPR first for specific situations like a drowning victim.",
+      "source": {
+        "title": "Cardiopulmonary resuscitation",
+        "url": "https://en.wikipedia.org/wiki/Cardiopulmonary_resuscitation"
+      },
+      "audio": {
+        "quick": "lessons/2026-10-21-cardiopulmonary-resuscitation-quick.mp3",
+        "more": "lessons/2026-10-21-cardiopulmonary-resuscitation-more.mp3",
+        "deep": "lessons/2026-10-21-cardiopulmonary-resuscitation-deep.mp3"
       }
     }
   ],
