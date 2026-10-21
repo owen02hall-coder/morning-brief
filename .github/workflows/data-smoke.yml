@@ -230,6 +230,23 @@ jobs:
           echo "rc=$rc" >> "$GITHUB_OUTPUT"
           exit $rc
 
+      # The whole audio edition (briefing mp3 + every lesson clip) rides on ONE model family. On
+      # 2026-10-21 the model it had run on since July was found listed for shutdown on 2026-11-17,
+      # and nothing here would have said so. Every model in config.TTS_MODELS is called through the
+      # production path, the fallback too: a retired fallback is the same outage one morning later.
+      # A SOURCE step, not judgment: a model that 404s is not "whatever the world published today".
+      - name: TTS models (every configured model still speaks, fallback included)
+        id: tts_model
+        if: always()
+        env:
+          BRIEFING_SMOKE_ALLOW_DEV: "true"
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          PYTHONPATH: ${{ github.workspace }}
+        run: |
+          rc=0; python scripts/briefing-assumptions/16-tts-model.py || rc=$?
+          echo "rc=$rc" >> "$GITHUB_OUTPUT"
+          exit $rc
+
       # The alarm is the only output of this job, and nothing else checks what it SAYS. On 08-31 it
       # described an unrunnable test as an upstream data drift and sent the reader looking for a
       # break that did not exist. Offline, instant, no key: it re-runs the shipped classifier over
@@ -295,6 +312,7 @@ jobs:
           EDITORIAL: ${{ steps.editorial.outcome }}
           RELEVANCE: ${{ steps.relevance.outcome }}
           ALERT_CLASS: ${{ steps.alert_class.outcome }}
+          TTS_MODEL: ${{ steps.tts_model.outcome }}
           SPINE_RC: ${{ steps.spine.outputs.rc }}
           BOUNDARY_RC: ${{ steps.boundary.outputs.rc }}
           POLICY_SOURCES_RC: ${{ steps.policy_sources.outputs.rc }}
@@ -308,6 +326,7 @@ jobs:
           EDITORIAL_RC: ${{ steps.editorial.outputs.rc }}
           RELEVANCE_RC: ${{ steps.relevance.outputs.rc }}
           ALERT_CLASS_RC: ${{ steps.alert_class.outputs.rc }}
+          TTS_MODEL_RC: ${{ steps.tts_model.outputs.rc }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: |
           # A step that never ran (an earlier one cancelled the job) reports "" or "skipped" and must
@@ -352,6 +371,7 @@ jobs:
           cls "$EDITORIAL"      "$EDITORIAL_RC"      "us-news-editorial"    jdg
           cls "$RELEVANCE"      "$RELEVANCE_RC"      "policy-relevance"     jdg
           cls "$ALERT_CLASS"    "$ALERT_CLASS_RC"    "alert-classification" src
+          cls "$TTS_MODEL"      "$TTS_MODEL_RC"      "tts-model"            src
           bad_sources="${bad_sources# }"; bad_judgment="${bad_judgment# }"; broken="${broken# }"
 
           if [ -n "$broken" ]; then

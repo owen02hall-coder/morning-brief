@@ -333,8 +333,13 @@ folding it in would let a healthy calendar mask a dead Federal Register leg.
 
 - Used for: writing the briefing prose (tldr, the why lines, tech and world items, weekly recap),
   writing the policy section's two prose fields, choosing and writing the day's Alphabet Soup
-  lesson, and synthesizing the audio (`scripts/tts.py`, model `TTS_MODEL` =
-  `gemini-2.5-flash-preview-tts`, voice `TTS_VOICE` = Kore; mp3 encoded in-process with `lameenc`).
+  lesson, and synthesizing the audio (`scripts/tts.py`, models `TTS_MODELS` = `gemini-3.8-flash-tts`
+  then `gemini-3.8-flash-lite-tts`, voice `TTS_VOICE` = Kore; mp3 encoded in-process with `lameenc`).
+  Until 2026-10-21 this was `gemini-2.5-flash-preview-tts` alone, which Google lists for shutdown on
+  2026-11-17. Kore is a prebuilt voice NAME — nothing was ever recorded, and switching model keeps
+  it. 3.8 reads its input VERBATIM, so the delivery prefix ("Read this warmly ...: ") is sent only to
+  legacy `-preview-tts` models (`config.TTS_STYLE_IN_PROMPT`), and it returns RIFF/WAV, which
+  `tts._decode_audio` unwraps. Test 16 calls every model in the chain weekly.
 - Request budget per build: **4 text calls** (narrative, policy, lesson topic, lesson prose — the
   last two skipped when the deck already grew, the policy one skipped on an empty window) and
   **4 TTS calls** (the briefing edition plus three lesson clips), up from 1 TTS call before v4.

@@ -27,6 +27,7 @@ TESTS=(
   "01-twelvedata-runner-pull.py"    # needs TWELVEDATA_API_KEY; run in CI for runner-IP proof
   "02-twelvedata-seed-budget.py"    # needs TWELVEDATA_API_KEY
   "03-gemini-structured.py"         # needs GEMINI_API_KEY
+  "16-tts-model.py"                 # needs GEMINI_API_KEY; every TTS model (fallback too) still speaks
   "06-policy-relevance.py"          # needs GEMINI_API_KEY; proves relevance scoring + no invented figures
 )
 PASS=0; START=$(date +%s)

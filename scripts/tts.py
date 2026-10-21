@@ -17,10 +17,12 @@ no manifest to keep honest because the deck entry only ever claims the clips tha
 
 Everything here is non-fatal by design: no audio must never kill the briefing.
 """
+import io
 import math
 import os
 import re
 import time
+import wave
 from datetime import date, datetime
 
 from . import config
@@ -478,6 +480,30 @@ def _synthesize(text, style):
     because a 200 carrying no audio is the other way a tier used to go missing silently. Callers
     therefore have no None branch to write — they already wrap this in the try/except that keeps
     audio non-fatal, and that is where a permanent error or a spent attempt budget lands."""
+    last = None
+    for model in config.TTS_MODELS:
+        try:
+            return _synthesize_with(model, text, style)
+        except Exception as e:                          # noqa: BLE001 - the next model may answer
+            last = e
+            print(f"tts: {model} failed ({type(e).__name__}: {e}); trying the next model")
+    raise last
+
+
+def _decode_audio(data, mime):
+    """(pcm, rate) from either payload shape: headerless L16 (the preview models, rate in the mime
+    type) or a RIFF/WAV container (3.8's default). Feeding a WAV header to the mp3 encoder as if it
+    were samples would not fail — it would put a click at the front of every clip, silently."""
+    if data[:4] == b"RIFF":
+        with wave.open(io.BytesIO(data)) as w:
+            if w.getsampwidth() != 2 or w.getnchannels() != 1:
+                raise ValueError(f"unexpected WAV shape: {w.getsampwidth()*8}-bit x{w.getnchannels()}")
+            return w.readframes(w.getnframes()), w.getframerate()
+    m = re.search(r"rate=(\d+)", mime or "")
+    return data, (int(m.group(1)) if m else 24000)
+
+
+def _synthesize_with(model, text, style):
     from google import genai
     from google.genai import types
 
@@ -489,8 +515,8 @@ def _synthesize(text, style):
             # the 10-minute job budget that the publish leg still needs.
             client = genai.Client(http_options=types.HttpOptions(timeout=180_000))
             resp = client.models.generate_content(
-                model=config.TTS_MODEL,
-                contents=style + text,
+                model=model,
+                contents=(style + text) if config.TTS_STYLE_IN_PROMPT(model) else text,
                 config=types.GenerateContentConfig(
                     response_modalities=["AUDIO"],
                     speech_config=types.SpeechConfig(
@@ -500,14 +526,13 @@ def _synthesize(text, style):
                 ),
             )
             part = resp.candidates[0].content.parts[0]
-            pcm = part.inline_data.data
+            pcm, rate = _decode_audio(part.inline_data.data or b"", part.inline_data.mime_type)
             if not pcm or len(pcm) < 1000:
                 # A 200 carrying no audio. Retried like a transport failure rather than accepted:
                 # an empty payload is the other way a tier used to go missing silently.
                 raise ValueError("empty/tiny audio payload")
-            mime = part.inline_data.mime_type or ""
-            m = re.search(r"rate=(\d+)", mime)
-            return pcm, (int(m.group(1)) if m else 24000)
+            print(f"tts: {model}/{config.TTS_VOICE} -> {len(pcm) / 2 / rate:.1f}s")
+            return pcm, rate
         except Exception as e:
             reason = "empty payload" if isinstance(e, ValueError) else _tts_transient(e)
             if reason is None or attempt >= attempts:
@@ -550,7 +575,7 @@ def generate(briefing, has_lesson=False):
                           "news-anchor voice: ")
         size = _write_mp3(*out)
         print(f"tts: wrote {size} bytes mp3 to {config.AUDIO_MP3_PATH} "
-              f"({config.TTS_MODEL}/{config.TTS_VOICE})")
+              f"(voice {config.TTS_VOICE})")
         return True
     except Exception as e:
         print(f"tts: audio generation failed (non-fatal): {e}")

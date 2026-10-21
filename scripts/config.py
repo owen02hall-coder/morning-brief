@@ -751,8 +751,22 @@ TTS_RETRY_BACKOFF = 8             # seconds, multiplied by the attempt number. D
 # One TTS request/day stays comfortably inside the Gemini free tier. The build writes a WAV to
 # AUDIO_WAV_PATH (job-local, gitignored); the workflow converts it to docs/briefing-audio.mp3 and
 # writes docs/briefing-audio.json so the client can verify the audio matches today's edition.
-TTS_MODEL = os.environ.get("TTS_MODEL", "gemini-2.5-flash-preview-tts")
+# 2026-10-21: Google's deprecations page lists gemini-2.5-flash-preview-tts (the model this ran on
+# since 2026-07-05) for SHUTDOWN on 2026-11-17, replacement gemini-3.8-flash-tts / -lite-tts. Kore
+# is a prebuilt voice name, not a recording, and the 3.8 models offer the same 30 voices. Two
+# behaviours differ and tts._synthesize handles both: 3.8 reads its input as a VERBATIM transcript
+# (a "Read this warmly: " prefix would be spoken aloud — see TTS_STYLE_IN_PROMPT), and it returns a
+# RIFF/WAV container rather than headerless PCM. Fallback = the other 3.8 tier, so one model being
+# retired no longer takes the audio edition and every lesson clip down with it.
+TTS_MODEL = os.environ.get("TTS_MODEL", "gemini-3.8-flash-tts")
+TTS_MODEL_FALLBACK = "gemini-3.8-flash-lite-tts"
+TTS_MODELS = tuple(dict.fromkeys((TTS_MODEL, TTS_MODEL_FALLBACK)))   # tried in order, de-duplicated
 TTS_VOICE = os.environ.get("TTS_VOICE", "Kore")   # warm, clear prebuilt voice
+
+
+def TTS_STYLE_IN_PROMPT(model):
+    """Only the legacy preview models take delivery directions inside the text. 3.8 would READ them."""
+    return model.endswith("-preview-tts")
 
 # --- Notifications / hosting ------------------------------------------------
 # Public Pages URL of the PWA; set as an env var/secret at deploy time.
