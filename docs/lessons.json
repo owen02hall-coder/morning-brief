@@ -1,22 +1,6 @@
 {
-  "generated_at": "2026-10-21T16:53:58.071601-06:00",
+  "generated_at": "2026-10-22T07:01:45.072193-06:00",
   "lessons": [
-    {
-      "id": "2026-08-17-scam",
-      "date": "2026-08-17",
-      "domain": "Thinking and people",
-      "title": "How scams trick you into making bad decisions",
-      "hook": "Scammers rely on more than just your gullibility; they actively manipulate your judgment and exploit your emotions.",
-      "quick": "Many people believe scams succeed because victims are simply naive, but these schemes are carefully designed to exploit specific human vulnerabilities. A con artist first gains your trust, sometimes through seemingly innocent interaction, and then presents an opportunity for you to profit. This \"build-up\" phase is crucial, as it encourages your greed, which can significantly impair your rational judgment. They might even give you a small \"pay-off\" or \"convincer,\" like a fake dividend from a supposed investment or a small winning bet in a rigged game. This is designed to demonstrate the scheme's purported effectiveness and make it seem very real. This initial success makes you much more likely to invest or participate further, believing the opportunity is legitimate and largely risk-free, making you overlook any early red flags by appealing to desires like quick, easy gains.",
-      "more": "Once you're convinced, scammers often create a sudden, manufactured crisis, known as the \"hurrah,\" which forces you to make an immediate decision. They might tell you a \"window of opportunity\" to make a large investment is about to close forever, creating immense urgency and panic. This rush prevents careful thought and research, pushing you to act quickly before you can second-guess the situation or consult others. Sometimes, an accomplice, who appears as an interested bystander, will also openly \"invest\" in the same scheme right in front of you. This \"in-and-in\" step adds another layer of apparent legitimacy, making you feel more secure and giving the con artist greater control over the transaction, especially when you are already feeling highly pressured.",
-      "deep": "These sophisticated tactics exploit common human traits and cognitive biases, not just simple gullibility. Researchers define confidence tricks as \"fraudulent conduct intending to further voluntary exchanges that are not mutually beneficial,\" meaning they are inherently designed to benefit the scammer entirely at your expense. While popular culture often highlights victim \"dishonesty\" or \"greed\" \u2013 such as being willing to participate in unlawful acts or believing in \"too-good-to-be-true\" gains that seem unrealistic \u2013 cons primarily succeed by inducing judgment errors. These errors stem from imperfect information and deeply ingrained cognitive biases. The con artist doesn't just hope you're foolish; they actively engineer situations to impair your rational assessment of risk and reward, playing on emotions like fear of missing out, or a deep desire for easy money, making anyone potentially vulnerable to their schemes. In 2021 alone, online fraud led to reported losses of 6.9 billion dollars in the US.",
-      "takeaway": "Before making any significant financial decision, especially under pressure, verify the opportunity independently and discuss it with a trusted, uninvolved third party.",
-      "source": {
-        "title": "Scam",
-        "url": "https://en.wikipedia.org/wiki/Scam"
-      },
-      "audio": {}
-    },
     {
       "id": "2026-08-18-escrow",
       "date": "2026-08-18",
@@ -639,11 +623,7 @@
         "title": "Carbon monoxide poisoning",
         "url": "https://en.wikipedia.org/wiki/Carbon_monoxide_poisoning"
       },
-      "audio": {
-        "quick": "lessons/2026-09-29-carbon-monoxide-poisoning-quick.mp3",
-        "more": "lessons/2026-09-29-carbon-monoxide-poisoning-more.mp3",
-        "deep": "lessons/2026-09-29-carbon-monoxide-poisoning-deep.mp3"
-      }
+      "audio": {}
     },
     {
       "id": "2026-09-30-misuse-of-statistics",
@@ -1043,6 +1023,26 @@
         "quick": "lessons/2026-10-21-cardiopulmonary-resuscitation-quick.mp3",
         "more": "lessons/2026-10-21-cardiopulmonary-resuscitation-more.mp3",
         "deep": "lessons/2026-10-21-cardiopulmonary-resuscitation-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-10-22-opportunity-cost",
+      "date": "2026-10-22",
+      "domain": "Thinking and people",
+      "title": "Understanding the Hidden Cost of Every Choice",
+      "hook": "Every decision you make comes with a hidden cost beyond what you actually pay or directly experience.",
+      "quick": "When faced with limited resources, choosing one option means you automatically give up the benefits of the next best alternative. This lost potential gain is called opportunity cost, and failing to consider it can lead to less effective choices. For example, if you spend an hour and $200 on office supplies, the explicit cost is the $200. However, if your hourly rate is $25, the implicit cost is the $25 you could have earned during that hour. Many people overlook these less obvious costs, which are not restricted to money but can also include lost time, pleasure, or any other benefit you forgo.",
+      "more": "Explicit costs are direct, out-of-pocket expenses that are easily identifiable, like paying wages or rent, and always involve a transfer of money. These are the costs that show up on a receipt. Implicit costs, on the other hand, are the value of resources you own that could have been used for another purpose. These are often hidden and correspond to intangibles, like your own labor or infrastructure. They don't involve an exchange of cash. Overlooking these implicit opportunity costs makes a decision seem cheaper or less impactful than it truly is because you aren't accounting for the full value of what you're giving up, like the income you didn't earn or the productivity you sacrificed.",
+      "deep": "Implicit costs often involve resources contributed by an individual, such as their human labor, the use of their own infrastructure, or the time they spend on one activity when a more valuable one was an option. The purpose of understanding opportunity cost is to ensure the efficient use of your limited resources. It is also important to know what is not an opportunity cost. Sunk costs, for instance, are expenses that have already been incurred and cannot be recovered; they should not influence present or future decisions. If you've already paid for a non-refundable item, that money is a sunk cost and should not factor into a new choice. Only the potential benefits of the best alternative you are giving up represent your true opportunity cost.",
+      "takeaway": "Before making a significant financial or time commitment, identify the best alternative you are giving up and consider its potential value.",
+      "source": {
+        "title": "Opportunity cost",
+        "url": "https://en.wikipedia.org/wiki/Opportunity_cost"
+      },
+      "audio": {
+        "quick": "lessons/2026-10-22-opportunity-cost-quick.mp3",
+        "more": "lessons/2026-10-22-opportunity-cost-more.mp3",
+        "deep": "lessons/2026-10-22-opportunity-cost-deep.mp3"
       }
     }
   ],
