@@ -1,22 +1,6 @@
 {
-  "generated_at": "2026-10-22T07:01:45.072193-06:00",
+  "generated_at": "2026-10-23T06:41:00.679115-06:00",
   "lessons": [
-    {
-      "id": "2026-08-18-escrow",
-      "date": "2026-08-18",
-      "domain": "Money mechanics",
-      "title": "Managing Property Taxes and Insurance with Escrow",
-      "hook": "Forgetting about certain required homeownership payments can create unexpected financial pressure, but escrow helps manage them.",
-      "quick": "A common way people face unexpected costs in homeownership is by not anticipating property taxes and insurance premiums. To address this, many mortgage lenders require an escrow account. This account is separate from your main mortgage loan and is specifically where funds are deposited to cover property taxes and insurance during the mortgage term. Lenders typically require this because they want to reduce the risk of homeowners failing to pay these obligations, which could jeopardize the property itself. The money you contribute each month ensures these critical payments are made on your behalf by a third party.",
-      "more": "The third party responsible for holding and disbursing these funds is known as an escrow agent. Their duty is to properly account for all money in the escrow account and ensure it is used explicitly for the intended purpose, such as paying your property taxes and insurance premiums. This arrangement helps protect both the homeowner by centralizing these payments, and the lender by reducing their exposure to financial risk. Escrow is most widely recognized in the United States within the context of the real estate industry for these very reasons.",
-      "deep": "While often associated with mortgages, the concept of escrow extends to other high-value transactions, where a neutral third party holds money or property until specific conditions are met, protecting both buyer and seller. For example, it\u2019s used in private property transactions for deposits, or when buying a second-hand car. However, when engaging in any transaction using an online escrow service, it is crucial to exercise caution. There are instances where fraudsters create fake escrow websites that closely resemble legitimate ones, aiming to trick people into sending payments or merchandise without receiving their expected return. To protect yourself, always verify that an online escrow company is genuine by checking a government register, as specific states like California and Arizona provide licenses for these services.",
-      "takeaway": "Before using any online escrow service, independently verify its legitimacy by checking for its listing on a relevant government online register.",
-      "source": {
-        "title": "Escrow",
-        "url": "https://en.wikipedia.org/wiki/Escrow"
-      },
-      "audio": {}
-    },
     {
       "id": "2026-08-19-heating-ventilation-and-air-conditioning",
       "date": "2026-08-19",
@@ -639,11 +623,7 @@
         "title": "Misuse of statistics",
         "url": "https://en.wikipedia.org/wiki/Misuse_of_statistics"
       },
-      "audio": {
-        "quick": "lessons/2026-09-30-misuse-of-statistics-quick.mp3",
-        "more": "lessons/2026-09-30-misuse-of-statistics-more.mp3",
-        "deep": "lessons/2026-09-30-misuse-of-statistics-deep.mp3"
-      }
+      "audio": {}
     },
     {
       "id": "2026-10-01-lenders-mortgage-insurance",
@@ -1043,6 +1023,26 @@
         "quick": "lessons/2026-10-22-opportunity-cost-quick.mp3",
         "more": "lessons/2026-10-22-opportunity-cost-more.mp3",
         "deep": "lessons/2026-10-22-opportunity-cost-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-10-23-health-insurance",
+      "date": "2026-10-23",
+      "domain": "Money mechanics",
+      "title": "Understanding Your Health Insurance Costs",
+      "hook": "Medical expenses can unexpectedly drain your savings if you don't know how your health insurance actually works beyond the monthly premium.",
+      "quick": "Many people think their monthly health insurance premium is their main cost, but that\u2019s just the price of coverage. Medical care often comes with additional expenses you pay out-of-pocket before your insurance fully kicks in. First, there's a deductible, which is the amount you must pay for your care each year before your insurer starts contributing its share. You might need several doctor visits or prescription refills to reach this amount. Separately, you often pay a fixed co-payment each time you see a doctor or get a prescription, and this often doesn't count towards your deductible. Beyond that, coinsurance means you pay a percentage of the total cost for a service, while your insurer pays the rest. These costs add up quickly.",
+      "more": "Not everything is covered, as policies have specific exclusions for certain services, meaning you'll pay their full cost. Also, some plans set coverage limits, which are maximum dollar amounts they will pay for a specific service, or even annual and lifetime totals, leaving you to pay anything beyond those limits. However, a crucial protective feature is the out-of-pocket maximum. Once you reach this total for covered services within a benefit year, your personal payment obligation ends, and your health insurance covers all further eligible costs. This maximum is a key figure to know for managing your potential medical expenses.",
+      "deep": "To keep your costs down, it's generally best to use \"in-network\" providers, which are healthcare professionals who have a contract with your insurer. Seeing an in-network provider often means discounted co-payments or coinsurance, and potentially more benefits. If you choose an \"out-of-network\" provider, you might pay the full cost of services, even for emergencies, because these providers haven't agreed to the insurer's discounted rates. Another important step is obtaining prior authorization from your insurer for certain medical services. This certification, provided before care, obligates the insurer to pay for that service, assuming it matches what was authorized, helping you avoid unexpected charges. For employer-sponsored ERISA plans, your plan details, including benefits and coverage, are in the Summary Plan Description, and any appeals usually start through the insurance company before escalating to the Employer's Plan Fiduciary or the US Department of Labor.",
+      "takeaway": "Review your health insurance's Summary Plan Description or Evidence of Coverage to understand your deductible, co-payments, coinsurance, out-of-pocket maximum, and in-network provider list before receiving non-emergency care.",
+      "source": {
+        "title": "Health insurance",
+        "url": "https://en.wikipedia.org/wiki/Health_insurance"
+      },
+      "audio": {
+        "quick": "lessons/2026-10-23-health-insurance-quick.mp3",
+        "more": "lessons/2026-10-23-health-insurance-more.mp3",
+        "deep": "lessons/2026-10-23-health-insurance-deep.mp3"
       }
     }
   ],

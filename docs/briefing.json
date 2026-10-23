@@ -1,47 +1,47 @@
 {
-  "generated_at": "2026-10-22T07:01:45.072193-06:00",
-  "date": "2026-10-22",
+  "generated_at": "2026-10-23T06:41:00.679115-06:00",
+  "date": "2026-10-23",
   "tldr": [
-    "A critical security flaw in the PHP programming language is posing a global cyber-security threat, affecting a large portion of the internet and causing government services to go offline.",
-    "Oil prices have surged to a five-month high due to escalating tensions in the Middle East, including reports of vessels being struck and potential U.S. strikes against Iran.",
-    "UN advisors warn that almost all shallow-water coral reefs worldwide are at risk of ecosystem collapse by 2075 due to global heating."
+    "OpenAI is nearing a new funding round that could value the company at $1.25 trillion, with UAE investors reportedly leading the initiative.",
+    "Oil prices reached a five-month high amid escalating fears of renewed US strikes on Iran and potential retaliatory attacks in the Middle East.",
+    "The first personalized mRNA cancer vaccine has shown promising results in a major trial, reducing the risk of melanoma recurrence and death by 42%."
   ],
   "market": {
     "sp500": {
-      "value": 7757.17,
-      "change": 44.6,
-      "asof": "2026-10-21"
+      "value": 7663.43,
+      "change": -93.74,
+      "asof": "2026-10-22"
     },
     "ndx": {
-      "value": 26702.86,
-      "change": 278.04,
-      "asof": "2026-10-21"
+      "value": 26008.86,
+      "change": -694.0,
+      "asof": "2026-10-22"
     },
-    "why": "The S&P 500 and Nasdaq Composite both closed higher, with JPMorgan strategists indicating that recent hedge fund positioning has significantly lightened, suggesting limited further downside for stocks."
+    "why": "The S&P 500 and Nasdaq Composite closed lower, primarily due to rising concerns over artificial intelligence, a fracturing stock market with a slump in tech shares, and hedge funds aggressively shorting U.S. stocks. This contributed to increased investor fear and a broader market decline."
   },
   "yield_10y": {
-    "value": 5.15,
-    "change": 0.03,
-    "asof": "2026-10-21",
-    "why": "The 10-year Treasury yield rose slightly, influenced by broader market pressures such as France's mounting economic crisis, which pushed its 10-year government bond yield to a new 24-year high."
+    "value": 4.95,
+    "change": -0.19,
+    "asof": "2026-10-22",
+    "why": "The 10-year Treasury yield dropped significantly, marking one of its largest daily declines since the 2023 banking crisis, as investors sought safety amidst AI-related worries and general market uncertainty."
   },
   "vix": {
-    "value": 16.68,
-    "change": -0.63,
-    "asof": "2026-10-21",
-    "why": "The VIX closed lower, aligning with the market's upward trend and a strategist's view that the stock market's downside may be limited, typically correlating with reduced volatility."
+    "value": 19.03,
+    "change": 2.35,
+    "asof": "2026-10-22",
+    "why": "The VIX, a measure of market volatility, increased, reflecting heightened investor fear and uncertainty. This sentiment was influenced by a perceived decline in the artificial-intelligence trade and a notable split in the broader stock market performance."
   },
   "breadth": {
     "sp500": {
-      "value": 54.5,
-      "asof": "2026-10-21",
+      "value": 57.1,
+      "asof": "2026-10-22",
       "status": "healthy",
       "matched": 499,
       "stale": false
     },
     "ndx100": {
-      "value": 56.2,
-      "asof": "2026-10-21",
+      "value": 58.3,
+      "asof": "2026-10-22",
       "status": "healthy",
       "matched": 96,
       "stale": false
@@ -51,55 +51,55 @@
     {
       "symbol": "SOXL",
       "what": "3x semiconductors",
-      "value": 103.24,
-      "day_move": 5.83,
-      "asof": "2026-10-21",
-      "rsi": 37.1,
-      "rsi_zone": "neutral",
-      "low": 93.67,
+      "value": 82.11,
+      "day_move": -20.47,
+      "asof": "2026-10-22",
+      "rsi": 29.9,
+      "rsi_zone": "oversold",
+      "low": 82.11,
       "high": 164.27,
-      "band_pct": 13.6,
-      "zone": "mid",
-      "action": "hold",
-      "read": "Mid-range - 14% of the way up its 1-month band."
+      "band_pct": 0.0,
+      "zone": "low",
+      "action": "buy",
+      "read": "Near the bottom of its 1-month range and oversold on RSI. Big session: down 20.5% in a day."
     },
     {
       "symbol": "SPXL",
       "what": "3x S&P 500",
-      "value": 290.87,
-      "day_move": 1.61,
-      "asof": "2026-10-21",
-      "rsi": 52.1,
+      "value": 280.41,
+      "day_move": -3.6,
+      "asof": "2026-10-22",
+      "rsi": 43.9,
       "rsi_zone": "neutral",
       "low": 280.17,
       "high": 299.21,
-      "band_pct": 56.2,
-      "zone": "mid",
-      "action": "hold",
-      "read": "Mid-range - 56% of the way up its 1-month band."
+      "band_pct": 1.3,
+      "zone": "low",
+      "action": "buy",
+      "read": "Within 4% of its 1-month low."
     },
     {
       "symbol": "TQQQ",
       "what": "3x Nasdaq-100",
-      "value": 72.61,
-      "day_move": 3.12,
-      "asof": "2026-10-21",
-      "rsi": 44.3,
+      "value": 66.42,
+      "day_move": -8.52,
+      "asof": "2026-10-22",
+      "rsi": 35.4,
       "rsi_zone": "neutral",
-      "low": 68.21,
+      "low": 66.42,
       "high": 84.25,
-      "band_pct": 27.4,
-      "zone": "mid",
-      "action": "hold",
-      "read": "Mid-range - 27% of the way up its 1-month band."
+      "band_pct": 0.0,
+      "zone": "low",
+      "action": "buy",
+      "read": "Within 4% of its 1-month low. Big session: down 8.5% in a day."
     }
   ],
   "watchlist_missing": [],
   "mortgage": {
-    "value": 7.4,
-    "change": 0.0,
-    "asof": "2026-10-15",
-    "why": "The 30-year fixed mortgage rate, as surveyed by Freddie Mac, remained unchanged in its latest weekly release. Mortgage rates generally track the 10-year Treasury yield, which saw a modest increase over recent days."
+    "value": 7.32,
+    "change": -0.08,
+    "asof": "2026-10-22",
+    "why": "The articles do not explicitly state a reason for the weekly change in the 30-year fixed mortgage rate. However, mortgage rates generally track the 10-year Treasury yield, which experienced a significant decrease over recent days."
   },
   "policy": [],
   "policy_upcoming": [
@@ -151,70 +151,60 @@
   ],
   "tech": [
     {
-      "summary": "A critical security flaw in the PHP programming language, which underpins a significant portion of the internet, has sparked global alarm, with governments and major tech companies like Google, OpenAI, and Amazon responding to potential cyber threats.",
+      "summary": "OpenAI is reportedly close to finalizing a new funding round, led by UAE investors, which could value the company at $1.25 trillion and serve as a bridge to its anticipated 2027 IPO.",
       "source": "CNBC",
-      "url": "https://www.cnbc.com/2026/10/22/php-google-openai-and-amazon-cyber.html"
+      "url": "https://www.cnbc.com/2026/10/22/openai-funding-round-uae-investors.html"
     },
     {
-      "summary": "1Password has introduced a new feature that enables AI agents to sign into user accounts without directly accessing or seeing the passwords, enhancing security while facilitating bot-assisted tasks.",
-      "source": "The Verge",
-      "url": "https://www.theverge.com/ai-artificial-intelligence/1016399/1password-ai-agent-password-sign-in"
+      "summary": "Large language models (LLMs) are enhancing the feasibility of formal software verification, allowing it to be applied on a much larger scale.",
+      "source": "Hacker News",
+      "url": "https://www.anthropic.com/research/formal-verification"
     },
     {
-      "summary": "Tesla has commenced early production of its Optimus humanoid robot on its high-volume line in Fremont, California, though CEO Elon Musk acknowledged that further development is needed in areas such as its hands, safety, reliability, durability, and artificial intelligence.",
+      "summary": "A new Texas-based defense startup called Warhound plans to genetically modify military and police dogs and equip them with advanced military technology from Anduril, co-founded by Palmer Luckey.",
       "source": "The Verge",
-      "url": "https://www.theverge.com/tech/1016492/tesla-optimus-robots-production-musk-q3-earnings"
+      "url": "https://www.theverge.com/tech/1017343/warhound-palmer-luckey-anduril-colossal-war-dogs"
     }
   ],
   "world": [
     {
-      "summary": "Oil prices surged to a five-month high after Iran's IRGC reported hitting multiple vessels in the northern Gulf and near the Strait of Hormuz, with reports also circulating of potential U.S. and Israeli strikes on Iran, signaling escalating conflict that threatens global supply.",
+      "summary": "Oil prices reached a five-month high amid fears of renewed US strikes on Iran and potential retaliatory attacks on Gulf oil and tech facilities, causing Brent crude to rise to $114.72 a barrel.",
       "source": "Guardian World",
-      "url": "https://www.theguardian.com/business/2026/oct/22/oil-prices-jump-five-month-high-threats-supply"
+      "url": "https://www.theguardian.com/business/2026/oct/23/oil-five-month-high-fears-us-renews-strikes-iran"
     },
     {
-      "summary": "United Nations advisors have issued a stark warning that nearly all shallow-water coral reefs globally, across 80 countries, are projected to face ecosystem collapse by 2075 due to accelerating global heating, urging immediate action.",
+      "summary": "Storm Austen, the first named storm of the year, has caused thousands of homes in southwest England to lose power and forced dozens of schools in Cornwall to close, with another storm system heading towards Scotland and northern regions.",
       "source": "Guardian World",
-      "url": "https://www.theguardian.com/australia-news/2026/oct/22/shallow-water-coral-reef-ecosystem-collapse-by-2075-un-advisors-say"
-    },
-    {
-      "summary": "French President Emmanuel Macron has condemned what he termed 'seditious acts' by 'ultra-left' groups amid ongoing protests and stated his intention to ban certain demonstrations, reinforcing police presence to restore order.",
-      "source": "Guardian World",
-      "url": "https://www.theguardian.com/world/live/2026/oct/22/france-protests-emmanuel-macron-ukraine-energy-attacks-latest-europe-news-updates"
-    },
-    {
-      "summary": "In the UK, 32 government services went offline due to a critical security flaw in the PHP programming language, which is used by the majority of websites globally and allows hackers to change websites or extract personal data.",
-      "source": "Guardian World",
-      "url": "https://www.theguardian.com/politics/live/2026/oct/22/john-healey-chancellor-budget-red-tape-small-businsesses-jackdaw-oil-latest-news-updates"
+      "url": "https://www.theguardian.com/uk-news/2026/oct/23/storm-austen-weather-updates-thousands-without-power-south-west-england"
     }
   ],
   "us": [
     {
-      "summary": "The Supreme Court ruled that the Trump administration must continue providing gender-affirming care to inmates in federal prisons, upholding a pause on efforts to change the policy while litigation proceeds.",
+      "summary": "The Supreme Court upheld a previous decision to pause the Trump administration's anti-trans prison policy, requiring federal prisons to continue providing gender-affirming care to inmates while litigation proceeds.",
       "source": "NPR National",
       "url": "https://www.npr.org/2026/10/21/nx-s1-5993878/supreme-court-trump-trans-prison-policy"
     },
     {
-      "summary": "The FAA has granted approval for airlines to begin operating Boeing's 737 Max 10, clearing a major regulatory hurdle for the largest variant of the 737 Max jet that has faced significant delays.",
+      "summary": "A new analysis indicates that the average renter household now requires 16 years to save for a down payment and closing costs for a starter home, which is twice the time needed in 2019 due to rising rents and other expenses.",
       "source": "NPR National",
-      "url": "https://www.npr.org/2026/10/21/g-s1-149032/faa-boeing-737-max-10"
+      "url": "https://www.npr.org/2026/10/22/nx-s1-6009378/down-payment-real-estate-affordability"
     },
     {
-      "summary": "The Chiricahua monument in southeastern Arizona, known as the Land of Standing-Up Rocks for its towering spires, has officially been designated as the 64th U.S. national park, with the legislation passing with bipartisan support.",
-      "source": "Guardian World",
-      "url": "https://www.theguardian.com/us-news/2026/oct/22/chiricahua-monument-arizona-new-national-park"
+      "summary": "The New York City Council passed a bill that will ban horse-drawn carriages in the city.",
+      "source": "NPR National",
+      "url": "https://www.npr.org/2026/10/23/nx-s1-6012817/new-york-city-councilwoman-on-passage-of-bill-banning-horse-drawn-carriages"
     }
   ],
   "science": [
     {
-      "summary": "The first human case of the Shamonda virus, previously believed to be non-transferable to humans and typically affecting cattle, has been identified in a patient in France who died in early October, though officials state there is no current health risk to the public.",
+      "summary": "The first personalized mRNA cancer vaccine, developed by Moderna and Merck, demonstrated a 42% reduction in the risk of death or recurrence for melanoma patients in a major trial.",
       "source": "BBC Health",
-      "url": "https://www.bbc.co.uk/news/articles/c6reyx1d9ge9o?at_medium=RSS&at_campaign=rss"
+      "url": "https://www.bbc.co.uk/news/articles/cq0ld9g9e913o?at_medium=RSS&at_campaign=rss"
     },
     {
-      "summary": "New human data is beginning to emerge that hints at the potential for psychedelics, such as psilocybin, to combat inflammation, which could open new avenues for treating neurodegenerative conditions like Parkinson's disease.",
-      "source": "NPR Science",
-      "url": "https://www.npr.org/2026/10/21/nx-s1-6009441/psychedelics-brain-inflammation-immune-system"
+      "summary": "The first human case of the Shamonda virus, typically found in cattle, has been identified in France in a patient who died in early October.",
+      "source": "BBC Health",
+      "url": "https://www.bbc.co.uk/news/articles/c6reyx1d9ge9o?at_medium=RSS&at_campaign=rss"
     }
   ],
   "weekly_recap": null,

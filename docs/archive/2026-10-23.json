@@ -1,0 +1,227 @@
+{
+  "generated_at": "2026-10-23T06:41:00.679115-06:00",
+  "date": "2026-10-23",
+  "tldr": [
+    "OpenAI is nearing a new funding round that could value the company at $1.25 trillion, with UAE investors reportedly leading the initiative.",
+    "Oil prices reached a five-month high amid escalating fears of renewed US strikes on Iran and potential retaliatory attacks in the Middle East.",
+    "The first personalized mRNA cancer vaccine has shown promising results in a major trial, reducing the risk of melanoma recurrence and death by 42%."
+  ],
+  "market": {
+    "sp500": {
+      "value": 7663.43,
+      "change": -93.74,
+      "asof": "2026-10-22"
+    },
+    "ndx": {
+      "value": 26008.86,
+      "change": -694.0,
+      "asof": "2026-10-22"
+    },
+    "why": "The S&P 500 and Nasdaq Composite closed lower, primarily due to rising concerns over artificial intelligence, a fracturing stock market with a slump in tech shares, and hedge funds aggressively shorting U.S. stocks. This contributed to increased investor fear and a broader market decline."
+  },
+  "yield_10y": {
+    "value": 4.95,
+    "change": -0.19,
+    "asof": "2026-10-22",
+    "why": "The 10-year Treasury yield dropped significantly, marking one of its largest daily declines since the 2023 banking crisis, as investors sought safety amidst AI-related worries and general market uncertainty."
+  },
+  "vix": {
+    "value": 19.03,
+    "change": 2.35,
+    "asof": "2026-10-22",
+    "why": "The VIX, a measure of market volatility, increased, reflecting heightened investor fear and uncertainty. This sentiment was influenced by a perceived decline in the artificial-intelligence trade and a notable split in the broader stock market performance."
+  },
+  "breadth": {
+    "sp500": {
+      "value": 57.1,
+      "asof": "2026-10-22",
+      "status": "healthy",
+      "matched": 499,
+      "stale": false
+    },
+    "ndx100": {
+      "value": 58.3,
+      "asof": "2026-10-22",
+      "status": "healthy",
+      "matched": 96,
+      "stale": false
+    }
+  },
+  "watchlist": [
+    {
+      "symbol": "SOXL",
+      "what": "3x semiconductors",
+      "value": 82.11,
+      "day_move": -20.47,
+      "asof": "2026-10-22",
+      "rsi": 29.9,
+      "rsi_zone": "oversold",
+      "low": 82.11,
+      "high": 164.27,
+      "band_pct": 0.0,
+      "zone": "low",
+      "action": "buy",
+      "read": "Near the bottom of its 1-month range and oversold on RSI. Big session: down 20.5% in a day."
+    },
+    {
+      "symbol": "SPXL",
+      "what": "3x S&P 500",
+      "value": 280.41,
+      "day_move": -3.6,
+      "asof": "2026-10-22",
+      "rsi": 43.9,
+      "rsi_zone": "neutral",
+      "low": 280.17,
+      "high": 299.21,
+      "band_pct": 1.3,
+      "zone": "low",
+      "action": "buy",
+      "read": "Within 4% of its 1-month low."
+    },
+    {
+      "symbol": "TQQQ",
+      "what": "3x Nasdaq-100",
+      "value": 66.42,
+      "day_move": -8.52,
+      "asof": "2026-10-22",
+      "rsi": 35.4,
+      "rsi_zone": "neutral",
+      "low": 66.42,
+      "high": 84.25,
+      "band_pct": 0.0,
+      "zone": "low",
+      "action": "buy",
+      "read": "Within 4% of its 1-month low. Big session: down 8.5% in a day."
+    }
+  ],
+  "watchlist_missing": [],
+  "mortgage": {
+    "value": 7.32,
+    "change": -0.08,
+    "asof": "2026-10-22",
+    "why": "The articles do not explicitly state a reason for the weekly change in the 30-year fixed mortgage rate. However, mortgage rates generally track the 10-year Treasury yield, which experienced a significant decrease over recent days."
+  },
+  "policy": [],
+  "policy_upcoming": [
+    {
+      "what_happened": "This document contains final regulations regarding the deduction for certain taxpayers for an amount up to $10,000 of qualified passenger vehicle loan interest.",
+      "effect": "You can deduct up to $10,000 of qualified passenger vehicle loan interest.",
+      "url": "https://www.federalregister.gov/documents/2026/09/08/2026-18219/car-loan-interest-deduction",
+      "status": "Final rule",
+      "effective_date": "2026-11-09",
+      "source": "Federal Register"
+    },
+    {
+      "what_happened": "A Utah bill modifies provisions related to the property tax exemption process.",
+      "effect": "Once you own a home, you will have deadlines for filing an application for a property tax exemption with the county board of equalization and for the board to render a decision.",
+      "url": "https://le.utah.gov/~2026/bills/static/SB0236.html",
+      "status": "Signed in Utah",
+      "effective_date": "2027-01-01",
+      "source": "Utah Legislature"
+    },
+    {
+      "what_happened": "A bill amends requirements for health insurance preauthorization in Utah.",
+      "effect": "Your health insurer must make an authorization or adverse preauthorization determination within a defined maximum time.",
+      "url": "https://le.utah.gov/~2026/bills/static/SB0319.html",
+      "status": "Signed in Utah",
+      "effective_date": "2027-01-01",
+      "source": "Utah Legislature"
+    }
+  ],
+  "policy_week": [],
+  "policy_calendar": [
+    {
+      "date": "2026-11-01",
+      "label": "ACA marketplace open enrollment opens \u2014 expected early November",
+      "note": "healthcare.gov has opened enrollment on November 1 each year, and currently publishes December 15 as the deadline for coverage starting January 1. The window is set by federal rule and has been changed by rulemaking before.",
+      "url": "https://www.healthcare.gov/quick-guide/dates-and-deadlines/"
+    },
+    {
+      "date": "2026-11-05",
+      "label": "IRS 401(k) and IRA contribution limits for next year \u2014 expected late October or early November",
+      "note": "The annual cost-of-living adjustment notice, historically released within a week or two of the bracket figures. It sets how much can go into a 401(k) and an IRA next year.",
+      "url": "https://www.irs.gov/retirement-plans/cola-increases-for-dollar-limitations-on-benefits-and-contributions"
+    },
+    {
+      "date": "2026-11-10",
+      "label": "IRS tax brackets and the married-filing-jointly standard deduction for next year \u2014 expected late October or early November",
+      "note": "Published as an annual inflation-adjustment revenue procedure; recent releases landed between mid-October and mid-November. These are the bracket thresholds and the standard deduction the next return is filed against.",
+      "url": "https://www.irs.gov/filing/federal-income-tax-rates-and-brackets"
+    }
+  ],
+  "tech": [
+    {
+      "summary": "OpenAI is reportedly close to finalizing a new funding round, led by UAE investors, which could value the company at $1.25 trillion and serve as a bridge to its anticipated 2027 IPO.",
+      "source": "CNBC",
+      "url": "https://www.cnbc.com/2026/10/22/openai-funding-round-uae-investors.html"
+    },
+    {
+      "summary": "Large language models (LLMs) are enhancing the feasibility of formal software verification, allowing it to be applied on a much larger scale.",
+      "source": "Hacker News",
+      "url": "https://www.anthropic.com/research/formal-verification"
+    },
+    {
+      "summary": "A new Texas-based defense startup called Warhound plans to genetically modify military and police dogs and equip them with advanced military technology from Anduril, co-founded by Palmer Luckey.",
+      "source": "The Verge",
+      "url": "https://www.theverge.com/tech/1017343/warhound-palmer-luckey-anduril-colossal-war-dogs"
+    }
+  ],
+  "world": [
+    {
+      "summary": "Oil prices reached a five-month high amid fears of renewed US strikes on Iran and potential retaliatory attacks on Gulf oil and tech facilities, causing Brent crude to rise to $114.72 a barrel.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/business/2026/oct/23/oil-five-month-high-fears-us-renews-strikes-iran"
+    },
+    {
+      "summary": "Storm Austen, the first named storm of the year, has caused thousands of homes in southwest England to lose power and forced dozens of schools in Cornwall to close, with another storm system heading towards Scotland and northern regions.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/uk-news/2026/oct/23/storm-austen-weather-updates-thousands-without-power-south-west-england"
+    }
+  ],
+  "us": [
+    {
+      "summary": "The Supreme Court upheld a previous decision to pause the Trump administration's anti-trans prison policy, requiring federal prisons to continue providing gender-affirming care to inmates while litigation proceeds.",
+      "source": "NPR National",
+      "url": "https://www.npr.org/2026/10/21/nx-s1-5993878/supreme-court-trump-trans-prison-policy"
+    },
+    {
+      "summary": "A new analysis indicates that the average renter household now requires 16 years to save for a down payment and closing costs for a starter home, which is twice the time needed in 2019 due to rising rents and other expenses.",
+      "source": "NPR National",
+      "url": "https://www.npr.org/2026/10/22/nx-s1-6009378/down-payment-real-estate-affordability"
+    },
+    {
+      "summary": "The New York City Council passed a bill that will ban horse-drawn carriages in the city.",
+      "source": "NPR National",
+      "url": "https://www.npr.org/2026/10/23/nx-s1-6012817/new-york-city-councilwoman-on-passage-of-bill-banning-horse-drawn-carriages"
+    }
+  ],
+  "science": [
+    {
+      "summary": "The first personalized mRNA cancer vaccine, developed by Moderna and Merck, demonstrated a 42% reduction in the risk of death or recurrence for melanoma patients in a major trial.",
+      "source": "BBC Health",
+      "url": "https://www.bbc.co.uk/news/articles/cq0ld9g9e913o?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "summary": "The first human case of the Shamonda virus, typically found in cattle, has been identified in France in a patient who died in early October.",
+      "source": "BBC Health",
+      "url": "https://www.bbc.co.uk/news/articles/c6reyx1d9ge9o?at_medium=RSS&at_campaign=rss"
+    }
+  ],
+  "weekly_recap": null,
+  "data_availability": {
+    "sp500": true,
+    "ndx": true,
+    "vix": true,
+    "ten_year": true,
+    "news_world": true,
+    "news_us": true,
+    "news_science": true,
+    "news_business": true,
+    "news_tech": true,
+    "summary": "ok",
+    "breadth": true,
+    "policy": true,
+    "mortgage": true,
+    "watchlist": true
+  }
+}
