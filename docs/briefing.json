@@ -1,47 +1,47 @@
 {
-  "generated_at": "2026-10-23T06:41:00.679115-06:00",
-  "date": "2026-10-23",
+  "generated_at": "2026-10-24T06:04:04.734311-06:00",
+  "date": "2026-10-24",
   "tldr": [
-    "OpenAI is nearing a new funding round that could value the company at $1.25 trillion, with UAE investors reportedly leading the initiative.",
-    "Oil prices reached a five-month high amid escalating fears of renewed US strikes on Iran and potential retaliatory attacks in the Middle East.",
-    "The first personalized mRNA cancer vaccine has shown promising results in a major trial, reducing the risk of melanoma recurrence and death by 42%."
+    "Major U.S. stock indices closed lower as turmoil in the artificial intelligence sector led to tech selling.",
+    "Europe faces widespread protests and significant events, including a deadly church attack in Jordan and North Korean leader Kim Jong-un's rare visit to China.",
+    "Scientists have identified a personalized cancer vaccine that reduces the risk of disease recurrence, marking a potential turning point in treatment."
   ],
   "market": {
     "sp500": {
-      "value": 7663.43,
-      "change": -93.74,
-      "asof": "2026-10-22"
+      "value": 7623.68,
+      "change": -39.75,
+      "asof": "2026-10-23"
     },
     "ndx": {
-      "value": 26008.86,
-      "change": -694.0,
-      "asof": "2026-10-22"
+      "value": 25955.34,
+      "change": -53.52,
+      "asof": "2026-10-23"
     },
-    "why": "The S&P 500 and Nasdaq Composite closed lower, primarily due to rising concerns over artificial intelligence, a fracturing stock market with a slump in tech shares, and hedge funds aggressively shorting U.S. stocks. This contributed to increased investor fear and a broader market decline."
+    "why": "Both the S&P 500 and Nasdaq Composite closed lower, driven by selling in the artificial intelligence sector amid mounting pressures and credit risks related to AI buildouts."
   },
   "yield_10y": {
-    "value": 4.95,
-    "change": -0.19,
-    "asof": "2026-10-22",
-    "why": "The 10-year Treasury yield dropped significantly, marking one of its largest daily declines since the 2023 banking crisis, as investors sought safety amidst AI-related worries and general market uncertainty."
+    "value": 4.99,
+    "change": 0.03,
+    "asof": "2026-10-23",
+    "why": "The 10-year Treasury yield rose slightly, influenced by factors such as French unrest which pushed bond yields to a 24-year high."
   },
   "vix": {
-    "value": 19.03,
-    "change": 2.35,
-    "asof": "2026-10-22",
-    "why": "The VIX, a measure of market volatility, increased, reflecting heightened investor fear and uncertainty. This sentiment was influenced by a perceived decline in the artificial-intelligence trade and a notable split in the broader stock market performance."
+    "value": 19.45,
+    "change": 0.42,
+    "asof": "2026-10-23",
+    "why": "The VIX, a measure of market volatility, increased as investors reacted to tech selling and overall market turmoil, particularly in the AI sector."
   },
   "breadth": {
     "sp500": {
-      "value": 57.1,
-      "asof": "2026-10-22",
+      "value": 55.9,
+      "asof": "2026-10-23",
       "status": "healthy",
       "matched": 499,
       "stale": false
     },
     "ndx100": {
-      "value": 58.3,
-      "asof": "2026-10-22",
+      "value": 56.2,
+      "asof": "2026-10-23",
       "status": "healthy",
       "matched": 96,
       "stale": false
@@ -51,29 +51,29 @@
     {
       "symbol": "SOXL",
       "what": "3x semiconductors",
-      "value": 82.11,
-      "day_move": -20.47,
-      "asof": "2026-10-22",
-      "rsi": 29.9,
-      "rsi_zone": "oversold",
+      "value": 83.56,
+      "day_move": 1.77,
+      "asof": "2026-10-23",
+      "rsi": 30.9,
+      "rsi_zone": "neutral",
       "low": 82.11,
       "high": 164.27,
-      "band_pct": 0.0,
+      "band_pct": 1.8,
       "zone": "low",
       "action": "buy",
-      "read": "Near the bottom of its 1-month range and oversold on RSI. Big session: down 20.5% in a day."
+      "read": "Within 4% of its 1-month low."
     },
     {
       "symbol": "SPXL",
       "what": "3x S&P 500",
-      "value": 280.41,
-      "day_move": -3.6,
-      "asof": "2026-10-22",
-      "rsi": 43.9,
+      "value": 275.63,
+      "day_move": -1.7,
+      "asof": "2026-10-23",
+      "rsi": 40.7,
       "rsi_zone": "neutral",
-      "low": 280.17,
+      "low": 275.63,
       "high": 299.21,
-      "band_pct": 1.3,
+      "band_pct": 0.0,
       "zone": "low",
       "action": "buy",
       "read": "Within 4% of its 1-month low."
@@ -81,17 +81,17 @@
     {
       "symbol": "TQQQ",
       "what": "3x Nasdaq-100",
-      "value": 66.42,
-      "day_move": -8.52,
-      "asof": "2026-10-22",
-      "rsi": 35.4,
+      "value": 66.29,
+      "day_move": -0.2,
+      "asof": "2026-10-23",
+      "rsi": 35.2,
       "rsi_zone": "neutral",
-      "low": 66.42,
+      "low": 66.29,
       "high": 84.25,
       "band_pct": 0.0,
       "zone": "low",
       "action": "buy",
-      "read": "Within 4% of its 1-month low. Big session: down 8.5% in a day."
+      "read": "Within 4% of its 1-month low."
     }
   ],
   "watchlist_missing": [],
@@ -99,7 +99,7 @@
     "value": 7.32,
     "change": -0.08,
     "asof": "2026-10-22",
-    "why": "The articles do not explicitly state a reason for the weekly change in the 30-year fixed mortgage rate. However, mortgage rates generally track the 10-year Treasury yield, which experienced a significant decrease over recent days."
+    "why": "The 30-year fixed mortgage rate declined over the past week, consistent with the 10-year Treasury yield dropping back to 5% as investors sought safety in government bonds due to AI-related concerns."
   },
   "policy": [],
   "policy_upcoming": [
@@ -151,60 +151,70 @@
   ],
   "tech": [
     {
-      "summary": "OpenAI is reportedly close to finalizing a new funding round, led by UAE investors, which could value the company at $1.25 trillion and serve as a bridge to its anticipated 2027 IPO.",
-      "source": "CNBC",
-      "url": "https://www.cnbc.com/2026/10/22/openai-funding-round-uae-investors.html"
-    },
-    {
-      "summary": "Large language models (LLMs) are enhancing the feasibility of formal software verification, allowing it to be applied on a much larger scale.",
-      "source": "Hacker News",
-      "url": "https://www.anthropic.com/research/formal-verification"
-    },
-    {
-      "summary": "A new Texas-based defense startup called Warhound plans to genetically modify military and police dogs and equip them with advanced military technology from Anduril, co-founded by Palmer Luckey.",
+      "summary": "OpenAI has shifted to training its most advanced AI models in an offline testing environment, without internet access, to prevent interaction with external systems after recent hacking incidents.",
       "source": "The Verge",
-      "url": "https://www.theverge.com/tech/1017343/warhound-palmer-luckey-anduril-colossal-war-dogs"
+      "url": "https://www.theverge.com/ai-artificial-intelligence/1018021/openai-training-top-ai-models-no-internet"
+    },
+    {
+      "summary": "Jack Dorsey's Block has introduced Dessa, an AI model trained exclusively on human conversation, which demonstrates a uniquely awkward and uncanny conversational style.",
+      "source": "The Verge",
+      "url": "https://www.theverge.com/ai-artificial-intelligence/1017906/jack-dorsey-block-dessa-ai-voice-speech"
+    },
+    {
+      "summary": "A hacker reverse-engineered a Samsung TV and discovered that its onboard AI was listening through an OpenAI account, leading to the account's suspension.",
+      "source": "Hacker News",
+      "url": "https://www.reddit.com/r/antiai/comments/1xdv3e5/hacker_reverse_engineers_his_samsung_tv_and_finds/"
     }
   ],
   "world": [
     {
-      "summary": "Oil prices reached a five-month high amid fears of renewed US strikes on Iran and potential retaliatory attacks on Gulf oil and tech facilities, causing Brent crude to rise to $114.72 a barrel.",
+      "summary": "France has deployed 70,000 officers as protests are anticipated across the country, with demonstrations also planned in Spain, Austria, Portugal, Albania, and Ireland.",
       "source": "Guardian World",
-      "url": "https://www.theguardian.com/business/2026/oct/23/oil-five-month-high-fears-us-renews-strikes-iran"
+      "url": "https://www.theguardian.com/world/live/2026/oct/24/france-demonstrations-police-macron-italy-albania-belgium-spain-ukraine-russia-europe-latest-news"
     },
     {
-      "summary": "Storm Austen, the first named storm of the year, has caused thousands of homes in southwest England to lose power and forced dozens of schools in Cornwall to close, with another storm system heading towards Scotland and northern regions.",
+      "summary": "Ukraine reports that its Starlink internet connection is now stable after network limits had affected military and drone operations for a week; Kyiv is also seeking alternatives by partnering with Nokia and ICEYE.",
+      "source": "BBC World",
+      "url": "https://www.bbc.co.uk/news/articles/cwkg5md14j8go?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "summary": "Eight people were killed and 40 injured after gunmen opened fire at a Greek Orthodox church funeral in Jordan in what authorities described as a terrorist act.",
       "source": "Guardian World",
-      "url": "https://www.theguardian.com/uk-news/2026/oct/23/storm-austen-weather-updates-thousands-without-power-south-west-england"
+      "url": "https://www.theguardian.com/world/2026/oct/24/seven-killed-and-40-injured-after-gunmen-open-fire-at-church-funeral-in-jordan"
+    },
+    {
+      "summary": "North Korean leader Kim Jong-un has made his first known trip abroad in over a year, traveling to China by train over a newly opened bridge.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/world/2026/oct/24/kim-jong-un-crosses-newly-opened-bridge-into-china"
     }
   ],
   "us": [
     {
-      "summary": "The Supreme Court upheld a previous decision to pause the Trump administration's anti-trans prison policy, requiring federal prisons to continue providing gender-affirming care to inmates while litigation proceeds.",
+      "summary": "The U.S. birth rate has fallen to its lowest recorded level, though the decline was mitigated by an increase in births among women over the age of 30, according to the Centers for Disease Control and Prevention.",
       "source": "NPR National",
-      "url": "https://www.npr.org/2026/10/21/nx-s1-5993878/supreme-court-trump-trans-prison-policy"
+      "url": "https://www.npr.org/2026/10/24/nx-s1-6012804/birth-rate-population-cdc"
     },
     {
-      "summary": "A new analysis indicates that the average renter household now requires 16 years to save for a down payment and closing costs for a starter home, which is twice the time needed in 2019 due to rising rents and other expenses.",
+      "summary": "Intense rainfall has led to severe flooding in the Four Corners region, prompting evacuations, emergency declarations, and rescue operations, with more rainfall anticipated through the weekend.",
       "source": "NPR National",
-      "url": "https://www.npr.org/2026/10/22/nx-s1-6009378/down-payment-real-estate-affordability"
+      "url": "https://www.npr.org/2026/10/23/nx-s1-6014742/flooding-weather-four-corners"
     },
     {
-      "summary": "The New York City Council passed a bill that will ban horse-drawn carriages in the city.",
+      "summary": "A congressional watchdog report released in October indicates that the Pentagon's guidelines for \"responsible AI\" are not consistently followed in the development of AI-capable weapons and projects.",
       "source": "NPR National",
-      "url": "https://www.npr.org/2026/10/23/nx-s1-6012817/new-york-city-councilwoman-on-passage-of-bill-banning-horse-drawn-carriages"
+      "url": "https://www.npr.org/2026/10/23/nx-s1-6012296/ai-department-of-defense-war"
     }
   ],
   "science": [
     {
-      "summary": "The first personalized mRNA cancer vaccine, developed by Moderna and Merck, demonstrated a 42% reduction in the risk of death or recurrence for melanoma patients in a major trial.",
+      "summary": "The first personalized cancer vaccine has shown promising results in a major trial, significantly cutting the risk of disease recurrence, which scientists believe could mark a turning point in cancer treatment.",
       "source": "BBC Health",
       "url": "https://www.bbc.co.uk/news/articles/cq0ld9g9e913o?at_medium=RSS&at_campaign=rss"
     },
     {
-      "summary": "The first human case of the Shamonda virus, typically found in cattle, has been identified in France in a patient who died in early October.",
-      "source": "BBC Health",
-      "url": "https://www.bbc.co.uk/news/articles/c6reyx1d9ge9o?at_medium=RSS&at_campaign=rss"
+      "summary": "A second patient has died from Ebola in Kenya, a close family member of the first victim who had recently traveled from the Democratic Republic of Congo; authorities are investigating whether the first cases in Kenya and Nigeria are connected.",
+      "source": "BBC World",
+      "url": "https://www.bbc.co.uk/news/articles/c6x2355448eyo?at_medium=RSS&at_campaign=rss"
     }
   ],
   "weekly_recap": null,

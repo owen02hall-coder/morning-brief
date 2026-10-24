@@ -1,22 +1,6 @@
 {
-  "generated_at": "2026-10-23T06:41:00.679115-06:00",
+  "generated_at": "2026-10-24T06:04:04.734311-06:00",
   "lessons": [
-    {
-      "id": "2026-08-19-heating-ventilation-and-air-conditioning",
-      "date": "2026-08-19",
-      "domain": "Home, car and repair",
-      "title": "Detecting Dangerous Gases from Home Heating",
-      "hook": "Many home heating systems can produce a dangerous, odorless gas that you won't detect without help.",
-      "quick": "When you heat your home using a furnace, space heater, or boiler, there's a serious risk of incomplete combustion occurring. This happens if there isn't enough oxygen available for the fuel to burn completely. When combustion is incomplete, these heating systems can release harmful byproducts into your indoor air, including carbon monoxide. This gas is especially dangerous because it is tasteless and odorless, making it impossible to detect without specialized equipment. The presence of carbon monoxide has serious adverse health effects. Beyond this invisible danger, incomplete combustion can also emit nitrogen oxides, formaldehyde, and various volatile organic compounds. These substances contribute to poorer indoor air quality and can come from furnaces, space heaters, and boilers if they are not operating correctly due to insufficient oxygen.",
-      "more": "The heating systems that rely on burning fuel, whether solid fuels, liquids, or gases, require a proper air supply to operate safely. Furnaces, for example, distribute heated air through ductwork, and boilers use water or steam through pipes. Both methods ultimately use a central source to transfer thermal energy. Heat pumps, on the other hand, operate differently by extracting heat from outside the structure and transferring it in, or vice versa for cooling, and are often supplemented by electrical heaters that use high-resistance wire. While heat pumps don't produce combustion byproducts, systems burning fuel are the ones where incomplete combustion is a risk, highlighting the importance of proper ventilation to ensure sufficient oxygen and to remove any potential contaminants.",
-      "deep": "Ensuring your home's HVAC system, especially those with combustion heating, is designed and installed correctly is crucial for safety. For very small buildings, contractors estimate system capacity and design it, selecting components and refrigerants. For larger buildings, mechanical engineers analyze and specify the systems. Regardless of size, local regulations typically require building permits and code-compliance inspections for all installations. These inspections are in place to confirm that systems meet safety standards and are properly integrated to provide thermal comfort while controlling airborne contaminants. Proper ventilation is key to removing moisture, odors, smoke, heat, dust, bacteria, and carbon dioxide, as well as replenishing oxygen, particularly when a heating system is consuming oxygen and producing combustion byproducts.",
-      "takeaway": "Install carbon monoxide detectors in your home to safeguard against tasteless and odorless gases produced by combustion heating systems.",
-      "source": {
-        "title": "Heating, ventilation, and air conditioning",
-        "url": "https://en.wikipedia.org/wiki/Heating,_ventilation,_and_air_conditioning"
-      },
-      "audio": {}
-    },
     {
       "id": "2026-08-20-emergency-medicine",
       "date": "2026-08-20",
@@ -639,11 +623,7 @@
         "title": "Lenders mortgage insurance",
         "url": "https://en.wikipedia.org/wiki/Lenders_mortgage_insurance"
       },
-      "audio": {
-        "quick": "lessons/2026-10-01-lenders-mortgage-insurance-quick.mp3",
-        "more": "lessons/2026-10-01-lenders-mortgage-insurance-more.mp3",
-        "deep": "lessons/2026-10-01-lenders-mortgage-insurance-deep.mp3"
-      }
+      "audio": {}
     },
     {
       "id": "2026-10-02-smoke-detector",
@@ -1043,6 +1023,26 @@
         "quick": "lessons/2026-10-23-health-insurance-quick.mp3",
         "more": "lessons/2026-10-23-health-insurance-more.mp3",
         "deep": "lessons/2026-10-23-health-insurance-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-10-24-roof",
+      "date": "2026-10-24",
+      "domain": "Home, car and repair",
+      "title": "Understanding Roof Durability and Repair Choices",
+      "hook": "Knowing how your roof is built and repaired can prevent significant future costs and hidden problems.",
+      "quick": "Roof damage can have serious effects on a building, and it's often the least accessible part for purposes of repair and renewal. The choice of roofing material significantly impacts its durability and how well it protects against rain, snow, sunlight, and extreme temperatures. Different materials, like traditional ceramic roof tiles or modern asphalt shingles, come with varying lifespans and characteristics. For example, some asphalt shingles are specified for a 20-year life, while thicker varieties are marketed as 'limited lifetime' shingles. The cost for these often reflects their thickness and expected durability. Understanding these key differences can help you avoid costly surprises and ensure your home stays protected.",
+      "more": "When asphalt shingles need replacement, there are two primary methods homeowners often face. One approach involves completely stripping away the old shingles, their underlayment, and all the roofing nails before installing a new layer. This thorough method provides a crucial opportunity to inspect the roof sheathing underneath for any issues. The alternative is to simply install a new layer of shingles directly over the existing, worn-out one. While this second method is quicker and can seem more convenient, it bypasses the critical chance to check the underlying sheathing. This means any existing water damage, which might not be visible from above, could remain undetected and untreated, potentially leading to more significant problems later on.",
+      "deep": "Beyond the materials themselves, the overall construction of a roof is also critical to its performance and longevity. This includes its method of support and, significantly, its pitch, or the angle at which it rises. While modern features like drainpipes can help manage water runoff even on less sloped roofs, a specific pitch might still be absolutely essential for certain materials to maintain their waterproof nature and durability. For instance, thatch requires a steep pitch to prevent water from penetrating, ensuring its effectiveness. In contrast, other materials, such as pantiles, can become unstable if installed on a steeply pitched roof, yet they provide excellent weather protection at a relatively low angle. The roof's supporting structure, typically comprising strong, rigid beams of timber or steel, works in conjunction with the outer layer to provide comprehensive protection for your home, emphasizing why construction details are so vital.",
+      "takeaway": "When replacing a roof, insist on stripping the old materials to allow a full inspection of the underlying sheathing for any unseen water damage.",
+      "source": {
+        "title": "Roof",
+        "url": "https://en.wikipedia.org/wiki/Roof"
+      },
+      "audio": {
+        "quick": "lessons/2026-10-24-roof-quick.mp3",
+        "more": "lessons/2026-10-24-roof-more.mp3",
+        "deep": "lessons/2026-10-24-roof-deep.mp3"
       }
     }
   ],
