@@ -1,22 +1,6 @@
 {
-  "generated_at": "2026-10-24T06:04:04.734311-06:00",
+  "generated_at": "2026-10-25T06:37:53.239033-06:00",
   "lessons": [
-    {
-      "id": "2026-08-20-emergency-medicine",
-      "date": "2026-08-20",
-      "domain": "Health and emergencies",
-      "title": "Understanding Emergency Room Care",
-      "hook": "Many people mistakenly believe the emergency room is the only option for immediate medical needs, which can lead to longer waits or higher costs for less urgent problems.",
-      "quick": "When an illness or injury needs immediate medical attention, the emergency room is the specialized setting to provide that care. Emergency physicians, often called ER doctors, are frontline providers who specialize in caring for unscheduled and undifferentiated patients of all ages, no matter their specific medical condition. Their main role is to initiate resuscitation, stabilize patients, and perform early interventions during the acute phase of a medical condition. This means they are trained to handle critical moments of a patient's health crisis, applying broad knowledge and procedural skills across a wide range of urgent issues. They generally practice in hospital emergency departments, in pre-hospital settings via emergency medical services, and sometimes in intensive care units, always focusing on the most critical needs.",
-      "more": "It is important to understand that while emergency physicians are equipped for the most severe cases, they also see many patients with conditions described as low-acuity, such as minor injuries or exacerbations of chronic diseases. While an emergency physician might provide episodic primary care to patients during off-hours or to those who do not have a primary care provider, this is a secondary function. Emergency medicine may also separate from urgent care, which refers to primary healthcare for less emergent medical issues, though there is obvious overlap and some emergency physicians do work in urgent care settings. Going to the emergency room for a condition that could be managed in an urgent care setting might mean a longer wait and possibly higher costs, as ER resources are prioritized for critical cases.",
-      "deep": "The broad training of an emergency physician means they have core skills from many medical specialties. This generalist approach is crucial because it allows them to quickly diagnose and manage diverse acute conditions without immediate referral to a specific specialist, potentially preventing delays in critical care. For instance, they can perform advanced cardiac life support, manage difficult airways, suture complex cuts, set fractured bones, treat heart attacks, manage strokes, and even assess pregnant patients with complications or control patients with severe mental health issues. This wide range of abilities helps overcome potential barriers to care that might arise in systems where patients in immediate need must first be seen by a narrow specialist. In rural areas, family physicians with additional emergency medicine skills are especially vital, often serving as the only healthcare providers in the community and needing to handle primary care as well as obstetrics.",
-      "takeaway": "Assess whether your medical issue truly requires immediate, acute intervention from an emergency room or if it's a less emergent concern suitable for an urgent care clinic or your primary doctor.",
-      "source": {
-        "title": "Emergency medicine",
-        "url": "https://en.wikipedia.org/wiki/Emergency_medicine"
-      },
-      "audio": {}
-    },
     {
       "id": "2026-08-21-cognitive-bias",
       "date": "2026-08-21",
@@ -639,11 +623,7 @@
         "title": "Smoke detector",
         "url": "https://en.wikipedia.org/wiki/Smoke_detector"
       },
-      "audio": {
-        "quick": "lessons/2026-10-02-smoke-detector-quick.mp3",
-        "more": "lessons/2026-10-02-smoke-detector-more.mp3",
-        "deep": "lessons/2026-10-02-smoke-detector-deep.mp3"
-      }
+      "audio": {}
     },
     {
       "id": "2026-10-03-concussion",
@@ -1043,6 +1023,26 @@
         "quick": "lessons/2026-10-24-roof-quick.mp3",
         "more": "lessons/2026-10-24-roof-more.mp3",
         "deep": "lessons/2026-10-24-roof-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-10-25-bone-fracture",
+      "date": "2026-10-25",
+      "domain": "Health and emergencies",
+      "title": "Understanding Bone Fracture Risks and Healing",
+      "hook": "A bone fracture is more than just a broken bone; it can lead to serious, lasting problems if not handled correctly.",
+      "quick": "A bone fracture isn't just a simple break; it can lead to serious complications if not addressed promptly. For example, compartment syndrome, if untreated, might even require amputation of the affected limb. Other issues include the bone failing to heal properly, called non-union, or healing in a deformed way, known as malunion. Malunion can involve a bone healing with sideways displacement, angulation, rotation, or even a reduction in overall bone length if displaced fragments overlap. These complications are grouped by their timing: immediate ones occur at the time of injury, early ones in the initial few days, and late ones long after the fracture. Most bone fractures require urgent medical attention to prevent further injury and manage these potential issues.",
+      "more": "Even though bone tissue itself has no pain receptors, a fracture is painful for several reasons related to the surrounding structures. The break in the continuity of the periosteum and endosteum, both rich in pain receptors, causes significant discomfort. Additionally, swelling and blood pooling from ruptured bone marrow in nearby soft tissues create pressure that results in pain. Involuntary muscle spasms, which are the body's attempt to hold the bone fragments in place, also contribute to the pain. The body then starts its natural healing process. This begins when the injured bone and surrounding tissues bleed, forming a fracture hematoma, which is essentially a blood clot between the broken fragments.",
+      "deep": "Within a few days, new blood vessels grow into this blood clot, bringing cells that remove non-viable material and produce collagen fibers. This collagen matrix then replaces the blood clot. Bone crystals are deposited into this collagen matrix, causing it to mineralize and stiffen into initial bone. This initial \"woven\" bone, however, lacks the strong mechanical properties of mature bone. Through a process called remodelling, this woven bone is gradually replaced by mature \"lamellar\" bone. This entire remodelling process can take up to 18 months, although in adults, the healing bone typically reaches 80% of its normal strength by 3 months after the injury. Several factors influence this healing, with tobacco smoking hindering the process and also increasing the risk of fractures due to lower bone density. Conversely, adequate nutrition, including calcium, helps bone healing, as does weight-bearing stress once the bone is strong enough.",
+      "takeaway": "If you suspect a bone is fractured, seek urgent medical attention to prevent serious complications and support proper healing.",
+      "source": {
+        "title": "Bone fracture",
+        "url": "https://en.wikipedia.org/wiki/Bone_fracture"
+      },
+      "audio": {
+        "quick": "lessons/2026-10-25-bone-fracture-quick.mp3",
+        "more": "lessons/2026-10-25-bone-fracture-more.mp3",
+        "deep": "lessons/2026-10-25-bone-fracture-deep.mp3"
       }
     }
   ],
