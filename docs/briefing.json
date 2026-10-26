@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-10-25T06:37:53.239033-06:00",
-  "date": "2026-10-25",
+  "generated_at": "2026-10-26T08:23:07.333866-06:00",
+  "date": "2026-10-26",
   "tldr": [
-    "The Archdiocese of New York agreed to an $800 million settlement with 1,300 survivors of sexual abuse by clergy members and lay workers.",
-    "A major trial showed that the first personalized cancer vaccine reduced the risk of disease returning, marking a potential turning point in cancer treatment.",
-    "Google's AI search changes have significantly altered the online publishing landscape, impacting how content is discovered and monetized."
+    "Lula da Silva secured a historic fourth term as Brazil's president, overcoming a first-round defeat.",
+    "In Serbia, President Aleksandar Vu\u010di\u0107 was ousted by a student-led movement, raising hopes for renewed relations with the EU.",
+    "AI company Anthropic filed for its IPO, cautioning about artificial intelligence's potential \"risks to humanity\" while aiming to revolutionize human endeavor."
   ],
   "market": {
     "sp500": {
@@ -17,23 +17,23 @@
       "change": -53.52,
       "asof": "2026-10-23"
     },
-    "why": "The S&P 500 and Nasdaq Composite closed lower as turmoil in the artificial intelligence sector led to selling in tech stocks."
+    "why": "The S&P 500 and Nasdaq Composite closed lower amidst reports of retail investors growing cautious about stocks and warnings against buying the tech dip. Negative sentiment in the neocloud sector, following Elon Musk's comments about many facing a 'guppy-level death,' also contributed to market declines."
   },
   "yield_10y": {
     "value": 4.99,
     "change": 0.03,
     "asof": "2026-10-23",
-    "why": "The 10-year Treasury yield increased slightly, but the provided articles do not offer a direct explanation for this specific daily movement."
+    "why": "The 10-year Treasury yield rose to 4.99% as high inflation and competition for investor dollars are reported to be contributing to elevated longer-term interest rates."
   },
   "vix": {
     "value": 19.45,
     "change": 0.42,
     "asof": "2026-10-23",
-    "why": "The VIX increased, indicating a rise in market volatility and investor uncertainty, likely influenced by the downturn in major stock indices."
+    "why": "The VIX increased, reflecting heightened market uncertainty and expected volatility. This comes as the stock market faces what is described as its 'biggest test in weeks' and retail investors are noted to be 'getting cold feet' about equities."
   },
   "breadth": {
     "sp500": {
-      "value": 55.9,
+      "value": 58.3,
       "asof": "2026-10-23",
       "status": "healthy",
       "matched": 499,
@@ -99,9 +99,18 @@
     "value": 7.32,
     "change": -0.08,
     "asof": "2026-10-22",
-    "why": "The 30-year fixed mortgage rate decreased in the latest weekly survey. The provided articles do not explain this specific movement or detail the recent trend in 10-year Treasury yields that would drive this change."
+    "why": "The articles do not provide a specific reason for the 30-year fixed mortgage rate's weekly decrease, particularly given the increase in the 10-year Treasury yield on the most recent market close date."
   },
-  "policy": [],
+  "policy": [
+    {
+      "what_happened": "Final rules set forth requirements for price transparency reporting for non-grandfathered group health plans and health insurance issuers.",
+      "effect": "Your employer health insurance plan has new price transparency reporting requirements that become effective on December 7, 2026.",
+      "url": "https://www.federalregister.gov/documents/2026/10/06/2026-20447/transparency-in-coverage",
+      "status": "Final rule",
+      "effective_date": "2026-12-07",
+      "source": "Federal Register"
+    }
+  ],
   "policy_upcoming": [
     {
       "what_happened": "This document contains final regulations regarding the deduction for certain taxpayers for an amount up to $10,000 of qualified passenger vehicle loan interest.",
@@ -109,6 +118,14 @@
       "url": "https://www.federalregister.gov/documents/2026/09/08/2026-18219/car-loan-interest-deduction",
       "status": "Final rule",
       "effective_date": "2026-11-09",
+      "source": "Federal Register"
+    },
+    {
+      "what_happened": "Final rules set forth requirements for price transparency reporting for non-grandfathered group health plans and health insurance issuers.",
+      "effect": "Your employer health insurance plan has new price transparency reporting requirements that become effective on December 7, 2026.",
+      "url": "https://www.federalregister.gov/documents/2026/10/06/2026-20447/transparency-in-coverage",
+      "status": "Final rule",
+      "effective_date": "2026-12-07",
       "source": "Federal Register"
     },
     {
@@ -128,7 +145,16 @@
       "source": "Utah Legislature"
     }
   ],
-  "policy_week": [],
+  "policy_week": [
+    {
+      "what_happened": "Final rules set forth requirements for price transparency reporting for non-grandfathered group health plans and health insurance issuers.",
+      "effect": "Your employer health insurance plan has new price transparency reporting requirements that become effective on December 7, 2026.",
+      "url": "https://www.federalregister.gov/documents/2026/10/06/2026-20447/transparency-in-coverage",
+      "status": "Final rule",
+      "effective_date": "2026-12-07",
+      "source": "Federal Register"
+    }
+  ],
   "policy_calendar": [
     {
       "date": "2026-11-01",
@@ -151,73 +177,73 @@
   ],
   "tech": [
     {
-      "summary": "Google's changes to its AI search have significantly impacted the online publishing industry, altering content visibility and revenue models.",
+      "summary": "AI company Anthropic filed its S-1 prospectus for an IPO, positioning itself to be the first major AI firm to go public. The company outlined plans to \"revolutionize every area of human endeavor\" with AI but also warned of potential \"risks to humanity.\"",
       "source": "The Verge",
-      "url": "https://www.theverge.com/column/1017983/google-ai-search-online-publishing"
+      "url": "https://www.theverge.com/ai-artificial-intelligence/1018476/anthropic-ipo-details-s1-filed-sec"
     },
     {
-      "summary": "A photography contest winner was disqualified after scientists detected signs of artificial intelligence generation in their entry, highlighting challenges in distinguishing AI-created content.",
-      "source": "Hacker News",
-      "url": "https://www.techspot.com/news/114171-nikon-photography-contest-winner-loses-title-after-scientists.html"
+      "summary": "Meta plans to raise $95 billion through a stock offering to fund its expansion into AI infrastructure and superintelligence, with Nvidia, AMD, and Broadcom reportedly eyeing stakes in the offering.",
+      "source": "CNBC",
+      "url": "https://www.cnbc.com/2026/10/26/meta-stock-offering-ai.html"
     },
     {
-      "summary": "Pennsylvania has enacted the Artificial Intelligence Deceptive Advertising Act, requiring disclosure labels on ads that have been significantly modified or generated by AI.",
+      "summary": "Apple has updated the iPad Mini with its largest refresh yet, featuring a new 8.5-inch OLED display and a thinner, lighter design, with prices starting at $699.",
       "source": "The Verge",
-      "url": "https://www.theverge.com/ai-artificial-intelligence/1018187/pennsylvania-ai-deceptive-advertising-act"
+      "url": "https://www.theverge.com/tech/1017801/ipad-mini-oled-display-apple-announce"
     }
   ],
   "world": [
     {
-      "summary": "Algeria's parliament approved the deployment of troops to Niger following a recent defense pact between the two neighboring countries.",
-      "source": "Al Jazeera",
-      "url": "https://www.aljazeera.com/news/2026/10/25/algerian-parliaments-upper-house-approves-troop-deployment-to-niger?traffic_source=rss"
-    },
-    {
-      "summary": "Hundreds of thousands marched across France in protests over school conditions and policing, leading to almost 1,000 arrests and police use of teargas in some cities.",
+      "summary": "Luiz In\u00e1cio Lula da Silva was re-elected as Brazil's president for a fourth term, overcoming an initial first-round defeat against Fl\u00e1vio Bolsonaro in a dramatic comeback.",
       "source": "Guardian World",
-      "url": "https://www.theguardian.com/world/2026/oct/24/hundreds-of-thousands-march-across-france-in-protests-over-schools-and-policing"
+      "url": "https://www.theguardian.com/world/live/2026/oct/25/brazil-election-runoff-live-updates-flavio-bolsonaro-lula"
     },
     {
-      "summary": "Saudi Arabia intercepted missiles and drones as fighting continued with Houthis, with Saudi-led coalition forces reporting interceptions targeting Riyadh and southern regions.",
-      "source": "Al Jazeera",
-      "url": "https://www.aljazeera.com/news/2026/10/25/saudi-arabia-intercepts-missiles-and-drones-as-fighting-with-houthis-rages?traffic_source=rss"
-    },
-    {
-      "summary": "The US military has granted Elon Musk's SpaceX access to sensitive space tracking data, which could provide the company with an advantage in tracking orbital objects and raises national security concerns.",
+      "summary": "Serbia's authoritarian President Aleksandar Vu\u010di\u0107 conceded defeat after a student-led movement ousted him in parliamentary elections, raising hopes for improved relations with the European Union.",
       "source": "Guardian World",
-      "url": "https://www.theguardian.com/science/2026/oct/25/spacex-access-sensitive-tracking-data"
+      "url": "https://www.theguardian.com/world/live/2026/oct/26/serbia-vucic-elections-students-bulgaria-france-urkaine-russia-latest-news-updates"
+    },
+    {
+      "summary": "High-level diplomatic delegations from Saudi Arabia, Turkey, and Pakistan traveled to Tehran in an effort to prevent an escalation of conflict between Iran, the US, and Israel amid rising rhetoric.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/world/2026/oct/26/saudi-pakistani-turkish-delegation-iran-avert-flare-up-conflict-us"
+    },
+    {
+      "summary": "Prosecutors in Japan have indicted a US Marine, Devin Jacob Ballard, on charges of murder and robbery of a woman on the island of Okinawa, an event that has caused outrage.",
+      "source": "BBC World",
+      "url": "https://www.bbc.co.uk/news/articles/c3vgxjex1z9wo?at_medium=RSS&at_campaign=rss"
     }
   ],
   "us": [
     {
-      "summary": "The Archdiocese of New York agreed to an $800 million settlement for 1,300 survivors of sexual abuse by clergy members and lay workers.",
+      "summary": "A federal judge struck down a Trump administration ban on issuing immigrant visas from 75 countries; however, thousands of immigrants continue to experience delays and remain stuck abroad without their visas.",
       "source": "NPR National",
-      "url": "https://www.npr.org/2026/10/24/nx-s1-6015522/new-york-archdiocese-settlement-agreement"
+      "url": "https://www.npr.org/2026/10/26/nx-s1-5991896/court-ruling-fails-to-end-wait-for-thousands-of-immigrants-stuck-abroad-without-visas"
     },
     {
-      "summary": "The U.S. birth rate dropped to its lowest recorded level, though an increase in births among women over 30 tempered the overall decline.",
+      "summary": "The Four Corners region in the U.S. Southwest is under a flood watch after experiencing several days of heavy rain and strong winds.",
       "source": "NPR National",
-      "url": "https://www.npr.org/2026/10/24/nx-s1-6012804/birth-rate-population-cdc"
+      "url": "https://www.npr.org/2026/10/26/nx-s1-6016309/four-corners-region-faces-flood-threat-after-days-of-heavy-rain"
     },
     {
-      "summary": "Enrollment in the Supplemental Nutrition Assistance Program (SNAP) in the US has significantly decreased over the past year due to Trump administration restrictions, leading more people to rely on food banks or face hunger.",
-      "source": "Guardian World",
-      "url": "https://www.theguardian.com/us-news/2026/oct/25/trump-food-stamp-cuts"
+      "summary": "Loggers have stated that the repeal of the Roadless Rule, which opens up pristine forests to road building and timber companies, will not resolve the primary challenges facing their industry.",
+      "source": "NPR National",
+      "url": "https://www.npr.org/2026/10/26/nx-s1-6009247/loggers-say-roadless-rule-repeal-wont-solve-their-biggest-challenges"
     }
   ],
   "science": [
     {
-      "summary": "A major trial found that the first personalized cancer vaccine significantly reduced the risk of disease returning in patients, potentially marking a significant advance in cancer treatment.",
-      "source": "BBC Health",
-      "url": "https://www.bbc.co.uk/news/articles/cq0ld9g9e913o?at_medium=RSS&at_campaign=rss"
+      "summary": "Merck's mRNA melanoma vaccine trial has shown promising results, indicating a reduction in the recurrence of skin cancer or death when the vaccine is administered alongside an immunotherapy drug.",
+      "source": "NPR Health",
+      "url": "https://www.npr.org/2026/10/26/nx-s1-6013568/mercks-melanoma-vaccine-trial-shows-reduced-recurrence-or-death-from-skin-cancer"
     },
     {
-      "summary": "Nigeria recorded its first case of Ebola in the current outbreak, which has been spreading from the epicenter in Congo to several other African nations.",
+      "summary": "The number of measles cases in the U.S. has more than doubled compared to last year, with a significant outbreak in Pennsylvania reporting over 1,300 confirmed cases across 44 counties.",
       "source": "NPR Health",
-      "url": "https://www.npr.org/2026/10/23/g-s1-149515/africa-ebola-outbreak"
+      "url": "https://www.npr.org/2026/10/25/nx-s1-6016205/measles-outbreak-pennsylvania"
     }
   ],
-  "weekly_recap": "The past week saw continued widespread protests across France, intensifying global financial market downturns influenced by civil unrest and heightened Middle East tensions. A critical security flaw in the PHP programming language posed a global cybersecurity threat, while oil prices surged to a five-month high amid escalating fears of renewed US strikes on Iran. OpenAI is nearing a new funding round that could value the company at $1.25 trillion. Looking ahead, investors continue to monitor geopolitical developments and the ongoing impact of AI on various sectors.",
+  "weekly_recap": null,
   "data_availability": {
     "sp500": true,
     "ndx": true,

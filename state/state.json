@@ -1,9 +1,9 @@
 {
-  "last_run": "2026-10-25",
-  "markets_last_ok": "2026-10-25",
+  "last_run": "2026-10-26",
+  "markets_last_ok": "2026-10-26",
   "breadth_last_good": {
     "sp500": {
-      "value": 55.9,
+      "value": 58.3,
       "matched": 499,
       "asof": "2026-10-23"
     },
@@ -18,7 +18,7 @@
       "in_alert": false,
       "nag_days": 0,
       "warn_armed": true,
-      "last_value": 55.9,
+      "last_value": 58.3,
       "last_asof": "2026-10-23"
     },
     "ndx100": {
@@ -57,7 +57,8 @@
     "2026-20021": "2026-09-30",
     "2026-17123": "2026-08-21",
     "2026-20027": "2026-09-30",
-    "C1-2026-16314": "2026-08-24"
+    "C1-2026-16314": "2026-08-24",
+    "2026-20447": "2026-10-06"
   },
   "policy_active": [
     {
@@ -66,6 +67,14 @@
       "url": "https://www.federalregister.gov/documents/2026/09/08/2026-18219/car-loan-interest-deduction",
       "status": "Final rule",
       "effective_date": "2026-11-09",
+      "source": "Federal Register"
+    },
+    {
+      "what_happened": "Final rules set forth requirements for price transparency reporting for non-grandfathered group health plans and health insurance issuers.",
+      "effect": "Your employer health insurance plan has new price transparency reporting requirements that become effective on December 7, 2026.",
+      "url": "https://www.federalregister.gov/documents/2026/10/06/2026-20447/transparency-in-coverage",
+      "status": "Final rule",
+      "effective_date": "2026-12-07",
       "source": "Federal Register"
     },
     {
@@ -86,9 +95,18 @@
     }
   ],
   "policy_today": {
-    "date": "2026-10-25",
-    "items": [],
-    "alerted": false
+    "date": "2026-10-26",
+    "items": [
+      {
+        "what_happened": "Final rules set forth requirements for price transparency reporting for non-grandfathered group health plans and health insurance issuers.",
+        "effect": "Your employer health insurance plan has new price transparency reporting requirements that become effective on December 7, 2026.",
+        "url": "https://www.federalregister.gov/documents/2026/10/06/2026-20447/transparency-in-coverage",
+        "status": "Final rule",
+        "effective_date": "2026-12-07",
+        "source": "Federal Register"
+      }
+    ],
+    "alerted": true
   },
   "lessons_taught": [
     {
@@ -587,10 +605,31 @@
       "title": "Understanding Bone Fracture Risks and Healing",
       "domain": "Health and emergencies",
       "date": "2026-10-25"
+    },
+    {
+      "id": "2026-10-26-statistical-literacy",
+      "article_title": "Statistical literacy",
+      "title": "How Statistics Can Mislead",
+      "domain": "Thinking and people",
+      "date": "2026-10-26"
     }
   ],
   "lessons_bootstrapped": true,
-  "policy_week": [],
+  "policy_week": [
+    {
+      "date": "2026-10-26",
+      "items": [
+        {
+          "what_happened": "Final rules set forth requirements for price transparency reporting for non-grandfathered group health plans and health insurance issuers.",
+          "effect": "Your employer health insurance plan has new price transparency reporting requirements that become effective on December 7, 2026.",
+          "url": "https://www.federalregister.gov/documents/2026/10/06/2026-20447/transparency-in-coverage",
+          "status": "Final rule",
+          "effective_date": "2026-12-07",
+          "source": "Federal Register"
+        }
+      ]
+    }
+  ],
   "watchlist_actions": {
     "SOXL": "buy",
     "SPXL": "buy",

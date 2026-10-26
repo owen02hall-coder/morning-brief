@@ -1,0 +1,263 @@
+{
+  "generated_at": "2026-10-26T08:23:07.333866-06:00",
+  "date": "2026-10-26",
+  "tldr": [
+    "Lula da Silva secured a historic fourth term as Brazil's president, overcoming a first-round defeat.",
+    "In Serbia, President Aleksandar Vu\u010di\u0107 was ousted by a student-led movement, raising hopes for renewed relations with the EU.",
+    "AI company Anthropic filed for its IPO, cautioning about artificial intelligence's potential \"risks to humanity\" while aiming to revolutionize human endeavor."
+  ],
+  "market": {
+    "sp500": {
+      "value": 7623.68,
+      "change": -39.75,
+      "asof": "2026-10-23"
+    },
+    "ndx": {
+      "value": 25955.34,
+      "change": -53.52,
+      "asof": "2026-10-23"
+    },
+    "why": "The S&P 500 and Nasdaq Composite closed lower amidst reports of retail investors growing cautious about stocks and warnings against buying the tech dip. Negative sentiment in the neocloud sector, following Elon Musk's comments about many facing a 'guppy-level death,' also contributed to market declines."
+  },
+  "yield_10y": {
+    "value": 4.99,
+    "change": 0.03,
+    "asof": "2026-10-23",
+    "why": "The 10-year Treasury yield rose to 4.99% as high inflation and competition for investor dollars are reported to be contributing to elevated longer-term interest rates."
+  },
+  "vix": {
+    "value": 19.45,
+    "change": 0.42,
+    "asof": "2026-10-23",
+    "why": "The VIX increased, reflecting heightened market uncertainty and expected volatility. This comes as the stock market faces what is described as its 'biggest test in weeks' and retail investors are noted to be 'getting cold feet' about equities."
+  },
+  "breadth": {
+    "sp500": {
+      "value": 58.3,
+      "asof": "2026-10-23",
+      "status": "healthy",
+      "matched": 499,
+      "stale": false
+    },
+    "ndx100": {
+      "value": 56.2,
+      "asof": "2026-10-23",
+      "status": "healthy",
+      "matched": 96,
+      "stale": false
+    }
+  },
+  "watchlist": [
+    {
+      "symbol": "SOXL",
+      "what": "3x semiconductors",
+      "value": 83.56,
+      "day_move": 1.77,
+      "asof": "2026-10-23",
+      "rsi": 30.9,
+      "rsi_zone": "neutral",
+      "low": 82.11,
+      "high": 164.27,
+      "band_pct": 1.8,
+      "zone": "low",
+      "action": "buy",
+      "read": "Within 4% of its 1-month low."
+    },
+    {
+      "symbol": "SPXL",
+      "what": "3x S&P 500",
+      "value": 275.63,
+      "day_move": -1.7,
+      "asof": "2026-10-23",
+      "rsi": 40.7,
+      "rsi_zone": "neutral",
+      "low": 275.63,
+      "high": 299.21,
+      "band_pct": 0.0,
+      "zone": "low",
+      "action": "buy",
+      "read": "Within 4% of its 1-month low."
+    },
+    {
+      "symbol": "TQQQ",
+      "what": "3x Nasdaq-100",
+      "value": 66.29,
+      "day_move": -0.2,
+      "asof": "2026-10-23",
+      "rsi": 35.2,
+      "rsi_zone": "neutral",
+      "low": 66.29,
+      "high": 84.25,
+      "band_pct": 0.0,
+      "zone": "low",
+      "action": "buy",
+      "read": "Within 4% of its 1-month low."
+    }
+  ],
+  "watchlist_missing": [],
+  "mortgage": {
+    "value": 7.32,
+    "change": -0.08,
+    "asof": "2026-10-22",
+    "why": "The articles do not provide a specific reason for the 30-year fixed mortgage rate's weekly decrease, particularly given the increase in the 10-year Treasury yield on the most recent market close date."
+  },
+  "policy": [
+    {
+      "what_happened": "Final rules set forth requirements for price transparency reporting for non-grandfathered group health plans and health insurance issuers.",
+      "effect": "Your employer health insurance plan has new price transparency reporting requirements that become effective on December 7, 2026.",
+      "url": "https://www.federalregister.gov/documents/2026/10/06/2026-20447/transparency-in-coverage",
+      "status": "Final rule",
+      "effective_date": "2026-12-07",
+      "source": "Federal Register"
+    }
+  ],
+  "policy_upcoming": [
+    {
+      "what_happened": "This document contains final regulations regarding the deduction for certain taxpayers for an amount up to $10,000 of qualified passenger vehicle loan interest.",
+      "effect": "You can deduct up to $10,000 of qualified passenger vehicle loan interest.",
+      "url": "https://www.federalregister.gov/documents/2026/09/08/2026-18219/car-loan-interest-deduction",
+      "status": "Final rule",
+      "effective_date": "2026-11-09",
+      "source": "Federal Register"
+    },
+    {
+      "what_happened": "Final rules set forth requirements for price transparency reporting for non-grandfathered group health plans and health insurance issuers.",
+      "effect": "Your employer health insurance plan has new price transparency reporting requirements that become effective on December 7, 2026.",
+      "url": "https://www.federalregister.gov/documents/2026/10/06/2026-20447/transparency-in-coverage",
+      "status": "Final rule",
+      "effective_date": "2026-12-07",
+      "source": "Federal Register"
+    },
+    {
+      "what_happened": "A Utah bill modifies provisions related to the property tax exemption process.",
+      "effect": "Once you own a home, you will have deadlines for filing an application for a property tax exemption with the county board of equalization and for the board to render a decision.",
+      "url": "https://le.utah.gov/~2026/bills/static/SB0236.html",
+      "status": "Signed in Utah",
+      "effective_date": "2027-01-01",
+      "source": "Utah Legislature"
+    },
+    {
+      "what_happened": "A bill amends requirements for health insurance preauthorization in Utah.",
+      "effect": "Your health insurer must make an authorization or adverse preauthorization determination within a defined maximum time.",
+      "url": "https://le.utah.gov/~2026/bills/static/SB0319.html",
+      "status": "Signed in Utah",
+      "effective_date": "2027-01-01",
+      "source": "Utah Legislature"
+    }
+  ],
+  "policy_week": [
+    {
+      "what_happened": "Final rules set forth requirements for price transparency reporting for non-grandfathered group health plans and health insurance issuers.",
+      "effect": "Your employer health insurance plan has new price transparency reporting requirements that become effective on December 7, 2026.",
+      "url": "https://www.federalregister.gov/documents/2026/10/06/2026-20447/transparency-in-coverage",
+      "status": "Final rule",
+      "effective_date": "2026-12-07",
+      "source": "Federal Register"
+    }
+  ],
+  "policy_calendar": [
+    {
+      "date": "2026-11-01",
+      "label": "ACA marketplace open enrollment opens \u2014 expected early November",
+      "note": "healthcare.gov has opened enrollment on November 1 each year, and currently publishes December 15 as the deadline for coverage starting January 1. The window is set by federal rule and has been changed by rulemaking before.",
+      "url": "https://www.healthcare.gov/quick-guide/dates-and-deadlines/"
+    },
+    {
+      "date": "2026-11-05",
+      "label": "IRS 401(k) and IRA contribution limits for next year \u2014 expected late October or early November",
+      "note": "The annual cost-of-living adjustment notice, historically released within a week or two of the bracket figures. It sets how much can go into a 401(k) and an IRA next year.",
+      "url": "https://www.irs.gov/retirement-plans/cola-increases-for-dollar-limitations-on-benefits-and-contributions"
+    },
+    {
+      "date": "2026-11-10",
+      "label": "IRS tax brackets and the married-filing-jointly standard deduction for next year \u2014 expected late October or early November",
+      "note": "Published as an annual inflation-adjustment revenue procedure; recent releases landed between mid-October and mid-November. These are the bracket thresholds and the standard deduction the next return is filed against.",
+      "url": "https://www.irs.gov/filing/federal-income-tax-rates-and-brackets"
+    }
+  ],
+  "tech": [
+    {
+      "summary": "AI company Anthropic filed its S-1 prospectus for an IPO, positioning itself to be the first major AI firm to go public. The company outlined plans to \"revolutionize every area of human endeavor\" with AI but also warned of potential \"risks to humanity.\"",
+      "source": "The Verge",
+      "url": "https://www.theverge.com/ai-artificial-intelligence/1018476/anthropic-ipo-details-s1-filed-sec"
+    },
+    {
+      "summary": "Meta plans to raise $95 billion through a stock offering to fund its expansion into AI infrastructure and superintelligence, with Nvidia, AMD, and Broadcom reportedly eyeing stakes in the offering.",
+      "source": "CNBC",
+      "url": "https://www.cnbc.com/2026/10/26/meta-stock-offering-ai.html"
+    },
+    {
+      "summary": "Apple has updated the iPad Mini with its largest refresh yet, featuring a new 8.5-inch OLED display and a thinner, lighter design, with prices starting at $699.",
+      "source": "The Verge",
+      "url": "https://www.theverge.com/tech/1017801/ipad-mini-oled-display-apple-announce"
+    }
+  ],
+  "world": [
+    {
+      "summary": "Luiz In\u00e1cio Lula da Silva was re-elected as Brazil's president for a fourth term, overcoming an initial first-round defeat against Fl\u00e1vio Bolsonaro in a dramatic comeback.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/world/live/2026/oct/25/brazil-election-runoff-live-updates-flavio-bolsonaro-lula"
+    },
+    {
+      "summary": "Serbia's authoritarian President Aleksandar Vu\u010di\u0107 conceded defeat after a student-led movement ousted him in parliamentary elections, raising hopes for improved relations with the European Union.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/world/live/2026/oct/26/serbia-vucic-elections-students-bulgaria-france-urkaine-russia-latest-news-updates"
+    },
+    {
+      "summary": "High-level diplomatic delegations from Saudi Arabia, Turkey, and Pakistan traveled to Tehran in an effort to prevent an escalation of conflict between Iran, the US, and Israel amid rising rhetoric.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/world/2026/oct/26/saudi-pakistani-turkish-delegation-iran-avert-flare-up-conflict-us"
+    },
+    {
+      "summary": "Prosecutors in Japan have indicted a US Marine, Devin Jacob Ballard, on charges of murder and robbery of a woman on the island of Okinawa, an event that has caused outrage.",
+      "source": "BBC World",
+      "url": "https://www.bbc.co.uk/news/articles/c3vgxjex1z9wo?at_medium=RSS&at_campaign=rss"
+    }
+  ],
+  "us": [
+    {
+      "summary": "A federal judge struck down a Trump administration ban on issuing immigrant visas from 75 countries; however, thousands of immigrants continue to experience delays and remain stuck abroad without their visas.",
+      "source": "NPR National",
+      "url": "https://www.npr.org/2026/10/26/nx-s1-5991896/court-ruling-fails-to-end-wait-for-thousands-of-immigrants-stuck-abroad-without-visas"
+    },
+    {
+      "summary": "The Four Corners region in the U.S. Southwest is under a flood watch after experiencing several days of heavy rain and strong winds.",
+      "source": "NPR National",
+      "url": "https://www.npr.org/2026/10/26/nx-s1-6016309/four-corners-region-faces-flood-threat-after-days-of-heavy-rain"
+    },
+    {
+      "summary": "Loggers have stated that the repeal of the Roadless Rule, which opens up pristine forests to road building and timber companies, will not resolve the primary challenges facing their industry.",
+      "source": "NPR National",
+      "url": "https://www.npr.org/2026/10/26/nx-s1-6009247/loggers-say-roadless-rule-repeal-wont-solve-their-biggest-challenges"
+    }
+  ],
+  "science": [
+    {
+      "summary": "Merck's mRNA melanoma vaccine trial has shown promising results, indicating a reduction in the recurrence of skin cancer or death when the vaccine is administered alongside an immunotherapy drug.",
+      "source": "NPR Health",
+      "url": "https://www.npr.org/2026/10/26/nx-s1-6013568/mercks-melanoma-vaccine-trial-shows-reduced-recurrence-or-death-from-skin-cancer"
+    },
+    {
+      "summary": "The number of measles cases in the U.S. has more than doubled compared to last year, with a significant outbreak in Pennsylvania reporting over 1,300 confirmed cases across 44 counties.",
+      "source": "NPR Health",
+      "url": "https://www.npr.org/2026/10/25/nx-s1-6016205/measles-outbreak-pennsylvania"
+    }
+  ],
+  "weekly_recap": null,
+  "data_availability": {
+    "sp500": true,
+    "ndx": true,
+    "vix": true,
+    "ten_year": true,
+    "news_world": true,
+    "news_us": true,
+    "news_science": true,
+    "news_business": true,
+    "news_tech": true,
+    "summary": "ok",
+    "breadth": true,
+    "policy": true,
+    "mortgage": true,
+    "watchlist": true
+  }
+}

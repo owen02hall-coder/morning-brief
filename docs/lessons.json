@@ -1,22 +1,6 @@
 {
-  "generated_at": "2026-10-25T06:37:53.239033-06:00",
+  "generated_at": "2026-10-26T08:23:07.333866-06:00",
   "lessons": [
-    {
-      "id": "2026-08-21-cognitive-bias",
-      "date": "2026-08-21",
-      "domain": "Thinking and people",
-      "title": "Understanding Why Quick Judgments Go Wrong",
-      "hook": "Your brain sometimes takes shortcuts that can lead to predictable errors in how you see the world and make decisions.",
-      "quick": "When people make judgments, especially when things are uncertain, they often rely on mental shortcuts. These shortcuts, while efficient and allowing for faster decisions, can lead to systematic errors in judgment. Your brain constructs its own \"subjective reality\" based on what it perceives, and this perception, rather than the objective facts, can dictate your behavior. This means your quick assessments might cause you to misunderstand things, interpret information illogically, or make irrational choices. These patterns of deviation from rational judgment can potentially distort your perceptions and lead to inaccurate judgments about people and situations.",
-      "more": "These mental shortcuts, called heuristics, provide quick estimates about how likely things are to happen. While they are efficient and simple for the brain to compute, they also introduce predictable, systematic errors. For instance, you might judge how likely something is by how easily you can remember similar events, or by how much an event resembles a typical case. This can lead to issues like activating stereotypes or making judgments that aren't accurate because your brain prioritizes what seems representative or easy to recall over actual statistical probability.",
-      "deep": "Consider an example where people were described as being concerned about discrimination and social justice issues. Participants were then asked if that person was more likely to be a \"bank teller\" or a \"bank teller and active in the feminist movement.\" A majority chose the more restrictive \"bank teller and active in the feminist movement.\" This choice is statistically less likely than simply being a \"bank teller,\" yet it seemed more \"representative\" of the description. This specific error is called the conjunction fallacy. It illustrates how relying on what seems representative can lead to inaccurate judgments by making us prefer a specific, \"fitting\" scenario over a broader, more probable one. This happens because our brains have limitations in processing all available information.",
-      "takeaway": "Before making a significant decision based on a quick impression, check if your judgment about likelihood is influenced by how typical something seems or how easily you recall similar examples.",
-      "source": {
-        "title": "Cognitive bias",
-        "url": "https://en.wikipedia.org/wiki/Cognitive_bias"
-      },
-      "audio": {}
-    },
     {
       "id": "2026-08-23-compound-interest",
       "date": "2026-08-23",
@@ -639,11 +623,7 @@
         "title": "Concussion",
         "url": "https://en.wikipedia.org/wiki/Concussion"
       },
-      "audio": {
-        "quick": "lessons/2026-10-03-concussion-quick.mp3",
-        "more": "lessons/2026-10-03-concussion-more.mp3",
-        "deep": "lessons/2026-10-03-concussion-deep.mp3"
-      }
+      "audio": {}
     },
     {
       "id": "2026-10-04-information-asymmetry",
@@ -1043,6 +1023,26 @@
         "quick": "lessons/2026-10-25-bone-fracture-quick.mp3",
         "more": "lessons/2026-10-25-bone-fracture-more.mp3",
         "deep": "lessons/2026-10-25-bone-fracture-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-10-26-statistical-literacy",
+      "date": "2026-10-26",
+      "domain": "Thinking and people",
+      "title": "How Statistics Can Mislead",
+      "hook": "Relying on numbers that seem valid but are actually misleading can lead you to make poor everyday choices.",
+      "quick": "Each day, we are bombarded with statistical information from advertisements, news reports, and even casual conversations. Experts and advocates often use numerical claims to strengthen their arguments, and it can be difficult to decide what these experts mean or which advocates to trust. The problem is that statistics can be crafted to misrepresent data in ways that appear perfectly valid. This means you might make decisions based on numbers that seem right but are actually misleading, impacting everything from your finances to your health choices.",
+      "more": "This challenge is especially clear in how news organizations often cite opinion poll results, even though the quality of these polls can vary considerably. Without some understanding of how polls work, it's hard to correctly interpret what they mean. For instance, a poll's sample size might be too small to draw any real conclusions, or the people sampled might not represent the larger population, creating a biased result. Even the way a poll question is worded can introduce a bias, and sometimes this is done intentionally to get a specific outcome. These factors make it hard to gauge a poll's trustworthiness or the true value of its findings.",
+      "deep": "Beyond misleading polls, our own brains often struggle with statistics in ways that can be costly. Studies show that how we estimate probabilities is heavily influenced by context and the exact wording used. This makes statistical reasoning seem counter-intuitive. For example, people frequently underestimate the probability of being in a car accident because their everyday experiences with vehicles give them a false sense of safety. Conversely, media influence might lead someone to overestimate the chance of a rare event like a shark attack. In situations like gambling, not understanding simple probability theory can lead to wagering more or less than you would if you knew the actual odds, potentially costing you money.",
+      "takeaway": "When presented with poll results, question whether the sample size was too small or if the wording of the questions could have introduced a bias.",
+      "source": {
+        "title": "Statistical literacy",
+        "url": "https://en.wikipedia.org/wiki/Statistical_literacy"
+      },
+      "audio": {
+        "quick": "lessons/2026-10-26-statistical-literacy-quick.mp3",
+        "more": "lessons/2026-10-26-statistical-literacy-more.mp3",
+        "deep": "lessons/2026-10-26-statistical-literacy-deep.mp3"
       }
     }
   ],
