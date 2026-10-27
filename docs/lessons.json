@@ -1,22 +1,6 @@
 {
-  "generated_at": "2026-10-26T08:23:07.333866-06:00",
+  "generated_at": "2026-10-27T07:21:19.495236-06:00",
   "lessons": [
-    {
-      "id": "2026-08-23-compound-interest",
-      "date": "2026-08-23",
-      "domain": "Money mechanics",
-      "title": "How Compound Interest Affects Savings and Debt",
-      "hook": "Not understanding how interest compounds can significantly change how quickly your savings grow or how much your debts cost over time.",
-      "quick": "When you save or borrow money, compound interest means that any interest you earn or owe gets added to the original principal, and then the next period's interest is calculated on that larger total. This is different from simple interest, where interest is only calculated on the initial amount. This process of adding interest to the principal can make your money grow much faster when you are saving, but it also means that debt can accumulate more rapidly than if interest was only applied to the original amount borrowed. The speed at which this happens depends on how often the interest is calculated and added back into the principal.",
-      "more": "The frequency with which interest is compounded makes a significant difference. For example, monthly capitalization with an annual rate means the interest is compounded 12 times in a year. To help people compare different financial products fairly, many places require institutions to disclose the annual compound interest rate on a comparable basis. This might be called an annual equivalent rate or AER. This rate is designed to show the total accumulated interest that would be payable by the end of one year, divided by the original principal sum, allowing you to see the true annual cost or gain of a financial product regardless of its stated rate or compounding frequency.",
-      "deep": "Understanding these details is important because different financial products treat interest differently. For instance, the interest on corporate and government bonds is usually paid twice a year, meaning it compounds semi-annually. Canadian mortgage loans are generally compounded semi-annually, even if payments are made more frequently. However, U.S. mortgages work differently; they use what is called an amortizing loan. With these loans, the interest generated is paid off monthly as part of your regular payment and is not added to the principal to compound further. This means your payments are structured to slowly reduce the principal balance over time, rather than having interest compound on top of previous interest.",
-      "takeaway": "When comparing financial products, always look for the Annual Equivalent Rate to understand the true annual cost or return of interest.",
-      "source": {
-        "title": "Compound interest",
-        "url": "https://en.wikipedia.org/wiki/Compound_interest"
-      },
-      "audio": {}
-    },
     {
       "id": "2026-08-24-circuit-breaker",
       "date": "2026-08-24",
@@ -639,11 +623,7 @@
         "title": "Information asymmetry",
         "url": "https://en.wikipedia.org/wiki/Information_asymmetry"
       },
-      "audio": {
-        "quick": "lessons/2026-10-04-information-asymmetry-quick.mp3",
-        "more": "lessons/2026-10-04-information-asymmetry-more.mp3",
-        "deep": "lessons/2026-10-04-information-asymmetry-deep.mp3"
-      }
+      "audio": {}
     },
     {
       "id": "2026-10-05-credit-history",
@@ -1043,6 +1023,26 @@
         "quick": "lessons/2026-10-26-statistical-literacy-quick.mp3",
         "more": "lessons/2026-10-26-statistical-literacy-more.mp3",
         "deep": "lessons/2026-10-26-statistical-literacy-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-10-27-401-k",
+      "date": "2026-10-27",
+      "domain": "Money mechanics",
+      "title": "Understanding Your 401(k) Retirement Options",
+      "hook": "Making the wrong choice for your retirement savings can mean paying more in taxes than you need to, both today and in the future.",
+      "quick": "Many people don't realize how their choice of a 401(k) account affects their current taxes and future withdrawals. If you choose a traditional 401(k), your contributions are typically deducted from your taxable income, lowering what you owe in income tax right now. However, when you withdraw this money in retirement, those withdrawals will be added to your taxable income at that time. On the other hand, if you opt for a Roth 401(k), your contributions are made after taxes are taken out of your paycheck. This means your current taxable income isn't reduced, but qualified distributions later in life can be entirely tax-free. Be aware that withdrawing funds before you reach age 59 and a half generally triggers an excise tax of ten percent on top of any ordinary income tax due, with only limited exceptions.",
+      "more": "The key difference lies in when you get your tax benefit. With a traditional 401(k), the tax reduction you receive from your contributions is seen as the government investing alongside you. This structure means that while your withdrawals in retirement are taxed as income, the profits earned on your savings are always considered permanently tax-free. For a Roth 401(k), because you've already paid taxes on your contributions, once certain conditions are met, like waiting at least five years after your first contribution and not withdrawing before age 59 and a half, your accumulated earnings and contributions can be taken out completely free of income tax. This makes Roth accounts particularly attractive if you expect to be in a higher tax bracket during retirement than you are now, or if you simply prefer knowing your future withdrawals are secure from income tax.",
+      "deep": "Understanding the specifics of tax-free withdrawals is vital for a Roth 401(k). To ensure your distributions are truly tax-free, they must meet the definition of a \"qualified distribution.\" This means your withdrawals must be made more than five years after your first designated Roth contribution and generally not before the year you turn age 59 and a half. There are some exceptions, as detailed in IRS code section 72(t), but broadly, these two conditions are key. A notable advantage of the Roth 401(k) over a Roth IRA is that it has no upper-income limit, meaning individuals who earn too much to contribute to a Roth IRA can still contribute to their employer-sponsored Roth 401(k). However, once you designate contributions as Roth, they are irrevocable and cannot be converted to pre-tax contributions later. Always remember that even pre-tax traditional 401(k) contributions do not exempt you from paying the 7.65% payroll taxes for Social Security and Medicare.",
+      "takeaway": "Investigate your employer's 401(k) plan to determine if a traditional or Roth account better suits your financial goals, especially considering your current income and anticipated tax bracket in retirement.",
+      "source": {
+        "title": "401(k)",
+        "url": "https://en.wikipedia.org/wiki/401(k)"
+      },
+      "audio": {
+        "quick": "lessons/2026-10-27-401-k-quick.mp3",
+        "more": "lessons/2026-10-27-401-k-more.mp3",
+        "deep": "lessons/2026-10-27-401-k-deep.mp3"
       }
     }
   ],
