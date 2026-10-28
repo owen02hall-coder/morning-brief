@@ -1,47 +1,47 @@
 {
-  "generated_at": "2026-10-27T07:21:19.495236-06:00",
-  "date": "2026-10-27",
+  "generated_at": "2026-10-28T08:06:07.971469-06:00",
+  "date": "2026-10-28",
   "tldr": [
-    "Israel held general elections with high voter turnout, viewed as a referendum on Benjamin Netanyahu's leadership.",
-    "Apple refreshed its iMac and MacBook Pro lines with new M6 chips, enhancing performance across its desktop and laptop offerings.",
-    "Major indices closed higher, driven by strong quarterly earnings from companies like UPS, Coca-Cola, and Boeing, alongside renewed diplomatic efforts to de-escalate Middle East tensions."
+    "UK Chancellor John Healey's new budget includes a \nA\n100 energy payment for households and a 3% increase in bank tax.",
+    "A deadly high-speed train collision in Toledo province, Spain, resulted in at least 64 fatalities and prompted the postponement of football matches.",
+    "In the United States, President Trump announced the termination of a Biden-era rule aimed at reducing methane emissions from oil and gas drilling."
   ],
   "market": {
     "sp500": {
-      "value": 7676.77,
-      "change": 53.09,
-      "asof": "2026-10-26"
+      "value": 7722.6,
+      "change": 45.83,
+      "asof": "2026-10-27"
     },
     "ndx": {
-      "value": 26169.38,
-      "change": 214.04,
-      "asof": "2026-10-26"
+      "value": 26477.81,
+      "change": 308.43,
+      "asof": "2026-10-27"
     },
-    "why": "The S&P 500 and Nasdaq Composite closed higher, with UPS and Coca-Cola both beating quarterly expectations and raising full-year guidance. Boeing also narrowed its third-quarter loss. Additionally, renewed diplomatic efforts to de-escalate tensions between Saudi Arabia and Iran contributed to the positive market sentiment."
+    "why": "The S&P 500 and Nasdaq Composite closed higher, primarily driven by strong performance in the tech sector, with South Korean chipmaker SK Hynix reporting a record quarterly profit and Vertiv's earnings signaling an accelerating AI buildout."
   },
   "yield_10y": {
     "value": 4.99,
-    "change": -0.0,
-    "asof": "2026-10-26",
-    "why": "The 10-year Treasury yield remained unchanged. The provided articles do not offer a specific explanation for this stability."
+    "change": 0.01,
+    "asof": "2026-10-27",
+    "why": "The 10-year Treasury yield saw a minimal increase. The provided articles do not offer a specific reason for this slight movement."
   },
   "vix": {
-    "value": 18.39,
-    "change": -1.06,
-    "asof": "2026-10-26",
-    "why": "The VIX decreased, indicating reduced market volatility, likely influenced by renewed diplomatic efforts to de-escalate tensions in the Middle East."
+    "value": 17.52,
+    "change": -0.87,
+    "asof": "2026-10-27",
+    "why": "The VIX decreased, indicating lower market volatility. The articles do not provide a specific reason for this movement."
   },
   "breadth": {
     "sp500": {
-      "value": 57.9,
-      "asof": "2026-10-26",
+      "value": 57.1,
+      "asof": "2026-10-27",
       "status": "healthy",
       "matched": 499,
       "stale": false
     },
     "ndx100": {
-      "value": 59.4,
-      "asof": "2026-10-26",
+      "value": 58.3,
+      "asof": "2026-10-27",
       "status": "healthy",
       "matched": 96,
       "stale": false
@@ -51,47 +51,47 @@
     {
       "symbol": "SOXL",
       "what": "3x semiconductors",
-      "value": 90.5,
-      "day_move": 8.31,
-      "asof": "2026-10-26",
-      "rsi": 35.6,
+      "value": 101.08,
+      "day_move": 11.69,
+      "asof": "2026-10-27",
+      "rsi": 42.1,
       "rsi_zone": "neutral",
       "low": 82.11,
       "high": 164.27,
-      "band_pct": 10.2,
+      "band_pct": 23.1,
       "zone": "mid",
       "action": "hold",
-      "read": "Mid-range - 10% of the way up its 1-month band. Big session: up 8.3% in a day."
+      "read": "Mid-range - 23% of the way up its 1-month band. Big session: up 11.7% in a day."
     },
     {
       "symbol": "SPXL",
       "what": "3x S&P 500",
-      "value": 281.52,
-      "day_move": 2.14,
-      "asof": "2026-10-26",
-      "rsi": 45.9,
+      "value": 286.21,
+      "day_move": 1.67,
+      "asof": "2026-10-27",
+      "rsi": 49.7,
       "rsi_zone": "neutral",
       "low": 275.63,
       "high": 299.21,
-      "band_pct": 25.0,
-      "zone": "low",
-      "action": "buy",
-      "read": "Within 4% of its 1-month low."
+      "band_pct": 44.9,
+      "zone": "mid",
+      "action": "hold",
+      "read": "Mid-range - 45% of the way up its 1-month band."
     },
     {
       "symbol": "TQQQ",
       "what": "3x Nasdaq-100",
-      "value": 68.43,
-      "day_move": 3.23,
-      "asof": "2026-10-26",
-      "rsi": 40.0,
+      "value": 71.04,
+      "day_move": 3.81,
+      "asof": "2026-10-27",
+      "rsi": 45.4,
       "rsi_zone": "neutral",
       "low": 66.29,
       "high": 84.25,
-      "band_pct": 11.9,
-      "zone": "low",
-      "action": "buy",
-      "read": "Within 4% of its 1-month low."
+      "band_pct": 26.4,
+      "zone": "mid",
+      "action": "hold",
+      "read": "Mid-range - 26% of the way up its 1-month band."
     }
   ],
   "watchlist_missing": [],
@@ -99,7 +99,7 @@
     "value": 7.32,
     "change": -0.08,
     "asof": "2026-10-22",
-    "why": "The 30-year fixed mortgage rate decreased in the latest weekly survey. However, the 10-year Treasury yield remained unchanged over the period relevant to this weekly movement, and the provided articles do not offer a specific explanation for this decline in mortgage rates."
+    "why": "The 30-year fixed mortgage rate decreased for the second consecutive week, as reported by the weekly Freddie Mac survey. This rate generally tracks the direction of the 10-year Treasury yield over recent days, but the provided articles do not offer a specific driver for the overall trend influencing this weekly change."
   },
   "policy": [],
   "policy_upcoming": [
@@ -168,70 +168,70 @@
   ],
   "tech": [
     {
-      "summary": "Apple has refreshed its iMac and MacBook Pro lines, integrating the new M6 chips for enhanced performance across its all-in-one desktop and entry-level laptops, with prices for the iMac starting from $1,499.",
+      "summary": "TikTok is launching an in-app restaurant guide called \"Must Eat,\" based on 40 million user posts, reviews, and comments, directly challenging platforms like Yelp and Google Maps.",
       "source": "The Verge",
-      "url": "https://www.theverge.com/tech/1018467/apple-imac-m6-chip-announced-price-release"
+      "url": "https://www.theverge.com/news/1020267/tiktok-viral-restaurant-recommendations-must-eat-yelp"
     },
     {
-      "summary": "Ford is introducing its new sub-$30,000 electric truck, the Fathom, which will feature bidirectional charging capabilities with a home backup inverter integrated directly into the vehicle.",
+      "summary": "Amazon introduced several new Echo devices, including the Echo Show 16 with a larger screen, an Echo Studio speaker featuring a home camera, and a digital picture frame that allows users to add voice notes to photos.",
       "source": "The Verge",
-      "url": "https://www.theverge.com/transportation/1018784/ford-fathom-bidirectional-charging-inverter-power-station-cost"
+      "url": "https://www.theverge.com/tech/1020403/everything-announced-at-amazons-october-2026-hardware-launch"
     },
     {
-      "summary": "Anduril, in partnership with Qualcomm, is launching a new line of BlueChip laptops, initially featuring ruggedized models with Arm-based Snapdragon X series chips aimed at the US military, with a long-term goal of entirely American-made production.",
-      "source": "The Verge",
-      "url": "https://www.theverge.com/gadgets/1019274/anduril-qualcomm-bluechip-laptops-american-made-military"
+      "summary": "AI labs are reportedly purchasing data from defunct startups to train their artificial intelligence models, indicating a new approach to sourcing information for AI development.",
+      "source": "MIT Technology Review",
+      "url": "https://www.technologyreview.com/2026/10/28/1147767/the-download-dead-startups-fueling-ai-interspecies-communication/"
     }
   ],
   "world": [
     {
-      "summary": "Israel held general elections, widely seen as a referendum on Benjamin Netanyahu's wartime leadership, with turnout reported to be the highest in decades.",
-      "source": "BBC World",
-      "url": "https://www.bbc.co.uk/news/articles/c3j47l4kdez4o?at_medium=RSS&at_campaign=rss"
-    },
-    {
-      "summary": "Leaders from Finland and Norway held a rare and \"substantive\" call with Russian President Vladimir Putin regarding Ukraine, though \"significant differences\" reportedly remain.",
+      "summary": "UK Chancellor John Healey announced the 2026 Budget, which includes a \nA\n100 energy payment for millions of households, a 3% rise in bank tax, and tax relief for business founders.",
       "source": "Guardian World",
-      "url": "https://www.theguardian.com/world/live/2026/oct/27/russia-ukraine-oleshky-serbia-france-europe-latest-news-updates"
+      "url": "https://www.theguardian.com/uk-news/live/2026/oct/28/budget-2026-latest-updates-john-healey-andy-burnham-labour-uk-politics"
     },
     {
-      "summary": "A local ceasefire, reportedly brokered by US First Lady Melania Trump, has begun in the Ukrainian city of Oleshky to allow for aid delivery and civilian evacuation.",
-      "source": "BBC World",
-      "url": "https://www.bbc.co.uk/news/articles/ck20wjnv3w0jo?at_medium=RSS&at_campaign=rss"
+      "summary": "At least 64 people died in a high-speed train collision in Spain's Toledo province, prompting Spanish football authorities to postpone 24 Copa del Rey games.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/world/2026/oct/28/spain-train-crash-high-speed-toledo"
     },
     {
-      "summary": "Ebola cases in the Democratic Republic of Congo have surpassed 10,000, marking the fastest-growing outbreak on record for the country, with nearly half of confirmed cases resulting in death.",
+      "summary": "After 92% of ballots were counted in Israel's election, neither Prime Minister Benjamin Netanyahu's bloc nor the main opposition appeared to have secured the majority needed to form a government.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/world/live/2026/oct/28/israel-election-results-live-updates-exit-polls-netanyahu-likud-eisenkot-latest-news"
+    },
+    {
+      "summary": "Iraqi Prime Minister Ali al-Zaidi conducted a historic visit to Syria, where he met with Ahmed al-Sharaa to discuss enhancing trade, reviving the Baniyas oil pipeline, and fostering regional stability.",
       "source": "Al Jazeera",
-      "url": "https://www.aljazeera.com/news/2026/10/27/ebola-cases-in-dr-congo-surpass-10000-in-fastest-growing-outbreak?traffic_source=rss"
+      "url": "https://www.aljazeera.com/news/2026/10/28/iraqi-pm-ali-al-zaidi-meets-ahmed-al-sharaa-in-historic-syria-visit?traffic_source=rss"
     }
   ],
   "us": [
     {
-      "summary": "A federal judge ruled that Maurene Comey, daughter of former FBI director James Comey, was illegally fired from her position as a federal prosecutor by the Trump administration.",
-      "source": "BBC World",
-      "url": "https://www.bbc.co.uk/news/articles/ck78px6glw3lo?at_medium=RSS&at_campaign=rss"
+      "summary": "President Donald Trump announced his administration is \"terminating\" a Biden-era rule that aimed to reduce planet-warming methane emissions from oil and gas drilling operations.",
+      "source": "NPR National",
+      "url": "https://www.npr.org/2026/10/28/g-s1-150299/trump-methane-restrictions"
     },
     {
-      "summary": "The Trump administration is proposing a new rule to upgrade food assistance cards, aiming to combat fraud that has deprived SNAP recipients of millions of dollars.",
-      "source": "NPR National",
-      "url": "https://www.npr.org/2026/10/26/nx-s1-6017810/snap-benefits-ebt-card-chip-usda-rule"
+      "summary": "The Federal Election Commission's campaign finance system went offline days before the midterms, with reports indicating hackers targeted the site.",
+      "source": "CNBC",
+      "url": "https://www.cnbc.com/2026/10/28/fec-hack-outage-campaign-finance-filings.html"
     },
     {
-      "summary": "The Four Corners region of the U.S. Southwest is under a flood watch after experiencing several days of heavy rain and strong winds.",
+      "summary": "A new report from the immigration reform advocacy group FWD.us found that the number of state and local officers participating in partnerships with Immigration and Customs Enforcement (ICE) has doubled in the last eight months.",
       "source": "NPR National",
-      "url": "https://www.npr.org/2026/10/26/nx-s1-6016309/four-corners-region-faces-flood-threat-after-days-of-heavy-rain"
+      "url": "https://www.npr.org/2026/10/28/g-s1-150296/287g-local-police-immigration-ice"
     }
   ],
   "science": [
     {
-      "summary": "Merck's mRNA melanoma vaccine trial has shown promising results, indicating a reduced recurrence or death from skin cancer when administered alongside an immunotherapy drug.",
-      "source": "NPR Health",
-      "url": "https://www.npr.org/2026/10/26/nx-s1-6013568/mercks-melanoma-vaccine-trial-shows-reduced-recurrence-or-death-from-skin-cancer"
+      "summary": "A new study projects a dramatic increase in the number of people with dementia in the United States over the next 25 years, which will strain the healthcare system.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/us-news/2026/oct/28/dementia-cases-increase"
     },
     {
-      "summary": "Hurricane forecasters are increasingly integrating artificial intelligence into their methods to improve the accuracy and efficiency of hurricane predictions.",
-      "source": "NPR National",
-      "url": "https://www.npr.org/2026/10/26/nx-s1-6012820/ai-hurricane-forecast-google-deepmind-isaias"
+      "summary": "Merck's mRNA melanoma vaccine trial showed promising results, demonstrating a reduction in the recurrence or death from skin cancer when administered alongside an immunotherapy drug.",
+      "source": "NPR Health",
+      "url": "https://www.npr.org/2026/10/26/nx-s1-6013568/mercks-melanoma-vaccine-trial-shows-reduced-recurrence-or-death-from-skin-cancer"
     }
   ],
   "weekly_recap": null,
