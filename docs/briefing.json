@@ -1,47 +1,47 @@
 {
-  "generated_at": "2026-10-28T08:06:07.971469-06:00",
-  "date": "2026-10-28",
+  "generated_at": "2026-10-29T08:27:57.411159-06:00",
+  "date": "2026-10-29",
   "tldr": [
-    "UK Chancellor John Healey's new budget includes a \nA\n100 energy payment for households and a 3% increase in bank tax.",
-    "A deadly high-speed train collision in Toledo province, Spain, resulted in at least 64 fatalities and prompted the postponement of football matches.",
-    "In the United States, President Trump announced the termination of a Biden-era rule aimed at reducing methane emissions from oil and gas drilling."
+    "The U.S. economy experienced faster-than-expected growth in the third quarter, driven by consumer spending and AI-related business investments.",
+    "DoorDash announced its acquisition of Instacart for $17 billion, consolidating the grocery delivery sector and expanding DoorDash's online grocery presence.",
+    "A new blood test has been developed that can detect brain changes associated with Alzheimer's disease."
   ],
   "market": {
     "sp500": {
-      "value": 7722.6,
-      "change": 45.83,
-      "asof": "2026-10-27"
+      "value": 7743.98,
+      "change": 21.38,
+      "asof": "2026-10-28"
     },
     "ndx": {
-      "value": 26477.81,
-      "change": 308.43,
-      "asof": "2026-10-27"
+      "value": 26549.85,
+      "change": 72.04,
+      "asof": "2026-10-28"
     },
-    "why": "The S&P 500 and Nasdaq Composite closed higher, primarily driven by strong performance in the tech sector, with South Korean chipmaker SK Hynix reporting a record quarterly profit and Vertiv's earnings signaling an accelerating AI buildout."
+    "why": "The S&P 500 and Nasdaq Composite closed higher as the U.S. economy grew faster than expected in the third quarter, at an annual rate of 3.4%, fueled by resilient consumer spending and AI-driven business investment."
   },
   "yield_10y": {
-    "value": 4.99,
-    "change": 0.01,
-    "asof": "2026-10-27",
-    "why": "The 10-year Treasury yield saw a minimal increase. The provided articles do not offer a specific reason for this slight movement."
+    "value": 5.05,
+    "change": 0.05,
+    "asof": "2026-10-28",
+    "why": "The 10-year Treasury yield increased, likely influenced by the stronger-than-expected U.S. GDP growth and accelerating September inflation, which could lead to expectations of potential Federal Reserve actions or higher inflation."
   },
   "vix": {
-    "value": 17.52,
-    "change": -0.87,
-    "asof": "2026-10-27",
-    "why": "The VIX decreased, indicating lower market volatility. The articles do not provide a specific reason for this movement."
+    "value": 16.91,
+    "change": -0.61,
+    "asof": "2026-10-28",
+    "why": "The VIX decreased, indicating a reduction in perceived market volatility, likely supported by the positive U.S. GDP report which boosted overall market confidence."
   },
   "breadth": {
     "sp500": {
-      "value": 57.1,
-      "asof": "2026-10-27",
+      "value": 60.5,
+      "asof": "2026-10-28",
       "status": "healthy",
       "matched": 499,
       "stale": false
     },
     "ndx100": {
-      "value": 58.3,
-      "asof": "2026-10-27",
+      "value": 60.4,
+      "asof": "2026-10-28",
       "status": "healthy",
       "matched": 96,
       "stale": false
@@ -51,47 +51,47 @@
     {
       "symbol": "SOXL",
       "what": "3x semiconductors",
-      "value": 101.08,
-      "day_move": 11.69,
-      "asof": "2026-10-27",
-      "rsi": 42.1,
+      "value": 107.35,
+      "day_move": 6.2,
+      "asof": "2026-10-28",
+      "rsi": 45.6,
       "rsi_zone": "neutral",
       "low": 82.11,
       "high": 164.27,
-      "band_pct": 23.1,
+      "band_pct": 30.7,
       "zone": "mid",
       "action": "hold",
-      "read": "Mid-range - 23% of the way up its 1-month band. Big session: up 11.7% in a day."
+      "read": "Mid-range - 31% of the way up its 1-month band."
     },
     {
       "symbol": "SPXL",
       "what": "3x S&P 500",
-      "value": 286.21,
-      "day_move": 1.67,
-      "asof": "2026-10-27",
-      "rsi": 49.7,
+      "value": 288.95,
+      "day_move": 0.96,
+      "asof": "2026-10-28",
+      "rsi": 51.8,
       "rsi_zone": "neutral",
       "low": 275.63,
       "high": 299.21,
-      "band_pct": 44.9,
+      "band_pct": 56.5,
       "zone": "mid",
       "action": "hold",
-      "read": "Mid-range - 45% of the way up its 1-month band."
+      "read": "Mid-range - 56% of the way up its 1-month band."
     },
     {
       "symbol": "TQQQ",
       "what": "3x Nasdaq-100",
-      "value": 71.04,
-      "day_move": 3.81,
-      "asof": "2026-10-27",
-      "rsi": 45.4,
+      "value": 72.36,
+      "day_move": 1.86,
+      "asof": "2026-10-28",
+      "rsi": 47.9,
       "rsi_zone": "neutral",
       "low": 66.29,
       "high": 84.25,
-      "band_pct": 26.4,
+      "band_pct": 33.8,
       "zone": "mid",
       "action": "hold",
-      "read": "Mid-range - 26% of the way up its 1-month band."
+      "read": "Mid-range - 34% of the way up its 1-month band."
     }
   ],
   "watchlist_missing": [],
@@ -99,7 +99,7 @@
     "value": 7.32,
     "change": -0.08,
     "asof": "2026-10-22",
-    "why": "The 30-year fixed mortgage rate decreased for the second consecutive week, as reported by the weekly Freddie Mac survey. This rate generally tracks the direction of the 10-year Treasury yield over recent days, but the provided articles do not offer a specific driver for the overall trend influencing this weekly change."
+    "why": "The provided articles do not offer a specific reason for the weekly decrease in 30-year fixed mortgage rates, especially as the 10-year Treasury yield increased on the day of the market close."
   },
   "policy": [],
   "policy_upcoming": [
@@ -168,70 +168,70 @@
   ],
   "tech": [
     {
-      "summary": "TikTok is launching an in-app restaurant guide called \"Must Eat,\" based on 40 million user posts, reviews, and comments, directly challenging platforms like Yelp and Google Maps.",
+      "summary": "DoorDash announced its acquisition of Instacart for $17 billion, consolidating the grocery delivery sector and expanding DoorDash's online grocery presence.",
       "source": "The Verge",
-      "url": "https://www.theverge.com/news/1020267/tiktok-viral-restaurant-recommendations-must-eat-yelp"
+      "url": "https://www.theverge.com/business/1021981/doordash-instacart-acquisition-announcement"
     },
     {
-      "summary": "Amazon introduced several new Echo devices, including the Echo Show 16 with a larger screen, an Echo Studio speaker featuring a home camera, and a digital picture frame that allows users to add voice notes to photos.",
-      "source": "The Verge",
-      "url": "https://www.theverge.com/tech/1020403/everything-announced-at-amazons-october-2026-hardware-launch"
+      "summary": "Concerns are emerging regarding the impact of AI on major tech companies, with Alphabet's search revenue falling short and Google and Microsoft reporting lower-than-expected capital expenditures for AI infrastructure.",
+      "source": "CNBC",
+      "url": "https://www.cnbc.com/2026/10/29/alphabet-google-search-ai-earnings.html"
     },
     {
-      "summary": "AI labs are reportedly purchasing data from defunct startups to train their artificial intelligence models, indicating a new approach to sourcing information for AI development.",
+      "summary": "There is a call for urgent, real-time monitoring of AI agents' actions after incidents where they breached test environments and accessed private data.",
       "source": "MIT Technology Review",
-      "url": "https://www.technologyreview.com/2026/10/28/1147767/the-download-dead-startups-fueling-ai-interspecies-communication/"
+      "url": "https://www.technologyreview.com/2026/10/29/1147824/monitor-ai-agents-actions-real-time/"
     }
   ],
   "world": [
     {
-      "summary": "UK Chancellor John Healey announced the 2026 Budget, which includes a \nA\n100 energy payment for millions of households, a 3% rise in bank tax, and tax relief for business founders.",
-      "source": "Guardian World",
-      "url": "https://www.theguardian.com/uk-news/live/2026/oct/28/budget-2026-latest-updates-john-healey-andy-burnham-labour-uk-politics"
+      "summary": "A Russian drone attack on a Ukrainian train station in Dnipro killed at least 14 people and wounded 14 others, including an 11-year-old boy.",
+      "source": "BBC World",
+      "url": "https://www.bbc.co.uk/news/articles/c9p8gdlz1p2ko?at_medium=RSS&at_campaign=rss"
     },
     {
-      "summary": "At least 64 people died in a high-speed train collision in Spain's Toledo province, prompting Spanish football authorities to postpone 24 Copa del Rey games.",
+      "summary": "A UK thinktank, the Resolution Foundation, forecasts that the 2020s will be the worst decade for living standards growth in over half a century, prompting calls for hard decisions from officials.",
       "source": "Guardian World",
-      "url": "https://www.theguardian.com/world/2026/oct/28/spain-train-crash-high-speed-toledo"
+      "url": "https://www.theguardian.com/politics/live/2026/oct/29/budget-john-healey-labour-uk-politics-latest-news"
     },
     {
-      "summary": "After 92% of ballots were counted in Israel's election, neither Prime Minister Benjamin Netanyahu's bloc nor the main opposition appeared to have secured the majority needed to form a government.",
-      "source": "Guardian World",
-      "url": "https://www.theguardian.com/world/live/2026/oct/28/israel-election-results-live-updates-exit-polls-netanyahu-likud-eisenkot-latest-news"
+      "summary": "Partial results from the Israeli election show Benjamin Netanyahu's bloc leading but falling short of a majority in the 120-seat Knesset.",
+      "source": "BBC World",
+      "url": "https://www.bbc.co.uk/news/articles/cmdx3knq1xexo?at_medium=RSS&at_campaign=rss"
     },
     {
-      "summary": "Iraqi Prime Minister Ali al-Zaidi conducted a historic visit to Syria, where he met with Ahmed al-Sharaa to discuss enhancing trade, reviving the Baniyas oil pipeline, and fostering regional stability.",
-      "source": "Al Jazeera",
-      "url": "https://www.aljazeera.com/news/2026/10/28/iraqi-pm-ali-al-zaidi-meets-ahmed-al-sharaa-in-historic-syria-visit?traffic_source=rss"
+      "summary": "DoorDash is set to acquire Instacart for $17 billion, a significant consolidation in the global grocery delivery market that will supercharge DoorDash's grocery operations.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/business/2026/oct/29/doordash-buys-instacart-grocery-delivery"
     }
   ],
   "us": [
     {
-      "summary": "President Donald Trump announced his administration is \"terminating\" a Biden-era rule that aimed to reduce planet-warming methane emissions from oil and gas drilling operations.",
+      "summary": "The U.S. economy experienced faster-than-expected growth in the third quarter, with an annual rate of 3.4%, driven by consumer spending and AI-related business investments.",
       "source": "NPR National",
-      "url": "https://www.npr.org/2026/10/28/g-s1-150299/trump-methane-restrictions"
+      "url": "https://www.npr.org/2026/10/29/nx-s1-6021008/economy-gdp-inflation-midterms-voters-affordability"
     },
     {
-      "summary": "The Federal Election Commission's campaign finance system went offline days before the midterms, with reports indicating hackers targeted the site.",
-      "source": "CNBC",
-      "url": "https://www.cnbc.com/2026/10/28/fec-hack-outage-campaign-finance-filings.html"
+      "summary": "A group of hacktivists exposed the identities of over 40,000 Department of Homeland Security employees, including ICE agents and contractors, in a massive data leak.",
+      "source": "NPR National",
+      "url": "https://www.npr.org/2026/10/28/nx-s1-6021497/dhs-hack-ice"
     },
     {
-      "summary": "A new report from the immigration reform advocacy group FWD.us found that the number of state and local officers participating in partnerships with Immigration and Customs Enforcement (ICE) has doubled in the last eight months.",
+      "summary": "The administration has announced plans to end a rule aimed at reducing methane emissions from the oil and gas industry.",
       "source": "NPR National",
-      "url": "https://www.npr.org/2026/10/28/g-s1-150296/287g-local-police-immigration-ice"
+      "url": "https://www.npr.org/2026/10/28/nx-s1-5995910/trump-wants-remove-regulations-planet-heating-methane"
     }
   ],
   "science": [
     {
-      "summary": "A new study projects a dramatic increase in the number of people with dementia in the United States over the next 25 years, which will strain the healthcare system.",
-      "source": "Guardian World",
-      "url": "https://www.theguardian.com/us-news/2026/oct/28/dementia-cases-increase"
+      "summary": "A new blood test has been developed that can detect brain changes associated with Alzheimer's disease, prompting increased patient inquiries to doctors.",
+      "source": "NPR Health",
+      "url": "https://www.npr.org/2026/10/29/nx-s1-6019546/new-blood-test-can-detect-changes-associated-with-alzheimers-disease"
     },
     {
-      "summary": "Merck's mRNA melanoma vaccine trial showed promising results, demonstrating a reduction in the recurrence or death from skin cancer when administered alongside an immunotherapy drug.",
+      "summary": "The current Ebola outbreak, first identified in the Democratic Republic of Congo, has reached a grim milestone with 10,000 patients and is spreading rapidly.",
       "source": "NPR Health",
-      "url": "https://www.npr.org/2026/10/26/nx-s1-6013568/mercks-melanoma-vaccine-trial-shows-reduced-recurrence-or-death-from-skin-cancer"
+      "url": "https://www.npr.org/2026/10/27/g-s1-150136/ebola-outbreak-milestone-democratic-republic-congo-vaccine"
     }
   ],
   "weekly_recap": null,

@@ -1,22 +1,6 @@
 {
-  "generated_at": "2026-10-28T08:06:07.971469-06:00",
+  "generated_at": "2026-10-29T08:27:57.411159-06:00",
   "lessons": [
-    {
-      "id": "2026-08-25-foodborne-illness",
-      "date": "2026-08-25",
-      "domain": "Health and emergencies",
-      "title": "Avoiding Hidden Risks in Your Food",
-      "hook": "Many times, when we feel sick to our stomach, we blame a common bug, but the culprit might actually be what we ate days ago.",
-      "quick": "It is easy to misattribute symptoms like vomiting, fever, aches, and diarrhea to a common illness when they are actually the result of foodborne disease. This confusion often happens because symptoms may not appear for hours or even days after eating contaminated food, making it hard to connect them to a specific meal. Foodborne illness usually comes from improper handling, preparation, or storage of food, and it can cause repeated bouts of vomiting even if the initial contaminated food is cleared from the stomach, because microbes can multiply in the intestines. These illnesses are a significant public health burden and can lead to substantial personal discomfort and lost time.",
-      "more": "To protect yourself at home, good hygiene practices are essential before, during, and after you prepare food. Public health experts agree that regular hand-washing is one of the most effective ways to prevent the spread of foodborne illness. While cooking food sufficiently can kill most bacteria and parasites, many toxins produced by bacteria are not destroyed by heat, so prevention goes beyond just heating food. Proper storage is also key, as bacteria grow most rapidly in temperatures between 40 and 140 degrees Fahrenheit. This range is known as the \"danger zone.\"",
-      "deep": "The reason symptoms can take so long to appear is that some contaminants require an incubation period, and the severity can depend on how much was consumed. Even after initial vomiting clears the stomach, bacteria can pass into the intestine and continue to multiply, leading to further illness. Beyond simple cooking, you can limit toxin production by storing food below 40 degrees or above 140 degrees Fahrenheit. For leftovers, placing them in shallow containers helps them cool more quickly and effectively. A common mistake is washing uncooked chicken, which actually increases the risk of spreading pathogens through splashing water droplets around your kitchen, rather than making the chicken safer.",
-      "takeaway": "Always keep hot foods hot and cold foods cold, storing food either below 40 degrees Fahrenheit or above 140 degrees Fahrenheit to prevent rapid bacterial growth.",
-      "source": {
-        "title": "Foodborne illness",
-        "url": "https://en.wikipedia.org/wiki/Foodborne_illness"
-      },
-      "audio": {}
-    },
     {
       "id": "2026-08-26-formal-fallacy",
       "date": "2026-08-26",
@@ -639,11 +623,7 @@
         "title": "Washing machine",
         "url": "https://en.wikipedia.org/wiki/Washing_machine"
       },
-      "audio": {
-        "quick": "lessons/2026-10-06-washing-machine-quick.mp3",
-        "more": "lessons/2026-10-06-washing-machine-more.mp3",
-        "deep": "lessons/2026-10-06-washing-machine-deep.mp3"
-      }
+      "audio": {}
     },
     {
       "id": "2026-10-07-poisoning",
@@ -1043,6 +1023,26 @@
         "quick": "lessons/2026-10-28-motor-oil-quick.mp3",
         "more": "lessons/2026-10-28-motor-oil-more.mp3",
         "deep": "lessons/2026-10-28-motor-oil-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-10-29-sleep",
+      "date": "2026-10-29",
+      "domain": "Health and emergencies",
+      "title": "Protect Your Sleep For Daily Restoration",
+      "hook": "Not getting enough quality sleep doesn't just make you tired; it actively prevents your body and mind from essential daily repair.",
+      "quick": "When you don't get enough good sleep, your body misses out on vital processes that restore your immune, nervous, skeletal, and muscular systems. These restorative states are crucial for maintaining your mood, memory, and cognitive function throughout the day. Your brain, for instance, uses significantly less energy during sleep than when you are awake, especially during non-REM sleep. This reduced activity allows your brain to restore its supply of the energy molecule known as ATP. During quiet waking, your brain alone accounts for twenty percent of your body's energy use, so this energy restoration during sleep has a noticeable effect on your overall energy consumption. Researchers have also found that a core purpose of sleep is for the brain to cleanse itself of waste products, including amyloid.",
+      "more": "Your body actually cycles through two distinct modes of sleep: non-REM sleep and REM sleep. Non-REM sleep happens first and includes what's known as deep sleep, where your body temperature and heart rate fall, and your brain uses less energy. This is when your body's systems are largely in an anabolic state, working to rebuild. REM sleep, on the other hand, is when most dreams occur and is characterized by rapid eye movements, virtual paralysis of the body, and a suspension of your body's internal balance. A full sleep cycle, alternating between non-REM and REM, takes an average of ninety minutes, and ideally, you would go through four to six of these cycles in a good night's sleep. Deep sleep tends to happen more in the earlier part of the night.",
+      "deep": "A common issue that disrupts these vital cycles is exposure to artificial light, particularly blue light, before bed. Many digital devices like smartphones and televisions emit large amounts of blue light, which is typically associated with daytime. This exposure can interfere with the natural release of melatonin, a hormone critical for regulating your sleep cycle. Your body\u2019s internal circadian clock promotes sleep daily when it is dark, and introducing bright, blue light signals to your brain that it is still daytime. This disruption can make it harder to fall asleep, stay asleep, and complete those full restorative cycles. When the body's systems are consistently deprived of this necessary time for repair and cleansing, it can lead to various sleep disorders, ranging from insomnia to sleep apnea, impacting overall health and daily function.",
+      "takeaway": "Avoid using digital screens that emit blue light for at least an hour before you plan to go to sleep.",
+      "source": {
+        "title": "Sleep",
+        "url": "https://en.wikipedia.org/wiki/Sleep"
+      },
+      "audio": {
+        "quick": "lessons/2026-10-29-sleep-quick.mp3",
+        "more": "lessons/2026-10-29-sleep-more.mp3",
+        "deep": "lessons/2026-10-29-sleep-deep.mp3"
       }
     }
   ],

@@ -1,16 +1,16 @@
 {
-  "last_run": "2026-10-28",
-  "markets_last_ok": "2026-10-28",
+  "last_run": "2026-10-29",
+  "markets_last_ok": "2026-10-29",
   "breadth_last_good": {
     "sp500": {
-      "value": 57.1,
+      "value": 60.5,
       "matched": 499,
-      "asof": "2026-10-27"
+      "asof": "2026-10-28"
     },
     "ndx100": {
-      "value": 58.3,
+      "value": 60.4,
       "matched": 96,
-      "asof": "2026-10-27"
+      "asof": "2026-10-28"
     }
   },
   "breadth": {
@@ -18,15 +18,15 @@
       "in_alert": false,
       "nag_days": 0,
       "warn_armed": true,
-      "last_value": 57.1,
-      "last_asof": "2026-10-27"
+      "last_value": 60.5,
+      "last_asof": "2026-10-28"
     },
     "ndx100": {
       "in_alert": false,
       "nag_days": 0,
       "warn_armed": true,
-      "last_value": 58.3,
-      "last_asof": "2026-10-27"
+      "last_value": 60.4,
+      "last_asof": "2026-10-28"
     }
   },
   "policy_utah_queue": [],
@@ -95,7 +95,7 @@
     }
   ],
   "policy_today": {
-    "date": "2026-10-28",
+    "date": "2026-10-29",
     "items": [],
     "alerted": false
   },
@@ -617,6 +617,13 @@
       "title": "Protecting Your Engine with Motor Oil",
       "domain": "Home, car and repair",
       "date": "2026-10-28"
+    },
+    {
+      "id": "2026-10-29-sleep",
+      "article_title": "Sleep",
+      "title": "Protect Your Sleep For Daily Restoration",
+      "domain": "Health and emergencies",
+      "date": "2026-10-29"
     }
   ],
   "lessons_bootstrapped": true,
