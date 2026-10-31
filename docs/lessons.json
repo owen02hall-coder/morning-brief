@@ -1,22 +1,6 @@
 {
-  "generated_at": "2026-10-29T08:27:57.411159-06:00",
+  "generated_at": "2026-10-31T07:43:07.838207-06:00",
   "lessons": [
-    {
-      "id": "2026-08-26-formal-fallacy",
-      "date": "2026-08-26",
-      "domain": "Thinking and people",
-      "title": "Spotting Flaws in Everyday Reasoning",
-      "hook": "Bad decisions often stem from arguments that seem sound but have a hidden flaw in their logic.",
-      "quick": "When someone presents an argument, it can sometimes lead you to a false conclusion, even if all the individual statements they make seem true. This happens when the way the statements are put together doesn't actually guarantee the conclusion. For instance, if someone says, 'All birds have beaks,' and then points to a creature saying, 'That creature has a beak,' and concludes, 'Therefore, that creature is a bird,' it seems logical at first. However, the conclusion isn't necessarily true; other animals like turtles also have beaks. The error here is in assuming that if all birds have beaks, then all beaked creatures must be birds, which isn't what the original statement said.",
-      "more": "This type of faulty reasoning makes a deductive argument invalid, meaning the conclusion doesn't logically follow from the premises. The problem isn't that the initial statements are false, but that the structure of the argument itself is flawed. For example, consider the idea that 'Most animals in this zoo are birds' and 'Most birds can fly.' Concluding 'Therefore, most animals in this zoo can fly' is also an error. A zoo could have many flightless birds, meaning the percentages don't combine in a way that forces the conclusion to be true. The argument might have true starting points, but it won't necessarily lead to a true conclusion because the steps taken to reach it are incorrect.",
-      "deep": "These errors occur because people often misapply the rules of logic, or they mistakenly assume a logical principle exists that doesn't. In the example about the beaked creature, the mistake comes from reversing a premise. People hear 'All birds have beaks' and might unconsciously convert it to 'All beaked creatures are birds.' This reversed premise seems plausible to many because they might not immediately think of animals other than birds that have beaks. When these individually plausible, but incorrectly connected, points are put together, they form a deductive fallacy. This means the deduction goes wrong, transforming what appears to be a logical process into an invalid one, potentially leading to an incorrect understanding or decision.",
-      "takeaway": "Before accepting an argument's conclusion, check if the premises are genuinely connected in a way that forces the conclusion to be true, especially if a premise seems to be reversed in your mind.",
-      "source": {
-        "title": "Formal fallacy",
-        "url": "https://en.wikipedia.org/wiki/Formal_fallacy"
-      },
-      "audio": {}
-    },
     {
       "id": "2026-08-27-property-tax",
       "date": "2026-08-27",
@@ -639,11 +623,7 @@
         "title": "Poisoning",
         "url": "https://en.wikipedia.org/wiki/Poisoning"
       },
-      "audio": {
-        "quick": "lessons/2026-10-07-poisoning-quick.mp3",
-        "more": "lessons/2026-10-07-poisoning-more.mp3",
-        "deep": "lessons/2026-10-07-poisoning-deep.mp3"
-      }
+      "audio": {}
     },
     {
       "id": "2026-10-08-correlation-does-not-imply-causation",
@@ -1043,6 +1023,26 @@
         "quick": "lessons/2026-10-29-sleep-quick.mp3",
         "more": "lessons/2026-10-29-sleep-more.mp3",
         "deep": "lessons/2026-10-29-sleep-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-10-31-anchoring-effect",
+      "date": "2026-10-31",
+      "domain": "Thinking and people",
+      "title": "How initial numbers influence your decisions",
+      "hook": "The first number you hear can quietly steer your judgment, even when it has no real connection to what you're deciding.",
+      "quick": "You might not realize it, but your decisions can be swayed by numbers that have nothing to do with the actual value of something. This often happens because an early number, called an \"anchor,\" sets a reference point in your mind. For example, in one study, people were asked to write down the last two digits of their social security number and then consider if they would pay that amount for various items, like wine or computer equipment, whose value they didn't know. When they then bid on these items, participants with higher two-digit numbers submitted bids that were between 60 percent and 120 percent higher than those with lower numbers. The irrelevant social security digits had become a hidden influence on their willingness to pay. This effect can happen even when the initial number is obviously random or incorrect.",
+      "more": "It turns out that this kind of influence is very hard to avoid, even when you are aware it's happening. In studies where people were given obviously wrong anchor numbers, their estimates were still significantly affected. For instance, participants asked if Mahatma Gandhi died before age 9 or after age 140 still guessed significantly differently when later asked his actual age. In another experiment, participants were explicitly told that an anchor number would \"contaminate\" their estimates and were encouraged to correct for it. Yet, these groups still reported higher estimates than a control group that received no anchor at all. Even offering money as an incentive didn't help most people effectively adjust away from the initial anchor.",
+      "deep": "The influence of these initial numbers can also last a surprisingly long time. Research shows that anchoring effects can remain strong even after a week-long delay in making a judgment. External information encountered during that delay often has little impact compared to the original number. This phenomenon isn't limited to experimental settings; it has been observed in real-world situations like predicting house prices, where past highs on an index could serve as anchors. It also shows up in financial decisions, with an investor's first stock purchase price sometimes acting as an anchor for future buys, potentially leading to less accumulated investments over time. While difficult to overcome, considering the opposite possibilities of your initial perceptions can be the most reliable way to mitigate this bias.",
+      "takeaway": "Before making a significant financial decision, actively consider a range of possibilities that challenge your initial thoughts or any numbers you've encountered first.",
+      "source": {
+        "title": "Anchoring effect",
+        "url": "https://en.wikipedia.org/wiki/Anchoring_effect"
+      },
+      "audio": {
+        "quick": "lessons/2026-10-31-anchoring-effect-quick.mp3",
+        "more": "lessons/2026-10-31-anchoring-effect-more.mp3",
+        "deep": "lessons/2026-10-31-anchoring-effect-deep.mp3"
       }
     }
   ],
