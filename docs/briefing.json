@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-10-31T07:43:07.838207-06:00",
-  "date": "2026-10-31",
+  "generated_at": "2026-11-01T07:21:22.208819-07:00",
+  "date": "2026-11-01",
   "tldr": [
-    "Tech stocks experienced a significant downturn, pushing the Nasdaq into its first three-week losing streak since March, fueled by concerns over dwindling free cash flows and rising borrowing costs.",
-    "An AI startup successfully breached Anthropic, gaining access to employee details and internal messages, while OpenAI also reported a security gap allowing account takeover.",
-    "France and Germany are preparing for widespread demonstrations, with officials warning of a very high risk of public disorder coinciding with Halloween."
+    "Major US stock indices, including the S&P 500 and Nasdaq Composite, closed lower due to renewed fears about AI spending.",
+    "Crypto exchange Binance has resumed withdrawals and stated it covered 90% of losses from a $6.3 billion hack attributed to North Korea.",
+    "A federal judge dismissed Donald Trump's $10 billion defamation lawsuit against The Wall Street Journal and Rupert Murdoch concerning a story about his ties to Jeffrey Epstein."
   ],
   "market": {
     "sp500": {
@@ -17,19 +17,19 @@
       "change": -747.72,
       "asof": "2026-10-30"
     },
-    "why": "U.S. stock markets, including the S&P 500 and Nasdaq Composite, experienced significant declines due to concerns over dwindling free cash flows, rising borrowing costs, and negative projections from hyperscalers that particularly impacted tech stocks. This contributed to the Nasdaq's first three-week losing streak since March and drew parallels to the dot-com bubble's peak."
+    "why": "The S&P 500 and Nasdaq Composite closed lower, marking a week of declines as Big Tech earnings reignited fears about AI spending and sent investors towards defensive stocks."
   },
   "yield_10y": {
     "value": 4.93,
     "change": -0.06,
     "asof": "2026-10-30",
-    "why": "The 10-year Treasury yield decreased slightly; however, the provided articles do not offer a specific reason for this particular daily movement."
+    "why": "The articles do not provide a specific reason for the 10-year Treasury yield's decrease."
   },
   "vix": {
     "value": 19.42,
     "change": 2.22,
     "asof": "2026-10-30",
-    "why": "The VIX, a measure of market volatility, increased as U.S. stock markets experienced significant declines and heightened investor worries regarding tech stocks, free cash flows, and borrowing costs."
+    "why": "The VIX increased, reflecting heightened market uncertainty and volatility, particularly following concerns about AI spending impacts on tech stocks."
   },
   "breadth": {
     "sp500": {
@@ -99,7 +99,7 @@
     "value": 7.24,
     "change": -0.08,
     "asof": "2026-10-29",
-    "why": "The 30-year fixed mortgage rate, as reported in a weekly survey released on October 29, 2026, saw a slight decrease. This movement generally tracks the direction of the 10-year Treasury yield, which also saw a decline, but the articles do not provide specific details on the weekly trend of yields that directly influenced this mortgage rate change."
+    "why": "The 30-year fixed mortgage rate slightly decreased this week, tracking the recent downward movement of the 10-year Treasury yield."
   },
   "policy": [],
   "policy_upcoming": [
@@ -174,68 +174,63 @@
   ],
   "tech": [
     {
-      "summary": "An AI startup successfully breached Anthropic, gaining access to employee details and internal messages, highlighting cybersecurity vulnerabilities in AI companies.",
-      "source": "Hacker News",
-      "url": "https://www.indiatoday.in/technology/news/story/ai-startup-hacks-anthropic-in-12-hours-gains-access-to-employee-details-and-internal-messages-3025452-2026-10-26"
+      "summary": "Crypto firm Binance resumed withdrawals after a $6.3 billion hack and announced it has covered 90% of the stolen user assets, with the remaining 10% also to be covered.",
+      "source": "CNBC",
+      "url": "https://www.cnbc.com/2026/10/31/binance-hack-asset-coverage-withdrawals.html"
     },
     {
-      "summary": "Parameter.ai reported discovering a security gap at OpenAI that allowed them to take over ChatGPT accounts.",
+      "summary": "Experiments with AI agent swarms in Minecraft aimed at building a civilization reportedly failed, as the 50-agent teams became bogged down in bureaucracy.",
       "source": "Hacker News",
-      "url": "https://www.parameter.ai/labs/we-found-a-gap-at-openai"
+      "url": "https://www.tomshardware.com/tech-industry/artificial-intelligence/ai-agent-swarms-unleashed-in-minecraft-to-build-a-thriving-civilization-50-agent-teams-fail-after-falling-into-paralyzing-bureaucracy"
     },
     {
-      "summary": "Major AI companies including OpenAI, Google, Microsoft, and Anthropic are adopting a new standard for publishers to opt out of being scraped by AI, offering more control over content used for AI training.",
-      "source": "The Verge",
-      "url": "https://www.theverge.com/tech/1023763/openai-google-microsoft-ai-scraping-standard-opt-out"
+      "summary": "A Brazilian court sanctioned lawyers for using prompt injection in a court filing, indicating emerging legal implications for the use of AI in professional contexts.",
+      "source": "Hacker News",
+      "url": "https://jetstream.security/insights/brazilian-court-sanctions-prompt-injection-filing/"
     }
   ],
   "world": [
     {
-      "summary": "Keir Starmer stated that the UK and other European nations must strengthen their relationship as the US becomes a less reliable partner, citing concerns over Russia and shifts in Washington's foreign policy.",
+      "summary": "John Healey, a UK politician, stated that an apology over Britain's historic role in the slave trade would not lead to financial reparations.",
       "source": "Guardian World",
-      "url": "https://www.theguardian.com/politics/2026/oct/31/keir-starmer-uk-europe-us-relationship-trump"
+      "url": "https://www.theguardian.com/politics/live/2026/nov/01/andy-burnham-uk-historic-slave-trade-financial-reparations-badenoch-budget-defence-latest-politics-news-updates"
     },
     {
-      "summary": "France and Germany are bracing for potential widespread unrest, with hundreds of demonstrations planned and officials warning of a very high risk of public disorder.",
+      "summary": "Australian home values have decreased for the seventh consecutive month, as rising interest rates continue to suppress demand in the property market.",
       "source": "Guardian World",
-      "url": "https://www.theguardian.com/world/live/2026/oct/31/france-germany-protests-paris-europe-latest-news-updates"
+      "url": "https://www.theguardian.com/australia-news/2026/nov/02/home-values-fall-for-seventh-month-interest-rates-dent-property-demand"
     },
     {
-      "summary": "The US has approved the sale of 500 Patriot missiles to Ukraine, providing the only effective weapon against Russia's ballistic missiles.",
-      "source": "BBC World",
-      "url": "https://www.bbc.co.uk/news/articles/c3vgxznlx7jzo?at_medium=RSS&at_campaign=rss"
+      "summary": "Iran and the US are exploring diplomatic avenues amidst escalating threats of war, with Iran indicating it could reopen the Strait of Hormuz more quickly if conditions are met.",
+      "source": "Al Jazeera",
+      "url": "https://www.aljazeera.com/news/2026/11/1/iran-and-us-explore-diplomacy-amid-rising-threats-of-war?traffic_source=rss"
     }
   ],
   "us": [
     {
-      "summary": "A federal judge has ordered a formal inquiry into potential misconduct by Trump administration officials in the East Potomac golf course case, including whether they misled the court.",
+      "summary": "A federal judge dismissed Donald Trump's $10 billion defamation lawsuit against The Wall Street Journal and Rupert Murdoch, describing the legal action as \"grasping at straws.\"",
       "source": "NPR National",
-      "url": "https://www.npr.org/2026/10/30/nx-s1-6023328/east-potomac-reyes-misconduct-inquiry-doj"
+      "url": "https://www.npr.org/2026/11/01/nx-s1-6025342/judge-dismisses-trump-suit-against-wall-street-journal-epstein-letter"
     },
     {
-      "summary": "In Alaska, a remote Native village continues its recovery efforts a year after being severely damaged by the remnants of a typhoon.",
+      "summary": "Communities in the Southwest's 'Four Corners' region are preparing for further flooding after several weeks of damaging storms have impacted parts of the area.",
       "source": "NPR National",
-      "url": "https://www.npr.org/2026/10/31/nx-s1-6021471/ex-typhoon-halong-damages-western-alaska-native-villages-kipnuk"
-    },
-    {
-      "summary": "The Trump administration has decided to allow small compounding pharmacies to produce six peptides that have not yet received approval from the Food and Drug Administration.",
-      "source": "NPR Health",
-      "url": "https://www.npr.org/2026/10/28/nx-s1-6021030/peptides-compounding-enforcement"
+      "url": "https://www.npr.org/2026/10/31/nx-s1-6023454/devastating-storms-continue-to-hit-southwest-four-corners-region"
     }
   ],
   "science": [
     {
-      "summary": "Researchers have identified a new blood test capable of detecting brain changes associated with Alzheimer's disease, leading to increased patient inquiries about testing.",
+      "summary": "The Food and Drug Administration has approved a gene therapy for Sanfilippo syndrome, a development significantly aided by millions of dollars in research funding raised by an affected family.",
       "source": "NPR Health",
-      "url": "https://www.npr.org/2026/10/29/nx-s1-6019546/new-blood-test-can-detect-changes-associated-with-alzheimers-disease"
+      "url": "https://www.npr.org/2026/11/01/nx-s1-6014739/sanfilippo-gene-therapy-fayuvi"
     },
     {
-      "summary": "Florida is experiencing a record number of dengue fever cases this year, as the tropical disease is flourishing in warming climates.",
+      "summary": "Florida is experiencing a record number of dengue fever cases this year, as the tropical disease finds favorable conditions in warming climates.",
       "source": "NPR Health",
       "url": "https://www.npr.org/2026/10/30/nx-s1-6020514/florida-sees-spike-in-dengue-fever-cases"
     }
   ],
-  "weekly_recap": null,
+  "weekly_recap": "This week, major U.S. stock indices saw declines as turmoil in the artificial intelligence sector led to tech selling. In Europe, widespread protests continued, and globally, significant events included a deadly church attack in Jordan, Kim Jong-un's visit to China, and Lula da Silva securing a historic fourth term as Brazil's president. Serbia's President Aleksandar Vu\u010di\u0107 was ousted by a student-led movement, and Israel held general elections. Apple refreshed its iMac and MacBook Pro lines with new M6 chips, while the UK Chancellor John Healey's budget included energy payments and a bank tax increase. A high-speed train collision in Spain resulted in numerous fatalities. The U.S. economy experienced faster-than-expected growth in the third quarter, driven by consumer spending and AI investments, and DoorDash announced its acquisition of Instacart. Tech stocks suffered a significant downturn, pushing the Nasdaq into its first three-week losing streak since March, and security gaps were reported for AI companies Anthropic and OpenAI.",
   "data_availability": {
     "sp500": true,
     "ndx": true,
