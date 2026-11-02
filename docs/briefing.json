@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-11-01T07:21:22.208819-07:00",
-  "date": "2026-11-01",
+  "generated_at": "2026-11-02T10:12:49.716424-07:00",
+  "date": "2026-11-02",
   "tldr": [
-    "Major US stock indices, including the S&P 500 and Nasdaq Composite, closed lower due to renewed fears about AI spending.",
-    "Crypto exchange Binance has resumed withdrawals and stated it covered 90% of losses from a $6.3 billion hack attributed to North Korea.",
-    "A federal judge dismissed Donald Trump's $10 billion defamation lawsuit against The Wall Street Journal and Rupert Murdoch concerning a story about his ties to Jeffrey Epstein."
+    "Supermarket chains across at least seven European countries experienced a suspected cyber-attack that caused refrigerator and freezer temperatures to rise significantly.",
+    "Prominent AI company Anthropic reported substantial Q3 revenue and purchase commitments in a revised S-1 filing, while Oracle announced plans to raise $20 billion to fund its AI infrastructure buildout.",
+    "A gene therapy for Sanfilippo syndrome received FDA approval, an outcome significantly supported by a family's fundraising efforts."
   ],
   "market": {
     "sp500": {
@@ -17,30 +17,30 @@
       "change": -747.72,
       "asof": "2026-10-30"
     },
-    "why": "The S&P 500 and Nasdaq Composite closed lower, marking a week of declines as Big Tech earnings reignited fears about AI spending and sent investors towards defensive stocks."
+    "why": "The provided articles do not offer a specific reason for the decline in the S&P 500 and Nasdaq Composite on this particular day. Some articles alluded to a prior week's selloff in tech stocks or general economic conditions but did not link specific news to the daily market movement."
   },
   "yield_10y": {
     "value": 4.93,
     "change": -0.06,
     "asof": "2026-10-30",
-    "why": "The articles do not provide a specific reason for the 10-year Treasury yield's decrease."
+    "why": "The provided articles do not offer a specific reason for the slight decrease in the 10-year Treasury yield."
   },
   "vix": {
     "value": 19.42,
     "change": 2.22,
     "asof": "2026-10-30",
-    "why": "The VIX increased, reflecting heightened market uncertainty and volatility, particularly following concerns about AI spending impacts on tech stocks."
+    "why": "The VIX index, also known as the fear index, increased, which generally correlates with a decline in the broader stock market, indicating increased investor uncertainty."
   },
   "breadth": {
     "sp500": {
-      "value": 59.3,
+      "value": 63.7,
       "asof": "2026-10-30",
       "status": "healthy",
-      "matched": 499,
+      "matched": 498,
       "stale": false
     },
     "ndx100": {
-      "value": 55.2,
+      "value": 58.3,
       "asof": "2026-10-30",
       "status": "healthy",
       "matched": 96,
@@ -99,7 +99,7 @@
     "value": 7.24,
     "change": -0.08,
     "asof": "2026-10-29",
-    "why": "The 30-year fixed mortgage rate slightly decreased this week, tracking the recent downward movement of the 10-year Treasury yield."
+    "why": "The 30-year fixed mortgage rate, as reported in a weekly Freddie Mac survey, decreased. This movement is consistent with the direction of the 10-year Treasury yield, which also moved lower over recent days."
   },
   "policy": [],
   "policy_upcoming": [
@@ -136,23 +136,8 @@
       "source": "Utah Legislature"
     }
   ],
-  "policy_week": [
-    {
-      "what_happened": "Final rules set forth requirements for price transparency reporting for non-grandfathered group health plans and health insurance issuers.",
-      "effect": "Your employer health insurance plan has new price transparency reporting requirements that become effective on December 7, 2026.",
-      "url": "https://www.federalregister.gov/documents/2026/10/06/2026-20447/transparency-in-coverage",
-      "status": "Final rule",
-      "effective_date": "2026-12-07",
-      "source": "Federal Register"
-    }
-  ],
+  "policy_week": [],
   "policy_calendar": [
-    {
-      "date": "2026-11-01",
-      "label": "ACA marketplace open enrollment opens \u2014 expected early November",
-      "note": "healthcare.gov has opened enrollment on November 1 each year, and currently publishes December 15 as the deadline for coverage starting January 1. The window is set by federal rule and has been changed by rulemaking before.",
-      "url": "https://www.healthcare.gov/quick-guide/dates-and-deadlines/"
-    },
     {
       "date": "2026-11-05",
       "label": "IRS 401(k) and IRA contribution limits for next year \u2014 expected late October or early November",
@@ -174,63 +159,73 @@
   ],
   "tech": [
     {
-      "summary": "Crypto firm Binance resumed withdrawals after a $6.3 billion hack and announced it has covered 90% of the stolen user assets, with the remaining 10% also to be covered.",
+      "summary": "AI company Anthropic updated its S-1 prospectus, reporting $17 billion in Q3 revenue and $895.4 billion in purchase commitments, indicating strong financial activity ahead of a potential IPO.",
       "source": "CNBC",
-      "url": "https://www.cnbc.com/2026/10/31/binance-hack-asset-coverage-withdrawals.html"
+      "url": "https://www.cnbc.com/2026/11/02/anthropic-ant-s-1-quarter-financials.html"
     },
     {
-      "summary": "Experiments with AI agent swarms in Minecraft aimed at building a civilization reportedly failed, as the 50-agent teams became bogged down in bureaucracy.",
-      "source": "Hacker News",
-      "url": "https://www.tomshardware.com/tech-industry/artificial-intelligence/ai-agent-swarms-unleashed-in-minecraft-to-build-a-thriving-civilization-50-agent-teams-fail-after-falling-into-paralyzing-bureaucracy"
+      "summary": "Oracle filed plans to issue $20 billion in new stock and bonds to finance its significant expansion in artificial intelligence infrastructure, highlighting the substantial investment required for AI development.",
+      "source": "CNBC",
+      "url": "https://www.cnbc.com/2026/11/02/oracle-files-to-sell-20-billion-in-new-stock-bonds-to-finance-ai-buildout.html"
     },
     {
-      "summary": "A Brazilian court sanctioned lawyers for using prompt injection in a court filing, indicating emerging legal implications for the use of AI in professional contexts.",
-      "source": "Hacker News",
-      "url": "https://jetstream.security/insights/brazilian-court-sanctions-prompt-injection-filing/"
+      "summary": "OpenAI is deepening its presence in Abu Dhabi, with CEO Sam Altman signing four agreements covering energy, government, and investment sectors, as the company expands its global AI initiatives.",
+      "source": "CNBC",
+      "url": "https://www.cnbc.com/2026/11/02/openai-abu-dhabi-ai-deals.html"
     }
   ],
   "world": [
     {
-      "summary": "John Healey, a UK politician, stated that an apology over Britain's historic role in the slave trade would not lead to financial reparations.",
+      "summary": "Supermarket chains in at least seven European countries, including Belgium, Estonia, and Sweden, reported a suspected cyber-attack that caused temperatures in refrigerators and freezers to soar overnight, echoing a similar incident last month.",
       "source": "Guardian World",
-      "url": "https://www.theguardian.com/politics/live/2026/nov/01/andy-burnham-uk-historic-slave-trade-financial-reparations-badenoch-budget-defence-latest-politics-news-updates"
+      "url": "https://www.theguardian.com/world/2026/nov/02/supermarket-freezers-across-europe-hit-by-second-suspected-cyber-attack"
     },
     {
-      "summary": "Australian home values have decreased for the seventh consecutive month, as rising interest rates continue to suppress demand in the property market.",
-      "source": "Guardian World",
-      "url": "https://www.theguardian.com/australia-news/2026/nov/02/home-values-fall-for-seventh-month-interest-rates-dent-property-demand"
-    },
-    {
-      "summary": "Iran and the US are exploring diplomatic avenues amidst escalating threats of war, with Iran indicating it could reopen the Strait of Hormuz more quickly if conditions are met.",
+      "summary": "China is increasing its diplomatic engagement in the Middle East, with meetings involving Iran and Oman, and Beijing is urging dialogue regarding the US-Iran situation as it hosts the first Omani head of state visit since 1978.",
       "source": "Al Jazeera",
-      "url": "https://www.aljazeera.com/news/2026/11/1/iran-and-us-explore-diplomacy-amid-rising-threats-of-war?traffic_source=rss"
+      "url": "https://www.aljazeera.com/news/2026/11/2/china-steps-up-middle-east-diplomacy-with-iran-and-oman-meetings?traffic_source=rss"
+    },
+    {
+      "summary": "The World Health Organization (WHO) reported that renewed fighting in northern Ethiopia is pushing the region's health system towards collapse, undermining a 2022 peace agreement.",
+      "source": "Al Jazeera",
+      "url": "https://www.aljazeera.com/news/2026/11/2/violence-in-northern-ethiopia-pushing-health-system-towards-collapse-who?traffic_source=rss"
+    },
+    {
+      "summary": "The UK Home Secretary, Shabana Mahmood, softened immigration proposals for care workers, allowing approximately 300,000 individuals to apply for indefinite leave to remain after five years, rather than the originally proposed 15 years, following cabinet discussions.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/uk-news/2026/nov/02/shabana-mahmood-softens-immigration-plans-cabinet-backlash-leave-to-remain"
     }
   ],
   "us": [
     {
-      "summary": "A federal judge dismissed Donald Trump's $10 billion defamation lawsuit against The Wall Street Journal and Rupert Murdoch, describing the legal action as \"grasping at straws.\"",
+      "summary": "All nine people on board a business jet died when the aircraft crashed into a Florida neighborhood after departing from Austin, Texas, and being en route to the Bahamas.",
+      "source": "NPR National",
+      "url": "https://www.npr.org/2026/11/02/g-s1-151211/south-florida-jet-crash"
+    },
+    {
+      "summary": "A federal judge dismissed Donald Trump's $10 billion lawsuit against The Wall Street Journal and Rupert Murdoch over a story reporting on his ties to Jeffrey Epstein.",
       "source": "NPR National",
       "url": "https://www.npr.org/2026/11/01/nx-s1-6025342/judge-dismisses-trump-suit-against-wall-street-journal-epstein-letter"
     },
     {
-      "summary": "Communities in the Southwest's 'Four Corners' region are preparing for further flooding after several weeks of damaging storms have impacted parts of the area.",
+      "summary": "Communities in the Southwest's 'Four Corners' region are bracing for more flooding, following weeks of devastating storms that have impacted parts of the area.",
       "source": "NPR National",
       "url": "https://www.npr.org/2026/10/31/nx-s1-6023454/devastating-storms-continue-to-hit-southwest-four-corners-region"
     }
   ],
   "science": [
     {
-      "summary": "The Food and Drug Administration has approved a gene therapy for Sanfilippo syndrome, a development significantly aided by millions of dollars in research funding raised by an affected family.",
+      "summary": "A family's dedicated fundraising efforts helped secure the Food and Drug Administration's approval of a gene therapy for Sanfilippo syndrome, offering a new treatment option for those affected.",
       "source": "NPR Health",
       "url": "https://www.npr.org/2026/11/01/nx-s1-6014739/sanfilippo-gene-therapy-fayuvi"
     },
     {
-      "summary": "Florida is experiencing a record number of dengue fever cases this year, as the tropical disease finds favorable conditions in warming climates.",
+      "summary": "To recognize the signs of a stroke, health experts advise remembering the acronym BE FAST: Balance, Eyes, Face, Arm, Speech, Time, and to call 911 immediately if symptoms appear.",
       "source": "NPR Health",
-      "url": "https://www.npr.org/2026/10/30/nx-s1-6020514/florida-sees-spike-in-dengue-fever-cases"
+      "url": "https://www.npr.org/2026/11/01/nx-s1-6025502/stroke-acronym-be-fast"
     }
   ],
-  "weekly_recap": "This week, major U.S. stock indices saw declines as turmoil in the artificial intelligence sector led to tech selling. In Europe, widespread protests continued, and globally, significant events included a deadly church attack in Jordan, Kim Jong-un's visit to China, and Lula da Silva securing a historic fourth term as Brazil's president. Serbia's President Aleksandar Vu\u010di\u0107 was ousted by a student-led movement, and Israel held general elections. Apple refreshed its iMac and MacBook Pro lines with new M6 chips, while the UK Chancellor John Healey's budget included energy payments and a bank tax increase. A high-speed train collision in Spain resulted in numerous fatalities. The U.S. economy experienced faster-than-expected growth in the third quarter, driven by consumer spending and AI investments, and DoorDash announced its acquisition of Instacart. Tech stocks suffered a significant downturn, pushing the Nasdaq into its first three-week losing streak since March, and security gaps were reported for AI companies Anthropic and OpenAI.",
+  "weekly_recap": null,
   "data_availability": {
     "sp500": true,
     "ndx": true,

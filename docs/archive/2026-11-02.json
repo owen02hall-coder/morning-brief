@@ -1,0 +1,245 @@
+{
+  "generated_at": "2026-11-02T10:12:49.716424-07:00",
+  "date": "2026-11-02",
+  "tldr": [
+    "Supermarket chains across at least seven European countries experienced a suspected cyber-attack that caused refrigerator and freezer temperatures to rise significantly.",
+    "Prominent AI company Anthropic reported substantial Q3 revenue and purchase commitments in a revised S-1 filing, while Oracle announced plans to raise $20 billion to fund its AI infrastructure buildout.",
+    "A gene therapy for Sanfilippo syndrome received FDA approval, an outcome significantly supported by a family's fundraising efforts."
+  ],
+  "market": {
+    "sp500": {
+      "value": 7580.07,
+      "change": -140.32,
+      "asof": "2026-10-30"
+    },
+    "ndx": {
+      "value": 25437.0,
+      "change": -747.72,
+      "asof": "2026-10-30"
+    },
+    "why": "The provided articles do not offer a specific reason for the decline in the S&P 500 and Nasdaq Composite on this particular day. Some articles alluded to a prior week's selloff in tech stocks or general economic conditions but did not link specific news to the daily market movement."
+  },
+  "yield_10y": {
+    "value": 4.93,
+    "change": -0.06,
+    "asof": "2026-10-30",
+    "why": "The provided articles do not offer a specific reason for the slight decrease in the 10-year Treasury yield."
+  },
+  "vix": {
+    "value": 19.42,
+    "change": 2.22,
+    "asof": "2026-10-30",
+    "why": "The VIX index, also known as the fear index, increased, which generally correlates with a decline in the broader stock market, indicating increased investor uncertainty."
+  },
+  "breadth": {
+    "sp500": {
+      "value": 63.7,
+      "asof": "2026-10-30",
+      "status": "healthy",
+      "matched": 498,
+      "stale": false
+    },
+    "ndx100": {
+      "value": 58.3,
+      "asof": "2026-10-30",
+      "status": "healthy",
+      "matched": 96,
+      "stale": false
+    }
+  },
+  "watchlist": [
+    {
+      "symbol": "SOXL",
+      "what": "3x semiconductors",
+      "value": 77.05,
+      "day_move": -24.75,
+      "asof": "2026-10-30",
+      "rsi": 34.1,
+      "rsi_zone": "neutral",
+      "low": 77.05,
+      "high": 164.27,
+      "band_pct": 0.0,
+      "zone": "low",
+      "action": "buy",
+      "read": "Within 4% of its 1-month low. Big session: down 24.7% in a day."
+    },
+    {
+      "symbol": "SPXL",
+      "what": "3x S&P 500",
+      "value": 270.35,
+      "day_move": -5.36,
+      "asof": "2026-10-30",
+      "rsi": 39.0,
+      "rsi_zone": "neutral",
+      "low": 270.35,
+      "high": 299.21,
+      "band_pct": 0.0,
+      "zone": "low",
+      "action": "buy",
+      "read": "Within 4% of its 1-month low."
+    },
+    {
+      "symbol": "TQQQ",
+      "what": "3x Nasdaq-100",
+      "value": 62.01,
+      "day_move": -10.47,
+      "asof": "2026-10-30",
+      "rsi": 33.9,
+      "rsi_zone": "neutral",
+      "low": 62.01,
+      "high": 84.25,
+      "band_pct": 0.0,
+      "zone": "low",
+      "action": "buy",
+      "read": "Within 4% of its 1-month low. Big session: down 10.5% in a day."
+    }
+  ],
+  "watchlist_missing": [],
+  "mortgage": {
+    "value": 7.24,
+    "change": -0.08,
+    "asof": "2026-10-29",
+    "why": "The 30-year fixed mortgage rate, as reported in a weekly Freddie Mac survey, decreased. This movement is consistent with the direction of the 10-year Treasury yield, which also moved lower over recent days."
+  },
+  "policy": [],
+  "policy_upcoming": [
+    {
+      "what_happened": "This document contains final regulations regarding the deduction for certain taxpayers for an amount up to $10,000 of qualified passenger vehicle loan interest.",
+      "effect": "You can deduct up to $10,000 of qualified passenger vehicle loan interest.",
+      "url": "https://www.federalregister.gov/documents/2026/09/08/2026-18219/car-loan-interest-deduction",
+      "status": "Final rule",
+      "effective_date": "2026-11-09",
+      "source": "Federal Register"
+    },
+    {
+      "what_happened": "Final rules set forth requirements for price transparency reporting for non-grandfathered group health plans and health insurance issuers.",
+      "effect": "Your employer health insurance plan has new price transparency reporting requirements that become effective on December 7, 2026.",
+      "url": "https://www.federalregister.gov/documents/2026/10/06/2026-20447/transparency-in-coverage",
+      "status": "Final rule",
+      "effective_date": "2026-12-07",
+      "source": "Federal Register"
+    },
+    {
+      "what_happened": "A Utah bill modifies provisions related to the property tax exemption process.",
+      "effect": "Once you own a home, you will have deadlines for filing an application for a property tax exemption with the county board of equalization and for the board to render a decision.",
+      "url": "https://le.utah.gov/~2026/bills/static/SB0236.html",
+      "status": "Signed in Utah",
+      "effective_date": "2027-01-01",
+      "source": "Utah Legislature"
+    },
+    {
+      "what_happened": "A bill amends requirements for health insurance preauthorization in Utah.",
+      "effect": "Your health insurer must make an authorization or adverse preauthorization determination within a defined maximum time.",
+      "url": "https://le.utah.gov/~2026/bills/static/SB0319.html",
+      "status": "Signed in Utah",
+      "effective_date": "2027-01-01",
+      "source": "Utah Legislature"
+    }
+  ],
+  "policy_week": [],
+  "policy_calendar": [
+    {
+      "date": "2026-11-05",
+      "label": "IRS 401(k) and IRA contribution limits for next year \u2014 expected late October or early November",
+      "note": "The annual cost-of-living adjustment notice, historically released within a week or two of the bracket figures. It sets how much can go into a 401(k) and an IRA next year.",
+      "url": "https://www.irs.gov/retirement-plans/cola-increases-for-dollar-limitations-on-benefits-and-contributions"
+    },
+    {
+      "date": "2026-11-10",
+      "label": "IRS tax brackets and the married-filing-jointly standard deduction for next year \u2014 expected late October or early November",
+      "note": "Published as an annual inflation-adjustment revenue procedure; recent releases landed between mid-October and mid-November. These are the bracket thresholds and the standard deduction the next return is filed against.",
+      "url": "https://www.irs.gov/filing/federal-income-tax-rates-and-brackets"
+    },
+    {
+      "date": "2026-11-30",
+      "label": "FHFA conforming loan limit for next year \u2014 expected late November",
+      "note": "The cap on a conforming (non-jumbo) mortgage, and the line between a normal rate and a jumbo one. FHFA has announced it in the last days of November each year, and the new limit applies to loans made from January 1.",
+      "url": "https://www.fhfa.gov/data/conforming-loan-limit"
+    }
+  ],
+  "tech": [
+    {
+      "summary": "AI company Anthropic updated its S-1 prospectus, reporting $17 billion in Q3 revenue and $895.4 billion in purchase commitments, indicating strong financial activity ahead of a potential IPO.",
+      "source": "CNBC",
+      "url": "https://www.cnbc.com/2026/11/02/anthropic-ant-s-1-quarter-financials.html"
+    },
+    {
+      "summary": "Oracle filed plans to issue $20 billion in new stock and bonds to finance its significant expansion in artificial intelligence infrastructure, highlighting the substantial investment required for AI development.",
+      "source": "CNBC",
+      "url": "https://www.cnbc.com/2026/11/02/oracle-files-to-sell-20-billion-in-new-stock-bonds-to-finance-ai-buildout.html"
+    },
+    {
+      "summary": "OpenAI is deepening its presence in Abu Dhabi, with CEO Sam Altman signing four agreements covering energy, government, and investment sectors, as the company expands its global AI initiatives.",
+      "source": "CNBC",
+      "url": "https://www.cnbc.com/2026/11/02/openai-abu-dhabi-ai-deals.html"
+    }
+  ],
+  "world": [
+    {
+      "summary": "Supermarket chains in at least seven European countries, including Belgium, Estonia, and Sweden, reported a suspected cyber-attack that caused temperatures in refrigerators and freezers to soar overnight, echoing a similar incident last month.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/world/2026/nov/02/supermarket-freezers-across-europe-hit-by-second-suspected-cyber-attack"
+    },
+    {
+      "summary": "China is increasing its diplomatic engagement in the Middle East, with meetings involving Iran and Oman, and Beijing is urging dialogue regarding the US-Iran situation as it hosts the first Omani head of state visit since 1978.",
+      "source": "Al Jazeera",
+      "url": "https://www.aljazeera.com/news/2026/11/2/china-steps-up-middle-east-diplomacy-with-iran-and-oman-meetings?traffic_source=rss"
+    },
+    {
+      "summary": "The World Health Organization (WHO) reported that renewed fighting in northern Ethiopia is pushing the region's health system towards collapse, undermining a 2022 peace agreement.",
+      "source": "Al Jazeera",
+      "url": "https://www.aljazeera.com/news/2026/11/2/violence-in-northern-ethiopia-pushing-health-system-towards-collapse-who?traffic_source=rss"
+    },
+    {
+      "summary": "The UK Home Secretary, Shabana Mahmood, softened immigration proposals for care workers, allowing approximately 300,000 individuals to apply for indefinite leave to remain after five years, rather than the originally proposed 15 years, following cabinet discussions.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/uk-news/2026/nov/02/shabana-mahmood-softens-immigration-plans-cabinet-backlash-leave-to-remain"
+    }
+  ],
+  "us": [
+    {
+      "summary": "All nine people on board a business jet died when the aircraft crashed into a Florida neighborhood after departing from Austin, Texas, and being en route to the Bahamas.",
+      "source": "NPR National",
+      "url": "https://www.npr.org/2026/11/02/g-s1-151211/south-florida-jet-crash"
+    },
+    {
+      "summary": "A federal judge dismissed Donald Trump's $10 billion lawsuit against The Wall Street Journal and Rupert Murdoch over a story reporting on his ties to Jeffrey Epstein.",
+      "source": "NPR National",
+      "url": "https://www.npr.org/2026/11/01/nx-s1-6025342/judge-dismisses-trump-suit-against-wall-street-journal-epstein-letter"
+    },
+    {
+      "summary": "Communities in the Southwest's 'Four Corners' region are bracing for more flooding, following weeks of devastating storms that have impacted parts of the area.",
+      "source": "NPR National",
+      "url": "https://www.npr.org/2026/10/31/nx-s1-6023454/devastating-storms-continue-to-hit-southwest-four-corners-region"
+    }
+  ],
+  "science": [
+    {
+      "summary": "A family's dedicated fundraising efforts helped secure the Food and Drug Administration's approval of a gene therapy for Sanfilippo syndrome, offering a new treatment option for those affected.",
+      "source": "NPR Health",
+      "url": "https://www.npr.org/2026/11/01/nx-s1-6014739/sanfilippo-gene-therapy-fayuvi"
+    },
+    {
+      "summary": "To recognize the signs of a stroke, health experts advise remembering the acronym BE FAST: Balance, Eyes, Face, Arm, Speech, Time, and to call 911 immediately if symptoms appear.",
+      "source": "NPR Health",
+      "url": "https://www.npr.org/2026/11/01/nx-s1-6025502/stroke-acronym-be-fast"
+    }
+  ],
+  "weekly_recap": null,
+  "data_availability": {
+    "sp500": true,
+    "ndx": true,
+    "vix": true,
+    "ten_year": true,
+    "news_world": true,
+    "news_us": true,
+    "news_science": true,
+    "news_business": true,
+    "news_tech": true,
+    "summary": "ok",
+    "breadth": true,
+    "policy": true,
+    "mortgage": true,
+    "watchlist": true
+  }
+}
