@@ -1,16 +1,16 @@
 {
-  "last_run": "2026-11-02",
-  "markets_last_ok": "2026-11-02",
+  "last_run": "2026-11-03",
+  "markets_last_ok": "2026-11-03",
   "breadth_last_good": {
     "sp500": {
-      "value": 63.7,
+      "value": 61.6,
       "matched": 498,
-      "asof": "2026-10-30"
+      "asof": "2026-11-02"
     },
     "ndx100": {
-      "value": 58.3,
+      "value": 55.2,
       "matched": 96,
-      "asof": "2026-10-30"
+      "asof": "2026-11-02"
     }
   },
   "breadth": {
@@ -18,15 +18,15 @@
       "in_alert": false,
       "nag_days": 0,
       "warn_armed": true,
-      "last_value": 63.7,
-      "last_asof": "2026-10-30"
+      "last_value": 61.6,
+      "last_asof": "2026-11-02"
     },
     "ndx100": {
       "in_alert": false,
       "nag_days": 0,
       "warn_armed": true,
-      "last_value": 58.3,
-      "last_asof": "2026-10-30"
+      "last_value": 55.2,
+      "last_asof": "2026-11-02"
     }
   },
   "policy_utah_queue": [],
@@ -58,7 +58,8 @@
     "2026-17123": "2026-08-21",
     "2026-20027": "2026-09-30",
     "C1-2026-16314": "2026-08-24",
-    "2026-20447": "2026-10-06"
+    "2026-20447": "2026-10-06",
+    "2026-20264": "2026-10-02"
   },
   "policy_active": [
     {
@@ -67,6 +68,14 @@
       "url": "https://www.federalregister.gov/documents/2026/09/08/2026-18219/car-loan-interest-deduction",
       "status": "Final rule",
       "effective_date": "2026-11-09",
+      "source": "Federal Register"
+    },
+    {
+      "what_happened": "Temporary regulations were issued concerning a new nonrefundable Federal tax credit for qualified contributions to scholarship granting organizations.",
+      "effect": "A new nonrefundable Federal tax credit becomes available for qualified contributions to scholarship granting organizations in 2027 and later taxable years.",
+      "url": "https://www.federalregister.gov/documents/2026/10/02/2026-20264/federal-scholarship-tax-credit",
+      "status": "Final rule",
+      "effective_date": "2026-12-01",
       "source": "Federal Register"
     },
     {
@@ -95,9 +104,18 @@
     }
   ],
   "policy_today": {
-    "date": "2026-11-02",
-    "items": [],
-    "alerted": false
+    "date": "2026-11-03",
+    "items": [
+      {
+        "what_happened": "Temporary regulations were issued concerning a new nonrefundable Federal tax credit for qualified contributions to scholarship granting organizations.",
+        "effect": "A new nonrefundable Federal tax credit becomes available for qualified contributions to scholarship granting organizations in 2027 and later taxable years.",
+        "url": "https://www.federalregister.gov/documents/2026/10/02/2026-20264/federal-scholarship-tax-credit",
+        "status": "Final rule",
+        "effective_date": "2026-12-01",
+        "source": "Federal Register"
+      }
+    ],
+    "alerted": true
   },
   "lessons_taught": [
     {
@@ -645,10 +663,31 @@
       "title": "How to stop banging pipes",
       "domain": "Home, car and repair",
       "date": "2026-11-02"
+    },
+    {
+      "id": "2026-11-03-bleeding",
+      "article_title": "Bleeding",
+      "title": "How Common Medicines Affect Bleeding",
+      "domain": "Health and emergencies",
+      "date": "2026-11-03"
     }
   ],
   "lessons_bootstrapped": true,
-  "policy_week": [],
+  "policy_week": [
+    {
+      "date": "2026-11-03",
+      "items": [
+        {
+          "what_happened": "Temporary regulations were issued concerning a new nonrefundable Federal tax credit for qualified contributions to scholarship granting organizations.",
+          "effect": "A new nonrefundable Federal tax credit becomes available for qualified contributions to scholarship granting organizations in 2027 and later taxable years.",
+          "url": "https://www.federalregister.gov/documents/2026/10/02/2026-20264/federal-scholarship-tax-credit",
+          "status": "Final rule",
+          "effective_date": "2026-12-01",
+          "source": "Federal Register"
+        }
+      ]
+    }
+  ],
   "watchlist_actions": {
     "SOXL": "buy",
     "SPXL": "buy",

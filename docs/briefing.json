@@ -1,47 +1,47 @@
 {
-  "generated_at": "2026-11-02T10:12:49.716424-07:00",
-  "date": "2026-11-02",
+  "generated_at": "2026-11-03T08:18:01.541960-07:00",
+  "date": "2026-11-03",
   "tldr": [
-    "Supermarket chains across at least seven European countries experienced a suspected cyber-attack that caused refrigerator and freezer temperatures to rise significantly.",
-    "Prominent AI company Anthropic reported substantial Q3 revenue and purchase commitments in a revised S-1 filing, while Oracle announced plans to raise $20 billion to fund its AI infrastructure buildout.",
-    "A gene therapy for Sanfilippo syndrome received FDA approval, an outcome significantly supported by a family's fundraising efforts."
+    "Widespread cyberattacks have targeted supermarket freezers across ten European countries, leading to food spoilage and prompting cybersecurity investigations.",
+    "Advances in mRNA technology and gene therapy are showing promise, with researchers exploring mRNA vaccines for cancer and gene therapy for rare genetic diseases receiving FDA approval.",
+    "Global food security faces threats as attacks on grain shipments from Russia and Ukraine may lead to increased food prices, particularly impacting import-dependent nations."
   ],
   "market": {
     "sp500": {
-      "value": 7580.07,
-      "change": -140.32,
-      "asof": "2026-10-30"
+      "value": 7541.4,
+      "change": -38.67,
+      "asof": "2026-11-02"
     },
     "ndx": {
-      "value": 25437.0,
-      "change": -747.72,
-      "asof": "2026-10-30"
+      "value": 25164.31,
+      "change": -272.69,
+      "asof": "2026-11-02"
     },
-    "why": "The provided articles do not offer a specific reason for the decline in the S&P 500 and Nasdaq Composite on this particular day. Some articles alluded to a prior week's selloff in tech stocks or general economic conditions but did not link specific news to the daily market movement."
+    "why": "The stock market closed lower, influenced by disappointing third-quarter earnings reports from major companies like Shopify and Apple, which missed revenue estimates. This also comes amid warnings from investors about a \"casino type\" market and broader vulnerability due to inflation limiting central bank's ability to ease rates."
   },
   "yield_10y": {
-    "value": 4.93,
-    "change": -0.06,
-    "asof": "2026-10-30",
-    "why": "The provided articles do not offer a specific reason for the slight decrease in the 10-year Treasury yield."
+    "value": 4.89,
+    "change": -0.03,
+    "asof": "2026-11-02",
+    "why": "The 10-year Treasury yield declined slightly as crude oil prices fell for a second consecutive day, driven by hopes for a diplomatic resolution to the Iran conflict. This reduction in oil prices can ease inflation concerns, which typically allows for lower bond yields. Some analysts also advise adding bonds given the current market setup."
   },
   "vix": {
-    "value": 19.42,
-    "change": 2.22,
-    "asof": "2026-10-30",
-    "why": "The VIX index, also known as the fear index, increased, which generally correlates with a decline in the broader stock market, indicating increased investor uncertainty."
+    "value": 21.15,
+    "change": 1.73,
+    "asof": "2026-11-02",
+    "why": "The VIX rose, indicating an increase in market volatility. This rise coincided with a downturn in stock indices and concerns expressed by investors about a speculative \"casino\" market environment."
   },
   "breadth": {
     "sp500": {
-      "value": 63.7,
-      "asof": "2026-10-30",
+      "value": 61.6,
+      "asof": "2026-11-02",
       "status": "healthy",
       "matched": 498,
       "stale": false
     },
     "ndx100": {
-      "value": 58.3,
-      "asof": "2026-10-30",
+      "value": 55.2,
+      "asof": "2026-11-02",
       "status": "healthy",
       "matched": 96,
       "stale": false
@@ -51,27 +51,27 @@
     {
       "symbol": "SOXL",
       "what": "3x semiconductors",
-      "value": 77.05,
-      "day_move": -24.75,
-      "asof": "2026-10-30",
-      "rsi": 34.1,
+      "value": 68.17,
+      "day_move": -11.52,
+      "asof": "2026-11-02",
+      "rsi": 31.6,
       "rsi_zone": "neutral",
-      "low": 77.05,
+      "low": 68.17,
       "high": 164.27,
       "band_pct": 0.0,
       "zone": "low",
       "action": "buy",
-      "read": "Within 4% of its 1-month low. Big session: down 24.7% in a day."
+      "read": "Within 4% of its 1-month low. Big session: down 11.5% in a day."
     },
     {
       "symbol": "SPXL",
       "what": "3x S&P 500",
-      "value": 270.35,
-      "day_move": -5.36,
-      "asof": "2026-10-30",
-      "rsi": 39.0,
+      "value": 266.32,
+      "day_move": -1.49,
+      "asof": "2026-11-02",
+      "rsi": 36.9,
       "rsi_zone": "neutral",
-      "low": 270.35,
+      "low": 266.32,
       "high": 299.21,
       "band_pct": 0.0,
       "zone": "low",
@@ -81,17 +81,17 @@
     {
       "symbol": "TQQQ",
       "what": "3x Nasdaq-100",
-      "value": 62.01,
-      "day_move": -10.47,
-      "asof": "2026-10-30",
-      "rsi": 33.9,
+      "value": 59.46,
+      "day_move": -4.11,
+      "asof": "2026-11-02",
+      "rsi": 31.5,
       "rsi_zone": "neutral",
-      "low": 62.01,
+      "low": 59.46,
       "high": 84.25,
       "band_pct": 0.0,
       "zone": "low",
       "action": "buy",
-      "read": "Within 4% of its 1-month low. Big session: down 10.5% in a day."
+      "read": "Within 4% of its 1-month low."
     }
   ],
   "watchlist_missing": [],
@@ -99,9 +99,18 @@
     "value": 7.24,
     "change": -0.08,
     "asof": "2026-10-29",
-    "why": "The 30-year fixed mortgage rate, as reported in a weekly Freddie Mac survey, decreased. This movement is consistent with the direction of the 10-year Treasury yield, which also moved lower over recent days."
+    "why": "The 30-year fixed mortgage rate decreased slightly in the weekly survey released on October 29. Mortgage rates generally follow the direction of the 10-year Treasury yield, which experienced a slight decline in recent days."
   },
-  "policy": [],
+  "policy": [
+    {
+      "what_happened": "Temporary regulations were issued concerning a new nonrefundable Federal tax credit for qualified contributions to scholarship granting organizations.",
+      "effect": "A new nonrefundable Federal tax credit becomes available for qualified contributions to scholarship granting organizations in 2027 and later taxable years.",
+      "url": "https://www.federalregister.gov/documents/2026/10/02/2026-20264/federal-scholarship-tax-credit",
+      "status": "Final rule",
+      "effective_date": "2026-12-01",
+      "source": "Federal Register"
+    }
+  ],
   "policy_upcoming": [
     {
       "what_happened": "This document contains final regulations regarding the deduction for certain taxpayers for an amount up to $10,000 of qualified passenger vehicle loan interest.",
@@ -109,6 +118,14 @@
       "url": "https://www.federalregister.gov/documents/2026/09/08/2026-18219/car-loan-interest-deduction",
       "status": "Final rule",
       "effective_date": "2026-11-09",
+      "source": "Federal Register"
+    },
+    {
+      "what_happened": "Temporary regulations were issued concerning a new nonrefundable Federal tax credit for qualified contributions to scholarship granting organizations.",
+      "effect": "A new nonrefundable Federal tax credit becomes available for qualified contributions to scholarship granting organizations in 2027 and later taxable years.",
+      "url": "https://www.federalregister.gov/documents/2026/10/02/2026-20264/federal-scholarship-tax-credit",
+      "status": "Final rule",
+      "effective_date": "2026-12-01",
       "source": "Federal Register"
     },
     {
@@ -136,7 +153,16 @@
       "source": "Utah Legislature"
     }
   ],
-  "policy_week": [],
+  "policy_week": [
+    {
+      "what_happened": "Temporary regulations were issued concerning a new nonrefundable Federal tax credit for qualified contributions to scholarship granting organizations.",
+      "effect": "A new nonrefundable Federal tax credit becomes available for qualified contributions to scholarship granting organizations in 2027 and later taxable years.",
+      "url": "https://www.federalregister.gov/documents/2026/10/02/2026-20264/federal-scholarship-tax-credit",
+      "status": "Final rule",
+      "effective_date": "2026-12-01",
+      "source": "Federal Register"
+    }
+  ],
   "policy_calendar": [
     {
       "date": "2026-11-05",
@@ -159,70 +185,70 @@
   ],
   "tech": [
     {
-      "summary": "AI company Anthropic updated its S-1 prospectus, reporting $17 billion in Q3 revenue and $895.4 billion in purchase commitments, indicating strong financial activity ahead of a potential IPO.",
-      "source": "CNBC",
-      "url": "https://www.cnbc.com/2026/11/02/anthropic-ant-s-1-quarter-financials.html"
+      "summary": "Mercedes-Benz is introducing a new holographic heads-up display, aiming to project information directly onto the windshield, moving beyond traditional screens in vehicle interiors.",
+      "source": "Ars Technica",
+      "url": "https://arstechnica.com/cars/2026/11/beyond-screens-mercedes-benzs-new-holographic-heads-up-display/"
     },
     {
-      "summary": "Oracle filed plans to issue $20 billion in new stock and bonds to finance its significant expansion in artificial intelligence infrastructure, highlighting the substantial investment required for AI development.",
-      "source": "CNBC",
-      "url": "https://www.cnbc.com/2026/11/02/oracle-files-to-sell-20-billion-in-new-stock-bonds-to-finance-ai-buildout.html"
+      "summary": "Bambu's new H3C 3D printer features nine nozzles, signaling an evolution in 3D printing that allows for on-the-fly swapping of materials, mixing of colors, and combining soft and hard materials.",
+      "source": "The Verge",
+      "url": "https://www.theverge.com/tech/1024978/bambu-h3c-color-mixing-toolchanger-3d-printer-trend"
     },
     {
-      "summary": "OpenAI is deepening its presence in Abu Dhabi, with CEO Sam Altman signing four agreements covering energy, government, and investment sectors, as the company expands its global AI initiatives.",
-      "source": "CNBC",
-      "url": "https://www.cnbc.com/2026/11/02/openai-abu-dhabi-ai-deals.html"
+      "summary": "A new approach called \"reverse game theory\" is being explored to control powerful AI models, designing systems that incentivize them to adhere to established rules and human desires.",
+      "source": "MIT Technology Review",
+      "url": "https://www.technologyreview.com/2026/11/03/1147934/reverse-game-theory-mechanism-design-ai-alignment/"
     }
   ],
   "world": [
     {
-      "summary": "Supermarket chains in at least seven European countries, including Belgium, Estonia, and Sweden, reported a suspected cyber-attack that caused temperatures in refrigerators and freezers to soar overnight, echoing a similar incident last month.",
+      "summary": "Supermarket freezers across Europe have been targeted in cyberattacks, with incidents reported in ten countries from Estonia to Portugal, forcing retailers to discard spoiled food.",
+      "source": "BBC World",
+      "url": "https://www.bbc.co.uk/news/articles/cwy8lm1m59mvo?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "summary": "The Indian navy rescued 20 crew members from an Iranian fishing boat that had been hijacked off the coast of Somalia, following a resurgence of piracy in the Gulf of Aden and western Indian Ocean.",
+      "source": "NPR",
+      "url": "https://www.npr.org/2026/11/03/g-s1-151468/indian-navy-rescues-20-crew-from-iranian-fishing-boat-hijacked-off-somalia"
+    },
+    {
+      "summary": "The US launched limited strikes on Iran\n\u2019s Qeshm Island, reportedly targeting surface-to-air missiles, hours after a US vice-president expressed optimism about diplomatic efforts to resolve the conflict.",
       "source": "Guardian World",
-      "url": "https://www.theguardian.com/world/2026/nov/02/supermarket-freezers-across-europe-hit-by-second-suspected-cyber-attack"
+      "url": "https://www.theguardian.com/world/2026/nov/03/us-strikes-irans-qeshm-island"
     },
     {
-      "summary": "China is increasing its diplomatic engagement in the Middle East, with meetings involving Iran and Oman, and Beijing is urging dialogue regarding the US-Iran situation as it hosts the first Omani head of state visit since 1978.",
-      "source": "Al Jazeera",
-      "url": "https://www.aljazeera.com/news/2026/11/2/china-steps-up-middle-east-diplomacy-with-iran-and-oman-meetings?traffic_source=rss"
-    },
-    {
-      "summary": "The World Health Organization (WHO) reported that renewed fighting in northern Ethiopia is pushing the region's health system towards collapse, undermining a 2022 peace agreement.",
-      "source": "Al Jazeera",
-      "url": "https://www.aljazeera.com/news/2026/11/2/violence-in-northern-ethiopia-pushing-health-system-towards-collapse-who?traffic_source=rss"
-    },
-    {
-      "summary": "The UK Home Secretary, Shabana Mahmood, softened immigration proposals for care workers, allowing approximately 300,000 individuals to apply for indefinite leave to remain after five years, rather than the originally proposed 15 years, following cabinet discussions.",
+      "summary": "King Charles delivered a speech at the Commonwealth Heads of Government Meeting in Antigua, acknowledging Britain\n\u2019s \"shameful\" role in the slave trade but stopping short of a formal apology.",
       "source": "Guardian World",
-      "url": "https://www.theguardian.com/uk-news/2026/nov/02/shabana-mahmood-softens-immigration-plans-cabinet-backlash-leave-to-remain"
+      "url": "https://www.theguardian.com/politics/live/2026/nov/03/shabana-mahmood-migration-brexit-eu-labour-andy-burnham-kemi-badenoch-king-charles-commonwealth-uk-politics-latest-news"
     }
   ],
   "us": [
     {
-      "summary": "All nine people on board a business jet died when the aircraft crashed into a Florida neighborhood after departing from Austin, Texas, and being en route to the Bahamas.",
+      "summary": "Federal authorities are investigating the cause of a deadly plane crash in South Florida that killed nine people when a Learjet nosedived and erupted into a fireball near a busy roadway.",
       "source": "NPR National",
-      "url": "https://www.npr.org/2026/11/02/g-s1-151211/south-florida-jet-crash"
+      "url": "https://www.npr.org/2026/11/03/nx-s1-6026568/federal-authorities-investigate-cause-of-deadly-plane-crash-in-florida"
     },
     {
-      "summary": "A federal judge dismissed Donald Trump's $10 billion lawsuit against The Wall Street Journal and Rupert Murdoch over a story reporting on his ties to Jeffrey Epstein.",
-      "source": "NPR National",
-      "url": "https://www.npr.org/2026/11/01/nx-s1-6025342/judge-dismisses-trump-suit-against-wall-street-journal-epstein-letter"
+      "summary": "A federal district court judge dismissed a lawsuit filed by the Trump administration seeking individual applicant records from Harvard, citing the government's failure to meet procedural requirements.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/education/2026/nov/03/harvard-trump-lawsuit-dismissed-admissions-data"
     },
     {
-      "summary": "Communities in the Southwest's 'Four Corners' region are bracing for more flooding, following weeks of devastating storms that have impacted parts of the area.",
-      "source": "NPR National",
-      "url": "https://www.npr.org/2026/10/31/nx-s1-6023454/devastating-storms-continue-to-hit-southwest-four-corners-region"
+      "summary": "The US Department of Justice is funding research aimed at exploring a potential link between gender dysphoria and violent crime, with grants up to $1 million for relevant studies.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/us-news/2026/nov/03/doj-research-gender-dysphoria-violent-crime"
     }
   ],
   "science": [
     {
-      "summary": "A family's dedicated fundraising efforts helped secure the Food and Drug Administration's approval of a gene therapy for Sanfilippo syndrome, offering a new treatment option for those affected.",
+      "summary": "New successes with mRNA technology are generating excitement among researchers and patients, offering hope for the development of cancer vaccines after decades of effort.",
       "source": "NPR Health",
-      "url": "https://www.npr.org/2026/11/01/nx-s1-6014739/sanfilippo-gene-therapy-fayuvi"
+      "url": "https://www.npr.org/2026/11/02/nx-s1-6009085/mrna-cancer-vaccine-pancreatic-skin"
     },
     {
-      "summary": "To recognize the signs of a stroke, health experts advise remembering the acronym BE FAST: Balance, Eyes, Face, Arm, Speech, Time, and to call 911 immediately if symptoms appear.",
+      "summary": "The Food and Drug Administration has approved a gene therapy, following years of research supported by a family affected by Sanfilippo syndrome, marking a significant advancement for the condition.",
       "source": "NPR Health",
-      "url": "https://www.npr.org/2026/11/01/nx-s1-6025502/stroke-acronym-be-fast"
+      "url": "https://www.npr.org/2026/11/01/nx-s1-6014739/sanfilippo-gene-therapy-fayuvi"
     }
   ],
   "weekly_recap": null,

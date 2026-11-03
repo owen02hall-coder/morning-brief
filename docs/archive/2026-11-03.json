@@ -1,0 +1,271 @@
+{
+  "generated_at": "2026-11-03T08:18:01.541960-07:00",
+  "date": "2026-11-03",
+  "tldr": [
+    "Widespread cyberattacks have targeted supermarket freezers across ten European countries, leading to food spoilage and prompting cybersecurity investigations.",
+    "Advances in mRNA technology and gene therapy are showing promise, with researchers exploring mRNA vaccines for cancer and gene therapy for rare genetic diseases receiving FDA approval.",
+    "Global food security faces threats as attacks on grain shipments from Russia and Ukraine may lead to increased food prices, particularly impacting import-dependent nations."
+  ],
+  "market": {
+    "sp500": {
+      "value": 7541.4,
+      "change": -38.67,
+      "asof": "2026-11-02"
+    },
+    "ndx": {
+      "value": 25164.31,
+      "change": -272.69,
+      "asof": "2026-11-02"
+    },
+    "why": "The stock market closed lower, influenced by disappointing third-quarter earnings reports from major companies like Shopify and Apple, which missed revenue estimates. This also comes amid warnings from investors about a \"casino type\" market and broader vulnerability due to inflation limiting central bank's ability to ease rates."
+  },
+  "yield_10y": {
+    "value": 4.89,
+    "change": -0.03,
+    "asof": "2026-11-02",
+    "why": "The 10-year Treasury yield declined slightly as crude oil prices fell for a second consecutive day, driven by hopes for a diplomatic resolution to the Iran conflict. This reduction in oil prices can ease inflation concerns, which typically allows for lower bond yields. Some analysts also advise adding bonds given the current market setup."
+  },
+  "vix": {
+    "value": 21.15,
+    "change": 1.73,
+    "asof": "2026-11-02",
+    "why": "The VIX rose, indicating an increase in market volatility. This rise coincided with a downturn in stock indices and concerns expressed by investors about a speculative \"casino\" market environment."
+  },
+  "breadth": {
+    "sp500": {
+      "value": 61.6,
+      "asof": "2026-11-02",
+      "status": "healthy",
+      "matched": 498,
+      "stale": false
+    },
+    "ndx100": {
+      "value": 55.2,
+      "asof": "2026-11-02",
+      "status": "healthy",
+      "matched": 96,
+      "stale": false
+    }
+  },
+  "watchlist": [
+    {
+      "symbol": "SOXL",
+      "what": "3x semiconductors",
+      "value": 68.17,
+      "day_move": -11.52,
+      "asof": "2026-11-02",
+      "rsi": 31.6,
+      "rsi_zone": "neutral",
+      "low": 68.17,
+      "high": 164.27,
+      "band_pct": 0.0,
+      "zone": "low",
+      "action": "buy",
+      "read": "Within 4% of its 1-month low. Big session: down 11.5% in a day."
+    },
+    {
+      "symbol": "SPXL",
+      "what": "3x S&P 500",
+      "value": 266.32,
+      "day_move": -1.49,
+      "asof": "2026-11-02",
+      "rsi": 36.9,
+      "rsi_zone": "neutral",
+      "low": 266.32,
+      "high": 299.21,
+      "band_pct": 0.0,
+      "zone": "low",
+      "action": "buy",
+      "read": "Within 4% of its 1-month low."
+    },
+    {
+      "symbol": "TQQQ",
+      "what": "3x Nasdaq-100",
+      "value": 59.46,
+      "day_move": -4.11,
+      "asof": "2026-11-02",
+      "rsi": 31.5,
+      "rsi_zone": "neutral",
+      "low": 59.46,
+      "high": 84.25,
+      "band_pct": 0.0,
+      "zone": "low",
+      "action": "buy",
+      "read": "Within 4% of its 1-month low."
+    }
+  ],
+  "watchlist_missing": [],
+  "mortgage": {
+    "value": 7.24,
+    "change": -0.08,
+    "asof": "2026-10-29",
+    "why": "The 30-year fixed mortgage rate decreased slightly in the weekly survey released on October 29. Mortgage rates generally follow the direction of the 10-year Treasury yield, which experienced a slight decline in recent days."
+  },
+  "policy": [
+    {
+      "what_happened": "Temporary regulations were issued concerning a new nonrefundable Federal tax credit for qualified contributions to scholarship granting organizations.",
+      "effect": "A new nonrefundable Federal tax credit becomes available for qualified contributions to scholarship granting organizations in 2027 and later taxable years.",
+      "url": "https://www.federalregister.gov/documents/2026/10/02/2026-20264/federal-scholarship-tax-credit",
+      "status": "Final rule",
+      "effective_date": "2026-12-01",
+      "source": "Federal Register"
+    }
+  ],
+  "policy_upcoming": [
+    {
+      "what_happened": "This document contains final regulations regarding the deduction for certain taxpayers for an amount up to $10,000 of qualified passenger vehicle loan interest.",
+      "effect": "You can deduct up to $10,000 of qualified passenger vehicle loan interest.",
+      "url": "https://www.federalregister.gov/documents/2026/09/08/2026-18219/car-loan-interest-deduction",
+      "status": "Final rule",
+      "effective_date": "2026-11-09",
+      "source": "Federal Register"
+    },
+    {
+      "what_happened": "Temporary regulations were issued concerning a new nonrefundable Federal tax credit for qualified contributions to scholarship granting organizations.",
+      "effect": "A new nonrefundable Federal tax credit becomes available for qualified contributions to scholarship granting organizations in 2027 and later taxable years.",
+      "url": "https://www.federalregister.gov/documents/2026/10/02/2026-20264/federal-scholarship-tax-credit",
+      "status": "Final rule",
+      "effective_date": "2026-12-01",
+      "source": "Federal Register"
+    },
+    {
+      "what_happened": "Final rules set forth requirements for price transparency reporting for non-grandfathered group health plans and health insurance issuers.",
+      "effect": "Your employer health insurance plan has new price transparency reporting requirements that become effective on December 7, 2026.",
+      "url": "https://www.federalregister.gov/documents/2026/10/06/2026-20447/transparency-in-coverage",
+      "status": "Final rule",
+      "effective_date": "2026-12-07",
+      "source": "Federal Register"
+    },
+    {
+      "what_happened": "A Utah bill modifies provisions related to the property tax exemption process.",
+      "effect": "Once you own a home, you will have deadlines for filing an application for a property tax exemption with the county board of equalization and for the board to render a decision.",
+      "url": "https://le.utah.gov/~2026/bills/static/SB0236.html",
+      "status": "Signed in Utah",
+      "effective_date": "2027-01-01",
+      "source": "Utah Legislature"
+    },
+    {
+      "what_happened": "A bill amends requirements for health insurance preauthorization in Utah.",
+      "effect": "Your health insurer must make an authorization or adverse preauthorization determination within a defined maximum time.",
+      "url": "https://le.utah.gov/~2026/bills/static/SB0319.html",
+      "status": "Signed in Utah",
+      "effective_date": "2027-01-01",
+      "source": "Utah Legislature"
+    }
+  ],
+  "policy_week": [
+    {
+      "what_happened": "Temporary regulations were issued concerning a new nonrefundable Federal tax credit for qualified contributions to scholarship granting organizations.",
+      "effect": "A new nonrefundable Federal tax credit becomes available for qualified contributions to scholarship granting organizations in 2027 and later taxable years.",
+      "url": "https://www.federalregister.gov/documents/2026/10/02/2026-20264/federal-scholarship-tax-credit",
+      "status": "Final rule",
+      "effective_date": "2026-12-01",
+      "source": "Federal Register"
+    }
+  ],
+  "policy_calendar": [
+    {
+      "date": "2026-11-05",
+      "label": "IRS 401(k) and IRA contribution limits for next year \u2014 expected late October or early November",
+      "note": "The annual cost-of-living adjustment notice, historically released within a week or two of the bracket figures. It sets how much can go into a 401(k) and an IRA next year.",
+      "url": "https://www.irs.gov/retirement-plans/cola-increases-for-dollar-limitations-on-benefits-and-contributions"
+    },
+    {
+      "date": "2026-11-10",
+      "label": "IRS tax brackets and the married-filing-jointly standard deduction for next year \u2014 expected late October or early November",
+      "note": "Published as an annual inflation-adjustment revenue procedure; recent releases landed between mid-October and mid-November. These are the bracket thresholds and the standard deduction the next return is filed against.",
+      "url": "https://www.irs.gov/filing/federal-income-tax-rates-and-brackets"
+    },
+    {
+      "date": "2026-11-30",
+      "label": "FHFA conforming loan limit for next year \u2014 expected late November",
+      "note": "The cap on a conforming (non-jumbo) mortgage, and the line between a normal rate and a jumbo one. FHFA has announced it in the last days of November each year, and the new limit applies to loans made from January 1.",
+      "url": "https://www.fhfa.gov/data/conforming-loan-limit"
+    }
+  ],
+  "tech": [
+    {
+      "summary": "Mercedes-Benz is introducing a new holographic heads-up display, aiming to project information directly onto the windshield, moving beyond traditional screens in vehicle interiors.",
+      "source": "Ars Technica",
+      "url": "https://arstechnica.com/cars/2026/11/beyond-screens-mercedes-benzs-new-holographic-heads-up-display/"
+    },
+    {
+      "summary": "Bambu's new H3C 3D printer features nine nozzles, signaling an evolution in 3D printing that allows for on-the-fly swapping of materials, mixing of colors, and combining soft and hard materials.",
+      "source": "The Verge",
+      "url": "https://www.theverge.com/tech/1024978/bambu-h3c-color-mixing-toolchanger-3d-printer-trend"
+    },
+    {
+      "summary": "A new approach called \"reverse game theory\" is being explored to control powerful AI models, designing systems that incentivize them to adhere to established rules and human desires.",
+      "source": "MIT Technology Review",
+      "url": "https://www.technologyreview.com/2026/11/03/1147934/reverse-game-theory-mechanism-design-ai-alignment/"
+    }
+  ],
+  "world": [
+    {
+      "summary": "Supermarket freezers across Europe have been targeted in cyberattacks, with incidents reported in ten countries from Estonia to Portugal, forcing retailers to discard spoiled food.",
+      "source": "BBC World",
+      "url": "https://www.bbc.co.uk/news/articles/cwy8lm1m59mvo?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "summary": "The Indian navy rescued 20 crew members from an Iranian fishing boat that had been hijacked off the coast of Somalia, following a resurgence of piracy in the Gulf of Aden and western Indian Ocean.",
+      "source": "NPR",
+      "url": "https://www.npr.org/2026/11/03/g-s1-151468/indian-navy-rescues-20-crew-from-iranian-fishing-boat-hijacked-off-somalia"
+    },
+    {
+      "summary": "The US launched limited strikes on Iran\n\u2019s Qeshm Island, reportedly targeting surface-to-air missiles, hours after a US vice-president expressed optimism about diplomatic efforts to resolve the conflict.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/world/2026/nov/03/us-strikes-irans-qeshm-island"
+    },
+    {
+      "summary": "King Charles delivered a speech at the Commonwealth Heads of Government Meeting in Antigua, acknowledging Britain\n\u2019s \"shameful\" role in the slave trade but stopping short of a formal apology.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/politics/live/2026/nov/03/shabana-mahmood-migration-brexit-eu-labour-andy-burnham-kemi-badenoch-king-charles-commonwealth-uk-politics-latest-news"
+    }
+  ],
+  "us": [
+    {
+      "summary": "Federal authorities are investigating the cause of a deadly plane crash in South Florida that killed nine people when a Learjet nosedived and erupted into a fireball near a busy roadway.",
+      "source": "NPR National",
+      "url": "https://www.npr.org/2026/11/03/nx-s1-6026568/federal-authorities-investigate-cause-of-deadly-plane-crash-in-florida"
+    },
+    {
+      "summary": "A federal district court judge dismissed a lawsuit filed by the Trump administration seeking individual applicant records from Harvard, citing the government's failure to meet procedural requirements.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/education/2026/nov/03/harvard-trump-lawsuit-dismissed-admissions-data"
+    },
+    {
+      "summary": "The US Department of Justice is funding research aimed at exploring a potential link between gender dysphoria and violent crime, with grants up to $1 million for relevant studies.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/us-news/2026/nov/03/doj-research-gender-dysphoria-violent-crime"
+    }
+  ],
+  "science": [
+    {
+      "summary": "New successes with mRNA technology are generating excitement among researchers and patients, offering hope for the development of cancer vaccines after decades of effort.",
+      "source": "NPR Health",
+      "url": "https://www.npr.org/2026/11/02/nx-s1-6009085/mrna-cancer-vaccine-pancreatic-skin"
+    },
+    {
+      "summary": "The Food and Drug Administration has approved a gene therapy, following years of research supported by a family affected by Sanfilippo syndrome, marking a significant advancement for the condition.",
+      "source": "NPR Health",
+      "url": "https://www.npr.org/2026/11/01/nx-s1-6014739/sanfilippo-gene-therapy-fayuvi"
+    }
+  ],
+  "weekly_recap": null,
+  "data_availability": {
+    "sp500": true,
+    "ndx": true,
+    "vix": true,
+    "ten_year": true,
+    "news_world": true,
+    "news_us": true,
+    "news_science": true,
+    "news_business": true,
+    "news_tech": true,
+    "summary": "ok",
+    "breadth": true,
+    "policy": true,
+    "mortgage": true,
+    "watchlist": true
+  }
+}
