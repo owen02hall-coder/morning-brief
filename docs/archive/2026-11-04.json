@@ -1,0 +1,262 @@
+{
+  "generated_at": "2026-11-04T08:32:09.789169-07:00",
+  "date": "2026-11-04",
+  "tldr": [
+    "Democrats gained full control of both houses of the U.S. Congress in the recent midterm elections.",
+    "Cocaine has become the leading cause of drug deaths in England and Wales, surpassing heroin, with a significant increase in related fatalities since 2010.",
+    "New advancements in mRNA technology are showing promise in the development of cancer vaccines, with researchers reporting recent successes."
+  ],
+  "market": {
+    "sp500": {
+      "value": 7568.92,
+      "change": 27.52,
+      "asof": "2026-11-03"
+    },
+    "ndx": {
+      "value": 25372.01,
+      "change": 207.7,
+      "asof": "2026-11-03"
+    },
+    "why": "The S&P 500 and Nasdaq Composite both closed higher, as Wall Street reacted positively to the Democratic victories in the U.S. midterm elections, which saw the party gain control of Congress."
+  },
+  "yield_10y": {
+    "value": 4.95,
+    "change": 0.06,
+    "asof": "2026-11-03",
+    "why": "The 10-year Treasury yield saw a slight increase as traders assessed the implications of the Democratic midterm election victories."
+  },
+  "vix": {
+    "value": 20.83,
+    "change": -0.32,
+    "asof": "2026-11-03",
+    "why": "The articles do not provide a reason for the VIX change."
+  },
+  "breadth": {
+    "sp500": {
+      "value": 63.1,
+      "asof": "2026-11-03",
+      "status": "healthy",
+      "matched": 498,
+      "stale": false
+    },
+    "ndx100": {
+      "value": 57.3,
+      "asof": "2026-11-03",
+      "status": "healthy",
+      "matched": 96,
+      "stale": false
+    }
+  },
+  "watchlist": [
+    {
+      "symbol": "SOXL",
+      "what": "3x semiconductors",
+      "value": 73.12,
+      "day_move": 7.26,
+      "asof": "2026-11-03",
+      "rsi": 34.5,
+      "rsi_zone": "neutral",
+      "low": 68.17,
+      "high": 164.26,
+      "band_pct": 5.2,
+      "zone": "mid",
+      "action": "hold",
+      "read": "Mid-range - 5% of the way up its 1-month band. Big session: up 7.3% in a day."
+    },
+    {
+      "symbol": "SPXL",
+      "what": "3x S&P 500",
+      "value": 268.76,
+      "day_move": 0.92,
+      "asof": "2026-11-03",
+      "rsi": 39.1,
+      "rsi_zone": "neutral",
+      "low": 266.32,
+      "high": 299.21,
+      "band_pct": 7.4,
+      "zone": "low",
+      "action": "buy",
+      "read": "Within 4% of its 1-month low."
+    },
+    {
+      "symbol": "TQQQ",
+      "what": "3x Nasdaq-100",
+      "value": 60.55,
+      "day_move": 1.83,
+      "asof": "2026-11-03",
+      "rsi": 33.7,
+      "rsi_zone": "neutral",
+      "low": 59.46,
+      "high": 84.25,
+      "band_pct": 4.4,
+      "zone": "low",
+      "action": "buy",
+      "read": "Within 4% of its 1-month low."
+    }
+  ],
+  "watchlist_missing": [],
+  "mortgage": {
+    "value": 7.24,
+    "change": -0.08,
+    "asof": "2026-10-29",
+    "why": "The Freddie Mac 30-year fixed mortgage rate decreased in its latest weekly survey. The provided articles do not offer a specific reason for this particular weekly decline in mortgage rates."
+  },
+  "policy": [],
+  "policy_upcoming": [
+    {
+      "what_happened": "This document contains final regulations regarding the deduction for certain taxpayers for an amount up to $10,000 of qualified passenger vehicle loan interest.",
+      "effect": "You can deduct up to $10,000 of qualified passenger vehicle loan interest.",
+      "url": "https://www.federalregister.gov/documents/2026/09/08/2026-18219/car-loan-interest-deduction",
+      "status": "Final rule",
+      "effective_date": "2026-11-09",
+      "source": "Federal Register"
+    },
+    {
+      "what_happened": "Temporary regulations were issued concerning a new nonrefundable Federal tax credit for qualified contributions to scholarship granting organizations.",
+      "effect": "A new nonrefundable Federal tax credit becomes available for qualified contributions to scholarship granting organizations in 2027 and later taxable years.",
+      "url": "https://www.federalregister.gov/documents/2026/10/02/2026-20264/federal-scholarship-tax-credit",
+      "status": "Final rule",
+      "effective_date": "2026-12-01",
+      "source": "Federal Register"
+    },
+    {
+      "what_happened": "Final rules set forth requirements for price transparency reporting for non-grandfathered group health plans and health insurance issuers.",
+      "effect": "Your employer health insurance plan has new price transparency reporting requirements that become effective on December 7, 2026.",
+      "url": "https://www.federalregister.gov/documents/2026/10/06/2026-20447/transparency-in-coverage",
+      "status": "Final rule",
+      "effective_date": "2026-12-07",
+      "source": "Federal Register"
+    },
+    {
+      "what_happened": "A Utah bill modifies provisions related to the property tax exemption process.",
+      "effect": "Once you own a home, you will have deadlines for filing an application for a property tax exemption with the county board of equalization and for the board to render a decision.",
+      "url": "https://le.utah.gov/~2026/bills/static/SB0236.html",
+      "status": "Signed in Utah",
+      "effective_date": "2027-01-01",
+      "source": "Utah Legislature"
+    },
+    {
+      "what_happened": "A bill amends requirements for health insurance preauthorization in Utah.",
+      "effect": "Your health insurer must make an authorization or adverse preauthorization determination within a defined maximum time.",
+      "url": "https://le.utah.gov/~2026/bills/static/SB0319.html",
+      "status": "Signed in Utah",
+      "effective_date": "2027-01-01",
+      "source": "Utah Legislature"
+    }
+  ],
+  "policy_week": [
+    {
+      "what_happened": "Temporary regulations were issued concerning a new nonrefundable Federal tax credit for qualified contributions to scholarship granting organizations.",
+      "effect": "A new nonrefundable Federal tax credit becomes available for qualified contributions to scholarship granting organizations in 2027 and later taxable years.",
+      "url": "https://www.federalregister.gov/documents/2026/10/02/2026-20264/federal-scholarship-tax-credit",
+      "status": "Final rule",
+      "effective_date": "2026-12-01",
+      "source": "Federal Register"
+    }
+  ],
+  "policy_calendar": [
+    {
+      "date": "2026-11-05",
+      "label": "IRS 401(k) and IRA contribution limits for next year \u2014 expected late October or early November",
+      "note": "The annual cost-of-living adjustment notice, historically released within a week or two of the bracket figures. It sets how much can go into a 401(k) and an IRA next year.",
+      "url": "https://www.irs.gov/retirement-plans/cola-increases-for-dollar-limitations-on-benefits-and-contributions"
+    },
+    {
+      "date": "2026-11-10",
+      "label": "IRS tax brackets and the married-filing-jointly standard deduction for next year \u2014 expected late October or early November",
+      "note": "Published as an annual inflation-adjustment revenue procedure; recent releases landed between mid-October and mid-November. These are the bracket thresholds and the standard deduction the next return is filed against.",
+      "url": "https://www.irs.gov/filing/federal-income-tax-rates-and-brackets"
+    },
+    {
+      "date": "2026-11-30",
+      "label": "FHFA conforming loan limit for next year \u2014 expected late November",
+      "note": "The cap on a conforming (non-jumbo) mortgage, and the line between a normal rate and a jumbo one. FHFA has announced it in the last days of November each year, and the new limit applies to loans made from January 1.",
+      "url": "https://www.fhfa.gov/data/conforming-loan-limit"
+    }
+  ],
+  "tech": [
+    {
+      "summary": "The Bluetooth Special Interest Group has adopted Bluetooth High Data Throughput (HDT) as an optional feature, increasing Bluetooth LE's maximum bit rate from 2 Mbps to 7.5 Mbps.",
+      "source": "The Verge",
+      "url": "https://www.theverge.com/tech/1026308/bluetooth-le-sig-high-data-throughput-hdt"
+    },
+    {
+      "summary": "SpaceX is partnering with Qualcomm to build out its Starlink Mobile 5G network across the U.S., integrating Qualcomm's Dragonwing technology into thousands of cell sites, with initial deployments expected in 2027.",
+      "source": "The Verge",
+      "url": "https://www.theverge.com/science/1026287/spacex-qualcomm-starlink-mobile-5g-netwowrk"
+    },
+    {
+      "summary": "U.S. voters rejected data centers in various ballot measures, raising long-term questions about the expansion of AI infrastructure, particularly in states like Texas.",
+      "source": "Semafor",
+      "url": "https://www.semafor.com/article/11/04/2026/us-voters-roundly-reject-data-centers-in-ballot-measures"
+    }
+  ],
+  "world": [
+    {
+      "summary": "Democrats gained control of both the Senate and House in the U.S. midterm elections, marking a significant change in legislative power.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/us-news/live/2026/nov/04/midterm-elections-results-senate-house-michigan-maine-mississippi-latest-updates"
+    },
+    {
+      "summary": "Ukrainian President Volodymyr Zelenskyy reported that 40 people have been confirmed dead following a Russian attack on a school in Komyshuvakha in the Zaporizhzhia region.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/world/live/2026/nov/04/eu-ukraine-russia-france-germany-us-nato-europe-latest-news"
+    },
+    {
+      "summary": "Cocaine has become the leading cause of drug-related deaths in England and Wales, with figures from the Office for National Statistics showing 1,233 cocaine-related deaths last year, an eight-fold increase since 2010.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/society/2026/nov/04/cocaine-overtakes-heroin-drug-deaths-england-wales"
+    },
+    {
+      "summary": "The UN refugee agency has expressed significant concerns over a UK government plan that could require refugees to wait up to 30 years before receiving permission to settle in the country.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/world/2026/nov/04/unhcr-criticises-uks-30-year-earned-settlement-plans-for-refugees"
+    }
+  ],
+  "us": [
+    {
+      "summary": "Hakeem Jeffries is poised to become the first Black Speaker of the House following Democratic victories in the midterm elections.",
+      "source": "NPR National",
+      "url": "https://www.npr.org/2026/11/04/g-s1-150030/hakeem-jeffries-speaker-of-the-house-midterms"
+    },
+    {
+      "summary": "The 2026 midterm elections saw several historic firsts, including the election of the nation's first Black woman governor, first Native American woman governor, first Black governor of Nevada, first Black governor of Wisconsin, and the first Muslim American to serve in the Senate.",
+      "source": "NPR National",
+      "url": "https://www.npr.org/2026/11/04/nx-s1-6028546/governor-candidates-history-election-2026"
+    },
+    {
+      "summary": "Democrats achieved full control of Congress for the first time since 2023 by flipping multiple Senate seats in states including Kansas, Iowa, Texas, Maine, and Ohio.",
+      "source": "NPR National",
+      "url": "https://www.npr.org/2026/11/03/g-s1-149526/2026-midterms-congress-balance-of-power"
+    }
+  ],
+  "science": [
+    {
+      "summary": "New multi-cancer blood tests are being introduced in some GP surgeries to detect hard-to-diagnose abdominal cancers, such as liver, ovarian, and pancreatic cancer, at earlier stages.",
+      "source": "BBC Health",
+      "url": "https://www.bbc.co.uk/news/articles/cm9qz93ew22no?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "summary": "Researchers are making progress with mRNA technology in the pursuit of cancer vaccines, demonstrating recent successes that are generating excitement among patients and the medical community.",
+      "source": "NPR Health",
+      "url": "https://www.npr.org/2026/11/02/nx-s1-6009085/mrna-cancer-vaccine-pancreatic-skin"
+    }
+  ],
+  "weekly_recap": null,
+  "data_availability": {
+    "sp500": true,
+    "ndx": true,
+    "vix": true,
+    "ten_year": true,
+    "news_world": true,
+    "news_us": true,
+    "news_science": true,
+    "news_business": true,
+    "news_tech": true,
+    "summary": "ok",
+    "breadth": true,
+    "policy": true,
+    "mortgage": true,
+    "watchlist": true
+  }
+}

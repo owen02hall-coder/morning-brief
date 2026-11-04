@@ -1,22 +1,6 @@
 {
-  "generated_at": "2026-11-03T08:18:01.541960-07:00",
+  "generated_at": "2026-11-04T08:32:09.789169-07:00",
   "lessons": [
-    {
-      "id": "2026-09-01-manipulation-psychology",
-      "date": "2026-09-01",
-      "domain": "Thinking and people",
-      "title": "Recognizing Manipulation in Relationships",
-      "hook": "Being under someone else's control through subtle tactics can cost you your autonomy and lead to decisions you regret.",
-      "quick": "When someone acts to influence or control you in an underhanded or subtle way for their own personal gain, you are likely experiencing manipulation. This isn't just someone trying to convince you; it's a deliberate action that exploits your vulnerabilities. Manipulative people often use methods like seduction, suggestion, coercion, or even blackmail to achieve their objectives. Unlike general influence or persuasion, which can be harmless, manipulation is considered a dishonest form of social interaction because it works at your expense. It's important to remember that such behavior is fundamentally intentional, with the manipulator fully aware of their actions and what they intend to get from you.",
-      "more": "Manipulation differs significantly from simple persuasion because it actively exploits your weaknesses, rather than just presenting a viewpoint. Non-manipulative influence allows you the clear right to accept or reject it without undue pressure, but manipulation often feels coercive. The person manipulating you is typically driven by self-serving goals and engages in what is considered antisocial behavior, contrasting sharply with pro-social actions meant to help others. They know exactly what they want out of the situation and the consequences of their deliberate actions, even if those consequences are harmful to you.",
-      "deep": "People who frequently resort to manipulation often exhibit certain personality traits that contribute to their behavior. These can include a notable lack of empathy, a high degree of narcissism, and a tendency to create self-serving rationalizations for their actions. Their interpersonal style is frequently marked by dominance and a certain cold-heartedness. Manipulators may employ a range of tactics to shape their environment or relationships to fit their personal needs. These strategies can be as seemingly benign as charm or reason, but can also involve more direct forms like silent treatment, coercion, or even debasement, all designed to get a specific reaction or outcome from you.",
-      "takeaway": "Pay close attention to whether someone's influence feels coercive or if they are subtly exploiting your vulnerabilities to achieve their own aims.",
-      "source": {
-        "title": "Manipulation (psychology)",
-        "url": "https://en.wikipedia.org/wiki/Manipulation_(psychology)"
-      },
-      "audio": {}
-    },
     {
       "id": "2026-09-02-tax-deduction",
       "date": "2026-09-02",
@@ -639,11 +623,7 @@
         "title": "Hypertension",
         "url": "https://en.wikipedia.org/wiki/Hypertension"
       },
-      "audio": {
-        "quick": "lessons/2026-10-11-hypertension-quick.mp3",
-        "more": "lessons/2026-10-11-hypertension-more.mp3",
-        "deep": "lessons/2026-10-11-hypertension-deep.mp3"
-      }
+      "audio": {}
     },
     {
       "id": "2026-10-12-ponzi-scheme",
@@ -1043,6 +1023,26 @@
         "quick": "lessons/2026-11-03-bleeding-quick.mp3",
         "more": "lessons/2026-11-03-bleeding-more.mp3",
         "deep": "lessons/2026-11-03-bleeding-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-11-04-confirmation-bias",
+      "date": "2026-11-04",
+      "domain": "Thinking and people",
+      "title": "How we confirm what we already believe",
+      "hook": "Our minds often trick us into seeing only what we expect, leading to poor choices without realizing it.",
+      "quick": "Many of our decisions are flawed because we unknowingly favor information that confirms what we already believe. This tendency is a common mental habit where we actively search for facts that support our existing views, interpret ambiguous evidence in a way that aligns with them, and even recall memories that fit our narrative. We might ignore or dismiss any information that contradicts what we think is true. This bias is strongest when we really want a particular outcome, when emotions are involved, or when our beliefs are deeply held. It can make us overconfident in our personal beliefs and can even strengthen those beliefs, despite evidence that suggests otherwise, leading us away from a clear understanding of reality.",
+      "more": "This happens because we tend to test our ideas in a one-sided way. Instead of looking at all the evidence objectively, we often search mainly for things that support our current assumptions. For instance, when trying to understand a situation, we might ask questions designed to elicit affirmative answers that confirm our theories, rather than exploring alternative possibilities. This preference for \"positive tests\" isn't always a bias on its own, as positive tests can be helpful. However, in complex real-world situations, where evidence is often mixed, this strategy can easily confirm an existing belief, regardless of its actual truth. This often leads us to focus on just one aspect of a situation while overlooking others.",
+      "deep": "The way a question is phrased can significantly influence the conclusions we draw because it guides our search for information. For example, people asked if they are \"happy with their social life\" report greater satisfaction than those asked if they are \"unhappy.\" In studies, when participants were asked \"which parent should have custody\" in a fictional case, they focused on positive traits and chose one parent. But when asked \"which parent should be denied custody,\" they focused on negative traits and often chose the same parent to be denied, effectively implying the other parent should get custody. This shows how our initial focus, influenced by a question's wording, shapes the evidence we look for. This automatic process isn't intentional deception; it's a fundamental aspect of how we process information, helping to explain why disagreements can become more extreme even when people share the same evidence, or why beliefs can persist after their supporting evidence is proven false.",
+      "takeaway": "Before making a decision, actively seek out and consider information that challenges your initial assumptions or preferences.",
+      "source": {
+        "title": "Confirmation bias",
+        "url": "https://en.wikipedia.org/wiki/Confirmation_bias"
+      },
+      "audio": {
+        "quick": "lessons/2026-11-04-confirmation-bias-quick.mp3",
+        "more": "lessons/2026-11-04-confirmation-bias-more.mp3",
+        "deep": "lessons/2026-11-04-confirmation-bias-deep.mp3"
       }
     }
   ],
