@@ -1,22 +1,6 @@
 {
-  "generated_at": "2026-11-04T08:32:09.789169-07:00",
+  "generated_at": "2026-11-05T08:35:40.855751-07:00",
   "lessons": [
-    {
-      "id": "2026-09-02-tax-deduction",
-      "date": "2026-09-02",
-      "domain": "Money mechanics",
-      "title": "Understanding Tax Deductions",
-      "hook": "Not knowing how tax deductions work could mean you're paying more in taxes than you need to.",
-      "quick": "A tax deduction reduces the amount of your income that is subject to tax, which means you pay less in taxes overall. It's important to understand that not all deductions work the same way. Some are \"above the line,\" meaning they reduce your income before a crucial number called adjusted gross income is calculated. Other deductions are \"below the line,\" and these are often called itemized deductions. These only lower your taxable income if their total amount exceeds the standard deduction. For instance, in tax year 2018, the standard deduction for a married couple was $24,000. If your combined below-the-line deductions are less than that figure, you would usually choose the standard deduction, effectively meaning those smaller deductions don't provide an additional tax benefit.",
-      "more": "Many people miss out on potential tax savings by not knowing the difference between these types of deductions. The \"below the line\" deductions include many common expenses, but their impact depends entirely on whether they add up to more than the standard deduction. Once you own a home, interest paid on your mortgage could become a significant itemized deduction, along with certain state and local taxes. However, it's not enough to simply have these expenses; you must track them to see if their sum surpasses the standard deduction. If your total itemized deductions don't exceed that threshold, taking the standard deduction is often simpler and results in the same, or even better, tax outcome. This decision is crucial because it directly affects your final tax bill.",
-      "deep": "One deduction that can be particularly useful for many, including those with educational debt, is the student loan interest deduction. This is an \"above the line\" deduction, which is distinct because it reduces your adjusted gross income directly, regardless of the standard deduction amount. This means you don't need to worry about whether your itemized deductions are large enough to be beneficial; this deduction applies independently. The article also points out that certain expenses that produce future benefits, rather than current ones, might need to be \"capitalized.\" This means their cost isn't deducted all at once but is recovered over a period of time, such as through depreciation. Understanding which expenses are immediately deductible and which must be capitalized can significantly impact your tax planning and the timing of your tax benefits, preventing you from missing out on legitimate savings or incorrectly claiming expenses.",
-      "takeaway": "Review your personal expenses, like student loan interest, and understand if they are above or below the line deductions to maximize your tax benefits.",
-      "source": {
-        "title": "Tax deduction",
-        "url": "https://en.wikipedia.org/wiki/Tax_deduction"
-      },
-      "audio": {}
-    },
     {
       "id": "2026-09-03-tire",
       "date": "2026-09-03",
@@ -639,11 +623,7 @@
         "title": "Ponzi scheme",
         "url": "https://en.wikipedia.org/wiki/Ponzi_scheme"
       },
-      "audio": {
-        "quick": "lessons/2026-10-12-ponzi-scheme-quick.mp3",
-        "more": "lessons/2026-10-12-ponzi-scheme-more.mp3",
-        "deep": "lessons/2026-10-12-ponzi-scheme-deep.mp3"
-      }
+      "audio": {}
     },
     {
       "id": "2026-10-14-joint-and-several-liability",
@@ -1043,6 +1023,26 @@
         "quick": "lessons/2026-11-04-confirmation-bias-quick.mp3",
         "more": "lessons/2026-11-04-confirmation-bias-more.mp3",
         "deep": "lessons/2026-11-04-confirmation-bias-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-11-05-individual-retirement-account",
+      "date": "2026-11-05",
+      "domain": "Money mechanics",
+      "title": "Choosing the Right Individual Retirement Account",
+      "hook": "Missing out on tax-advantaged retirement savings can cost you significant growth over your working life.",
+      "quick": "Many people miss out on thousands of dollars in retirement savings by not understanding how individual retirement accounts, or IRAs, work. These accounts offer significant tax advantages, but the benefits depend on the type you choose. For example, with a Traditional IRA, your contributions are often tax-deductible, meaning you might reduce your taxable income now. However, when you withdraw money in retirement, those withdrawals are typically taxed as income. A Roth IRA works differently: your contributions are not tax-deductible, but when you retire, all qualified withdrawals, including the earnings, are completely tax-free. It's crucial to understand this difference, especially since the amount you can contribute each year is limited. For example, in tax year 2024, the limit was $7,000. Choosing the right type helps you keep more of your money over time.",
+      "more": "The decision between a Traditional and Roth IRA often depends on your current income and whether you're covered by an employer retirement plan. For instance, if you're covered by a workplace retirement plan, the ability to deduct Traditional IRA contributions can be phased out if your income exceeds certain levels. For those filing as married jointly, this threshold was over $50,000 at one point, meaning many people covered by a work plan couldn't fully deduct their Traditional IRA contributions. In such cases, a Roth IRA might be more appealing because while contributions aren't deductible, your earnings grow and can be withdrawn tax-free in retirement, offering a distinct advantage down the road, especially if you expect to be in a higher tax bracket later in life.",
+      "deep": "Beyond Traditional and Roth, IRAs offer flexibility in how you manage your retirement savings, especially with rollovers. It's often misunderstood that money is locked into specific retirement accounts. In fact, most retirement plans can be rolled into an IRA, and funds can often be transferred from an IRA into other retirement plans, though there are exceptions like some non-governmental 457 plans. This flexibility allows you to consolidate or move funds if you change jobs or want different investment options. Many financial institutions, including banks, credit unions, and brokerage firms, can serve as custodians for your IRA, offering various investment choices. Some even specialize in self-directed IRAs, allowing investments in things like real estate or private company stock, but remember that the custodian may still impose their own restrictions on what they will hold. Also, if you open a new IRA and change your mind, you have seven calendar days to revoke it without penalty.",
+      "takeaway": "Evaluate your current income and employer retirement plan coverage to decide whether a Traditional IRA's tax deduction or a Roth IRA's tax-free withdrawals in retirement best suits your financial strategy.",
+      "source": {
+        "title": "Individual retirement account",
+        "url": "https://en.wikipedia.org/wiki/Individual_retirement_account"
+      },
+      "audio": {
+        "quick": "lessons/2026-11-05-individual-retirement-account-quick.mp3",
+        "more": "lessons/2026-11-05-individual-retirement-account-more.mp3",
+        "deep": "lessons/2026-11-05-individual-retirement-account-deep.mp3"
       }
     }
   ],
