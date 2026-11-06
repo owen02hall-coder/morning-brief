@@ -1,0 +1,255 @@
+{
+  "generated_at": "2026-11-06T08:09:53.525040-07:00",
+  "date": "2026-11-06",
+  "tldr": [
+    "Global stock markets experienced a sell-off, with the Nasdaq Composite entering correction territory, partly attributed to concerns over artificial intelligence and midterm election outcomes.",
+    "Tesla announced it will wind down production of its Cybertruck next year to focus on the Cybercab, following years of limited sales."
+  ],
+  "market": {
+    "sp500": {
+      "value": 7353.73,
+      "change": -334.89,
+      "asof": "2026-11-05"
+    },
+    "ndx": {
+      "value": 24315.0,
+      "change": -1421.51,
+      "asof": "2026-11-05"
+    },
+    "why": "The S&P 500 and Nasdaq Composite both closed lower, reflecting a broader market sell-off attributed in part to \"AI panic\" and concerns related to the midterm election outcomes, despite a stronger-than-expected US jobs report for October. The Nasdaq Composite specifically dropped into correction territory."
+  },
+  "yield_10y": {
+    "value": 4.84,
+    "change": -0.06,
+    "asof": "2026-11-05",
+    "why": "The 10-year Treasury yield decreased, but the provided articles do not offer a specific reason for this movement."
+  },
+  "vix": {
+    "value": 28.18,
+    "change": 11.57,
+    "asof": "2026-11-05",
+    "why": "The VIX, Wall Street's fear gauge, rose significantly, indicating increased market volatility and investor apprehension amid a market sell-off and the Nasdaq's drop into correction territory."
+  },
+  "breadth": {
+    "sp500": {
+      "value": 56.3,
+      "asof": "2026-11-05",
+      "status": "healthy",
+      "matched": 499,
+      "stale": false
+    },
+    "ndx100": {
+      "value": 44.8,
+      "asof": "2026-11-05",
+      "status": "healthy",
+      "matched": 96,
+      "stale": false
+    }
+  },
+  "watchlist": [
+    {
+      "symbol": "SOXL",
+      "what": "3x semiconductors",
+      "value": 40.87,
+      "day_move": -38.71,
+      "asof": "2026-11-05",
+      "rsi": 26.2,
+      "rsi_zone": "oversold",
+      "low": 40.87,
+      "high": 142.52,
+      "band_pct": 0.0,
+      "zone": "low",
+      "action": "buy",
+      "read": "Near the bottom of its 1-month range and oversold on RSI. Big session: down 38.7% in a day."
+    },
+    {
+      "symbol": "SPXL",
+      "what": "3x S&P 500",
+      "value": 244.98,
+      "day_move": -13.06,
+      "asof": "2026-11-05",
+      "rsi": 32.7,
+      "rsi_zone": "neutral",
+      "low": 244.98,
+      "high": 297.97,
+      "band_pct": 0.0,
+      "zone": "low",
+      "action": "buy",
+      "read": "Within 4% of its 1-month low. Big session: down 13.1% in a day."
+    },
+    {
+      "symbol": "TQQQ",
+      "what": "3x Nasdaq-100",
+      "value": 50.47,
+      "day_move": -18.91,
+      "asof": "2026-11-05",
+      "rsi": 26.8,
+      "rsi_zone": "oversold",
+      "low": 50.47,
+      "high": 81.28,
+      "band_pct": 0.0,
+      "zone": "low",
+      "action": "buy",
+      "read": "Near the bottom of its 1-month range and oversold on RSI. Big session: down 18.9% in a day."
+    }
+  ],
+  "watchlist_missing": [],
+  "mortgage": {
+    "value": 7.18,
+    "change": -0.06,
+    "asof": "2026-11-05",
+    "why": "The 30-year fixed mortgage rate, as reported in Freddie Mac's weekly survey, decreased, aligning with the observed decline in the 10-year Treasury yield over recent days."
+  },
+  "policy": [],
+  "policy_upcoming": [
+    {
+      "what_happened": "This document contains final regulations regarding the deduction for certain taxpayers for an amount up to $10,000 of qualified passenger vehicle loan interest.",
+      "effect": "You can deduct up to $10,000 of qualified passenger vehicle loan interest.",
+      "url": "https://www.federalregister.gov/documents/2026/09/08/2026-18219/car-loan-interest-deduction",
+      "status": "Final rule",
+      "effective_date": "2026-11-09",
+      "source": "Federal Register"
+    },
+    {
+      "what_happened": "Temporary regulations were issued concerning a new nonrefundable Federal tax credit for qualified contributions to scholarship granting organizations.",
+      "effect": "A new nonrefundable Federal tax credit becomes available for qualified contributions to scholarship granting organizations in 2027 and later taxable years.",
+      "url": "https://www.federalregister.gov/documents/2026/10/02/2026-20264/federal-scholarship-tax-credit",
+      "status": "Final rule",
+      "effective_date": "2026-12-01",
+      "source": "Federal Register"
+    },
+    {
+      "what_happened": "Final rules set forth requirements for price transparency reporting for non-grandfathered group health plans and health insurance issuers.",
+      "effect": "Your employer health insurance plan has new price transparency reporting requirements that become effective on December 7, 2026.",
+      "url": "https://www.federalregister.gov/documents/2026/10/06/2026-20447/transparency-in-coverage",
+      "status": "Final rule",
+      "effective_date": "2026-12-07",
+      "source": "Federal Register"
+    },
+    {
+      "what_happened": "A Utah bill modifies provisions related to the property tax exemption process.",
+      "effect": "Once you own a home, you will have deadlines for filing an application for a property tax exemption with the county board of equalization and for the board to render a decision.",
+      "url": "https://le.utah.gov/~2026/bills/static/SB0236.html",
+      "status": "Signed in Utah",
+      "effective_date": "2027-01-01",
+      "source": "Utah Legislature"
+    },
+    {
+      "what_happened": "A bill amends requirements for health insurance preauthorization in Utah.",
+      "effect": "Your health insurer must make an authorization or adverse preauthorization determination within a defined maximum time.",
+      "url": "https://le.utah.gov/~2026/bills/static/SB0319.html",
+      "status": "Signed in Utah",
+      "effective_date": "2027-01-01",
+      "source": "Utah Legislature"
+    }
+  ],
+  "policy_week": [
+    {
+      "what_happened": "Temporary regulations were issued concerning a new nonrefundable Federal tax credit for qualified contributions to scholarship granting organizations.",
+      "effect": "A new nonrefundable Federal tax credit becomes available for qualified contributions to scholarship granting organizations in 2027 and later taxable years.",
+      "url": "https://www.federalregister.gov/documents/2026/10/02/2026-20264/federal-scholarship-tax-credit",
+      "status": "Final rule",
+      "effective_date": "2026-12-01",
+      "source": "Federal Register"
+    }
+  ],
+  "policy_calendar": [
+    {
+      "date": "2026-11-10",
+      "label": "IRS tax brackets and the married-filing-jointly standard deduction for next year \u2014 expected late October or early November",
+      "note": "Published as an annual inflation-adjustment revenue procedure; recent releases landed between mid-October and mid-November. These are the bracket thresholds and the standard deduction the next return is filed against.",
+      "url": "https://www.irs.gov/filing/federal-income-tax-rates-and-brackets"
+    },
+    {
+      "date": "2026-11-30",
+      "label": "FHFA conforming loan limit for next year \u2014 expected late November",
+      "note": "The cap on a conforming (non-jumbo) mortgage, and the line between a normal rate and a jumbo one. FHFA has announced it in the last days of November each year, and the new limit applies to loans made from January 1.",
+      "url": "https://www.fhfa.gov/data/conforming-loan-limit"
+    }
+  ],
+  "tech": [
+    {
+      "summary": "Tesla plans to cease Cybertruck production next year at its Texas plant to shift focus to its Cybercab, following the Cybertruck's niche sales and multiple recalls.",
+      "source": "CNBC",
+      "url": "https://www.cnbc.com/2026/11/06/tesla-cybertruck-texas-musk.html"
+    },
+    {
+      "summary": "The European Commission has charged TikTok for allegedly failing to protect users' mental health, stating that its recommendation algorithm may expose young and vulnerable individuals to harmful content.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/technology/2026/nov/06/eu-charges-tiktok-failure-to-protect-users-mental-health"
+    },
+    {
+      "summary": "Fox has completed its $22 billion acquisition of Roku, giving Fox control over a major streaming platform that reaches over 100 million US households.",
+      "source": "The Verge",
+      "url": "https://www.theverge.com/streaming/1028629/fox-roku-acquisition-close"
+    }
+  ],
+  "world": [
+    {
+      "summary": "Paul Mackenzie, a cult leader in Kenya, received a life sentence after being convicted of murdering 191 people, including 190 children, whom he instructed to starve themselves to death to meet Jesus.",
+      "source": "BBC World",
+      "url": "https://www.bbc.co.uk/news/articles/cm5yne5984l0o?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "summary": "A series of bomb threats disrupted at least 18 flights across Europe, leading Irish authorities to suggest the incidents are likely part of a coordinated campaign to cause disruption.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/world/2026/nov/06/further-bomb-threats-disrupt-flights-across-europe"
+    },
+    {
+      "summary": "Ukrainian officials have raised the death toll to at least 50 following an aid strike in Zaporizhia, with DNA tests being used to identify bodies and up to 39 individuals still trapped under rubble.",
+      "source": "Al Jazeera",
+      "url": "https://www.aljazeera.com/news/2026/11/6/ukraine-raises-zaporizhia-aid-strike-death-toll-to-at-least-50?traffic_source=rss"
+    },
+    {
+      "summary": "A Tanzanian opposition leader, who has been detained since April last year, was found guilty of inciting unrest but was acquitted of treason charges.",
+      "source": "BBC World",
+      "url": "https://www.bbc.co.uk/news/articles/ckp8g4pm0y4lo?at_medium=RSS&at_campaign=rss"
+    }
+  ],
+  "us": [
+    {
+      "summary": "A federal judge issued a temporary restraining order, blocking any construction work for 14 days on Donald Trump's triumphal arch in Washington D.C., shortly after it gained federal approval.",
+      "source": "NPR National",
+      "url": "https://www.npr.org/2026/11/06/nx-s1-6031990/trump-arch-planning-commission-injunction"
+    },
+    {
+      "summary": "Harmeet Dhillon resigned from her position as the head of the Justice Department's Civil Rights Division, concluding her 18-month tenure.",
+      "source": "NPR National",
+      "url": "https://www.npr.org/2026/11/05/g-s1-152080/head-of-justice-department-office-on-civil-rights-resigns"
+    },
+    {
+      "summary": "Public schools across the United States are facing a substantial drop in student enrollment, a trend that education experts indicate is worsened by the deportation of immigrant families.",
+      "source": "NPR National",
+      "url": "https://www.npr.org/2026/11/06/nx-s1-5971283/public-school-enrollment-ice-deportation-birthrate"
+    }
+  ],
+  "science": [
+    {
+      "summary": "A UK doctor who tested positive for Ebola in the Democratic Republic of Congo is currently undergoing treatment at a London hospital, with public health authorities assuring that the risk to the general public remains low.",
+      "source": "BBC Health",
+      "url": "https://www.bbc.co.uk/news/articles/cqj34d3l0zlmo?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "summary": "New \"multi-cancer\" blood tests are scheduled to be introduced in some general practitioner surgeries across the UK, aiming to detect challenging-to-diagnose abdominal cancers, such as liver, ovarian, and pancreatic cancer, at an earlier stage.",
+      "source": "BBC Health",
+      "url": "https://www.bbc.co.uk/news/articles/cm9qz93ew22no?at_medium=RSS&at_campaign=rss"
+    }
+  ],
+  "weekly_recap": null,
+  "data_availability": {
+    "sp500": true,
+    "ndx": true,
+    "vix": true,
+    "ten_year": true,
+    "news_world": true,
+    "news_us": true,
+    "news_science": true,
+    "news_business": true,
+    "news_tech": true,
+    "summary": "ok",
+    "breadth": true,
+    "policy": true,
+    "mortgage": true,
+    "watchlist": true
+  }
+}

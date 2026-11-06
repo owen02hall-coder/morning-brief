@@ -1,47 +1,46 @@
 {
-  "generated_at": "2026-11-05T08:35:40.855751-07:00",
-  "date": "2026-11-05",
+  "generated_at": "2026-11-06T08:09:53.525040-07:00",
+  "date": "2026-11-06",
   "tldr": [
-    "US markets saw increases at their most recent close, with the S&P 500 and Nasdaq Composite rising, following positive sentiment from the US midterm election results and indications of economic growth.",
-    "The UK pound reached its highest level against other currencies since the 2016 Brexit vote, influenced by a decline in the dollar after US midterm elections and the UK's pursuit of closer European ties.",
-    "Teenagers globally are not meeting recommended exercise levels, with girls particularly affected, while new developments in mRNA technology are showing promise in cancer vaccine research."
+    "Global stock markets experienced a sell-off, with the Nasdaq Composite entering correction territory, partly attributed to concerns over artificial intelligence and midterm election outcomes.",
+    "Tesla announced it will wind down production of its Cybertruck next year to focus on the Cybercab, following years of limited sales."
   ],
   "market": {
     "sp500": {
-      "value": 7688.62,
-      "change": 119.7,
-      "asof": "2026-11-04"
+      "value": 7353.73,
+      "change": -334.89,
+      "asof": "2026-11-05"
     },
     "ndx": {
-      "value": 25736.51,
-      "change": 364.5,
-      "asof": "2026-11-04"
+      "value": 24315.0,
+      "change": -1421.51,
+      "asof": "2026-11-05"
     },
-    "why": "The S&P 500 and Nasdaq Composite both rose at their most recent close, with articles linking positive market sentiment to the outcomes of the US midterm elections and indications of faster U.S. economic growth."
+    "why": "The S&P 500 and Nasdaq Composite both closed lower, reflecting a broader market sell-off attributed in part to \"AI panic\" and concerns related to the midterm election outcomes, despite a stronger-than-expected US jobs report for October. The Nasdaq Composite specifically dropped into correction territory."
   },
   "yield_10y": {
-    "value": 4.89,
+    "value": 4.84,
     "change": -0.06,
-    "asof": "2026-11-04",
-    "why": "The 10-year Treasury yield decreased at its most recent close. The provided articles do not offer a direct reason for this specific movement."
+    "asof": "2026-11-05",
+    "why": "The 10-year Treasury yield decreased, but the provided articles do not offer a specific reason for this movement."
   },
   "vix": {
-    "value": 16.61,
-    "change": -4.22,
-    "asof": "2026-11-04",
-    "why": "The VIX decreased at its most recent close, indicating a reduction in market volatility. The provided articles do not offer a direct reason for this specific movement."
+    "value": 28.18,
+    "change": 11.57,
+    "asof": "2026-11-05",
+    "why": "The VIX, Wall Street's fear gauge, rose significantly, indicating increased market volatility and investor apprehension amid a market sell-off and the Nasdaq's drop into correction territory."
   },
   "breadth": {
     "sp500": {
-      "value": 63.9,
-      "asof": "2026-11-04",
+      "value": 56.3,
+      "asof": "2026-11-05",
       "status": "healthy",
       "matched": 499,
       "stale": false
     },
     "ndx100": {
-      "value": 49.0,
-      "asof": "2026-11-04",
+      "value": 44.8,
+      "asof": "2026-11-05",
       "status": "healthy",
       "matched": 96,
       "stale": false
@@ -51,55 +50,55 @@
     {
       "symbol": "SOXL",
       "what": "3x semiconductors",
-      "value": 66.68,
-      "day_move": -8.81,
-      "asof": "2026-11-04",
-      "rsi": 32.6,
-      "rsi_zone": "neutral",
-      "low": 66.68,
-      "high": 158.91,
+      "value": 40.87,
+      "day_move": -38.71,
+      "asof": "2026-11-05",
+      "rsi": 26.2,
+      "rsi_zone": "oversold",
+      "low": 40.87,
+      "high": 142.52,
       "band_pct": 0.0,
       "zone": "low",
       "action": "buy",
-      "read": "Within 4% of its 1-month low. Big session: down 8.8% in a day."
+      "read": "Near the bottom of its 1-month range and oversold on RSI. Big session: down 38.7% in a day."
     },
     {
       "symbol": "SPXL",
       "what": "3x S&P 500",
-      "value": 281.79,
-      "day_move": 4.85,
-      "asof": "2026-11-04",
-      "rsi": 49.2,
+      "value": 244.98,
+      "day_move": -13.06,
+      "asof": "2026-11-05",
+      "rsi": 32.7,
       "rsi_zone": "neutral",
-      "low": 266.32,
+      "low": 244.98,
       "high": 297.97,
-      "band_pct": 48.9,
-      "zone": "mid",
-      "action": "hold",
-      "read": "Mid-range - 49% of the way up its 1-month band."
+      "band_pct": 0.0,
+      "zone": "low",
+      "action": "buy",
+      "read": "Within 4% of its 1-month low. Big session: down 13.1% in a day."
     },
     {
       "symbol": "TQQQ",
       "what": "3x Nasdaq-100",
-      "value": 62.24,
-      "day_move": 2.79,
-      "asof": "2026-11-04",
-      "rsi": 37.1,
-      "rsi_zone": "neutral",
-      "low": 59.46,
-      "high": 83.62,
-      "band_pct": 11.5,
-      "zone": "mid",
-      "action": "hold",
-      "read": "Mid-range - 12% of the way up its 1-month band."
+      "value": 50.47,
+      "day_move": -18.91,
+      "asof": "2026-11-05",
+      "rsi": 26.8,
+      "rsi_zone": "oversold",
+      "low": 50.47,
+      "high": 81.28,
+      "band_pct": 0.0,
+      "zone": "low",
+      "action": "buy",
+      "read": "Near the bottom of its 1-month range and oversold on RSI. Big session: down 18.9% in a day."
     }
   ],
   "watchlist_missing": [],
   "mortgage": {
-    "value": 7.24,
-    "change": -0.08,
-    "asof": "2026-10-29",
-    "why": "The 30-year fixed mortgage rate, as reported in the most recent weekly survey, saw a decrease. This movement tracks the observed reduction in the 10-year Treasury yield over recent days."
+    "value": 7.18,
+    "change": -0.06,
+    "asof": "2026-11-05",
+    "why": "The 30-year fixed mortgage rate, as reported in Freddie Mac's weekly survey, decreased, aligning with the observed decline in the 10-year Treasury yield over recent days."
   },
   "policy": [],
   "policy_upcoming": [
@@ -156,12 +155,6 @@
   ],
   "policy_calendar": [
     {
-      "date": "2026-11-05",
-      "label": "IRS 401(k) and IRA contribution limits for next year \u2014 expected late October or early November",
-      "note": "The annual cost-of-living adjustment notice, historically released within a week or two of the bracket figures. It sets how much can go into a 401(k) and an IRA next year.",
-      "url": "https://www.irs.gov/retirement-plans/cola-increases-for-dollar-limitations-on-benefits-and-contributions"
-    },
-    {
       "date": "2026-11-10",
       "label": "IRS tax brackets and the married-filing-jointly standard deduction for next year \u2014 expected late October or early November",
       "note": "Published as an annual inflation-adjustment revenue procedure; recent releases landed between mid-October and mid-November. These are the bracket thresholds and the standard deduction the next return is filed against.",
@@ -176,65 +169,70 @@
   ],
   "tech": [
     {
-      "summary": "WhatsApp is rolling out a new feature that allows users to invite people to in-app events even if they do not have the messenger installed, by sharing a link.",
-      "source": "The Verge",
-      "url": "https://www.theverge.com/tech/1027412/whatsapp-events-invite-outside-app"
+      "summary": "Tesla plans to cease Cybertruck production next year at its Texas plant to shift focus to its Cybercab, following the Cybertruck's niche sales and multiple recalls.",
+      "source": "CNBC",
+      "url": "https://www.cnbc.com/2026/11/06/tesla-cybertruck-texas-musk.html"
     },
     {
-      "summary": "SoundCloud has integrated with ElevenLabs, enabling users to directly publish AI-generated music from ElevenLabs to SoundCloud, alongside offering Artist Pro subscribers three months free.",
-      "source": "The Verge",
-      "url": "https://www.theverge.com/ai-artificial-intelligence/1027427/ai-music-soundcloud-elevenlabs"
+      "summary": "The European Commission has charged TikTok for allegedly failing to protect users' mental health, stating that its recommendation algorithm may expose young and vulnerable individuals to harmful content.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/technology/2026/nov/06/eu-charges-tiktok-failure-to-protect-users-mental-health"
     },
     {
-      "summary": "Discord has transitioned from Electron to a new web app, resulting in reduced RAM usage for the application.",
-      "source": "Hacker News",
-      "url": "https://www.theverge.com/news/1027379/discord-ditching-electron-web-app"
+      "summary": "Fox has completed its $22 billion acquisition of Roku, giving Fox control over a major streaming platform that reaches over 100 million US households.",
+      "source": "The Verge",
+      "url": "https://www.theverge.com/streaming/1028629/fox-roku-acquisition-close"
     }
   ],
   "world": [
     {
-      "summary": "The pound has reached its highest value against other currencies since the Brexit referendum, following a decline in the dollar after the US midterm elections and the UK's efforts towards closer ties with the EU.",
-      "source": "Guardian World",
-      "url": "https://www.theguardian.com/business/2026/nov/05/pound-hits-highest-level-since-2016-brexit-vote"
+      "summary": "Paul Mackenzie, a cult leader in Kenya, received a life sentence after being convicted of murdering 191 people, including 190 children, whom he instructed to starve themselves to death to meet Jesus.",
+      "source": "BBC World",
+      "url": "https://www.bbc.co.uk/news/articles/cm5yne5984l0o?at_medium=RSS&at_campaign=rss"
     },
     {
-      "summary": "Multiple commercial flights across Europe were diverted due to reported bomb threats, though an EU transport commissioner stated it is too early to determine if the 19 incidents are linked.",
+      "summary": "A series of bomb threats disrupted at least 18 flights across Europe, leading Irish authorities to suggest the incidents are likely part of a coordinated campaign to cause disruption.",
       "source": "Guardian World",
-      "url": "https://www.theguardian.com/world/live/2026/nov/05/aer-lingus-plane-bomb-threat-europe-latest-news-updates"
+      "url": "https://www.theguardian.com/world/2026/nov/06/further-bomb-threats-disrupt-flights-across-europe"
     },
     {
-      "summary": "Hong Kong pro-democracy activist Joshua Wong received a second jail term of 10 years under the city's security law, a sentence condemned by both the UK and US.",
-      "source": "Guardian World",
-      "url": "https://www.theguardian.com/world/2026/nov/05/uk-and-us-condemn-second-jail-term-handed-to-hong-kong-activist-joshua-wong"
+      "summary": "Ukrainian officials have raised the death toll to at least 50 following an aid strike in Zaporizhia, with DNA tests being used to identify bodies and up to 39 individuals still trapped under rubble.",
+      "source": "Al Jazeera",
+      "url": "https://www.aljazeera.com/news/2026/11/6/ukraine-raises-zaporizhia-aid-strike-death-toll-to-at-least-50?traffic_source=rss"
+    },
+    {
+      "summary": "A Tanzanian opposition leader, who has been detained since April last year, was found guilty of inciting unrest but was acquitted of treason charges.",
+      "source": "BBC World",
+      "url": "https://www.bbc.co.uk/news/articles/ckp8g4pm0y4lo?at_medium=RSS&at_campaign=rss"
     }
   ],
   "us": [
     {
-      "summary": "Democrats have gained control of both the House and Senate in the US midterm elections, resulting in a significant shift in congressional power.",
-      "source": "Guardian World",
-      "url": "https://www.theguardian.com/us-news/live/2026/nov/05/midterm-elections-live-latest-updates-mississippi-senate-race"
+      "summary": "A federal judge issued a temporary restraining order, blocking any construction work for 14 days on Donald Trump's triumphal arch in Washington D.C., shortly after it gained federal approval.",
+      "source": "NPR National",
+      "url": "https://www.npr.org/2026/11/06/nx-s1-6031990/trump-arch-planning-commission-injunction"
     },
     {
-      "summary": "A new report indicates that first-time homebuyers are increasingly scarce, with a record 10% of them now paying for their homes entirely in cash.",
+      "summary": "Harmeet Dhillon resigned from her position as the head of the Justice Department's Civil Rights Division, concluding her 18-month tenure.",
       "source": "NPR National",
-      "url": "https://www.npr.org/2026/11/05/nx-s1-6022491/real-estate-all-cash-offer"
+      "url": "https://www.npr.org/2026/11/05/g-s1-152080/head-of-justice-department-office-on-civil-rights-resigns"
     },
     {
-      "summary": "House Speaker Mike Johnson will step aside as the top Republican in the House for the next Congress following the party's defeat in the recent midterm elections.",
+      "summary": "Public schools across the United States are facing a substantial drop in student enrollment, a trend that education experts indicate is worsened by the deportation of immigrant families.",
       "source": "NPR National",
-      "url": "https://www.npr.org/2026/11/04/g-s1-151854/2026-midterms-mike-johnson-speaker"
+      "url": "https://www.npr.org/2026/11/06/nx-s1-5971283/public-school-enrollment-ice-deportation-birthrate"
     }
   ],
   "science": [
     {
-      "summary": "A new study reveals that teenagers globally are not getting enough exercise, with girls showing particularly low rates of meeting recommended daily activity levels.",
-      "source": "NPR Health",
-      "url": "https://www.npr.org/2026/11/05/nx-s1-6027635/exercise-workout-teenagers-adolescents-gender-gap"
+      "summary": "A UK doctor who tested positive for Ebola in the Democratic Republic of Congo is currently undergoing treatment at a London hospital, with public health authorities assuring that the risk to the general public remains low.",
+      "source": "BBC Health",
+      "url": "https://www.bbc.co.uk/news/articles/cqj34d3l0zlmo?at_medium=RSS&at_campaign=rss"
     },
     {
-      "summary": "Researchers are garnering excitement with recent successes in using mRNA technology for cancer vaccines, offering new hope for patients and the medical community.",
-      "source": "NPR Health",
-      "url": "https://www.npr.org/2026/11/02/nx-s1-6009085/mrna-cancer-vaccine-pancreatic-skin"
+      "summary": "New \"multi-cancer\" blood tests are scheduled to be introduced in some general practitioner surgeries across the UK, aiming to detect challenging-to-diagnose abdominal cancers, such as liver, ovarian, and pancreatic cancer, at an earlier stage.",
+      "source": "BBC Health",
+      "url": "https://www.bbc.co.uk/news/articles/cm9qz93ew22no?at_medium=RSS&at_campaign=rss"
     }
   ],
   "weekly_recap": null,

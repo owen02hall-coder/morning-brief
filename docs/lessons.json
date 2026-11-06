@@ -1,22 +1,6 @@
 {
-  "generated_at": "2026-11-05T08:35:40.855751-07:00",
+  "generated_at": "2026-11-06T08:09:53.525040-07:00",
   "lessons": [
-    {
-      "id": "2026-09-03-tire",
-      "date": "2026-09-03",
-      "domain": "Home, car and repair",
-      "title": "Caring for Car Tires Prevents Serious Problems",
-      "hook": "Ignoring your vehicle's tires can lead to more than just a flat; it can result in dangerous situations and harm to the environment.",
-      "quick": "Unmaintained tires can cause severe hazards for vehicles and people. This neglect might lead to a flat tire, making your vehicle inoperable, or even a sudden blowout. A blowout means a tire explodes during operation, which can damage your vehicle and potentially injure anyone nearby. Modern tires are specifically designed to transfer a vehicle's weight from the axle to the ground, providing traction and absorbing shocks as you drive. They are made from various materials, including natural and synthetic rubber, fabric, and wire, and contain both a tread for grip and a body to hold compressed air. Because of these critical functions and the inherent risks, the manufacturing of tires is often highly regulated to ensure safety.",
-      "more": "Beyond the immediate safety risks, the regular use of tires also carries an environmental cost. As tires wear down, they release micro-plastic particles that contain chemicals into the environment. These tiny particles can elevate the risk of damage to human health as they spread. Furthermore, when tires reach the end of their life, they become a significant portion of global waste. If these waste tires are not properly recycled or are burned, they release toxic chemicals into the environment. There is a strong need for proper tire recycling, whether through mechanical methods, reusing materials like crumb rubber, or through chemical processes such as pyrolysis to create tire-derived fuel. Understanding these impacts highlights the importance of thoughtful tire management from purchase to disposal.",
-      "deep": "The primary components of a pneumatic tire, like those found on most cars, are the tread and the body. The tread is the part that touches the road, engineered to provide essential traction and match the vehicle's weight to the surface it rolls over. This design ensures that the pressure exerted by the tire avoids deforming the road surface, contributing to stability and control. The body of the tire is what contains the compressed air, creating a flexible cushion that absorbs shocks from rough road features. This shock absorption is crucial for a smooth ride and protecting the vehicle's suspension components. Before the development of modern rubber tires, wheels used metal bands, or even solid rubber, but these lacked the shock absorption and precise handling of today's inflated designs. Neglecting the maintenance of these complex components, such as overlooking proper inflation or wear, compromises their ability to perform safely and efficiently, increasing the likelihood of the hazards like flats or blowouts.",
-      "takeaway": "Regularly inspect your vehicle's tires for proper inflation and signs of wear to prevent sudden failures and reduce environmental impact.",
-      "source": {
-        "title": "Tire",
-        "url": "https://en.wikipedia.org/wiki/Tire"
-      },
-      "audio": {}
-    },
     {
       "id": "2026-09-04-myocardial-infarction",
       "date": "2026-09-04",
@@ -639,11 +623,7 @@
         "title": "Joint and several liability",
         "url": "https://en.wikipedia.org/wiki/Joint_and_several_liability"
       },
-      "audio": {
-        "quick": "lessons/2026-10-14-joint-and-several-liability-quick.mp3",
-        "more": "lessons/2026-10-14-joint-and-several-liability-more.mp3",
-        "deep": "lessons/2026-10-14-joint-and-several-liability-deep.mp3"
-      }
+      "audio": {}
     },
     {
       "id": "2026-10-15-dishwasher",
@@ -1043,6 +1023,26 @@
         "quick": "lessons/2026-11-05-individual-retirement-account-quick.mp3",
         "more": "lessons/2026-11-05-individual-retirement-account-more.mp3",
         "deep": "lessons/2026-11-05-individual-retirement-account-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-11-06-distribution-board",
+      "date": "2026-11-06",
+      "domain": "Home, car and repair",
+      "title": "Understanding Your Home's Electrical Panel",
+      "hook": "Your home's electrical panel is crucial for both safety and function, and knowing a few key details about it can prevent problems.",
+      "quick": "The electrical distribution board, often called a circuit breaker panel or fuse box, is the central point where electricity enters your home and is divided into various circuits. This panel includes protective fuses or circuit breakers for each circuit. A significant safety consideration for North American panels is that when the cover is removed for servicing, some live electrical parts inside are commonly exposed. In Canadian panels, the main switch or breaker is located in a separate section, so that when it is turned off, no live parts are exposed when servicing the individual branch circuits. This difference highlights varying safety designs in electrical systems.",
+      "more": "In residential and light commercial applications, these panels are generally known as load centers and typically use plug-in circuit breakers. Inside, busbars carry current from the incoming hot conductors to these breakers. Neutral conductors are connected to a neutral bus, while the branch circuit bonding conductors are secured to a terminal block that is directly attached to the panelboard enclosure, which is itself grounded. For large, permanently installed appliances, it's common for them to be wired line-to-line, taking up two slots in the panel and providing higher voltages like 240 V for split-phase power or 208 V for three-phase power.",
+      "deep": "Older homes might still have a different kind of electrical control. For instance, homes built from 1940 through 1965 commonly featured 60-amp fuse boxes, which had four plug fuses for branch circuits and additional cartridge fuses for major appliances. After 1965, the more substantial 100 A panel, offering three-wire 230 V service, became common. When looking at a home's electrical system, be aware that issues can arise; for example, a subpanel should have its neutral bar separate from the ground bar after the first main disconnect, and the main panel itself requires a grounding conductor. Violations of electrical code, such as an improperly bonded neutral and ground, can be significant.",
+      "takeaway": "When considering a home, especially an older one, ensure a qualified professional inspects the electrical panel for proper grounding, code compliance, and to identify the type of system.",
+      "source": {
+        "title": "Distribution board",
+        "url": "https://en.wikipedia.org/wiki/Distribution_board"
+      },
+      "audio": {
+        "quick": "lessons/2026-11-06-distribution-board-quick.mp3",
+        "more": "lessons/2026-11-06-distribution-board-more.mp3",
+        "deep": "lessons/2026-11-06-distribution-board-deep.mp3"
       }
     }
   ],
