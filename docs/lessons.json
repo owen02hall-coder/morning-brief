@@ -1,22 +1,6 @@
 {
-  "generated_at": "2026-11-06T08:09:53.525040-07:00",
+  "generated_at": "2026-11-07T07:08:52.122656-07:00",
   "lessons": [
-    {
-      "id": "2026-09-04-myocardial-infarction",
-      "date": "2026-09-04",
-      "domain": "Health and emergencies",
-      "title": "Recognize the Signs of a Heart Attack",
-      "hook": "Misunderstanding the signs of a heart attack can delay crucial care, potentially leading to serious complications.",
-      "quick": "Many people imagine a heart attack as sudden, crushing chest pain, but this isn't always how it happens. When blood flow to a part of the heart muscle is decreased or stops, that tissue begins to die. While classic chest discomfort is common, a heart attack can also present with subtle symptoms that are easily overlooked, especially by women, who frequently experience symptoms like unusual tiredness, neck pain, or arm pain without typical chest pain. Ignoring these less obvious signs can prevent someone from getting time-critical treatment that could limit damage to the heart muscle. In the United States, about one million people have an MI each year.",
-      "more": "Beyond the chest, symptoms can also include shortness of breath, nausea, feeling faint, or a cold sweat. The chest discomfort often feels like pressure, tightness, or squeezing and may radiate to the left arm, jaw, or shoulder, lasting for more than 20 minutes. For women, it's particularly important to recognize that symptoms like unexplained tiredness, nausea, vomiting, or back pain might be the only warning signs. Even those over 70-75 years old may experience a heart attack with few or no symptoms, emphasizing that not all heart attacks fit the dramatic picture often portrayed.",
-      "deep": "Most heart attacks result from coronary artery disease, where a blockage forms in one of the heart's arteries, often from a ruptured plaque. Risk factors for this include high blood pressure, smoking, diabetes, obesity, and a poor diet, though spasms of the arteries can also cause them, sometimes linked to significant emotional stress. Getting immediate medical help is critical because treatment aims to restore blood flow to the heart quickly. Without rapid intervention, a heart attack can lead to severe conditions like heart failure, an irregular heartbeat, or even cardiac arrest. In 2011, heart attack hospitalizations in the US cost about $11.5 billion.",
-      "takeaway": "Seek emergency medical attention immediately if you or someone else experiences persistent chest discomfort, or other unusual symptoms like unexplained tiredness, shortness of breath, or arm pain, particularly if they last longer than 20 minutes.",
-      "source": {
-        "title": "Myocardial infarction",
-        "url": "https://en.wikipedia.org/wiki/Myocardial_infarction"
-      },
-      "audio": {}
-    },
     {
       "id": "2026-09-05-social-engineering-security",
       "date": "2026-09-05",
@@ -639,11 +623,7 @@
         "title": "Dishwasher",
         "url": "https://en.wikipedia.org/wiki/Dishwasher"
       },
-      "audio": {
-        "quick": "lessons/2026-10-15-dishwasher-quick.mp3",
-        "more": "lessons/2026-10-15-dishwasher-more.mp3",
-        "deep": "lessons/2026-10-15-dishwasher-deep.mp3"
-      }
+      "audio": {}
     },
     {
       "id": "2026-10-16-heat-stroke",
@@ -1043,6 +1023,26 @@
         "quick": "lessons/2026-11-06-distribution-board-quick.mp3",
         "more": "lessons/2026-11-06-distribution-board-more.mp3",
         "deep": "lessons/2026-11-06-distribution-board-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-11-07-sepsis",
+      "date": "2026-11-07",
+      "domain": "Health and emergencies",
+      "title": "Recognizing the Dangers of Sepsis",
+      "hook": "Sepsis is a serious and potentially life-threatening condition that can arise when your body's response to an infection harms its own tissues and organs.",
+      "quick": "When your body reacts in a dysregulated way to an infection, it can injure its own tissues and organs, leading to a potentially life-threatening condition called sepsis. This serious internal response can cause organ dysfunction and significantly reduced blood flow if it progresses. Common signs that might point to sepsis include a fever, an increased heart rate, an increased breathing rate, and confusion. However, it's important to know that some people, like the very young or those with a weakened immune system, might not develop a fever; their body temperature could even be low or normal instead.",
+      "more": "This condition can be triggered by many types of organisms, including bacteria, viruses, parasites, and fungi, though bacteria are the most common causes. The initial infection can start in various common locations, such as the lungs, urinary tract, skin, or abdominal organs. Certain individuals are at higher risk, including the very young, the elderly, and those with a weakened immune system due to conditions like cancer or diabetes. Recognizing these potential signs and understanding who is more vulnerable can be crucial, as sepsis can progress quickly and demand immediate medical attention.",
+      "deep": "As sepsis worsens, it can lead to severe sepsis, causing organ dysfunction and a significant reduction in blood flow. This might show up as low blood pressure, high blood lactate, or low urine output. If the low blood pressure persists even after fluid replacement or requires medications to raise it, the condition has progressed to septic shock. The risk of death from sepsis is as high as 30 percent, and for severe sepsis, it increases to 50 percent. For septic shock, the risk of death is 80 percent. Given these serious potential outcomes, immediate treatment with intravenous fluids and antimicrobial medications is necessary, often requiring ongoing care and stabilization in an intensive care unit.",
+      "takeaway": "If an infection leads to new confusion, a rapid increase in breathing rate, or persistent low blood pressure, seek immediate emergency medical help.",
+      "source": {
+        "title": "Sepsis",
+        "url": "https://en.wikipedia.org/wiki/Sepsis"
+      },
+      "audio": {
+        "quick": "lessons/2026-11-07-sepsis-quick.mp3",
+        "more": "lessons/2026-11-07-sepsis-more.mp3",
+        "deep": "lessons/2026-11-07-sepsis-deep.mp3"
       }
     }
   ],

@@ -1,46 +1,47 @@
 {
-  "generated_at": "2026-11-06T08:09:53.525040-07:00",
-  "date": "2026-11-06",
+  "generated_at": "2026-11-07T07:08:52.122656-07:00",
+  "date": "2026-11-07",
   "tldr": [
-    "Global stock markets experienced a sell-off, with the Nasdaq Composite entering correction territory, partly attributed to concerns over artificial intelligence and midterm election outcomes.",
-    "Tesla announced it will wind down production of its Cybertruck next year to focus on the Cybercab, following years of limited sales."
+    "OpenAI's valuation has surged to $1.25 trillion following a new funding round, while rival Anthropic is accelerating its AI development by using AI to build more powerful models.",
+    "New Zealand's national election results have been declared too close to call, signaling that weeks of coalition talks will be necessary to form the next government.",
+    "A new peer-reviewed study has linked exposure to a new generation of plasticizers, often used in plastic food packaging, to lower birth weight and fetal development complications."
   ],
   "market": {
     "sp500": {
-      "value": 7353.73,
-      "change": -334.89,
-      "asof": "2026-11-05"
+      "value": 7376.86,
+      "change": 23.13,
+      "asof": "2026-11-06"
     },
     "ndx": {
-      "value": 24315.0,
-      "change": -1421.51,
-      "asof": "2026-11-05"
+      "value": 24579.43,
+      "change": 264.43,
+      "asof": "2026-11-06"
     },
-    "why": "The S&P 500 and Nasdaq Composite both closed lower, reflecting a broader market sell-off attributed in part to \"AI panic\" and concerns related to the midterm election outcomes, despite a stronger-than-expected US jobs report for October. The Nasdaq Composite specifically dropped into correction territory."
+    "why": "The Nasdaq Composite and S&P 500 closed higher, driven by a rebound in chip stocks like Nvidia and AMD, despite ongoing discussions about an \"AI backlash\" in the broader tech sector."
   },
   "yield_10y": {
-    "value": 4.84,
-    "change": -0.06,
-    "asof": "2026-11-05",
-    "why": "The 10-year Treasury yield decreased, but the provided articles do not offer a specific reason for this movement."
+    "value": 4.86,
+    "change": 0.02,
+    "asof": "2026-11-06",
+    "why": "The 10-year Treasury yield saw a slight increase, as concerns persist regarding the financing of data centers for AI, which continues to impact bond markets."
   },
   "vix": {
-    "value": 28.18,
-    "change": 11.57,
-    "asof": "2026-11-05",
-    "why": "The VIX, Wall Street's fear gauge, rose significantly, indicating increased market volatility and investor apprehension amid a market sell-off and the Nasdaq's drop into correction territory."
+    "value": 25.64,
+    "change": -2.54,
+    "asof": "2026-11-06",
+    "why": "The VIX, a measure of market volatility, decreased, likely reflecting the rebound in chip stocks and a slight easing of immediate \"AI fears\" despite some tech sector headwinds."
   },
   "breadth": {
     "sp500": {
-      "value": 56.3,
-      "asof": "2026-11-05",
+      "value": 55.7,
+      "asof": "2026-11-06",
       "status": "healthy",
       "matched": 499,
       "stale": false
     },
     "ndx100": {
-      "value": 44.8,
-      "asof": "2026-11-05",
+      "value": 43.8,
+      "asof": "2026-11-06",
       "status": "healthy",
       "matched": 96,
       "stale": false
@@ -50,47 +51,47 @@
     {
       "symbol": "SOXL",
       "what": "3x semiconductors",
-      "value": 40.87,
-      "day_move": -38.71,
-      "asof": "2026-11-05",
-      "rsi": 26.2,
+      "value": 45.97,
+      "day_move": 12.48,
+      "asof": "2026-11-06",
+      "rsi": 29.2,
       "rsi_zone": "oversold",
       "low": 40.87,
-      "high": 142.52,
-      "band_pct": 0.0,
-      "zone": "low",
+      "high": 139.76,
+      "band_pct": 5.2,
+      "zone": "mid",
       "action": "buy",
-      "read": "Near the bottom of its 1-month range and oversold on RSI. Big session: down 38.7% in a day."
+      "read": "Oversold on RSI, mid-range for the month. Big session: up 12.5% in a day."
     },
     {
       "symbol": "SPXL",
       "what": "3x S&P 500",
-      "value": 244.98,
-      "day_move": -13.06,
-      "asof": "2026-11-05",
-      "rsi": 32.7,
+      "value": 246.75,
+      "day_move": 0.72,
+      "asof": "2026-11-06",
+      "rsi": 33.8,
       "rsi_zone": "neutral",
       "low": 244.98,
       "high": 297.97,
-      "band_pct": 0.0,
+      "band_pct": 3.3,
       "zone": "low",
       "action": "buy",
-      "read": "Within 4% of its 1-month low. Big session: down 13.1% in a day."
+      "read": "Within 4% of its 1-month low."
     },
     {
       "symbol": "TQQQ",
       "what": "3x Nasdaq-100",
-      "value": 50.47,
-      "day_move": -18.91,
-      "asof": "2026-11-05",
-      "rsi": 26.8,
+      "value": 52.25,
+      "day_move": 3.53,
+      "asof": "2026-11-06",
+      "rsi": 29.9,
       "rsi_zone": "oversold",
       "low": 50.47,
       "high": 81.28,
-      "band_pct": 0.0,
+      "band_pct": 5.8,
       "zone": "low",
       "action": "buy",
-      "read": "Near the bottom of its 1-month range and oversold on RSI. Big session: down 18.9% in a day."
+      "read": "Near the bottom of its 1-month range and oversold on RSI."
     }
   ],
   "watchlist_missing": [],
@@ -98,7 +99,7 @@
     "value": 7.18,
     "change": -0.06,
     "asof": "2026-11-05",
-    "why": "The 30-year fixed mortgage rate, as reported in Freddie Mac's weekly survey, decreased, aligning with the observed decline in the 10-year Treasury yield over recent days."
+    "why": "The provided articles do not offer a direct explanation for the movement of the 30-year fixed mortgage rate, which is reported as part of a weekly survey and tracks broader trends in the 10-year Treasury yield over several days."
   },
   "policy": [],
   "policy_upcoming": [
@@ -169,70 +170,60 @@
   ],
   "tech": [
     {
-      "summary": "Tesla plans to cease Cybertruck production next year at its Texas plant to shift focus to its Cybercab, following the Cybertruck's niche sales and multiple recalls.",
-      "source": "CNBC",
-      "url": "https://www.cnbc.com/2026/11/06/tesla-cybertruck-texas-musk.html"
-    },
-    {
-      "summary": "The European Commission has charged TikTok for allegedly failing to protect users' mental health, stating that its recommendation algorithm may expose young and vulnerable individuals to harmful content.",
-      "source": "Guardian World",
-      "url": "https://www.theguardian.com/technology/2026/nov/06/eu-charges-tiktok-failure-to-protect-users-mental-health"
-    },
-    {
-      "summary": "Fox has completed its $22 billion acquisition of Roku, giving Fox control over a major streaming platform that reaches over 100 million US households.",
+      "summary": "Anthropic is accelerating its AI development by utilizing AI to build more powerful models, with its models reportedly improving twice as quickly as a year ago.",
       "source": "The Verge",
-      "url": "https://www.theverge.com/streaming/1028629/fox-roku-acquisition-close"
+      "url": "https://www.theverge.com/ai-artificial-intelligence/1029126/anthropic-metr-report-accelerating-ai-development"
+    },
+    {
+      "summary": "OpenAI's valuation has increased to $1.25 trillion after securing an additional $11 billion in a new funding round, solidifying its position among the world's most valuable companies.",
+      "source": "The Verge",
+      "url": "https://www.theverge.com/ai-artificial-intelligence/1029380/openai-1-25-trillion-investment-valuation"
+    },
+    {
+      "summary": "SpaceX is progressing with its plans for Starlink Mobile to become a major mobile carrier, having already deployed thousands of direct-to-cell satellites and moving to build out its 5G network on Earth.",
+      "source": "The Verge",
+      "url": "https://www.theverge.com/science/1029162/spacex-starlink-mobile-elon-musk-news"
     }
   ],
   "world": [
     {
-      "summary": "Paul Mackenzie, a cult leader in Kenya, received a life sentence after being convicted of murdering 191 people, including 190 children, whom he instructed to starve themselves to death to meet Jesus.",
-      "source": "BBC World",
-      "url": "https://www.bbc.co.uk/news/articles/cm5yne5984l0o?at_medium=RSS&at_campaign=rss"
-    },
-    {
-      "summary": "A series of bomb threats disrupted at least 18 flights across Europe, leading Irish authorities to suggest the incidents are likely part of a coordinated campaign to cause disruption.",
+      "summary": "New Zealand's general election concluded with results too close to call, leading to weeks of uncertainty as the incumbent prime minister and opposition bloc face prolonged coalition talks to form a government.",
       "source": "Guardian World",
-      "url": "https://www.theguardian.com/world/2026/nov/06/further-bomb-threats-disrupt-flights-across-europe"
+      "url": "https://www.theguardian.com/world/2026/nov/07/new-zealand-election-too-close-to-call-vote-count"
     },
     {
-      "summary": "Ukrainian officials have raised the death toll to at least 50 following an aid strike in Zaporizhia, with DNA tests being used to identify bodies and up to 39 individuals still trapped under rubble.",
-      "source": "Al Jazeera",
-      "url": "https://www.aljazeera.com/news/2026/11/6/ukraine-raises-zaporizhia-aid-strike-death-toll-to-at-least-50?traffic_source=rss"
-    },
-    {
-      "summary": "A Tanzanian opposition leader, who has been detained since April last year, was found guilty of inciting unrest but was acquitted of treason charges.",
-      "source": "BBC World",
-      "url": "https://www.bbc.co.uk/news/articles/ckp8g4pm0y4lo?at_medium=RSS&at_campaign=rss"
+      "summary": "Russia launched significant drone and ballistic missile attacks on Ukraine's energy infrastructure, causing blackouts and water shortages in Kyiv and further damaging the national power network.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/world/2026/nov/07/blackout-water-shortage-kyiv-russia-strike-ukraine-energy-grid"
     }
   ],
   "us": [
     {
-      "summary": "A federal judge issued a temporary restraining order, blocking any construction work for 14 days on Donald Trump's triumphal arch in Washington D.C., shortly after it gained federal approval.",
+      "summary": "A federal judge issued an order blocking the construction of an arch planned by the Trump administration for 14 days, after a federal panel had approved its immediate start late Thursday.",
       "source": "NPR National",
       "url": "https://www.npr.org/2026/11/06/nx-s1-6031990/trump-arch-planning-commission-injunction"
     },
     {
-      "summary": "Harmeet Dhillon resigned from her position as the head of the Justice Department's Civil Rights Division, concluding her 18-month tenure.",
+      "summary": "Harmeet Dhillon resigned as the head of the Justice Department's Civil Rights Division after 18 months in the position.",
       "source": "NPR National",
       "url": "https://www.npr.org/2026/11/05/g-s1-152080/head-of-justice-department-office-on-civil-rights-resigns"
     },
     {
-      "summary": "Public schools across the United States are facing a substantial drop in student enrollment, a trend that education experts indicate is worsened by the deportation of immigrant families.",
+      "summary": "A new report indicates that first-time homebuyers remain scarce, with a record share paying all cash, which is contributing to a widening divide between those who can buy and those priced out.",
       "source": "NPR National",
-      "url": "https://www.npr.org/2026/11/06/nx-s1-5971283/public-school-enrollment-ice-deportation-birthrate"
+      "url": "https://www.npr.org/2026/11/05/nx-s1-6022491/real-estate-all-cash-offer"
     }
   ],
   "science": [
     {
-      "summary": "A UK doctor who tested positive for Ebola in the Democratic Republic of Congo is currently undergoing treatment at a London hospital, with public health authorities assuring that the risk to the general public remains low.",
-      "source": "BBC Health",
-      "url": "https://www.bbc.co.uk/news/articles/cqj34d3l0zlmo?at_medium=RSS&at_campaign=rss"
+      "summary": "A new peer-reviewed study has linked exposure to a new generation of plasticizers, allegedly deemed \"safe\" and used in food packaging in the EU and US, to lower birth weight and fetal development complications.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/us-news/2026/nov/07/nontoxic-plastic-lower-birth-weight-study"
     },
     {
-      "summary": "New \"multi-cancer\" blood tests are scheduled to be introduced in some general practitioner surgeries across the UK, aiming to detect challenging-to-diagnose abdominal cancers, such as liver, ovarian, and pancreatic cancer, at an earlier stage.",
-      "source": "BBC Health",
-      "url": "https://www.bbc.co.uk/news/articles/cm9qz93ew22no?at_medium=RSS&at_campaign=rss"
+      "summary": "Researchers are studying how octopuses can squeeze through incredibly small holes, using this natural ability to inspire the development of robots designed for search and rescue operations that can navigate narrow spaces.",
+      "source": "NPR Science",
+      "url": "https://www.npr.org/2026/11/06/nx-s1-6027897/how-octopuses-squeeze-through-teeny-tiny-holes"
     }
   ],
   "weekly_recap": null,

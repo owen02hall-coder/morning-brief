@@ -1,0 +1,246 @@
+{
+  "generated_at": "2026-11-07T07:08:52.122656-07:00",
+  "date": "2026-11-07",
+  "tldr": [
+    "OpenAI's valuation has surged to $1.25 trillion following a new funding round, while rival Anthropic is accelerating its AI development by using AI to build more powerful models.",
+    "New Zealand's national election results have been declared too close to call, signaling that weeks of coalition talks will be necessary to form the next government.",
+    "A new peer-reviewed study has linked exposure to a new generation of plasticizers, often used in plastic food packaging, to lower birth weight and fetal development complications."
+  ],
+  "market": {
+    "sp500": {
+      "value": 7376.86,
+      "change": 23.13,
+      "asof": "2026-11-06"
+    },
+    "ndx": {
+      "value": 24579.43,
+      "change": 264.43,
+      "asof": "2026-11-06"
+    },
+    "why": "The Nasdaq Composite and S&P 500 closed higher, driven by a rebound in chip stocks like Nvidia and AMD, despite ongoing discussions about an \"AI backlash\" in the broader tech sector."
+  },
+  "yield_10y": {
+    "value": 4.86,
+    "change": 0.02,
+    "asof": "2026-11-06",
+    "why": "The 10-year Treasury yield saw a slight increase, as concerns persist regarding the financing of data centers for AI, which continues to impact bond markets."
+  },
+  "vix": {
+    "value": 25.64,
+    "change": -2.54,
+    "asof": "2026-11-06",
+    "why": "The VIX, a measure of market volatility, decreased, likely reflecting the rebound in chip stocks and a slight easing of immediate \"AI fears\" despite some tech sector headwinds."
+  },
+  "breadth": {
+    "sp500": {
+      "value": 55.7,
+      "asof": "2026-11-06",
+      "status": "healthy",
+      "matched": 499,
+      "stale": false
+    },
+    "ndx100": {
+      "value": 43.8,
+      "asof": "2026-11-06",
+      "status": "healthy",
+      "matched": 96,
+      "stale": false
+    }
+  },
+  "watchlist": [
+    {
+      "symbol": "SOXL",
+      "what": "3x semiconductors",
+      "value": 45.97,
+      "day_move": 12.48,
+      "asof": "2026-11-06",
+      "rsi": 29.2,
+      "rsi_zone": "oversold",
+      "low": 40.87,
+      "high": 139.76,
+      "band_pct": 5.2,
+      "zone": "mid",
+      "action": "buy",
+      "read": "Oversold on RSI, mid-range for the month. Big session: up 12.5% in a day."
+    },
+    {
+      "symbol": "SPXL",
+      "what": "3x S&P 500",
+      "value": 246.75,
+      "day_move": 0.72,
+      "asof": "2026-11-06",
+      "rsi": 33.8,
+      "rsi_zone": "neutral",
+      "low": 244.98,
+      "high": 297.97,
+      "band_pct": 3.3,
+      "zone": "low",
+      "action": "buy",
+      "read": "Within 4% of its 1-month low."
+    },
+    {
+      "symbol": "TQQQ",
+      "what": "3x Nasdaq-100",
+      "value": 52.25,
+      "day_move": 3.53,
+      "asof": "2026-11-06",
+      "rsi": 29.9,
+      "rsi_zone": "oversold",
+      "low": 50.47,
+      "high": 81.28,
+      "band_pct": 5.8,
+      "zone": "low",
+      "action": "buy",
+      "read": "Near the bottom of its 1-month range and oversold on RSI."
+    }
+  ],
+  "watchlist_missing": [],
+  "mortgage": {
+    "value": 7.18,
+    "change": -0.06,
+    "asof": "2026-11-05",
+    "why": "The provided articles do not offer a direct explanation for the movement of the 30-year fixed mortgage rate, which is reported as part of a weekly survey and tracks broader trends in the 10-year Treasury yield over several days."
+  },
+  "policy": [],
+  "policy_upcoming": [
+    {
+      "what_happened": "This document contains final regulations regarding the deduction for certain taxpayers for an amount up to $10,000 of qualified passenger vehicle loan interest.",
+      "effect": "You can deduct up to $10,000 of qualified passenger vehicle loan interest.",
+      "url": "https://www.federalregister.gov/documents/2026/09/08/2026-18219/car-loan-interest-deduction",
+      "status": "Final rule",
+      "effective_date": "2026-11-09",
+      "source": "Federal Register"
+    },
+    {
+      "what_happened": "Temporary regulations were issued concerning a new nonrefundable Federal tax credit for qualified contributions to scholarship granting organizations.",
+      "effect": "A new nonrefundable Federal tax credit becomes available for qualified contributions to scholarship granting organizations in 2027 and later taxable years.",
+      "url": "https://www.federalregister.gov/documents/2026/10/02/2026-20264/federal-scholarship-tax-credit",
+      "status": "Final rule",
+      "effective_date": "2026-12-01",
+      "source": "Federal Register"
+    },
+    {
+      "what_happened": "Final rules set forth requirements for price transparency reporting for non-grandfathered group health plans and health insurance issuers.",
+      "effect": "Your employer health insurance plan has new price transparency reporting requirements that become effective on December 7, 2026.",
+      "url": "https://www.federalregister.gov/documents/2026/10/06/2026-20447/transparency-in-coverage",
+      "status": "Final rule",
+      "effective_date": "2026-12-07",
+      "source": "Federal Register"
+    },
+    {
+      "what_happened": "A Utah bill modifies provisions related to the property tax exemption process.",
+      "effect": "Once you own a home, you will have deadlines for filing an application for a property tax exemption with the county board of equalization and for the board to render a decision.",
+      "url": "https://le.utah.gov/~2026/bills/static/SB0236.html",
+      "status": "Signed in Utah",
+      "effective_date": "2027-01-01",
+      "source": "Utah Legislature"
+    },
+    {
+      "what_happened": "A bill amends requirements for health insurance preauthorization in Utah.",
+      "effect": "Your health insurer must make an authorization or adverse preauthorization determination within a defined maximum time.",
+      "url": "https://le.utah.gov/~2026/bills/static/SB0319.html",
+      "status": "Signed in Utah",
+      "effective_date": "2027-01-01",
+      "source": "Utah Legislature"
+    }
+  ],
+  "policy_week": [
+    {
+      "what_happened": "Temporary regulations were issued concerning a new nonrefundable Federal tax credit for qualified contributions to scholarship granting organizations.",
+      "effect": "A new nonrefundable Federal tax credit becomes available for qualified contributions to scholarship granting organizations in 2027 and later taxable years.",
+      "url": "https://www.federalregister.gov/documents/2026/10/02/2026-20264/federal-scholarship-tax-credit",
+      "status": "Final rule",
+      "effective_date": "2026-12-01",
+      "source": "Federal Register"
+    }
+  ],
+  "policy_calendar": [
+    {
+      "date": "2026-11-10",
+      "label": "IRS tax brackets and the married-filing-jointly standard deduction for next year \u2014 expected late October or early November",
+      "note": "Published as an annual inflation-adjustment revenue procedure; recent releases landed between mid-October and mid-November. These are the bracket thresholds and the standard deduction the next return is filed against.",
+      "url": "https://www.irs.gov/filing/federal-income-tax-rates-and-brackets"
+    },
+    {
+      "date": "2026-11-30",
+      "label": "FHFA conforming loan limit for next year \u2014 expected late November",
+      "note": "The cap on a conforming (non-jumbo) mortgage, and the line between a normal rate and a jumbo one. FHFA has announced it in the last days of November each year, and the new limit applies to loans made from January 1.",
+      "url": "https://www.fhfa.gov/data/conforming-loan-limit"
+    }
+  ],
+  "tech": [
+    {
+      "summary": "Anthropic is accelerating its AI development by utilizing AI to build more powerful models, with its models reportedly improving twice as quickly as a year ago.",
+      "source": "The Verge",
+      "url": "https://www.theverge.com/ai-artificial-intelligence/1029126/anthropic-metr-report-accelerating-ai-development"
+    },
+    {
+      "summary": "OpenAI's valuation has increased to $1.25 trillion after securing an additional $11 billion in a new funding round, solidifying its position among the world's most valuable companies.",
+      "source": "The Verge",
+      "url": "https://www.theverge.com/ai-artificial-intelligence/1029380/openai-1-25-trillion-investment-valuation"
+    },
+    {
+      "summary": "SpaceX is progressing with its plans for Starlink Mobile to become a major mobile carrier, having already deployed thousands of direct-to-cell satellites and moving to build out its 5G network on Earth.",
+      "source": "The Verge",
+      "url": "https://www.theverge.com/science/1029162/spacex-starlink-mobile-elon-musk-news"
+    }
+  ],
+  "world": [
+    {
+      "summary": "New Zealand's general election concluded with results too close to call, leading to weeks of uncertainty as the incumbent prime minister and opposition bloc face prolonged coalition talks to form a government.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/world/2026/nov/07/new-zealand-election-too-close-to-call-vote-count"
+    },
+    {
+      "summary": "Russia launched significant drone and ballistic missile attacks on Ukraine's energy infrastructure, causing blackouts and water shortages in Kyiv and further damaging the national power network.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/world/2026/nov/07/blackout-water-shortage-kyiv-russia-strike-ukraine-energy-grid"
+    }
+  ],
+  "us": [
+    {
+      "summary": "A federal judge issued an order blocking the construction of an arch planned by the Trump administration for 14 days, after a federal panel had approved its immediate start late Thursday.",
+      "source": "NPR National",
+      "url": "https://www.npr.org/2026/11/06/nx-s1-6031990/trump-arch-planning-commission-injunction"
+    },
+    {
+      "summary": "Harmeet Dhillon resigned as the head of the Justice Department's Civil Rights Division after 18 months in the position.",
+      "source": "NPR National",
+      "url": "https://www.npr.org/2026/11/05/g-s1-152080/head-of-justice-department-office-on-civil-rights-resigns"
+    },
+    {
+      "summary": "A new report indicates that first-time homebuyers remain scarce, with a record share paying all cash, which is contributing to a widening divide between those who can buy and those priced out.",
+      "source": "NPR National",
+      "url": "https://www.npr.org/2026/11/05/nx-s1-6022491/real-estate-all-cash-offer"
+    }
+  ],
+  "science": [
+    {
+      "summary": "A new peer-reviewed study has linked exposure to a new generation of plasticizers, allegedly deemed \"safe\" and used in food packaging in the EU and US, to lower birth weight and fetal development complications.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/us-news/2026/nov/07/nontoxic-plastic-lower-birth-weight-study"
+    },
+    {
+      "summary": "Researchers are studying how octopuses can squeeze through incredibly small holes, using this natural ability to inspire the development of robots designed for search and rescue operations that can navigate narrow spaces.",
+      "source": "NPR Science",
+      "url": "https://www.npr.org/2026/11/06/nx-s1-6027897/how-octopuses-squeeze-through-teeny-tiny-holes"
+    }
+  ],
+  "weekly_recap": null,
+  "data_availability": {
+    "sp500": true,
+    "ndx": true,
+    "vix": true,
+    "ten_year": true,
+    "news_world": true,
+    "news_us": true,
+    "news_science": true,
+    "news_business": true,
+    "news_tech": true,
+    "summary": "ok",
+    "breadth": true,
+    "policy": true,
+    "mortgage": true,
+    "watchlist": true
+  }
+}
