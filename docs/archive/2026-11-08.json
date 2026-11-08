@@ -1,0 +1,256 @@
+{
+  "generated_at": "2026-11-08T07:22:12.059600-07:00",
+  "date": "2026-11-08",
+  "tldr": [
+    "Homelessness in the U.S. has decreased for the second consecutive year, marking the largest drop in over a decade.",
+    "Israel's president has selected Gadi Eisenkot to attempt to form a new government after a deadlocked election.",
+    "Concerns are emerging regarding Nvidia's sale of H200 AI chips to Chinese firms, including one with an empty office, raising questions about due diligence."
+  ],
+  "market": {
+    "sp500": {
+      "value": 7376.86,
+      "change": 23.13,
+      "asof": "2026-11-06"
+    },
+    "ndx": {
+      "value": 24579.43,
+      "change": 264.43,
+      "asof": "2026-11-06"
+    },
+    "why": "The provided articles do not offer explicit reasons for the S&P 500 and Nasdaq Composite closing higher on 2026-11-06."
+  },
+  "yield_10y": {
+    "value": 4.86,
+    "change": 0.02,
+    "asof": "2026-11-06",
+    "why": "The provided articles do not offer explicit reasons for the 10-year Treasury yield closing higher on 2026-11-06."
+  },
+  "vix": {
+    "value": 25.64,
+    "change": -2.54,
+    "asof": "2026-11-06",
+    "why": "The provided articles do not offer explicit reasons for the VIX closing lower on 2026-11-06."
+  },
+  "breadth": {
+    "sp500": {
+      "value": 55.7,
+      "asof": "2026-11-06",
+      "status": "healthy",
+      "matched": 499,
+      "stale": false
+    },
+    "ndx100": {
+      "value": 43.8,
+      "asof": "2026-11-06",
+      "status": "healthy",
+      "matched": 96,
+      "stale": false
+    }
+  },
+  "watchlist": [
+    {
+      "symbol": "SOXL",
+      "what": "3x semiconductors",
+      "value": 45.97,
+      "day_move": 12.48,
+      "asof": "2026-11-06",
+      "rsi": 29.2,
+      "rsi_zone": "oversold",
+      "low": 40.87,
+      "high": 139.76,
+      "band_pct": 5.2,
+      "zone": "mid",
+      "action": "buy",
+      "read": "Oversold on RSI, mid-range for the month. Big session: up 12.5% in a day."
+    },
+    {
+      "symbol": "SPXL",
+      "what": "3x S&P 500",
+      "value": 246.75,
+      "day_move": 0.72,
+      "asof": "2026-11-06",
+      "rsi": 33.8,
+      "rsi_zone": "neutral",
+      "low": 244.98,
+      "high": 297.97,
+      "band_pct": 3.3,
+      "zone": "low",
+      "action": "buy",
+      "read": "Within 4% of its 1-month low."
+    },
+    {
+      "symbol": "TQQQ",
+      "what": "3x Nasdaq-100",
+      "value": 52.25,
+      "day_move": 3.53,
+      "asof": "2026-11-06",
+      "rsi": 29.9,
+      "rsi_zone": "oversold",
+      "low": 50.47,
+      "high": 81.28,
+      "band_pct": 5.8,
+      "zone": "low",
+      "action": "buy",
+      "read": "Near the bottom of its 1-month range and oversold on RSI."
+    }
+  ],
+  "watchlist_missing": [],
+  "mortgage": {
+    "value": 7.18,
+    "change": -0.06,
+    "asof": "2026-11-05",
+    "why": "The 30-year fixed mortgage rate, reported on 2026-11-05, decreased from its previous weekly release. While mortgage rates generally track the direction of 10-year Treasury yields over recent days, the provided articles do not offer a specific reason for this weekly decrease."
+  },
+  "policy": [],
+  "policy_upcoming": [
+    {
+      "what_happened": "This document contains final regulations regarding the deduction for certain taxpayers for an amount up to $10,000 of qualified passenger vehicle loan interest.",
+      "effect": "You can deduct up to $10,000 of qualified passenger vehicle loan interest.",
+      "url": "https://www.federalregister.gov/documents/2026/09/08/2026-18219/car-loan-interest-deduction",
+      "status": "Final rule",
+      "effective_date": "2026-11-09",
+      "source": "Federal Register"
+    },
+    {
+      "what_happened": "Temporary regulations were issued concerning a new nonrefundable Federal tax credit for qualified contributions to scholarship granting organizations.",
+      "effect": "A new nonrefundable Federal tax credit becomes available for qualified contributions to scholarship granting organizations in 2027 and later taxable years.",
+      "url": "https://www.federalregister.gov/documents/2026/10/02/2026-20264/federal-scholarship-tax-credit",
+      "status": "Final rule",
+      "effective_date": "2026-12-01",
+      "source": "Federal Register"
+    },
+    {
+      "what_happened": "Final rules set forth requirements for price transparency reporting for non-grandfathered group health plans and health insurance issuers.",
+      "effect": "Your employer health insurance plan has new price transparency reporting requirements that become effective on December 7, 2026.",
+      "url": "https://www.federalregister.gov/documents/2026/10/06/2026-20447/transparency-in-coverage",
+      "status": "Final rule",
+      "effective_date": "2026-12-07",
+      "source": "Federal Register"
+    },
+    {
+      "what_happened": "A Utah bill modifies provisions related to the property tax exemption process.",
+      "effect": "Once you own a home, you will have deadlines for filing an application for a property tax exemption with the county board of equalization and for the board to render a decision.",
+      "url": "https://le.utah.gov/~2026/bills/static/SB0236.html",
+      "status": "Signed in Utah",
+      "effective_date": "2027-01-01",
+      "source": "Utah Legislature"
+    },
+    {
+      "what_happened": "A bill amends requirements for health insurance preauthorization in Utah.",
+      "effect": "Your health insurer must make an authorization or adverse preauthorization determination within a defined maximum time.",
+      "url": "https://le.utah.gov/~2026/bills/static/SB0319.html",
+      "status": "Signed in Utah",
+      "effective_date": "2027-01-01",
+      "source": "Utah Legislature"
+    }
+  ],
+  "policy_week": [
+    {
+      "what_happened": "Temporary regulations were issued concerning a new nonrefundable Federal tax credit for qualified contributions to scholarship granting organizations.",
+      "effect": "A new nonrefundable Federal tax credit becomes available for qualified contributions to scholarship granting organizations in 2027 and later taxable years.",
+      "url": "https://www.federalregister.gov/documents/2026/10/02/2026-20264/federal-scholarship-tax-credit",
+      "status": "Final rule",
+      "effective_date": "2026-12-01",
+      "source": "Federal Register"
+    }
+  ],
+  "policy_calendar": [
+    {
+      "date": "2026-11-10",
+      "label": "IRS tax brackets and the married-filing-jointly standard deduction for next year \u2014 expected late October or early November",
+      "note": "Published as an annual inflation-adjustment revenue procedure; recent releases landed between mid-October and mid-November. These are the bracket thresholds and the standard deduction the next return is filed against.",
+      "url": "https://www.irs.gov/filing/federal-income-tax-rates-and-brackets"
+    },
+    {
+      "date": "2026-11-30",
+      "label": "FHFA conforming loan limit for next year \u2014 expected late November",
+      "note": "The cap on a conforming (non-jumbo) mortgage, and the line between a normal rate and a jumbo one. FHFA has announced it in the last days of November each year, and the new limit applies to loans made from January 1.",
+      "url": "https://www.fhfa.gov/data/conforming-loan-limit"
+    }
+  ],
+  "tech": [
+    {
+      "summary": "Concerns are emerging regarding Nvidia's sale of H200 AI chips to Chinese firms, including one with an empty office, raising questions about due diligence by the Commerce Department and Nvidia.",
+      "source": "The Verge",
+      "url": "https://www.theverge.com/ai-artificial-intelligence/1029483/nvidia-ai-chips-china-blacklist-government"
+    },
+    {
+      "summary": "The global music body IFPI has warned the Australian government that weakening AI copyright law would be a \"disaster for creativity\" and damage Australia's reputation, arguing against allowing AI companies access to online content.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/technology/2026/nov/09/weakening-ai-copyright-law-will-spell-disaster-for-creativity-australia"
+    },
+    {
+      "summary": "Meta's Chief Strategy Officer, Dave Wehner, has departed to become the CFO of Fireworks, an AI infrastructure startup recently valued at $17.5 billion.",
+      "source": "CNBC",
+      "url": "https://www.cnbc.com/2026/11/07/dave-wehner-meta-fireworks-cfo.html"
+    }
+  ],
+  "world": [
+    {
+      "summary": "Israel's president has selected Gadi Eisenkot, leader of the Yashar party and a rival to Prime Minister Benjamin Netanyahu, to attempt to form a new government after a deadlocked election.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/world/2026/nov/07/israel-president-gadi-eisenkot-form-government"
+    },
+    {
+      "summary": "A US task force has been established with the goal of disrupting Iran's transport of advanced weapons, though analysts express skepticism about its full success in completely choking off supply lines.",
+      "source": "Al Jazeera",
+      "url": "https://www.aljazeera.com/news/2026/11/8/us-task-force-to-cut-off-irans-transport-of-advanced-weapons-what-we-know?traffic_source=rss"
+    },
+    {
+      "summary": "Russian strikes have caused widespread power outages in Ukraine, leaving approximately 850,000 people without electricity in the Dnipropetrovsk and Kharkiv regions.",
+      "source": "Al Jazeera",
+      "url": "https://www.aljazeera.com/news/2026/11/8/russian-strikes-on-ukraine-leave-hundreds-of-thousands-without-electricity?traffic_source=rss"
+    },
+    {
+      "summary": "At least 21 people died when a small migrant boat sank off the coast of Senegal, with a search operation underway after one person was rescued.",
+      "source": "Al Jazeera",
+      "url": "https://www.aljazeera.com/news/2026/11/8/at-least-21-dead-as-small-boat-sinks-off-senegal?traffic_source=rss"
+    }
+  ],
+  "us": [
+    {
+      "summary": "Homelessness in the U.S. has decreased for the second consecutive year, marking the largest drop in over a decade, according to recent analyses.",
+      "source": "NPR National",
+      "url": "https://www.npr.org/2026/11/07/nx-s1-6033491/homelessness-in-the-u-s-saw-its-largest-drop-in-more-than-a-decade-last-year"
+    },
+    {
+      "summary": "Democrats plan to broaden investigations into fatal Immigration and Customs Enforcement (ICE) shootings, particularly those that occurred during a surge in Minneapolis.",
+      "source": "NPR National",
+      "url": "https://www.npr.org/2026/11/07/nx-s1-6029659/democrats-investigate-fatal-ice-shootings"
+    },
+    {
+      "summary": "The Trump administration's proposed changes to the National Historic Preservation Act have drawn concern from Oklahoma tribes, who state that ancestral lands in Ohio and other historic sites across the country are at risk.",
+      "source": "NPR National",
+      "url": "https://www.npr.org/2026/11/07/nx-s1-6029409/oklahoma-tribes-says-proposed-legal-changes-puts-ancestral-lands-in-ohio-at-risk"
+    }
+  ],
+  "science": [
+    {
+      "summary": "Climate change is causing shifts in the natural colors observed across various environments, from Arctic landscapes to the bodies of insects.",
+      "source": "NPR Science",
+      "url": "https://www.npr.org/2026/11/08/nx-s1-5393776/color-climate-change-coral-lakes"
+    },
+    {
+      "summary": "An experimental drug designed to lower a common risk factor for heart attacks unexpectedly failed to demonstrate any benefit in saving patients' lives.",
+      "source": "NPR Health",
+      "url": "https://www.npr.org/2026/11/07/nx-s1-6026379/lpa-drug-lipoproteina-heart-attack"
+    }
+  ],
+  "weekly_recap": "The past week brought market volatility, with initial stock index drops fueled by AI spending fears, followed by US market gains attributed to midterm election results. Globally, however, some markets experienced sell-offs. Key developments included widespread cyberattacks on European supermarkets and a growing debate over AI funding and copyright. Politically, Democrats gained full control of the US Congress, while Israel began the process of forming a new government. Looking ahead, the Cop31 climate summit is set to commence, New Zealand faces weeks of coalition negotiations, and US Democrats are expected to focus on investigations into ICE shootings and potential changes to tariffs.",
+  "data_availability": {
+    "sp500": true,
+    "ndx": true,
+    "vix": true,
+    "ten_year": true,
+    "news_world": true,
+    "news_us": true,
+    "news_science": true,
+    "news_business": true,
+    "news_tech": true,
+    "summary": "ok",
+    "breadth": true,
+    "policy": true,
+    "mortgage": true,
+    "watchlist": true
+  }
+}
