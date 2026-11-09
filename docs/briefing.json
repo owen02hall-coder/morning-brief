@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-11-08T07:22:12.059600-07:00",
-  "date": "2026-11-08",
+  "generated_at": "2026-11-09T10:39:13.502006-07:00",
+  "date": "2026-11-09",
   "tldr": [
-    "Homelessness in the U.S. has decreased for the second consecutive year, marking the largest drop in over a decade.",
-    "Israel's president has selected Gadi Eisenkot to attempt to form a new government after a deadlocked election.",
-    "Concerns are emerging regarding Nvidia's sale of H200 AI chips to Chinese firms, including one with an empty office, raising questions about due diligence."
+    "Nvidia's CEO is facing an internal investigation regarding an alleged affair with a suspected Chinese spy, which has impacted the company's stock.",
+    "France has formally accused Iran's Revolutionary Guards of conducting cyberattacks that targeted supermarket refrigeration systems.",
+    "Homelessness in the United States decreased for the second consecutive year, according to recent analyses."
   ],
   "market": {
     "sp500": {
@@ -17,30 +17,30 @@
       "change": 264.43,
       "asof": "2026-11-06"
     },
-    "why": "The provided articles do not offer explicit reasons for the S&P 500 and Nasdaq Composite closing higher on 2026-11-06."
+    "why": "The S&P 500 and Nasdaq Composite indices both closed higher on November 6, while the VIX, a measure of market volatility, decreased. This occurred amid a reported diversification away from the volatile AI trade, which saw Nvidia's shares slump due to an internal investigation into its CEO Jensen Huang's alleged affair with a Chinese spy."
   },
   "yield_10y": {
     "value": 4.86,
     "change": 0.02,
     "asof": "2026-11-06",
-    "why": "The provided articles do not offer explicit reasons for the 10-year Treasury yield closing higher on 2026-11-06."
+    "why": "The 10-year Treasury yield saw a minor increase on November 6. The provided articles do not offer a specific reason for this slight movement."
   },
   "vix": {
     "value": 25.64,
     "change": -2.54,
     "asof": "2026-11-06",
-    "why": "The provided articles do not offer explicit reasons for the VIX closing lower on 2026-11-06."
+    "why": "The VIX decreased on November 6, which typically indicates a reduction in expected market volatility. The articles do not provide a specific reason for this movement, but the general upward trend in major indices and market commentary on diversifying from the AI trade may contribute to a perceived reduction in overall market risk."
   },
   "breadth": {
     "sp500": {
-      "value": 55.7,
+      "value": 63.2,
       "asof": "2026-11-06",
       "status": "healthy",
-      "matched": 499,
+      "matched": 500,
       "stale": false
     },
     "ndx100": {
-      "value": 43.8,
+      "value": 51.0,
       "asof": "2026-11-06",
       "status": "healthy",
       "matched": 96,
@@ -99,18 +99,10 @@
     "value": 7.18,
     "change": -0.06,
     "asof": "2026-11-05",
-    "why": "The 30-year fixed mortgage rate, reported on 2026-11-05, decreased from its previous weekly release. While mortgage rates generally track the direction of 10-year Treasury yields over recent days, the provided articles do not offer a specific reason for this weekly decrease."
+    "why": "The 30-year fixed mortgage rate, as reported by Freddie Mac's weekly survey on November 5, experienced a slight decrease. Mortgage rates generally track the direction of the 10-year Treasury yield over time, which saw a modest increase on November 6. The provided articles do not offer specific commentary on the drivers of this particular weekly mortgage rate movement."
   },
   "policy": [],
   "policy_upcoming": [
-    {
-      "what_happened": "This document contains final regulations regarding the deduction for certain taxpayers for an amount up to $10,000 of qualified passenger vehicle loan interest.",
-      "effect": "You can deduct up to $10,000 of qualified passenger vehicle loan interest.",
-      "url": "https://www.federalregister.gov/documents/2026/09/08/2026-18219/car-loan-interest-deduction",
-      "status": "Final rule",
-      "effective_date": "2026-11-09",
-      "source": "Federal Register"
-    },
     {
       "what_happened": "Temporary regulations were issued concerning a new nonrefundable Federal tax credit for qualified contributions to scholarship granting organizations.",
       "effect": "A new nonrefundable Federal tax credit becomes available for qualified contributions to scholarship granting organizations in 2027 and later taxable years.",
@@ -170,73 +162,73 @@
   ],
   "tech": [
     {
-      "summary": "Concerns are emerging regarding Nvidia's sale of H200 AI chips to Chinese firms, including one with an empty office, raising questions about due diligence by the Commerce Department and Nvidia.",
+      "summary": "Uber has introduced Uber Parking, a new in-app feature that allows users to locate, reserve, and pay for garage and lot parking spaces in advance, following its acquisition of SpotHero.",
       "source": "The Verge",
-      "url": "https://www.theverge.com/ai-artificial-intelligence/1029483/nvidia-ai-chips-china-blacklist-government"
+      "url": "https://www.theverge.com/transportation/1029776/uber-parking-launch-spothero-robotaxis"
     },
     {
-      "summary": "The global music body IFPI has warned the Australian government that weakening AI copyright law would be a \"disaster for creativity\" and damage Australia's reputation, arguing against allowing AI companies access to online content.",
-      "source": "Guardian World",
-      "url": "https://www.theguardian.com/technology/2026/nov/09/weakening-ai-copyright-law-will-spell-disaster-for-creativity-australia"
+      "summary": "The Walt Disney Company and Adobe have formed a multiyear partnership to develop proprietary, artist-led generative AI models to enhance Disney's production pipeline, integrating Adobe's latest technologies.",
+      "source": "The Verge",
+      "url": "https://www.theverge.com/tech/1029773/disney-adobe-generative-ai-partnership"
     },
     {
-      "summary": "Meta's Chief Strategy Officer, Dave Wehner, has departed to become the CFO of Fireworks, an AI infrastructure startup recently valued at $17.5 billion.",
-      "source": "CNBC",
-      "url": "https://www.cnbc.com/2026/11/07/dave-wehner-meta-fireworks-cfo.html"
+      "summary": "Canada has officially launched its Real-Time Rail (RTR) payment system, establishing a national 24/7 payment infrastructure designed for immediate transactions across the economy.",
+      "source": "Hacker News",
+      "url": "https://www.payments.ca/canada-launches-real-time-rail-bringing-247-payment-infrastructure-national-economy"
     }
   ],
   "world": [
     {
-      "summary": "Israel's president has selected Gadi Eisenkot, leader of the Yashar party and a rival to Prime Minister Benjamin Netanyahu, to attempt to form a new government after a deadlocked election.",
+      "summary": "France has publicly accused Iran's Revolutionary Guards of being responsible for cyberattacks last month that disrupted supermarket refrigeration systems, with the French foreign minister vowing European sanctions against Tehran.",
       "source": "Guardian World",
-      "url": "https://www.theguardian.com/world/2026/nov/07/israel-president-gadi-eisenkot-form-government"
+      "url": "https://www.theguardian.com/world/2026/nov/09/france-blames-irans-revolutionary-guards-for-cyber-attacks-on-supermarket-fridges"
     },
     {
-      "summary": "A US task force has been established with the goal of disrupting Iran's transport of advanced weapons, though analysts express skepticism about its full success in completely choking off supply lines.",
-      "source": "Al Jazeera",
-      "url": "https://www.aljazeera.com/news/2026/11/8/us-task-force-to-cut-off-irans-transport-of-advanced-weapons-what-we-know?traffic_source=rss"
+      "summary": "At least 39 people died when a migrant boat, which was attempting the dangerous Atlantic crossing to Spain's Canary Islands, sank off the coast of Senegal.",
+      "source": "BBC World",
+      "url": "https://www.bbc.co.uk/news/articles/cv2d6dpge65go?at_medium=RSS&at_campaign=rss"
     },
     {
-      "summary": "Russian strikes have caused widespread power outages in Ukraine, leaving approximately 850,000 people without electricity in the Dnipropetrovsk and Kharkiv regions.",
-      "source": "Al Jazeera",
-      "url": "https://www.aljazeera.com/news/2026/11/8/russian-strikes-on-ukraine-leave-hundreds-of-thousands-without-electricity?traffic_source=rss"
+      "summary": "Nine individuals from Zimbabwe were reportedly apprehended in South Africa as they allegedly attempted to leave the country to participate in the conflict in Ukraine.",
+      "source": "BBC World",
+      "url": "https://www.bbc.co.uk/news/articles/cm93z3lp5lnpo?at_medium=RSS&at_campaign=rss"
     },
     {
-      "summary": "At least 21 people died when a small migrant boat sank off the coast of Senegal, with a search operation underway after one person was rescued.",
+      "summary": "More than 50,000 people have been displaced by recent deadly border clashes in Ethiopia, with families arriving in Kenya facing shortages of food and shelter as host communities struggle.",
       "source": "Al Jazeera",
-      "url": "https://www.aljazeera.com/news/2026/11/8/at-least-21-dead-as-small-boat-sinks-off-senegal?traffic_source=rss"
+      "url": "https://www.aljazeera.com/news/2026/11/9/more-than-50000-displaced-by-deadly-ethiopia-border-clashes?traffic_source=rss"
     }
   ],
   "us": [
     {
-      "summary": "Homelessness in the U.S. has decreased for the second consecutive year, marking the largest drop in over a decade, according to recent analyses.",
-      "source": "NPR National",
-      "url": "https://www.npr.org/2026/11/07/nx-s1-6033491/homelessness-in-the-u-s-saw-its-largest-drop-in-more-than-a-decade-last-year"
+      "summary": "Stephen Miller, recognized as a key architect of immigration policies, has assumed the role of White House chief of staff.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/us-news/2026/nov/09/stephen-miller-white-house-chief-of-staff"
     },
     {
-      "summary": "Democrats plan to broaden investigations into fatal Immigration and Customs Enforcement (ICE) shootings, particularly those that occurred during a surge in Minneapolis.",
-      "source": "NPR National",
-      "url": "https://www.npr.org/2026/11/07/nx-s1-6029659/democrats-investigate-fatal-ice-shootings"
+      "summary": "Honda has announced a $3 billion investment to establish a new vehicle assembly plant in Ohio, which is expected to begin producing hybrid vehicles in 2029.",
+      "source": "CNBC",
+      "url": "https://www.cnbc.com/2026/11/09/honda-to-invest-3-billion-in-new-vehicle-assembly-plant-in-ohio.html"
     },
     {
-      "summary": "The Trump administration's proposed changes to the National Historic Preservation Act have drawn concern from Oklahoma tribes, who state that ancestral lands in Ohio and other historic sites across the country are at risk.",
+      "summary": "Homelessness in the U.S. has decreased for the second consecutive year, according to analyses, although the specific reasons for this decline are still being discussed by different groups.",
       "source": "NPR National",
-      "url": "https://www.npr.org/2026/11/07/nx-s1-6029409/oklahoma-tribes-says-proposed-legal-changes-puts-ancestral-lands-in-ohio-at-risk"
+      "url": "https://www.npr.org/2026/11/08/nx-s1-6033391/homelessness-in-the-u-s-dropped-again-hud-and-housing-advocates-differ-on-why"
     }
   ],
   "science": [
     {
-      "summary": "Climate change is causing shifts in the natural colors observed across various environments, from Arctic landscapes to the bodies of insects.",
-      "source": "NPR Science",
-      "url": "https://www.npr.org/2026/11/08/nx-s1-5393776/color-climate-change-coral-lakes"
-    },
-    {
-      "summary": "An experimental drug designed to lower a common risk factor for heart attacks unexpectedly failed to demonstrate any benefit in saving patients' lives.",
+      "summary": "An experimental drug designed to lower Lp(a), a common risk factor for heart attacks, unexpectedly failed to demonstrate cardiovascular benefits in a closely watched clinical trial, despite successfully reducing Lp(a) levels.",
       "source": "NPR Health",
       "url": "https://www.npr.org/2026/11/07/nx-s1-6026379/lpa-drug-lipoproteina-heart-attack"
+    },
+    {
+      "summary": "Climate change is reportedly causing shifts in the familiar colors of nature across various environments, including Arctic landscapes and the bodies of insects.",
+      "source": "NPR Science",
+      "url": "https://www.npr.org/2026/11/08/nx-s1-5393776/color-climate-change-coral-lakes"
     }
   ],
-  "weekly_recap": "The past week brought market volatility, with initial stock index drops fueled by AI spending fears, followed by US market gains attributed to midterm election results. Globally, however, some markets experienced sell-offs. Key developments included widespread cyberattacks on European supermarkets and a growing debate over AI funding and copyright. Politically, Democrats gained full control of the US Congress, while Israel began the process of forming a new government. Looking ahead, the Cop31 climate summit is set to commence, New Zealand faces weeks of coalition negotiations, and US Democrats are expected to focus on investigations into ICE shootings and potential changes to tariffs.",
+  "weekly_recap": null,
   "data_availability": {
     "sp500": true,
     "ndx": true,

@@ -1,0 +1,248 @@
+{
+  "generated_at": "2026-11-09T10:39:13.502006-07:00",
+  "date": "2026-11-09",
+  "tldr": [
+    "Nvidia's CEO is facing an internal investigation regarding an alleged affair with a suspected Chinese spy, which has impacted the company's stock.",
+    "France has formally accused Iran's Revolutionary Guards of conducting cyberattacks that targeted supermarket refrigeration systems.",
+    "Homelessness in the United States decreased for the second consecutive year, according to recent analyses."
+  ],
+  "market": {
+    "sp500": {
+      "value": 7376.86,
+      "change": 23.13,
+      "asof": "2026-11-06"
+    },
+    "ndx": {
+      "value": 24579.43,
+      "change": 264.43,
+      "asof": "2026-11-06"
+    },
+    "why": "The S&P 500 and Nasdaq Composite indices both closed higher on November 6, while the VIX, a measure of market volatility, decreased. This occurred amid a reported diversification away from the volatile AI trade, which saw Nvidia's shares slump due to an internal investigation into its CEO Jensen Huang's alleged affair with a Chinese spy."
+  },
+  "yield_10y": {
+    "value": 4.86,
+    "change": 0.02,
+    "asof": "2026-11-06",
+    "why": "The 10-year Treasury yield saw a minor increase on November 6. The provided articles do not offer a specific reason for this slight movement."
+  },
+  "vix": {
+    "value": 25.64,
+    "change": -2.54,
+    "asof": "2026-11-06",
+    "why": "The VIX decreased on November 6, which typically indicates a reduction in expected market volatility. The articles do not provide a specific reason for this movement, but the general upward trend in major indices and market commentary on diversifying from the AI trade may contribute to a perceived reduction in overall market risk."
+  },
+  "breadth": {
+    "sp500": {
+      "value": 63.2,
+      "asof": "2026-11-06",
+      "status": "healthy",
+      "matched": 500,
+      "stale": false
+    },
+    "ndx100": {
+      "value": 51.0,
+      "asof": "2026-11-06",
+      "status": "healthy",
+      "matched": 96,
+      "stale": false
+    }
+  },
+  "watchlist": [
+    {
+      "symbol": "SOXL",
+      "what": "3x semiconductors",
+      "value": 45.97,
+      "day_move": 12.48,
+      "asof": "2026-11-06",
+      "rsi": 29.2,
+      "rsi_zone": "oversold",
+      "low": 40.87,
+      "high": 139.76,
+      "band_pct": 5.2,
+      "zone": "mid",
+      "action": "buy",
+      "read": "Oversold on RSI, mid-range for the month. Big session: up 12.5% in a day."
+    },
+    {
+      "symbol": "SPXL",
+      "what": "3x S&P 500",
+      "value": 246.75,
+      "day_move": 0.72,
+      "asof": "2026-11-06",
+      "rsi": 33.8,
+      "rsi_zone": "neutral",
+      "low": 244.98,
+      "high": 297.97,
+      "band_pct": 3.3,
+      "zone": "low",
+      "action": "buy",
+      "read": "Within 4% of its 1-month low."
+    },
+    {
+      "symbol": "TQQQ",
+      "what": "3x Nasdaq-100",
+      "value": 52.25,
+      "day_move": 3.53,
+      "asof": "2026-11-06",
+      "rsi": 29.9,
+      "rsi_zone": "oversold",
+      "low": 50.47,
+      "high": 81.28,
+      "band_pct": 5.8,
+      "zone": "low",
+      "action": "buy",
+      "read": "Near the bottom of its 1-month range and oversold on RSI."
+    }
+  ],
+  "watchlist_missing": [],
+  "mortgage": {
+    "value": 7.18,
+    "change": -0.06,
+    "asof": "2026-11-05",
+    "why": "The 30-year fixed mortgage rate, as reported by Freddie Mac's weekly survey on November 5, experienced a slight decrease. Mortgage rates generally track the direction of the 10-year Treasury yield over time, which saw a modest increase on November 6. The provided articles do not offer specific commentary on the drivers of this particular weekly mortgage rate movement."
+  },
+  "policy": [],
+  "policy_upcoming": [
+    {
+      "what_happened": "Temporary regulations were issued concerning a new nonrefundable Federal tax credit for qualified contributions to scholarship granting organizations.",
+      "effect": "A new nonrefundable Federal tax credit becomes available for qualified contributions to scholarship granting organizations in 2027 and later taxable years.",
+      "url": "https://www.federalregister.gov/documents/2026/10/02/2026-20264/federal-scholarship-tax-credit",
+      "status": "Final rule",
+      "effective_date": "2026-12-01",
+      "source": "Federal Register"
+    },
+    {
+      "what_happened": "Final rules set forth requirements for price transparency reporting for non-grandfathered group health plans and health insurance issuers.",
+      "effect": "Your employer health insurance plan has new price transparency reporting requirements that become effective on December 7, 2026.",
+      "url": "https://www.federalregister.gov/documents/2026/10/06/2026-20447/transparency-in-coverage",
+      "status": "Final rule",
+      "effective_date": "2026-12-07",
+      "source": "Federal Register"
+    },
+    {
+      "what_happened": "A Utah bill modifies provisions related to the property tax exemption process.",
+      "effect": "Once you own a home, you will have deadlines for filing an application for a property tax exemption with the county board of equalization and for the board to render a decision.",
+      "url": "https://le.utah.gov/~2026/bills/static/SB0236.html",
+      "status": "Signed in Utah",
+      "effective_date": "2027-01-01",
+      "source": "Utah Legislature"
+    },
+    {
+      "what_happened": "A bill amends requirements for health insurance preauthorization in Utah.",
+      "effect": "Your health insurer must make an authorization or adverse preauthorization determination within a defined maximum time.",
+      "url": "https://le.utah.gov/~2026/bills/static/SB0319.html",
+      "status": "Signed in Utah",
+      "effective_date": "2027-01-01",
+      "source": "Utah Legislature"
+    }
+  ],
+  "policy_week": [
+    {
+      "what_happened": "Temporary regulations were issued concerning a new nonrefundable Federal tax credit for qualified contributions to scholarship granting organizations.",
+      "effect": "A new nonrefundable Federal tax credit becomes available for qualified contributions to scholarship granting organizations in 2027 and later taxable years.",
+      "url": "https://www.federalregister.gov/documents/2026/10/02/2026-20264/federal-scholarship-tax-credit",
+      "status": "Final rule",
+      "effective_date": "2026-12-01",
+      "source": "Federal Register"
+    }
+  ],
+  "policy_calendar": [
+    {
+      "date": "2026-11-10",
+      "label": "IRS tax brackets and the married-filing-jointly standard deduction for next year \u2014 expected late October or early November",
+      "note": "Published as an annual inflation-adjustment revenue procedure; recent releases landed between mid-October and mid-November. These are the bracket thresholds and the standard deduction the next return is filed against.",
+      "url": "https://www.irs.gov/filing/federal-income-tax-rates-and-brackets"
+    },
+    {
+      "date": "2026-11-30",
+      "label": "FHFA conforming loan limit for next year \u2014 expected late November",
+      "note": "The cap on a conforming (non-jumbo) mortgage, and the line between a normal rate and a jumbo one. FHFA has announced it in the last days of November each year, and the new limit applies to loans made from January 1.",
+      "url": "https://www.fhfa.gov/data/conforming-loan-limit"
+    }
+  ],
+  "tech": [
+    {
+      "summary": "Uber has introduced Uber Parking, a new in-app feature that allows users to locate, reserve, and pay for garage and lot parking spaces in advance, following its acquisition of SpotHero.",
+      "source": "The Verge",
+      "url": "https://www.theverge.com/transportation/1029776/uber-parking-launch-spothero-robotaxis"
+    },
+    {
+      "summary": "The Walt Disney Company and Adobe have formed a multiyear partnership to develop proprietary, artist-led generative AI models to enhance Disney's production pipeline, integrating Adobe's latest technologies.",
+      "source": "The Verge",
+      "url": "https://www.theverge.com/tech/1029773/disney-adobe-generative-ai-partnership"
+    },
+    {
+      "summary": "Canada has officially launched its Real-Time Rail (RTR) payment system, establishing a national 24/7 payment infrastructure designed for immediate transactions across the economy.",
+      "source": "Hacker News",
+      "url": "https://www.payments.ca/canada-launches-real-time-rail-bringing-247-payment-infrastructure-national-economy"
+    }
+  ],
+  "world": [
+    {
+      "summary": "France has publicly accused Iran's Revolutionary Guards of being responsible for cyberattacks last month that disrupted supermarket refrigeration systems, with the French foreign minister vowing European sanctions against Tehran.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/world/2026/nov/09/france-blames-irans-revolutionary-guards-for-cyber-attacks-on-supermarket-fridges"
+    },
+    {
+      "summary": "At least 39 people died when a migrant boat, which was attempting the dangerous Atlantic crossing to Spain's Canary Islands, sank off the coast of Senegal.",
+      "source": "BBC World",
+      "url": "https://www.bbc.co.uk/news/articles/cv2d6dpge65go?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "summary": "Nine individuals from Zimbabwe were reportedly apprehended in South Africa as they allegedly attempted to leave the country to participate in the conflict in Ukraine.",
+      "source": "BBC World",
+      "url": "https://www.bbc.co.uk/news/articles/cm93z3lp5lnpo?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "summary": "More than 50,000 people have been displaced by recent deadly border clashes in Ethiopia, with families arriving in Kenya facing shortages of food and shelter as host communities struggle.",
+      "source": "Al Jazeera",
+      "url": "https://www.aljazeera.com/news/2026/11/9/more-than-50000-displaced-by-deadly-ethiopia-border-clashes?traffic_source=rss"
+    }
+  ],
+  "us": [
+    {
+      "summary": "Stephen Miller, recognized as a key architect of immigration policies, has assumed the role of White House chief of staff.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/us-news/2026/nov/09/stephen-miller-white-house-chief-of-staff"
+    },
+    {
+      "summary": "Honda has announced a $3 billion investment to establish a new vehicle assembly plant in Ohio, which is expected to begin producing hybrid vehicles in 2029.",
+      "source": "CNBC",
+      "url": "https://www.cnbc.com/2026/11/09/honda-to-invest-3-billion-in-new-vehicle-assembly-plant-in-ohio.html"
+    },
+    {
+      "summary": "Homelessness in the U.S. has decreased for the second consecutive year, according to analyses, although the specific reasons for this decline are still being discussed by different groups.",
+      "source": "NPR National",
+      "url": "https://www.npr.org/2026/11/08/nx-s1-6033391/homelessness-in-the-u-s-dropped-again-hud-and-housing-advocates-differ-on-why"
+    }
+  ],
+  "science": [
+    {
+      "summary": "An experimental drug designed to lower Lp(a), a common risk factor for heart attacks, unexpectedly failed to demonstrate cardiovascular benefits in a closely watched clinical trial, despite successfully reducing Lp(a) levels.",
+      "source": "NPR Health",
+      "url": "https://www.npr.org/2026/11/07/nx-s1-6026379/lpa-drug-lipoproteina-heart-attack"
+    },
+    {
+      "summary": "Climate change is reportedly causing shifts in the familiar colors of nature across various environments, including Arctic landscapes and the bodies of insects.",
+      "source": "NPR Science",
+      "url": "https://www.npr.org/2026/11/08/nx-s1-5393776/color-climate-change-coral-lakes"
+    }
+  ],
+  "weekly_recap": null,
+  "data_availability": {
+    "sp500": true,
+    "ndx": true,
+    "vix": true,
+    "ten_year": true,
+    "news_world": true,
+    "news_us": true,
+    "news_science": true,
+    "news_business": true,
+    "news_tech": true,
+    "summary": "ok",
+    "breadth": true,
+    "policy": true,
+    "mortgage": true,
+    "watchlist": true
+  }
+}

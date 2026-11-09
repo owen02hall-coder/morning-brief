@@ -1,22 +1,6 @@
 {
-  "generated_at": "2026-11-08T07:22:12.059600-07:00",
+  "generated_at": "2026-11-09T10:39:13.502006-07:00",
   "lessons": [
-    {
-      "id": "2026-09-06-closing-costs",
-      "date": "2026-09-06",
-      "domain": "Money mechanics",
-      "title": "Planning for Home Closing Costs",
-      "hook": "When you save for a down payment on a home, there are other significant costs that you will need to pay at closing, which can add substantially to your upfront expenses.",
-      "quick": "Many people are surprised by the additional money required to close on a home beyond the down payment itself. These are called closing costs, and they are various fees paid at the time the property title officially transfers to the buyer. Many of these fees are not optional, as they are required by your lender or by law. Examples include attorney fees, costs for title services like a title search and insurance, recording costs to document the change of ownership, and an appraisal fee to verify the property's market value. Being prepared for these costs is crucial, as some like the first year's private mortgage insurance premium, if applicable, are often due in advance at closing.",
-      "more": "Lenders often require certain closing costs to protect their investment in your property. For instance, they typically require title insurance to ensure the property's title is clear of claims and an appraisal to confirm that the home's sale price does not exceed its fair market value. They also typically require you to pre-pay your homeowner's property insurance. Other costs cover the legal and administrative steps involved in transferring ownership, such as fees for preparing official documents or governmental excise taxes on the transaction. Some buyers also choose to pay \"points,\" which are a form of pre-paid interest that can reduce your mortgage loan's interest rate over time.",
-      "deep": "One of the most significant potential closing costs for buyers is private mortgage insurance, or PMI. If your down payment is less than 20 percent of the home's value, lenders usually require this insurance, and you'll typically pay the first full year's premium at closing. It\u2019s important to know that you can request the cancellation of PMI once your equity reaches 20 percent of the market value, and federal laws require lenders to automatically cancel it once your equity reaches 22 percent. Beyond this, you'll also likely pay prorated amounts for property taxes and homeowner association dues if the property has them, ensuring both you and the seller cover your share for the year of the transaction. These accumulated upfront costs, along with other fees, contribute to the total cash you need on closing day.",
-      "takeaway": "Before making an offer on a home, request a detailed estimate of all potential closing costs from your lender to understand the full upfront financial commitment.",
-      "source": {
-        "title": "Closing costs",
-        "url": "https://en.wikipedia.org/wiki/Closing_costs"
-      },
-      "audio": {}
-    },
     {
       "id": "2026-09-07-automotive-battery",
       "date": "2026-09-07",
@@ -639,11 +623,7 @@
         "title": "Groupthink",
         "url": "https://en.wikipedia.org/wiki/Groupthink"
       },
-      "audio": {
-        "quick": "lessons/2026-10-17-groupthink-quick.mp3",
-        "more": "lessons/2026-10-17-groupthink-more.mp3",
-        "deep": "lessons/2026-10-17-groupthink-deep.mp3"
-      }
+      "audio": {}
     },
     {
       "id": "2026-10-19-underwriting",
@@ -1043,6 +1023,26 @@
         "quick": "lessons/2026-11-08-framing-social-sciences-quick.mp3",
         "more": "lessons/2026-11-08-framing-social-sciences-more.mp3",
         "deep": "lessons/2026-11-08-framing-social-sciences-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-11-09-student-loan",
+      "date": "2026-11-09",
+      "domain": "Money mechanics",
+      "title": "Understanding How Student Loans Differ",
+      "hook": "Not fully understanding the unique characteristics of student loans compared to other debts can lead to unexpected financial challenges.",
+      "quick": "Student loans are designed to help with the costs of higher education, covering things like tuition, books, and living expenses. These loans often stand apart from other types of borrowing because their interest rates can be substantially lower, which might seem like a significant advantage. Another helpful feature is that repayment schedules can often be postponed while the student is actively enrolled in school. However, it's important to understand that student loans can also differ significantly in how they are managed, particularly regarding options for renegotiation or bankruptcy. The strict laws around these aspects in many countries mean that the financial risks associated with student loan defaults can sometimes be carried by the tertiary education institution, which highlights a unique structure compared to typical loans.",
+      "more": "These strict laws regarding renegotiation and bankruptcy mean that student loans can present unique challenges if a borrower faces financial difficulty later on. Unlike other forms of debt, where options like modifying terms or seeking bankruptcy protection might be more accessible, student loans often have specific, limited pathways for relief. This structural difference can make it harder for individuals to adjust their repayment obligations or discharge the debt, even when circumstances change. This distinction is important because it means the flexibility you might expect with other loans may not apply to your student debt, making default a particularly difficult situation to resolve.",
+      "deep": "In some places, for example, student loan repayments are integrated into the tax system, automatically deducted from salary once an income threshold is met. This means payments begin only when the borrower is earning enough money, and the amount deducted scales with their taxable income. Other systems may also include conditions for loan cancellation, such as in cases of the borrower's death, or becoming permanently unable to work. Some loans might even be canceled after a set period, like 30 years, or upon reaching a certain age, depending on when and where the loan was taken out. These varied approaches underscore that the specific rules governing repayment, deferment, and potential forgiveness are not universal across all student loans or even within different programs in a single country, making it essential to thoroughly review your loan's individual terms.",
+      "takeaway": "Review the specific terms and conditions of your student loan agreements to understand how interest accrues, when repayment begins, and what options exist for renegotiation, deferment, or cancellation, as these can vary significantly.",
+      "source": {
+        "title": "Student loan",
+        "url": "https://en.wikipedia.org/wiki/Student_loan"
+      },
+      "audio": {
+        "quick": "lessons/2026-11-09-student-loan-quick.mp3",
+        "more": "lessons/2026-11-09-student-loan-more.mp3",
+        "deep": "lessons/2026-11-09-student-loan-deep.mp3"
       }
     }
   ],
