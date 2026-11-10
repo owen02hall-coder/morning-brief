@@ -1,22 +1,6 @@
 {
-  "generated_at": "2026-11-09T10:39:13.502006-07:00",
+  "generated_at": "2026-11-10T08:39:38.546782-07:00",
   "lessons": [
-    {
-      "id": "2026-09-07-automotive-battery",
-      "date": "2026-09-07",
-      "domain": "Home, car and repair",
-      "title": "Protecting your car battery",
-      "hook": "Ignoring how your car battery works could leave you stranded or facing an unexpected repair bill.",
-      "quick": "Many people don't realize that a car battery is designed for a very specific job: delivering a powerful burst of electricity to start your engine. It also powers basic accessories like lights or wipers when the engine is off. However, these batteries are not meant to provide sustained power for long periods. They are built to deliver a maximum electric current for a short time, and deep discharging them, such as by leaving lights on and draining the battery completely, can severely reduce its lifespan. Once the engine is running, the vehicle's alternator takes over, supplying power to the car's electrical systems and simultaneously recharging the battery. The battery also stabilizes potentially damaging voltage spikes, acting as a crucial backup during peak electrical demands.",
-      "more": "While the battery helps stabilize voltage and provides extra power when the alternator can't keep up, its primary design is for starting, lighting, and ignition, earning it the name SLI battery. Because starting typically uses less than three percent of the battery's capacity, they are optimized for quick, intense power delivery rather than a slow, continuous drain. Most passenger vehicles today use a nominal 12-volt system with lead-acid batteries that consist of six series-connected cells. These modern batteries often use plastic cases and woven sheets inside to prevent the internal plates from touching and short-circuiting. Knowing this design difference helps understand why letting a battery go completely flat is so damaging.",
-      "deep": "Modern automotive batteries, especially \"low-maintenance\" types, are particularly intolerant of deep discharge. When a car battery is fully drained, lead sulfate deposits can form on the internal lead plate electrodes, which can reduce the battery's lifespan by a third or more. Beyond lifespan concerns, there are serious safety risks. Explosions can occur if hydrogen gas builds up from blocked battery vents or poor ventilation, combined with an ignition source. Corroded or dirty battery posts are frequently associated with explosions during engine start-up. A significant percentage of battery explosion injuries happen while charging the battery, or during jump-starting, often due to improper connections, such as failing to connect to the dead battery first or connecting directly to the grounded battery post instead of the vehicle chassis.",
-      "takeaway": "Always turn off your lights and accessories before leaving your car, and avoid using them for long periods with the engine off, to prevent deep discharging your battery.",
-      "source": {
-        "title": "Automotive battery",
-        "url": "https://en.wikipedia.org/wiki/Automotive_battery"
-      },
-      "audio": {}
-    },
     {
       "id": "2026-09-08-dehydration",
       "date": "2026-09-08",
@@ -639,11 +623,7 @@
         "title": "Underwriting",
         "url": "https://en.wikipedia.org/wiki/Underwriting"
       },
-      "audio": {
-        "quick": "lessons/2026-10-19-underwriting-quick.mp3",
-        "more": "lessons/2026-10-19-underwriting-more.mp3",
-        "deep": "lessons/2026-10-19-underwriting-deep.mp3"
-      }
+      "audio": {}
     },
     {
       "id": "2026-10-20-residual-current-device",
@@ -1043,6 +1023,26 @@
         "quick": "lessons/2026-11-09-student-loan-quick.mp3",
         "more": "lessons/2026-11-09-student-loan-more.mp3",
         "deep": "lessons/2026-11-09-student-loan-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-11-10-brake",
+      "date": "2026-11-10",
+      "domain": "Home, car and repair",
+      "title": "Understanding Car Brakes",
+      "hook": "When your car's brakes aren't working right, it's not just an annoyance; it can put you in serious danger, especially at higher speeds.",
+      "quick": "Brakes slow a moving vehicle by absorbing its energy, most often through friction. The kinetic energy a vehicle has increases significantly with speed. For instance, a vehicle moving at 10 meters per second has 100 times as much energy as one moving at 1 meter per second, meaning it could theoretically take up to 100 times longer to stop when braking at its limit. This makes proper brake function critical for safety. In modern cars with hydraulic brakes, pressing the pedal causes a piston to push a brake pad against a rotating disc, slowing the wheel. However, not all brakes are the same, and their differences affect how they perform and wear.",
+      "more": "Friction brakes are the most common type on vehicles, using either pads or shoes that press against a rotating surface. You'll generally find two main types: drum brakes and disc brakes. Drum brakes, common on older cars and trucks, and even some low-cost newer vehicles for their rear wheels, work by brake shoes pressing against the inside of a rotating drum. A significant drawback of drum brakes is their tendency to overheat, which causes them to wear out faster compared to disc brakes. Disc brakes, on the other hand, use pads that pinch a rotating disc, typically made of cast iron or ceramic, to slow the wheel. This design helps manage heat better, leading to longer lasting components.",
+      "deep": "Beyond friction, brakes can also operate using pumping or electromagnetic principles. Pumping brakes might involve using an internal combustion engine's natural internal losses, or they can be regenerative, storing energy rather than just dissipating it as heat. Electromagnetic brakes, often found in hybrid vehicles, use the electric motor as a generator, converting the vehicle's kinetic energy into electrical energy that recharges batteries. Some diesel-electric locomotives use a similar method but send the generated electricity to resistors to dump it as heat. Unlike friction brakes that rely on physical pressure between two objects, electromagnetic brakes slow a vehicle through electromagnetic induction, creating resistance that can generate heat or electricity without mechanical wear. This difference in how they dissipate or recover energy is a key distinction.",
+      "takeaway": "When considering a vehicle, inquire whether it uses drum brakes or disc brakes, especially for the rear wheels, as drum brakes tend to overheat and wear out more quickly.",
+      "source": {
+        "title": "Brake",
+        "url": "https://en.wikipedia.org/wiki/Brake"
+      },
+      "audio": {
+        "quick": "lessons/2026-11-10-brake-quick.mp3",
+        "more": "lessons/2026-11-10-brake-more.mp3",
+        "deep": "lessons/2026-11-10-brake-deep.mp3"
       }
     }
   ],

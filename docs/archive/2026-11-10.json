@@ -1,0 +1,238 @@
+{
+  "generated_at": "2026-11-10T08:39:38.546782-07:00",
+  "date": "2026-11-10",
+  "tldr": [
+    "US-led talks regarding the Russia-Ukraine conflict were described as \"very productive\" on their first day in Abu Dhabi.",
+    "California voters rejected a proposal to implement a one-time 5% tax on billionaires' overall wealth."
+  ],
+  "market": {
+    "sp500": {
+      "value": 7549.94,
+      "change": 173.08,
+      "asof": "2026-11-09"
+    },
+    "ndx": {
+      "value": 25253.14,
+      "change": 673.71,
+      "asof": "2026-11-09"
+    },
+    "why": "The provided articles do not offer a direct explanation for the S&P 500 and Nasdaq Composite closing values on 2026-11-09, as relevant economic news such as the consumer price index report and comments from a Fed official on potential rate hikes were reported on 2026-11-10."
+  },
+  "yield_10y": {
+    "value": 4.86,
+    "change": 0.0,
+    "asof": "2026-11-09",
+    "why": "The articles do not provide a specific reason for the 10-year Treasury yield remaining unchanged on 2026-11-09, as discussions about inflation and potential rate hikes occurred after this date."
+  },
+  "vix": {
+    "value": 19.92,
+    "change": -5.72,
+    "asof": "2026-11-09",
+    "why": "The articles do not offer a direct explanation for the VIX index decrease on 2026-11-09, as significant market-moving news regarding inflation and Federal Reserve considerations was reported on 2026-11-10."
+  },
+  "breadth": {
+    "sp500": {
+      "value": 61.0,
+      "asof": "2026-11-09",
+      "status": "healthy",
+      "matched": 500,
+      "stale": false
+    },
+    "ndx100": {
+      "value": 50.0,
+      "asof": "2026-11-09",
+      "status": "healthy",
+      "matched": 96,
+      "stale": false
+    }
+  },
+  "watchlist": [
+    {
+      "symbol": "SOXL",
+      "what": "3x semiconductors",
+      "value": 56.2,
+      "day_move": 22.25,
+      "asof": "2026-11-09",
+      "rsi": 34.8,
+      "rsi_zone": "neutral",
+      "low": 40.87,
+      "high": 128.4,
+      "band_pct": 17.5,
+      "zone": "mid",
+      "action": "hold",
+      "read": "Mid-range - 18% of the way up its 1-month band. Big session: up 22.3% in a day."
+    },
+    {
+      "symbol": "SPXL",
+      "what": "3x S&P 500",
+      "value": 264.01,
+      "day_move": 6.99,
+      "asof": "2026-11-09",
+      "rsi": 43.9,
+      "rsi_zone": "neutral",
+      "low": 244.98,
+      "high": 297.42,
+      "band_pct": 36.3,
+      "zone": "mid",
+      "action": "hold",
+      "read": "Mid-range - 36% of the way up its 1-month band."
+    },
+    {
+      "symbol": "TQQQ",
+      "what": "3x Nasdaq-100",
+      "value": 57.58,
+      "day_move": 10.2,
+      "asof": "2026-11-09",
+      "rsi": 38.6,
+      "rsi_zone": "neutral",
+      "low": 50.47,
+      "high": 79.61,
+      "band_pct": 24.4,
+      "zone": "mid",
+      "action": "hold",
+      "read": "Mid-range - 24% of the way up its 1-month band. Big session: up 10.2% in a day."
+    }
+  ],
+  "watchlist_missing": [],
+  "mortgage": {
+    "value": 7.18,
+    "change": -0.06,
+    "asof": "2026-11-05",
+    "why": "The articles do not provide a specific reason for the slight decrease in the 30-year fixed mortgage rate reported on 2026-11-05, as this weekly survey reflects trends over recent days and current news largely pertains to later dates."
+  },
+  "policy": [],
+  "policy_upcoming": [
+    {
+      "what_happened": "Temporary regulations were issued concerning a new nonrefundable Federal tax credit for qualified contributions to scholarship granting organizations.",
+      "effect": "A new nonrefundable Federal tax credit becomes available for qualified contributions to scholarship granting organizations in 2027 and later taxable years.",
+      "url": "https://www.federalregister.gov/documents/2026/10/02/2026-20264/federal-scholarship-tax-credit",
+      "status": "Final rule",
+      "effective_date": "2026-12-01",
+      "source": "Federal Register"
+    },
+    {
+      "what_happened": "Final rules set forth requirements for price transparency reporting for non-grandfathered group health plans and health insurance issuers.",
+      "effect": "Your employer health insurance plan has new price transparency reporting requirements that become effective on December 7, 2026.",
+      "url": "https://www.federalregister.gov/documents/2026/10/06/2026-20447/transparency-in-coverage",
+      "status": "Final rule",
+      "effective_date": "2026-12-07",
+      "source": "Federal Register"
+    },
+    {
+      "what_happened": "A Utah bill modifies provisions related to the property tax exemption process.",
+      "effect": "Once you own a home, you will have deadlines for filing an application for a property tax exemption with the county board of equalization and for the board to render a decision.",
+      "url": "https://le.utah.gov/~2026/bills/static/SB0236.html",
+      "status": "Signed in Utah",
+      "effective_date": "2027-01-01",
+      "source": "Utah Legislature"
+    },
+    {
+      "what_happened": "A bill amends requirements for health insurance preauthorization in Utah.",
+      "effect": "Your health insurer must make an authorization or adverse preauthorization determination within a defined maximum time.",
+      "url": "https://le.utah.gov/~2026/bills/static/SB0319.html",
+      "status": "Signed in Utah",
+      "effective_date": "2027-01-01",
+      "source": "Utah Legislature"
+    }
+  ],
+  "policy_week": [],
+  "policy_calendar": [
+    {
+      "date": "2026-11-10",
+      "label": "IRS tax brackets and the married-filing-jointly standard deduction for next year \u2014 expected late October or early November",
+      "note": "Published as an annual inflation-adjustment revenue procedure; recent releases landed between mid-October and mid-November. These are the bracket thresholds and the standard deduction the next return is filed against.",
+      "url": "https://www.irs.gov/filing/federal-income-tax-rates-and-brackets"
+    },
+    {
+      "date": "2026-11-30",
+      "label": "FHFA conforming loan limit for next year \u2014 expected late November",
+      "note": "The cap on a conforming (non-jumbo) mortgage, and the line between a normal rate and a jumbo one. FHFA has announced it in the last days of November each year, and the new limit applies to loans made from January 1.",
+      "url": "https://www.fhfa.gov/data/conforming-loan-limit"
+    }
+  ],
+  "tech": [
+    {
+      "summary": "DeepMind has released Gemini Robotics 2.5, an advanced model that is up to twice as successful at certain tasks, along with an open safety benchmark called \"ASIMOV-jailbreak.\"",
+      "source": "Ars Technica",
+      "url": "https://arstechnica.com/google/2026/11/deepmind-reveals-gemini-robotics-2-5-and-open-safety-benchmark-asimov-jailbreak/"
+    },
+    {
+      "summary": "Adobe is embracing agentic AI, announcing new tools and features at its Max conference that allow AI agents to act as design assistants, automate creative workflows, and perform repetitive tasks, alongside enhanced object removal capabilities in Photoshop, Lightroom, and Premiere.",
+      "source": "The Verge",
+      "url": "https://www.theverge.com/tech/1030593/adobe-max-ai-agents-mcp-firefly-assistant-updates"
+    },
+    {
+      "summary": "Amazon's Ring has introduced new security robotics, including the Ring Drone Cam, a flying indoor camera set to ship in January 2027, and the Ring Rover Cam, a mobile security camera designed to patrol homes and businesses.",
+      "source": "The Verge",
+      "url": "https://www.theverge.com/tech/1030282/amazon-ring-robotics-rover-cam-4k-security-business"
+    }
+  ],
+  "world": [
+    {
+      "summary": "The US has described the initial day of talks between American, Russian, and Ukrainian delegations in Abu Dhabi as \"very productive,\" with humanitarian issues among the topics discussed.",
+      "source": "BBC World",
+      "url": "https://www.bbc.co.uk/news/articles/cqpvgvrpjvv8o?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "summary": "France has accused the Islamic Revolutionary Guard Corps' cyber unit, Shahid Kaveh, of orchestrating cyberattacks on supermarket freezers, causing millions of euros in damages, and stated the EU is prepared for a united response.",
+      "source": "CNBC",
+      "url": "https://www.cnbc.com/2026/11/10/iran-fridge-cyberattacks-france.html"
+    },
+    {
+      "summary": "At the Cop31 climate summit, Greta Thunberg warned of existential stakes, while host country Turkey celebrated new oilfields, and former US climate ambassador John Kerry praised Brazil for maintaining focus on the fossil fuel transition.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/environment/live/2026/nov/10/cop31-live-fossil-fuel-carbon-emissions-climate-crisis-latest-news-updates"
+    },
+    {
+      "summary": "The UK and Argentina are clashing at a Hamburg tribunal over Britain's approval of an oil drilling project near the Falkland Islands, which Argentina argues escalates the long-standing sovereignty dispute.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/world/2026/nov/10/uk-and-argentina-clash-over-falklands-oil-project-as-hamburg-tribunal-starts"
+    }
+  ],
+  "us": [
+    {
+      "summary": "California voters defeated a ballot proposal that would have imposed a one-time 5% tax on most of billionaires' overall wealth, including their company ownership.",
+      "source": "NPR National",
+      "url": "https://www.npr.org/2026/11/09/g-s1-151625/california-billionaire-tax-referendum"
+    },
+    {
+      "summary": "The Supreme Court ruled that construction of the border wall can continue in west Texas while a lawsuit challenging the plan proceeds.",
+      "source": "NPR National",
+      "url": "https://www.npr.org/2026/11/09/nx-s1-6019424/border-wall-big-bend-texas-trump"
+    },
+    {
+      "summary": "NASA is actively recruiting new astronauts to participate in future missions to live and work on the Moon, aiming to return after more than half a century.",
+      "source": "NPR National",
+      "url": "https://www.npr.org/2026/11/08/nx-s1-6034002/nasa-astronaut-class-applications-2026"
+    }
+  ],
+  "science": [
+    {
+      "summary": "Scientists believe they have discovered ancient remnants of dinosaur blood, representing the strongest evidence found to date beyond bones, eggs, and footprints.",
+      "source": "NPR Science",
+      "url": "https://www.npr.org/2026/11/09/nx-s1-6026704/scientists-think-theyve-found-ancient-remnants-of-dinosaur-blood"
+    },
+    {
+      "summary": "Research has found that mice can learn to fight simply by observing other mice in 'gladiator-style' matches, demonstrating that mere observation can alter their brain structure to resemble those who have actually fought.",
+      "source": "NPR Science",
+      "url": "https://www.npr.org/2026/11/09/nx-s1-6027938/mice-can-learn-to-fight-by-watching-tiny-rodent-cage-matches-study-finds"
+    }
+  ],
+  "weekly_recap": null,
+  "data_availability": {
+    "sp500": true,
+    "ndx": true,
+    "vix": true,
+    "ten_year": true,
+    "news_world": true,
+    "news_us": true,
+    "news_science": true,
+    "news_business": true,
+    "news_tech": true,
+    "summary": "ok",
+    "breadth": true,
+    "policy": true,
+    "mortgage": true,
+    "watchlist": true
+  }
+}

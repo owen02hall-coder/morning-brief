@@ -1,16 +1,16 @@
 {
-  "last_run": "2026-11-09",
-  "markets_last_ok": "2026-11-09",
+  "last_run": "2026-11-10",
+  "markets_last_ok": "2026-11-10",
   "breadth_last_good": {
     "sp500": {
-      "value": 63.2,
+      "value": 61.0,
       "matched": 500,
-      "asof": "2026-11-06"
+      "asof": "2026-11-09"
     },
     "ndx100": {
-      "value": 51.0,
+      "value": 50.0,
       "matched": 96,
-      "asof": "2026-11-06"
+      "asof": "2026-11-09"
     }
   },
   "breadth": {
@@ -18,15 +18,15 @@
       "in_alert": false,
       "nag_days": 0,
       "warn_armed": true,
-      "last_value": 63.2,
-      "last_asof": "2026-11-06"
+      "last_value": 61.0,
+      "last_asof": "2026-11-09"
     },
     "ndx100": {
       "in_alert": false,
       "nag_days": 0,
       "warn_armed": true,
-      "last_value": 51.0,
-      "last_asof": "2026-11-06"
+      "last_value": 50.0,
+      "last_asof": "2026-11-09"
     }
   },
   "policy_utah_queue": [],
@@ -96,7 +96,7 @@
     }
   ],
   "policy_today": {
-    "date": "2026-11-09",
+    "date": "2026-11-10",
     "items": [],
     "alerted": false
   },
@@ -695,27 +695,20 @@
       "title": "Understanding How Student Loans Differ",
       "domain": "Money mechanics",
       "date": "2026-11-09"
+    },
+    {
+      "id": "2026-11-10-brake",
+      "article_title": "Brake",
+      "title": "Understanding Car Brakes",
+      "domain": "Home, car and repair",
+      "date": "2026-11-10"
     }
   ],
   "lessons_bootstrapped": true,
-  "policy_week": [
-    {
-      "date": "2026-11-03",
-      "items": [
-        {
-          "what_happened": "Temporary regulations were issued concerning a new nonrefundable Federal tax credit for qualified contributions to scholarship granting organizations.",
-          "effect": "A new nonrefundable Federal tax credit becomes available for qualified contributions to scholarship granting organizations in 2027 and later taxable years.",
-          "url": "https://www.federalregister.gov/documents/2026/10/02/2026-20264/federal-scholarship-tax-credit",
-          "status": "Final rule",
-          "effective_date": "2026-12-01",
-          "source": "Federal Register"
-        }
-      ]
-    }
-  ],
+  "policy_week": [],
   "watchlist_actions": {
-    "SOXL": "buy",
-    "SPXL": "buy",
-    "TQQQ": "buy"
+    "SOXL": "hold",
+    "SPXL": "hold",
+    "TQQQ": "hold"
   }
 }
