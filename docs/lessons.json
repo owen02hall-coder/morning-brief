@@ -1,22 +1,6 @@
 {
-  "generated_at": "2026-11-10T08:39:38.546782-07:00",
+  "generated_at": "2026-11-11T08:24:09.152638-07:00",
   "lessons": [
-    {
-      "id": "2026-09-08-dehydration",
-      "date": "2026-09-08",
-      "domain": "Health and emergencies",
-      "title": "Recognizing Early Signs of Dehydration",
-      "hook": "Mild dehydration can affect your mental sharpness without you even realizing it.",
-      "quick": "Dehydration is a lack of total body water that disrupts essential bodily processes. Even a modest decrease in your body's water content can lead to fatigue and dizziness. If you lose more than a certain percentage of total body water, it can cause significant physical and mental deterioration. It commonly occurs from excessive sweating, certain health conditions, or simply not consuming enough water. Even a small body water loss of just one to two percent is shown to impair cognitive performance, affecting how clearly you think. Key early signs include thirst, headaches, a general feeling of discomfort, nausea, and a decrease in how often you need to urinate.",
-      "more": "As your body continues to lose water, these symptoms of dehydration become increasingly severe. While mild dehydration often improves by simply drinking more fluids, severe cases might require medical attention, such as receiving fluids intravenously. Dehydration can also lead to an imbalance in the blood, specifically causing high levels of sodium. Over a longer period, chronic dehydration is linked to the development of kidney stones and can contribute to chronic kidney disease. Factors that increase your risk include physical exertion in hot and humid weather, living at high altitudes, and engaging in endurance athletics. Additionally, some medications can have dehydration as a side effect, so it's wise to be aware of this possibility.",
-      "deep": "Your body has sophisticated mechanisms to try and maintain its water balance. When there is a deficit of free water, the concentration of dissolved molecules and ions in your body fluids increases. This elevated concentration is detected by specialized receptors in a part of your brain called the hypothalamus, which then triggers the release of antidiuretic hormone. This hormone works by increasing the absorption of water in your kidneys, helping your body conserve what it has. In more extreme situations of low blood pressure, this hormone also causes blood vessels to constrict, which helps to raise blood pressure. It's important to understand that a lack of total body water, or dehydration, is distinct from a loss of blood volume, known as hypovolemia; these are separate conditions with independent regulatory mechanisms and often require different treatments. Also, rehydrating too rapidly in severe cases can carry its own risks.",
-      "takeaway": "Monitor for initial signs like increased thirst, dry mouth, or headaches, especially when active or in warm conditions, to address dehydration promptly.",
-      "source": {
-        "title": "Dehydration",
-        "url": "https://en.wikipedia.org/wiki/Dehydration"
-      },
-      "audio": {}
-    },
     {
       "id": "2026-09-09-dark-pattern",
       "date": "2026-09-09",
@@ -639,11 +623,7 @@
         "title": "Residual-current device",
         "url": "https://en.wikipedia.org/wiki/Residual-current_device"
       },
-      "audio": {
-        "quick": "lessons/2026-10-20-residual-current-device-quick.mp3",
-        "more": "lessons/2026-10-20-residual-current-device-more.mp3",
-        "deep": "lessons/2026-10-20-residual-current-device-deep.mp3"
-      }
+      "audio": {}
     },
     {
       "id": "2026-10-21-cardiopulmonary-resuscitation",
@@ -1043,6 +1023,26 @@
         "quick": "lessons/2026-11-10-brake-quick.mp3",
         "more": "lessons/2026-11-10-brake-more.mp3",
         "deep": "lessons/2026-11-10-brake-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-11-11-hypothermia",
+      "date": "2026-11-11",
+      "domain": "Health and emergencies",
+      "title": "Recognizing dangerously low body temperature",
+      "hook": "Many assume hypothermia only happens in extreme cold, but it can unexpectedly affect people in milder conditions with serious consequences.",
+      "quick": "Hypothermia, a dangerously low body temperature below 35.0 \u00b0C (95.0 \u00b0F), causes at least 1,500 deaths a year in the United States. It isn't just a risk in blizzards or icy water; it can also occur from conditions like alcohol intoxication or low blood sugar. In its early stages, symptoms include shivering, confusion, and impaired judgment. You might notice someone acting aggressively or refusing help, even denying their condition. As the body tries to preserve heat, blood pressure, heart rate, and breathing might speed up, and they may appear pale and feel cold to the touch. It's important to recognize these early signs because a person's ability to think clearly is often affected, meaning they won't realize they need help.",
+      "more": "As hypothermia worsens, its signs can become even more deceptive. In moderate cases, the shivering that was present earlier may actually stop, and confusion increases significantly. Someone might experience amnesia, slurred speech, or lose fine motor skills. A particularly dangerous symptom is \"paradoxical undressing,\" where a person with moderate or severe hypothermia becomes disoriented and combative, then starts removing their clothing, increasing heat loss. This happens in a significant number of hypothermia deaths and is something rescuers are trained to expect. If you see someone behaving this way in cold conditions, it\u2019s a critical sign they need immediate help.",
+      "deep": "The extreme confusion and disorientation leading to paradoxical undressing can unfortunately lead to tragic misunderstandings. When individuals who die from hypothermia in urban settings are found undressed, it's sometimes incorrectly assumed they were victims of sexual assault. This misconception highlights how important it is to recognize the true medical nature of this behavior. In severe hypothermia, as the body temperature drops further, vital systems begin to fail. Heart rate, respiratory rate, and blood pressure all decrease, and shivering is often absent. There may be hallucinations, lack of reflexes, and fixed dilated pupils. Gentle handling is crucial for anyone with moderate or severe hypothermia, and prompt medical care with specialized rewarming techniques may be needed to save a life.",
+      "takeaway": "If you encounter someone acting confused or disoriented in cold conditions, especially if they are removing clothing, call for emergency medical help immediately.",
+      "source": {
+        "title": "Hypothermia",
+        "url": "https://en.wikipedia.org/wiki/Hypothermia"
+      },
+      "audio": {
+        "quick": "lessons/2026-11-11-hypothermia-quick.mp3",
+        "more": "lessons/2026-11-11-hypothermia-more.mp3",
+        "deep": "lessons/2026-11-11-hypothermia-deep.mp3"
       }
     }
   ],

@@ -1,46 +1,47 @@
 {
-  "generated_at": "2026-11-10T08:39:38.546782-07:00",
-  "date": "2026-11-10",
+  "generated_at": "2026-11-11T08:24:09.152638-07:00",
+  "date": "2026-11-11",
   "tldr": [
-    "US-led talks regarding the Russia-Ukraine conflict were described as \"very productive\" on their first day in Abu Dhabi.",
-    "California voters rejected a proposal to implement a one-time 5% tax on billionaires' overall wealth."
+    "US negotiators are scheduled to meet with Putin in Moscow and Zelenskyy in Dublin after recent peace talks.",
+    "Spain experienced its first general strike in 14 years, with millions protesting against rising housing costs.",
+    "Google DeepMind researchers have unveiled AlphaGenome 2, a new AI model designed to better understand how DNA changes affect cells, potentially leading to new disease treatments."
   ],
   "market": {
     "sp500": {
-      "value": 7549.94,
-      "change": 173.08,
-      "asof": "2026-11-09"
+      "value": 7520.93,
+      "change": -29.01,
+      "asof": "2026-11-10"
     },
     "ndx": {
-      "value": 25253.14,
-      "change": 673.71,
-      "asof": "2026-11-09"
+      "value": 25065.87,
+      "change": -187.27,
+      "asof": "2026-11-10"
     },
-    "why": "The provided articles do not offer a direct explanation for the S&P 500 and Nasdaq Composite closing values on 2026-11-09, as relevant economic news such as the consumer price index report and comments from a Fed official on potential rate hikes were reported on 2026-11-10."
+    "why": "The S&P 500 and Nasdaq Composite both declined at their most recent close on November 10, 2026. This market angst was driven by a sharp selloff in artificial intelligence names and persistently high bond yields, with investors reportedly moving towards low-volatility stocks. Additionally, a Federal Reserve official described the October inflation report as \"borderline disturbing,\" raising concerns about potential further interest rate hikes."
   },
   "yield_10y": {
-    "value": 4.86,
-    "change": 0.0,
-    "asof": "2026-11-09",
-    "why": "The articles do not provide a specific reason for the 10-year Treasury yield remaining unchanged on 2026-11-09, as discussions about inflation and potential rate hikes occurred after this date."
+    "value": 4.98,
+    "change": 0.12,
+    "asof": "2026-11-10",
+    "why": "The 10-year Treasury yield increased by 0.12% to 4.98% at its most recent close on November 10, 2026. This rise was influenced by persistently high bond yields and the Federal Reserve's concerns over October's inflation report, which a Fed official called \"borderline disturbing,\" suggesting the possibility of further rate increases."
   },
   "vix": {
-    "value": 19.92,
-    "change": -5.72,
-    "asof": "2026-11-09",
-    "why": "The articles do not offer a direct explanation for the VIX index decrease on 2026-11-09, as significant market-moving news regarding inflation and Federal Reserve considerations was reported on 2026-11-10."
+    "value": 19.46,
+    "change": -0.46,
+    "asof": "2026-11-10",
+    "why": "The VIX decreased by 0.46 to 19.46 at its most recent close on November 10, 2026. The provided articles do not offer a direct explanation for this specific movement."
   },
   "breadth": {
     "sp500": {
-      "value": 61.0,
-      "asof": "2026-11-09",
+      "value": 62.0,
+      "asof": "2026-11-10",
       "status": "healthy",
       "matched": 500,
       "stale": false
     },
     "ndx100": {
-      "value": 50.0,
-      "asof": "2026-11-09",
+      "value": 52.1,
+      "asof": "2026-11-10",
       "status": "healthy",
       "matched": 96,
       "stale": false
@@ -50,47 +51,47 @@
     {
       "symbol": "SOXL",
       "what": "3x semiconductors",
-      "value": 56.2,
-      "day_move": 22.25,
-      "asof": "2026-11-09",
-      "rsi": 34.8,
+      "value": 56.06,
+      "day_move": -0.25,
+      "asof": "2026-11-10",
+      "rsi": 34.7,
       "rsi_zone": "neutral",
       "low": 40.87,
-      "high": 128.4,
+      "high": 127.57,
       "band_pct": 17.5,
       "zone": "mid",
       "action": "hold",
-      "read": "Mid-range - 18% of the way up its 1-month band. Big session: up 22.3% in a day."
+      "read": "Mid-range - 18% of the way up its 1-month band."
     },
     {
       "symbol": "SPXL",
       "what": "3x S&P 500",
-      "value": 264.01,
-      "day_move": 6.99,
-      "asof": "2026-11-09",
-      "rsi": 43.9,
+      "value": 261.05,
+      "day_move": -1.12,
+      "asof": "2026-11-10",
+      "rsi": 42.7,
       "rsi_zone": "neutral",
       "low": 244.98,
       "high": 297.42,
-      "band_pct": 36.3,
+      "band_pct": 30.6,
       "zone": "mid",
       "action": "hold",
-      "read": "Mid-range - 36% of the way up its 1-month band."
+      "read": "Mid-range - 31% of the way up its 1-month band."
     },
     {
       "symbol": "TQQQ",
       "what": "3x Nasdaq-100",
-      "value": 57.58,
-      "day_move": 10.2,
-      "asof": "2026-11-09",
-      "rsi": 38.6,
+      "value": 56.56,
+      "day_move": -1.77,
+      "asof": "2026-11-10",
+      "rsi": 37.6,
       "rsi_zone": "neutral",
       "low": 50.47,
-      "high": 79.61,
-      "band_pct": 24.4,
+      "high": 78.81,
+      "band_pct": 21.5,
       "zone": "mid",
       "action": "hold",
-      "read": "Mid-range - 24% of the way up its 1-month band. Big session: up 10.2% in a day."
+      "read": "Mid-range - 22% of the way up its 1-month band."
     }
   ],
   "watchlist_missing": [],
@@ -98,7 +99,7 @@
     "value": 7.18,
     "change": -0.06,
     "asof": "2026-11-05",
-    "why": "The articles do not provide a specific reason for the slight decrease in the 30-year fixed mortgage rate reported on 2026-11-05, as this weekly survey reflects trends over recent days and current news largely pertains to later dates."
+    "why": "The 30-year fixed mortgage rate, as surveyed by Freddie Mac and released on November 5, 2026, decreased by 0.06% to 7.18% compared to the previous weekly release. The provided articles do not offer specific reasons for this change in the weekly survey period. Mortgage rates generally track trends in the 10-year Treasury yield over recent days, but the articles do not detail yield movements relevant to the period preceding the November 5 survey release."
   },
   "policy": [],
   "policy_upcoming": [
@@ -138,12 +139,6 @@
   "policy_week": [],
   "policy_calendar": [
     {
-      "date": "2026-11-10",
-      "label": "IRS tax brackets and the married-filing-jointly standard deduction for next year \u2014 expected late October or early November",
-      "note": "Published as an annual inflation-adjustment revenue procedure; recent releases landed between mid-October and mid-November. These are the bracket thresholds and the standard deduction the next return is filed against.",
-      "url": "https://www.irs.gov/filing/federal-income-tax-rates-and-brackets"
-    },
-    {
       "date": "2026-11-30",
       "label": "FHFA conforming loan limit for next year \u2014 expected late November",
       "note": "The cap on a conforming (non-jumbo) mortgage, and the line between a normal rate and a jumbo one. FHFA has announced it in the last days of November each year, and the new limit applies to loans made from January 1.",
@@ -152,70 +147,70 @@
   ],
   "tech": [
     {
-      "summary": "DeepMind has released Gemini Robotics 2.5, an advanced model that is up to twice as successful at certain tasks, along with an open safety benchmark called \"ASIMOV-jailbreak.\"",
+      "summary": "Google DeepMind researchers unveiled AlphaGenome 2, an AI model aimed at understanding how DNA changes impact cells to identify disease causes and treatments.",
+      "source": "The Verge",
+      "url": "https://www.theverge.com/ai-artificial-intelligence/1031524/google-deepmind-alphagenome-2-genetic-ai-model"
+    },
+    {
+      "summary": "Google DeepMind has mathematically verified key parts of Signal's encryption using an AI-powered process, hinting at more practical formal verification in the future.",
       "source": "Ars Technica",
-      "url": "https://arstechnica.com/google/2026/11/deepmind-reveals-gemini-robotics-2-5-and-open-safety-benchmark-asimov-jailbreak/"
+      "url": "https://arstechnica.com/ai/2026/11/signals-encryption-just-passed-an-ai-powered-mathematical-checkup/"
     },
     {
-      "summary": "Adobe is embracing agentic AI, announcing new tools and features at its Max conference that allow AI agents to act as design assistants, automate creative workflows, and perform repetitive tasks, alongside enhanced object removal capabilities in Photoshop, Lightroom, and Premiere.",
-      "source": "The Verge",
-      "url": "https://www.theverge.com/tech/1030593/adobe-max-ai-agents-mcp-firefly-assistant-updates"
-    },
-    {
-      "summary": "Amazon's Ring has introduced new security robotics, including the Ring Drone Cam, a flying indoor camera set to ship in January 2027, and the Ring Rover Cam, a mobile security camera designed to patrol homes and businesses.",
-      "source": "The Verge",
-      "url": "https://www.theverge.com/tech/1030282/amazon-ring-robotics-rover-cam-4k-security-business"
+      "summary": "An individual using 48 AI agents and NASA Lidar data successfully discovered an unmapped Maya pyramid in 72 hours, demonstrating advanced AI capabilities in archaeological exploration.",
+      "source": "Hacker News",
+      "url": "https://pietromiotti.com/latest/maya-site/?maya"
     }
   ],
   "world": [
     {
-      "summary": "The US has described the initial day of talks between American, Russian, and Ukrainian delegations in Abu Dhabi as \"very productive,\" with humanitarian issues among the topics discussed.",
-      "source": "BBC World",
-      "url": "https://www.bbc.co.uk/news/articles/cqpvgvrpjvv8o?at_medium=RSS&at_campaign=rss"
+      "summary": "US envoys are set to meet separately with President Putin in Moscow and President Zelenskyy in Dublin following some progress in peace talks.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/world/live/2026/nov/11/europe-ukraine-russia-us-talks-abu-dhabi-zelenskyy-latest-news-updates"
     },
     {
-      "summary": "France has accused the Islamic Revolutionary Guard Corps' cyber unit, Shahid Kaveh, of orchestrating cyberattacks on supermarket freezers, causing millions of euros in damages, and stated the EU is prepared for a united response.",
+      "summary": "Millions participated in Spain's first general strike in 14 years, protesting soaring housing prices ahead of upcoming parliamentary elections.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/world/2026/nov/11/spain-general-strike-housing-costs"
+    },
+    {
+      "summary": "Consultant doctors in England have called off a planned two-day pay strike to allow for formal negotiations with the government.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/society/2026/nov/11/consultant-doctors-in-england-call-off-nhs-strike"
+    },
+    {
+      "summary": "Hundreds of schools in Italy and the UK were evacuated after receiving bomb threats, amidst growing concerns about hybrid threats.",
       "source": "CNBC",
-      "url": "https://www.cnbc.com/2026/11/10/iran-fridge-cyberattacks-france.html"
-    },
-    {
-      "summary": "At the Cop31 climate summit, Greta Thunberg warned of existential stakes, while host country Turkey celebrated new oilfields, and former US climate ambassador John Kerry praised Brazil for maintaining focus on the fossil fuel transition.",
-      "source": "Guardian World",
-      "url": "https://www.theguardian.com/environment/live/2026/nov/10/cop31-live-fossil-fuel-carbon-emissions-climate-crisis-latest-news-updates"
-    },
-    {
-      "summary": "The UK and Argentina are clashing at a Hamburg tribunal over Britain's approval of an oil drilling project near the Falkland Islands, which Argentina argues escalates the long-standing sovereignty dispute.",
-      "source": "Guardian World",
-      "url": "https://www.theguardian.com/world/2026/nov/10/uk-and-argentina-clash-over-falklands-oil-project-as-hamburg-tribunal-starts"
+      "url": "https://www.cnbc.com/2026/11/11/hoax-bomb-threats-schools-italy-uk.html"
     }
   ],
   "us": [
     {
-      "summary": "California voters defeated a ballot proposal that would have imposed a one-time 5% tax on most of billionaires' overall wealth, including their company ownership.",
-      "source": "NPR National",
-      "url": "https://www.npr.org/2026/11/09/g-s1-151625/california-billionaire-tax-referendum"
-    },
-    {
-      "summary": "The Supreme Court ruled that construction of the border wall can continue in west Texas while a lawsuit challenging the plan proceeds.",
+      "summary": "The Supreme Court ruled that border wall construction can continue in West Texas while a lawsuit challenging the plan proceeds.",
       "source": "NPR National",
       "url": "https://www.npr.org/2026/11/09/nx-s1-6019424/border-wall-big-bend-texas-trump"
     },
     {
-      "summary": "NASA is actively recruiting new astronauts to participate in future missions to live and work on the Moon, aiming to return after more than half a century.",
+      "summary": "A House Oversight Committee report concluded that the federal government failed to hold Jeffrey Epstein accountable over decades.",
       "source": "NPR National",
-      "url": "https://www.npr.org/2026/11/08/nx-s1-6034002/nasa-astronaut-class-applications-2026"
+      "url": "https://www.npr.org/2026/11/10/nx-s1-6036135/federal-government-failed-to-hold-epstein-accountable-republican-committee-says"
+    },
+    {
+      "summary": "Swatters are increasingly using AI technology to create synthetic voices and sound effects for fake emergency calls to law enforcement, making them more believable.",
+      "source": "NPR National",
+      "url": "https://www.npr.org/2026/11/11/nx-s1-6034449/ai-911-calls-swatting"
     }
   ],
   "science": [
     {
-      "summary": "Scientists believe they have discovered ancient remnants of dinosaur blood, representing the strongest evidence found to date beyond bones, eggs, and footprints.",
-      "source": "NPR Science",
-      "url": "https://www.npr.org/2026/11/09/nx-s1-6026704/scientists-think-theyve-found-ancient-remnants-of-dinosaur-blood"
+      "summary": "Congo's Ebola outbreak has exceeded 11,000 cases, highlighting the severity of the disease's spread in the country.",
+      "source": "NPR Health",
+      "url": "https://www.npr.org/2026/11/11/nx-s1-6037304/ebola-congo-outbreak"
     },
     {
-      "summary": "Research has found that mice can learn to fight simply by observing other mice in 'gladiator-style' matches, demonstrating that mere observation can alter their brain structure to resemble those who have actually fought.",
-      "source": "NPR Science",
-      "url": "https://www.npr.org/2026/11/09/nx-s1-6027938/mice-can-learn-to-fight-by-watching-tiny-rodent-cage-matches-study-finds"
+      "summary": "An analysis found that the antidepressant escitalopram was more effective at preventing relapse compared to other pills, including Prozac.",
+      "source": "BBC Health",
+      "url": "https://www.bbc.co.uk/news/articles/cv62yyng00jyo?at_medium=RSS&at_campaign=rss"
     }
   ],
   "weekly_recap": null,

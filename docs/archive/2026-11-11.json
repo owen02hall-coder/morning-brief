@@ -1,0 +1,233 @@
+{
+  "generated_at": "2026-11-11T08:24:09.152638-07:00",
+  "date": "2026-11-11",
+  "tldr": [
+    "US negotiators are scheduled to meet with Putin in Moscow and Zelenskyy in Dublin after recent peace talks.",
+    "Spain experienced its first general strike in 14 years, with millions protesting against rising housing costs.",
+    "Google DeepMind researchers have unveiled AlphaGenome 2, a new AI model designed to better understand how DNA changes affect cells, potentially leading to new disease treatments."
+  ],
+  "market": {
+    "sp500": {
+      "value": 7520.93,
+      "change": -29.01,
+      "asof": "2026-11-10"
+    },
+    "ndx": {
+      "value": 25065.87,
+      "change": -187.27,
+      "asof": "2026-11-10"
+    },
+    "why": "The S&P 500 and Nasdaq Composite both declined at their most recent close on November 10, 2026. This market angst was driven by a sharp selloff in artificial intelligence names and persistently high bond yields, with investors reportedly moving towards low-volatility stocks. Additionally, a Federal Reserve official described the October inflation report as \"borderline disturbing,\" raising concerns about potential further interest rate hikes."
+  },
+  "yield_10y": {
+    "value": 4.98,
+    "change": 0.12,
+    "asof": "2026-11-10",
+    "why": "The 10-year Treasury yield increased by 0.12% to 4.98% at its most recent close on November 10, 2026. This rise was influenced by persistently high bond yields and the Federal Reserve's concerns over October's inflation report, which a Fed official called \"borderline disturbing,\" suggesting the possibility of further rate increases."
+  },
+  "vix": {
+    "value": 19.46,
+    "change": -0.46,
+    "asof": "2026-11-10",
+    "why": "The VIX decreased by 0.46 to 19.46 at its most recent close on November 10, 2026. The provided articles do not offer a direct explanation for this specific movement."
+  },
+  "breadth": {
+    "sp500": {
+      "value": 62.0,
+      "asof": "2026-11-10",
+      "status": "healthy",
+      "matched": 500,
+      "stale": false
+    },
+    "ndx100": {
+      "value": 52.1,
+      "asof": "2026-11-10",
+      "status": "healthy",
+      "matched": 96,
+      "stale": false
+    }
+  },
+  "watchlist": [
+    {
+      "symbol": "SOXL",
+      "what": "3x semiconductors",
+      "value": 56.06,
+      "day_move": -0.25,
+      "asof": "2026-11-10",
+      "rsi": 34.7,
+      "rsi_zone": "neutral",
+      "low": 40.87,
+      "high": 127.57,
+      "band_pct": 17.5,
+      "zone": "mid",
+      "action": "hold",
+      "read": "Mid-range - 18% of the way up its 1-month band."
+    },
+    {
+      "symbol": "SPXL",
+      "what": "3x S&P 500",
+      "value": 261.05,
+      "day_move": -1.12,
+      "asof": "2026-11-10",
+      "rsi": 42.7,
+      "rsi_zone": "neutral",
+      "low": 244.98,
+      "high": 297.42,
+      "band_pct": 30.6,
+      "zone": "mid",
+      "action": "hold",
+      "read": "Mid-range - 31% of the way up its 1-month band."
+    },
+    {
+      "symbol": "TQQQ",
+      "what": "3x Nasdaq-100",
+      "value": 56.56,
+      "day_move": -1.77,
+      "asof": "2026-11-10",
+      "rsi": 37.6,
+      "rsi_zone": "neutral",
+      "low": 50.47,
+      "high": 78.81,
+      "band_pct": 21.5,
+      "zone": "mid",
+      "action": "hold",
+      "read": "Mid-range - 22% of the way up its 1-month band."
+    }
+  ],
+  "watchlist_missing": [],
+  "mortgage": {
+    "value": 7.18,
+    "change": -0.06,
+    "asof": "2026-11-05",
+    "why": "The 30-year fixed mortgage rate, as surveyed by Freddie Mac and released on November 5, 2026, decreased by 0.06% to 7.18% compared to the previous weekly release. The provided articles do not offer specific reasons for this change in the weekly survey period. Mortgage rates generally track trends in the 10-year Treasury yield over recent days, but the articles do not detail yield movements relevant to the period preceding the November 5 survey release."
+  },
+  "policy": [],
+  "policy_upcoming": [
+    {
+      "what_happened": "Temporary regulations were issued concerning a new nonrefundable Federal tax credit for qualified contributions to scholarship granting organizations.",
+      "effect": "A new nonrefundable Federal tax credit becomes available for qualified contributions to scholarship granting organizations in 2027 and later taxable years.",
+      "url": "https://www.federalregister.gov/documents/2026/10/02/2026-20264/federal-scholarship-tax-credit",
+      "status": "Final rule",
+      "effective_date": "2026-12-01",
+      "source": "Federal Register"
+    },
+    {
+      "what_happened": "Final rules set forth requirements for price transparency reporting for non-grandfathered group health plans and health insurance issuers.",
+      "effect": "Your employer health insurance plan has new price transparency reporting requirements that become effective on December 7, 2026.",
+      "url": "https://www.federalregister.gov/documents/2026/10/06/2026-20447/transparency-in-coverage",
+      "status": "Final rule",
+      "effective_date": "2026-12-07",
+      "source": "Federal Register"
+    },
+    {
+      "what_happened": "A Utah bill modifies provisions related to the property tax exemption process.",
+      "effect": "Once you own a home, you will have deadlines for filing an application for a property tax exemption with the county board of equalization and for the board to render a decision.",
+      "url": "https://le.utah.gov/~2026/bills/static/SB0236.html",
+      "status": "Signed in Utah",
+      "effective_date": "2027-01-01",
+      "source": "Utah Legislature"
+    },
+    {
+      "what_happened": "A bill amends requirements for health insurance preauthorization in Utah.",
+      "effect": "Your health insurer must make an authorization or adverse preauthorization determination within a defined maximum time.",
+      "url": "https://le.utah.gov/~2026/bills/static/SB0319.html",
+      "status": "Signed in Utah",
+      "effective_date": "2027-01-01",
+      "source": "Utah Legislature"
+    }
+  ],
+  "policy_week": [],
+  "policy_calendar": [
+    {
+      "date": "2026-11-30",
+      "label": "FHFA conforming loan limit for next year \u2014 expected late November",
+      "note": "The cap on a conforming (non-jumbo) mortgage, and the line between a normal rate and a jumbo one. FHFA has announced it in the last days of November each year, and the new limit applies to loans made from January 1.",
+      "url": "https://www.fhfa.gov/data/conforming-loan-limit"
+    }
+  ],
+  "tech": [
+    {
+      "summary": "Google DeepMind researchers unveiled AlphaGenome 2, an AI model aimed at understanding how DNA changes impact cells to identify disease causes and treatments.",
+      "source": "The Verge",
+      "url": "https://www.theverge.com/ai-artificial-intelligence/1031524/google-deepmind-alphagenome-2-genetic-ai-model"
+    },
+    {
+      "summary": "Google DeepMind has mathematically verified key parts of Signal's encryption using an AI-powered process, hinting at more practical formal verification in the future.",
+      "source": "Ars Technica",
+      "url": "https://arstechnica.com/ai/2026/11/signals-encryption-just-passed-an-ai-powered-mathematical-checkup/"
+    },
+    {
+      "summary": "An individual using 48 AI agents and NASA Lidar data successfully discovered an unmapped Maya pyramid in 72 hours, demonstrating advanced AI capabilities in archaeological exploration.",
+      "source": "Hacker News",
+      "url": "https://pietromiotti.com/latest/maya-site/?maya"
+    }
+  ],
+  "world": [
+    {
+      "summary": "US envoys are set to meet separately with President Putin in Moscow and President Zelenskyy in Dublin following some progress in peace talks.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/world/live/2026/nov/11/europe-ukraine-russia-us-talks-abu-dhabi-zelenskyy-latest-news-updates"
+    },
+    {
+      "summary": "Millions participated in Spain's first general strike in 14 years, protesting soaring housing prices ahead of upcoming parliamentary elections.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/world/2026/nov/11/spain-general-strike-housing-costs"
+    },
+    {
+      "summary": "Consultant doctors in England have called off a planned two-day pay strike to allow for formal negotiations with the government.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/society/2026/nov/11/consultant-doctors-in-england-call-off-nhs-strike"
+    },
+    {
+      "summary": "Hundreds of schools in Italy and the UK were evacuated after receiving bomb threats, amidst growing concerns about hybrid threats.",
+      "source": "CNBC",
+      "url": "https://www.cnbc.com/2026/11/11/hoax-bomb-threats-schools-italy-uk.html"
+    }
+  ],
+  "us": [
+    {
+      "summary": "The Supreme Court ruled that border wall construction can continue in West Texas while a lawsuit challenging the plan proceeds.",
+      "source": "NPR National",
+      "url": "https://www.npr.org/2026/11/09/nx-s1-6019424/border-wall-big-bend-texas-trump"
+    },
+    {
+      "summary": "A House Oversight Committee report concluded that the federal government failed to hold Jeffrey Epstein accountable over decades.",
+      "source": "NPR National",
+      "url": "https://www.npr.org/2026/11/10/nx-s1-6036135/federal-government-failed-to-hold-epstein-accountable-republican-committee-says"
+    },
+    {
+      "summary": "Swatters are increasingly using AI technology to create synthetic voices and sound effects for fake emergency calls to law enforcement, making them more believable.",
+      "source": "NPR National",
+      "url": "https://www.npr.org/2026/11/11/nx-s1-6034449/ai-911-calls-swatting"
+    }
+  ],
+  "science": [
+    {
+      "summary": "Congo's Ebola outbreak has exceeded 11,000 cases, highlighting the severity of the disease's spread in the country.",
+      "source": "NPR Health",
+      "url": "https://www.npr.org/2026/11/11/nx-s1-6037304/ebola-congo-outbreak"
+    },
+    {
+      "summary": "An analysis found that the antidepressant escitalopram was more effective at preventing relapse compared to other pills, including Prozac.",
+      "source": "BBC Health",
+      "url": "https://www.bbc.co.uk/news/articles/cv62yyng00jyo?at_medium=RSS&at_campaign=rss"
+    }
+  ],
+  "weekly_recap": null,
+  "data_availability": {
+    "sp500": true,
+    "ndx": true,
+    "vix": true,
+    "ten_year": true,
+    "news_world": true,
+    "news_us": true,
+    "news_science": true,
+    "news_business": true,
+    "news_tech": true,
+    "summary": "ok",
+    "breadth": true,
+    "policy": true,
+    "mortgage": true,
+    "watchlist": true
+  }
+}
