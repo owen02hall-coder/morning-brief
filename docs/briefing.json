@@ -1,47 +1,47 @@
 {
-  "generated_at": "2026-11-11T08:24:09.152638-07:00",
-  "date": "2026-11-11",
+  "generated_at": "2026-11-12T09:02:14.820290-07:00",
+  "date": "2026-11-12",
   "tldr": [
-    "US negotiators are scheduled to meet with Putin in Moscow and Zelenskyy in Dublin after recent peace talks.",
-    "Spain experienced its first general strike in 14 years, with millions protesting against rising housing costs.",
-    "Google DeepMind researchers have unveiled AlphaGenome 2, a new AI model designed to better understand how DNA changes affect cells, potentially leading to new disease treatments."
+    "Nvidia CEO Jensen Huang resigned due to alleged extramarital affairs, including with a suspected Chinese spy, causing a significant dip in the company's stock.",
+    "US envoys met with Russian President Vladimir Putin and are scheduled to meet with Ukrainian President Volodymyr Zelenskyy, as Ukraine reported new disruptions to its military's Starlink service.",
+    "Democrat Scott Colom secured a historic win in the Mississippi U.S. Senate race, becoming the state's first Black senator since 1875."
   ],
   "market": {
     "sp500": {
-      "value": 7520.93,
-      "change": -29.01,
-      "asof": "2026-11-10"
+      "value": 7619.38,
+      "change": 98.45,
+      "asof": "2026-11-11"
     },
     "ndx": {
-      "value": 25065.87,
-      "change": -187.27,
-      "asof": "2026-11-10"
+      "value": 25466.19,
+      "change": 400.32,
+      "asof": "2026-11-11"
     },
-    "why": "The S&P 500 and Nasdaq Composite both declined at their most recent close on November 10, 2026. This market angst was driven by a sharp selloff in artificial intelligence names and persistently high bond yields, with investors reportedly moving towards low-volatility stocks. Additionally, a Federal Reserve official described the October inflation report as \"borderline disturbing,\" raising concerns about potential further interest rate hikes."
+    "why": "The S&P 500 and Nasdaq Composite indices closed higher on November 11. Although Nvidia shares plunged following the resignation of CEO Jensen Huang amid reports of alleged affairs, the provided articles do not offer a direct explanation for the broader market's overall upward movement."
   },
   "yield_10y": {
-    "value": 4.98,
-    "change": 0.12,
-    "asof": "2026-11-10",
-    "why": "The 10-year Treasury yield increased by 0.12% to 4.98% at its most recent close on November 10, 2026. This rise was influenced by persistently high bond yields and the Federal Reserve's concerns over October's inflation report, which a Fed official called \"borderline disturbing,\" suggesting the possibility of further rate increases."
+    "value": 5.0,
+    "change": 0.02,
+    "asof": "2026-11-11",
+    "why": "The 10-year Treasury yield rose to 5.0% on November 11 as bond markets reopened after the Veterans Day holiday, driven by expectations of further Federal Reserve interest rate hikes."
   },
   "vix": {
-    "value": 19.46,
-    "change": -0.46,
-    "asof": "2026-11-10",
-    "why": "The VIX decreased by 0.46 to 19.46 at its most recent close on November 10, 2026. The provided articles do not offer a direct explanation for this specific movement."
+    "value": 17.49,
+    "change": -1.97,
+    "asof": "2026-11-11",
+    "why": "The VIX decreased on November 11, indicating lower market volatility. The provided articles do not offer a direct explanation for this specific movement."
   },
   "breadth": {
     "sp500": {
-      "value": 62.0,
-      "asof": "2026-11-10",
+      "value": 63.0,
+      "asof": "2026-11-11",
       "status": "healthy",
       "matched": 500,
       "stale": false
     },
     "ndx100": {
-      "value": 52.1,
-      "asof": "2026-11-10",
+      "value": 55.2,
+      "asof": "2026-11-11",
       "status": "healthy",
       "matched": 96,
       "stale": false
@@ -51,47 +51,47 @@
     {
       "symbol": "SOXL",
       "what": "3x semiconductors",
-      "value": 56.06,
-      "day_move": -0.25,
-      "asof": "2026-11-10",
-      "rsi": 34.7,
+      "value": 66.03,
+      "day_move": 17.78,
+      "asof": "2026-11-11",
+      "rsi": 40.1,
       "rsi_zone": "neutral",
       "low": 40.87,
-      "high": 127.57,
-      "band_pct": 17.5,
+      "high": 110.54,
+      "band_pct": 36.1,
       "zone": "mid",
       "action": "hold",
-      "read": "Mid-range - 18% of the way up its 1-month band."
+      "read": "Mid-range - 36% of the way up its 1-month band. Big session: up 17.8% in a day."
     },
     {
       "symbol": "SPXL",
       "what": "3x S&P 500",
-      "value": 261.05,
-      "day_move": -1.12,
-      "asof": "2026-11-10",
-      "rsi": 42.7,
+      "value": 271.18,
+      "day_move": 3.88,
+      "asof": "2026-11-11",
+      "rsi": 47.9,
       "rsi_zone": "neutral",
       "low": 244.98,
-      "high": 297.42,
-      "band_pct": 30.6,
+      "high": 290.87,
+      "band_pct": 57.1,
       "zone": "mid",
       "action": "hold",
-      "read": "Mid-range - 31% of the way up its 1-month band."
+      "read": "Mid-range - 57% of the way up its 1-month band."
     },
     {
       "symbol": "TQQQ",
       "what": "3x Nasdaq-100",
-      "value": 56.56,
-      "day_move": -1.77,
-      "asof": "2026-11-10",
-      "rsi": 37.6,
+      "value": 60.44,
+      "day_move": 6.86,
+      "asof": "2026-11-11",
+      "rsi": 43.3,
       "rsi_zone": "neutral",
       "low": 50.47,
-      "high": 78.81,
-      "band_pct": 21.5,
+      "high": 74.12,
+      "band_pct": 42.2,
       "zone": "mid",
       "action": "hold",
-      "read": "Mid-range - 22% of the way up its 1-month band."
+      "read": "Mid-range - 42% of the way up its 1-month band."
     }
   ],
   "watchlist_missing": [],
@@ -99,7 +99,7 @@
     "value": 7.18,
     "change": -0.06,
     "asof": "2026-11-05",
-    "why": "The 30-year fixed mortgage rate, as surveyed by Freddie Mac and released on November 5, 2026, decreased by 0.06% to 7.18% compared to the previous weekly release. The provided articles do not offer specific reasons for this change in the weekly survey period. Mortgage rates generally track trends in the 10-year Treasury yield over recent days, but the articles do not detail yield movements relevant to the period preceding the November 5 survey release."
+    "why": "The 30-year fixed mortgage rate decreased slightly to 7.18% in the latest weekly survey released on November 5. This movement tracks the direction of the 10-year Treasury yield over recent days; however, the 10-year yield increased on the latest reporting day. This survey reflects trends from the preceding week, during which home sales fell to a 16-year low as buyers reacted to high mortgage rates."
   },
   "policy": [],
   "policy_upcoming": [
@@ -147,68 +147,68 @@
   ],
   "tech": [
     {
-      "summary": "Google DeepMind researchers unveiled AlphaGenome 2, an AI model aimed at understanding how DNA changes impact cells to identify disease causes and treatments.",
+      "summary": "Jensen Huang's resignation as CEO of Nvidia due to alleged extramarital affairs, including one with a suspected Chinese spy, led to a drop in the company's stock and raised questions about the future of the AI industry.",
       "source": "The Verge",
-      "url": "https://www.theverge.com/ai-artificial-intelligence/1031524/google-deepmind-alphagenome-2-genetic-ai-model"
+      "url": "https://www.theverge.com/ai-artificial-intelligence/1032028/read-nvidias-internal-emails-jensen-huang"
     },
     {
-      "summary": "Google DeepMind has mathematically verified key parts of Signal's encryption using an AI-powered process, hinting at more practical formal verification in the future.",
+      "summary": "Google introduced its Gemini-powered smartglasses, developed in collaboration with Samsung, Gentle Monster, and Warby Parker, emphasizing a privacy-focused design.",
       "source": "Ars Technica",
-      "url": "https://arstechnica.com/ai/2026/11/signals-encryption-just-passed-an-ai-powered-mathematical-checkup/"
+      "url": "https://arstechnica.com/google/2026/11/google-pushes-privacy-angle-as-gemini-powered-smartglasses-debut-starting-at-395/"
     },
     {
-      "summary": "An individual using 48 AI agents and NASA Lidar data successfully discovered an unmapped Maya pyramid in 72 hours, demonstrating advanced AI capabilities in archaeological exploration.",
+      "summary": "Multiple updates were released for PostgreSQL, including versions 18.7, 17.12, 16.16, 15.20, 14.25, and release candidate 2 for version 19.",
       "source": "Hacker News",
-      "url": "https://pietromiotti.com/latest/maya-site/?maya"
+      "url": "https://www.postgresql.org/about/news/postgresql-187-1712-1616-1520-1425-and-19-rc-2-released-3442/"
     }
   ],
   "world": [
     {
-      "summary": "US envoys are set to meet separately with President Putin in Moscow and President Zelenskyy in Dublin following some progress in peace talks.",
-      "source": "Guardian World",
-      "url": "https://www.theguardian.com/world/live/2026/nov/11/europe-ukraine-russia-us-talks-abu-dhabi-zelenskyy-latest-news-updates"
+      "summary": "US envoys Jared Kushner and Steve Witkoff met with Russian President Vladimir Putin in the Kremlin and are scheduled to meet with Ukrainian President Volodymyr Zelenskyy, while Ukraine reported its military's Starlink service was again disrupted.",
+      "source": "NPR",
+      "url": "https://www.npr.org/2026/11/12/nx-s1-6038809/us-envoys-meet-putin-russia-ukraine-war-talks"
     },
     {
-      "summary": "Millions participated in Spain's first general strike in 14 years, protesting soaring housing prices ahead of upcoming parliamentary elections.",
-      "source": "Guardian World",
-      "url": "https://www.theguardian.com/world/2026/nov/11/spain-general-strike-housing-costs"
+      "summary": "A UK court convicted two Iranian men of spying for Iran, noting they were promised rewards for intelligence and one was prepared to conduct a \"violent attack.\"",
+      "source": "Al Jazeera",
+      "url": "https://www.aljazeera.com/news/2026/11/12/uk-court-finds-two-iranian-men-guilty-of-spying-for-iran?traffic_source=rss"
     },
     {
-      "summary": "Consultant doctors in England have called off a planned two-day pay strike to allow for formal negotiations with the government.",
-      "source": "Guardian World",
-      "url": "https://www.theguardian.com/society/2026/nov/11/consultant-doctors-in-england-call-off-nhs-strike"
+      "summary": "An Israeli strike reportedly killed six Palestinians at Nasser hospital in Gaza, with witnesses describing a missile impact on a building containing surgical and intensive care units.",
+      "source": "BBC World",
+      "url": "https://www.bbc.co.uk/news/articles/ckzd9p7e4eqeo?at_medium=RSS&at_campaign=rss"
     },
     {
-      "summary": "Hundreds of schools in Italy and the UK were evacuated after receiving bomb threats, amidst growing concerns about hybrid threats.",
-      "source": "CNBC",
-      "url": "https://www.cnbc.com/2026/11/11/hoax-bomb-threats-schools-italy-uk.html"
+      "summary": "Indonesia's Vice President, Gibran Rakabuming Raka, resigned after his eligibility and academic credentials were challenged in court, with rulings stating his overseas education documents did not meet election requirements.",
+      "source": "NPR",
+      "url": "https://www.npr.org/2026/11/12/g-s1-153190/indonesias-vp-resigns-as-his-eligibility-and-academic-credentials-are-questioned"
     }
   ],
   "us": [
     {
-      "summary": "The Supreme Court ruled that border wall construction can continue in West Texas while a lawsuit challenging the plan proceeds.",
+      "summary": "Democrat Scott Colom secured election to the U.S. Senate in Mississippi, becoming the state's first Black senator since 1875 after defeating Republican Sen. Cindy Hyde-Smith.",
       "source": "NPR National",
-      "url": "https://www.npr.org/2026/11/09/nx-s1-6019424/border-wall-big-bend-texas-trump"
+      "url": "https://www.npr.org/2026/11/11/g-s1-151688/mississippi-senate-race-scott-colom"
     },
     {
-      "summary": "A House Oversight Committee report concluded that the federal government failed to hold Jeffrey Epstein accountable over decades.",
+      "summary": "The SS United States, a historic ocean liner, was intentionally sunk off the Florida coast to create the largest artificial reef, serving as a new diving destination and marine habitat.",
       "source": "NPR National",
-      "url": "https://www.npr.org/2026/11/10/nx-s1-6036135/federal-government-failed-to-hold-epstein-accountable-republican-committee-says"
+      "url": "https://www.npr.org/2026/11/11/nx-s1-6030853/ss-united-states-artificial-reef-sinking"
     },
     {
-      "summary": "Swatters are increasingly using AI technology to create synthetic voices and sound effects for fake emergency calls to law enforcement, making them more believable.",
-      "source": "NPR National",
-      "url": "https://www.npr.org/2026/11/11/nx-s1-6034449/ai-911-calls-swatting"
+      "summary": "A shooting incident in northwest Washington D.C. resulted in one fatality and four injuries, prompting a \"barricade situation\" and police containment of a suspect.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/us-news/2026/nov/12/dc-shooting-logan-circle"
     }
   ],
   "science": [
     {
-      "summary": "Congo's Ebola outbreak has exceeded 11,000 cases, highlighting the severity of the disease's spread in the country.",
+      "summary": "Congo's Ebola outbreak has surpassed 11,000 cases, making it the country's deadliest and highlighting the severe and persistent spread of the disease.",
       "source": "NPR Health",
       "url": "https://www.npr.org/2026/11/11/nx-s1-6037304/ebola-congo-outbreak"
     },
     {
-      "summary": "An analysis found that the antidepressant escitalopram was more effective at preventing relapse compared to other pills, including Prozac.",
+      "summary": "A large study found that the antidepressant escitalopram was the most effective in preventing the recurrence of depression symptoms, though the overall differences between various medications were small.",
       "source": "BBC Health",
       "url": "https://www.bbc.co.uk/news/articles/cv62yyng00jyo?at_medium=RSS&at_campaign=rss"
     }

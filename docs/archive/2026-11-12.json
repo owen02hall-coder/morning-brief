@@ -1,0 +1,233 @@
+{
+  "generated_at": "2026-11-12T09:02:14.820290-07:00",
+  "date": "2026-11-12",
+  "tldr": [
+    "Nvidia CEO Jensen Huang resigned due to alleged extramarital affairs, including with a suspected Chinese spy, causing a significant dip in the company's stock.",
+    "US envoys met with Russian President Vladimir Putin and are scheduled to meet with Ukrainian President Volodymyr Zelenskyy, as Ukraine reported new disruptions to its military's Starlink service.",
+    "Democrat Scott Colom secured a historic win in the Mississippi U.S. Senate race, becoming the state's first Black senator since 1875."
+  ],
+  "market": {
+    "sp500": {
+      "value": 7619.38,
+      "change": 98.45,
+      "asof": "2026-11-11"
+    },
+    "ndx": {
+      "value": 25466.19,
+      "change": 400.32,
+      "asof": "2026-11-11"
+    },
+    "why": "The S&P 500 and Nasdaq Composite indices closed higher on November 11. Although Nvidia shares plunged following the resignation of CEO Jensen Huang amid reports of alleged affairs, the provided articles do not offer a direct explanation for the broader market's overall upward movement."
+  },
+  "yield_10y": {
+    "value": 5.0,
+    "change": 0.02,
+    "asof": "2026-11-11",
+    "why": "The 10-year Treasury yield rose to 5.0% on November 11 as bond markets reopened after the Veterans Day holiday, driven by expectations of further Federal Reserve interest rate hikes."
+  },
+  "vix": {
+    "value": 17.49,
+    "change": -1.97,
+    "asof": "2026-11-11",
+    "why": "The VIX decreased on November 11, indicating lower market volatility. The provided articles do not offer a direct explanation for this specific movement."
+  },
+  "breadth": {
+    "sp500": {
+      "value": 63.0,
+      "asof": "2026-11-11",
+      "status": "healthy",
+      "matched": 500,
+      "stale": false
+    },
+    "ndx100": {
+      "value": 55.2,
+      "asof": "2026-11-11",
+      "status": "healthy",
+      "matched": 96,
+      "stale": false
+    }
+  },
+  "watchlist": [
+    {
+      "symbol": "SOXL",
+      "what": "3x semiconductors",
+      "value": 66.03,
+      "day_move": 17.78,
+      "asof": "2026-11-11",
+      "rsi": 40.1,
+      "rsi_zone": "neutral",
+      "low": 40.87,
+      "high": 110.54,
+      "band_pct": 36.1,
+      "zone": "mid",
+      "action": "hold",
+      "read": "Mid-range - 36% of the way up its 1-month band. Big session: up 17.8% in a day."
+    },
+    {
+      "symbol": "SPXL",
+      "what": "3x S&P 500",
+      "value": 271.18,
+      "day_move": 3.88,
+      "asof": "2026-11-11",
+      "rsi": 47.9,
+      "rsi_zone": "neutral",
+      "low": 244.98,
+      "high": 290.87,
+      "band_pct": 57.1,
+      "zone": "mid",
+      "action": "hold",
+      "read": "Mid-range - 57% of the way up its 1-month band."
+    },
+    {
+      "symbol": "TQQQ",
+      "what": "3x Nasdaq-100",
+      "value": 60.44,
+      "day_move": 6.86,
+      "asof": "2026-11-11",
+      "rsi": 43.3,
+      "rsi_zone": "neutral",
+      "low": 50.47,
+      "high": 74.12,
+      "band_pct": 42.2,
+      "zone": "mid",
+      "action": "hold",
+      "read": "Mid-range - 42% of the way up its 1-month band."
+    }
+  ],
+  "watchlist_missing": [],
+  "mortgage": {
+    "value": 7.18,
+    "change": -0.06,
+    "asof": "2026-11-05",
+    "why": "The 30-year fixed mortgage rate decreased slightly to 7.18% in the latest weekly survey released on November 5. This movement tracks the direction of the 10-year Treasury yield over recent days; however, the 10-year yield increased on the latest reporting day. This survey reflects trends from the preceding week, during which home sales fell to a 16-year low as buyers reacted to high mortgage rates."
+  },
+  "policy": [],
+  "policy_upcoming": [
+    {
+      "what_happened": "Temporary regulations were issued concerning a new nonrefundable Federal tax credit for qualified contributions to scholarship granting organizations.",
+      "effect": "A new nonrefundable Federal tax credit becomes available for qualified contributions to scholarship granting organizations in 2027 and later taxable years.",
+      "url": "https://www.federalregister.gov/documents/2026/10/02/2026-20264/federal-scholarship-tax-credit",
+      "status": "Final rule",
+      "effective_date": "2026-12-01",
+      "source": "Federal Register"
+    },
+    {
+      "what_happened": "Final rules set forth requirements for price transparency reporting for non-grandfathered group health plans and health insurance issuers.",
+      "effect": "Your employer health insurance plan has new price transparency reporting requirements that become effective on December 7, 2026.",
+      "url": "https://www.federalregister.gov/documents/2026/10/06/2026-20447/transparency-in-coverage",
+      "status": "Final rule",
+      "effective_date": "2026-12-07",
+      "source": "Federal Register"
+    },
+    {
+      "what_happened": "A Utah bill modifies provisions related to the property tax exemption process.",
+      "effect": "Once you own a home, you will have deadlines for filing an application for a property tax exemption with the county board of equalization and for the board to render a decision.",
+      "url": "https://le.utah.gov/~2026/bills/static/SB0236.html",
+      "status": "Signed in Utah",
+      "effective_date": "2027-01-01",
+      "source": "Utah Legislature"
+    },
+    {
+      "what_happened": "A bill amends requirements for health insurance preauthorization in Utah.",
+      "effect": "Your health insurer must make an authorization or adverse preauthorization determination within a defined maximum time.",
+      "url": "https://le.utah.gov/~2026/bills/static/SB0319.html",
+      "status": "Signed in Utah",
+      "effective_date": "2027-01-01",
+      "source": "Utah Legislature"
+    }
+  ],
+  "policy_week": [],
+  "policy_calendar": [
+    {
+      "date": "2026-11-30",
+      "label": "FHFA conforming loan limit for next year \u2014 expected late November",
+      "note": "The cap on a conforming (non-jumbo) mortgage, and the line between a normal rate and a jumbo one. FHFA has announced it in the last days of November each year, and the new limit applies to loans made from January 1.",
+      "url": "https://www.fhfa.gov/data/conforming-loan-limit"
+    }
+  ],
+  "tech": [
+    {
+      "summary": "Jensen Huang's resignation as CEO of Nvidia due to alleged extramarital affairs, including one with a suspected Chinese spy, led to a drop in the company's stock and raised questions about the future of the AI industry.",
+      "source": "The Verge",
+      "url": "https://www.theverge.com/ai-artificial-intelligence/1032028/read-nvidias-internal-emails-jensen-huang"
+    },
+    {
+      "summary": "Google introduced its Gemini-powered smartglasses, developed in collaboration with Samsung, Gentle Monster, and Warby Parker, emphasizing a privacy-focused design.",
+      "source": "Ars Technica",
+      "url": "https://arstechnica.com/google/2026/11/google-pushes-privacy-angle-as-gemini-powered-smartglasses-debut-starting-at-395/"
+    },
+    {
+      "summary": "Multiple updates were released for PostgreSQL, including versions 18.7, 17.12, 16.16, 15.20, 14.25, and release candidate 2 for version 19.",
+      "source": "Hacker News",
+      "url": "https://www.postgresql.org/about/news/postgresql-187-1712-1616-1520-1425-and-19-rc-2-released-3442/"
+    }
+  ],
+  "world": [
+    {
+      "summary": "US envoys Jared Kushner and Steve Witkoff met with Russian President Vladimir Putin in the Kremlin and are scheduled to meet with Ukrainian President Volodymyr Zelenskyy, while Ukraine reported its military's Starlink service was again disrupted.",
+      "source": "NPR",
+      "url": "https://www.npr.org/2026/11/12/nx-s1-6038809/us-envoys-meet-putin-russia-ukraine-war-talks"
+    },
+    {
+      "summary": "A UK court convicted two Iranian men of spying for Iran, noting they were promised rewards for intelligence and one was prepared to conduct a \"violent attack.\"",
+      "source": "Al Jazeera",
+      "url": "https://www.aljazeera.com/news/2026/11/12/uk-court-finds-two-iranian-men-guilty-of-spying-for-iran?traffic_source=rss"
+    },
+    {
+      "summary": "An Israeli strike reportedly killed six Palestinians at Nasser hospital in Gaza, with witnesses describing a missile impact on a building containing surgical and intensive care units.",
+      "source": "BBC World",
+      "url": "https://www.bbc.co.uk/news/articles/ckzd9p7e4eqeo?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "summary": "Indonesia's Vice President, Gibran Rakabuming Raka, resigned after his eligibility and academic credentials were challenged in court, with rulings stating his overseas education documents did not meet election requirements.",
+      "source": "NPR",
+      "url": "https://www.npr.org/2026/11/12/g-s1-153190/indonesias-vp-resigns-as-his-eligibility-and-academic-credentials-are-questioned"
+    }
+  ],
+  "us": [
+    {
+      "summary": "Democrat Scott Colom secured election to the U.S. Senate in Mississippi, becoming the state's first Black senator since 1875 after defeating Republican Sen. Cindy Hyde-Smith.",
+      "source": "NPR National",
+      "url": "https://www.npr.org/2026/11/11/g-s1-151688/mississippi-senate-race-scott-colom"
+    },
+    {
+      "summary": "The SS United States, a historic ocean liner, was intentionally sunk off the Florida coast to create the largest artificial reef, serving as a new diving destination and marine habitat.",
+      "source": "NPR National",
+      "url": "https://www.npr.org/2026/11/11/nx-s1-6030853/ss-united-states-artificial-reef-sinking"
+    },
+    {
+      "summary": "A shooting incident in northwest Washington D.C. resulted in one fatality and four injuries, prompting a \"barricade situation\" and police containment of a suspect.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/us-news/2026/nov/12/dc-shooting-logan-circle"
+    }
+  ],
+  "science": [
+    {
+      "summary": "Congo's Ebola outbreak has surpassed 11,000 cases, making it the country's deadliest and highlighting the severe and persistent spread of the disease.",
+      "source": "NPR Health",
+      "url": "https://www.npr.org/2026/11/11/nx-s1-6037304/ebola-congo-outbreak"
+    },
+    {
+      "summary": "A large study found that the antidepressant escitalopram was the most effective in preventing the recurrence of depression symptoms, though the overall differences between various medications were small.",
+      "source": "BBC Health",
+      "url": "https://www.bbc.co.uk/news/articles/cv62yyng00jyo?at_medium=RSS&at_campaign=rss"
+    }
+  ],
+  "weekly_recap": null,
+  "data_availability": {
+    "sp500": true,
+    "ndx": true,
+    "vix": true,
+    "ten_year": true,
+    "news_world": true,
+    "news_us": true,
+    "news_science": true,
+    "news_business": true,
+    "news_tech": true,
+    "summary": "ok",
+    "breadth": true,
+    "policy": true,
+    "mortgage": true,
+    "watchlist": true
+  }
+}

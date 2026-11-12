@@ -1,22 +1,6 @@
 {
-  "generated_at": "2026-11-11T08:24:09.152638-07:00",
+  "generated_at": "2026-11-12T09:02:14.820290-07:00",
   "lessons": [
-    {
-      "id": "2026-09-09-dark-pattern",
-      "date": "2026-09-09",
-      "domain": "Thinking and people",
-      "title": "Recognize Deceptive Online Designs",
-      "hook": "Online, it's easy to get tricked into spending extra money or giving away more of your private information than you intended.",
-      "quick": "Many websites and apps are carefully designed to trick you into making choices you wouldn\u2019t otherwise, often costing you money or your privacy. One common trick is \"bait-and-switch,\" where a product or service is advertised as free or very cheap, but then turns out to be unavailable or quickly pushed aside for a more expensive option. For instance, some tax filing services have historically advertised free options that most people don\u2019t qualify for, leading millions of customers to pay for tax preparation they thought would be free. These companies have even faced legal action and settlements because of these misleading practices.",
-      "more": "Another common tactic is \"drip pricing,\" where you see a low initial price advertised, but then additional fees, taxes, or charges are gradually added as you go through the purchase process. This makes you invest time and effort before revealing the true, higher final cost. You might also encounter \"confirmshaming,\" where declining an offer, like a newsletter, is worded to make you feel guilty for not accepting. These designs aim to subtly push you into decisions that benefit the company, not you, by playing on habit, emotion, or a lack of clear information.",
-      "deep": "Beyond just spending money, these deceptive designs can lead to unwanted software installations through \"misdirection,\" where a prominent button encourages you to accept terms for an unrelated program. Or, you might fall victim to \"privacy Zuckering,\" a practice that makes you unknowingly share more personal information than you intended, often by hiding opt-out options or making them difficult to find. For example, some companies have made it incredibly hard to opt out of having your data used for training AI, requiring multiple steps and even asking for reasons, despite claiming any reason would suffice. Once you're in, some services use a \"roach motel\" design, making it simple to sign up but extremely difficult to cancel, leading to continuous charges for services you no longer want.",
-      "takeaway": "Before clicking any \"accept,\" \"continue,\" or \"I agree\" button online, always pause to carefully read all text, especially fine print and alternative options, to avoid unexpected costs or privacy disclosures.",
-      "source": {
-        "title": "Dark pattern",
-        "url": "https://en.wikipedia.org/wiki/Dark_pattern"
-      },
-      "audio": {}
-    },
     {
       "id": "2026-09-10-amortization-accounting",
       "date": "2026-09-10",
@@ -639,11 +623,7 @@
         "title": "Cardiopulmonary resuscitation",
         "url": "https://en.wikipedia.org/wiki/Cardiopulmonary_resuscitation"
       },
-      "audio": {
-        "quick": "lessons/2026-10-21-cardiopulmonary-resuscitation-quick.mp3",
-        "more": "lessons/2026-10-21-cardiopulmonary-resuscitation-more.mp3",
-        "deep": "lessons/2026-10-21-cardiopulmonary-resuscitation-deep.mp3"
-      }
+      "audio": {}
     },
     {
       "id": "2026-10-22-opportunity-cost",
@@ -1043,6 +1023,26 @@
         "quick": "lessons/2026-11-11-hypothermia-quick.mp3",
         "more": "lessons/2026-11-11-hypothermia-more.mp3",
         "deep": "lessons/2026-11-11-hypothermia-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-11-12-best-alternative-to-a-negotiated-agreeme",
+      "date": "2026-11-12",
+      "domain": "Thinking and people",
+      "title": "Prepare Your Best Alternative in Negotiations",
+      "hook": "When negotiating a big decision, like buying a home or a car, many people miss out on a better deal because they haven't thought through their real options.",
+      "quick": "Most people overestimate their best option if a deal falls through and don't spend enough time looking into what those real options are. This can lead to making bad decisions and getting poor results in negotiations. Instead of seeing your alternatives as just a safety net, think of them as leverage. If you don't know your true best alternative, you lose power at the negotiating table. When evaluating a potential deal, ensure you consider all factors. This includes the value of ongoing relationships, the time value of money, and the likelihood that the other party will keep their promises. Without careful thought and research into actual and actionable alternatives, you might settle for a less favorable agreement because you haven't truly valued your other choices.",
+      "more": "Beyond understanding your own options, it is also important to consider the other party's best alternative and how it compares to what you are offering. Without insight into their options, you cannot accurately assess their negotiating power. Some individuals might even try to manipulate your perception of their interests, perhaps by proposing an undesirable term to see how you react. To develop a strong position for yourself, begin by listing all the actions you could take if no agreement is reached. Then, convert the most promising of these ideas into concrete alternatives. Finally, choose the alternative that offers you the most value; this becomes your best option if negotiations fail.",
+      "deep": "Be aware that some negotiation tactics focus on weakening the other party\u2019s best alternatives. This might involve efforts to limit you to exclusive negotiations or to delay the process. If you encounter such tactics, it is crucial to analyze how they might affect your own alternatives and take steps to prevent or counteract any deterioration of your position. For instance, if you are negotiating for a house, and the seller insists on exclusive negotiations while you are still exploring other properties, this could be an attempt to weaken your perceived alternatives. Remember, attractive alternatives are necessary to develop a strong negotiating stance. Also, be mindful of different negotiation styles; a hard approach often wins the immediate position against a softer style, but it can come at the cost of damaging the long-term relationship between the parties.",
+      "takeaway": "Before entering any significant negotiation, list all your potential alternatives, determine the worth of each, and select the one that provides the most value to you if a deal is not reached.",
+      "source": {
+        "title": "Best alternative to a negotiated agreement",
+        "url": "https://en.wikipedia.org/wiki/Best_alternative_to_a_negotiated_agreement"
+      },
+      "audio": {
+        "quick": "lessons/2026-11-12-best-alternative-to-a-negotiated-agreeme-quick.mp3",
+        "more": "lessons/2026-11-12-best-alternative-to-a-negotiated-agreeme-more.mp3",
+        "deep": "lessons/2026-11-12-best-alternative-to-a-negotiated-agreeme-deep.mp3"
       }
     }
   ],
