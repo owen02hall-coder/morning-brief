@@ -1,22 +1,6 @@
 {
-  "generated_at": "2026-11-12T09:02:14.820290-07:00",
+  "generated_at": "2026-11-13T08:29:18.175919-07:00",
   "lessons": [
-    {
-      "id": "2026-09-10-amortization-accounting",
-      "date": "2026-09-10",
-      "domain": "Money mechanics",
-      "title": "How Company Expense Reporting Can Affect Your View",
-      "hook": "It's important to understand how companies report their expenses, because a misreading of their financial health can have unexpected implications.",
-      "quick": "When companies show their net income, it might not always reflect the full, immediate impact of certain large expenditures. Sometimes, what would otherwise be a one-time expense is treated differently in accounting. Instead of hitting the income statement all at once, the company might list it as a capital investment. Then, the cost is gradually \"paid off\" or spread out over time. This approach can make the company's net income appear more favorable in the fiscal year or quarter when that expense was actually incurred, potentially making its immediate financial picture seem stronger.",
-      "more": "This method primarily applies to intangible assets, which are things a company owns that don't have a physical form, like patents or trademarks. The accounting practice aims to show the decline in value of these assets over their useful life, similar to how physical items depreciate. However, not all such assets are handled this way; some, like goodwill or specific brands, are seen as having an indefinite useful life and are therefore not subject to this systematic expense allocation. For those looking at a company's financial reports, it means a significant cost that might typically be a big drain on profits in one period can be smoothed over, making the underlying cash flow appear steadier.",
-      "deep": "The way this works involves taking the acquisition cost of an intangible asset and systematically reducing its value over its economic life, after subtracting any residual value. While the theoretical purpose is to account for the decreasing value of an intangible asset, companies in practice can use it to manage how one-time expenses affect their reported profits. By listing these expenses as capital expenditures on the cash flow statement, they effectively spread the cost over multiple periods. This has the effect of boosting the reported net income in the specific period the expense actually happened, because the full cost isn't recorded all at once. Anyone relying on a company's reported income figures should be aware that these numbers might not immediately reflect the full brunt of all recent large expenditures.",
-      "takeaway": "When evaluating a company's reported income, consider that one-time expenses might be spread out over time, potentially presenting a smoother but not immediately complete financial picture.",
-      "source": {
-        "title": "Amortization (accounting)",
-        "url": "https://en.wikipedia.org/wiki/Amortization_(accounting)"
-      },
-      "audio": {}
-    },
     {
       "id": "2026-09-12-toilet",
       "date": "2026-09-12",
@@ -639,11 +623,7 @@
         "title": "Opportunity cost",
         "url": "https://en.wikipedia.org/wiki/Opportunity_cost"
       },
-      "audio": {
-        "quick": "lessons/2026-10-22-opportunity-cost-quick.mp3",
-        "more": "lessons/2026-10-22-opportunity-cost-more.mp3",
-        "deep": "lessons/2026-10-22-opportunity-cost-deep.mp3"
-      }
+      "audio": {}
     },
     {
       "id": "2026-10-23-health-insurance",
@@ -1043,6 +1023,26 @@
         "quick": "lessons/2026-11-12-best-alternative-to-a-negotiated-agreeme-quick.mp3",
         "more": "lessons/2026-11-12-best-alternative-to-a-negotiated-agreeme-more.mp3",
         "deep": "lessons/2026-11-12-best-alternative-to-a-negotiated-agreeme-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-11-13-closing-real-estate",
+      "date": "2026-11-13",
+      "domain": "Money mechanics",
+      "title": "Understanding Real Estate Closing",
+      "hook": "Misunderstandings about the final step in buying a home can cause unexpected delays and stress.",
+      "quick": "The final hurdle in buying a home, called closing, happens after your purchase offer is accepted and a closing date is set. This date, usually several weeks after your offer, is when property ownership officially transfers from the seller to you. Many parties are involved in this crucial step, including you as the buyer, the seller, both real estate agents, your mortgage lender, and a settlement agency, which is also known as a title company. The process officially begins once the seller formally accepts, signs, and returns your purchase offer. Before the closing day itself, a title search is ordered to look for any potential issues with the property's ownership history, which is a key part of protecting your investment.",
+      "more": "During the important closing preparation phase, any title issues that were discovered during the initial title search are carefully cleared up to ensure a smooth transfer. Just a day or two before the scheduled closing, the settlement agency will produce a series of vital documents, often referred to as closing documents or a closing package, that both you and the seller will need to sign. Before the closing can happen, this settlement agency has a critical task: they must ensure that all the money you and your lender expect to send into escrow precisely matches the total amount that needs to be paid out to all parties, such as the seller and the real estate agents. This meticulous accounting process means gathering all financial information and balancing the entire order, preventing discrepancies that could otherwise halt the transaction.",
+      "deep": "On the actual closing date, the buyer and seller come together to sign these prepared closing documents. It is often at this time that the seller may also deliver possession of the property to you, typically by handing over the keys to your new home. However, the process doesn't end immediately after the signing and key exchange. In the post-closing phase, all the signed documents are officially recorded at the local recording office, making the transfer of ownership public and legally binding. During this same period, title insurance is issued to provide protection for your property ownership, and your mortgage loan is formally funded on its funding date. The money is then disbursed from escrow to the seller and other beneficiaries on the disbursement date. It is important to remember that state and regional legislation significantly impacts this entire process, meaning the specific steps and requirements for closing can vary greatly depending on where your property is located.",
+      "takeaway": "Carefully review your closing documents and understand all financial disbursements before you sign.",
+      "source": {
+        "title": "Closing (real estate)",
+        "url": "https://en.wikipedia.org/wiki/Closing_(real_estate)"
+      },
+      "audio": {
+        "quick": "lessons/2026-11-13-closing-real-estate-quick.mp3",
+        "more": "lessons/2026-11-13-closing-real-estate-more.mp3",
+        "deep": "lessons/2026-11-13-closing-real-estate-deep.mp3"
       }
     }
   ],
