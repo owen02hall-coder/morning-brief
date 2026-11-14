@@ -1,0 +1,228 @@
+{
+  "generated_at": "2026-11-14T07:16:43.366542-07:00",
+  "date": "2026-11-14",
+  "tldr": [
+    "Microsoft services were fully restored after a global outage impacted governments, businesses, and public services worldwide.",
+    "A nationwide ground stop for flights in the United States was lifted after several hours, with officials blaming outdated equipment for the disruption.",
+    "Green turtles have been reclassified from endangered to 'least concern' status in global conservation rankings."
+  ],
+  "market": {
+    "sp500": {
+      "value": 7561.67,
+      "change": -30.73,
+      "asof": "2026-11-13"
+    },
+    "ndx": {
+      "value": 25136.27,
+      "change": -229.82,
+      "asof": "2026-11-13"
+    },
+    "why": "A widespread tech selloff, particularly affecting AI stocks, contributed to the decline in both the S&P 500 and Nasdaq Composite, with chipmaker Nvidia experiencing significant losses."
+  },
+  "yield_10y": {
+    "value": 5.15,
+    "change": 0.05,
+    "asof": "2026-11-13",
+    "why": "The provided articles do not support a specific reason for the 10-year Treasury yield's movement."
+  },
+  "vix": {
+    "value": 19.3,
+    "change": 0.6,
+    "asof": "2026-11-13",
+    "why": "The provided articles do not support a specific reason for the VIX's movement."
+  },
+  "breadth": {
+    "sp500": {
+      "value": 63.6,
+      "asof": "2026-11-13",
+      "status": "healthy",
+      "matched": 500,
+      "stale": false
+    },
+    "ndx100": {
+      "value": 56.2,
+      "asof": "2026-11-13",
+      "status": "healthy",
+      "matched": 96,
+      "stale": false
+    }
+  },
+  "watchlist": [
+    {
+      "symbol": "SOXL",
+      "what": "3x semiconductors",
+      "value": 58.32,
+      "day_move": -11.0,
+      "asof": "2026-11-13",
+      "rsi": 37.4,
+      "rsi_zone": "neutral",
+      "low": 40.87,
+      "high": 107.35,
+      "band_pct": 26.2,
+      "zone": "mid",
+      "action": "hold",
+      "read": "Mid-range - 26% of the way up its 1-month band. Big session: down 11.0% in a day."
+    },
+    {
+      "symbol": "SPXL",
+      "what": "3x S&P 500",
+      "value": 265.1,
+      "day_move": -1.22,
+      "asof": "2026-11-13",
+      "rsi": 45.2,
+      "rsi_zone": "neutral",
+      "low": 244.98,
+      "high": 290.87,
+      "band_pct": 43.8,
+      "zone": "mid",
+      "action": "hold",
+      "read": "Mid-range - 44% of the way up its 1-month band."
+    },
+    {
+      "symbol": "TQQQ",
+      "what": "3x Nasdaq-100",
+      "value": 57.68,
+      "day_move": -3.67,
+      "asof": "2026-11-13",
+      "rsi": 40.3,
+      "rsi_zone": "neutral",
+      "low": 50.47,
+      "high": 72.61,
+      "band_pct": 32.6,
+      "zone": "mid",
+      "action": "hold",
+      "read": "Mid-range - 33% of the way up its 1-month band."
+    }
+  ],
+  "watchlist_missing": [],
+  "mortgage": {
+    "value": 7.11,
+    "change": -0.07,
+    "asof": "2026-11-12",
+    "why": "The provided articles do not support a specific reason for the direction of the 30-year fixed mortgage rate, which is based on a weekly survey released on November 12, 2026."
+  },
+  "policy": [],
+  "policy_upcoming": [
+    {
+      "what_happened": "Temporary regulations were issued concerning a new nonrefundable Federal tax credit for qualified contributions to scholarship granting organizations.",
+      "effect": "A new nonrefundable Federal tax credit becomes available for qualified contributions to scholarship granting organizations in 2027 and later taxable years.",
+      "url": "https://www.federalregister.gov/documents/2026/10/02/2026-20264/federal-scholarship-tax-credit",
+      "status": "Final rule",
+      "effective_date": "2026-12-01",
+      "source": "Federal Register"
+    },
+    {
+      "what_happened": "Final rules set forth requirements for price transparency reporting for non-grandfathered group health plans and health insurance issuers.",
+      "effect": "Your employer health insurance plan has new price transparency reporting requirements that become effective on December 7, 2026.",
+      "url": "https://www.federalregister.gov/documents/2026/10/06/2026-20447/transparency-in-coverage",
+      "status": "Final rule",
+      "effective_date": "2026-12-07",
+      "source": "Federal Register"
+    },
+    {
+      "what_happened": "A Utah bill modifies provisions related to the property tax exemption process.",
+      "effect": "Once you own a home, you will have deadlines for filing an application for a property tax exemption with the county board of equalization and for the board to render a decision.",
+      "url": "https://le.utah.gov/~2026/bills/static/SB0236.html",
+      "status": "Signed in Utah",
+      "effective_date": "2027-01-01",
+      "source": "Utah Legislature"
+    },
+    {
+      "what_happened": "A bill amends requirements for health insurance preauthorization in Utah.",
+      "effect": "Your health insurer must make an authorization or adverse preauthorization determination within a defined maximum time.",
+      "url": "https://le.utah.gov/~2026/bills/static/SB0319.html",
+      "status": "Signed in Utah",
+      "effective_date": "2027-01-01",
+      "source": "Utah Legislature"
+    }
+  ],
+  "policy_week": [],
+  "policy_calendar": [
+    {
+      "date": "2026-11-30",
+      "label": "FHFA conforming loan limit for next year \u2014 expected late November",
+      "note": "The cap on a conforming (non-jumbo) mortgage, and the line between a normal rate and a jumbo one. FHFA has announced it in the last days of November each year, and the new limit applies to loans made from January 1.",
+      "url": "https://www.fhfa.gov/data/conforming-loan-limit"
+    }
+  ],
+  "tech": [
+    {
+      "summary": "OpenAI launched ChatGPT Wallet for Pro subscribers, enabling AI agents to make purchases using eligible US-issued cards.",
+      "source": "The Verge",
+      "url": "https://www.theverge.com/ai-artificial-intelligence/1033425/openai-chatgpt-wallet"
+    },
+    {
+      "summary": "Microsoft announced that its services, including Outlook and Teams, have been fully restored after a global outage affected numerous organizations worldwide.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/technology/2026/nov/14/microsoft-says-services-fully-restored-after-global-outage"
+    }
+  ],
+  "world": [
+    {
+      "summary": "The Bank of England's chief economist indicated that further interest rate rises are probable in the coming months to address inflation.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/business/2026/nov/14/interest-rate-rises-inflation-bank-of-england-chief-economist"
+    },
+    {
+      "summary": "Reports suggest Russian casualties in the Ukraine war have reached 450,000, impacting the conflict primarily through older men, poorer regions, and foreign recruits.",
+      "source": "Al Jazeera",
+      "url": "https://www.aljazeera.com/news/2026/11/14/russian-casualties-reach-450000-what-that-means-for-the-ukraine-war?traffic_source=rss"
+    },
+    {
+      "summary": "Ukrainian President Volodymyr Zelenskyy stated that the United States has for the first time proposed Ukraine cede territory in Donbas in exchange for NATO membership.",
+      "source": "BBC World",
+      "url": "https://www.bbc.co.uk/news/articles/cwvg2l312ylqo?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "summary": "A trilateral meeting between leaders from the US, China, and Russia is anticipated at APEC, with a nuclear treaty and the US's war on Iran among the priority discussion topics.",
+      "source": "Al Jazeera",
+      "url": "https://www.aljazeera.com/news/2026/11/14/trump-xi-putin-trilateral-meeting-at-apec-what-to-expect?traffic_source=rss"
+    }
+  ],
+  "us": [
+    {
+      "summary": "The Federal Aviation Administration lifted a nationwide ground stop for all departing flights, which officials later attributed to outdated equipment that became overloaded.",
+      "source": "NPR National",
+      "url": "https://www.npr.org/2026/11/13/nx-s1-6040403/faa-nationwide-groundstop-airports"
+    },
+    {
+      "summary": "More than 30 people were injured, though no fatalities occurred, after a tanker collided with a cruise ship in the Port of New Orleans.",
+      "source": "NPR National",
+      "url": "https://www.npr.org/2026/11/14/nx-s1-6040430/over-30-injured-no-fatalities-after-tanker-strikes-cruise-ship-in-new-orleans"
+    },
+    {
+      "summary": "In North Dakota, lawmakers from both parties collaborated to cap insulin prices for patients, joining a national trend to protect individuals with diabetes.",
+      "source": "NPR Health",
+      "url": "https://www.npr.org/2026/11/13/nx-s1-6032717/diabetes-insurance-insulin-price"
+    }
+  ],
+  "science": [
+    {
+      "summary": "The James Webb Space Telescope has discovered ice that predates the star it orbits, providing new insights into planetary building materials.",
+      "source": "Ars Technica",
+      "url": "https://arstechnica.com/science/2026/11/james-webb-telescope-finds-ice-older-than-the-star-it-orbits/"
+    },
+    {
+      "summary": "A new wrist device developed by researchers in Nottingham is proving life-changing for individuals with Tourette syndrome by helping to manage tics.",
+      "source": "BBC Health",
+      "url": "https://www.bbc.co.uk/news/videos/c94gnv5e31gno?at_medium=RSS&at_campaign=rss"
+    }
+  ],
+  "weekly_recap": null,
+  "data_availability": {
+    "sp500": true,
+    "ndx": true,
+    "vix": true,
+    "ten_year": true,
+    "news_world": true,
+    "news_us": true,
+    "news_science": true,
+    "news_business": true,
+    "news_tech": true,
+    "summary": "ok",
+    "breadth": true,
+    "policy": true,
+    "mortgage": true,
+    "watchlist": true
+  }
+}

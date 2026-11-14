@@ -1,47 +1,47 @@
 {
-  "generated_at": "2026-11-13T08:29:18.175919-07:00",
-  "date": "2026-11-13",
+  "generated_at": "2026-11-14T07:16:43.366542-07:00",
+  "date": "2026-11-14",
   "tldr": [
-    "Global Microsoft services, including Teams and Outlook, experienced an outage that stretched into a second day, impacting users worldwide.",
-    "The 10-year Treasury yield rose as October's producer price index data indicated higher wholesale prices, fueling expectations of a potential Federal Reserve rate hike.",
-    "Nvidia's CEO, Jensen Huang, resigned amid a scandal, leading to concerns about the company's AI dominance and future leadership."
+    "Microsoft services were fully restored after a global outage impacted governments, businesses, and public services worldwide.",
+    "A nationwide ground stop for flights in the United States was lifted after several hours, with officials blaming outdated equipment for the disruption.",
+    "Green turtles have been reclassified from endangered to 'least concern' status in global conservation rankings."
   ],
   "market": {
     "sp500": {
-      "value": 7592.4,
-      "change": -26.98,
-      "asof": "2026-11-12"
+      "value": 7561.67,
+      "change": -30.73,
+      "asof": "2026-11-13"
     },
     "ndx": {
-      "value": 25366.09,
-      "change": -100.1,
-      "asof": "2026-11-12"
+      "value": 25136.27,
+      "change": -229.82,
+      "asof": "2026-11-13"
     },
-    "why": "The stock market indices closed lower, with the Nasdaq Composite notably down, influenced by the latest producer price index report indicating rising wholesale prices. This was compounded by significant news in the tech sector, including a global Microsoft outage affecting key services and the resignation of Nvidia CEO Jensen Huang amidst a scandal, raising questions about the company's future in AI."
+    "why": "A widespread tech selloff, particularly affecting AI stocks, contributed to the decline in both the S&P 500 and Nasdaq Composite, with chipmaker Nvidia experiencing significant losses."
   },
   "yield_10y": {
-    "value": 5.1,
-    "change": 0.11,
-    "asof": "2026-11-12",
-    "why": "The 10-year Treasury yield increased to 5.1%, driven by higher-than-expected producer price index data for October and strengthening investor expectations for a potential Federal Reserve rate hike in December as the central bank addresses inflation."
+    "value": 5.15,
+    "change": 0.05,
+    "asof": "2026-11-13",
+    "why": "The provided articles do not support a specific reason for the 10-year Treasury yield's movement."
   },
   "vix": {
-    "value": 18.7,
-    "change": 1.21,
-    "asof": "2026-11-12",
-    "why": "The VIX increased, indicating a rise in market volatility, likely in response to the latest inflation data and its implications for Federal Reserve policy, as well as the significant news from the tech sector regarding Microsoft's global outage and Nvidia's CEO resignation."
+    "value": 19.3,
+    "change": 0.6,
+    "asof": "2026-11-13",
+    "why": "The provided articles do not support a specific reason for the VIX's movement."
   },
   "breadth": {
     "sp500": {
-      "value": 61.8,
-      "asof": "2026-11-12",
+      "value": 63.6,
+      "asof": "2026-11-13",
       "status": "healthy",
       "matched": 500,
       "stale": false
     },
     "ndx100": {
-      "value": 55.2,
-      "asof": "2026-11-12",
+      "value": 56.2,
+      "asof": "2026-11-13",
       "status": "healthy",
       "matched": 96,
       "stale": false
@@ -51,47 +51,47 @@
     {
       "symbol": "SOXL",
       "what": "3x semiconductors",
-      "value": 65.53,
-      "day_move": -0.76,
-      "asof": "2026-11-12",
-      "rsi": 39.9,
+      "value": 58.32,
+      "day_move": -11.0,
+      "asof": "2026-11-13",
+      "rsi": 37.4,
       "rsi_zone": "neutral",
       "low": 40.87,
       "high": 107.35,
-      "band_pct": 37.1,
+      "band_pct": 26.2,
       "zone": "mid",
       "action": "hold",
-      "read": "Mid-range - 37% of the way up its 1-month band."
+      "read": "Mid-range - 26% of the way up its 1-month band. Big session: down 11.0% in a day."
     },
     {
       "symbol": "SPXL",
       "what": "3x S&P 500",
-      "value": 268.38,
-      "day_move": -1.03,
-      "asof": "2026-11-12",
-      "rsi": 46.7,
+      "value": 265.1,
+      "day_move": -1.22,
+      "asof": "2026-11-13",
+      "rsi": 45.2,
       "rsi_zone": "neutral",
       "low": 244.98,
       "high": 290.87,
-      "band_pct": 51.0,
+      "band_pct": 43.8,
       "zone": "mid",
       "action": "hold",
-      "read": "Mid-range - 51% of the way up its 1-month band."
+      "read": "Mid-range - 44% of the way up its 1-month band."
     },
     {
       "symbol": "TQQQ",
       "what": "3x Nasdaq-100",
-      "value": 59.88,
-      "day_move": -0.93,
-      "asof": "2026-11-12",
-      "rsi": 42.7,
+      "value": 57.68,
+      "day_move": -3.67,
+      "asof": "2026-11-13",
+      "rsi": 40.3,
       "rsi_zone": "neutral",
       "low": 50.47,
-      "high": 73.82,
-      "band_pct": 40.3,
+      "high": 72.61,
+      "band_pct": 32.6,
       "zone": "mid",
       "action": "hold",
-      "read": "Mid-range - 40% of the way up its 1-month band."
+      "read": "Mid-range - 33% of the way up its 1-month band."
     }
   ],
   "watchlist_missing": [],
@@ -99,7 +99,7 @@
     "value": 7.11,
     "change": -0.07,
     "asof": "2026-11-12",
-    "why": "The 30-year fixed mortgage rate, as reported in a weekly survey released on 2026-11-12, decreased slightly to 7.11%. This movement typically tracks the direction of the 10-year Treasury yield over recent days, rather than a single day's movement, with the 10-year yield having risen on 2026-11-12."
+    "why": "The provided articles do not support a specific reason for the direction of the 30-year fixed mortgage rate, which is based on a weekly survey released on November 12, 2026."
   },
   "policy": [],
   "policy_upcoming": [
@@ -147,65 +147,65 @@
   ],
   "tech": [
     {
-      "summary": "OpenAI has launched ChatGPT Wallet, allowing its 'dots' AI agents to make purchases for users through partnerships with American Express, Mastercard, and Visa, enabling cardholders to retain existing credit card rewards.",
-      "source": "CNBC",
-      "url": "https://www.cnbc.com/2026/11/13/openai-chatgpt-wallet-dot-purchases.html"
+      "summary": "OpenAI launched ChatGPT Wallet for Pro subscribers, enabling AI agents to make purchases using eligible US-issued cards.",
+      "source": "The Verge",
+      "url": "https://www.theverge.com/ai-artificial-intelligence/1033425/openai-chatgpt-wallet"
     },
     {
-      "summary": "Microsoft is experiencing a global outage affecting services including Teams and Outlook, which the company has attributed to failed server health checks rather than malicious cyber-activity.",
-      "source": "Ars Technica",
-      "url": "https://arstechnica.com/tech-policy/2026/11/microsoft-blames-failed-server-health-checks-not-hackers-for-global-outage/"
-    },
-    {
-      "summary": "SpaceX's Starship is preparing for a historic test flight, as the company works to develop its new massive rocket which could eventually replace NASA's primary transport to the International Space Station.",
-      "source": "NPR Science",
-      "url": "https://www.npr.org/2026/11/13/nx-s1-6039312/spacex-nasa-starship-iss-dragon-falcon-musk"
+      "summary": "Microsoft announced that its services, including Outlook and Teams, have been fully restored after a global outage affected numerous organizations worldwide.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/technology/2026/nov/14/microsoft-says-services-fully-restored-after-global-outage"
     }
   ],
   "world": [
     {
-      "summary": "Iran's Islamic Revolutionary Guard Corps claims to have targeted and destroyed a US early-warning radar in Bahrain, stating it was in retaliation for a US airstrike on a communications tower in Sirik.",
+      "summary": "The Bank of England's chief economist indicated that further interest rate rises are probable in the coming months to address inflation.",
       "source": "Guardian World",
-      "url": "https://www.theguardian.com/world/2026/nov/13/iran-us-radar-bahrain-sirik-hormuz"
+      "url": "https://www.theguardian.com/business/2026/nov/14/interest-rate-rises-inflation-bank-of-england-chief-economist"
     },
     {
-      "summary": "Europe's foreign policy chief, Kaja Kallas, issued a warning to EU leaders against 'walking into the traps that Russia is setting' in proposed Ukraine peace talks, cautioning against Moscow's sequencing of events.",
-      "source": "Guardian World",
-      "url": "https://www.theguardian.com/world/2026/nov/13/russia-ukraine-talks-kaja-kallas-eu-foreign-policy-dublin-summit"
-    },
-    {
-      "summary": "India's capital, New Delhi, has surpassed Pakistan's Lahore to become the world's most polluted city, according to recent reports.",
+      "summary": "Reports suggest Russian casualties in the Ukraine war have reached 450,000, impacting the conflict primarily through older men, poorer regions, and foreign recruits.",
       "source": "Al Jazeera",
-      "url": "https://www.aljazeera.com/video/newsfeed/2026/11/13/delhi-overtakes-lahore-as-worlds-most-polluted-city?traffic_source=rss"
+      "url": "https://www.aljazeera.com/news/2026/11/14/russian-casualties-reach-450000-what-that-means-for-the-ukraine-war?traffic_source=rss"
+    },
+    {
+      "summary": "Ukrainian President Volodymyr Zelenskyy stated that the United States has for the first time proposed Ukraine cede territory in Donbas in exchange for NATO membership.",
+      "source": "BBC World",
+      "url": "https://www.bbc.co.uk/news/articles/cwvg2l312ylqo?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "summary": "A trilateral meeting between leaders from the US, China, and Russia is anticipated at APEC, with a nuclear treaty and the US's war on Iran among the priority discussion topics.",
+      "source": "Al Jazeera",
+      "url": "https://www.aljazeera.com/news/2026/11/14/trump-xi-putin-trilateral-meeting-at-apec-what-to-expect?traffic_source=rss"
     }
   ],
   "us": [
     {
-      "summary": "An investigation is currently underway in Brooklyn, New York, following an apartment building collapse into a nearby construction site that resulted in the deaths of at least eight people.",
+      "summary": "The Federal Aviation Administration lifted a nationwide ground stop for all departing flights, which officials later attributed to outdated equipment that became overloaded.",
       "source": "NPR National",
-      "url": "https://www.npr.org/2026/11/13/nx-s1-6038959/investigation-into-what-cause-deadly-brooklyn-building-collapse-continues"
+      "url": "https://www.npr.org/2026/11/13/nx-s1-6040403/faa-nationwide-groundstop-airports"
     },
     {
-      "summary": "Cindy Holscher won the Kansas gubernatorial race, securing the governor's office for the Democrats in a state that has largely favored the Republican party in other statewide elections.",
+      "summary": "More than 30 people were injured, though no fatalities occurred, after a tanker collided with a cruise ship in the Port of New Orleans.",
       "source": "NPR National",
-      "url": "https://www.npr.org/2026/11/12/g-s1-151239/kansas-governor-midterms-holscher-masterson"
+      "url": "https://www.npr.org/2026/11/14/nx-s1-6040430/over-30-injured-no-fatalities-after-tanker-strikes-cruise-ship-in-new-orleans"
     },
     {
-      "summary": "The Trump administration has begun hiring debt collectors for the first time in six years to pursue defaulted student-loan borrowers, with the Treasury Department proposing to pay these collectors less than in the past.",
-      "source": "MarketWatch",
-      "url": "https://www.marketwatch.com/story/trump-administration-is-hiring-debt-collectors-for-first-time-in-6-years-to-go-after-defaulted-student-loan-borrowers-8bae13ad?mod=mw_rss_topstories"
+      "summary": "In North Dakota, lawmakers from both parties collaborated to cap insulin prices for patients, joining a national trend to protect individuals with diabetes.",
+      "source": "NPR Health",
+      "url": "https://www.npr.org/2026/11/13/nx-s1-6032717/diabetes-insurance-insulin-price"
     }
   ],
   "science": [
     {
-      "summary": "A study involving nearly 10,000 people found that the antidepressant escitalopram was most effective at preventing depression symptoms from returning, though the differences in effectiveness among various medications were generally small.",
-      "source": "BBC Health",
-      "url": "https://www.bbc.co.uk/news/articles/cv62yyng00jyo?at_medium=RSS&at_campaign=rss"
+      "summary": "The James Webb Space Telescope has discovered ice that predates the star it orbits, providing new insights into planetary building materials.",
+      "source": "Ars Technica",
+      "url": "https://arstechnica.com/science/2026/11/james-webb-telescope-finds-ice-older-than-the-star-it-orbits/"
     },
     {
-      "summary": "A regulator's report indicates that trainee doctors involved in delivering babies are more likely to experience overwork and burnout compared to other medical specialties, potentially posing risks to maternity patients.",
+      "summary": "A new wrist device developed by researchers in Nottingham is proving life-changing for individuals with Tourette syndrome by helping to manage tics.",
       "source": "BBC Health",
-      "url": "https://www.bbc.co.uk/news/articles/ckx28le8dv9wo?at_medium=RSS&at_campaign=rss"
+      "url": "https://www.bbc.co.uk/news/videos/c94gnv5e31gno?at_medium=RSS&at_campaign=rss"
     }
   ],
   "weekly_recap": null,
