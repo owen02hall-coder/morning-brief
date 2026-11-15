@@ -1,22 +1,6 @@
 {
-  "generated_at": "2026-11-14T07:16:43.366542-07:00",
+  "generated_at": "2026-11-15T07:50:26.624571-07:00",
   "lessons": [
-    {
-      "id": "2026-09-13-burn",
-      "date": "2026-09-13",
-      "domain": "Health and emergencies",
-      "title": "Identifying Burn Severity",
-      "hook": "Burns are a common injury that can happen unexpectedly in your home, especially in the kitchen, and knowing how severe one is can guide your next steps.",
-      "quick": "When skin or other tissues are damaged by heat, electricity, chemicals, or even friction, it's called a burn. The most noticeable burns affect only the superficial skin layers, appearing red without blisters, and the pain typically lasts about three days. These are often called first-degree burns. If the injury extends into the underlying skin layer, blisters frequently appear, and these burns are often very painful, sometimes taking up to eight weeks to heal and potentially leaving a scar. A burn that damages all layers of the skin, known as a full-thickness or third-degree burn, might surprisingly involve no pain, and the affected area can feel stiff. Even more severe, a fourth-degree burn reaches deeper tissues like muscle or bone, often turning the area black and frequently leading to the loss of the burned part.",
-      "more": "Recognizing the signs of a serious burn is crucial because healing for full-thickness burns usually does not happen on its own, and deeper burns often require surgical treatments, like skin grafting. Immediately after a burn, cooling the affected area with tap water can help reduce pain and limit damage; however, avoid prolonged cooling which might lead to a low body temperature. For burns with blisters, it's generally considered reasonable to leave small blisters intact and drain large ones, though guidance on managing them is not entirely clear. Many burns, particularly thermal ones from hot fluids or objects, happen at home, often in domestic kitchens involving stoves or hot liquids.",
-      "deep": "The primary complication with burns, especially more severe ones, is infection, so keeping the area clean is important. Beyond the visible skin damage, certain signs can indicate a more critical situation, such as burns around the mouth or singed hair inside the nose, which may suggest an airway injury. More concerning symptoms include shortness of breath, hoarseness, stridor, or wheezing, and these should prompt immediate attention. While significant burns can be fatal, and extensive burns often require substantial intravenous fluids due to fluid leakage and swelling, burns are generally preventable. Taking care with common risks in the home, like hot fluids and cooking appliances, can help avoid many of these injuries.",
-      "takeaway": "Carefully observe any burn for signs like blisters, stiffness, or blackening, and if there are symptoms of airway distress or the burn is deep, seek emergency medical attention.",
-      "source": {
-        "title": "Burn",
-        "url": "https://en.wikipedia.org/wiki/Burn"
-      },
-      "audio": {}
-    },
     {
       "id": "2026-09-14-informal-fallacy",
       "date": "2026-09-14",
@@ -639,11 +623,7 @@
         "title": "Roof",
         "url": "https://en.wikipedia.org/wiki/Roof"
       },
-      "audio": {
-        "quick": "lessons/2026-10-24-roof-quick.mp3",
-        "more": "lessons/2026-10-24-roof-more.mp3",
-        "deep": "lessons/2026-10-24-roof-deep.mp3"
-      }
+      "audio": {}
     },
     {
       "id": "2026-10-25-bone-fracture",
@@ -1043,6 +1023,26 @@
         "quick": "lessons/2026-11-14-antifreeze-quick.mp3",
         "more": "lessons/2026-11-14-antifreeze-more.mp3",
         "deep": "lessons/2026-11-14-antifreeze-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-11-15-seizure",
+      "date": "2026-11-15",
+      "domain": "Health and emergencies",
+      "title": "Recognize a Seizure Emergency",
+      "hook": "Knowing when a seizure is serious can guide you to act appropriately when it matters most.",
+      "quick": "A seizure is a sudden disruption of brain activity, and it can result in a wide range of changes in behavior, awareness, or movement. They can look very different from person to person; some seizures are subtle, like brief lapses in attention, while others cause generalized convulsions with a loss of consciousness. Most seizures last less than two minutes. However, if a seizure goes on for longer than five minutes, or if a person has multiple seizures without fully recovering their awareness between episodes, it is considered a medical emergency. In such a critical situation, immediate attention from emergency services is crucial to ensure safety and proper care.",
+      "more": "During a seizure, someone might experience changes in movement such as muscle stiffening or rhythmic jerking. They might have sudden muscle jerks or a sudden loss of muscle tone, causing them to drop. Beyond physical symptoms, a seizure can also involve tingling sensations, seeing visual phenomena, or even changes in heart rate and breathing. Some people who experience focal seizures, which affect a specific area of the brain, may first notice an \"aura.\" This is a subjective sensation like an unusual smell, a sudden emotional shift, or a feeling of deja vu, acting as a warning before the seizure fully manifests.",
+      "deep": "Seizures are classified based on whether they are provoked or unprovoked. Provoked seizures have a known and often temporary cause, such as a high fever, an acute head injury, or an imbalance in the body's metabolism. For instance, dehydration can specifically trigger seizures by changing the electrolyte balances within the body. These are sometimes called acute symptomatic seizures because they happen closely following an injury or specific event. In contrast, unprovoked seizures occur when no immediate trigger is identified. Understanding these potential underlying causes can sometimes help in long-term management, but the immediate priority when witnessing a seizure is always to address the event itself and its duration.",
+      "takeaway": "Call emergency services immediately if a seizure lasts longer than five minutes or if someone has multiple seizures without regaining full awareness between them.",
+      "source": {
+        "title": "Seizure",
+        "url": "https://en.wikipedia.org/wiki/Seizure"
+      },
+      "audio": {
+        "quick": "lessons/2026-11-15-seizure-quick.mp3",
+        "more": "lessons/2026-11-15-seizure-more.mp3",
+        "deep": "lessons/2026-11-15-seizure-deep.mp3"
       }
     }
   ],

@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-11-14T07:16:43.366542-07:00",
-  "date": "2026-11-14",
+  "generated_at": "2026-11-15T07:50:26.624571-07:00",
+  "date": "2026-11-15",
   "tldr": [
-    "Microsoft services were fully restored after a global outage impacted governments, businesses, and public services worldwide.",
-    "A nationwide ground stop for flights in the United States was lifted after several hours, with officials blaming outdated equipment for the disruption.",
-    "Green turtles have been reclassified from endangered to 'least concern' status in global conservation rankings."
+    "SpaceX achieved a significant milestone by successfully catching its Starship rocket with its 'Mechazilla' launch tower after orbit.",
+    "Global health authorities have indicated that the United States has lost its status as a country where measles is eliminated.",
+    "A nationwide FAA ground stop for flights in the United States was attributed to an equipment issue during a telecommunications network upgrade."
   ],
   "market": {
     "sp500": {
@@ -17,19 +17,19 @@
       "change": -229.82,
       "asof": "2026-11-13"
     },
-    "why": "A widespread tech selloff, particularly affecting AI stocks, contributed to the decline in both the S&P 500 and Nasdaq Composite, with chipmaker Nvidia experiencing significant losses."
+    "why": "Equity markets closed lower, with both the S&P 500 and Nasdaq Composite declining, amidst turbulence in the AI trade sector and ongoing leadership challenges at Nvidia."
   },
   "yield_10y": {
     "value": 5.15,
     "change": 0.05,
     "asof": "2026-11-13",
-    "why": "The provided articles do not support a specific reason for the 10-year Treasury yield's movement."
+    "why": "The 10-year Treasury yield rose on Friday, driven by October's producer price index data which showed higher wholesale prices, leading to increased expectations of a potential Federal Reserve rate hike."
   },
   "vix": {
     "value": 19.3,
     "change": 0.6,
     "asof": "2026-11-13",
-    "why": "The provided articles do not support a specific reason for the VIX's movement."
+    "why": "The VIX, an index of market volatility, increased, reflecting a general unease in the equity markets as they experienced declines."
   },
   "breadth": {
     "sp500": {
@@ -99,7 +99,7 @@
     "value": 7.11,
     "change": -0.07,
     "asof": "2026-11-12",
-    "why": "The provided articles do not support a specific reason for the direction of the 30-year fixed mortgage rate, which is based on a weekly survey released on November 12, 2026."
+    "why": "The weekly 30-year fixed mortgage rate, released on November 12, decreased slightly. The provided articles do not offer a specific reason for this particular weekly movement, though mortgage rates generally track trends in the 10-year Treasury yield over several days."
   },
   "policy": [],
   "policy_upcoming": [
@@ -147,68 +147,73 @@
   ],
   "tech": [
     {
-      "summary": "OpenAI launched ChatGPT Wallet for Pro subscribers, enabling AI agents to make purchases using eligible US-issued cards.",
+      "summary": "SpaceX successfully executed the first \"chopstick\" catch of its Starship rocket with the \"Mechazilla\" launch and catch tower after its Flight 15 orbital mission.",
       "source": "The Verge",
-      "url": "https://www.theverge.com/ai-artificial-intelligence/1033425/openai-chatgpt-wallet"
+      "url": "https://www.theverge.com/science/1033930/spacex-chopstick-starship-catch"
     },
     {
-      "summary": "Microsoft announced that its services, including Outlook and Teams, have been fully restored after a global outage affected numerous organizations worldwide.",
-      "source": "Guardian World",
-      "url": "https://www.theguardian.com/technology/2026/nov/14/microsoft-says-services-fully-restored-after-global-outage"
+      "summary": "A court has denied a motion to dismiss a price-fixing case involving DRAM, allowing the lawsuit against companies like Samsung, SK Hynix, and Micron to proceed.",
+      "source": "Hacker News",
+      "url": "https://litnews.ai/articles/garciaguirre-samsung-sk-hynix-micron-dram-conspiracy-suit-survives-dismissal"
+    },
+    {
+      "summary": "Security researchers have found that 'Lovable apps' exposed passport details and over 200,000 private messages, highlighting significant data vulnerabilities.",
+      "source": "Hacker News",
+      "url": "https://www.crissyfield.de/research/lovable-en/"
     }
   ],
   "world": [
     {
-      "summary": "The Bank of England's chief economist indicated that further interest rate rises are probable in the coming months to address inflation.",
-      "source": "Guardian World",
-      "url": "https://www.theguardian.com/business/2026/nov/14/interest-rate-rises-inflation-bank-of-england-chief-economist"
-    },
-    {
-      "summary": "Reports suggest Russian casualties in the Ukraine war have reached 450,000, impacting the conflict primarily through older men, poorer regions, and foreign recruits.",
-      "source": "Al Jazeera",
-      "url": "https://www.aljazeera.com/news/2026/11/14/russian-casualties-reach-450000-what-that-means-for-the-ukraine-war?traffic_source=rss"
-    },
-    {
-      "summary": "Ukrainian President Volodymyr Zelenskyy stated that the United States has for the first time proposed Ukraine cede territory in Donbas in exchange for NATO membership.",
+      "summary": "Iran launched a drone attack targeting a US military base in Bahrain, marking the second such incident in three days amid a standoff with the US over the Strait of Hormuz.",
       "source": "BBC World",
-      "url": "https://www.bbc.co.uk/news/articles/cwvg2l312ylqo?at_medium=RSS&at_campaign=rss"
+      "url": "https://www.bbc.co.uk/news/articles/cqn4e2py48kwo?at_medium=RSS&at_campaign=rss"
     },
     {
-      "summary": "A trilateral meeting between leaders from the US, China, and Russia is anticipated at APEC, with a nuclear treaty and the US's war on Iran among the priority discussion topics.",
+      "summary": "Families in Gaza are now able to bury the remains of 69 Palestinians that have been recovered in the northern part of the region, after being trapped under rubble for years.",
       "source": "Al Jazeera",
-      "url": "https://www.aljazeera.com/news/2026/11/14/trump-xi-putin-trilateral-meeting-at-apec-what-to-expect?traffic_source=rss"
+      "url": "https://www.aljazeera.com/features/2026/11/15/gaza-families-bury-bodies-of-loved-ones-trapped-for-years-under-rubble?traffic_source=rss"
+    },
+    {
+      "summary": "Aid agencies are struggling to provide essential services, including food, medical care, and shelter, to more than 50,000 Ethiopian refugees in Kenya.",
+      "source": "Al Jazeera",
+      "url": "https://www.aljazeera.com/video/newsfeed/2026/11/15/aid-agencies-struggle-to-help-more-than-50000-ethiopian-refugees-in-kenya?traffic_source=rss"
+    },
+    {
+      "summary": "Ukrainian President Zelenskyy has stated that restrictions on SpaceX's Starshield services are hindering Ukraine's defense against Russia's energy attacks.",
+      "source": "Al Jazeera",
+      "url": "https://www.aljazeera.com/news/2026/11/15/starshield-restrictions-help-russias-energy-attacks-on-ukraine-zelenskyy?traffic_source=rss"
     }
   ],
   "us": [
     {
-      "summary": "The Federal Aviation Administration lifted a nationwide ground stop for all departing flights, which officials later attributed to outdated equipment that became overloaded.",
+      "summary": "A nationwide ground stop for flights in the United States was caused by an \"equipment issue\" during a contractor's upgrade to an older telecommunications system at a remote FAA facility, according to Transportation Secretary Sean Duffy.",
       "source": "NPR National",
-      "url": "https://www.npr.org/2026/11/13/nx-s1-6040403/faa-nationwide-groundstop-airports"
+      "url": "https://www.npr.org/2026/11/14/nx-s1-6040952/faa-ground-stop-airplane-travel"
     },
     {
-      "summary": "More than 30 people were injured, though no fatalities occurred, after a tanker collided with a cruise ship in the Port of New Orleans.",
+      "summary": "New Mexico became the first state to offer free childcare to every eligible family a year ago, with initial outcomes showing what has worked and what has not in its implementation.",
       "source": "NPR National",
-      "url": "https://www.npr.org/2026/11/14/nx-s1-6040430/over-30-injured-no-fatalities-after-tanker-strikes-cruise-ship-in-new-orleans"
+      "url": "https://www.npr.org/2026/11/15/nx-s1-6040194/new-mexico-free-universal-childcare-families"
     },
     {
-      "summary": "In North Dakota, lawmakers from both parties collaborated to cap insulin prices for patients, joining a national trend to protect individuals with diabetes.",
-      "source": "NPR Health",
-      "url": "https://www.npr.org/2026/11/13/nx-s1-6032717/diabetes-insurance-insulin-price"
+      "summary": "The Port of New Orleans has filed a $1 million lawsuit requesting the seizure and sale of a tanker involved in a collision with a cruise ship that resulted in over 30 injuries.",
+      "source": "BBC World",
+      "url": "https://www.bbc.co.uk/news/articles/cwe89y2r5j20o?at_medium=RSS&at_campaign=rss"
     }
   ],
   "science": [
     {
-      "summary": "The James Webb Space Telescope has discovered ice that predates the star it orbits, providing new insights into planetary building materials.",
-      "source": "Ars Technica",
-      "url": "https://arstechnica.com/science/2026/11/james-webb-telescope-finds-ice-older-than-the-star-it-orbits/"
+      "summary": "Global health authorities, specifically researchers with knowledge of the Pan American Health Organization's deliberations, state that the U.S. has lost its measles elimination status.",
+      "source": "NPR Health",
+      "url": "https://www.npr.org/2026/11/14/nx-s1-6041119/us-measles-elimination-status-vaccines-cdc-paho"
     },
     {
-      "summary": "A new wrist device developed by researchers in Nottingham is proving life-changing for individuals with Tourette syndrome by helping to manage tics.",
-      "source": "BBC Health",
-      "url": "https://www.bbc.co.uk/news/videos/c94gnv5e31gno?at_medium=RSS&at_campaign=rss"
+      "summary": "New guidelines designed to address the U.S. organ shortage through a retrieval procedure that maintains blood flow to organs are being met with ethical concerns from bioethicists.",
+      "source": "NPR Science",
+      "url": "https://www.npr.org/2026/11/14/nx-s1-6032604/organ-transplant-donor-dead-ethics"
     }
   ],
-  "weekly_recap": null,
+  "weekly_recap": "This week saw significant developments across several fronts. Early in the week, reports indicated a decrease in homelessness in the U.S. for the second consecutive year, while Israel's president selected Gadi Eisenkot to attempt forming a new government. Nvidia faced an internal investigation regarding its CEO, which impacted the company's stock, and France accused Iran of cyberattacks. US-led talks regarding the Russia-Ukraine conflict were described as productive, though Ukraine later reported new disruptions to its Starlink service. California voters rejected a proposal for a billionaire wealth tax, and Spain experienced a general strike over housing costs. Towards the end of the week, global Microsoft services, including Teams and Outlook, experienced a widespread outage. The 10-year Treasury yield rose on Friday following producer price index data, fueling expectations of a potential Federal Reserve rate hike. The week concluded with Microsoft services being fully restored and a nationwide FAA ground stop lifted, attributed to outdated equipment.",
   "data_availability": {
     "sp500": true,
     "ndx": true,
