@@ -71,6 +71,18 @@ section: one deduplicated summary across all of them, not one summary per newsle
 promotional mail (Delta, Priceline, H&M and so on). Step zero is subscribing. A dedicated address
 or a `+briefing` alias (`you+briefing@gmail.com`) makes filtering trivial.
 
+**Update 2026-11-16:** subscribed. Confirmed sender addresses (from the welcome emails):
+
+| Newsletter | Sender | Cadence |
+|---|---|---|
+| Exec Sum (Litquidity) | `news@execsum.co` | Weekday mornings, excluding market holidays |
+| Short Squeez | `press@shortsqueez.co` | Weekday mornings |
+| WSJ morning newsletter | not yet arrived | — |
+| Dealhook | not yet arrived | — |
+
+Note that `news@execsum.co` also sends login codes (subject "... is your login code"). The code-side
+filter has to skip those, so allowlisting the sender alone is not enough.
+
 ### How to get email into a headless cron job
 Claude's Gmail connector works in a chat session, but it is **not** available to a GitHub Actions
 job. The pipeline needs its own access. Options, simplest first:
