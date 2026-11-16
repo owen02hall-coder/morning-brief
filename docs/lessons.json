@@ -1,22 +1,6 @@
 {
-  "generated_at": "2026-11-15T07:50:26.624571-07:00",
+  "generated_at": "2026-11-16T10:08:44.143001-07:00",
   "lessons": [
-    {
-      "id": "2026-09-14-informal-fallacy",
-      "date": "2026-09-14",
-      "domain": "Thinking and people",
-      "title": "Spotting Hidden Flaws in Everyday Arguments",
-      "hook": "Misleading arguments can trick you into making poor decisions by appearing correct on the surface.",
-      "quick": "Incorrect arguments expressed in everyday language can seem perfectly sound, even though they contain hidden errors. These errors don't necessarily come from the structure of how someone says something, but from the actual content of their message or the situation where it's said. This deceptive appearance makes them attractive, often leading people to accept them without realizing their flaws. Often, these misleading arguments depend on words that are unclear, phrases that are too general, or assumptions that aren't stated openly. Because they look correct, these arguments can lead us to conclusions that aren't actually supported by the information given, potentially influencing our beliefs or choices in ways we wouldn't intend if we saw the flaw. Recognizing these subtle deceptions helps us think more clearly and make better judgments in daily life.",
-      "more": "The underlying problem is that an argument's foundation, its premises, can be shaky, or even if those premises seem solid, they might not genuinely support the conclusion being made. For an argument to be sound, its statements or reasons must truly lead to the final point it's trying to make. Many of these flawed arguments rely on unstated assumptions that are simply taken for granted, or use language in a way that shifts its meaning, making a weak link between the initial points and the conclusion. When we encounter these, they often present themselves as compelling logic, drawing us in with their apparent validity. However, their purpose isn't to expand our knowledge or build a bridge from what we know to what we don't; rather, they can steer us towards unjustified beliefs. Being able to spot when the stated reasons don't connect properly to the outcome is key.",
-      "deep": "These misleading arguments are distinct from simple mistakes made out of carelessness, possessing an 'alluring element' that actively seduces people into committing or accepting the error. This psychological aspect explains why they are so commonly used and believed. While arguments are made of premises leading to a conclusion, the flaw in these cases isn't just that the conclusion might be false; it's that the premises, even if true, don't logically justify that conclusion. Imagine building a house: the foundation, or premises, might seem fine, but if the house itself, the conclusion, isn't properly attached or designed to stand on that specific foundation, it will still fall. The study of these helps us evaluate arguments critically, allowing us to distinguish between truly supportive reasoning and arguments that merely appear to be so, particularly when language is used ambiguously or a critical piece of information is left unsaid.",
-      "takeaway": "Before accepting an argument, identify its main conclusion and check if the given reasons directly support it without relying on unstated assumptions or vague language.",
-      "source": {
-        "title": "Informal fallacy",
-        "url": "https://en.wikipedia.org/wiki/Informal_fallacy"
-      },
-      "audio": {}
-    },
     {
       "id": "2026-09-15-tax-bracket",
       "date": "2026-09-15",
@@ -639,11 +623,7 @@
         "title": "Bone fracture",
         "url": "https://en.wikipedia.org/wiki/Bone_fracture"
       },
-      "audio": {
-        "quick": "lessons/2026-10-25-bone-fracture-quick.mp3",
-        "more": "lessons/2026-10-25-bone-fracture-more.mp3",
-        "deep": "lessons/2026-10-25-bone-fracture-deep.mp3"
-      }
+      "audio": {}
     },
     {
       "id": "2026-10-26-statistical-literacy",
@@ -1043,6 +1023,26 @@
         "quick": "lessons/2026-11-15-seizure-quick.mp3",
         "more": "lessons/2026-11-15-seizure-more.mp3",
         "deep": "lessons/2026-11-15-seizure-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-11-16-loss-aversion",
+      "date": "2026-11-16",
+      "domain": "Thinking and people",
+      "title": "How Fearing Loss Changes Your Choices",
+      "hook": "Our natural tendency to dislike losing something can make us miss out on better opportunities or cling to what we have, even when it's not ideal.",
+      "quick": "Many decisions we make aren't purely logical because our emotions about potential losses are so strong. This is due to a cognitive bias called loss aversion, where the feeling of losing something is much more intense than the satisfaction of gaining something of equal value. For instance, a situation framed as a loss feels worse than if it were framed as a gain, even if the actual outcome is the same. This bias can make us hesitant to change or take certain actions, as the perceived pain of giving something up outweighs the potential joy of what we might receive in return, causing us to act against our own best interests.",
+      "more": "In fact, losses tend to be treated as if they were twice as large as an equivalent gain, which heavily influences our behavior. This means we often value something we already own more highly than an identical item we don't possess, a phenomenon known as the endowment effect. This bias is why marketing often uses trial periods or rebates; once you've had something, giving it up feels like a loss, making you more likely to keep it. Whether a transaction is presented as avoiding a surcharge or receiving a discount, even for the same price change, it can significantly affect consumer behavior because of how our minds process gains versus losses.",
+      "deep": "Loss aversion is a cornerstone of prospect theory, which explores how people make decisions when facing risk, often leading to choices that aren't optimal. It shows that we don't simply look at the absolute value of an outcome; instead, we evaluate potential gains and losses relative to a specific reference point, like our current wealth. For example, people might choose a guaranteed smaller sum over a riskier option with a higher potential payoff, even if the risky option has a much greater expected value, because the mere possibility of getting nothing looms too large. This happens because the prospect of losing, even a small chance of getting zero, feels more painful than the satisfaction of a larger, but less certain, gain.",
+      "takeaway": "When making a decision that involves giving something up or risking a potential loss, consciously consider the full value of what you stand to gain, weighing it objectively against the potential downsides.",
+      "source": {
+        "title": "Loss aversion",
+        "url": "https://en.wikipedia.org/wiki/Loss_aversion"
+      },
+      "audio": {
+        "quick": "lessons/2026-11-16-loss-aversion-quick.mp3",
+        "more": "lessons/2026-11-16-loss-aversion-more.mp3",
+        "deep": "lessons/2026-11-16-loss-aversion-deep.mp3"
       }
     }
   ],
