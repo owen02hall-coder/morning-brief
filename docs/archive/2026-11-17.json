@@ -1,0 +1,233 @@
+{
+  "generated_at": "2026-11-17T09:56:45.905090-07:00",
+  "date": "2026-11-17",
+  "tldr": [
+    "The US has officially lost its measles elimination status for the first time in 26 years, amid a significant outbreak.",
+    "Nvidia's stock experienced a decline as investors reacted to former CEO Jensen Huang's resignation and subsequent indication of willingness to return.",
+    "Ukraine reported critical damage to the Kerch bridge and its president urged allies for expedited air defense deliveries as Russia intensified attacks."
+  ],
+  "market": {
+    "sp500": {
+      "value": 7416.59,
+      "change": -145.08,
+      "asof": "2026-11-16"
+    },
+    "ndx": {
+      "value": 24509.76,
+      "change": -626.51,
+      "asof": "2026-11-16"
+    },
+    "why": "The S&P 500 and Nasdaq Composite closed lower, primarily influenced by investor concerns surrounding Nvidia. The company's stock fell ahead of earnings amid the fallout from former CEO Jensen Huang's resignation, with some investors suggesting AI neocloud stocks could be in trouble."
+  },
+  "yield_10y": {
+    "value": 5.12,
+    "change": -0.03,
+    "asof": "2026-11-16",
+    "why": "The articles do not support a specific reason for the movement in the 10-year Treasury yield."
+  },
+  "vix": {
+    "value": 22.91,
+    "change": 3.61,
+    "asof": "2026-11-16",
+    "why": "The articles do not support a specific reason for the movement in the VIX."
+  },
+  "breadth": {
+    "sp500": {
+      "value": 56.7,
+      "asof": "2026-11-16",
+      "status": "healthy",
+      "matched": 499,
+      "stale": false
+    },
+    "ndx100": {
+      "value": 44.8,
+      "asof": "2026-11-16",
+      "status": "healthy",
+      "matched": 96,
+      "stale": false
+    }
+  },
+  "watchlist": [
+    {
+      "symbol": "SOXL",
+      "what": "3x semiconductors",
+      "value": 48.76,
+      "day_move": -16.39,
+      "asof": "2026-11-16",
+      "rsi": 34.2,
+      "rsi_zone": "neutral",
+      "low": 40.87,
+      "high": 107.35,
+      "band_pct": 11.9,
+      "zone": "mid",
+      "action": "hold",
+      "read": "Mid-range - 12% of the way up its 1-month band. Big session: down 16.4% in a day."
+    },
+    {
+      "symbol": "SPXL",
+      "what": "3x S&P 500",
+      "value": 250.09,
+      "day_move": -5.66,
+      "asof": "2026-11-16",
+      "rsi": 38.9,
+      "rsi_zone": "neutral",
+      "low": 244.98,
+      "high": 290.87,
+      "band_pct": 11.1,
+      "zone": "low",
+      "action": "buy",
+      "read": "Within 4% of its 1-month low."
+    },
+    {
+      "symbol": "TQQQ",
+      "what": "3x Nasdaq-100",
+      "value": 53.03,
+      "day_move": -8.06,
+      "asof": "2026-11-16",
+      "rsi": 35.7,
+      "rsi_zone": "neutral",
+      "low": 50.47,
+      "high": 72.61,
+      "band_pct": 11.6,
+      "zone": "mid",
+      "action": "hold",
+      "read": "Mid-range - 12% of the way up its 1-month band. Big session: down 8.1% in a day."
+    }
+  ],
+  "watchlist_missing": [],
+  "mortgage": {
+    "value": 7.11,
+    "change": -0.07,
+    "asof": "2026-11-12",
+    "why": "The 30-year fixed mortgage rate, reported in a weekly survey, saw a decrease, which generally tracks the direction of the 10-year Treasury yield that also declined recently."
+  },
+  "policy": [],
+  "policy_upcoming": [
+    {
+      "what_happened": "Temporary regulations were issued concerning a new nonrefundable Federal tax credit for qualified contributions to scholarship granting organizations.",
+      "effect": "A new nonrefundable Federal tax credit becomes available for qualified contributions to scholarship granting organizations in 2027 and later taxable years.",
+      "url": "https://www.federalregister.gov/documents/2026/10/02/2026-20264/federal-scholarship-tax-credit",
+      "status": "Final rule",
+      "effective_date": "2026-12-01",
+      "source": "Federal Register"
+    },
+    {
+      "what_happened": "Final rules set forth requirements for price transparency reporting for non-grandfathered group health plans and health insurance issuers.",
+      "effect": "Your employer health insurance plan has new price transparency reporting requirements that become effective on December 7, 2026.",
+      "url": "https://www.federalregister.gov/documents/2026/10/06/2026-20447/transparency-in-coverage",
+      "status": "Final rule",
+      "effective_date": "2026-12-07",
+      "source": "Federal Register"
+    },
+    {
+      "what_happened": "A Utah bill modifies provisions related to the property tax exemption process.",
+      "effect": "Once you own a home, you will have deadlines for filing an application for a property tax exemption with the county board of equalization and for the board to render a decision.",
+      "url": "https://le.utah.gov/~2026/bills/static/SB0236.html",
+      "status": "Signed in Utah",
+      "effective_date": "2027-01-01",
+      "source": "Utah Legislature"
+    },
+    {
+      "what_happened": "A bill amends requirements for health insurance preauthorization in Utah.",
+      "effect": "Your health insurer must make an authorization or adverse preauthorization determination within a defined maximum time.",
+      "url": "https://le.utah.gov/~2026/bills/static/SB0319.html",
+      "status": "Signed in Utah",
+      "effective_date": "2027-01-01",
+      "source": "Utah Legislature"
+    }
+  ],
+  "policy_week": [],
+  "policy_calendar": [
+    {
+      "date": "2026-11-30",
+      "label": "FHFA conforming loan limit for next year \u2014 expected late November",
+      "note": "The cap on a conforming (non-jumbo) mortgage, and the line between a normal rate and a jumbo one. FHFA has announced it in the last days of November each year, and the new limit applies to loans made from January 1.",
+      "url": "https://www.fhfa.gov/data/conforming-loan-limit"
+    }
+  ],
+  "tech": [
+    {
+      "summary": "Jensen Huang, who recently resigned as Nvidia's CEO, has stated he would be willing to return to his role if requested by the company's board of directors.",
+      "source": "The Verge",
+      "url": "https://www.theverge.com/tech/1035420/jensen-huang-nvidia-return-as-ceo-statement"
+    },
+    {
+      "summary": "Google is introducing new privacy options for Gemini, allowing users to opt out of having their conversations used for AI training without losing their chat history.",
+      "source": "Ars Technica",
+      "url": "https://arstechnica.com/ai/2026/11/google-will-let-you-opt-out-of-ai-training-in-gemini-without-losing-your-history/"
+    },
+    {
+      "summary": "A highly classified US national security communications network experienced an outage.",
+      "source": "Hacker News",
+      "url": "https://www.cnn.com/2026/11/17/politics/highly-classified-national-security-communications-network-goes-down"
+    }
+  ],
+  "world": [
+    {
+      "summary": "Ukraine reported critical damage to the Kerch bridge, a significant link to Russian-annexed Crimea, and President Zelenskyy called on allies for urgent air defense systems as Russia continued its missile and drone attacks.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/world/live/2026/nov/17/europe-ukraine-russia-crimea-kerch-bridge-attack-latest-news-updates"
+    },
+    {
+      "summary": "The US has officially lost its measles elimination status, marking the first time in 26 years that the infectious disease is considered endemic in the country, amidst its worst outbreak since 1991.",
+      "source": "BBC World",
+      "url": "https://www.bbc.co.uk/news/articles/c977p71jx0xxo?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "summary": "The UK has imposed sanctions on firms involved in Israeli West Bank settlements, signaling a shift towards a tougher policy stance on actions in the territory.",
+      "source": "BBC World",
+      "url": "https://www.bbc.co.uk/news/articles/cvglr977x3z0o?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "summary": "US President Trump announced new critical minerals agreements during a Quad meeting in Manila, designed to diversify supply chains and reduce reliance on any single foreign supplier.",
+      "source": "Al Jazeera",
+      "url": "https://www.aljazeera.com/news/2026/11/17/trump-announces-critical-minerals-agreements-at-quad-meeting-in-manila?traffic_source=rss"
+    }
+  ],
+  "us": [
+    {
+      "summary": "The Pentagon failed its financial audit for the ninth consecutive year, although an official noted that a majority of its individual units passed for the first time.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/us-news/2026/nov/17/pentagon-fails-audit"
+    },
+    {
+      "summary": "Senator Jack Reed expressed concerns about the Federal Aviation Administration's oversight of contractors following a recent nationwide ground stop, stating the agency needs a comprehensive plan rather than just increased funding.",
+      "source": "NPR National",
+      "url": "https://www.npr.org/2026/11/17/nx-s1-6042514/jack-reed-faa-oversight-ground-stop-funding"
+    },
+    {
+      "summary": "The US has officially lost its measles elimination status, with global health authorities announcing the disease is now continually spreading after 26 years of elimination.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/us-news/2026/nov/17/us-measles-outbreak-elimination-status"
+    }
+  ],
+  "science": [
+    {
+      "summary": "Global health authorities have announced that the US has officially lost its measles elimination status, reversing decades of progress due to record case numbers and lower vaccination rates.",
+      "source": "NPR Health",
+      "url": "https://www.npr.org/2026/11/17/nx-s1-6042892/health-organization-to-announce-that-the-u-s-has-lost-its-measles-elimination-status"
+    },
+    {
+      "summary": "Researchers worldwide have developed a cellular atlas of the basal ganglia, brain structures crucial for learning and motor control, which could provide a foundation for improved treatments for conditions like dementia.",
+      "source": "NPR Science",
+      "url": "https://www.npr.org/2026/11/16/nx-s1-6038924/brain-cell-mapping-lays-groundwork-for-better-treatments-for-conditions-like-dementia"
+    }
+  ],
+  "weekly_recap": null,
+  "data_availability": {
+    "sp500": true,
+    "ndx": true,
+    "vix": true,
+    "ten_year": true,
+    "news_world": true,
+    "news_us": true,
+    "news_science": true,
+    "news_business": true,
+    "news_tech": true,
+    "summary": "ok",
+    "breadth": true,
+    "policy": true,
+    "mortgage": true,
+    "watchlist": true
+  }
+}
