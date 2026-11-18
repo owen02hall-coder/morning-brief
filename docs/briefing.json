@@ -1,47 +1,47 @@
 {
-  "generated_at": "2026-11-17T09:56:45.905090-07:00",
-  "date": "2026-11-17",
+  "generated_at": "2026-11-18T09:31:58.693049-07:00",
+  "date": "2026-11-18",
   "tldr": [
-    "The US has officially lost its measles elimination status for the first time in 26 years, amid a significant outbreak.",
-    "Nvidia's stock experienced a decline as investors reacted to former CEO Jensen Huang's resignation and subsequent indication of willingness to return.",
-    "Ukraine reported critical damage to the Kerch bridge and its president urged allies for expedited air defense deliveries as Russia intensified attacks."
+    "Democrats formally nominated Hakeem Jeffries to become the first Black House speaker, positioning him to lead the chamber when the new Congress convenes.",
+    "Major global leaders, including Donald Trump, Xi Jinping, and Vladimir Putin, gathered in China for the APEC summit, with historic talks anticipated.",
+    "The S&P 500 and Nasdaq Composite both closed lower, influenced by Nvidia's post-earnings decline and widespread tech outages contributing to market uncertainty."
   ],
   "market": {
     "sp500": {
-      "value": 7416.59,
-      "change": -145.08,
-      "asof": "2026-11-16"
+      "value": 7340.53,
+      "change": -76.06,
+      "asof": "2026-11-17"
     },
     "ndx": {
-      "value": 24509.76,
-      "change": -626.51,
-      "asof": "2026-11-16"
+      "value": 24328.38,
+      "change": -181.38,
+      "asof": "2026-11-17"
     },
-    "why": "The S&P 500 and Nasdaq Composite closed lower, primarily influenced by investor concerns surrounding Nvidia. The company's stock fell ahead of earnings amid the fallout from former CEO Jensen Huang's resignation, with some investors suggesting AI neocloud stocks could be in trouble."
+    "why": "The S&P 500 and Nasdaq Composite both closed lower. This decline was influenced by Nvidia's stock sinking after its earnings report, dragging down other tech companies. Additionally, general market uncertainty stemming from recent widespread tech outages contributed to a cautious investment environment."
   },
   "yield_10y": {
-    "value": 5.12,
-    "change": -0.03,
-    "asof": "2026-11-16",
-    "why": "The articles do not support a specific reason for the movement in the 10-year Treasury yield."
+    "value": 5.1,
+    "change": -0.02,
+    "asof": "2026-11-17",
+    "why": "The provided articles do not offer a specific reason for the slight decline in the 10-year Treasury yield on this date."
   },
   "vix": {
-    "value": 22.91,
-    "change": 3.61,
-    "asof": "2026-11-16",
-    "why": "The articles do not support a specific reason for the movement in the VIX."
+    "value": 25.46,
+    "change": 2.55,
+    "asof": "2026-11-17",
+    "why": "The VIX, a measure of market volatility, increased. This rise occurred amid concerns over widespread tech outages, which analysts noted were fueling \"apocalyptic concerns\" and panic buying, indicative of increased market fear and uncertainty."
   },
   "breadth": {
     "sp500": {
-      "value": 56.7,
-      "asof": "2026-11-16",
+      "value": 54.8,
+      "asof": "2026-11-17",
       "status": "healthy",
-      "matched": 499,
+      "matched": 500,
       "stale": false
     },
     "ndx100": {
-      "value": 44.8,
-      "asof": "2026-11-16",
+      "value": 45.8,
+      "asof": "2026-11-17",
       "status": "healthy",
       "matched": 96,
       "stale": false
@@ -51,29 +51,29 @@
     {
       "symbol": "SOXL",
       "what": "3x semiconductors",
-      "value": 48.76,
-      "day_move": -16.39,
-      "asof": "2026-11-16",
-      "rsi": 34.2,
+      "value": 49.07,
+      "day_move": 0.64,
+      "asof": "2026-11-17",
+      "rsi": 34.4,
       "rsi_zone": "neutral",
       "low": 40.87,
       "high": 107.35,
-      "band_pct": 11.9,
+      "band_pct": 12.3,
       "zone": "mid",
       "action": "hold",
-      "read": "Mid-range - 12% of the way up its 1-month band. Big session: down 16.4% in a day."
+      "read": "Mid-range - 12% of the way up its 1-month band."
     },
     {
       "symbol": "SPXL",
       "what": "3x S&P 500",
-      "value": 250.09,
-      "day_move": -5.66,
-      "asof": "2026-11-16",
-      "rsi": 38.9,
+      "value": 242.1,
+      "day_move": -3.19,
+      "asof": "2026-11-17",
+      "rsi": 36.1,
       "rsi_zone": "neutral",
-      "low": 244.98,
+      "low": 242.1,
       "high": 290.87,
-      "band_pct": 11.1,
+      "band_pct": 0.0,
       "zone": "low",
       "action": "buy",
       "read": "Within 4% of its 1-month low."
@@ -81,17 +81,17 @@
     {
       "symbol": "TQQQ",
       "what": "3x Nasdaq-100",
-      "value": 53.03,
-      "day_move": -8.06,
-      "asof": "2026-11-16",
-      "rsi": 35.7,
+      "value": 51.81,
+      "day_move": -2.3,
+      "asof": "2026-11-17",
+      "rsi": 34.6,
       "rsi_zone": "neutral",
       "low": 50.47,
       "high": 72.61,
-      "band_pct": 11.6,
-      "zone": "mid",
-      "action": "hold",
-      "read": "Mid-range - 12% of the way up its 1-month band. Big session: down 8.1% in a day."
+      "band_pct": 6.1,
+      "zone": "low",
+      "action": "buy",
+      "read": "Within 4% of its 1-month low."
     }
   ],
   "watchlist_missing": [],
@@ -99,7 +99,7 @@
     "value": 7.11,
     "change": -0.07,
     "asof": "2026-11-12",
-    "why": "The 30-year fixed mortgage rate, reported in a weekly survey, saw a decrease, which generally tracks the direction of the 10-year Treasury yield that also declined recently."
+    "why": "The 30-year fixed mortgage rate saw a modest decrease in the latest weekly Freddie Mac survey, which was released on November 12, 2026. This movement tracks a general direction of lower Treasury yields over the recent days leading up to the survey period."
   },
   "policy": [],
   "policy_upcoming": [
@@ -147,68 +147,68 @@
   ],
   "tech": [
     {
-      "summary": "Jensen Huang, who recently resigned as Nvidia's CEO, has stated he would be willing to return to his role if requested by the company's board of directors.",
-      "source": "The Verge",
-      "url": "https://www.theverge.com/tech/1035420/jensen-huang-nvidia-return-as-ceo-statement"
-    },
-    {
-      "summary": "Google is introducing new privacy options for Gemini, allowing users to opt out of having their conversations used for AI training without losing their chat history.",
+      "summary": "Waymo has temporarily suspended its autonomous freeway driving operations following a complaint regarding its robotaxis entering a construction zone in California.",
       "source": "Ars Technica",
-      "url": "https://arstechnica.com/ai/2026/11/google-will-let-you-opt-out-of-ai-training-in-gemini-without-losing-your-history/"
+      "url": "https://arstechnica.com/cars/2026/11/waymo-suspends-freeway-driving-after-california-construction-zone-complaint/"
     },
     {
-      "summary": "A highly classified US national security communications network experienced an outage.",
-      "source": "Hacker News",
-      "url": "https://www.cnn.com/2026/11/17/politics/highly-classified-national-security-communications-network-goes-down"
+      "summary": "Shelly has launched a new smart valve designed to be installed on a home's main water line, which can automatically shut off water flow if a connected leak sensor detects a problem.",
+      "source": "The Verge",
+      "url": "https://www.theverge.com/tech/1036494/shelly-neo-smart-home-water-valve-sensor-shut-off"
+    },
+    {
+      "summary": "Will Wright, creator of games like SimCity and The Sims, is developing a new game called MyMems that utilizes artificial intelligence to map and explore players' memories.",
+      "source": "The Verge",
+      "url": "https://www.theverge.com/games/1036140/will-wright-mymems-ai-game-interview"
     }
   ],
   "world": [
     {
-      "summary": "Ukraine reported critical damage to the Kerch bridge, a significant link to Russian-annexed Crimea, and President Zelenskyy called on allies for urgent air defense systems as Russia continued its missile and drone attacks.",
-      "source": "Guardian World",
-      "url": "https://www.theguardian.com/world/live/2026/nov/17/europe-ukraine-russia-crimea-kerch-bridge-attack-latest-news-updates"
-    },
-    {
-      "summary": "The US has officially lost its measles elimination status, marking the first time in 26 years that the infectious disease is considered endemic in the country, amidst its worst outbreak since 1991.",
+      "summary": "U.S. President Donald Trump, Chinese President Xi Jinping, and Russian President Vladimir Putin engaged in handshakes and prepared for historic talks at the APEC summit in China.",
       "source": "BBC World",
-      "url": "https://www.bbc.co.uk/news/articles/c977p71jx0xxo?at_medium=RSS&at_campaign=rss"
+      "url": "https://www.bbc.co.uk/news/articles/ck9d75x5wwwwo?at_medium=RSS&at_campaign=rss"
     },
     {
-      "summary": "The UK has imposed sanctions on firms involved in Israeli West Bank settlements, signaling a shift towards a tougher policy stance on actions in the territory.",
-      "source": "BBC World",
-      "url": "https://www.bbc.co.uk/news/articles/cvglr977x3z0o?at_medium=RSS&at_campaign=rss"
-    },
-    {
-      "summary": "US President Trump announced new critical minerals agreements during a Quad meeting in Manila, designed to diversify supply chains and reduce reliance on any single foreign supplier.",
+      "summary": "Five European Union nations are exploring plans to deport rejected asylum seekers to Rwanda as part of a new approach to managing migrant flows.",
       "source": "Al Jazeera",
-      "url": "https://www.aljazeera.com/news/2026/11/17/trump-announces-critical-minerals-agreements-at-quad-meeting-in-manila?traffic_source=rss"
+      "url": "https://www.aljazeera.com/video/newsfeed/2026/11/18/five-eu-nations-to-deport-migrants-to-rwanda?traffic_source=rss"
+    },
+    {
+      "summary": "Russian attacks across Ukraine resulted in the deaths of at least five people, with President Volodymyr Zelenskyy describing the strikes on Odesa as 'brutal'.",
+      "source": "Al Jazeera",
+      "url": "https://www.aljazeera.com/news/2026/11/18/russian-attacks-on-ukraine-kill-at-least-five-people?traffic_source=rss"
+    },
+    {
+      "summary": "Canada's Prime Minister accused Russian leader Vladimir Putin of 'lying' for downplaying the impact of Western sanctions, as international tensions persist.",
+      "source": "Al Jazeera",
+      "url": "https://www.aljazeera.com/video/newsfeed/2026/11/18/canadas-pm-calls-out-lying-putin-for-downplaying-sanctions?traffic_source=rss"
     }
   ],
   "us": [
     {
-      "summary": "The Pentagon failed its financial audit for the ninth consecutive year, although an official noted that a majority of its individual units passed for the first time.",
-      "source": "Guardian World",
-      "url": "https://www.theguardian.com/us-news/2026/nov/17/pentagon-fails-audit"
+      "summary": "Democrats formally nominated Hakeem Jeffries to become the first Black House speaker, a significant step toward him leading the chamber when the new Congress begins next year.",
+      "source": "CNBC",
+      "url": "https://www.cnbc.com/2026/11/18/jeffries-house-speaker-congress.html"
     },
     {
-      "summary": "Senator Jack Reed expressed concerns about the Federal Aviation Administration's oversight of contractors following a recent nationwide ground stop, stating the agency needs a comprehensive plan rather than just increased funding.",
-      "source": "NPR National",
-      "url": "https://www.npr.org/2026/11/17/nx-s1-6042514/jack-reed-faa-oversight-ground-stop-funding"
+      "summary": "A bipartisan group of US senators has urged Jay Clayton, the national intelligence and AI czar, to identify and address vulnerabilities in AI systems following recent mass outages that affected critical infrastructure.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/us-news/2026/nov/18/jay-clayton-ai-tech-outages-infrastructure"
     },
     {
-      "summary": "The US has officially lost its measles elimination status, with global health authorities announcing the disease is now continually spreading after 26 years of elimination.",
-      "source": "Guardian World",
-      "url": "https://www.theguardian.com/us-news/2026/nov/17/us-measles-outbreak-elimination-status"
+      "summary": "Cal-Maine, the largest egg producer in the United States, announced plans to cull 1.8 million birds at a Florida site due to an outbreak of avian influenza, affecting 2.7 percent of its total flock.",
+      "source": "Al Jazeera",
+      "url": "https://www.aljazeera.com/economy/2026/11/18/largest-us-egg-producer-to-cull-1-8-million-birds-after-bird-flu-outbreak?traffic_source=rss"
     }
   ],
   "science": [
     {
-      "summary": "Global health authorities have announced that the US has officially lost its measles elimination status, reversing decades of progress due to record case numbers and lower vaccination rates.",
+      "summary": "The Pan American Health Organization announced that the United States has officially lost its measles elimination status, classifying the disease as endemic due to a strain persisting for over a year.",
       "source": "NPR Health",
-      "url": "https://www.npr.org/2026/11/17/nx-s1-6042892/health-organization-to-announce-that-the-u-s-has-lost-its-measles-elimination-status"
+      "url": "https://www.npr.org/2026/11/17/nx-s1-6044227/u-s-officially-loses-its-measles-elimination-status"
     },
     {
-      "summary": "Researchers worldwide have developed a cellular atlas of the basal ganglia, brain structures crucial for learning and motor control, which could provide a foundation for improved treatments for conditions like dementia.",
+      "summary": "An international effort by brain researchers has created a cellular atlas of the basal ganglia, laying groundwork for improved treatments for neurological conditions like dementia.",
       "source": "NPR Science",
       "url": "https://www.npr.org/2026/11/16/nx-s1-6038924/brain-cell-mapping-lays-groundwork-for-better-treatments-for-conditions-like-dementia"
     }
