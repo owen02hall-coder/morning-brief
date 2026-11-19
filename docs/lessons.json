@@ -1,22 +1,6 @@
 {
-  "generated_at": "2026-11-18T09:31:58.693049-07:00",
+  "generated_at": "2026-11-19T09:38:33.365049-07:00",
   "lessons": [
-    {
-      "id": "2026-09-17-choking",
-      "date": "2026-09-17",
-      "domain": "Health and emergencies",
-      "title": "Recognizing the signs of choking",
-      "hook": "Knowing the subtle signs of choking can be crucial when every second counts.",
-      "quick": "Choking occurs when something blocks the airway, preventing oxygen from reaching the lungs. This quickly leads to oxygen deprivation. Although your body has some oxygen stored in the blood and lungs, choking often leads to death and is the fourth leading cause of unintentional injury death in the United States. Many choking events go unreported if they resolve quickly, but signs can be subtle. They might include a cough, gurgling, gagging, or shortness of breath. More obvious signs can involve a person clutching their throat, attempting to use hand signals, or trying to force vomiting because they cannot speak.",
-      "more": "Even if initial symptoms appear to improve, it doesn't always mean the blockage is resolved. These initial episodes typically last seconds to several minutes but can be followed by symptom improvement that is mistakenly taken as resolution. If breathing is not restored, a person may lose consciousness. Oxygen deprivation can cause brain damage when a person remains without air for approximately three minutes, though this time can vary. Death can occur if breathing is not restored in six to ten minutes, also varying by individual. The face or fingertips might also turn blue from lack of oxygen, but this visual sign is observed in only 15 to 20 percent of choking episodes in healthy adults and children.",
-      "deep": "Choking can be caused by food, or by small non-food objects like coins or toy parts. Foods that are small, round, or hard pose a high risk, such as hard candy, nuts, or marshmallows. Children younger than three years old are especially at risk because they have not fully developed chewing habits and explore their environment by putting objects in their mouths. Their airways are smaller, making them more susceptible to blockages from smaller objects, and their coughs are less forceful. For adults, risk factors can include consuming alcohol or sedatives, or having medical conditions like stroke, Alzheimer's disease, or Parkinson's disease that cause difficulty swallowing or impair the cough reflex. Living alone and wearing dentures are also risk factors for older adults.",
-      "takeaway": "Recognize the signs of choking, including subtle coughs or shortness of breath, because oxygen deprivation can quickly lead to brain damage and death.",
-      "source": {
-        "title": "Choking",
-        "url": "https://en.wikipedia.org/wiki/Choking"
-      },
-      "audio": {}
-    },
     {
       "id": "2026-09-18-sunk-cost",
       "date": "2026-09-18",
@@ -639,11 +623,7 @@
         "title": "Motor oil",
         "url": "https://en.wikipedia.org/wiki/Motor_oil"
       },
-      "audio": {
-        "quick": "lessons/2026-10-28-motor-oil-quick.mp3",
-        "more": "lessons/2026-10-28-motor-oil-more.mp3",
-        "deep": "lessons/2026-10-28-motor-oil-deep.mp3"
-      }
+      "audio": {}
     },
     {
       "id": "2026-10-29-sleep",
@@ -1043,6 +1023,26 @@
         "quick": "lessons/2026-11-18-jump-start-vehicle-quick.mp3",
         "more": "lessons/2026-11-18-jump-start-vehicle-more.mp3",
         "deep": "lessons/2026-11-18-jump-start-vehicle-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-11-19-heimlich-maneuver",
+      "date": "2026-11-19",
+      "domain": "Health and emergencies",
+      "title": "Responding to Choking Emergencies",
+      "hook": "Knowing the right steps to take when someone is choking can make all the difference in a crisis.",
+      "quick": "When a foreign object obstructs someone's upper airway, causing them to choke, our immediate instinct might be to perform an abdominal thrust. However, modern first-aid protocols, including those from major organizations like the American Heart Association and American Red Cross, actually recommend a specific sequence of actions. The very first step is to strongly encourage the choking person to cough, as this can often be enough to clear the obstruction on its own. Only if coughing doesn't work should further measures be taken, moving through steps designed to apply increasing levels of pressure.",
+      "more": "If forceful coughing does not dislodge the object, the next step in most protocols is to deliver hard back slaps. The rescuer should bend the person forward and administer five slaps to their back. If these back slaps are unsuccessful, then abdominal thrusts, often called the Heimlich maneuver, become the next measure. Many guidelines now recommend alternating between five back slaps and five abdominal thrusts until the object is expelled or medical help arrives. These procedures are not recommended for children under the age of one.",
+      "deep": "It is important to know that even when performed correctly, abdominal thrusts can lead to injuries because of the forceful nature of the procedure. Bruising to the abdomen is highly likely, and more serious injuries like fractured ribs or a broken xiphoid process can occur. For this reason, medical organizations advise that anyone who has received abdominal thrusts should seek medical attention afterward to ensure there are no internal injuries. The current protocols that combine back slaps with abdominal thrusts have evolved over time, as some earlier claims that back slaps could push objects further into the windpipe were later found to lack strong scientific evidence.",
+      "takeaway": "If someone receives abdominal thrusts, ensure they get medical attention to check for any internal injuries.",
+      "source": {
+        "title": "Heimlich maneuver",
+        "url": "https://en.wikipedia.org/wiki/Heimlich_maneuver"
+      },
+      "audio": {
+        "quick": "lessons/2026-11-19-heimlich-maneuver-quick.mp3",
+        "more": "lessons/2026-11-19-heimlich-maneuver-more.mp3",
+        "deep": "lessons/2026-11-19-heimlich-maneuver-deep.mp3"
       }
     }
   ],

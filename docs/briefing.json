@@ -1,47 +1,47 @@
 {
-  "generated_at": "2026-11-18T09:31:58.693049-07:00",
-  "date": "2026-11-18",
+  "generated_at": "2026-11-19T09:38:33.365049-07:00",
+  "date": "2026-11-19",
   "tldr": [
-    "Democrats formally nominated Hakeem Jeffries to become the first Black House speaker, positioning him to lead the chamber when the new Congress convenes.",
-    "Major global leaders, including Donald Trump, Xi Jinping, and Vladimir Putin, gathered in China for the APEC summit, with historic talks anticipated.",
-    "The S&P 500 and Nasdaq Composite both closed lower, influenced by Nvidia's post-earnings decline and widespread tech outages contributing to market uncertainty."
+    "The UN's top court ruled that Myanmar committed genocide against the Rohingya minority in an unprecedented verdict.",
+    "Anthropic's IPO set a new record, valued at $81.3 billion, making it the most valuable initial public offering of all time.",
+    "The US has officially lost its measles elimination status, as a strain of the disease has persisted in the country for over a year."
   ],
   "market": {
     "sp500": {
-      "value": 7340.53,
-      "change": -76.06,
-      "asof": "2026-11-17"
+      "value": 7323.63,
+      "change": -16.9,
+      "asof": "2026-11-18"
     },
     "ndx": {
-      "value": 24328.38,
-      "change": -181.38,
-      "asof": "2026-11-17"
+      "value": 24429.88,
+      "change": 101.5,
+      "asof": "2026-11-18"
     },
-    "why": "The S&P 500 and Nasdaq Composite both closed lower. This decline was influenced by Nvidia's stock sinking after its earnings report, dragging down other tech companies. Additionally, general market uncertainty stemming from recent widespread tech outages contributed to a cautious investment environment."
+    "why": "The Nasdaq Composite closed higher, boosted by the Anthropic IPO and strong performances from AI-related companies like Palo Alto Networks, Micron, and Intel. The S&P 500 experienced a slight decline, potentially reflecting broader market concerns about AI debt and an overall 'oversold' market condition mentioned in some reports."
   },
   "yield_10y": {
-    "value": 5.1,
-    "change": -0.02,
-    "asof": "2026-11-17",
-    "why": "The provided articles do not offer a specific reason for the slight decline in the 10-year Treasury yield on this date."
+    "value": 5.07,
+    "change": -0.04,
+    "asof": "2026-11-18",
+    "why": "The articles do not provide a specific reason for the 10-year Treasury yield's movement."
   },
   "vix": {
-    "value": 25.46,
-    "change": 2.55,
-    "asof": "2026-11-17",
-    "why": "The VIX, a measure of market volatility, increased. This rise occurred amid concerns over widespread tech outages, which analysts noted were fueling \"apocalyptic concerns\" and panic buying, indicative of increased market fear and uncertainty."
+    "value": 24.56,
+    "change": -0.9,
+    "asof": "2026-11-18",
+    "why": "The articles do not provide a specific reason for the VIX's movement."
   },
   "breadth": {
     "sp500": {
-      "value": 54.8,
-      "asof": "2026-11-17",
+      "value": 51.8,
+      "asof": "2026-11-18",
       "status": "healthy",
       "matched": 500,
       "stale": false
     },
     "ndx100": {
       "value": 45.8,
-      "asof": "2026-11-17",
+      "asof": "2026-11-18",
       "status": "healthy",
       "matched": 96,
       "stale": false
@@ -51,27 +51,27 @@
     {
       "symbol": "SOXL",
       "what": "3x semiconductors",
-      "value": 49.07,
-      "day_move": 0.64,
-      "asof": "2026-11-17",
-      "rsi": 34.4,
+      "value": 49.26,
+      "day_move": 0.39,
+      "asof": "2026-11-18",
+      "rsi": 34.6,
       "rsi_zone": "neutral",
       "low": 40.87,
       "high": 107.35,
-      "band_pct": 12.3,
+      "band_pct": 12.6,
       "zone": "mid",
       "action": "hold",
-      "read": "Mid-range - 12% of the way up its 1-month band."
+      "read": "Mid-range - 13% of the way up its 1-month band."
     },
     {
       "symbol": "SPXL",
       "what": "3x S&P 500",
-      "value": 242.1,
-      "day_move": -3.19,
-      "asof": "2026-11-17",
-      "rsi": 36.1,
+      "value": 239.97,
+      "day_move": -0.88,
+      "asof": "2026-11-18",
+      "rsi": 35.4,
       "rsi_zone": "neutral",
-      "low": 242.1,
+      "low": 239.97,
       "high": 290.87,
       "band_pct": 0.0,
       "zone": "low",
@@ -81,14 +81,14 @@
     {
       "symbol": "TQQQ",
       "what": "3x Nasdaq-100",
-      "value": 51.81,
-      "day_move": -2.3,
-      "asof": "2026-11-17",
-      "rsi": 34.6,
+      "value": 52.44,
+      "day_move": 1.22,
+      "asof": "2026-11-18",
+      "rsi": 35.7,
       "rsi_zone": "neutral",
       "low": 50.47,
       "high": 72.61,
-      "band_pct": 6.1,
+      "band_pct": 8.9,
       "zone": "low",
       "action": "buy",
       "read": "Within 4% of its 1-month low."
@@ -99,7 +99,7 @@
     "value": 7.11,
     "change": -0.07,
     "asof": "2026-11-12",
-    "why": "The 30-year fixed mortgage rate saw a modest decrease in the latest weekly Freddie Mac survey, which was released on November 12, 2026. This movement tracks a general direction of lower Treasury yields over the recent days leading up to the survey period."
+    "why": "The 30-year fixed mortgage rate decreased in the latest weekly survey, reflecting a recent decline in the 10-year Treasury yield."
   },
   "policy": [],
   "policy_upcoming": [
@@ -147,70 +147,70 @@
   ],
   "tech": [
     {
-      "summary": "Waymo has temporarily suspended its autonomous freeway driving operations following a complaint regarding its robotaxis entering a construction zone in California.",
-      "source": "Ars Technica",
-      "url": "https://arstechnica.com/cars/2026/11/waymo-suspends-freeway-driving-after-california-construction-zone-complaint/"
+      "summary": "Anthropic's IPO is the largest in history, raising $81.3 billion and setting a precedent for future AI lab debuts, while also testing the company's commitment to its \"safe AI\" reputation.",
+      "source": "The Verge",
+      "url": "https://www.theverge.com/ai-artificial-intelligence/1037459/anthropic-ipo-safe-ai-reputation-power-structure"
     },
     {
-      "summary": "Shelly has launched a new smart valve designed to be installed on a home's main water line, which can automatically shut off water flow if a connected leak sensor detects a problem.",
-      "source": "The Verge",
-      "url": "https://www.theverge.com/tech/1036494/shelly-neo-smart-home-water-valve-sensor-shut-off"
+      "summary": "Australian physicists have demonstrated a proof-of-concept for communicating using gravity, successfully transmitting a message in binary code through a brick wall.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/science/2026/nov/20/scientists-communicate-using-gravity-elevator-brick-wall-bathroom-experiment"
     },
     {
-      "summary": "Will Wright, creator of games like SimCity and The Sims, is developing a new game called MyMems that utilizes artificial intelligence to map and explore players' memories.",
+      "summary": "Blue Origin will launch satellites equipped with Google's Tensor Processing Units into space in 2029 as part of Google's Project Suncatcher, a plan to deploy AI server satellites.",
       "source": "The Verge",
-      "url": "https://www.theverge.com/games/1036140/will-wright-mymems-ai-game-interview"
+      "url": "https://www.theverge.com/tech/1037535/google-blue-origin-project-suncatcher-2029"
     }
   ],
   "world": [
     {
-      "summary": "U.S. President Donald Trump, Chinese President Xi Jinping, and Russian President Vladimir Putin engaged in handshakes and prepared for historic talks at the APEC summit in China.",
+      "summary": "The International Court of Justice has ruled that Myanmar committed genocide against its Rohingya minority during a 2017 military crackdown, marking the first time the court has made such a ruling against a state.",
       "source": "BBC World",
-      "url": "https://www.bbc.co.uk/news/articles/ck9d75x5wwwwo?at_medium=RSS&at_campaign=rss"
+      "url": "https://www.bbc.co.uk/news/articles/c804wzp20ddvo?at_medium=RSS&at_campaign=rss"
     },
     {
-      "summary": "Five European Union nations are exploring plans to deport rejected asylum seekers to Rwanda as part of a new approach to managing migrant flows.",
-      "source": "Al Jazeera",
-      "url": "https://www.aljazeera.com/video/newsfeed/2026/11/18/five-eu-nations-to-deport-migrants-to-rwanda?traffic_source=rss"
+      "summary": "The leaders of China, Russia, and the US issued a \"peace declaration\" following an unprecedented trilateral summit, outlining priorities like UN reform and boosting oil supplies, but notably omitting any mention of the wars in Ukraine or Iran.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/world/2026/nov/19/china-russia-us-agree-peace-statement-no-mention-ukraine-iran-wars"
     },
     {
-      "summary": "Russian attacks across Ukraine resulted in the deaths of at least five people, with President Volodymyr Zelenskyy describing the strikes on Odesa as 'brutal'.",
-      "source": "Al Jazeera",
-      "url": "https://www.aljazeera.com/news/2026/11/18/russian-attacks-on-ukraine-kill-at-least-five-people?traffic_source=rss"
+      "summary": "Ukraine's allies are meeting in Berlin to discuss air defense, energy, and financial support, following a trilateral meeting between the US, China, and Russia that did not address the conflict.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/world/live/2026/nov/19/russia-ukraine-war-coalition-of-the-willing-europe-latest-news-updates"
     },
     {
-      "summary": "Canada's Prime Minister accused Russian leader Vladimir Putin of 'lying' for downplaying the impact of Western sanctions, as international tensions persist.",
-      "source": "Al Jazeera",
-      "url": "https://www.aljazeera.com/video/newsfeed/2026/11/18/canadas-pm-calls-out-lying-putin-for-downplaying-sanctions?traffic_source=rss"
+      "summary": "Southern California is preparing for a fierce winter storm, which has already caused record rainfall in the northern part of the state, leading to temporary grounding of planes, flooded roads, power outages, and evacuation orders in some areas.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/us-news/2026/nov/19/california-atmospheric-river-san-francisco-rain-record"
     }
   ],
   "us": [
     {
-      "summary": "Democrats formally nominated Hakeem Jeffries to become the first Black House speaker, a significant step toward him leading the chamber when the new Congress begins next year.",
-      "source": "CNBC",
-      "url": "https://www.cnbc.com/2026/11/18/jeffries-house-speaker-congress.html"
+      "summary": "Florida is set to record its 20th execution of the year, establishing a new record for the state, even as other states are reducing their use of the death penalty.",
+      "source": "NPR National",
+      "url": "https://www.npr.org/2026/11/19/nx-s1-6042913/as-some-states-move-away-from-the-death-penalty-florida-prepares-to-set-new-record"
     },
     {
-      "summary": "A bipartisan group of US senators has urged Jay Clayton, the national intelligence and AI czar, to identify and address vulnerabilities in AI systems following recent mass outages that affected critical infrastructure.",
-      "source": "Guardian World",
-      "url": "https://www.theguardian.com/us-news/2026/nov/18/jay-clayton-ai-tech-outages-infrastructure"
-    },
-    {
-      "summary": "Cal-Maine, the largest egg producer in the United States, announced plans to cull 1.8 million birds at a Florida site due to an outbreak of avian influenza, affecting 2.7 percent of its total flock.",
-      "source": "Al Jazeera",
-      "url": "https://www.aljazeera.com/economy/2026/11/18/largest-us-egg-producer-to-cull-1-8-million-birds-after-bird-flu-outbreak?traffic_source=rss"
-    }
-  ],
-  "science": [
-    {
-      "summary": "The Pan American Health Organization announced that the United States has officially lost its measles elimination status, classifying the disease as endemic due to a strain persisting for over a year.",
+      "summary": "The Pan American Health Organization has announced that the U.S. has officially lost its measles elimination status, reclassifying the disease as endemic because a strain has persisted for over a year.",
       "source": "NPR Health",
       "url": "https://www.npr.org/2026/11/17/nx-s1-6044227/u-s-officially-loses-its-measles-elimination-status"
     },
     {
-      "summary": "An international effort by brain researchers has created a cellular atlas of the basal ganglia, laying groundwork for improved treatments for neurological conditions like dementia.",
-      "source": "NPR Science",
-      "url": "https://www.npr.org/2026/11/16/nx-s1-6038924/brain-cell-mapping-lays-groundwork-for-better-treatments-for-conditions-like-dementia"
+      "summary": "Recent changes to SNAP food aid regulations require older adults up to age 65 to work or volunteer to receive benefits, impacting individuals who may have retired early for family care.",
+      "source": "NPR National",
+      "url": "https://www.npr.org/2026/11/18/nx-s1-5954231/snap-work-rules-retirees"
+    }
+  ],
+  "science": [
+    {
+      "summary": "Australian scientists conducted a proof-of-concept experiment, successfully using gravity to transmit a message in binary code through a brick wall, suggesting a new method of communication.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/science/2026/nov/20/scientists-communicate-using-gravity-elevator-brick-wall-bathroom-experiment"
+    },
+    {
+      "summary": "The U.S. has officially lost its measles elimination status, as the Pan American Health Organization now classifies the disease as endemic due to a strain persisting for over a year.",
+      "source": "NPR Health",
+      "url": "https://www.npr.org/2026/11/17/nx-s1-6044227/u-s-officially-loses-its-measles-elimination-status"
     }
   ],
   "weekly_recap": null,
