@@ -1,48 +1,48 @@
 {
-  "generated_at": "2026-11-19T09:38:33.365049-07:00",
-  "date": "2026-11-19",
+  "generated_at": "2026-11-20T09:14:15.675316-07:00",
+  "date": "2026-11-20",
   "tldr": [
-    "The UN's top court ruled that Myanmar committed genocide against the Rohingya minority in an unprecedented verdict.",
-    "Anthropic's IPO set a new record, valued at $81.3 billion, making it the most valuable initial public offering of all time.",
-    "The US has officially lost its measles elimination status, as a strain of the disease has persisted in the country for over a year."
+    "Global stock markets experienced a slump, driven by a broad sell-off in the artificial intelligence sector following Anthropic's public trading debut.",
+    "The US Senate passed bipartisan legislation aimed at accelerating permitting reviews for energy and data center infrastructure projects.",
+    "The US officially lost its measles elimination status, as the Pan American Health Organization reclassified the disease as endemic in the nation."
   ],
   "market": {
     "sp500": {
-      "value": 7323.63,
-      "change": -16.9,
-      "asof": "2026-11-18"
+      "value": 7175.83,
+      "change": -147.8,
+      "asof": "2026-11-19"
     },
     "ndx": {
-      "value": 24429.88,
-      "change": 101.5,
-      "asof": "2026-11-18"
+      "value": 23879.2,
+      "change": -550.68,
+      "asof": "2026-11-19"
     },
-    "why": "The Nasdaq Composite closed higher, boosted by the Anthropic IPO and strong performances from AI-related companies like Palo Alto Networks, Micron, and Intel. The S&P 500 experienced a slight decline, potentially reflecting broader market concerns about AI debt and an overall 'oversold' market condition mentioned in some reports."
+    "why": "Global stock markets closed lower, with the S&P 500 and Nasdaq Composite both declining, as investors questioned the significant investments in AI and a broader sell-off impacted the sector after Anthropic's initial public offering."
   },
   "yield_10y": {
-    "value": 5.07,
-    "change": -0.04,
-    "asof": "2026-11-18",
-    "why": "The articles do not provide a specific reason for the 10-year Treasury yield's movement."
+    "value": 5.05,
+    "change": -0.01,
+    "asof": "2026-11-19",
+    "why": "The articles do not provide a specific reason for the 10-year Treasury yield's minor change on November 19, 2026."
   },
   "vix": {
-    "value": 24.56,
-    "change": -0.9,
-    "asof": "2026-11-18",
-    "why": "The articles do not provide a specific reason for the VIX's movement."
+    "value": 28.44,
+    "change": 3.88,
+    "asof": "2026-11-19",
+    "why": "The VIX, a measure of market volatility, increased as global stock markets slumped and the AI sector experienced a sell-off, indicating heightened investor apprehension."
   },
   "breadth": {
     "sp500": {
-      "value": 51.8,
-      "asof": "2026-11-18",
+      "value": 51.6,
+      "asof": "2026-11-19",
       "status": "healthy",
       "matched": 500,
       "stale": false
     },
     "ndx100": {
-      "value": 45.8,
-      "asof": "2026-11-18",
-      "status": "healthy",
+      "value": 39.6,
+      "asof": "2026-11-19",
+      "status": "watch",
       "matched": 96,
       "stale": false
     }
@@ -51,28 +51,28 @@
     {
       "symbol": "SOXL",
       "what": "3x semiconductors",
-      "value": 49.26,
-      "day_move": 0.39,
-      "asof": "2026-11-18",
-      "rsi": 34.6,
+      "value": 45.3,
+      "day_move": -8.04,
+      "asof": "2026-11-19",
+      "rsi": 33.1,
       "rsi_zone": "neutral",
       "low": 40.87,
       "high": 107.35,
-      "band_pct": 12.6,
+      "band_pct": 6.7,
       "zone": "mid",
       "action": "hold",
-      "read": "Mid-range - 13% of the way up its 1-month band."
+      "read": "Mid-range - 7% of the way up its 1-month band. Big session: down 8.0% in a day."
     },
     {
       "symbol": "SPXL",
       "what": "3x S&P 500",
-      "value": 239.97,
-      "day_move": -0.88,
-      "asof": "2026-11-18",
-      "rsi": 35.4,
+      "value": 225.68,
+      "day_move": -5.95,
+      "asof": "2026-11-19",
+      "rsi": 30.8,
       "rsi_zone": "neutral",
-      "low": 239.97,
-      "high": 290.87,
+      "low": 225.68,
+      "high": 288.95,
       "band_pct": 0.0,
       "zone": "low",
       "action": "buy",
@@ -81,14 +81,14 @@
     {
       "symbol": "TQQQ",
       "what": "3x Nasdaq-100",
-      "value": 52.44,
-      "day_move": 1.22,
-      "asof": "2026-11-18",
-      "rsi": 35.7,
+      "value": 49.01,
+      "day_move": -6.54,
+      "asof": "2026-11-19",
+      "rsi": 32.5,
       "rsi_zone": "neutral",
-      "low": 50.47,
-      "high": 72.61,
-      "band_pct": 8.9,
+      "low": 49.01,
+      "high": 72.36,
+      "band_pct": 0.0,
       "zone": "low",
       "action": "buy",
       "read": "Within 4% of its 1-month low."
@@ -96,10 +96,10 @@
   ],
   "watchlist_missing": [],
   "mortgage": {
-    "value": 7.11,
-    "change": -0.07,
-    "asof": "2026-11-12",
-    "why": "The 30-year fixed mortgage rate decreased in the latest weekly survey, reflecting a recent decline in the 10-year Treasury yield."
+    "value": 7.28,
+    "change": 0.17,
+    "asof": "2026-11-19",
+    "why": "The 30-year fixed mortgage rate increased to 7.28% in the weekly Freddie Mac survey released on November 19, 2026. This rate tracks the direction of 10-year Treasury yields over recent days, though a specific reason for this weekly change was not detailed in the provided articles."
   },
   "policy": [],
   "policy_upcoming": [
@@ -147,68 +147,63 @@
   ],
   "tech": [
     {
-      "summary": "Anthropic's IPO is the largest in history, raising $81.3 billion and setting a precedent for future AI lab debuts, while also testing the company's commitment to its \"safe AI\" reputation.",
-      "source": "The Verge",
-      "url": "https://www.theverge.com/ai-artificial-intelligence/1037459/anthropic-ipo-safe-ai-reputation-power-structure"
-    },
-    {
-      "summary": "Australian physicists have demonstrated a proof-of-concept for communicating using gravity, successfully transmitting a message in binary code through a brick wall.",
+      "summary": "Shares of AI company Anthropic slumped on its second day of trading, dragging down the broader AI market, as investors reassessed the large sums being invested in artificial intelligence development.",
       "source": "Guardian World",
-      "url": "https://www.theguardian.com/science/2026/nov/20/scientists-communicate-using-gravity-elevator-brick-wall-bathroom-experiment"
+      "url": "https://www.theguardian.com/business/2026/nov/20/global-stock-markets-slump-anthropic-ipo-ai-sell-off"
     },
     {
-      "summary": "Blue Origin will launch satellites equipped with Google's Tensor Processing Units into space in 2029 as part of Google's Project Suncatcher, a plan to deploy AI server satellites.",
+      "summary": "A new CPU architecture named 'Frostbite' has been discovered, designed, and verified entirely by artificial intelligence, marking a significant development in AI's role in hardware engineering.",
+      "source": "Hacker News",
+      "url": "https://architectlabs.com/blog/frostbite"
+    },
+    {
+      "summary": "Signal is implementing restrictions to block AI agents like Gemini and Siri from reading user messages and other data by preventing screenshots on Android and iOS devices, aiming to uphold user privacy.",
       "source": "The Verge",
-      "url": "https://www.theverge.com/tech/1037535/google-blue-origin-project-suncatcher-2029"
+      "url": "https://www.theverge.com/ai-artificial-intelligence/1038390/signal-blocking-ai-agent-screenshots-mobile-app"
     }
   ],
   "world": [
     {
-      "summary": "The International Court of Justice has ruled that Myanmar committed genocide against its Rohingya minority during a 2017 military crackdown, marking the first time the court has made such a ruling against a state.",
+      "summary": "The UK and EU have agreed to a 'reset deal' for their relationship, although the issue of tuition fees for EU students attending UK universities remains unresolved.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/politics/2026/nov/20/fallout-over-tuition-fees-may-snag-burnhams-eu-deal-say-insiders"
+    },
+    {
+      "summary": "Nearly 600 women were killed in South Africa within a three-month period, prompting police officials to call for increased efforts to prevent violence against women and children.",
       "source": "BBC World",
-      "url": "https://www.bbc.co.uk/news/articles/c804wzp20ddvo?at_medium=RSS&at_campaign=rss"
+      "url": "https://www.bbc.co.uk/news/articles/c69vwyjp0339o?at_medium=RSS&at_campaign=rss"
     },
     {
-      "summary": "The leaders of China, Russia, and the US issued a \"peace declaration\" following an unprecedented trilateral summit, outlining priorities like UN reform and boosting oil supplies, but notably omitting any mention of the wars in Ukraine or Iran.",
-      "source": "Guardian World",
-      "url": "https://www.theguardian.com/world/2026/nov/19/china-russia-us-agree-peace-statement-no-mention-ukraine-iran-wars"
-    },
-    {
-      "summary": "Ukraine's allies are meeting in Berlin to discuss air defense, energy, and financial support, following a trilateral meeting between the US, China, and Russia that did not address the conflict.",
-      "source": "Guardian World",
-      "url": "https://www.theguardian.com/world/live/2026/nov/19/russia-ukraine-war-coalition-of-the-willing-europe-latest-news-updates"
-    },
-    {
-      "summary": "Southern California is preparing for a fierce winter storm, which has already caused record rainfall in the northern part of the state, leading to temporary grounding of planes, flooded roads, power outages, and evacuation orders in some areas.",
-      "source": "Guardian World",
-      "url": "https://www.theguardian.com/us-news/2026/nov/19/california-atmospheric-river-san-francisco-rain-record"
+      "summary": "Reports indicate that almost one-third of all reported violations against children worldwide in 2025 occurred in Palestine, as Palestinians return to find their homes in ruins following Israel's ground offensive.",
+      "source": "Al Jazeera",
+      "url": "https://www.aljazeera.com/video/newsfeed/2026/11/20/one-third-of-attacks-on-children-worldwide-recorded-in-palestine?traffic_source=rss"
     }
   ],
   "us": [
     {
-      "summary": "Florida is set to record its 20th execution of the year, establishing a new record for the state, even as other states are reducing their use of the death penalty.",
-      "source": "NPR National",
-      "url": "https://www.npr.org/2026/11/19/nx-s1-6042913/as-some-states-move-away-from-the-death-penalty-florida-prepares-to-set-new-record"
+      "summary": "The US Senate approved bipartisan legislation aimed at speeding up permitting reviews for the construction of power plants, transmission lines, and other energy infrastructure, including data centers.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/us-news/2026/nov/20/senate-energy-datacenters-review-bill"
     },
     {
-      "summary": "The Pan American Health Organization has announced that the U.S. has officially lost its measles elimination status, reclassifying the disease as endemic because a strain has persisted for over a year.",
-      "source": "NPR Health",
-      "url": "https://www.npr.org/2026/11/17/nx-s1-6044227/u-s-officially-loses-its-measles-elimination-status"
+      "summary": "The US Army postponed its plan to detonate a stash of bomb-making chemicals in south-eastern Iowa following public and state official concerns that the controlled detonation could release a cloud of lead particles.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/us-news/2026/nov/19/iowa-lead-bomb-dust"
     },
     {
-      "summary": "Recent changes to SNAP food aid regulations require older adults up to age 65 to work or volunteer to receive benefits, impacting individuals who may have retired early for family care.",
+      "summary": "A Texas execution took over an hour as staff struggled to find suitable veins for the lethal injection, with the prisoner, Reinaldo Dennes, reportedly moaning about pain.",
       "source": "NPR National",
-      "url": "https://www.npr.org/2026/11/18/nx-s1-5954231/snap-work-rules-retirees"
+      "url": "https://www.npr.org/2026/11/20/nx-s1-6048461/texas-execution-dennes-moaned-pain"
     }
   ],
   "science": [
     {
-      "summary": "Australian scientists conducted a proof-of-concept experiment, successfully using gravity to transmit a message in binary code through a brick wall, suggesting a new method of communication.",
-      "source": "Guardian World",
-      "url": "https://www.theguardian.com/science/2026/nov/20/scientists-communicate-using-gravity-elevator-brick-wall-bathroom-experiment"
+      "summary": "A daily pill called daraxonrasib has shown potential to shrink and possibly eliminate tumors in some patients with pancreatic cancer, offering significant hope for one of the deadliest forms of the disease.",
+      "source": "BBC Health",
+      "url": "https://www.bbc.co.uk/news/articles/cqrmgjnzz9l0o?at_medium=RSS&at_campaign=rss"
     },
     {
-      "summary": "The U.S. has officially lost its measles elimination status, as the Pan American Health Organization now classifies the disease as endemic due to a strain persisting for over a year.",
+      "summary": "The US has officially lost its measles elimination status, as the Pan American Health Organization announced that the disease is now considered endemic in the country after a strain lingered for over a year.",
       "source": "NPR Health",
       "url": "https://www.npr.org/2026/11/17/nx-s1-6044227/u-s-officially-loses-its-measles-elimination-status"
     }

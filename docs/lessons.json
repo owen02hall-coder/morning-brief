@@ -1,22 +1,6 @@
 {
-  "generated_at": "2026-11-19T09:38:33.365049-07:00",
+  "generated_at": "2026-11-20T09:14:15.675316-07:00",
   "lessons": [
-    {
-      "id": "2026-09-18-sunk-cost",
-      "date": "2026-09-18",
-      "domain": "Thinking and people",
-      "title": "Deciding when to quit a project",
-      "hook": "Many people find themselves continuing endeavors that are no longer beneficial, simply because of what they've already put into them.",
-      "quick": "It is easy to get trapped in a situation, whether it's a car repair, a house renovation, or even a relationship, by focusing on what you've already spent. This happens when people believe their past investments, like money, effort, or time, justify putting in even more. This common behavior, often described as 'throwing good money after bad,' can lead you to persist in endeavors that are no longer serving you. Rational decision-making, however, suggests that only future costs and potential future benefits should guide your next steps. What you've already spent is gone and cannot be recovered, meaning it should not influence your decision to continue or stop.",
-      "more": "To make better choices, consider any cost that has already been incurred as 'water under the bridge.' This means your past expenditures should be irrelevant when deciding what to do next. For instance, if a new factory project was expected to cost a large sum and generate significant value, but after a portion of that sum is spent, the projected value drops considerably, a rational company would abandon the project if the cost to complete it now outweighs its reduced future value. The crucial point is to focus on what can still occur and the consequences of future actions, rather than dwelling on how the current situation was reached.",
-      "deep": "This tendency to let past, unrecoverable expenditures sway future decisions is known as the sunk cost fallacy. People often demonstrate a greater inclination to continue an endeavor once an investment has been made, even if it goes against their best interests. This behavior can be seen in individuals who keep investing time, money, and emotional energy in psychologically manipulative scams, despite having doubts. It has also been observed in managers of utility companies who were reluctant to terminate economically unviable nuclear plant projects in the 1970s and 1980s. While economic theory generally advises against considering sunk costs, there can be specific, often personal, reasons why someone might factor them in, such as wanting to be seen as persevering or to avoid blame for earlier mistakes. Yet, for most everyday situations, ignoring these past costs is essential for making sound and logical decisions.",
-      "takeaway": "Before committing more resources to any project or situation, assess only the future costs and potential benefits, completely disregarding any investments you have already made.",
-      "source": {
-        "title": "Sunk cost",
-        "url": "https://en.wikipedia.org/wiki/Sunk_cost"
-      },
-      "audio": {}
-    },
     {
       "id": "2026-09-19-loan",
       "date": "2026-09-19",
@@ -639,11 +623,7 @@
         "title": "Sleep",
         "url": "https://en.wikipedia.org/wiki/Sleep"
       },
-      "audio": {
-        "quick": "lessons/2026-10-29-sleep-quick.mp3",
-        "more": "lessons/2026-10-29-sleep-more.mp3",
-        "deep": "lessons/2026-10-29-sleep-deep.mp3"
-      }
+      "audio": {}
     },
     {
       "id": "2026-10-31-anchoring-effect",
@@ -1043,6 +1023,26 @@
         "quick": "lessons/2026-11-19-heimlich-maneuver-quick.mp3",
         "more": "lessons/2026-11-19-heimlich-maneuver-more.mp3",
         "deep": "lessons/2026-11-19-heimlich-maneuver-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-11-20-cognitive-dissonance",
+      "date": "2026-11-20",
+      "domain": "Thinking and people",
+      "title": "How to Handle Conflicting Beliefs",
+      "hook": "You might feel uncomfortable when your actions don't match your beliefs, but there are ways to resolve this inner conflict.",
+      "quick": "When your actions clash with your beliefs or values, it creates a mental discomfort known as cognitive dissonance. For instance, if you believe in saving money but make an impulse purchase, you might feel uneasy. To reduce this discomfort, you might unconsciously try to make your thoughts and actions align. This could involve changing your belief about the purchase, telling yourself it was a necessary expense, or downplaying its impact on your savings goals. Leon Festinger's theory suggests we naturally seek consistency and become psychologically uncomfortable when we don't have it. This discomfort motivates us to resolve the inconsistency, often by reframing the situation or adjusting our perspective to make our actions seem congruent with our internal state.",
+      "more": "Resolving cognitive dissonance can take several forms. You might rationalize your behavior, adding justifications to make it seem less inconsistent. For example, if you believe in healthy eating but indulge in junk food, you might tell yourself you deserve a treat or that it's only a small amount. Another way is through selective perception, where you focus on information that supports your action and ignore anything that contradicts it. If you're trying to cut back on spending but buy something expensive, you might only notice positive reviews of the item and ignore its cost. These mental adjustments help reduce the psychological stress caused by the conflict between what you believe and what you do.",
+      "deep": "The intensity of cognitive dissonance depends on how important the conflicting beliefs or actions are to you. If something deeply matters to you, like a core value or a significant life goal, the dissonance experienced when your actions contradict it will be much stronger. You might also be more likely to resolve this dissonance by downplaying the importance of the conflicting element or by rejecting information that highlights the inconsistency. For example, if you strongly believe in environmental protection but drive a gas-guzzling car, you might either decide that individual actions don't matter much, or you might selectively focus on the car's safety features and ignore its environmental impact to reduce the mental discomfort.",
+      "takeaway": "Review recent decisions where your actions felt inconsistent with your stated goals or values, and notice if you've reframed the situation to feel better about it.",
+      "source": {
+        "title": "Cognitive dissonance",
+        "url": "https://en.wikipedia.org/wiki/Cognitive_dissonance"
+      },
+      "audio": {
+        "quick": "lessons/2026-11-20-cognitive-dissonance-quick.mp3",
+        "more": "lessons/2026-11-20-cognitive-dissonance-more.mp3",
+        "deep": "lessons/2026-11-20-cognitive-dissonance-deep.mp3"
       }
     }
   ],
