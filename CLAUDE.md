@@ -10,7 +10,7 @@ Owen tracks every Claude session in Wingman, in his Atlas hub. Report there so h
 - When you are stuck (failing CI you cannot fix, missing access or keys): write a `needs` item that says what is blocking you.
 - Item id: `code-morning-brief-<YYYYMMDD-HHMM>`, reused for updates to the same piece of work.
 - Fields: `agent` "code", `kind` (progress | needs | done), `title` (one short line), `detail` (one or two short lines), `area`, `ref`, `link` (https, e.g. the PR) and `linkLabel`, `status` (open | done), `createdAt` and `updatedAt` (ISO). For `needs` also `action` and `status` open.
-- How to write: if `~/.central-hub.env` exists, POST `{"ops":[{"op":"merge","col":"brain","id":"<id>","data":{...}}]}` to `$HUB_URL/api/write` with `Authorization: Bearer $HUB_TOKEN`. Otherwise use the Neon connector on project `jolly-grass-18463699`:
+- How to write: if `~/.central-hub.env` exists, POST `{"ops":[{"op":"merge","col":"brain","id":"<id>","data":{...}}]}` to `$HUB_URL/api/write` with `Authorization: Bearer $HUB_TOKEN`. Otherwise use the Neon connector on project `autumn-mode-41076665`:
   `insert into hub_docs (col, id, data) values ('brain', '<id>', '<json>'::jsonb) on conflict (col, id) do update set data = hub_docs.data || excluded.data, updated_at = now()`
 - If neither works, skip it and say so in your final message. Never ask Owen for keys in chat.
 - Keep it short. No em dashes. Full schema: `docs/claude-update-rule.md` in owen02hall-coder/central-hub.
