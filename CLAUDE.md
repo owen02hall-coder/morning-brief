@@ -14,3 +14,4 @@ Owen tracks every Claude session in Wingman, in his Atlas hub. Report there so h
   `insert into hub_docs (col, id, data) values ('brain', '<id>', '<json>'::jsonb) on conflict (col, id) do update set data = hub_docs.data || excluded.data, updated_at = now()`
 - If neither works, skip it and say so in your final message. Never ask Owen for keys in chat.
 - Keep it short. No em dashes. Full schema: `docs/claude-update-rule.md` in owen02hall-coder/central-hub.
+- After meaningful work, update `PROJECT.md` (goal, milestones, next step) so the hub and the next session can see where things stand.
