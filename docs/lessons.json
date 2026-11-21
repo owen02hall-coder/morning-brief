@@ -1,22 +1,6 @@
 {
-  "generated_at": "2026-11-20T09:14:15.675316-07:00",
+  "generated_at": "2026-11-21T08:26:59.883135-07:00",
   "lessons": [
-    {
-      "id": "2026-09-19-loan",
-      "date": "2026-09-19",
-      "domain": "Money mechanics",
-      "title": "How Loan Types Affect Your Cost and Risk",
-      "hook": "The cost of borrowing money can be significantly different depending on whether your loan is backed by an asset or not.",
-      "quick": "If you need to borrow money, you might find that the interest rate charged varies widely, and this often comes down to whether the loan is secured. A secured loan means you pledge an asset, like a car or a house, as collateral. Because the lender has something to recover if you can't pay, they face less risk. This reduced risk for the lender typically results in lower interest rates for you. For example, a mortgage loan to buy property is a common type of secured loan, where the property itself acts as security until the loan is fully paid.",
-      "more": "In contrast, an unsecured loan isn't backed by any of your assets. Examples include credit cards or personal loans. Because there's no specific collateral for the lender to take if you default, their risk is much higher. This increased risk is reflected in the interest rates you pay, which are almost always higher for unsecured loans compared to secured ones. If you were to face severe financial difficulty, secured lenders traditionally have priority over unsecured lenders when any assets are divided by a court.",
-      "deep": "When an unsecured borrower defaults, the lender cannot simply repossess an asset like with a secured loan. Instead, the unsecured lender usually has to sue the borrower, obtain a judgment for breach of contract, and then pursue the execution of that judgment against any assets the borrower has that are not already pledged to other lenders. This legal process can be lengthy and uncertain, which contributes to the higher risk for the unsecured lender and, consequently, the higher interest rates for the borrower. Whether a loan is secured or unsecured significantly impacts both the lender's recourse and your borrowing cost.",
-      "takeaway": "Before committing to a loan, confirm if it is secured by an asset and understand how that impacts the interest rate and the lender's ability to recover funds.",
-      "source": {
-        "title": "Loan",
-        "url": "https://en.wikipedia.org/wiki/Loan"
-      },
-      "audio": {}
-    },
     {
       "id": "2026-09-20-foundation-engineering",
       "date": "2026-09-20",
@@ -639,11 +623,7 @@
         "title": "Anchoring effect",
         "url": "https://en.wikipedia.org/wiki/Anchoring_effect"
       },
-      "audio": {
-        "quick": "lessons/2026-10-31-anchoring-effect-quick.mp3",
-        "more": "lessons/2026-10-31-anchoring-effect-more.mp3",
-        "deep": "lessons/2026-10-31-anchoring-effect-deep.mp3"
-      }
+      "audio": {}
     },
     {
       "id": "2026-11-01-home-insurance",
@@ -1043,6 +1023,26 @@
         "quick": "lessons/2026-11-20-cognitive-dissonance-quick.mp3",
         "more": "lessons/2026-11-20-cognitive-dissonance-more.mp3",
         "deep": "lessons/2026-11-20-cognitive-dissonance-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-11-21-index-fund",
+      "date": "2026-11-21",
+      "domain": "Money mechanics",
+      "title": "Reducing Investment Costs",
+      "hook": "High fees and unnecessary trading can quietly eat away at your investment returns over time.",
+      "quick": "Many mutual funds employ active management, where fund managers try to pick winning stocks to beat the market. This approach can come with higher costs. For investors, these higher fees mean less of their money actually goes to work for them. Index funds offer a different path; they are designed to simply mirror the performance of a market index, like a broad stock market average. Instead of trying to outperform the market, an index fund holds the same securities as the index in similar proportions. This passive strategy allows for lower fees and offers diversification, which can be a simpler way to manage your asset allocation compared to constantly trying to pick individual winners.",
+      "more": "The reason index funds are typically less expensive to operate is because their composition is a known quantity. They don't need expensive research teams making daily decisions about which stocks to buy or sell. This passive approach also leads to lower turnover within the fund. Turnover refers to how often a fund buys and sells securities. Frequent selling of securities can lead to capital gains taxes, which are sometimes passed on to investors. Even without taxes, turnover has explicit and implicit costs that directly reduce returns. By keeping turnover low, index funds help preserve more of your investment's growth.",
+      "deep": "An index fund's primary goal is not to generate extra returns through security selection, but to accurately replicate its benchmark index while keeping investment costs and tracking error to a minimum. This straightforward objective makes them easy for investors to understand. In contrast, actively managed funds sometimes experience \"style drift,\" meaning they might invest in areas outside their stated focus, like a fund advertised as large-cap value suddenly buying small-cap growth stocks to chase returns. This can complicate an investor's overall portfolio strategy. There are also modified index funds that adjust how they track an index, perhaps by using covered call strategies or excluding certain sectors, all with the aim of altering the risk, return, or yield.",
+      "takeaway": "When considering investments, compare the fees and turnover rates of different funds to see how much of your potential returns might be lost to costs.",
+      "source": {
+        "title": "Index fund",
+        "url": "https://en.wikipedia.org/wiki/Index_fund"
+      },
+      "audio": {
+        "quick": "lessons/2026-11-21-index-fund-quick.mp3",
+        "more": "lessons/2026-11-21-index-fund-more.mp3",
+        "deep": "lessons/2026-11-21-index-fund-deep.mp3"
       }
     }
   ],

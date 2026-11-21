@@ -1,47 +1,47 @@
 {
-  "generated_at": "2026-11-20T09:14:15.675316-07:00",
-  "date": "2026-11-20",
+  "generated_at": "2026-11-21T08:26:59.883135-07:00",
+  "date": "2026-11-21",
   "tldr": [
-    "Global stock markets experienced a slump, driven by a broad sell-off in the artificial intelligence sector following Anthropic's public trading debut.",
-    "The US Senate passed bipartisan legislation aimed at accelerating permitting reviews for energy and data center infrastructure projects.",
-    "The US officially lost its measles elimination status, as the Pan American Health Organization reclassified the disease as endemic in the nation."
+    "US markets experienced a significant sell-off, with the S&P 500 and Nasdaq Composite entering correction territory and Nvidia stock plunging.",
+    "International climate talks at COP31 are in a deadlock over fossil fuels, and UN discussions on autonomous weapons failed to yield binding rules.",
+    "Scientists successfully sequenced a whale's entire genome using drone-collected snot, and a new pancreatic cancer pill showed promise in clinical trials."
   ],
   "market": {
     "sp500": {
-      "value": 7175.83,
-      "change": -147.8,
-      "asof": "2026-11-19"
+      "value": 6910.39,
+      "change": -265.44,
+      "asof": "2026-11-20"
     },
     "ndx": {
-      "value": 23879.2,
-      "change": -550.68,
-      "asof": "2026-11-19"
+      "value": 22617.73,
+      "change": -1261.47,
+      "asof": "2026-11-20"
     },
-    "why": "Global stock markets closed lower, with the S&P 500 and Nasdaq Composite both declining, as investors questioned the significant investments in AI and a broader sell-off impacted the sector after Anthropic's initial public offering."
+    "why": "US equity markets saw a broad sell-off, with the S&P 500 and Nasdaq Composite closing in correction territory as of November 20. This reflected a \"brutal week for stocks\" where investors prioritized portfolio protection, and a significant plunge in Nvidia stock also contributed to the downturn."
   },
   "yield_10y": {
-    "value": 5.05,
-    "change": -0.01,
-    "asof": "2026-11-19",
-    "why": "The articles do not provide a specific reason for the 10-year Treasury yield's minor change on November 19, 2026."
+    "value": 4.91,
+    "change": -0.14,
+    "asof": "2026-11-20",
+    "why": "The articles provided do not offer a reason for the specific daily movement of the 10-year Treasury yield."
   },
   "vix": {
-    "value": 28.44,
-    "change": 3.88,
-    "asof": "2026-11-19",
-    "why": "The VIX, a measure of market volatility, increased as global stock markets slumped and the AI sector experienced a sell-off, indicating heightened investor apprehension."
+    "value": 35.89,
+    "change": 7.45,
+    "asof": "2026-11-20",
+    "why": "The VIX increased significantly to 35.89 as of November 20, reflecting heightened investor fear amid a broad market sell-off described as Wall Street's worst week in over a year."
   },
   "breadth": {
     "sp500": {
-      "value": 51.6,
-      "asof": "2026-11-19",
+      "value": 45.7,
+      "asof": "2026-11-20",
       "status": "healthy",
-      "matched": 500,
+      "matched": 499,
       "stale": false
     },
     "ndx100": {
-      "value": 39.6,
-      "asof": "2026-11-19",
+      "value": 36.5,
+      "asof": "2026-11-20",
       "status": "watch",
       "matched": 96,
       "stale": false
@@ -51,47 +51,47 @@
     {
       "symbol": "SOXL",
       "what": "3x semiconductors",
-      "value": 45.3,
-      "day_move": -8.04,
-      "asof": "2026-11-19",
-      "rsi": 33.1,
-      "rsi_zone": "neutral",
-      "low": 40.87,
+      "value": 30.88,
+      "day_move": -31.83,
+      "asof": "2026-11-20",
+      "rsi": 28.5,
+      "rsi_zone": "oversold",
+      "low": 30.88,
       "high": 107.35,
-      "band_pct": 6.7,
-      "zone": "mid",
-      "action": "hold",
-      "read": "Mid-range - 7% of the way up its 1-month band. Big session: down 8.0% in a day."
+      "band_pct": 0.0,
+      "zone": "low",
+      "action": "buy",
+      "read": "Near the bottom of its 1-month range and oversold on RSI. Big session: down 31.8% in a day."
     },
     {
       "symbol": "SPXL",
       "what": "3x S&P 500",
-      "value": 225.68,
-      "day_move": -5.95,
-      "asof": "2026-11-19",
-      "rsi": 30.8,
-      "rsi_zone": "neutral",
-      "low": 225.68,
+      "value": 201.97,
+      "day_move": -10.51,
+      "asof": "2026-11-20",
+      "rsi": 25.0,
+      "rsi_zone": "oversold",
+      "low": 201.97,
       "high": 288.95,
       "band_pct": 0.0,
       "zone": "low",
       "action": "buy",
-      "read": "Within 4% of its 1-month low."
+      "read": "Near the bottom of its 1-month range and oversold on RSI. Big session: down 10.5% in a day."
     },
     {
       "symbol": "TQQQ",
       "what": "3x Nasdaq-100",
-      "value": 49.01,
-      "day_move": -6.54,
-      "asof": "2026-11-19",
-      "rsi": 32.5,
-      "rsi_zone": "neutral",
-      "low": 49.01,
+      "value": 41.2,
+      "day_move": -15.94,
+      "asof": "2026-11-20",
+      "rsi": 26.6,
+      "rsi_zone": "oversold",
+      "low": 41.2,
       "high": 72.36,
       "band_pct": 0.0,
       "zone": "low",
       "action": "buy",
-      "read": "Within 4% of its 1-month low."
+      "read": "Near the bottom of its 1-month range and oversold on RSI. Big session: down 15.9% in a day."
     }
   ],
   "watchlist_missing": [],
@@ -99,9 +99,18 @@
     "value": 7.28,
     "change": 0.17,
     "asof": "2026-11-19",
-    "why": "The 30-year fixed mortgage rate increased to 7.28% in the weekly Freddie Mac survey released on November 19, 2026. This rate tracks the direction of 10-year Treasury yields over recent days, though a specific reason for this weekly change was not detailed in the provided articles."
+    "why": "The 30-year fixed mortgage rate from Freddie Mac's weekly survey, released November 19, increased by 0.17% to 7.28%. This movement typically tracks the direction of the 10-year Treasury yield over recent days, though specific drivers for this weekly survey's change are not detailed in the provided articles."
   },
-  "policy": [],
+  "policy": [
+    {
+      "what_happened": "Final regulations provide guidance for automatic enrollment requirements that apply to certain retirement plans.",
+      "effect": "Your retirement plan participation is subject to new automatic enrollment requirements starting January 19, 2027.",
+      "url": "https://www.federalregister.gov/documents/2026/11/18/2026-23530/automatic-enrollment-requirements-under-section-414a",
+      "status": "Final rule",
+      "effective_date": "2027-01-19",
+      "source": "Federal Register"
+    }
+  ],
   "policy_upcoming": [
     {
       "what_happened": "Temporary regulations were issued concerning a new nonrefundable Federal tax credit for qualified contributions to scholarship granting organizations.",
@@ -134,9 +143,26 @@
       "status": "Signed in Utah",
       "effective_date": "2027-01-01",
       "source": "Utah Legislature"
+    },
+    {
+      "what_happened": "Final regulations provide guidance for automatic enrollment requirements that apply to certain retirement plans.",
+      "effect": "Your retirement plan participation is subject to new automatic enrollment requirements starting January 19, 2027.",
+      "url": "https://www.federalregister.gov/documents/2026/11/18/2026-23530/automatic-enrollment-requirements-under-section-414a",
+      "status": "Final rule",
+      "effective_date": "2027-01-19",
+      "source": "Federal Register"
     }
   ],
-  "policy_week": [],
+  "policy_week": [
+    {
+      "what_happened": "Final regulations provide guidance for automatic enrollment requirements that apply to certain retirement plans.",
+      "effect": "Your retirement plan participation is subject to new automatic enrollment requirements starting January 19, 2027.",
+      "url": "https://www.federalregister.gov/documents/2026/11/18/2026-23530/automatic-enrollment-requirements-under-section-414a",
+      "status": "Final rule",
+      "effective_date": "2027-01-19",
+      "source": "Federal Register"
+    }
+  ],
   "policy_calendar": [
     {
       "date": "2026-11-30",
@@ -147,65 +173,70 @@
   ],
   "tech": [
     {
-      "summary": "Shares of AI company Anthropic slumped on its second day of trading, dragging down the broader AI market, as investors reassessed the large sums being invested in artificial intelligence development.",
-      "source": "Guardian World",
-      "url": "https://www.theguardian.com/business/2026/nov/20/global-stock-markets-slump-anthropic-ipo-ai-sell-off"
+      "summary": "A mathematician working for artificial intelligence company Anthropic claims to have solved a major mathematical problem, the second such claim linked to an AI company in recent months.",
+      "source": "NPR",
+      "url": "https://www.npr.org/2026/11/21/g-s1-154922/anthropic-worker-claims-to-have-solved-a-holy-grail-of-math-problems-with-the-help-of-ai"
     },
     {
-      "summary": "A new CPU architecture named 'Frostbite' has been discovered, designed, and verified entirely by artificial intelligence, marking a significant development in AI's role in hardware engineering.",
-      "source": "Hacker News",
-      "url": "https://architectlabs.com/blog/frostbite"
+      "summary": "Google is rolling out a redesigned search homepage that integrates AI chat history and removes the traditional search button, making AI tools more accessible directly on the search page.",
+      "source": "Ars Technica",
+      "url": "https://arstechnica.com/ai/2026/11/googles-latest-search-page-redesign-drops-the-search-button-adds-ai-sidebar/"
     },
     {
-      "summary": "Signal is implementing restrictions to block AI agents like Gemini and Siri from reading user messages and other data by preventing screenshots on Android and iOS devices, aiming to uphold user privacy.",
-      "source": "The Verge",
-      "url": "https://www.theverge.com/ai-artificial-intelligence/1038390/signal-blocking-ai-agent-screenshots-mobile-app"
+      "summary": "A researcher demonstrated that unique, trackable secrets inserted into AI prompts can expose secret user data at an alarming rate, revealing privacy vulnerabilities within the AI supply chain.",
+      "source": "Ars Technica",
+      "url": "https://arstechnica.com/security/2026/11/a-leaky-ai-supply-chain-is-exposing-secret-user-data-at-an-alarming-rate/"
     }
   ],
   "world": [
     {
-      "summary": "The UK and EU have agreed to a 'reset deal' for their relationship, although the issue of tuition fees for EU students attending UK universities remains unresolved.",
-      "source": "Guardian World",
-      "url": "https://www.theguardian.com/politics/2026/nov/20/fallout-over-tuition-fees-may-snag-burnhams-eu-deal-say-insiders"
-    },
-    {
-      "summary": "Nearly 600 women were killed in South Africa within a three-month period, prompting police officials to call for increased efforts to prevent violence against women and children.",
-      "source": "BBC World",
-      "url": "https://www.bbc.co.uk/news/articles/c69vwyjp0339o?at_medium=RSS&at_campaign=rss"
-    },
-    {
-      "summary": "Reports indicate that almost one-third of all reported violations against children worldwide in 2025 occurred in Palestine, as Palestinians return to find their homes in ruins following Israel's ground offensive.",
+      "summary": "Two tankers were reportedly hit in the Strait of Hormuz near Oman, while Iran stated one tanker caught fire due to a naval mine, as Iran reportedly tightens its grip on shipping in the area.",
       "source": "Al Jazeera",
-      "url": "https://www.aljazeera.com/video/newsfeed/2026/11/20/one-third-of-attacks-on-children-worldwide-recorded-in-palestine?traffic_source=rss"
+      "url": "https://www.aljazeera.com/news/2026/11/21/tankers-hit-in-strait-of-hormuz-as-iran-tightens-grip-on-shipping?traffic_source=rss"
+    },
+    {
+      "summary": "International climate talks at COP31 are in a deadlock as countries struggle to agree on a new global climate agreement due to disagreements over fossil fuels.",
+      "source": "BBC World",
+      "url": "https://www.bbc.co.uk/news/articles/c6ly5w40eg07o?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "summary": "U.N. talks in Geneva concluded without achieving legally binding rules on autonomous weapons, prompting humanitarian groups to express concern that military AI is advancing faster than diplomatic efforts.",
+      "source": "NPR",
+      "url": "https://www.npr.org/2026/11/21/nx-s1-6047916/killer-robots-un-drones"
+    },
+    {
+      "summary": "Denmark is expelling a Russian diplomat, Russia's defense attache in Copenhagen, following suspicions that Moscow was involved in an attempted killing of a US-Ukrainian rapper.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/world/2026/nov/20/denmark-russian-diplomat-us-ukrainian-rapper-attempted-killing"
     }
   ],
   "us": [
     {
-      "summary": "The US Senate approved bipartisan legislation aimed at speeding up permitting reviews for the construction of power plants, transmission lines, and other energy infrastructure, including data centers.",
-      "source": "Guardian World",
-      "url": "https://www.theguardian.com/us-news/2026/nov/20/senate-energy-datacenters-review-bill"
-    },
-    {
-      "summary": "The US Army postponed its plan to detonate a stash of bomb-making chemicals in south-eastern Iowa following public and state official concerns that the controlled detonation could release a cloud of lead particles.",
-      "source": "Guardian World",
-      "url": "https://www.theguardian.com/us-news/2026/nov/19/iowa-lead-bomb-dust"
-    },
-    {
-      "summary": "A Texas execution took over an hour as staff struggled to find suitable veins for the lethal injection, with the prisoner, Reinaldo Dennes, reportedly moaning about pain.",
+      "summary": "A federal jury in Los Angeles convicted 30-year-old Jonathan Rinderknecht of starting the deadly 2025 Palisades Fire, which resulted in 12 fatalities, following a retrial.",
       "source": "NPR National",
-      "url": "https://www.npr.org/2026/11/20/nx-s1-6048461/texas-execution-dennes-moaned-pain"
+      "url": "https://www.npr.org/2026/11/21/nx-s1-6049625/palisades-fire-conviction"
+    },
+    {
+      "summary": "Hackers reportedly breached the US Department of Agriculture (USDA) and the FBI, targeting the farmer-payment system at the USDA and the FBI's National Crime Information Center.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/us-news/2026/nov/21/usda-fbi-outages-cyber-attack"
+    },
+    {
+      "summary": "A report to the US Congress found that the US Navy's commitment to new \"Trump-class\" battleships has inflated the cost of its new fleet by billions of dollars, with the acting Secretary of the Navy admitting the Iran war is straining fleet capacity.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/us-news/2026/nov/21/trump-class-warships"
     }
   ],
   "science": [
     {
-      "summary": "A daily pill called daraxonrasib has shown potential to shrink and possibly eliminate tumors in some patients with pancreatic cancer, offering significant hope for one of the deadliest forms of the disease.",
-      "source": "BBC Health",
-      "url": "https://www.bbc.co.uk/news/articles/cqrmgjnzz9l0o?at_medium=RSS&at_campaign=rss"
+      "summary": "Scientists successfully sequenced the entire genome of a whale by using commercial drones equipped with petri dishes to collect samples of the whale's snot, demonstrating a novel genetic research method.",
+      "source": "NPR Science",
+      "url": "https://www.npr.org/2026/11/21/nx-s1-6044816/scientists-sequenced-a-whales-entire-genome-using-drones-and-whale-snot"
     },
     {
-      "summary": "The US has officially lost its measles elimination status, as the Pan American Health Organization announced that the disease is now considered endemic in the country after a strain lingered for over a year.",
-      "source": "NPR Health",
-      "url": "https://www.npr.org/2026/11/17/nx-s1-6044227/u-s-officially-loses-its-measles-elimination-status"
+      "summary": "A daily pill called daraxonrasib has shown \"massive hope\" for pancreatic cancer treatment, with a trial indicating it can shrink and potentially eliminate tumors in some patients with this aggressive cancer.",
+      "source": "BBC Health",
+      "url": "https://www.bbc.co.uk/news/articles/cqrmgjnzz9l0o?at_medium=RSS&at_campaign=rss"
     }
   ],
   "weekly_recap": null,
