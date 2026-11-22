@@ -1,22 +1,6 @@
 {
-  "generated_at": "2026-11-21T08:26:59.883135-07:00",
+  "generated_at": "2026-11-22T08:27:20.101141-07:00",
   "lessons": [
-    {
-      "id": "2026-09-20-foundation-engineering",
-      "date": "2026-09-20",
-      "domain": "Home, car and repair",
-      "title": "Understanding Home Foundation Settlement",
-      "hook": "Understanding how a house connects to the ground can save you from costly problems down the road.",
-      "quick": "A common and costly problem with home foundations occurs when the ground underneath settles unevenly. This \"differential settlement\" can happen if the foundation does not properly distribute the building's weight over a sufficiently large area, or if the underlying soil becomes overloaded. When different parts of a foundation sink at varying rates, it creates instability for the entire structure. This issue is particularly pronounced in areas where the weight from the house is not uniformly spread across the foundation. A well-designed foundation aims to prevent such unequal settling, which is crucial for keeping the home stable and intact. Without proper attention to these engineering details, a house may experience significant structural stress and damage, potentially leading to expensive repairs over its lifespan.",
-      "more": "Beyond uneven weight distribution, foundations also need to protect against various natural forces, including earthquakes, floods, droughts, frost heaves, tornadoes, and wind, effectively anchoring the structure firmly. A well-built foundation must both sustain the dead and imposed loads from the house and transmit them to the soil without causing any form of settlement that could lead to stability problems. A deeper foundation is often recommended based on the specific soil conditions and geographic area. This increased depth helps guard against damage or distress primarily caused by the soil shrinking and swelling due to temperature changes. This natural movement in the ground can put considerable stress on a foundation that isn't designed to resist it, leading to future issues.",
-      "deep": "During the design phase, foundations are carefully planned to have adequate load capacity, considering the specific type of subsoil or rock that will support them. A geotechnical engineer is responsible for determining this ground capacity, while a structural engineer designs the footing elements themselves. The two primary concerns guiding this design are settlement and bearing capacity. Engineers analyze both total settlement, which refers to the overall sinking of the entire structure, and differential settlement, which is the uneven sinking of different parts of the foundation. Getting these aspects correct is paramount because, once a house is built, addressing problems related to a poorly designed or constructed foundation can become incredibly expensive and disruptive for homeowners, significantly affecting the long-term stability and value of their property.",
-      "takeaway": "Before buying a house, arrange for a qualified structural or geotechnical engineer to inspect the foundation for signs of unequal settlement or damage caused by soil movement.",
-      "source": {
-        "title": "Foundation (engineering)",
-        "url": "https://en.wikipedia.org/wiki/Foundation_(engineering)"
-      },
-      "audio": {}
-    },
     {
       "id": "2026-09-21-anaphylaxis",
       "date": "2026-09-21",
@@ -639,11 +623,7 @@
         "title": "Home insurance",
         "url": "https://en.wikipedia.org/wiki/Home_insurance"
       },
-      "audio": {
-        "quick": "lessons/2026-11-01-home-insurance-quick.mp3",
-        "more": "lessons/2026-11-01-home-insurance-more.mp3",
-        "deep": "lessons/2026-11-01-home-insurance-deep.mp3"
-      }
+      "audio": {}
     },
     {
       "id": "2026-11-02-hydraulic-shock",
@@ -1043,6 +1023,26 @@
         "quick": "lessons/2026-11-21-index-fund-quick.mp3",
         "more": "lessons/2026-11-21-index-fund-more.mp3",
         "deep": "lessons/2026-11-21-index-fund-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-11-22-air-conditioning",
+      "date": "2026-11-22",
+      "domain": "Home, car and repair",
+      "title": "Air Conditioning and Your Home's Energy Use",
+      "hook": "How you cool your home impacts your energy bill and helps shape the environment around you.",
+      "quick": "Many of us rely on air conditioning to stay comfortable, but using it widely comes with significant energy and environmental costs. Air conditioning uses about seven percent of global electricity and emits three percent of greenhouse gas annually. Despite these costs, air conditioning prevents serious health issues in hot weather, such as heat stroke, dehydration from excessive sweating, electrolyte imbalance, and kidney failure, averting an estimated 190,000 heat-related deaths each year. It has also increased productivity in hot climates and was a key factor in shaping the growth of cities after the postwar period, enabling people to live comfortably in hotter parts of the world and allowing for the creation of buildings with deep interior spaces.",
+      "more": "While mechanical air conditioners provide powerful cooling, their energy consumption has led to calls for more sustainable approaches. Organizations like the United Nations encourage more sustainable technology and the use of alternatives to traditional air conditioning. Instead of solely relying on mechanical units, other methods like passive cooling, evaporative cooling, selective shading, and thermal insulation can help manage indoor temperatures. Heat pumps are also becoming more common in cooler climates, offering a similar cooling function to air conditioners but with the added ability to heat a space using a reversing valve.",
+      "deep": "Historically, cooling techniques were often passive and widespread across many ancient cultures. Buildings with double walls to encourage airflow or other methods to cool spaces were common from the Iberian Peninsula through North Africa, the Middle East, and Northern India, and remained so until the twentieth century. At that point, these passive techniques fell out of fashion, largely replaced by powered air conditioning. However, drawing on engineering studies of these traditional buildings, passive cooling methods are now being revived and modified for modern architectural designs. This return to older principles helps maintain a more constant indoor environment, reducing reliance on mechanical systems regardless of external weather changes or internal heat sources.",
+      "takeaway": "When considering a home, investigate its existing cooling methods and ask about options like passive cooling, evaporative cooling, selective shading, or thermal insulation to reduce energy use.",
+      "source": {
+        "title": "Air conditioning",
+        "url": "https://en.wikipedia.org/wiki/Air_conditioning"
+      },
+      "audio": {
+        "quick": "lessons/2026-11-22-air-conditioning-quick.mp3",
+        "more": "lessons/2026-11-22-air-conditioning-more.mp3",
+        "deep": "lessons/2026-11-22-air-conditioning-deep.mp3"
       }
     }
   ],

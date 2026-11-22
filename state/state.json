@@ -1,6 +1,6 @@
 {
-  "last_run": "2026-11-21",
-  "markets_last_ok": "2026-11-21",
+  "last_run": "2026-11-22",
+  "markets_last_ok": "2026-11-22",
   "breadth_last_good": {
     "sp500": {
       "value": 45.7,
@@ -105,18 +105,9 @@
     }
   ],
   "policy_today": {
-    "date": "2026-11-21",
-    "items": [
-      {
-        "what_happened": "Final regulations provide guidance for automatic enrollment requirements that apply to certain retirement plans.",
-        "effect": "Your retirement plan participation is subject to new automatic enrollment requirements starting January 19, 2027.",
-        "url": "https://www.federalregister.gov/documents/2026/11/18/2026-23530/automatic-enrollment-requirements-under-section-414a",
-        "status": "Final rule",
-        "effective_date": "2027-01-19",
-        "source": "Federal Register"
-      }
-    ],
-    "alerted": true
+    "date": "2026-11-22",
+    "items": [],
+    "alerted": false
   },
   "lessons_taught": [
     {
@@ -797,6 +788,13 @@
       "title": "Reducing Investment Costs",
       "domain": "Money mechanics",
       "date": "2026-11-21"
+    },
+    {
+      "id": "2026-11-22-air-conditioning",
+      "article_title": "Air conditioning",
+      "title": "Air Conditioning and Your Home's Energy Use",
+      "domain": "Home, car and repair",
+      "date": "2026-11-22"
     }
   ],
   "lessons_bootstrapped": true,

@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-11-21T08:26:59.883135-07:00",
-  "date": "2026-11-21",
+  "generated_at": "2026-11-22T08:27:20.101141-07:00",
+  "date": "2026-11-22",
   "tldr": [
-    "US markets experienced a significant sell-off, with the S&P 500 and Nasdaq Composite entering correction territory and Nvidia stock plunging.",
-    "International climate talks at COP31 are in a deadlock over fossil fuels, and UN discussions on autonomous weapons failed to yield binding rules.",
-    "Scientists successfully sequenced a whale's entire genome using drone-collected snot, and a new pancreatic cancer pill showed promise in clinical trials."
+    "Global stock markets experienced a significant sell-off, particularly in the tech sector, resulting in the S&P 500 and Nasdaq Composite entering correction territory.",
+    "A federal jury in Los Angeles convicted a man for starting the deadly 2025 Palisades Fire, which resulted in 12 fatalities.",
+    "Scientists have achieved a breakthrough by sequencing an entire whale genome using drone-collected snot samples."
   ],
   "market": {
     "sp500": {
@@ -17,19 +17,19 @@
       "change": -1261.47,
       "asof": "2026-11-20"
     },
-    "why": "US equity markets saw a broad sell-off, with the S&P 500 and Nasdaq Composite closing in correction territory as of November 20. This reflected a \"brutal week for stocks\" where investors prioritized portfolio protection, and a significant plunge in Nvidia stock also contributed to the downturn."
+    "why": "Global stock markets experienced a slump and entered correction territory on November 20, driven by a broad sell-off, particularly in the artificial intelligence sector, following Anthropic's public trading debut and marking Wall Street's worst week in over a year."
   },
   "yield_10y": {
     "value": 4.91,
     "change": -0.14,
     "asof": "2026-11-20",
-    "why": "The articles provided do not offer a reason for the specific daily movement of the 10-year Treasury yield."
+    "why": "The provided articles do not offer a specific explanation for the movement in the 10-year Treasury yield on November 20."
   },
   "vix": {
     "value": 35.89,
     "change": 7.45,
     "asof": "2026-11-20",
-    "why": "The VIX increased significantly to 35.89 as of November 20, reflecting heightened investor fear amid a broad market sell-off described as Wall Street's worst week in over a year."
+    "why": "The VIX increased significantly on November 20, reflecting heightened market volatility and investor concerns amid a broad stock market correction and sell-off, especially within the tech sector."
   },
   "breadth": {
     "sp500": {
@@ -99,18 +99,9 @@
     "value": 7.28,
     "change": 0.17,
     "asof": "2026-11-19",
-    "why": "The 30-year fixed mortgage rate from Freddie Mac's weekly survey, released November 19, increased by 0.17% to 7.28%. This movement typically tracks the direction of the 10-year Treasury yield over recent days, though specific drivers for this weekly survey's change are not detailed in the provided articles."
+    "why": "The 30-year fixed mortgage rate, reported as part of a weekly survey released on November 19, increased, reflecting trends in bond yields over recent days. The provided articles do not offer a more specific reason for this particular weekly increase."
   },
-  "policy": [
-    {
-      "what_happened": "Final regulations provide guidance for automatic enrollment requirements that apply to certain retirement plans.",
-      "effect": "Your retirement plan participation is subject to new automatic enrollment requirements starting January 19, 2027.",
-      "url": "https://www.federalregister.gov/documents/2026/11/18/2026-23530/automatic-enrollment-requirements-under-section-414a",
-      "status": "Final rule",
-      "effective_date": "2027-01-19",
-      "source": "Federal Register"
-    }
-  ],
+  "policy": [],
   "policy_upcoming": [
     {
       "what_happened": "Temporary regulations were issued concerning a new nonrefundable Federal tax credit for qualified contributions to scholarship granting organizations.",
@@ -173,73 +164,68 @@
   ],
   "tech": [
     {
-      "summary": "A mathematician working for artificial intelligence company Anthropic claims to have solved a major mathematical problem, the second such claim linked to an AI company in recent months.",
-      "source": "NPR",
-      "url": "https://www.npr.org/2026/11/21/g-s1-154922/anthropic-worker-claims-to-have-solved-a-holy-grail-of-math-problems-with-the-help-of-ai"
+      "summary": "Quantum computing firms are exploring practical applications in the energy sector, including optimizing energy grids, developing solar materials, and creating hydrogen catalysts, potentially leading to its first real-world payoff in energy rather than drug discovery.",
+      "source": "CNBC",
+      "url": "https://www.cnbc.com/2026/11/22/quantum-computing-energy-applications.html"
     },
     {
-      "summary": "Google is rolling out a redesigned search homepage that integrates AI chat history and removes the traditional search button, making AI tools more accessible directly on the search page.",
-      "source": "Ars Technica",
-      "url": "https://arstechnica.com/ai/2026/11/googles-latest-search-page-redesign-drops-the-search-button-adds-ai-sidebar/"
+      "summary": "United Nations diplomats failed to agree on regulations for autonomous weapons, often referred to as 'killer robots,' after a week of negotiations in Geneva, instead agreeing only to begin discussing options.",
+      "source": "The Verge",
+      "url": "https://www.theverge.com/tech/1039554/un-regulations-killer-robots"
     },
     {
-      "summary": "A researcher demonstrated that unique, trackable secrets inserted into AI prompts can expose secret user data at an alarming rate, revealing privacy vulnerabilities within the AI supply chain.",
-      "source": "Ars Technica",
-      "url": "https://arstechnica.com/security/2026/11/a-leaky-ai-supply-chain-is-exposing-secret-user-data-at-an-alarming-rate/"
+      "summary": "Developers are working on AI-assisted Rust servers for Python applications, such as 'Muru' by the creator of mod_WSGI, indicating advances in leveraging AI for server-side development.",
+      "source": "Hacker News",
+      "url": "https://simonwillison.net/2026/Nov/21/muru/"
     }
   ],
   "world": [
     {
-      "summary": "Two tankers were reportedly hit in the Strait of Hormuz near Oman, while Iran stated one tanker caught fire due to a naval mine, as Iran reportedly tightens its grip on shipping in the area.",
+      "summary": "Ukrainian President Zelenskyy has urged the United States to supply Patriot missiles after a Russian drone attack near Kyiv killed at least two people, and shelling in Zaporizhzhia killed one.",
       "source": "Al Jazeera",
-      "url": "https://www.aljazeera.com/news/2026/11/21/tankers-hit-in-strait-of-hormuz-as-iran-tightens-grip-on-shipping?traffic_source=rss"
+      "url": "https://www.aljazeera.com/news/2026/11/22/zelenskyy-urges-us-to-release-patriot-missiles?traffic_source=rss"
     },
     {
-      "summary": "International climate talks at COP31 are in a deadlock as countries struggle to agree on a new global climate agreement due to disagreements over fossil fuels.",
-      "source": "BBC World",
-      "url": "https://www.bbc.co.uk/news/articles/c6ly5w40eg07o?at_medium=RSS&at_campaign=rss"
+      "summary": "Drone attacks near Sudan's capital, Khartoum, killed four people and reportedly damaged a UN building and the city's airport, with blame directed at the Rapid Support Forces.",
+      "source": "Al Jazeera",
+      "url": "https://www.aljazeera.com/news/2026/11/22/rsf-drones-kill-four-in-khartoum?traffic_source=rss"
     },
     {
-      "summary": "U.N. talks in Geneva concluded without achieving legally binding rules on autonomous weapons, prompting humanitarian groups to express concern that military AI is advancing faster than diplomatic efforts.",
-      "source": "NPR",
-      "url": "https://www.npr.org/2026/11/21/nx-s1-6047916/killer-robots-un-drones"
-    },
-    {
-      "summary": "Denmark is expelling a Russian diplomat, Russia's defense attache in Copenhagen, following suspicions that Moscow was involved in an attempted killing of a US-Ukrainian rapper.",
-      "source": "Guardian World",
-      "url": "https://www.theguardian.com/world/2026/nov/20/denmark-russian-diplomat-us-ukrainian-rapper-attempted-killing"
+      "summary": "Saudi Arabia intercepted a drone and missile, while Houthi media reported an attack on an oil company in Sanaa that injured several people, as regional tensions continue.",
+      "source": "Al Jazeera",
+      "url": "https://www.aljazeera.com/news/2026/11/22/houthis-report-attack-on-sanaa-as-saudi-arabia-intercepts-drone?traffic_source=rss"
     }
   ],
   "us": [
     {
-      "summary": "A federal jury in Los Angeles convicted 30-year-old Jonathan Rinderknecht of starting the deadly 2025 Palisades Fire, which resulted in 12 fatalities, following a retrial.",
+      "summary": "A federal jury convicted 30-year-old Jonathan Rinderknecht for starting the deadly 2025 Palisades Fire in Los Angeles, which tragically killed 12 people.",
       "source": "NPR National",
       "url": "https://www.npr.org/2026/11/21/nx-s1-6049625/palisades-fire-conviction"
     },
     {
-      "summary": "Hackers reportedly breached the US Department of Agriculture (USDA) and the FBI, targeting the farmer-payment system at the USDA and the FBI's National Crime Information Center.",
-      "source": "Guardian World",
-      "url": "https://www.theguardian.com/us-news/2026/nov/21/usda-fbi-outages-cyber-attack"
+      "summary": "Thanksgiving holiday travel is threatened by anticipated storms on both the East and West coasts, with San Francisco's mayor advising residents against non-essential travel.",
+      "source": "NPR National",
+      "url": "https://www.npr.org/2026/11/21/nx-s1-6047508/weather-thanksgiving-storm-elnino"
     },
     {
-      "summary": "A report to the US Congress found that the US Navy's commitment to new \"Trump-class\" battleships has inflated the cost of its new fleet by billions of dollars, with the acting Secretary of the Navy admitting the Iran war is straining fleet capacity.",
-      "source": "Guardian World",
-      "url": "https://www.theguardian.com/us-news/2026/nov/21/trump-class-warships"
+      "summary": "A permitting reform bill passed in the Senate aims to accelerate the development of renewable energy projects.",
+      "source": "NPR National",
+      "url": "https://www.npr.org/2026/11/21/nx-s1-6046482/senate-permitting-bill-speeds-up-renewables-divides-greens-over-oil-and-gas"
     }
   ],
   "science": [
     {
-      "summary": "Scientists successfully sequenced the entire genome of a whale by using commercial drones equipped with petri dishes to collect samples of the whale's snot, demonstrating a novel genetic research method.",
+      "summary": "Scientists have successfully sequenced the entire genome of a whale by using commercial drones fitted with petri dishes to collect snot samples.",
       "source": "NPR Science",
       "url": "https://www.npr.org/2026/11/21/nx-s1-6044816/scientists-sequenced-a-whales-entire-genome-using-drones-and-whale-snot"
     },
     {
-      "summary": "A daily pill called daraxonrasib has shown \"massive hope\" for pancreatic cancer treatment, with a trial indicating it can shrink and potentially eliminate tumors in some patients with this aggressive cancer.",
+      "summary": "Early trials of a daily pill called daraxonrasib have shown promise in shrinking and potentially eliminating tumors in some patients with pancreatic cancer.",
       "source": "BBC Health",
       "url": "https://www.bbc.co.uk/news/articles/cqrmgjnzz9l0o?at_medium=RSS&at_campaign=rss"
     }
   ],
-  "weekly_recap": null,
+  "weekly_recap": "This week began with SpaceX achieving a major milestone by successfully catching its Starship rocket with its 'Mechazilla' launch tower after orbit on November 15. The United States officially lost its measles elimination status, confirmed on November 17, amid a significant outbreak. Global financial markets experienced considerable turbulence, marked by a tech sell-off, including Nvidia's stock decline following a new Commerce Department rule targeting China's chip access and the resignation of its former CEO. Anthropic's IPO set a record on November 19, valued at $81.3 billion, but its public debut on November 20 contributed to a broader slump in global stock markets, with the S&P 500 and Nasdaq Composite entering correction territory. Geopolitically, major global leaders gathered in China for the APEC summit on November 18, and the UN's top court ruled on November 19 that Myanmar committed genocide against the Rohingya minority. In the US, the Senate passed bipartisan legislation on November 20 to accelerate permitting reviews for energy and data center infrastructure. The week concluded with international climate talks at COP31 in a deadlock over fossil fuels and UN discussions failing to yield binding rules for autonomous weapons on November 21.",
   "data_availability": {
     "sp500": true,
     "ndx": true,
