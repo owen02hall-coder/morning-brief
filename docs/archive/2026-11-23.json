@@ -1,0 +1,250 @@
+{
+  "generated_at": "2026-11-23T12:19:09.428004-07:00",
+  "date": "2026-11-23",
+  "tldr": [
+    "International climate talks (COP31) concluded without a consensus deal on fossil fuels and climate finance for the first time in 17 years.",
+    "Ukraine announced that it sank the Russian warship Merkury off the coast of Libya.",
+    "Jensen Huang was reinstated as Nvidia CEO and board chair, a decision that drew criticism from some Republican lawmakers."
+  ],
+  "market": {
+    "sp500": {
+      "value": 6910.39,
+      "change": -265.44,
+      "asof": "2026-11-20"
+    },
+    "ndx": {
+      "value": 22617.73,
+      "change": -1261.47,
+      "asof": "2026-11-20"
+    },
+    "why": "The provided articles do not offer a specific reason for the S&P 500's decline of 265.44 points or the Nasdaq Composite's decline of 1261.47 points as of November 20, 2026. Reports of tech stock rallies related to Nvidia's CEO reinstatement occurred on November 23, 2026."
+  },
+  "yield_10y": {
+    "value": 4.91,
+    "change": -0.14,
+    "asof": "2026-11-20",
+    "why": "The provided articles do not offer a specific reason for the 10-year Treasury yield's decrease of 0.14% as of November 20, 2026."
+  },
+  "vix": {
+    "value": 35.89,
+    "change": 7.45,
+    "asof": "2026-11-20",
+    "why": "The provided articles do not offer a specific reason for the VIX's increase of 7.45 points as of November 20, 2026. Reports of tech stock rallies related to Nvidia's CEO reinstatement occurred on November 23, 2026."
+  },
+  "breadth": {
+    "sp500": {
+      "value": 53.0,
+      "asof": "2026-11-20",
+      "status": "healthy",
+      "matched": 500,
+      "stale": false
+    },
+    "ndx100": {
+      "value": 42.7,
+      "asof": "2026-11-20",
+      "status": "healthy",
+      "matched": 96,
+      "stale": false
+    }
+  },
+  "watchlist": [
+    {
+      "symbol": "SOXL",
+      "what": "3x semiconductors",
+      "value": 30.88,
+      "day_move": -31.83,
+      "asof": "2026-11-20",
+      "rsi": 28.5,
+      "rsi_zone": "oversold",
+      "low": 30.88,
+      "high": 107.35,
+      "band_pct": 0.0,
+      "zone": "low",
+      "action": "buy",
+      "read": "Near the bottom of its 1-month range and oversold on RSI. Big session: down 31.8% in a day."
+    },
+    {
+      "symbol": "SPXL",
+      "what": "3x S&P 500",
+      "value": 201.97,
+      "day_move": -10.51,
+      "asof": "2026-11-20",
+      "rsi": 25.0,
+      "rsi_zone": "oversold",
+      "low": 201.97,
+      "high": 288.95,
+      "band_pct": 0.0,
+      "zone": "low",
+      "action": "buy",
+      "read": "Near the bottom of its 1-month range and oversold on RSI. Big session: down 10.5% in a day."
+    },
+    {
+      "symbol": "TQQQ",
+      "what": "3x Nasdaq-100",
+      "value": 41.2,
+      "day_move": -15.94,
+      "asof": "2026-11-20",
+      "rsi": 26.6,
+      "rsi_zone": "oversold",
+      "low": 41.2,
+      "high": 72.36,
+      "band_pct": 0.0,
+      "zone": "low",
+      "action": "buy",
+      "read": "Near the bottom of its 1-month range and oversold on RSI. Big session: down 15.9% in a day."
+    }
+  ],
+  "watchlist_missing": [],
+  "mortgage": {
+    "value": 7.28,
+    "change": 0.17,
+    "asof": "2026-11-19",
+    "why": "The provided articles do not offer a specific reason for the 30-year fixed mortgage rate's increase of 0.17% in the weekly survey released November 19, 2026."
+  },
+  "policy": [],
+  "policy_upcoming": [
+    {
+      "what_happened": "Temporary regulations were issued concerning a new nonrefundable Federal tax credit for qualified contributions to scholarship granting organizations.",
+      "effect": "A new nonrefundable Federal tax credit becomes available for qualified contributions to scholarship granting organizations in 2027 and later taxable years.",
+      "url": "https://www.federalregister.gov/documents/2026/10/02/2026-20264/federal-scholarship-tax-credit",
+      "status": "Final rule",
+      "effective_date": "2026-12-01",
+      "source": "Federal Register"
+    },
+    {
+      "what_happened": "Final rules set forth requirements for price transparency reporting for non-grandfathered group health plans and health insurance issuers.",
+      "effect": "Your employer health insurance plan has new price transparency reporting requirements that become effective on December 7, 2026.",
+      "url": "https://www.federalregister.gov/documents/2026/10/06/2026-20447/transparency-in-coverage",
+      "status": "Final rule",
+      "effective_date": "2026-12-07",
+      "source": "Federal Register"
+    },
+    {
+      "what_happened": "A Utah bill modifies provisions related to the property tax exemption process.",
+      "effect": "Once you own a home, you will have deadlines for filing an application for a property tax exemption with the county board of equalization and for the board to render a decision.",
+      "url": "https://le.utah.gov/~2026/bills/static/SB0236.html",
+      "status": "Signed in Utah",
+      "effective_date": "2027-01-01",
+      "source": "Utah Legislature"
+    },
+    {
+      "what_happened": "A bill amends requirements for health insurance preauthorization in Utah.",
+      "effect": "Your health insurer must make an authorization or adverse preauthorization determination within a defined maximum time.",
+      "url": "https://le.utah.gov/~2026/bills/static/SB0319.html",
+      "status": "Signed in Utah",
+      "effective_date": "2027-01-01",
+      "source": "Utah Legislature"
+    },
+    {
+      "what_happened": "Final regulations provide guidance for automatic enrollment requirements that apply to certain retirement plans.",
+      "effect": "Your retirement plan participation is subject to new automatic enrollment requirements starting January 19, 2027.",
+      "url": "https://www.federalregister.gov/documents/2026/11/18/2026-23530/automatic-enrollment-requirements-under-section-414a",
+      "status": "Final rule",
+      "effective_date": "2027-01-19",
+      "source": "Federal Register"
+    }
+  ],
+  "policy_week": [
+    {
+      "what_happened": "Final regulations provide guidance for automatic enrollment requirements that apply to certain retirement plans.",
+      "effect": "Your retirement plan participation is subject to new automatic enrollment requirements starting January 19, 2027.",
+      "url": "https://www.federalregister.gov/documents/2026/11/18/2026-23530/automatic-enrollment-requirements-under-section-414a",
+      "status": "Final rule",
+      "effective_date": "2027-01-19",
+      "source": "Federal Register"
+    }
+  ],
+  "policy_calendar": [
+    {
+      "date": "2026-11-30",
+      "label": "FHFA conforming loan limit for next year \u2014 expected late November",
+      "note": "The cap on a conforming (non-jumbo) mortgage, and the line between a normal rate and a jumbo one. FHFA has announced it in the last days of November each year, and the new limit applies to loans made from January 1.",
+      "url": "https://www.fhfa.gov/data/conforming-loan-limit"
+    }
+  ],
+  "tech": [
+    {
+      "summary": "Amazon is set to acquire AI startup Decart's chip software and hire its founders, in a deal reportedly valued at $7.5 billion, aiming to boost the speed and efficiency of its custom chips.",
+      "source": "MarketWatch",
+      "url": "https://www.marketwatch.com/story/amazon-may-have-just-found-a-cheap-way-to-get-a-lot-more-out-of-its-chips-bd822bd5?mod=mw_rss_topstories"
+    },
+    {
+      "summary": "CrowdStrike will acquire Zscaler in a $44 billion deal, as cybersecurity companies increase their defenses in response to advanced AI-supercharged cyberattacks.",
+      "source": "CNBC",
+      "url": "https://www.cnbc.com/2026/11/23/crowdstrike-zscaler-aquisition-ai-cyberattacks.html"
+    },
+    {
+      "summary": "Jensen Huang was reinstated as Nvidia's CEO and board chair, a decision reportedly influenced by President Trump and followed by a significant surge in Nvidia's shares.",
+      "source": "CNBC",
+      "url": "https://www.cnbc.com/2026/11/23/nvidia-jensen-huang-ceo.html"
+    }
+  ],
+  "world": [
+    {
+      "summary": "Ukraine announced that its forces sank the Russian warship Merkury off the coast of Libya.",
+      "source": "Al Jazeera",
+      "url": "https://www.aljazeera.com/video/newsfeed/2026/11/23/what-russian-warship-did-ukraine-just-sink?traffic_source=rss"
+    },
+    {
+      "summary": "The COP31 climate summit concluded without a consensus agreement for the first time in 17 years, due to disagreements over fossil fuels and financing for climate-vulnerable nations.",
+      "source": "Ars Technica",
+      "url": "https://arstechnica.com/science/2026/11/cop31-ends-in-failure-as-countries-split-over-fossil-fuels-climate-finance/"
+    },
+    {
+      "summary": "India has pledged $1.6 billion in flood relief for Nepal following a visit by Nepal's Prime Minister Balendra Shah to New Delhi.",
+      "source": "Al Jazeera",
+      "url": "https://www.aljazeera.com/news/2026/11/23/india-pledges-1-6bn-in-flood-relief-for-nepal?traffic_source=rss"
+    },
+    {
+      "summary": "Denmark's top court upheld the country's controversial 'ghetto law,' ruling that the eviction of 'non-Western' families from certain areas did not constitute discrimination, supporting the nation's hardline immigration policy.",
+      "source": "Al Jazeera",
+      "url": "https://www.aljazeera.com/news/2026/11/23/danish-top-courts-ghetto-law-ruling-supports-hardline-immigration-policy?traffic_source=rss"
+    }
+  ],
+  "us": [
+    {
+      "summary": "The U.S. Army has rescheduled the detonation of approximately five tons of bomb-making material in Iowa for Wednesday, citing weather conditions and mitigation measures.",
+      "source": "NPR National",
+      "url": "https://www.npr.org/2026/11/23/nx-s1-6048731/army-reschedules-detonation-of-toxic-explosives-in-iowa-for-wednesday"
+    },
+    {
+      "summary": "Food banks across the country are experiencing increased demand as the holiday season approaches, with higher grocery prices contributing to more individuals seeking assistance.",
+      "source": "NPR National",
+      "url": "https://www.npr.org/2026/11/23/nx-s1-6048664/as-holidays-approach-food-banks-face-increased-demand"
+    },
+    {
+      "summary": "The Labor Department proposed a regulation aimed at curbing the use of ESG (Environmental, Social, and Governance) funds in workplace retirement plans, including 401(k)s.",
+      "source": "CNBC",
+      "url": "https://www.cnbc.com/2026/11/23/labor-department-esg-401k-rule.html"
+    }
+  ],
+  "science": [
+    {
+      "summary": "The NHS has launched the world's largest trial to investigate if artificial intelligence can improve the early diagnosis of breast cancer during screening, potentially easing pressure on healthcare services.",
+      "source": "BBC Health",
+      "url": "https://www.bbc.co.uk/news/articles/cmpdwnw3nvzjo?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "summary": "Scientists successfully sequenced the entire genome of a whale by collecting samples of its snot using commercial drones equipped with petri dishes.",
+      "source": "NPR Science",
+      "url": "https://www.npr.org/2026/11/21/nx-s1-6044816/scientists-sequenced-a-whales-entire-genome-using-drones-and-whale-snot"
+    }
+  ],
+  "weekly_recap": null,
+  "data_availability": {
+    "sp500": true,
+    "ndx": true,
+    "vix": true,
+    "ten_year": true,
+    "news_world": true,
+    "news_us": true,
+    "news_science": true,
+    "news_business": true,
+    "news_tech": true,
+    "summary": "ok",
+    "breadth": true,
+    "policy": true,
+    "mortgage": true,
+    "watchlist": true
+  }
+}

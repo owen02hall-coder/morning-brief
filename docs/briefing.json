@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-11-22T08:27:20.101141-07:00",
-  "date": "2026-11-22",
+  "generated_at": "2026-11-23T12:19:09.428004-07:00",
+  "date": "2026-11-23",
   "tldr": [
-    "Global stock markets experienced a significant sell-off, particularly in the tech sector, resulting in the S&P 500 and Nasdaq Composite entering correction territory.",
-    "A federal jury in Los Angeles convicted a man for starting the deadly 2025 Palisades Fire, which resulted in 12 fatalities.",
-    "Scientists have achieved a breakthrough by sequencing an entire whale genome using drone-collected snot samples."
+    "International climate talks (COP31) concluded without a consensus deal on fossil fuels and climate finance for the first time in 17 years.",
+    "Ukraine announced that it sank the Russian warship Merkury off the coast of Libya.",
+    "Jensen Huang was reinstated as Nvidia CEO and board chair, a decision that drew criticism from some Republican lawmakers."
   ],
   "market": {
     "sp500": {
@@ -17,32 +17,32 @@
       "change": -1261.47,
       "asof": "2026-11-20"
     },
-    "why": "Global stock markets experienced a slump and entered correction territory on November 20, driven by a broad sell-off, particularly in the artificial intelligence sector, following Anthropic's public trading debut and marking Wall Street's worst week in over a year."
+    "why": "The provided articles do not offer a specific reason for the S&P 500's decline of 265.44 points or the Nasdaq Composite's decline of 1261.47 points as of November 20, 2026. Reports of tech stock rallies related to Nvidia's CEO reinstatement occurred on November 23, 2026."
   },
   "yield_10y": {
     "value": 4.91,
     "change": -0.14,
     "asof": "2026-11-20",
-    "why": "The provided articles do not offer a specific explanation for the movement in the 10-year Treasury yield on November 20."
+    "why": "The provided articles do not offer a specific reason for the 10-year Treasury yield's decrease of 0.14% as of November 20, 2026."
   },
   "vix": {
     "value": 35.89,
     "change": 7.45,
     "asof": "2026-11-20",
-    "why": "The VIX increased significantly on November 20, reflecting heightened market volatility and investor concerns amid a broad stock market correction and sell-off, especially within the tech sector."
+    "why": "The provided articles do not offer a specific reason for the VIX's increase of 7.45 points as of November 20, 2026. Reports of tech stock rallies related to Nvidia's CEO reinstatement occurred on November 23, 2026."
   },
   "breadth": {
     "sp500": {
-      "value": 45.7,
+      "value": 53.0,
       "asof": "2026-11-20",
       "status": "healthy",
-      "matched": 499,
+      "matched": 500,
       "stale": false
     },
     "ndx100": {
-      "value": 36.5,
+      "value": 42.7,
       "asof": "2026-11-20",
-      "status": "watch",
+      "status": "healthy",
       "matched": 96,
       "stale": false
     }
@@ -99,7 +99,7 @@
     "value": 7.28,
     "change": 0.17,
     "asof": "2026-11-19",
-    "why": "The 30-year fixed mortgage rate, reported as part of a weekly survey released on November 19, increased, reflecting trends in bond yields over recent days. The provided articles do not offer a more specific reason for this particular weekly increase."
+    "why": "The provided articles do not offer a specific reason for the 30-year fixed mortgage rate's increase of 0.17% in the weekly survey released November 19, 2026."
   },
   "policy": [],
   "policy_upcoming": [
@@ -164,68 +164,73 @@
   ],
   "tech": [
     {
-      "summary": "Quantum computing firms are exploring practical applications in the energy sector, including optimizing energy grids, developing solar materials, and creating hydrogen catalysts, potentially leading to its first real-world payoff in energy rather than drug discovery.",
+      "summary": "Amazon is set to acquire AI startup Decart's chip software and hire its founders, in a deal reportedly valued at $7.5 billion, aiming to boost the speed and efficiency of its custom chips.",
+      "source": "MarketWatch",
+      "url": "https://www.marketwatch.com/story/amazon-may-have-just-found-a-cheap-way-to-get-a-lot-more-out-of-its-chips-bd822bd5?mod=mw_rss_topstories"
+    },
+    {
+      "summary": "CrowdStrike will acquire Zscaler in a $44 billion deal, as cybersecurity companies increase their defenses in response to advanced AI-supercharged cyberattacks.",
       "source": "CNBC",
-      "url": "https://www.cnbc.com/2026/11/22/quantum-computing-energy-applications.html"
+      "url": "https://www.cnbc.com/2026/11/23/crowdstrike-zscaler-aquisition-ai-cyberattacks.html"
     },
     {
-      "summary": "United Nations diplomats failed to agree on regulations for autonomous weapons, often referred to as 'killer robots,' after a week of negotiations in Geneva, instead agreeing only to begin discussing options.",
-      "source": "The Verge",
-      "url": "https://www.theverge.com/tech/1039554/un-regulations-killer-robots"
-    },
-    {
-      "summary": "Developers are working on AI-assisted Rust servers for Python applications, such as 'Muru' by the creator of mod_WSGI, indicating advances in leveraging AI for server-side development.",
-      "source": "Hacker News",
-      "url": "https://simonwillison.net/2026/Nov/21/muru/"
+      "summary": "Jensen Huang was reinstated as Nvidia's CEO and board chair, a decision reportedly influenced by President Trump and followed by a significant surge in Nvidia's shares.",
+      "source": "CNBC",
+      "url": "https://www.cnbc.com/2026/11/23/nvidia-jensen-huang-ceo.html"
     }
   ],
   "world": [
     {
-      "summary": "Ukrainian President Zelenskyy has urged the United States to supply Patriot missiles after a Russian drone attack near Kyiv killed at least two people, and shelling in Zaporizhzhia killed one.",
+      "summary": "Ukraine announced that its forces sank the Russian warship Merkury off the coast of Libya.",
       "source": "Al Jazeera",
-      "url": "https://www.aljazeera.com/news/2026/11/22/zelenskyy-urges-us-to-release-patriot-missiles?traffic_source=rss"
+      "url": "https://www.aljazeera.com/video/newsfeed/2026/11/23/what-russian-warship-did-ukraine-just-sink?traffic_source=rss"
     },
     {
-      "summary": "Drone attacks near Sudan's capital, Khartoum, killed four people and reportedly damaged a UN building and the city's airport, with blame directed at the Rapid Support Forces.",
-      "source": "Al Jazeera",
-      "url": "https://www.aljazeera.com/news/2026/11/22/rsf-drones-kill-four-in-khartoum?traffic_source=rss"
+      "summary": "The COP31 climate summit concluded without a consensus agreement for the first time in 17 years, due to disagreements over fossil fuels and financing for climate-vulnerable nations.",
+      "source": "Ars Technica",
+      "url": "https://arstechnica.com/science/2026/11/cop31-ends-in-failure-as-countries-split-over-fossil-fuels-climate-finance/"
     },
     {
-      "summary": "Saudi Arabia intercepted a drone and missile, while Houthi media reported an attack on an oil company in Sanaa that injured several people, as regional tensions continue.",
+      "summary": "India has pledged $1.6 billion in flood relief for Nepal following a visit by Nepal's Prime Minister Balendra Shah to New Delhi.",
       "source": "Al Jazeera",
-      "url": "https://www.aljazeera.com/news/2026/11/22/houthis-report-attack-on-sanaa-as-saudi-arabia-intercepts-drone?traffic_source=rss"
+      "url": "https://www.aljazeera.com/news/2026/11/23/india-pledges-1-6bn-in-flood-relief-for-nepal?traffic_source=rss"
+    },
+    {
+      "summary": "Denmark's top court upheld the country's controversial 'ghetto law,' ruling that the eviction of 'non-Western' families from certain areas did not constitute discrimination, supporting the nation's hardline immigration policy.",
+      "source": "Al Jazeera",
+      "url": "https://www.aljazeera.com/news/2026/11/23/danish-top-courts-ghetto-law-ruling-supports-hardline-immigration-policy?traffic_source=rss"
     }
   ],
   "us": [
     {
-      "summary": "A federal jury convicted 30-year-old Jonathan Rinderknecht for starting the deadly 2025 Palisades Fire in Los Angeles, which tragically killed 12 people.",
+      "summary": "The U.S. Army has rescheduled the detonation of approximately five tons of bomb-making material in Iowa for Wednesday, citing weather conditions and mitigation measures.",
       "source": "NPR National",
-      "url": "https://www.npr.org/2026/11/21/nx-s1-6049625/palisades-fire-conviction"
+      "url": "https://www.npr.org/2026/11/23/nx-s1-6048731/army-reschedules-detonation-of-toxic-explosives-in-iowa-for-wednesday"
     },
     {
-      "summary": "Thanksgiving holiday travel is threatened by anticipated storms on both the East and West coasts, with San Francisco's mayor advising residents against non-essential travel.",
+      "summary": "Food banks across the country are experiencing increased demand as the holiday season approaches, with higher grocery prices contributing to more individuals seeking assistance.",
       "source": "NPR National",
-      "url": "https://www.npr.org/2026/11/21/nx-s1-6047508/weather-thanksgiving-storm-elnino"
+      "url": "https://www.npr.org/2026/11/23/nx-s1-6048664/as-holidays-approach-food-banks-face-increased-demand"
     },
     {
-      "summary": "A permitting reform bill passed in the Senate aims to accelerate the development of renewable energy projects.",
-      "source": "NPR National",
-      "url": "https://www.npr.org/2026/11/21/nx-s1-6046482/senate-permitting-bill-speeds-up-renewables-divides-greens-over-oil-and-gas"
+      "summary": "The Labor Department proposed a regulation aimed at curbing the use of ESG (Environmental, Social, and Governance) funds in workplace retirement plans, including 401(k)s.",
+      "source": "CNBC",
+      "url": "https://www.cnbc.com/2026/11/23/labor-department-esg-401k-rule.html"
     }
   ],
   "science": [
     {
-      "summary": "Scientists have successfully sequenced the entire genome of a whale by using commercial drones fitted with petri dishes to collect snot samples.",
-      "source": "NPR Science",
-      "url": "https://www.npr.org/2026/11/21/nx-s1-6044816/scientists-sequenced-a-whales-entire-genome-using-drones-and-whale-snot"
+      "summary": "The NHS has launched the world's largest trial to investigate if artificial intelligence can improve the early diagnosis of breast cancer during screening, potentially easing pressure on healthcare services.",
+      "source": "BBC Health",
+      "url": "https://www.bbc.co.uk/news/articles/cmpdwnw3nvzjo?at_medium=RSS&at_campaign=rss"
     },
     {
-      "summary": "Early trials of a daily pill called daraxonrasib have shown promise in shrinking and potentially eliminating tumors in some patients with pancreatic cancer.",
-      "source": "BBC Health",
-      "url": "https://www.bbc.co.uk/news/articles/cqrmgjnzz9l0o?at_medium=RSS&at_campaign=rss"
+      "summary": "Scientists successfully sequenced the entire genome of a whale by collecting samples of its snot using commercial drones equipped with petri dishes.",
+      "source": "NPR Science",
+      "url": "https://www.npr.org/2026/11/21/nx-s1-6044816/scientists-sequenced-a-whales-entire-genome-using-drones-and-whale-snot"
     }
   ],
-  "weekly_recap": "This week began with SpaceX achieving a major milestone by successfully catching its Starship rocket with its 'Mechazilla' launch tower after orbit on November 15. The United States officially lost its measles elimination status, confirmed on November 17, amid a significant outbreak. Global financial markets experienced considerable turbulence, marked by a tech sell-off, including Nvidia's stock decline following a new Commerce Department rule targeting China's chip access and the resignation of its former CEO. Anthropic's IPO set a record on November 19, valued at $81.3 billion, but its public debut on November 20 contributed to a broader slump in global stock markets, with the S&P 500 and Nasdaq Composite entering correction territory. Geopolitically, major global leaders gathered in China for the APEC summit on November 18, and the UN's top court ruled on November 19 that Myanmar committed genocide against the Rohingya minority. In the US, the Senate passed bipartisan legislation on November 20 to accelerate permitting reviews for energy and data center infrastructure. The week concluded with international climate talks at COP31 in a deadlock over fossil fuels and UN discussions failing to yield binding rules for autonomous weapons on November 21.",
+  "weekly_recap": null,
   "data_availability": {
     "sp500": true,
     "ndx": true,

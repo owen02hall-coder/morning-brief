@@ -1,14 +1,14 @@
 {
-  "last_run": "2026-11-22",
-  "markets_last_ok": "2026-11-22",
+  "last_run": "2026-11-23",
+  "markets_last_ok": "2026-11-23",
   "breadth_last_good": {
     "sp500": {
-      "value": 45.7,
-      "matched": 499,
+      "value": 53.0,
+      "matched": 500,
       "asof": "2026-11-20"
     },
     "ndx100": {
-      "value": 36.5,
+      "value": 42.7,
       "matched": 96,
       "asof": "2026-11-20"
     }
@@ -18,14 +18,14 @@
       "in_alert": false,
       "nag_days": 0,
       "warn_armed": true,
-      "last_value": 45.7,
+      "last_value": 53.0,
       "last_asof": "2026-11-20"
     },
     "ndx100": {
       "in_alert": false,
       "nag_days": 0,
-      "warn_armed": false,
-      "last_value": 36.5,
+      "warn_armed": true,
+      "last_value": 42.7,
       "last_asof": "2026-11-20"
     }
   },
@@ -105,7 +105,7 @@
     }
   ],
   "policy_today": {
-    "date": "2026-11-22",
+    "date": "2026-11-23",
     "items": [],
     "alerted": false
   },
@@ -795,6 +795,13 @@
       "title": "Air Conditioning and Your Home's Energy Use",
       "domain": "Home, car and repair",
       "date": "2026-11-22"
+    },
+    {
+      "id": "2026-11-23-automated-external-defibrillator",
+      "article_title": "Automated external defibrillator",
+      "title": "Responding to Sudden Cardiac Arrest",
+      "domain": "Health and emergencies",
+      "date": "2026-11-23"
     }
   ],
   "lessons_bootstrapped": true,

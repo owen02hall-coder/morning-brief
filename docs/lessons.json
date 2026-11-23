@@ -1,22 +1,6 @@
 {
-  "generated_at": "2026-11-22T08:27:20.101141-07:00",
+  "generated_at": "2026-11-23T12:19:09.428004-07:00",
   "lessons": [
-    {
-      "id": "2026-09-21-anaphylaxis",
-      "date": "2026-09-21",
-      "domain": "Health and emergencies",
-      "title": "Recognizing and Responding to Anaphylaxis",
-      "hook": "Knowing the signs of a severe allergic reaction and how to respond can be life-saving, as this condition can worsen very quickly.",
-      "quick": "Anaphylaxis is a serious and potentially fatal allergic reaction that can progress rapidly, affecting more than one body system. This can quickly lead to severe symptoms such as an itchy rash, swelling that closes the throat or tongue, shortness of breath, vomiting, lightheadedness, or even loss of consciousness and low blood pressure. If someone experiences these symptoms, urgent medical treatment is required immediately to prevent serious harm or death. This is true even if the person has already used an epinephrine autoinjector or taken other medications, and even if their symptoms appear to be improving.",
-      "more": "Common triggers for anaphylaxis include insect bites and stings, certain foods like nuts, peanuts, milk, fish, and eggs, or specific medications such as some antibiotics and non-steroidal anti-inflammatory drugs. Physical exercise can also be a cause. The symptoms typically begin within minutes to hours, then increase very rapidly to life-threatening levels. Because of this rapid progression and the potential for severe outcomes, immediately contacting ambulance or EMT services is strongly recommended, regardless of any initial on-site treatment provided.",
-      "deep": "The reaction involves a rapidly escalating cascade where inflammatory mediators are released from certain white blood cells. While skin reactions like hives and itching are common, the symptoms often involve two or more body systems, indicating a systemic issue. Beyond skin symptoms, respiratory issues like wheezing or difficulty swallowing may occur, or cardiovascular effects such as a drop in blood pressure, leading to lightheadedness or even loss of consciousness. Gastrointestinal symptoms like severe abdominal pain and vomiting can also happen, along with a feeling of anxiety or impending doom. Anaphylaxis occurs most often in young people, and sometimes there is no obvious cause.",
-      "takeaway": "If you suspect someone is experiencing anaphylaxis, immediately contact ambulance or EMT services, as urgent medical attention is vital even if symptoms seem to improve.",
-      "source": {
-        "title": "Anaphylaxis",
-        "url": "https://en.wikipedia.org/wiki/Anaphylaxis"
-      },
-      "audio": {}
-    },
     {
       "id": "2026-09-22-data-and-information-visualization",
       "date": "2026-09-22",
@@ -639,11 +623,7 @@
         "title": "Hydraulic shock",
         "url": "https://en.wikipedia.org/wiki/Hydraulic_shock"
       },
-      "audio": {
-        "quick": "lessons/2026-11-02-hydraulic-shock-quick.mp3",
-        "more": "lessons/2026-11-02-hydraulic-shock-more.mp3",
-        "deep": "lessons/2026-11-02-hydraulic-shock-deep.mp3"
-      }
+      "audio": {}
     },
     {
       "id": "2026-11-03-bleeding",
@@ -1043,6 +1023,26 @@
         "quick": "lessons/2026-11-22-air-conditioning-quick.mp3",
         "more": "lessons/2026-11-22-air-conditioning-more.mp3",
         "deep": "lessons/2026-11-22-air-conditioning-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-11-23-automated-external-defibrillator",
+      "date": "2026-11-23",
+      "domain": "Health and emergencies",
+      "title": "Responding to Sudden Cardiac Arrest",
+      "hook": "Every minute counts when someone suffers sudden cardiac arrest, and knowing about a simple device could make the difference between life and death.",
+      "quick": "Sudden cardiac arrest is a life-threatening emergency where the heart stops effectively pumping blood, rapidly leading to irreversible brain damage and death. For every minute someone goes without successful treatment, their chance of survival drops significantly: by 7 percent per minute in the first three minutes, and by 10 percent per minute as time passes beyond three minutes. An automated external defibrillator, or AED, is a portable device designed for laypersons that can diagnose and treat the specific electrical issues causing these arrests. It uses simple audio and visual commands to apply an electrical shock, allowing the heart to reset to an effective rhythm. This crucial tool is designed for anyone to use, even without prior training, to bridge the gap until emergency services arrive.",
+      "more": "AEDs are specifically for life-threatening cardiac arrhythmias like pulseless ventricular tachycardia and ventricular fibrillation. In these conditions, the heart is electrically active but in a dysfunctional pattern, beating too fast or chaotically, preventing it from circulating blood. The AED delivers a shock to stop this chaotic activity. It's important to know an AED is not used for asystole, often called a 'flat line' heart rhythm, because shocking this condition will not help. If you're using an AED on someone, remember to quickly remove any bras with metal underwire or torso piercings, as these can interfere with the device and could potentially lead to arcing or fire in rare circumstances.",
+      "deep": "Public access AEDs are often found in visible, brightly colored protective cases near entrances in places where people gather, like offices, shopping centers, or public transport. While opening one of these cases might trigger a buzzer, that sound does not automatically summon emergency services. It's vital that anyone using or sending for an AED also calls for an ambulance. Some people purchase AEDs for home use, especially if they have known heart conditions, and prices have become more affordable. However, medical professionals express concern about home users not always having proper training. Regardless of placement, all AEDs require regular checks. Manufacturers recommend checking fixed units regularly, and it's essential to ensure the electrode pads, which have a typical life expectancy of 18 to 30 months, and the unit's batteries are not expired.",
+      "takeaway": "Check for expired electrode pads and batteries on any AED unit you are responsible for, following the manufacturer's recommended maintenance schedule.",
+      "source": {
+        "title": "Automated external defibrillator",
+        "url": "https://en.wikipedia.org/wiki/Automated_external_defibrillator"
+      },
+      "audio": {
+        "quick": "lessons/2026-11-23-automated-external-defibrillator-quick.mp3",
+        "more": "lessons/2026-11-23-automated-external-defibrillator-more.mp3",
+        "deep": "lessons/2026-11-23-automated-external-defibrillator-deep.mp3"
       }
     }
   ],
