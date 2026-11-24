@@ -1,22 +1,6 @@
 {
-  "generated_at": "2026-11-23T12:19:09.428004-07:00",
+  "generated_at": "2026-11-24T11:57:15.169055-07:00",
   "lessons": [
-    {
-      "id": "2026-09-22-data-and-information-visualization",
-      "date": "2026-09-22",
-      "domain": "Thinking and people",
-      "title": "How to spot misleading data visuals",
-      "hook": "Misleading charts and graphs can quietly shape your decisions without you even realizing it.",
-      "quick": "Poorly made or intentionally deceptive visual representations of data can spread misinformation, manipulate how people see things, and change public opinion. Many visual displays are designed to help you quickly understand complex information, spot trends, and make decisions, but not all of them are created with your best interest in mind. Some use visual elements not just to present numbers, but to tell a story, and this storytelling approach can be a powerful tool to convince an audience to take a specific action or make a decision. Because of this, learning to interpret visual data effectively is now as important as reading or basic math.",
-      "more": "To protect yourself from being misled, it is important to understand what makes a visualization effective and reliable. Effective data visualizations come from good sources, have appropriate context, and are presented simply and without clutter. The numbers used to create the visual should be accurate and current so that any insights you gain from them are trustworthy. The pictures, shapes, and colors used in the visual should be chosen carefully and used meaningfully without being distracting. Additionally, good visuals are supported by text, with both words and graphics working together to help you understand quickly and remember the key points clearly.",
-      "deep": "Visualizations are often created by combining principles from various fields, including graphic design and how people think and process information. This means they are both an art and a science, requiring design, statistical, and computing skills. However, research shows that people can both read and misread different types of visualizations. This understanding helps determine which visuals are most effective for clear communication. When a visualization is poor, whether by accident or on purpose, it can become a powerful way to spread false information or steer public opinion. It's crucial to remember that these tools are meant to help you explore and understand large amounts of information by using the human eye's ability to process visuals, but that same power can be used to lead you astray.",
-      "takeaway": "Before acting on information from a chart or graph, examine its source, look for supporting text, and check if the underlying data appears accurate and current.",
-      "source": {
-        "title": "Data and information visualization",
-        "url": "https://en.wikipedia.org/wiki/Data_and_information_visualization"
-      },
-      "audio": {}
-    },
     {
       "id": "2026-09-23-health-savings-account",
       "date": "2026-09-23",
@@ -639,11 +623,7 @@
         "title": "Bleeding",
         "url": "https://en.wikipedia.org/wiki/Bleeding"
       },
-      "audio": {
-        "quick": "lessons/2026-11-03-bleeding-quick.mp3",
-        "more": "lessons/2026-11-03-bleeding-more.mp3",
-        "deep": "lessons/2026-11-03-bleeding-deep.mp3"
-      }
+      "audio": {}
     },
     {
       "id": "2026-11-04-confirmation-bias",
@@ -1043,6 +1023,26 @@
         "quick": "lessons/2026-11-23-automated-external-defibrillator-quick.mp3",
         "more": "lessons/2026-11-23-automated-external-defibrillator-more.mp3",
         "deep": "lessons/2026-11-23-automated-external-defibrillator-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-11-24-phishing",
+      "date": "2026-11-24",
+      "domain": "Thinking and people",
+      "title": "Recognizing Phishing Attacks",
+      "hook": "Phishing scams can trick anyone into giving away their financial and personal details, costing real money and peace of mind.",
+      "quick": "Phishing is a deceptive scam where attackers try to trick you into revealing sensitive personal information or installing harmful software. This can lead to your money being stolen, your accounts compromised, or your devices infected. These attacks often impersonate trusted sources, like your bank, a government agency, or a streaming service provider, creating a sense of urgency or claiming fraudulent activity to pressure you into acting quickly. They might send you emails, text messages, or even make phone calls. The goal is to get you to click a malicious link that takes you to a fake login page, call a number, or provide details directly, allowing them to capture your login credentials or other private information.",
+      "more": "These deceptive messages frequently use social engineering tactics, playing on trust or fear. For example, a common text message scam pretends to be a package delivery service, like the U.S. Postal Service, asking you to click a link about a delivery issue. In 2024, people reported US$470 million in losses to text message scams alone. Attackers also use voice calls, known as vishing, where they might spoof caller numbers to appear legitimate and prompt you to enter sensitive information or speak with a person who uses further social engineering. QR codes can also be used, directing you to malicious websites when scanned, and their hidden destinations make them hard to identify as fake.",
+      "deep": "Attackers often manipulate links to disguise their true destination. This can involve using misspelled domains, creating deceptive subdomains that appear to belong to a trusted site, or even using international domain names that look visually identical to legitimate ones. Sometimes, the text of a link might look trustworthy, but the actual hidden link points to a phisher's site. Even modern authentication methods, like those requiring a one-time code, are not always safe from advanced \"adversary-in-the-middle\" phishing. In these sophisticated attacks, you interact with an impostor site that transparently relays your authentication, including your two-factor code, to the real service in real time, capturing everything. If an attacker gains possession of your session cookie, they can reuse your authenticated session until it expires, potentially giving them continued access to your accounts.",
+      "takeaway": "Always directly type the known website address into your browser, or use a trusted app, instead of clicking on links from unsolicited emails or text messages.",
+      "source": {
+        "title": "Phishing",
+        "url": "https://en.wikipedia.org/wiki/Phishing"
+      },
+      "audio": {
+        "quick": "lessons/2026-11-24-phishing-quick.mp3",
+        "more": "lessons/2026-11-24-phishing-more.mp3",
+        "deep": "lessons/2026-11-24-phishing-deep.mp3"
       }
     }
   ],

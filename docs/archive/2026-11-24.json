@@ -1,0 +1,267 @@
+{
+  "generated_at": "2026-11-24T11:57:15.169055-07:00",
+  "date": "2026-11-24",
+  "tldr": [
+    "Stock markets rebounded and consumer confidence rose following midterm election results and strong retail performance.",
+    "Tidal has announced it will ban and delete millions of AI-generated music tracks from its platform starting December 9th.",
+    "A senior Hamas security official was killed in Israeli drone strikes carried out across Gaza."
+  ],
+  "market": {
+    "sp500": {
+      "value": 7237.17,
+      "change": 326.78,
+      "asof": "2026-11-23"
+    },
+    "ndx": {
+      "value": 24089.56,
+      "change": 1471.83,
+      "asof": "2026-11-23"
+    },
+    "why": "The S&P 500 and Nasdaq Composite closed higher, with stocks rebounding as consumer confidence shot up after midterm victories. Additionally, retail earnings reports indicated strong results, driven by resilient consumers and improved execution."
+  },
+  "yield_10y": {
+    "value": 4.92,
+    "change": 0.01,
+    "asof": "2026-11-23",
+    "why": "The articles do not provide specific reasons for the modest increase in the 10-year Treasury yield."
+  },
+  "vix": {
+    "value": 26.62,
+    "change": -9.27,
+    "asof": "2026-11-23",
+    "why": "The VIX decreased significantly, reflecting a reduction in market volatility, consistent with the overall rebound in stock markets."
+  },
+  "breadth": {
+    "sp500": {
+      "value": 53.2,
+      "asof": "2026-11-23",
+      "status": "healthy",
+      "matched": 500,
+      "stale": false
+    },
+    "ndx100": {
+      "value": 44.8,
+      "asof": "2026-11-23",
+      "status": "healthy",
+      "matched": 96,
+      "stale": false
+    }
+  },
+  "watchlist": [
+    {
+      "symbol": "SOXL",
+      "what": "3x semiconductors",
+      "value": 43.21,
+      "day_move": 39.93,
+      "asof": "2026-11-23",
+      "rsi": 36.6,
+      "rsi_zone": "neutral",
+      "low": 30.88,
+      "high": 107.35,
+      "band_pct": 16.1,
+      "zone": "mid",
+      "action": "hold",
+      "read": "Mid-range - 16% of the way up its 1-month band. Big session: up 39.9% in a day."
+    },
+    {
+      "symbol": "SPXL",
+      "what": "3x S&P 500",
+      "value": 229.06,
+      "day_move": 13.41,
+      "asof": "2026-11-23",
+      "rsi": 39.1,
+      "rsi_zone": "neutral",
+      "low": 201.97,
+      "high": 288.95,
+      "band_pct": 31.1,
+      "zone": "mid",
+      "action": "hold",
+      "read": "Mid-range - 31% of the way up its 1-month band. Big session: up 13.4% in a day."
+    },
+    {
+      "symbol": "TQQQ",
+      "what": "3x Nasdaq-100",
+      "value": 49.1,
+      "day_move": 19.17,
+      "asof": "2026-11-23",
+      "rsi": 38.7,
+      "rsi_zone": "neutral",
+      "low": 41.2,
+      "high": 72.36,
+      "band_pct": 25.4,
+      "zone": "mid",
+      "action": "hold",
+      "read": "Mid-range - 25% of the way up its 1-month band. Big session: up 19.2% in a day."
+    }
+  ],
+  "watchlist_missing": [],
+  "mortgage": {
+    "value": 7.28,
+    "change": 0.17,
+    "asof": "2026-11-19",
+    "why": "The 30-year fixed mortgage rate increased by 0.17% to 7.28% in Freddie Mac's latest weekly survey. The articles do not provide a specific explanation for this weekly movement, though mortgage rates generally track the direction of the 10-year Treasury yield."
+  },
+  "policy": [
+    {
+      "what_happened": "This final rule revises HUD's Section 214 regulations for verifying eligible status.",
+      "effect": "You must verify U.S. citizenship or eligible immigration status if you apply for housing assistance under a covered program.",
+      "url": "https://www.federalregister.gov/documents/2026/11/12/2026-23003/housing-and-community-development-act-of-1980-verification-of-eligible-status",
+      "status": "Final rule",
+      "effective_date": "2026-12-14",
+      "source": "Federal Register"
+    }
+  ],
+  "policy_upcoming": [
+    {
+      "what_happened": "Temporary regulations were issued concerning a new nonrefundable Federal tax credit for qualified contributions to scholarship granting organizations.",
+      "effect": "A new nonrefundable Federal tax credit becomes available for qualified contributions to scholarship granting organizations in 2027 and later taxable years.",
+      "url": "https://www.federalregister.gov/documents/2026/10/02/2026-20264/federal-scholarship-tax-credit",
+      "status": "Final rule",
+      "effective_date": "2026-12-01",
+      "source": "Federal Register"
+    },
+    {
+      "what_happened": "Final rules set forth requirements for price transparency reporting for non-grandfathered group health plans and health insurance issuers.",
+      "effect": "Your employer health insurance plan has new price transparency reporting requirements that become effective on December 7, 2026.",
+      "url": "https://www.federalregister.gov/documents/2026/10/06/2026-20447/transparency-in-coverage",
+      "status": "Final rule",
+      "effective_date": "2026-12-07",
+      "source": "Federal Register"
+    },
+    {
+      "what_happened": "This final rule revises HUD's Section 214 regulations for verifying eligible status.",
+      "effect": "You must verify U.S. citizenship or eligible immigration status if you apply for housing assistance under a covered program.",
+      "url": "https://www.federalregister.gov/documents/2026/11/12/2026-23003/housing-and-community-development-act-of-1980-verification-of-eligible-status",
+      "status": "Final rule",
+      "effective_date": "2026-12-14",
+      "source": "Federal Register"
+    },
+    {
+      "what_happened": "A Utah bill modifies provisions related to the property tax exemption process.",
+      "effect": "Once you own a home, you will have deadlines for filing an application for a property tax exemption with the county board of equalization and for the board to render a decision.",
+      "url": "https://le.utah.gov/~2026/bills/static/SB0236.html",
+      "status": "Signed in Utah",
+      "effective_date": "2027-01-01",
+      "source": "Utah Legislature"
+    },
+    {
+      "what_happened": "A bill amends requirements for health insurance preauthorization in Utah.",
+      "effect": "Your health insurer must make an authorization or adverse preauthorization determination within a defined maximum time.",
+      "url": "https://le.utah.gov/~2026/bills/static/SB0319.html",
+      "status": "Signed in Utah",
+      "effective_date": "2027-01-01",
+      "source": "Utah Legislature"
+    }
+  ],
+  "policy_week": [
+    {
+      "what_happened": "This final rule revises HUD's Section 214 regulations for verifying eligible status.",
+      "effect": "You must verify U.S. citizenship or eligible immigration status if you apply for housing assistance under a covered program.",
+      "url": "https://www.federalregister.gov/documents/2026/11/12/2026-23003/housing-and-community-development-act-of-1980-verification-of-eligible-status",
+      "status": "Final rule",
+      "effective_date": "2026-12-14",
+      "source": "Federal Register"
+    },
+    {
+      "what_happened": "Final regulations provide guidance for automatic enrollment requirements that apply to certain retirement plans.",
+      "effect": "Your retirement plan participation is subject to new automatic enrollment requirements starting January 19, 2027.",
+      "url": "https://www.federalregister.gov/documents/2026/11/18/2026-23530/automatic-enrollment-requirements-under-section-414a",
+      "status": "Final rule",
+      "effective_date": "2027-01-19",
+      "source": "Federal Register"
+    }
+  ],
+  "policy_calendar": [
+    {
+      "date": "2026-11-30",
+      "label": "FHFA conforming loan limit for next year \u2014 expected late November",
+      "note": "The cap on a conforming (non-jumbo) mortgage, and the line between a normal rate and a jumbo one. FHFA has announced it in the last days of November each year, and the new limit applies to loans made from January 1.",
+      "url": "https://www.fhfa.gov/data/conforming-loan-limit"
+    }
+  ],
+  "tech": [
+    {
+      "summary": "Tidal will begin banning AI-generated music from its platform on December 9th, leading to the deletion of approximately 27 million tracks and the rejection of up to 85,000 new tracks daily.",
+      "source": "Ars Technica",
+      "url": "https://arstechnica.com/ai/2026/11/tidal-will-ban-fully-ai-generated-music-on-december-9/"
+    },
+    {
+      "summary": "The New York Times has advised its freelance photographers not to use the newest version of Adobe Photoshop due to concerns that its AI features may generate content in ways not immediately apparent to users.",
+      "source": "The Verge",
+      "url": "https://www.theverge.com/ai-artificial-intelligence/1041227/the-new-york-times-warns-photographers-not-to-update-photoshop-over-ai-features"
+    },
+    {
+      "summary": "A cyberattack campaign has been identified, compromising Check Point security management servers across 22 organizations.",
+      "source": "Hacker News",
+      "url": "https://www.greynoise.io/blog/check-point-security-management-servers-intrusion-campaign"
+    }
+  ],
+  "world": [
+    {
+      "summary": "A senior Hamas security official was killed in a series of Israeli drone strikes conducted across Gaza.",
+      "source": "Al Jazeera",
+      "url": "https://www.aljazeera.com/video/newsfeed/2026/11/24/senior-hamas-security-official-killed-in-israeli-drone-strikes?traffic_source=rss"
+    },
+    {
+      "summary": "Armed men seized a supermarket in Cartagena, Colombia, taking 25 people hostage after a failed attempt to flee.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/world/2026/nov/24/cartagena-colombia-hostages-supermarket"
+    },
+    {
+      "summary": "Former French President Nicolas Sarkozy and his wife Carla Bruni are set to face trial in the latest legal case involving the ex-leader.",
+      "source": "BBC World",
+      "url": "https://www.bbc.co.uk/news/articles/c65y17pwv1z7o?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "summary": "Cameroon separatist leader Lucas Cho Ayaba pleaded not guilty at his war crimes trial in Norway, where he is accused of remotely planning attacks that resulted in dozens of civilian casualties.",
+      "source": "Al Jazeera",
+      "url": "https://www.aljazeera.com/news/2026/11/24/cameroon-separatist-leader-pleads-not-guilty-in-war-crimes-trial?traffic_source=rss"
+    }
+  ],
+  "us": [
+    {
+      "summary": "A court has lifted an administrative stay, allowing the U.S. Army to proceed with its plan to detonate tons of unstable bomb-making material in Iowa.",
+      "source": "NPR National",
+      "url": "https://www.npr.org/2026/11/24/nx-s1-6051547/court-lifts-administrative-stay-allowing-lead-azide-detonation-to-move-forward"
+    },
+    {
+      "summary": "Residents of Berkeley, California, have voted to double their existing tax on soda and sugary drinks.",
+      "source": "NPR National",
+      "url": "https://www.npr.org/2026/11/24/nx-s1-6049118/residents-of-berkeley-california-vote-to-double-their-soda-tax"
+    },
+    {
+      "summary": "The U.S. Army has rescheduled the detonation of approximately five tons of bomb-making material in Iowa to Wednesday, citing weather and the implementation of mitigation measures.",
+      "source": "NPR National",
+      "url": "https://www.npr.org/2026/11/23/nx-s1-6048731/army-reschedules-detonation-of-toxic-explosives-in-iowa-for-wednesday"
+    }
+  ],
+  "science": [
+    {
+      "summary": "Doctors are facing challenges in saving babies due to a rise in parents refusing routine vitamin K shots for newborns, often influenced by misinformation, which helps prevent a rare but severe bleeding disorder.",
+      "source": "NPR Health",
+      "url": "https://www.npr.org/2026/11/24/nx-s1-6001723/vitamin-k-deficiency-refusal-vaccine-misinformation-newborn-bleeding"
+    },
+    {
+      "summary": "The NHS has launched the world's largest trial to investigate whether artificial intelligence can improve the early diagnosis of breast cancer and potentially reduce pressure on healthcare services.",
+      "source": "BBC Health",
+      "url": "https://www.bbc.co.uk/news/articles/cmpdwnw3nvzjo?at_medium=RSS&at_campaign=rss"
+    }
+  ],
+  "weekly_recap": null,
+  "data_availability": {
+    "sp500": true,
+    "ndx": true,
+    "vix": true,
+    "ten_year": true,
+    "news_world": true,
+    "news_us": true,
+    "news_science": true,
+    "news_business": true,
+    "news_tech": true,
+    "summary": "ok",
+    "breadth": true,
+    "policy": true,
+    "mortgage": true,
+    "watchlist": true
+  }
+}
