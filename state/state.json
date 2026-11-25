@@ -3,12 +3,12 @@
   "markets_last_ok": "2026-11-25",
   "breadth_last_good": {
     "sp500": {
-      "value": 55.6,
+      "value": 56.0,
       "matched": 500,
       "asof": "2026-11-24"
     },
     "ndx100": {
-      "value": 42.7,
+      "value": 44.8,
       "matched": 96,
       "asof": "2026-11-24"
     }
@@ -18,14 +18,14 @@
       "in_alert": false,
       "nag_days": 0,
       "warn_armed": true,
-      "last_value": 55.6,
+      "last_value": 56.0,
       "last_asof": "2026-11-24"
     },
     "ndx100": {
       "in_alert": false,
       "nag_days": 0,
       "warn_armed": true,
-      "last_value": 42.7,
+      "last_value": 44.8,
       "last_asof": "2026-11-24"
     }
   },
@@ -854,8 +854,8 @@
     "TQQQ": "hold"
   },
   "mortgage_last_good": {
-    "value": 7.28,
-    "change": 0.17,
-    "asof": "2026-11-19"
+    "value": 7.21,
+    "change": -0.07,
+    "asof": "2026-11-25"
   }
 }

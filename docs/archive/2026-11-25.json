@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-11-25T12:15:35.201975-07:00",
+  "generated_at": "2026-11-25T13:36:27.590052-07:00",
   "date": "2026-11-25",
   "tldr": [
-    "US stocks, particularly in the tech sector, closed lower due to intensified fears over AI investments and new tariff proposals.",
-    "The US Army successfully detonated a large stockpile of bomb-making chemicals in Iowa amidst public health concerns.",
-    "The FCC has approved SpaceX's plan to deploy up to one million AI-equipped data center satellites into orbit."
+    "SpaceX received FCC approval to deploy up to one million orbital data center satellites for its \"Starmind\" initiative.",
+    "The U.S. Army successfully completed a controlled detonation of nearly five tons of lead-based explosives in Iowa, reporting promising initial lead readings.",
+    "Stock market indices declined following an Nvidia-led tech sell-off, driven by concerns over AI spending, inflation, and the risks of higher interest rates."
   ],
   "market": {
     "sp500": {
@@ -17,30 +17,30 @@
       "change": -356.02,
       "asof": "2026-11-24"
     },
-    "why": "US stocks, including the S&P 500 and Nasdaq Composite, closed lower due to intensifying fears over artificial intelligence investments, inflation, and the risks associated with higher interest rates, as well as new tariff proposals from the United States."
+    "why": "The S&P 500 and Nasdaq Composite closed lower on November 24, as an Nvidia-led tech sell-off impacted markets. Investors weighed concerns over AI spending, persistent inflation, and the risks of higher interest rates."
   },
   "yield_10y": {
-    "value": 4.9,
-    "change": -0.01,
-    "asof": "2026-11-24",
-    "why": "The 10-year Treasury yield moved lower as investors sought the protection of bonds amid ongoing sticky inflation data."
+    "value": 4.85,
+    "change": -0.06,
+    "asof": "2026-11-25",
+    "why": "The 10-year Treasury yield fell on November 25, despite sticky inflation data, as investors bought bonds for protection."
   },
   "vix": {
     "value": 26.36,
     "change": -0.26,
     "asof": "2026-11-24",
-    "why": "The articles do not provide a direct explanation for the slight decrease in the VIX."
+    "why": "The VIX decreased on November 24, as options trading suggested expectations for dampening stock swings in the near term."
   },
   "breadth": {
     "sp500": {
-      "value": 55.6,
+      "value": 56.0,
       "asof": "2026-11-24",
       "status": "healthy",
       "matched": 500,
       "stale": false
     },
     "ndx100": {
-      "value": 42.7,
+      "value": 44.8,
       "asof": "2026-11-24",
       "status": "healthy",
       "matched": 96,
@@ -95,7 +95,12 @@
     }
   ],
   "watchlist_missing": [],
-  "mortgage": null,
+  "mortgage": {
+    "value": 7.21,
+    "change": -0.07,
+    "asof": "2026-11-25",
+    "why": "The 30-year fixed mortgage rate decreased by 0.07% in the weekly survey released November 25, tracking the recent slide in the 10-year Treasury yield, which investors sought for protection."
+  },
   "policy": [],
   "policy_upcoming": [
     {
@@ -159,76 +164,77 @@
   ],
   "policy_calendar": [
     {
-      "date": "2026-11-30",
-      "label": "FHFA conforming loan limit for next year \u2014 expected late November",
-      "note": "The cap on a conforming (non-jumbo) mortgage, and the line between a normal rate and a jumbo one. FHFA has announced it in the last days of November each year, and the new limit applies to loans made from January 1.",
-      "url": "https://www.fhfa.gov/data/conforming-loan-limit"
+      "date": "2026-11-24",
+      "label": "FHFA set the 2027 baseline conforming loan limit at $855,400 for one-unit homes, announced Nov 24",
+      "note": "Up $22,650 from 2026. It applies to loans made from January 1, 2027, and is the line between a conforming mortgage and a jumbo one in most of the US. High-cost counties have higher limits on FHFA's county list.",
+      "url": "https://www.fhfa.gov/news/news-release/fhfa-announces-conforming-loan-limit-for-2027",
+      "announced": "2026-11-24"
     }
   ],
   "tech": [
     {
-      "summary": "The Federal Communications Commission has authorized SpaceX to deploy up to one million AI-equipped Starmind satellites, establishing orbital data centers.",
-      "source": "Ars Technica",
-      "url": "https://arstechnica.com/space/2026/11/the-fcc-has-authorized-spacex-to-deploy-1-million-satellites/"
+      "summary": "SpaceX has received approval from the FCC to deploy up to one million AI chip-equipped satellites as part of its \"Starmind\" initiative, aiming to establish orbital data centers.",
+      "source": "Al Jazeera",
+      "url": "https://www.aljazeera.com/news/2026/11/25/us-grants-spacex-approval-for-1-million-space-data-centres?traffic_source=rss"
     },
     {
-      "summary": "Huawei faces significant penalties after being found guilty of stealing trade secrets from T-Mobile and Cisco, and evading Iran sanctions.",
-      "source": "Ars Technica",
-      "url": "https://arstechnica.com/tech-policy/2026/11/jury-convicts-huawei-of-stealing-us-trade-secrets-evading-iran-sanctions/"
-    },
-    {
-      "summary": "Nothing has revealed its new AI earbuds, which can record calls and offer transcription and summarization features directly from their charging case.",
+      "summary": "Nothing has provided a detailed look at its upcoming AI earbuds, the Ear Note, which feature call recording, transcription, and summarization capabilities, with a microphone-equipped charging case.",
       "source": "The Verge",
       "url": "https://www.theverge.com/gadgets/1042162/nothing-ear-note-ai-earbuds-reveal"
+    },
+    {
+      "summary": "A new preprint article suggests that the polynomial Hirsch conjecture, a long-standing open problem in mathematics and theoretical computer science related to the diameter of polytopes, has been found to be false.",
+      "source": "Hacker News",
+      "url": "https://github.com/openai/math/blob/main/preprints/Superpolynomial-graph-diameter-of-simple-polytopes-November-24-2026/paper.pdf"
     }
   ],
   "world": [
     {
-      "summary": "A UN tribunal has ruled that the UN's dismissal of Palestinian aid workers in 2024 was based \"almost entirely\" on unproven Israeli allegations, impacting humanitarian efforts in Gaza.",
+      "summary": "Colombian security forces stormed a supermarket in Cartagena, ending a daylong siege and successfully rescuing all hostages, though one man described by police as a hostage-taker was killed.",
       "source": "Guardian World",
-      "url": "https://www.theguardian.com/world/2026/nov/25/un-sacked-palestinian-staff-on-back-of-unproven-israel-allegations"
+      "url": "https://www.theguardian.com/world/2026/nov/25/hostages-freed-colombia-security-forces-storm-cartagena-supermarket"
     },
     {
-      "summary": "Colombian security forces successfully stormed a supermarket, rescuing all 76 hostages who had been held for 17 hours after a robbery attempt.",
+      "summary": "Israeli judges have recommended dropping the most serious charges against Prime Minister Benjamin Netanyahu, indicating there is little chance of conviction in one of his three ongoing cases.",
       "source": "BBC World",
-      "url": "https://www.bbc.co.uk/news/articles/ckp80mjr9emyo?at_medium=RSS&at_campaign=rss"
+      "url": "https://www.bbc.co.uk/news/articles/cxj05mv723r2o?at_medium=RSS&at_campaign=rss"
     },
     {
-      "summary": "Poundland, a budget retail chain in the UK, has collapsed into administration, jeopardizing over 10,000 jobs.",
+      "summary": "The Bank of England has warned that food price inflation in the UK could reach 5% next year, as cost pressures continue to mount despite recent increases being less severe than initially feared.",
       "source": "Guardian World",
-      "url": "https://www.theguardian.com/business/2026/nov/25/poundland-administration-jobs-at-risk-gordon-brothers"
+      "url": "https://www.theguardian.com/business/2026/nov/25/uk-food-inflation-sharp-rise-next-year-mounting-cost-pressures-bank-of-england"
     },
     {
-      "summary": "Iraq's top court has ruled that the federal government can take control of Kurdish border areas and oil fields, following accusations from Kurdish authorities of an 'assault' on their constitutional rights.",
+      "summary": "Ukraine has claimed that its Blysk laser system successfully intercepted and downed a Russian jet-powered drone in combat, marking what it describes as a world first for this technology.",
       "source": "Al Jazeera",
-      "url": "https://www.aljazeera.com/news/2026/11/25/iraqs-top-court-rules-government-can-take-over-kurdish-borders-oil-fields?traffic_source=rss"
+      "url": "https://www.aljazeera.com/video/newsfeed/2026/11/25/ukrainian-laser-downs-russian-jet-powered-drone-in-world-first?traffic_source=rss"
     }
   ],
   "us": [
     {
-      "summary": "The US Army successfully conducted a controlled detonation of approximately five tons of unstable lead azide at the Iowa Army Ammunition Plant, despite public concerns about potential health and environmental effects.",
+      "summary": "The U.S. Army successfully completed a controlled detonation of nearly five tons of unstable lead azide at the Iowa Army Ammunition Plant, with officials reporting promising initial lead readings in the area.",
       "source": "NPR National",
       "url": "https://www.npr.org/2026/11/25/nx-s1-6052338/army-detonation-lead-explosives-iowa"
     },
     {
-      "summary": "Kilmar \u00c1brego Garc\u00eda, a Salvadoran immigrant who had been involved in legal battles regarding deportation, voluntarily departed the United States for Spain.",
+      "summary": "Kilmar \u00c1brego Garc\u00eda, a Salvadoran national who became a symbol of past deportation efforts, voluntarily departed the U.S. for Spain following a nearly two-year legal battle.",
       "source": "NPR National",
       "url": "https://www.npr.org/2026/11/25/nx-s1-6053203/abrego-garcia-leaves-us"
     },
     {
-      "summary": "The United States has proposed new tariffs on 14 trading partners, including China and the EU, following an eight-month investigation by the United States Trade Representative into foreign trade practices.",
-      "source": "CNBC",
-      "url": "https://www.cnbc.com/2026/11/25/us-tariffs-trump-section-301.html"
+      "summary": "Inspections over two years at four Butterball plants, the nation's largest turkey producer, found high levels of salmonella bacteria in more than a third of its ground or chopped turkey samples.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/environment/2026/nov/25/turkey-salmonella-butterball"
     }
   ],
   "science": [
     {
-      "summary": "The NHS has launched the world's largest trial to determine if artificial intelligence can improve breast cancer diagnosis and enable earlier detection, potentially easing pressure on the health service.",
+      "summary": "The NHS has launched the world's largest trial to investigate whether artificial intelligence can improve the early diagnosis of breast cancer and potentially ease pressure on healthcare services.",
       "source": "BBC Health",
       "url": "https://www.bbc.co.uk/news/articles/cmpdwnw3nvzjo?at_medium=RSS&at_campaign=rss"
     },
     {
-      "summary": "Doctors are confronting a rise in parents refusing routine vitamin K shots for newborns, leading to challenges in preventing a rare but severe bleeding disorder due to misinformation.",
+      "summary": "Doctors are facing challenges in saving newborns from a rare but devastating bleeding disorder, as some parents are refusing routine vitamin K shots due to the spread of misinformation.",
       "source": "NPR Health",
       "url": "https://www.npr.org/2026/11/24/nx-s1-6001723/vitamin-k-deficiency-refusal-vaccine-misinformation-newborn-bleeding"
     }
@@ -245,9 +251,10 @@
     "news_business": true,
     "news_tech": true,
     "summary": "ok",
+    "summary_error": null,
     "breadth": true,
     "policy": true,
-    "mortgage": false,
+    "mortgage": true,
     "watchlist": true
   }
 }
