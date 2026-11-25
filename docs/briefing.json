@@ -1,8 +1,10 @@
 {
-  "generated_at": "2026-11-25T11:01:37.129439-07:00",
+  "generated_at": "2026-11-25T12:15:35.201975-07:00",
   "date": "2026-11-25",
   "tldr": [
-    "AI summary unavailable today \u2014 showing raw market numbers and headlines."
+    "US stocks, particularly in the tech sector, closed lower due to intensified fears over AI investments and new tariff proposals.",
+    "The US Army successfully detonated a large stockpile of bomb-making chemicals in Iowa amidst public health concerns.",
+    "The FCC has approved SpaceX's plan to deploy up to one million AI-equipped data center satellites into orbit."
   ],
   "market": {
     "sp500": {
@@ -15,30 +17,30 @@
       "change": -356.02,
       "asof": "2026-11-24"
     },
-    "why": ""
+    "why": "US stocks, including the S&P 500 and Nasdaq Composite, closed lower due to intensifying fears over artificial intelligence investments, inflation, and the risks associated with higher interest rates, as well as new tariff proposals from the United States."
   },
   "yield_10y": {
     "value": 4.9,
     "change": -0.01,
     "asof": "2026-11-24",
-    "why": ""
+    "why": "The 10-year Treasury yield moved lower as investors sought the protection of bonds amid ongoing sticky inflation data."
   },
   "vix": {
     "value": 26.36,
     "change": -0.26,
     "asof": "2026-11-24",
-    "why": ""
+    "why": "The articles do not provide a direct explanation for the slight decrease in the VIX."
   },
   "breadth": {
     "sp500": {
-      "value": 54.8,
+      "value": 55.6,
       "asof": "2026-11-24",
       "status": "healthy",
       "matched": 500,
       "stale": false
     },
     "ndx100": {
-      "value": 41.7,
+      "value": 42.7,
       "asof": "2026-11-24",
       "status": "healthy",
       "matched": 96,
@@ -165,70 +167,70 @@
   ],
   "tech": [
     {
-      "summary": "The Fairphone 6 Plus is modular, repairable, and $100 off right now",
-      "source": "The Verge",
-      "url": "https://www.theverge.com/gadgets/1041460/fairphone-6-plus-repairable-phone-black-friday-2026-deal-sale"
+      "summary": "The Federal Communications Commission has authorized SpaceX to deploy up to one million AI-equipped Starmind satellites, establishing orbital data centers.",
+      "source": "Ars Technica",
+      "url": "https://arstechnica.com/space/2026/11/the-fcc-has-authorized-spacex-to-deploy-1-million-satellites/"
     },
     {
-      "summary": "The loneliest peptide party in New York",
-      "source": "The Verge",
-      "url": "https://www.theverge.com/column/1041761/optimizer-peptide-parties-afterglow"
+      "summary": "Huawei faces significant penalties after being found guilty of stealing trade secrets from T-Mobile and Cisco, and evading Iran sanctions.",
+      "source": "Ars Technica",
+      "url": "https://arstechnica.com/tech-policy/2026/11/jury-convicts-huawei-of-stealing-us-trade-secrets-evading-iran-sanctions/"
     },
     {
-      "summary": "FCC signs off on SpaceX\u2019s plan to put up to 1 million data center satellites into space",
+      "summary": "Nothing has revealed its new AI earbuds, which can record calls and offer transcription and summarization features directly from their charging case.",
       "source": "The Verge",
-      "url": "https://www.theverge.com/science/1042278/spacex-fcc-starmind-ai-space-data-centers"
+      "url": "https://www.theverge.com/gadgets/1042162/nothing-ear-note-ai-earbuds-reveal"
     }
   ],
   "world": [
     {
-      "summary": "US stocks fall further as fears over AI intensify",
+      "summary": "A UN tribunal has ruled that the UN's dismissal of Palestinian aid workers in 2024 was based \"almost entirely\" on unproven Israeli allegations, impacting humanitarian efforts in Gaza.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/world/2026/nov/25/un-sacked-palestinian-staff-on-back-of-unproven-israel-allegations"
+    },
+    {
+      "summary": "Colombian security forces successfully stormed a supermarket, rescuing all 76 hostages who had been held for 17 hours after a robbery attempt.",
       "source": "BBC World",
-      "url": "https://www.bbc.co.uk/news/articles/cq0md8g14zryo?at_medium=RSS&at_campaign=rss"
+      "url": "https://www.bbc.co.uk/news/articles/ckp80mjr9emyo?at_medium=RSS&at_campaign=rss"
     },
     {
-      "summary": "Burnham dismisses Badenoch\u2019s criticism over influencer and declines to apologise for \u2018vile video\u2019 \u2013 UK politics live",
+      "summary": "Poundland, a budget retail chain in the UK, has collapsed into administration, jeopardizing over 10,000 jobs.",
       "source": "Guardian World",
-      "url": "https://www.theguardian.com/politics/live/2026/nov/25/andy-burnham-kemi-badenoch-pmqs-energy-bills-tiktok-welfare-benefits-timms-reform-brexit-devolution-latest-news-updates"
+      "url": "https://www.theguardian.com/business/2026/nov/25/poundland-administration-jobs-at-risk-gordon-brothers"
     },
     {
-      "summary": "Smoke seen from a mile away as army detonates US stockpile of bomb-making chemicals in Iowa",
-      "source": "Guardian World",
-      "url": "https://www.theguardian.com/us-news/2026/nov/25/iowa-controlled-blast-lead-azide"
-    },
-    {
-      "summary": "Woman did not believe husband had drugged her for rape by strangers, Manchester trial told",
-      "source": "Guardian World",
-      "url": "https://www.theguardian.com/uk-news/2026/nov/25/woman-did-not-believe-husband-drugged-her-for-rape-by-strangers-manchester-trial"
+      "summary": "Iraq's top court has ruled that the federal government can take control of Kurdish border areas and oil fields, following accusations from Kurdish authorities of an 'assault' on their constitutional rights.",
+      "source": "Al Jazeera",
+      "url": "https://www.aljazeera.com/news/2026/11/25/iraqs-top-court-rules-government-can-take-over-kurdish-borders-oil-fields?traffic_source=rss"
     }
   ],
   "us": [
     {
-      "summary": "Republican wants FBI and CIA answers before questioning Nvidia chief",
+      "summary": "The US Army successfully conducted a controlled detonation of approximately five tons of unstable lead azide at the Iowa Army Ammunition Plant, despite public concerns about potential health and environmental effects.",
       "source": "NPR National",
-      "url": "https://www.npr.org/2026/11/25/nx-s1-6052417/nvidia-jensen-huang-reaction-republicans-congress-investigation"
+      "url": "https://www.npr.org/2026/11/25/nx-s1-6052338/army-detonation-lead-explosives-iowa"
     },
     {
-      "summary": "A quintessential Route 66 diner has been serving up Americana for nearly 100 years",
+      "summary": "Kilmar \u00c1brego Garc\u00eda, a Salvadoran immigrant who had been involved in legal battles regarding deportation, voluntarily departed the United States for Spain.",
       "source": "NPR National",
-      "url": "https://www.npr.org/2026/11/25/nx-s1-5983717/ariston-cafe-route-66-diner-litchfield-illinois"
+      "url": "https://www.npr.org/2026/11/25/nx-s1-6053203/abrego-garcia-leaves-us"
     },
     {
-      "summary": "In a time of rising costs, one Thanksgiving commodity is cheaper: cannabis",
-      "source": "NPR National",
-      "url": "https://www.npr.org/2026/11/25/nx-s1-6046173/cannabis-marijuana-prices-retailers-discounts"
+      "summary": "The United States has proposed new tariffs on 14 trading partners, including China and the EU, following an eight-month investigation by the United States Trade Representative into foreign trade practices.",
+      "source": "CNBC",
+      "url": "https://www.cnbc.com/2026/11/25/us-tariffs-trump-section-301.html"
     }
   ],
   "science": [
     {
-      "summary": "NHS Grampian surgeon operated on patient while recovering from endoscopy",
+      "summary": "The NHS has launched the world's largest trial to determine if artificial intelligence can improve breast cancer diagnosis and enable earlier detection, potentially easing pressure on the health service.",
       "source": "BBC Health",
-      "url": "https://www.bbc.co.uk/news/articles/cx30g76yvl1zo?at_medium=RSS&at_campaign=rss"
+      "url": "https://www.bbc.co.uk/news/articles/cmpdwnw3nvzjo?at_medium=RSS&at_campaign=rss"
     },
     {
-      "summary": "How American Thanksgiving took root -- and evolved -- in Liberia",
+      "summary": "Doctors are confronting a rise in parents refusing routine vitamin K shots for newborns, leading to challenges in preventing a rare but severe bleeding disorder due to misinformation.",
       "source": "NPR Health",
-      "url": "https://www.npr.org/2026/11/25/nx-s1-6048614/thanksgiving-liberia-gratitude-prayer"
+      "url": "https://www.npr.org/2026/11/24/nx-s1-6001723/vitamin-k-deficiency-refusal-vaccine-misinformation-newborn-bleeding"
     }
   ],
   "weekly_recap": null,
@@ -242,7 +244,7 @@
     "news_science": true,
     "news_business": true,
     "news_tech": true,
-    "summary": "unavailable",
+    "summary": "ok",
     "breadth": true,
     "policy": true,
     "mortgage": false,
