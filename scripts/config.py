@@ -27,6 +27,12 @@ BUILD_NOT_BEFORE_HOUR = 5            # local (TIMEZONE) hour; matches the reader
 # --- AI (proven: gemini-2.5-flash + response_mime_type/response_schema) ------
 MODEL_ID = os.environ.get("MODEL_ID", "gemini-2.5-flash")
 MODEL_FALLBACK = "gemini-2.5-flash-lite"   # model ids move; documented fallback
+# summarize() budget: the old worst case (two models x a 120s client timeout) kept as a hard ceiling,
+# now spent by summarize.call_with_backoff, which can add ONE retry after a wait when a model failed
+# with a 429 or a 5xx (the 2026-11-25 outage). Every call's timeout is capped at what is left, so the
+# retry never makes the run longer than before; it only uses time a fast failure left unspent.
+SUMMARY_BUDGET_S = 240
+SUMMARY_RETRY_BACKOFF_S = 25
 
 # --- News -------------------------------------------------------------------
 NEWS_WINDOW_HOURS = 72               # widen past 24h so Mondays/holidays aren't empty
@@ -351,6 +357,14 @@ LIFE_PROFILE_EXCLUSIONS = [
     ("pension funding / defined benefit plan mechanics",
      ["defined benefit", "target normal cost", "funding target", "minimum funding",
       "single-employer plan", "pension plan"]),
+    # 2026-11-25. TD 10060, "Regulations Regarding Payment of Tax by Commercially Acceptable Means"
+    # (2026-21267): lets the IRS take card payments directly and sets how processing fees are
+    # handled. The model kept selecting it (Data Smoke 2026-11-16 and 2026-11-24, 06's G2/prefilter)
+    # because it touches "paying tax", but it creates no number, deadline or obligation for this
+    # reader: it is payment-processing machinery. Recorded here as intentional, not widened into a
+    # keyword, which would admit every IRS procedural notice.
+    ("IRS payment-processing mechanics (how a tax payment is accepted)",
+     ["commercially acceptable means"]),
 ]
 
 # Federal Register — one keyless request covers all six agencies, type-filtered and date-windowed.
@@ -376,7 +390,13 @@ FR_AGENCIES = [
 # every date comparison and sort key downstream must be None-safe or the policy leg raises into
 # build_briefing.main()'s crash handler and pages the whole briefing as FAILED.
 FR_FIELDS = ["title", "html_url", "publication_date", "type", "agencies",
-             "abstract", "effective_on", "document_number"]
+             "abstract", "effective_on", "document_number",
+             # The rule's own DATES text ("Effective date: These regulations are effective on ...").
+             # Added 2026-11-25: with only `effective_on` to go on, the model told this reader the
+             # Section 414A auto-enrollment rule applied to "your plan" from its effective date,
+             # when the rule applies to plan years from 2028 and only to newer plans. Sent to the
+             # model and used as source text by summarize._validate_policy_items' date check.
+             "dates"]
 FR_WINDOW_DAYS = 45      # measured cadence is ~1 qualifying item per 22 days (2 of 24 across 45
                          # days), so a 24h window would be empty almost every morning. Dedupe is by
                          # document_number against state.policy_seen — applied to what the model
@@ -406,6 +426,10 @@ UTAH_MIN_SIGNED = 100    # harvest gate: only trust a scrape that yields at leas
 # a year, and the single most decision-relevant number for someone saving for a first house.
 # Weekly release; 2,889 rows, newest 2026-07-30 at 6.66 (05 fingerprint). Needs a browser-like UA.
 PMMS_CSV_URL = "https://www.freddiemac.com/pmms/docs/PMMS_history.csv"
+# How old a cached PMMS reading may be and still be shown when today's fetch fails
+# (mortgage.with_last_good). 14 days matches 05's P4 freshness bound: two missed weekly releases
+# means the feed is broken, and a two-week-old rate shown as "the rate" would mislead.
+MORTGAGE_LAST_GOOD_MAX_DAYS = 14
 
 POLICY_TIMEOUT = 25              # per request. Matches what 05/07 proved; Utah detail pages answered
                                  # well under 20s each. The whole policy leg must stay inside
@@ -519,6 +543,7 @@ MAX_POLICY_SPOKEN = 6            # hard cap on items read aloud in the digest, n
 POLICY_CALENDAR = [
     {
         "month": 11, "day": 30,
+        "key": "fhfa-conforming-loan-limit",
         "label": "FHFA conforming loan limit for next year — expected late November",
         "note": ("The cap on a conforming (non-jumbo) mortgage, and the line between a normal rate "
                  "and a jumbo one. FHFA has announced it in the last days of November each year, "
@@ -527,6 +552,7 @@ POLICY_CALENDAR = [
     },
     {
         "month": 11, "day": 10,
+        "key": "irs-brackets",
         "label": ("IRS tax brackets and the married-filing-jointly standard deduction for next "
                   "year — expected late October or early November"),
         "note": ("Published as an annual inflation-adjustment revenue procedure; recent releases "
@@ -536,6 +562,7 @@ POLICY_CALENDAR = [
     },
     {
         "month": 11, "day": 5,
+        "key": "irs-retirement-limits",
         "label": ("IRS 401(k) and IRA contribution limits for next year — expected late October "
                   "or early November"),
         "note": ("The annual cost-of-living adjustment notice, historically released within a week "
@@ -546,6 +573,7 @@ POLICY_CALENDAR = [
     },
     {
         "month": 11, "day": 1,
+        "key": "aca-open-enrollment-opens",
         "label": "ACA marketplace open enrollment opens — expected early November",
         "note": ("healthcare.gov has opened enrollment on November 1 each year, and currently "
                  "publishes December 15 as the deadline for coverage starting January 1. The "
@@ -554,6 +582,7 @@ POLICY_CALENDAR = [
     },
     {
         "month": 1, "day": 15,
+        "key": "aca-open-enrollment-closes",
         "label": "ACA marketplace open enrollment closes — expected mid-January",
         "note": ("healthcare.gov currently publishes January 15 as the last day to enroll in or "
                  "change a marketplace plan. After it closes, enrolling needs a qualifying life "
@@ -563,6 +592,7 @@ POLICY_CALENDAR = [
     },
     {
         "month": 4, "day": 18,
+        "key": "federal-filing-deadline",
         "label": "Federal income tax filing deadline — expected mid-April",
         "note": ("April 15 by statute, moving to the next business day when that falls on a "
                  "weekend or a District of Columbia holiday, which has pushed it to April 17 or "
@@ -571,6 +601,7 @@ POLICY_CALENDAR = [
     },
     {
         "month": 1, "day": 21,
+        "key": "utah-session-convenes",
         "label": "Utah Legislature's general session convenes — expected mid-to-late January",
         "note": ("The general session opens on the third Tuesday in January (so January 15-21 "
                  "depending on the year) and runs 45 calendar days, adjourning in early March. "
@@ -580,6 +611,7 @@ POLICY_CALENDAR = [
     },
     {
         "month": 8, "day": 31,
+        "key": "utah-truth-in-taxation",
         "label": "Utah Truth in Taxation hearings — expected during August",
         "note": ("A Utah taxing entity that wants more property tax revenue than the certified "
                  "rate allows must hold a public hearing, and those hearings are held in August. "
@@ -589,6 +621,38 @@ POLICY_CALENDAR = [
     },
 ]
 POLICY_CALENDAR_HORIZON_DAYS = 30
+
+# --- Announced: a calendar entry whose event has HAPPENED ----------------------------------------
+# The calendar can only say "expected". Once the source publishes, that line is stale in the worst
+# way: on 2026-11-25 the page still said the conforming loan limit was "expected late November" a day
+# after FHFA announced it. An entry here REPLACES the calendar entry with the same `key` (see
+# policy.upcoming_calendar) from `announced` through `expires`, and renders with an "Announced" marker
+# instead of "Expected".
+#
+# Unlike the calendar, these lines DO carry years and figures, because they report a published fact.
+# That is exactly why each one needs an expiry: a dated fact goes stale, and `expires` is its
+# staleness story. 09-policy-calendar.py's C7 requires a primary-source https url, a key that matches
+# a calendar entry, and an expiry no more than POLICY_ANNOUNCED_MAX_DAYS after the announcement, so a
+# forgotten entry cannot shadow next year's "expected" line.
+#
+# Every figure here is verified against the primary source before it is written (see each `source`).
+POLICY_ANNOUNCED_MAX_DAYS = 120
+POLICY_ANNOUNCED = [
+    {
+        "key": "fhfa-conforming-loan-limit",
+        "announced": "2026-11-24",
+        "expires": "2027-01-31",
+        "label": ("FHFA set the 2027 baseline conforming loan limit at $855,400 for one-unit "
+                  "homes, announced Nov 24"),
+        "note": ("Up $22,650 from 2026. It applies to loans made from January 1, 2027, and is the "
+                 "line between a conforming mortgage and a jumbo one in most of the US. High-cost "
+                 "counties have higher limits on FHFA's county list."),
+        # Verified 2026-11-25 on fhfa.gov: "In most of the United States, the 2027 CLL for one-unit
+        # properties will be $855,400, an increase of $22,650 from 2026." Release dated 11/24/2026.
+        "url": ("https://www.fhfa.gov/news/news-release/"
+                "fhfa-announces-conforming-loan-limit-for-2027"),
+    },
+]
 # Why 30 and not 60 or 7. Eight events a year, each anchored at the end of its window, produce these
 # visible spans: Oct 2-Nov 30, Dec 16-Jan 21, Mar 19-Apr 18, Aug 1-31 — 159 days, so the
 # forward-looking block appears on roughly 44% of mornings. That is the point of the number: useful

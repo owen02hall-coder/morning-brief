@@ -77,6 +77,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 # __init__.py — so sys.path is the route.
 sys.path.insert(0, os.path.dirname(os.path.dirname(HERE)))
 from scripts import config  # noqa: E402
+from scripts.data import mortgage  # noqa: E402
 
 UA = {"User-Agent": "briefing-assumption-test/1.0"}
 BROWSER_UA = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
@@ -206,14 +207,21 @@ def main():
     # --- P4: Freddie Mac PMMS mortgage rate ---------------------------------------
     try:
         raw = _get(PMMS_CSV, headers=BROWSER_UA).decode("utf-8", "replace")
-        rows = [r for r in raw.splitlines() if r.strip()]
-        header = rows[0].split(",")
-        last = rows[-1].split(",")
+        # PRODUCTION's row splitter and cell cleaner, not a local str.split(","). This block used to
+        # carry its own split, and on 2026-11-25 Freddie Mac started quoting cells: production broke
+        # the same day, and a local copy would have kept proving a parse nobody ships.
+        rows = mortgage._rows(raw)
+        header = [mortgage._cell(h).lower() for h in rows[0]]
+        last = rows[-1]
         if "pmms30" not in header:
             failures.append(f"P4 PMMS header lacks 'pmms30': {header[:6]} — the 30-year rate column moved")
-        last_date = datetime.strptime(last[0], "%m/%d/%Y").date()
+        last_date = datetime.strptime(mortgage._cell(last[0]), "%m/%d/%Y").date()
         age = (date.today() - last_date).days
-        rate30 = last[header.index("pmms30")] if "pmms30" in header else None
+        rate30 = mortgage._cell(last[header.index("pmms30")]) if "pmms30" in header else None
+        # And the full production parse, end to end, so P4 is red exactly when the tile would be empty.
+        parsed = mortgage._parse(raw)
+        if not parsed or parsed.get("value") is None:
+            failures.append(f"P4 production mortgage._parse returned {parsed!r} on the live file")
         fp["pmms"] = {"rows": len(rows), "latest_date": last_date.isoformat(),
                       "age_days": age, "pmms30": rate30}
         if age > PMMS_MAX_AGE_DAYS:

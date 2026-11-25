@@ -22,8 +22,10 @@ column or a changed date format is caught instead by the weekly assumption gate
 
 Any failure degrades to None rather than raising, so the briefing still ships.
 """
+import csv
+import io
 import urllib.request
-from datetime import datetime
+from datetime import date, datetime
 
 from .. import config
 from . import retry
@@ -47,9 +49,28 @@ def _rate_at(row, col):
     rate there means there is no rate to publish at all, which must raise into get_rate()'s logged
     degrade, not quietly become None."""
     try:
-        return float(row[col].strip())
+        return float(_cell(row[col]))
     except (IndexError, ValueError):
         return None
+
+
+def _cell(s):
+    """One CSV cell with stray quotes, whitespace and a byte-order mark removed.
+
+    csv.reader already unwraps properly quoted cells. The extra strip is for a half-quoted cell or a
+    BOM on the first header name, either of which would otherwise turn a healthy file into a parse
+    failure the same way the quoted dates did on 2026-11-25."""
+    return (s or "").strip().lstrip("﻿").strip().strip('"').strip()
+
+
+def _rows(raw):
+    """The non-empty rows of a PMMS history CSV, split by the csv module.
+
+    NOT str.split(","). On 2026-11-25 Freddie Mac started quoting the data cells ("11/25/2026"), and
+    the old split handed strptime a date wrapped in quote marks. Both runs that day shipped with no
+    mortgage rate. csv.reader handles quoted and unquoted files identically, and a quoted cell that
+    contains a comma (which split would cut in two) as well."""
+    return [r for r in csv.reader(io.StringIO(raw)) if any(_cell(c) for c in r)]
 
 
 def _parse(raw):
@@ -68,17 +89,17 @@ def _parse(raw):
     weekly, so the previous row IS last week, but if Freddie Mac ever skips a week the delta is
     still exactly "the move since the last published rate" rather than a broken weekly claim. That
     is why there is no date-gap guard here — there is nothing for one to protect."""
-    rows = [r for r in raw.splitlines() if r.strip()]
+    rows = _rows(raw)
     if len(rows) < 2:                       # header only (or nothing) is not a usable release
         return None
-    header = [h.strip() for h in rows[0].split(",")]
+    header = [_cell(h).lower() for h in rows[0]]
     # BY NAME, never by position — an inserted column shifts nothing.
     col = header.index("pmms30")
-    last = rows[-1].split(",")
-    asof = datetime.strptime(last[0].strip(), "%m/%d/%Y").date().isoformat()
-    value = round(float(last[col].strip()), 2)
+    last = rows[-1]
+    asof = datetime.strptime(_cell(last[0]), "%m/%d/%Y").date().isoformat()
+    value = round(float(_cell(last[col])), 2)
     # rows[0] is the header, so rows[-2] is only a data row when there are at least 2 of them.
-    prior = _rate_at(rows[-2].split(","), col) if len(rows) >= 3 else None
+    prior = _rate_at(rows[-2], col) if len(rows) >= 3 else None
     change = round(value - prior, 2) if prior is not None else None
     return {"value": value, "change": change, "asof": asof}
 
@@ -116,3 +137,38 @@ def get_rate():
         # Log the real reason — a silent None made the FRED outage invisible for days (see market.py).
         print(f"mortgage: PMMS 30-year rate failed: {type(e).__name__}: {e}")
         return None
+
+
+def with_last_good(live, st, today):
+    """Return (rate_or_None, state). Same idea as build_briefing._get_breadth's last-good cache.
+
+    A good fetch is stored as `mortgage_last_good` and returned with stale=False. A failed fetch
+    falls back to that stored reading, marked stale=True and still carrying its OWN `asof`, so the
+    page and the narration say "as of <release date>" exactly as they do for a live reading. It is
+    served only while that release is at most config.MORTGAGE_LAST_GOOD_MAX_DAYS old: PMMS is
+    weekly, so a reading older than that is no longer "the rate", it is history.
+
+    The caller keeps data_availability.mortgage tied to the LIVE fetch, not to this return value.
+    A stale number on the page must not hide a dead feed from the degraded ping; that is how the
+    two failed runs of 2026-11-25 would have gone unnoticed if the fallback had counted as healthy.
+
+    Never raises: a malformed cache entry degrades to None, the pre-fallback behaviour."""
+    st = dict(st or {})
+    if live is not None:
+        st["mortgage_last_good"] = {k: live.get(k) for k in ("value", "change", "asof")}
+        return {**live, "stale": False}, st
+    try:
+        lg = st.get("mortgage_last_good") or {}
+        if lg.get("value") is None or not lg.get("asof"):
+            return None, st
+        age = (date.fromisoformat(today) - date.fromisoformat(lg["asof"])).days
+        if 0 <= age <= config.MORTGAGE_LAST_GOOD_MAX_DAYS:
+            print(f"mortgage: serving last good PMMS reading {lg['value']}% as of {lg['asof']} "
+                  f"({age} days old, stale)")
+            return {"value": lg["value"], "change": lg.get("change"), "asof": lg["asof"],
+                    "stale": True}, st
+        print(f"mortgage: last good PMMS reading is {age} days old (as of {lg['asof']}), past the "
+              f"{config.MORTGAGE_LAST_GOOD_MAX_DAYS}-day limit, so no rate is shown")
+    except Exception as e:
+        print(f"mortgage: last-good fallback skipped: {type(e).__name__}: {e}")
+    return None, st
