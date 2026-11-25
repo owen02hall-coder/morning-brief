@@ -25,7 +25,9 @@ rejected rather than merely unused) AND the rule has real work to do.
        attack-verb list. A prompt refactor that drops it would otherwise be invisible until the
        section had already drifted.
   (C3) THE MODEL OBEYS IT — a live call over real AP/NPR candidates returns `us` items free of
-       contest vocabulary. Skipped (not failed) without GEMINI_API_KEY.
+       contest vocabulary. Skipped (not failed) without GEMINI_API_KEY. Since 2026-11-25 production
+       drops contest items itself (summarize._drop_contest_us), so C3's hard check proves the
+       shipped guard holds and a NOTE reports how many items the guard had to drop.
   (C4) SHIPPED EDITIONS ARE CLEAN — every archived briefing that has a `us` section is checked.
        Starts as a no-op and grows into a real regression net as archives accumulate.
 
@@ -63,80 +65,14 @@ except Exception as e:                                  # noqa: BLE001 - any imp
           file=sys.stderr)
     sys.exit(3)
 
-# The contest vocabulary. Two distinct kinds, deliberately: REACTION verbs (the shape of an
-# attack-quote story) and HORSE-RACE nouns (the shape of a who-is-winning story). A bare party name
-# is included because in a three-sentence summary there is rarely a way to name a party without the
-# item being about the fight — an EVENT summary says "a federal appeals court ruled", not
-# "Republicans said".
-#
-# ONE MEASURED EXCEPTION, added 2026-08-31. "Rarely" is not "never", and the original rule said
-# never. A live run went red on "Former Republican congressman George Santos has received a lifetime
-# ban from the prediction-market platform Kalshi" — an event story about a betting platform, in
-# which the party word is BIOGRAPHY attached to a person, not a description of a fight. So a party
-# adjective immediately qualifying a person's role is not a hit.
-#
-# The carve-out is deliberately narrow, and note what it does NOT cover: the PLURAL collective
-# ("Republicans said", "Democrats blasted") is the party acting as a political actor and still
-# fires, as does a party word with no role noun behind it. C1 pins both directions — a
-# biographical sentence sits in EVENT_COPY and the plural forms sit in CONTEST_COPY — so this
-# exception cannot quietly widen into "party names are always fine".
-BIOGRAPHICAL = re.compile(
-    r"\b(Republican|Democratic|Democrat|GOP)\s+(?:(?:House|Senate)\s+)?"
-    r"(speaker|congressman|congresswoman|congressmember|representative|rep\.?|senator|sen\.?|governor|"
-    r"gov\.?|lawmaker|legislator|mayor|attorney general|official|appointee|nominee|aide|"
-    r"strategist|donor|operative|chairman|chairwoman|chair)\b", re.I)
-
-# The SECOND carve-out, added the same day as the first and for the same reason: a contest word with
-# two meanings. "Polls" is opinion polling (contest), but "the polls" is a place people vote at, and
-# the run that added this went red on "The US military's top general stated there are no plans to
-# send troops to the polls for the November elections" — a civil-military story, an event by any
-# reading. Same for "polling place" and "polling station".
-#
-# TWO polysemy false positives in two consecutive runs is the honest limit of a keyword detector: it
-# matches strings, and some strings mean two things. The carve-outs stay narrow and each is pinned in
-# BOTH directions by C1, so the detector cannot quietly erode into matching nothing — which is the
-# failure mode that would let C3 pass forever while proving nothing.
-POLLING_PLACE = re.compile(
-    r"\b(?:to|at|from|near|outside|inside)\s+the\s+polls\b"
-    r"|\bpolling\s+(?:place|station|location|site|booth)s?\b", re.I)
-
-# The THIRD carve-out, 2026-09-01 — and it is the SAME STORY as the second. The run that added
-# POLLING_PLACE went red on "no plans to send troops to the polls for the November elections". The
-# next run went red on the model's re-wording of that same civil-military story: "no plans to deploy
-# military troops to polling sites for the upcoming midterm elections". `polling sites` was carved
-# out correctly and did not fire; `midterm` did.
-#
-# "Midterm elections" NAMES AN ELECTION — it is a date, the same way "the November elections" is a
-# date — where "the midterms" as a bare noun is the horse race itself. So only the full noun phrase
-# is blanked. C1 pins both sides: the sentence above sits in EVENT_COPY, and a bare-"midterms"
-# horse-race line sits in CONTEST_COPY, so this cannot widen into "midterm is always fine".
-#
-# THREE polysemy false positives in three consecutive runs, all three from ONE news story, is worth
-# saying plainly: a keyword detector matches strings, and an election-adjacent EVENT story will keep
-# borrowing election vocabulary to say when it happened. C3 is a JUDGMENT-class check for exactly
-# this reason — it is scored against whatever the world published today and it pages at low
-# priority. Each carve-out here is narrow and pinned; if a fourth arrives, the honest move is to
-# reconsider the mechanism, not to add a fourth hole.
-#
-# 2026-10-21, the fourth hit — and it is NOT a fourth hole, it is the third carve-out's own phrase
-# with a modifier: "restrictions for the midterm general election" names the election exactly as
-# "midterm elections" does. The same day the BIOGRAPHICAL role list gained "speaker" (with an
-# optional House/Senate before it) for "the longest-serving Republican House speaker". The mechanism
-# change that came with them is in C4: see there.
-MIDTERM_DATE = re.compile(r"\bmidterm\s+(?:general\s+|primary\s+)?elections?\b", re.I)
-
-# Blanked before the contest scan, in order. Extend deliberately: every entry here is a hole in the
-# detector, and it earns its place only with a C1 control on each side of it.
-CARVE_OUTS = (BIOGRAPHICAL, POLLING_PLACE, MIDTERM_DATE)
+# The contest vocabulary, its carve-outs and contest_hits() moved to scripts/summarize.py on
+# 2026-11-25, where they now also GUARD the shipped US section (summarize._drop_contest_us): C4 went
+# red five weeks running on items the prompt rule should have kept out, and a prompt instruction is
+# a label, not a mechanism. The history of every carve-out moved with the code. This file imports the
+# ONE detector, so the gate and production cannot drift apart (the same rule as _MONEY).
+from scripts.summarize import contest_hits  # noqa: E402
 
 C4_WINDOW_DAYS = 7    # data-smoke.yml runs weekly; one window per run (see C4)
-CONTEST = re.compile(
-    r"\b("
-    r"slammed|blasted|lashed out|hit back|fired back|doubled down|rebuked|decried|denounced|"
-    r"critics|backlash|outrage|feud|clashed|infighting|"
-    r"poll|polls|polling|approval rating|midterms?|campaign trail|partisan|bipartisan|"
-    r"Democrats?|Republicans?|GOP|left-wing|right-wing"
-    r")\b", re.I)
 
 EVENT_COPY = [
     "A federal appeals court ruled that the state may not enforce the statute while litigation "
@@ -183,26 +119,13 @@ CONTEST_COPY = [
 ]
 
 
-def contest_hits(text):
-    """Every contest word in one piece of copy. Empty list == clean.
-
-    Every pattern in CARVE_OUTS is blanked first, so a contest word used in its OTHER sense reads as
-    the event it is: "Former Republican congressman X was charged", "troops sent to the polls".
-    Blanking rather than post-filtering the match list is deliberate — a post-filter would have to
-    guess WHICH "republican" a hit came from when a summary contains two.
-    """
-    clean = text or ""
-    for pattern in CARVE_OUTS:
-        clean = pattern.sub(" ", clean)
-    return sorted({m.group(0).lower() for m in CONTEST.finditer(clean)})
-
-
 def main():
-    global CONTEST
     failures, notes = [], []
 
     if CONTROL == "blunt-detector":
-        CONTEST = re.compile(r"\bzzzz-nothing-matches-this\b", re.I)
+        # Patches PRODUCTION's pattern: contest_hits (imported from summarize) reads it at call time,
+        # so this is the exact decay that would also switch off the shipped guard.
+        summarize.CONTEST = re.compile(r"\bzzzz-nothing-matches-this\b", re.I)
     elif CONTROL == "drop-rule":
         pass
     elif CONTROL:
@@ -274,6 +197,13 @@ def main():
                     verdict = "all clean" if not dirty else f"{dirty} carrying contest vocabulary"
                     notes.append(f"NOTE C3 ran: {len(items)} US item(s) from {len(news['us'])} "
                                  f"live candidates, {verdict}.")
+                    # Since 2026-11-25 summarize._drop_contest_us removes contest items before they
+                    # ship, so the hard check above proves the GUARD holds on live copy. How often
+                    # the MODEL broke the rule is still worth tracking, so it is reported here.
+                    drops = summarize.last_us_contest_drops()
+                    notes.append(f"NOTE C3 the shipped guard dropped {len(drops)} US item(s) the "
+                                 f"model wrote with contest vocabulary"
+                                 + (f": {[h for h, _ in drops]}" if drops else "."))
         except Exception as e:                          # noqa: BLE001
             notes.append(f"NOTE C3 SKIPPED (infrastructure): {type(e).__name__}: {e}")
 

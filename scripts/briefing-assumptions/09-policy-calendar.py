@@ -34,16 +34,25 @@ no network and no dependency, so it can run anywhere, in milliseconds, on every 
        days. Load-bearing: "Policy that affects you" renders ONLY when non-empty, and a horizon wide
        enough to keep an entry on screen every day would silently convert it into an always-on
        section. Measured against the real calendar over a full year.
+  (C7) ANNOUNCED LINES EXPIRE. `config.POLICY_ANNOUNCED` replaces a calendar line once its source
+       has published (2026-11-25: the page still said the loan limit was "expected" a day after
+       FHFA announced it). Those lines carry real years and figures, so each needs its own
+       staleness story: a primary-source https url, a `key` that matches a calendar entry, and an
+       `expires` no more than config.POLICY_ANNOUNCED_MAX_DAYS (about 120) after `announced`.
+       Also proves the replacement through PRODUCTION code: on the announcement day the line is
+       shown with its `announced` marker, and the day after expiry it is gone.
 
 Runnable NOW (no API key, no network, no dependencies). Read-only. Exit: 0 PASS / 1 FAIL / 2 REFUSED.
 
 NEGATIVE CONTROLS (`POLICY_CALENDAR_CONTROL=<mode>`, each driving PRODUCTION code red — all four
-verified red at authoring time, 2026-08-03):
+verified red at authoring time, 2026-08-03; long-expiry added 2026-11-25):
   no-rollforward  -> C1 red. Replaces production `policy._next_occurrence` with the naive same-year
                      version (`date(today.year, m, d)`), i.e. exactly the December->January bug the
                      roll-forward exists to prevent.
   fixed-year      -> C2 red. Appends an entry carrying a `year` key and a year in its label.
   blank-note      -> C3 red. Appends an entry whose note is empty.
+  long-expiry     -> C7 red. Appends an announced entry whose expiry is a year out and whose url is
+                     plain http, i.e. a dated fact that would outlive the year it describes.
   no-sort         -> C4 red. Neutralises production's `policy._calendar_sort_key` to a constant;
                      Python's sort is stable, so the output falls back to config order. This control
                      can only engage where config order differs from date order — the test says so
@@ -92,17 +101,24 @@ def apply_control():
         policy._next_occurrence = naive
     elif CONTROL == "fixed-year":
         config.POLICY_CALENDAR = list(config.POLICY_CALENDAR) + [{
-            "month": 11, "day": 30, "year": 2026,
+            "month": 11, "day": 30, "year": 2026, "key": "control-fixed-year",
             "label": "FHFA conforming loan limit for 2027 — expected November 2026",
             "note": "control entry", "url": "https://www.fhfa.gov/",
         }]
     elif CONTROL == "blank-note":
         config.POLICY_CALENDAR = list(config.POLICY_CALENDAR) + [{
-            "month": 6, "day": 1, "label": "Something — expected in June",
+            "month": 6, "day": 1, "key": "control-blank-note",
+            "label": "Something — expected in June",
             "note": "", "url": "https://www.irs.gov/",
         }]
     elif CONTROL == "no-sort":
         policy._calendar_sort_key = lambda entry: 0
+    elif CONTROL == "long-expiry":
+        config.POLICY_ANNOUNCED = list(config.POLICY_ANNOUNCED) + [{
+            "key": "fhfa-conforming-loan-limit", "announced": "2026-11-24",
+            "expires": "2027-11-24", "label": "control entry", "note": "control entry",
+            "url": "http://www.fhfa.gov/",
+        }]
     elif CONTROL:
         print(f"INFRA: unknown POLICY_CALENDAR_CONTROL={CONTROL!r}", file=sys.stderr)
         sys.exit(3)
@@ -206,6 +222,45 @@ def main():
                         f"silently turned 'Policy that affects you' into an always-on section, "
                         f"undoing the render-when-non-empty decision")
 
+    # --- C7: announced lines carry a url and an expiry, and really replace their calendar line ----
+    cal_keys = [e.get("key") for e in entries]
+    if len(set(cal_keys)) != len(cal_keys) or not all(cal_keys):
+        failures.append(f"C7 calendar keys must be present and unique (got {cal_keys}): an announced "
+                        f"line finds the entry it replaces by key")
+    max_days = config.POLICY_ANNOUNCED_MAX_DAYS
+    announced = list(getattr(config, "POLICY_ANNOUNCED", []) or [])
+    for a in announced:
+        tag = f"announced[{a.get('key')!r}]"
+        url = str(a.get("url") or "")
+        if not url.startswith("https://"):
+            failures.append(f"C7 {tag} has url={url!r}: an announced fact must link its https "
+                            f"primary source")
+        if a.get("key") not in cal_keys:
+            failures.append(f"C7 {tag} matches no POLICY_CALENDAR key, so it replaces nothing")
+        if not str(a.get("label") or "").strip() or not str(a.get("note") or "").strip():
+            failures.append(f"C7 {tag} has an empty label or note")
+        try:
+            ann = date.fromisoformat(a["announced"])
+            exp = date.fromisoformat(a["expires"])
+        except Exception as e:                       # noqa: BLE001
+            failures.append(f"C7 {tag} needs ISO `announced` and `expires` dates ({e})")
+            continue
+        if exp < ann:
+            failures.append(f"C7 {tag} expires {exp} before it was announced {ann}")
+        elif (exp - ann).days > max_days:
+            failures.append(f"C7 {tag} expires {(exp - ann).days} days after it was announced, past "
+                            f"the {max_days}-day limit: a dated fact must not outlive its season "
+                            f"and shadow next year's 'expected' line")
+        rows = policy.upcoming_calendar(ann)
+        if not any(r.get("announced") == a["announced"] and r.get("label") == a.get("label")
+                   for r in rows):
+            failures.append(f"C7 {tag} does not appear in upcoming_calendar({ann}) on its own "
+                            f"announcement day: the replacement is not wired")
+        after = policy.upcoming_calendar(exp + timedelta(days=1))
+        if any(r.get("label") == a.get("label") for r in after):
+            failures.append(f"C7 {tag} still shows the day after it expires ({exp})")
+    fp["announced_entries"] = len(announced)
+
     if failures:
         print("FAIL: 09-policy-calendar", file=sys.stderr)
         for f in failures:
@@ -219,11 +274,12 @@ def main():
 
     with open(os.path.join(HERE, "09-policy-calendar.fingerprint.json"), "w", encoding="utf-8") as fh:
         json.dump(fp, fh, indent=2)
-    print(f"PASS: 09-policy-calendar — C1..C6 ({len(entries)} entries, horizon "
+    print(f"PASS: 09-policy-calendar — C1..C7 ({len(entries)} entries, horizon "
           f"{config.POLICY_CALENDAR_HORIZON_DAYS}d; all resolve forward from "
           f"{len(REFERENCE_DATES)} reference dates incl. Dec 31/Jan 1; no fixed years; "
           f"{order_checked} multi-entry windows all ascending; block visible {hit}/365 days "
-          f"= {pct:.1f}% of mornings)")
+          f"= {pct:.1f}% of mornings; {len(announced)} announced line(s) with an expiry within "
+          f"{max_days} days)")
 
 
 if __name__ == "__main__":

@@ -852,5 +852,10 @@
     "SOXL": "hold",
     "SPXL": "hold",
     "TQQQ": "hold"
+  },
+  "mortgage_last_good": {
+    "value": 7.28,
+    "change": 0.17,
+    "asof": "2026-11-19"
   }
 }

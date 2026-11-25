@@ -204,6 +204,10 @@ def _normalize_fr(d):
         "url": d["html_url"],
         "title": d.get("title") or "",
         "abstract": (d.get("abstract") or "")[:_ABSTRACT_CHARS],
+        # The document's DATES section as the Federal Register publishes it (effective date,
+        # comment deadline, sometimes applicability). Often null. Source text for the model and for
+        # summarize._validate_policy_items' invented-date check.
+        "dates": (d.get("dates") or "")[:_ABSTRACT_CHARS],
         "status": "Final rule" if d.get("type") == "Rule" else "Proposed",
         # LEGITIMATELY None on proposed rules. Every downstream comparison must survive that.
         "effective_date": d.get("effective_on"),
@@ -309,6 +313,22 @@ def _utah_date(raw):
         return None
 
 
+def _header_label(cell_html):
+    """A passed-bills header cell reduced to its column name: 'effective date', 'bill number'.
+
+    By 2026-11-09 Utah made the headers sortable. Each cell now also carries the link text
+    "Sort by Effective Date", and the active column an arrow entity (&#9660;), so the stripped text
+    read 'effective date sort by effective date' and the exact match below found nothing. Every
+    signed bill then shipped with no effective date, and Data Smoke's 07 A6 went red for three
+    weeks running. The sort-link text and any entity are cut off here; the column ORDER, which is
+    what the index is for, did not change."""
+    txt = _strip_tags(cell_html).lower()
+    txt = re.sub(r"&#?\w+;", " ", txt)                  # leftover entities, e.g. the sort arrow
+    txt = re.split(r"\bsort\s+by\b", txt, maxsplit=1)[0]
+    txt = re.sub(r"[^a-z0-9' ]+", " ", txt)              # stray arrows or punctuation
+    return re.sub(r"\s+", " ", txt).strip()
+
+
 def _effective_date_index(html):
     """Position of the Effective Date column WITHIN a row's tail cells, or None.
 
@@ -326,7 +346,7 @@ def _effective_date_index(html):
     | Effective Date | Governor's Action | Gov's Action Date | Laws of Utah Chapter -> index 4 -> 3.
     """
     for block in _TR_RE.findall(html):
-        heads = [_strip_tags(h).lower() for h in _TH_RE.findall(block)]
+        heads = [_header_label(h) for h in _TH_RE.findall(block)]
         if not heads:
             continue                      # not the header row; keep looking
         if _UTAH_EFF_HEADER in heads:
@@ -693,6 +713,21 @@ def _calendar_sort_key(entry):
     return entry["date"]
 
 
+def _active_announcements(ref):
+    """{key: entry} for config.POLICY_ANNOUNCED entries with announced <= ref <= expires.
+
+    Never raises; a malformed entry is skipped with a printed reason, and its calendar entry then
+    shows as plain "expected" (the pre-announcement behaviour) rather than taking the section down."""
+    out = {}
+    for a in getattr(config, "POLICY_ANNOUNCED", []) or []:
+        try:
+            if date.fromisoformat(a["announced"]) <= ref <= date.fromisoformat(a["expires"]):
+                out[a["key"]] = a
+        except Exception as e:
+            print(f"policy: announced entry {a.get('key')!r} skipped: {type(e).__name__}: {e}")
+    return out
+
+
 def upcoming_calendar(today, horizon_days=None):
     """Calendar entries whose next occurrence falls within the horizon, soonest first.
 
@@ -712,11 +747,20 @@ def upcoming_calendar(today, horizon_days=None):
         print(f"policy: calendar skipped — unusable date {today!r}: {type(e).__name__}: {e}")
         return []
 
+    announced = _active_announcements(ref)
     out = []
     for entry in config.POLICY_CALENDAR:
         try:
             when = _next_occurrence(entry["month"], entry["day"], ref)
             if when is None or when > cutoff:
+                continue
+            done = announced.get(entry.get("key"))
+            if done:
+                # The source has published. Show what it said, dated by the announcement, with an
+                # `announced` key the page reads to print "Announced" instead of "Expected".
+                out.append({"date": done["announced"], "label": done["label"],
+                            "note": done["note"], "url": done["url"],
+                            "announced": done["announced"]})
                 continue
             out.append({"date": when.isoformat(), "label": entry["label"],
                         "note": entry["note"], "url": entry["url"]})

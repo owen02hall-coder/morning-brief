@@ -434,7 +434,8 @@ def _fallback_items(news, bucket, limit):
 
 def _assemble(now, today, market, news, narrative, ai_ok, breadth=None,
               policy=None, policy_upcoming=None, mortgage=None, policy_available=True,
-              policy_calendar=None, policy_week=None, watchlist=None, watchlist_missing=None):
+              policy_calendar=None, policy_week=None, watchlist=None, watchlist_missing=None,
+              mortgage_live=None, summary_error=None):
     """`policy`, `policy_upcoming` and `mortgage` are KEYWORD-only in practice (the 7 positional
     args are the pre-existing call shape) and are emitted OUTSIDE the `if ai_ok:` branch: they come
     from a separate model call and a deterministic fetch, and both can succeed on a day when
@@ -444,8 +445,15 @@ def _assemble(now, today, market, news, narrative, ai_ok, breadth=None,
     deliberately absent from `avail` below: it cannot be unavailable, and folding it into
     `data_availability.policy` would let a healthy calendar mask a dead Federal Register leg."""
     briefing_date = today
+    if mortgage_live is None:
+        # Direct callers that predate the last-good cache: a stale reading is never a live fetch.
+        mortgage_live = bool(mortgage) and not mortgage.get("stale")
     avail = {**market["availability"], **{f"news_{k}": v for k, v in news["available"].items()},
              "summary": "ok" if ai_ok else "unavailable",
+             # WHY the summary is unavailable, as an error class (rate_limited, server_error,
+             # model_not_found, timeout, bad_response, other), or None on a good day. A string, so
+             # the degraded-ping filter below (False / "unavailable") does not count it twice.
+             "summary_error": None if ai_ok else (summary_error or "other"),
              "breadth": bool(breadth and all(
                  breadth.get(k) and breadth[k].get("value") is not None
                  for k in ("sp500", "ndx100"))),
@@ -453,7 +461,11 @@ def _assemble(now, today, market, news, narrative, ai_ok, breadth=None,
              # NOTE: `mortgage` is deliberately NOT part of the markets_ok tuple in run() — PMMS is
              # a WEEKLY release, so a normal publishing gap would fire the high-priority
              # "market data unavailable N days running" escalation.
-             "mortgage": mortgage is not None,
+             # LIVE fetch only. A last-good reading still renders (see mortgage.with_last_good) but
+             # leaves this False, so the degraded ping keeps naming a broken PMMS feed.
+             # The mortgage block itself carries `stale`; no separate key here, because the
+             # degraded filter reads every False in this dict as a broken section.
+             "mortgage": bool(mortgage_live),
              # True only when EVERY configured ticker reported. The module fails closed per ticker,
              # so a partial result is a real state, and a bool that called 1-of-3 "available" would
              # be the kind of label this project keeps getting burned by. Derived from the module's
@@ -474,7 +486,12 @@ def _assemble(now, today, market, news, narrative, ai_ok, breadth=None,
     def num(n, why):
         if not n:
             return None
-        return {"value": n["value"], "change": n["change"], "asof": n["asof"], "why": why}
+        out = {"value": n["value"], "change": n["change"], "asof": n["asof"], "why": why}
+        if n.get("stale"):
+            # Only the mortgage can be stale (mortgage.with_last_good). The key is added only when
+            # true so the market tiles keep their exact published shape.
+            out["stale"] = True
+        return out
 
     if ai_ok:
         tldr = narrative["tldr"]
@@ -587,7 +604,10 @@ def run(do_notify=True, today=None):
     prev_markets_ok = st.get("markets_last_ok")   # last date all four market numbers were available
 
     market = market_mod.get_market()
-    mortgage = mortgage_mod.get_rate()      # weekly PMMS release; None on any failure
+    mortgage_live = mortgage_mod.get_rate()      # weekly PMMS release; None on any failure
+    # The last good reading (with its own as-of date) when today's fetch failed. `mortgage_live`,
+    # not `mortgage`, decides data_availability so a cached number cannot hide a dead feed.
+    mortgage, st = mortgage_mod.with_last_good(mortgage_live, st, today)
     news = news_mod.get_news()
     # Same Yahoo source as the headline numbers, so it lives beside them. Per-ticker
     # fail-closed inside the module: a bad ticker is absent, never wrong, and never fatal.
@@ -639,7 +659,9 @@ def run(do_notify=True, today=None):
                          policy=policy, policy_upcoming=policy_upcoming, mortgage=mortgage,
                          policy_available=policy_available, policy_calendar=policy_calendar,
                          policy_week=policy_week, watchlist=watchlist,
-                         watchlist_missing=watchlist_missing)
+                         watchlist_missing=watchlist_missing,
+                         mortgage_live=mortgage_live is not None,
+                         summary_error=summarize_mod.last_summary_error())
     _write(briefing)
 
     # Track the last day markets were fully healthy, so a SUSTAINED blackout (a dead data source, the

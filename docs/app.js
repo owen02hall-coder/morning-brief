@@ -60,7 +60,10 @@ function numberCard(title, obj, unit, mode) {
   }
   card.appendChild(v);
   if (obj.why) card.appendChild(el("p", "tile-why", obj.why));
-  if (obj.asof) card.appendChild(el("p", "asof", `as of ${obj.asof}`));
+  // `stale` is set only on a mortgage reading served from the last good fetch (the live one
+  // failed). Say so beside the date rather than presenting an old release as this week's.
+  if (obj.asof) card.appendChild(el("p", "asof",
+    obj.stale ? `last good reading, as of ${obj.asof}` : `as of ${obj.asof}`));
   return card;
 }
 
@@ -298,8 +301,14 @@ function policyCalendarCard(entries) {
   // EXPECTED. Hence a separate card, a muted "Expected" marker where the reported rows print a real
   // date, and this lede.
   const card = el("div", "card policy-upcoming policy-calendar");
+  // An entry with `announced` set is config.POLICY_ANNOUNCED replacing its calendar line: the
+  // source HAS published. The lede must not tell the reader nobody has when one row says otherwise.
+  const anyAnnounced = entries.some((e) => e && e.announced);
+  const allAnnounced = entries.length > 0 && entries.every((e) => e && e.announced);
   card.appendChild(el("p", "policy-calendar-lede",
-    "Recurring dates — expected, not announced. Nobody has published these yet."));
+    allAnnounced ? "Recurring dates, now announced by the source."
+      : anyAnnounced ? "Recurring dates. Rows marked Expected have not been published yet."
+        : "Recurring dates — expected, not announced. Nobody has published these yet."));
   const ul = el("ul");
   for (const e of entries) {
     const li = el("li");
@@ -310,7 +319,9 @@ function policyCalendarCard(entries) {
     // The resolved ISO date exists in the JSON ONLY to order this list, and is deliberately NOT
     // rendered: printing "Nov 30" beside "expected late November" would claim a precision no
     // source has published. The timing lives in the label, in the words the source can support.
-    row.appendChild(el("span", "policy-date policy-expected", "Expected"));
+    row.appendChild(e.announced
+      ? el("span", "policy-date", "Announced")
+      : el("span", "policy-date policy-expected", "Expected"));
     const body = el("div", "policy-row-body");
     if (e.label) body.appendChild(el("p", "policy-row-what", e.label));
     if (e.note) body.appendChild(el("p", "policy-calendar-note", e.note));
