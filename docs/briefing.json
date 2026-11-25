@@ -1,47 +1,45 @@
 {
-  "generated_at": "2026-11-24T11:57:15.169055-07:00",
-  "date": "2026-11-24",
+  "generated_at": "2026-11-25T11:01:37.129439-07:00",
+  "date": "2026-11-25",
   "tldr": [
-    "Stock markets rebounded and consumer confidence rose following midterm election results and strong retail performance.",
-    "Tidal has announced it will ban and delete millions of AI-generated music tracks from its platform starting December 9th.",
-    "A senior Hamas security official was killed in Israeli drone strikes carried out across Gaza."
+    "AI summary unavailable today \u2014 showing raw market numbers and headlines."
   ],
   "market": {
     "sp500": {
-      "value": 7237.17,
-      "change": 326.78,
-      "asof": "2026-11-23"
+      "value": 7201.09,
+      "change": -36.08,
+      "asof": "2026-11-24"
     },
     "ndx": {
-      "value": 24089.56,
-      "change": 1471.83,
-      "asof": "2026-11-23"
+      "value": 23733.54,
+      "change": -356.02,
+      "asof": "2026-11-24"
     },
-    "why": "The S&P 500 and Nasdaq Composite closed higher, with stocks rebounding as consumer confidence shot up after midterm victories. Additionally, retail earnings reports indicated strong results, driven by resilient consumers and improved execution."
+    "why": ""
   },
   "yield_10y": {
-    "value": 4.92,
-    "change": 0.01,
-    "asof": "2026-11-23",
-    "why": "The articles do not provide specific reasons for the modest increase in the 10-year Treasury yield."
+    "value": 4.9,
+    "change": -0.01,
+    "asof": "2026-11-24",
+    "why": ""
   },
   "vix": {
-    "value": 26.62,
-    "change": -9.27,
-    "asof": "2026-11-23",
-    "why": "The VIX decreased significantly, reflecting a reduction in market volatility, consistent with the overall rebound in stock markets."
+    "value": 26.36,
+    "change": -0.26,
+    "asof": "2026-11-24",
+    "why": ""
   },
   "breadth": {
     "sp500": {
-      "value": 53.2,
-      "asof": "2026-11-23",
+      "value": 54.8,
+      "asof": "2026-11-24",
       "status": "healthy",
       "matched": 500,
       "stale": false
     },
     "ndx100": {
-      "value": 44.8,
-      "asof": "2026-11-23",
+      "value": 41.7,
+      "asof": "2026-11-24",
       "status": "healthy",
       "matched": 96,
       "stale": false
@@ -51,66 +49,52 @@
     {
       "symbol": "SOXL",
       "what": "3x semiconductors",
-      "value": 43.21,
-      "day_move": 39.93,
-      "asof": "2026-11-23",
-      "rsi": 36.6,
+      "value": 32.6,
+      "day_move": -24.55,
+      "asof": "2026-11-24",
+      "rsi": 33.1,
       "rsi_zone": "neutral",
       "low": 30.88,
       "high": 107.35,
-      "band_pct": 16.1,
+      "band_pct": 2.2,
       "zone": "mid",
       "action": "hold",
-      "read": "Mid-range - 16% of the way up its 1-month band. Big session: up 39.9% in a day."
+      "read": "Mid-range - 2% of the way up its 1-month band. Big session: down 24.6% in a day."
     },
     {
       "symbol": "SPXL",
       "what": "3x S&P 500",
-      "value": 229.06,
-      "day_move": 13.41,
-      "asof": "2026-11-23",
-      "rsi": 39.1,
+      "value": 225.65,
+      "day_move": -1.49,
+      "asof": "2026-11-24",
+      "rsi": 38.1,
       "rsi_zone": "neutral",
       "low": 201.97,
       "high": 288.95,
-      "band_pct": 31.1,
+      "band_pct": 27.2,
       "zone": "mid",
       "action": "hold",
-      "read": "Mid-range - 31% of the way up its 1-month band. Big session: up 13.4% in a day."
+      "read": "Mid-range - 27% of the way up its 1-month band."
     },
     {
       "symbol": "TQQQ",
       "what": "3x Nasdaq-100",
-      "value": 49.1,
-      "day_move": 19.17,
-      "asof": "2026-11-23",
-      "rsi": 38.7,
+      "value": 46.19,
+      "day_move": -5.93,
+      "asof": "2026-11-24",
+      "rsi": 36.3,
       "rsi_zone": "neutral",
       "low": 41.2,
       "high": 72.36,
-      "band_pct": 25.4,
+      "band_pct": 16.0,
       "zone": "mid",
       "action": "hold",
-      "read": "Mid-range - 25% of the way up its 1-month band. Big session: up 19.2% in a day."
+      "read": "Mid-range - 16% of the way up its 1-month band."
     }
   ],
   "watchlist_missing": [],
-  "mortgage": {
-    "value": 7.28,
-    "change": 0.17,
-    "asof": "2026-11-19",
-    "why": "The 30-year fixed mortgage rate increased by 0.17% to 7.28% in Freddie Mac's latest weekly survey. The articles do not provide a specific explanation for this weekly movement, though mortgage rates generally track the direction of the 10-year Treasury yield."
-  },
-  "policy": [
-    {
-      "what_happened": "This final rule revises HUD's Section 214 regulations for verifying eligible status.",
-      "effect": "You must verify U.S. citizenship or eligible immigration status if you apply for housing assistance under a covered program.",
-      "url": "https://www.federalregister.gov/documents/2026/11/12/2026-23003/housing-and-community-development-act-of-1980-verification-of-eligible-status",
-      "status": "Final rule",
-      "effective_date": "2026-12-14",
-      "source": "Federal Register"
-    }
-  ],
+  "mortgage": null,
+  "policy": [],
   "policy_upcoming": [
     {
       "what_happened": "Temporary regulations were issued concerning a new nonrefundable Federal tax credit for qualified contributions to scholarship granting organizations.",
@@ -181,70 +165,70 @@
   ],
   "tech": [
     {
-      "summary": "Tidal will begin banning AI-generated music from its platform on December 9th, leading to the deletion of approximately 27 million tracks and the rejection of up to 85,000 new tracks daily.",
-      "source": "Ars Technica",
-      "url": "https://arstechnica.com/ai/2026/11/tidal-will-ban-fully-ai-generated-music-on-december-9/"
-    },
-    {
-      "summary": "The New York Times has advised its freelance photographers not to use the newest version of Adobe Photoshop due to concerns that its AI features may generate content in ways not immediately apparent to users.",
+      "summary": "The Fairphone 6 Plus is modular, repairable, and $100 off right now",
       "source": "The Verge",
-      "url": "https://www.theverge.com/ai-artificial-intelligence/1041227/the-new-york-times-warns-photographers-not-to-update-photoshop-over-ai-features"
+      "url": "https://www.theverge.com/gadgets/1041460/fairphone-6-plus-repairable-phone-black-friday-2026-deal-sale"
     },
     {
-      "summary": "A cyberattack campaign has been identified, compromising Check Point security management servers across 22 organizations.",
-      "source": "Hacker News",
-      "url": "https://www.greynoise.io/blog/check-point-security-management-servers-intrusion-campaign"
+      "summary": "The loneliest peptide party in New York",
+      "source": "The Verge",
+      "url": "https://www.theverge.com/column/1041761/optimizer-peptide-parties-afterglow"
+    },
+    {
+      "summary": "FCC signs off on SpaceX\u2019s plan to put up to 1 million data center satellites into space",
+      "source": "The Verge",
+      "url": "https://www.theverge.com/science/1042278/spacex-fcc-starmind-ai-space-data-centers"
     }
   ],
   "world": [
     {
-      "summary": "A senior Hamas security official was killed in a series of Israeli drone strikes conducted across Gaza.",
-      "source": "Al Jazeera",
-      "url": "https://www.aljazeera.com/video/newsfeed/2026/11/24/senior-hamas-security-official-killed-in-israeli-drone-strikes?traffic_source=rss"
-    },
-    {
-      "summary": "Armed men seized a supermarket in Cartagena, Colombia, taking 25 people hostage after a failed attempt to flee.",
-      "source": "Guardian World",
-      "url": "https://www.theguardian.com/world/2026/nov/24/cartagena-colombia-hostages-supermarket"
-    },
-    {
-      "summary": "Former French President Nicolas Sarkozy and his wife Carla Bruni are set to face trial in the latest legal case involving the ex-leader.",
+      "summary": "US stocks fall further as fears over AI intensify",
       "source": "BBC World",
-      "url": "https://www.bbc.co.uk/news/articles/c65y17pwv1z7o?at_medium=RSS&at_campaign=rss"
+      "url": "https://www.bbc.co.uk/news/articles/cq0md8g14zryo?at_medium=RSS&at_campaign=rss"
     },
     {
-      "summary": "Cameroon separatist leader Lucas Cho Ayaba pleaded not guilty at his war crimes trial in Norway, where he is accused of remotely planning attacks that resulted in dozens of civilian casualties.",
-      "source": "Al Jazeera",
-      "url": "https://www.aljazeera.com/news/2026/11/24/cameroon-separatist-leader-pleads-not-guilty-in-war-crimes-trial?traffic_source=rss"
+      "summary": "Burnham dismisses Badenoch\u2019s criticism over influencer and declines to apologise for \u2018vile video\u2019 \u2013 UK politics live",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/politics/live/2026/nov/25/andy-burnham-kemi-badenoch-pmqs-energy-bills-tiktok-welfare-benefits-timms-reform-brexit-devolution-latest-news-updates"
+    },
+    {
+      "summary": "Smoke seen from a mile away as army detonates US stockpile of bomb-making chemicals in Iowa",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/us-news/2026/nov/25/iowa-controlled-blast-lead-azide"
+    },
+    {
+      "summary": "Woman did not believe husband had drugged her for rape by strangers, Manchester trial told",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/uk-news/2026/nov/25/woman-did-not-believe-husband-drugged-her-for-rape-by-strangers-manchester-trial"
     }
   ],
   "us": [
     {
-      "summary": "A court has lifted an administrative stay, allowing the U.S. Army to proceed with its plan to detonate tons of unstable bomb-making material in Iowa.",
+      "summary": "Republican wants FBI and CIA answers before questioning Nvidia chief",
       "source": "NPR National",
-      "url": "https://www.npr.org/2026/11/24/nx-s1-6051547/court-lifts-administrative-stay-allowing-lead-azide-detonation-to-move-forward"
+      "url": "https://www.npr.org/2026/11/25/nx-s1-6052417/nvidia-jensen-huang-reaction-republicans-congress-investigation"
     },
     {
-      "summary": "Residents of Berkeley, California, have voted to double their existing tax on soda and sugary drinks.",
+      "summary": "A quintessential Route 66 diner has been serving up Americana for nearly 100 years",
       "source": "NPR National",
-      "url": "https://www.npr.org/2026/11/24/nx-s1-6049118/residents-of-berkeley-california-vote-to-double-their-soda-tax"
+      "url": "https://www.npr.org/2026/11/25/nx-s1-5983717/ariston-cafe-route-66-diner-litchfield-illinois"
     },
     {
-      "summary": "The U.S. Army has rescheduled the detonation of approximately five tons of bomb-making material in Iowa to Wednesday, citing weather and the implementation of mitigation measures.",
+      "summary": "In a time of rising costs, one Thanksgiving commodity is cheaper: cannabis",
       "source": "NPR National",
-      "url": "https://www.npr.org/2026/11/23/nx-s1-6048731/army-reschedules-detonation-of-toxic-explosives-in-iowa-for-wednesday"
+      "url": "https://www.npr.org/2026/11/25/nx-s1-6046173/cannabis-marijuana-prices-retailers-discounts"
     }
   ],
   "science": [
     {
-      "summary": "Doctors are facing challenges in saving babies due to a rise in parents refusing routine vitamin K shots for newborns, often influenced by misinformation, which helps prevent a rare but severe bleeding disorder.",
-      "source": "NPR Health",
-      "url": "https://www.npr.org/2026/11/24/nx-s1-6001723/vitamin-k-deficiency-refusal-vaccine-misinformation-newborn-bleeding"
+      "summary": "NHS Grampian surgeon operated on patient while recovering from endoscopy",
+      "source": "BBC Health",
+      "url": "https://www.bbc.co.uk/news/articles/cx30g76yvl1zo?at_medium=RSS&at_campaign=rss"
     },
     {
-      "summary": "The NHS has launched the world's largest trial to investigate whether artificial intelligence can improve the early diagnosis of breast cancer and potentially reduce pressure on healthcare services.",
-      "source": "BBC Health",
-      "url": "https://www.bbc.co.uk/news/articles/cmpdwnw3nvzjo?at_medium=RSS&at_campaign=rss"
+      "summary": "How American Thanksgiving took root -- and evolved -- in Liberia",
+      "source": "NPR Health",
+      "url": "https://www.npr.org/2026/11/25/nx-s1-6048614/thanksgiving-liberia-gratitude-prayer"
     }
   ],
   "weekly_recap": null,
@@ -258,10 +242,10 @@
     "news_science": true,
     "news_business": true,
     "news_tech": true,
-    "summary": "ok",
+    "summary": "unavailable",
     "breadth": true,
     "policy": true,
-    "mortgage": true,
+    "mortgage": false,
     "watchlist": true
   }
 }
