@@ -1,22 +1,6 @@
 {
-  "generated_at": "2026-11-25T13:36:27.590052-07:00",
+  "generated_at": "2026-11-26T10:47:09.725111-07:00",
   "lessons": [
-    {
-      "id": "2026-09-24-drain-plumbing",
-      "date": "2026-09-24",
-      "domain": "Home, car and repair",
-      "title": "Avoiding Drain Blockages and Suction Dangers",
-      "hook": "Everyday drains can cause surprising problems, from household health risks to serious safety hazards in recreational water.",
-      "quick": "It costs you time, money, and can even compromise your health when household drains malfunction. Blocked drains in kitchens and bathrooms are a common problem that occurs for several reasons, including flushing wet wipes, using an excessive amount of toilet paper, or allowing cooking fats to enter the drainage system. When these blockages happen, they can lead to significant issues beyond just slow drainage. For instance, blocked drains can cause water supplies to become contaminated. This contamination can increase the likelihood of disease outbreaks, turning an everyday household inconvenience into a serious health concern that affects the safety of your home's water. Being mindful of what goes down your drains is a simple step to avoid these potential hazards and the costs associated with clearing them or dealing with contaminated water.",
-      "more": "Once a drain is blocked, you have several options to address it. Sometimes, a chemical drain cleaner can clear the blockage. Other methods include using common household ingredients like soda crystals, bicarbonate of soda, and vinegar, which can be effective for certain types of clogs. A plunger is another tool you might use to try and dislodge the obstruction. If these home remedies don't work, you might need to take pipework apart to manually remove what is blocking it. Ultimately, for stubborn or recurring blockages, hiring a plumber to professionally clear the drain might be necessary. To prevent many of these issues, simple drain covers, which have holes or a grating, act as a coarse filter. These covers prevent large solid objects from entering the drainage system while still allowing liquids to pass through, significantly reducing the chances of a future blockage.",
-      "deep": "Beyond preventing solids from entering, a crucial design element in a building's foul water drainage system is the trap. This part of the system uses a water seal specifically to prevent gases from the drains and sewers from coming back into the building. If this water seal fails, harmful gases can enter your living space. While household drains have these concerns, drains in other settings, like swimming pools or fountains, pose a different and severe risk. These systems recirculate waste fluid, and the drain acts as an input to a pumping machine, creating powerful suction that people often don't anticipate. Fatalities have occurred due to what is known as suction entrapment, where a person's body, hair, or clothing can become stuck against the drain, making release impossible and leading to drowning. A notable incident from 1994 involved a person who drowned when their hair became entangled in a water funnel. To address this danger, the Virginia Graeme Baker Pool and Spa Safety Act was passed into law in the US on December 19, 2007, establishing consumer protection regulations for pool and spa drains to end such injuries and deaths.",
-      "takeaway": "Regularly ensure drain covers are securely in place on all household sinks and be extremely cautious around drains in swimming pools to avoid suction hazards.",
-      "source": {
-        "title": "Drain (plumbing)",
-        "url": "https://en.wikipedia.org/wiki/Drain_(plumbing)"
-      },
-      "audio": {}
-    },
     {
       "id": "2026-09-25-appendicitis",
       "date": "2026-09-25",
@@ -639,11 +623,7 @@
         "title": "Individual retirement account",
         "url": "https://en.wikipedia.org/wiki/Individual_retirement_account"
       },
-      "audio": {
-        "quick": "lessons/2026-11-05-individual-retirement-account-quick.mp3",
-        "more": "lessons/2026-11-05-individual-retirement-account-more.mp3",
-        "deep": "lessons/2026-11-05-individual-retirement-account-deep.mp3"
-      }
+      "audio": {}
     },
     {
       "id": "2026-11-06-distribution-board",
@@ -1043,6 +1023,26 @@
         "quick": "lessons/2026-11-25-deductible-quick.mp3",
         "more": "lessons/2026-11-25-deductible-more.mp3",
         "deep": "lessons/2026-11-25-deductible-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-11-26-air-filter",
+      "date": "2026-11-26",
+      "domain": "Home, car and repair",
+      "title": "Maintaining Your Car's Air Filters",
+      "hook": "Ignoring your car's air filters can make your ride uncomfortable and cost you money.",
+      "quick": "Clogged or dirty cabin air filters significantly reduce the amount of air that reaches your vehicle's vents, which directly affects the performance of your heating and air conditioning systems. This means your car may struggle to keep you warm in winter or cool in summer. Beyond comfort, these dirty filters can also allow allergens to enter the air you breathe inside the cabin. A cabin air filter is typically a pleated filter placed in the outside-air intake for the passenger compartment, designed to filter particles before they reach you. Regular replacement helps maintain comfortable temperatures and cleaner air inside your vehicle.",
+      "more": "When a cabin air filter becomes clogged, it creates a pressure drop across the filter media, forcing your vehicle's blower motor to work harder to push air through. This increased effort can reduce the overall effectiveness and performance of your air conditioning and heating systems, as the air flow rate directly influences temperature control. Beyond the cabin, another critical filter is found in your internal combustion engine, positioned inside the air cleaner housing and associated duct work. This engine air filter prevents abrasive particulate matter from entering the engine's cylinders. If this filter becomes clogged, it can lead to mechanical wear on engine parts and contaminate the engine oil, potentially impacting your vehicle's long-term health and performance.",
+      "deep": "Ignoring a clogged engine air filter can have serious consequences beyond simple wear. It can lead to higher fuel consumption, increased emissions, and if further ignored, potential damage to the engine itself. Some engines are equipped with mechanical indicators or electronic transducers that measure differential pressure across the filter. These devices signal when values exceed the engine manufacturer's threshold, typically indicating that the filter is clogged and needs replacement. Separately, for broader air quality concerns in human-made environments, including homes, High Efficiency Particulate Arrestor, or HEPA, filters are a specialized type. These filters must meet specific efficiency standards, removing 99.95% or more of particles that are 0.3 micrometers or larger from the air that passes through them, offering a higher level of air filtration. These HEPA filters are used in various applications, including clean rooms, medical facilities, and homes, where air quality is critical.",
+      "takeaway": "Visually inspect your vehicle's cabin air filter regularly for contamination and refer to your car's manual for recommended replacement intervals for both cabin and engine air filters.",
+      "source": {
+        "title": "Air filter",
+        "url": "https://en.wikipedia.org/wiki/Air_filter"
+      },
+      "audio": {
+        "quick": "lessons/2026-11-26-air-filter-quick.mp3",
+        "more": "lessons/2026-11-26-air-filter-more.mp3",
+        "deep": "lessons/2026-11-26-air-filter-deep.mp3"
       }
     }
   ],

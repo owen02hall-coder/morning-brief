@@ -1,16 +1,16 @@
 {
-  "last_run": "2026-11-25",
-  "markets_last_ok": "2026-11-25",
+  "last_run": "2026-11-26",
+  "markets_last_ok": "2026-11-26",
   "breadth_last_good": {
     "sp500": {
-      "value": 56.0,
+      "value": 54.6,
       "matched": 500,
-      "asof": "2026-11-24"
+      "asof": "2026-11-25"
     },
     "ndx100": {
-      "value": 44.8,
+      "value": 43.8,
       "matched": 96,
-      "asof": "2026-11-24"
+      "asof": "2026-11-25"
     }
   },
   "breadth": {
@@ -18,15 +18,15 @@
       "in_alert": false,
       "nag_days": 0,
       "warn_armed": true,
-      "last_value": 56.0,
-      "last_asof": "2026-11-24"
+      "last_value": 54.6,
+      "last_asof": "2026-11-25"
     },
     "ndx100": {
       "in_alert": false,
       "nag_days": 0,
       "warn_armed": true,
-      "last_value": 44.8,
-      "last_asof": "2026-11-24"
+      "last_value": 43.8,
+      "last_asof": "2026-11-25"
     }
   },
   "policy_utah_queue": [],
@@ -106,7 +106,7 @@
     }
   ],
   "policy_today": {
-    "date": "2026-11-25",
+    "date": "2026-11-26",
     "items": [],
     "alerted": false
   },
@@ -817,6 +817,13 @@
       "title": "Understand your insurance deductible",
       "domain": "Money mechanics",
       "date": "2026-11-25"
+    },
+    {
+      "id": "2026-11-26-air-filter",
+      "article_title": "Air filter",
+      "title": "Maintaining Your Car's Air Filters",
+      "domain": "Home, car and repair",
+      "date": "2026-11-26"
     }
   ],
   "lessons_bootstrapped": true,
@@ -849,7 +856,7 @@
     }
   ],
   "watchlist_actions": {
-    "SOXL": "hold",
+    "SOXL": "buy",
     "SPXL": "hold",
     "TQQQ": "hold"
   },

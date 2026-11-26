@@ -1,0 +1,255 @@
+{
+  "generated_at": "2026-11-26T10:47:09.725111-07:00",
+  "date": "2026-11-26",
+  "tldr": [
+    "New bionic hands have been developed that can provide tactile sensation by connecting to nerves in the user's forearm.",
+    "Two Italian technicians were killed in Kuwait following an Iranian drone attack, according to Kuwait's army.",
+    "Powerful storms across both US coasts disrupted Thanksgiving travel for millions and led to the cancellation of holiday parades."
+  ],
+  "market": {
+    "sp500": {
+      "value": 7182.78,
+      "change": -18.31,
+      "asof": "2026-11-25"
+    },
+    "ndx": {
+      "value": 23585.8,
+      "change": -147.74,
+      "asof": "2026-11-25"
+    },
+    "why": "The S&P 500 and Nasdaq Composite both closed lower, with MarketWatch pointing to a prior 'tech washout' and 'AI jitters' as contributing factors to market caution."
+  },
+  "yield_10y": {
+    "value": 4.85,
+    "change": -0.06,
+    "asof": "2026-11-25",
+    "why": "The provided articles do not offer a specific reason for the movement in the 10-year Treasury yield."
+  },
+  "vix": {
+    "value": 28.29,
+    "change": 1.93,
+    "asof": "2026-11-25",
+    "why": "The provided articles do not offer a specific reason for the movement in the VIX."
+  },
+  "breadth": {
+    "sp500": {
+      "value": 54.6,
+      "asof": "2026-11-25",
+      "status": "healthy",
+      "matched": 500,
+      "stale": false
+    },
+    "ndx100": {
+      "value": 43.8,
+      "asof": "2026-11-25",
+      "status": "healthy",
+      "matched": 96,
+      "stale": false
+    }
+  },
+  "watchlist": [
+    {
+      "symbol": "SOXL",
+      "what": "3x semiconductors",
+      "value": 32.02,
+      "day_move": -1.78,
+      "asof": "2026-11-25",
+      "rsi": 32.9,
+      "rsi_zone": "neutral",
+      "low": 30.88,
+      "high": 107.35,
+      "band_pct": 1.5,
+      "zone": "low",
+      "action": "buy",
+      "read": "Within 4% of its 1-month low."
+    },
+    {
+      "symbol": "SPXL",
+      "what": "3x S&P 500",
+      "value": 223.52,
+      "day_move": -0.94,
+      "asof": "2026-11-25",
+      "rsi": 37.5,
+      "rsi_zone": "neutral",
+      "low": 201.97,
+      "high": 288.95,
+      "band_pct": 24.8,
+      "zone": "mid",
+      "action": "hold",
+      "read": "Mid-range - 25% of the way up its 1-month band."
+    },
+    {
+      "symbol": "TQQQ",
+      "what": "3x Nasdaq-100",
+      "value": 45.28,
+      "day_move": -1.97,
+      "asof": "2026-11-25",
+      "rsi": 35.6,
+      "rsi_zone": "neutral",
+      "low": 41.2,
+      "high": 72.36,
+      "band_pct": 13.1,
+      "zone": "mid",
+      "action": "hold",
+      "read": "Mid-range - 13% of the way up its 1-month band."
+    }
+  ],
+  "watchlist_missing": [],
+  "mortgage": {
+    "value": 7.21,
+    "change": -0.07,
+    "asof": "2026-11-25",
+    "why": "The 30-year fixed mortgage rate saw a decrease, aligning with the recent decline in the 10-year Treasury yield."
+  },
+  "policy": [],
+  "policy_upcoming": [
+    {
+      "what_happened": "Temporary regulations were issued concerning a new nonrefundable Federal tax credit for qualified contributions to scholarship granting organizations.",
+      "effect": "A new nonrefundable Federal tax credit becomes available for qualified contributions to scholarship granting organizations in 2027 and later taxable years.",
+      "url": "https://www.federalregister.gov/documents/2026/10/02/2026-20264/federal-scholarship-tax-credit",
+      "status": "Final rule",
+      "effective_date": "2026-12-01",
+      "source": "Federal Register"
+    },
+    {
+      "what_happened": "Final rules set forth requirements for price transparency reporting for non-grandfathered group health plans and health insurance issuers.",
+      "effect": "Your employer health insurance plan has new price transparency reporting requirements that become effective on December 7, 2026.",
+      "url": "https://www.federalregister.gov/documents/2026/10/06/2026-20447/transparency-in-coverage",
+      "status": "Final rule",
+      "effective_date": "2026-12-07",
+      "source": "Federal Register"
+    },
+    {
+      "what_happened": "This final rule revises HUD's Section 214 regulations for verifying eligible status.",
+      "effect": "You must verify U.S. citizenship or eligible immigration status if you apply for housing assistance under a covered program.",
+      "url": "https://www.federalregister.gov/documents/2026/11/12/2026-23003/housing-and-community-development-act-of-1980-verification-of-eligible-status",
+      "status": "Final rule",
+      "effective_date": "2026-12-14",
+      "source": "Federal Register"
+    },
+    {
+      "what_happened": "A Utah bill modifies provisions related to the property tax exemption process.",
+      "effect": "Once you own a home, you will have deadlines for filing an application for a property tax exemption with the county board of equalization and for the board to render a decision.",
+      "url": "https://le.utah.gov/~2026/bills/static/SB0236.html",
+      "status": "Signed in Utah",
+      "effective_date": "2027-01-01",
+      "source": "Utah Legislature"
+    },
+    {
+      "what_happened": "A bill amends requirements for health insurance preauthorization in Utah.",
+      "effect": "Your health insurer must make an authorization or adverse preauthorization determination within a defined maximum time.",
+      "url": "https://le.utah.gov/~2026/bills/static/SB0319.html",
+      "status": "Signed in Utah",
+      "effective_date": "2027-01-01",
+      "source": "Utah Legislature"
+    }
+  ],
+  "policy_week": [
+    {
+      "what_happened": "This final rule revises HUD's Section 214 regulations for verifying eligible status.",
+      "effect": "You must verify U.S. citizenship or eligible immigration status if you apply for housing assistance under a covered program.",
+      "url": "https://www.federalregister.gov/documents/2026/11/12/2026-23003/housing-and-community-development-act-of-1980-verification-of-eligible-status",
+      "status": "Final rule",
+      "effective_date": "2026-12-14",
+      "source": "Federal Register"
+    },
+    {
+      "what_happened": "Final regulations provide guidance for automatic enrollment requirements that apply to certain retirement plans.",
+      "effect": "Your retirement plan participation is subject to new automatic enrollment requirements starting January 19, 2027.",
+      "url": "https://www.federalregister.gov/documents/2026/11/18/2026-23530/automatic-enrollment-requirements-under-section-414a",
+      "status": "Final rule",
+      "effective_date": "2027-01-19",
+      "source": "Federal Register"
+    }
+  ],
+  "policy_calendar": [
+    {
+      "date": "2026-11-24",
+      "label": "FHFA set the 2027 baseline conforming loan limit at $855,400 for one-unit homes, announced Nov 24",
+      "note": "Up $22,650 from 2026. It applies to loans made from January 1, 2027, and is the line between a conforming mortgage and a jumbo one in most of the US. High-cost counties have higher limits on FHFA's county list.",
+      "url": "https://www.fhfa.gov/news/news-release/fhfa-announces-conforming-loan-limit-for-2027",
+      "announced": "2026-11-24"
+    }
+  ],
+  "tech": [
+    {
+      "summary": "The next generation of bionic hands has arrived, capable of providing tactile feedback to users by wiring into nerves in the forearm, allowing for the handling of delicate objects.",
+      "source": "MIT Technology Review",
+      "url": "https://www.technologyreview.com/2026/11/26/1149923/the-next-generation-of-bionic-hands-is-here-and-they-can-feel/"
+    },
+    {
+      "summary": "Europe's largest satellite factory has opened in Belgium, with the capacity to produce up to 500 satellites annually, aiming to compete with companies like SpaceX's Starlink.",
+      "source": "CNBC",
+      "url": "https://www.cnbc.com/2026/11/26/starlink-satellites-aerospacelab-factory-belgium.html"
+    },
+    {
+      "summary": "Xpeng Co-President Brian Gu predicts that humanoid robots could be performing household chores within the next one to two years.",
+      "source": "CNBC",
+      "url": "https://www.cnbc.com/2026/11/26/china-ev-xpeng-humanoid-robots-household-chores.html"
+    }
+  ],
+  "world": [
+    {
+      "summary": "Two Italian technicians working for a German company were killed in Kuwait by debris from an Iranian drone strike, according to Italy's foreign ministry and Kuwait's army.",
+      "source": "BBC World",
+      "url": "https://www.bbc.co.uk/news/articles/c39w9y5dx4k5o?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "summary": "Heavy storms impacted both US coasts, leading to over 1,000 flight cancellations or delays and the postponement of Thanksgiving parades as millions traveled for the holiday.",
+      "source": "BBC World",
+      "url": "https://www.bbc.co.uk/news/articles/ckm2mz3prq77o?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "summary": "French actor Gerard Depardieu has been ordered by a Paris court to stand trial for an alleged 2018 rape, following the dismissal of a second set of allegations.",
+      "source": "Al Jazeera",
+      "url": "https://www.aljazeera.com/news/2026/11/26/paris-court-orders-gerard-depardieu-to-stand-trial-for-rape-sexual-assault?traffic_source=rss"
+    }
+  ],
+  "us": [
+    {
+      "summary": "A federal judge blocked the Federal Communications Commission (FCC) from conducting an early review of ABC's broadcast licenses, ruling that the FCC had violated ABC's free speech rights.",
+      "source": "NPR National",
+      "url": "https://www.npr.org/2026/11/26/nx-s1-6000576/fcc-disney-abc-first-amendment-trump-brendan-carr"
+    },
+    {
+      "summary": "The US Army successfully carried out a controlled detonation of its entire national stockpile of lead azide, an explosive chemical, in Iowa, with initial assessments indicating no toxic dust spread to surrounding areas.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/us-news/2026/nov/26/iowa-chemical-lead-bomb-detonation-toxic-dust-fears"
+    },
+    {
+      "summary": "Severe weather, including strong winds, heavy rain, and floods, disrupted holiday travel for millions of Americans, causing widespread flight delays and cancellations and prompting the postponement of the Macy's Thanksgiving Day Parade.",
+      "source": "NPR National",
+      "url": "https://www.npr.org/2026/11/26/nx-s1-6054079/storms-expected-on-both-coasts-as-millions-travel-for-thanksgiving"
+    }
+  ],
+  "science": [
+    {
+      "summary": "A new, cheaper HIV prevention injection called Lenacapavir, which is nearly 100% effective and administered twice a year, has become available in Africa, offering hope to millions.",
+      "source": "BBC Health",
+      "url": "https://www.bbc.co.uk/news/articles/cmly7jve72r2o?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "summary": "Doctors are facing challenges in administering routine vitamin K shots to newborns due to a rise in misinformation, risking a rare but devastating bleeding disorder in infants whose parents refuse the treatment.",
+      "source": "NPR Health",
+      "url": "https://www.npr.org/2026/11/24/nx-s1-6001723/vitamin-k-deficiency-refusal-vaccine-misinformation-newborn-bleeding"
+    }
+  ],
+  "weekly_recap": null,
+  "data_availability": {
+    "sp500": true,
+    "ndx": true,
+    "vix": true,
+    "ten_year": true,
+    "news_world": true,
+    "news_us": true,
+    "news_science": true,
+    "news_business": true,
+    "news_tech": true,
+    "summary": "ok",
+    "summary_error": null,
+    "breadth": true,
+    "policy": true,
+    "mortgage": true,
+    "watchlist": true
+  }
+}
