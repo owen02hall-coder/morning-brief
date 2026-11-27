@@ -1,0 +1,260 @@
+{
+  "generated_at": "2026-11-27T10:30:58.741998-07:00",
+  "date": "2026-11-27",
+  "tldr": [
+    "A powerful storm disrupted Thanksgiving travel and caused widespread power outages across the US East Coast.",
+    "US authorities gave Elon Musk's Starlink project approval to launch one million satellites, with an aim to power AI data centers in space.",
+    "A global surge in severe flu cases has prompted health officials in England to urge vaccinations, particularly for children."
+  ],
+  "market": {
+    "sp500": {
+      "value": 7182.78,
+      "change": -18.31,
+      "asof": "2026-11-25"
+    },
+    "ndx": {
+      "value": 23585.8,
+      "change": -147.74,
+      "asof": "2026-11-25"
+    },
+    "why": "The provided articles do not offer a specific reason for the S&P 500 and Nasdaq Composite closing lower on 2026-11-25."
+  },
+  "yield_10y": {
+    "value": 4.85,
+    "change": -0.06,
+    "asof": "2026-11-25",
+    "why": "The provided articles do not offer a specific reason for the 10-year Treasury yield falling on 2026-11-25."
+  },
+  "vix": {
+    "value": 26.8,
+    "change": -1.49,
+    "asof": "2026-11-26",
+    "why": "The provided articles do not offer a specific reason for the VIX declining on 2026-11-26."
+  },
+  "breadth": {
+    "sp500": {
+      "value": 59.0,
+      "asof": "2026-11-26",
+      "status": "healthy",
+      "matched": 500,
+      "stale": false
+    },
+    "ndx100": {
+      "value": 47.9,
+      "asof": "2026-11-26",
+      "status": "healthy",
+      "matched": 96,
+      "stale": false
+    }
+  },
+  "watchlist": [
+    {
+      "symbol": "SOXL",
+      "what": "3x semiconductors",
+      "value": 32.02,
+      "day_move": -1.78,
+      "asof": "2026-11-25",
+      "rsi": 33.0,
+      "rsi_zone": "neutral",
+      "low": 30.88,
+      "high": 107.35,
+      "band_pct": 1.5,
+      "zone": "low",
+      "action": "buy",
+      "read": "Within 4% of its 1-month low."
+    },
+    {
+      "symbol": "SPXL",
+      "what": "3x S&P 500",
+      "value": 223.52,
+      "day_move": -0.94,
+      "asof": "2026-11-25",
+      "rsi": 37.5,
+      "rsi_zone": "neutral",
+      "low": 201.97,
+      "high": 288.95,
+      "band_pct": 24.8,
+      "zone": "mid",
+      "action": "hold",
+      "read": "Mid-range - 25% of the way up its 1-month band."
+    },
+    {
+      "symbol": "TQQQ",
+      "what": "3x Nasdaq-100",
+      "value": 45.28,
+      "day_move": -1.97,
+      "asof": "2026-11-25",
+      "rsi": 35.6,
+      "rsi_zone": "neutral",
+      "low": 41.2,
+      "high": 72.36,
+      "band_pct": 13.1,
+      "zone": "mid",
+      "action": "hold",
+      "read": "Mid-range - 13% of the way up its 1-month band."
+    }
+  ],
+  "watchlist_missing": [],
+  "mortgage": {
+    "value": 7.21,
+    "change": -0.07,
+    "asof": "2026-11-25",
+    "why": "The 30-year fixed mortgage rate, reported in a weekly survey as of 2026-11-25, decreased by 0.07% from the previous week, aligning with the decline observed in the 10-year Treasury yield."
+  },
+  "policy": [],
+  "policy_upcoming": [
+    {
+      "what_happened": "Temporary regulations were issued concerning a new nonrefundable Federal tax credit for qualified contributions to scholarship granting organizations.",
+      "effect": "A new nonrefundable Federal tax credit becomes available for qualified contributions to scholarship granting organizations in 2027 and later taxable years.",
+      "url": "https://www.federalregister.gov/documents/2026/10/02/2026-20264/federal-scholarship-tax-credit",
+      "status": "Final rule",
+      "effective_date": "2026-12-01",
+      "source": "Federal Register"
+    },
+    {
+      "what_happened": "Final rules set forth requirements for price transparency reporting for non-grandfathered group health plans and health insurance issuers.",
+      "effect": "Your employer health insurance plan has new price transparency reporting requirements that become effective on December 7, 2026.",
+      "url": "https://www.federalregister.gov/documents/2026/10/06/2026-20447/transparency-in-coverage",
+      "status": "Final rule",
+      "effective_date": "2026-12-07",
+      "source": "Federal Register"
+    },
+    {
+      "what_happened": "This final rule revises HUD's Section 214 regulations for verifying eligible status.",
+      "effect": "You must verify U.S. citizenship or eligible immigration status if you apply for housing assistance under a covered program.",
+      "url": "https://www.federalregister.gov/documents/2026/11/12/2026-23003/housing-and-community-development-act-of-1980-verification-of-eligible-status",
+      "status": "Final rule",
+      "effective_date": "2026-12-14",
+      "source": "Federal Register"
+    },
+    {
+      "what_happened": "A Utah bill modifies provisions related to the property tax exemption process.",
+      "effect": "Once you own a home, you will have deadlines for filing an application for a property tax exemption with the county board of equalization and for the board to render a decision.",
+      "url": "https://le.utah.gov/~2026/bills/static/SB0236.html",
+      "status": "Signed in Utah",
+      "effective_date": "2027-01-01",
+      "source": "Utah Legislature"
+    },
+    {
+      "what_happened": "A bill amends requirements for health insurance preauthorization in Utah.",
+      "effect": "Your health insurer must make an authorization or adverse preauthorization determination within a defined maximum time.",
+      "url": "https://le.utah.gov/~2026/bills/static/SB0319.html",
+      "status": "Signed in Utah",
+      "effective_date": "2027-01-01",
+      "source": "Utah Legislature"
+    }
+  ],
+  "policy_week": [
+    {
+      "what_happened": "This final rule revises HUD's Section 214 regulations for verifying eligible status.",
+      "effect": "You must verify U.S. citizenship or eligible immigration status if you apply for housing assistance under a covered program.",
+      "url": "https://www.federalregister.gov/documents/2026/11/12/2026-23003/housing-and-community-development-act-of-1980-verification-of-eligible-status",
+      "status": "Final rule",
+      "effective_date": "2026-12-14",
+      "source": "Federal Register"
+    },
+    {
+      "what_happened": "Final regulations provide guidance for automatic enrollment requirements that apply to certain retirement plans.",
+      "effect": "Your retirement plan participation is subject to new automatic enrollment requirements starting January 19, 2027.",
+      "url": "https://www.federalregister.gov/documents/2026/11/18/2026-23530/automatic-enrollment-requirements-under-section-414a",
+      "status": "Final rule",
+      "effective_date": "2027-01-19",
+      "source": "Federal Register"
+    }
+  ],
+  "policy_calendar": [
+    {
+      "date": "2026-11-24",
+      "label": "FHFA set the 2027 baseline conforming loan limit at $855,400 for one-unit homes, announced Nov 24",
+      "note": "Up $22,650 from 2026. It applies to loans made from January 1, 2027, and is the line between a conforming mortgage and a jumbo one in most of the US. High-cost counties have higher limits on FHFA's county list.",
+      "url": "https://www.fhfa.gov/news/news-release/fhfa-announces-conforming-loan-limit-for-2027",
+      "announced": "2026-11-24"
+    }
+  ],
+  "tech": [
+    {
+      "summary": "The US Air Force's cloud computing platform has reportedly been compromised by hackers, raising concerns about cybersecurity in defense systems.",
+      "source": "Hacker News",
+      "url": "https://news.sky.com/story/us-air-forces-cloud-computing-platform-hacked-13617163"
+    },
+    {
+      "summary": "AI shopping agents, such as those from OpenAI, Meta, and Google, are facing obstacles from retailers like Amazon that are blocking their access, potentially stunting their growth.",
+      "source": "CNBC",
+      "url": "https://www.cnbc.com/2026/11/27/ai-shopping-agents-retailer-blocks.html"
+    },
+    {
+      "summary": "A new deterministic subexponential-time algorithm has been proposed for solving the discrete logarithm problem, a fundamental challenge in cryptography.",
+      "source": "Hacker News",
+      "url": "https://eprint.iacr.org/2026/3020.pdf"
+    }
+  ],
+  "world": [
+    {
+      "summary": "Paul Mackenzie, a Kenyan doomsday cult leader, was convicted for an additional 123 deaths of his followers, weeks after being imprisoned for the mass murder of children.",
+      "source": "BBC World",
+      "url": "https://www.bbc.co.uk/news/articles/cmy49de4xx1zo?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "summary": "Ukrainian authorities have rejected 'unfavorable compromises' amid ongoing Western discussions of ceasefire proposals, as Ukrainian forces continue to free territory and resist Russian assaults.",
+      "source": "Al Jazeera",
+      "url": "https://www.aljazeera.com/news/2026/11/27/ukraine-rejects-unfavourable-compromises-as-it-frees-more-territory?traffic_source=rss"
+    },
+    {
+      "summary": "Canada's top court has largely upheld Quebec's law banning public sector workers from wearing religious symbols, a decision that faced challenges from groups arguing it violated fundamental rights.",
+      "source": "BBC World",
+      "url": "https://www.bbc.co.uk/news/articles/cq3dgpy9lem3o?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "summary": "British budget airline Norse Atlantic has filed for bankruptcy and halted all flights, advising passengers to seek refunds via the bankruptcy process, citing surging fuel costs as a contributing factor.",
+      "source": "Al Jazeera",
+      "url": "https://www.aljazeera.com/economy/2026/11/27/norse-atlantic-files-for-bankruptcy-halts-flights-and-ticket-sales?traffic_source=rss"
+    }
+  ],
+  "us": [
+    {
+      "summary": "A powerful storm impacted the US eastern seaboard, causing heavy rains, high winds, and extensive power outages that disrupted Thanksgiving plans for hundreds of thousands of customers.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/us-news/2026/nov/27/heavy-rain-wind-flooding-us-thanksgiving"
+    },
+    {
+      "summary": "Former President Donald Trump called for an immediate investigation into the third-quarter GDP data revision, which showed a significant upward adjustment.",
+      "source": "CNBC",
+      "url": "https://www.cnbc.com/2026/11/26/trump-gdp-revision-investigation.html"
+    },
+    {
+      "summary": "Changes to asylum policy, including an asylum ban and new legal maneuvers, have effectively halted asylum proceedings, leading advocates to seek a review from the Supreme Court on due process concerns.",
+      "source": "NPR National",
+      "url": "https://www.npr.org/2026/11/27/nx-s1-6037854/trump-effectively-ended-asylum-supreme-court"
+    }
+  ],
+  "science": [
+    {
+      "summary": "Health officials in England are urging parents to vaccinate their children for flu as hospital cases surge, with pharmacies now administering jabs to address missed vaccinations.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/society/2026/nov/27/parents-urged-to-vaccinate-children-for-flu-as-hospital-cases-surge-in-england"
+    },
+    {
+      "summary": "California voters approved a ballot measure backed by a billionaire to provide $8.4 billion in funding for immunology research, with half of the funding allocated to a research group supported by the same individual.",
+      "source": "NPR Science",
+      "url": "https://www.npr.org/2026/11/27/nx-s1-6052399/california-voters-pass-billionaires-measure-to-bankroll-his-own-medical-lab"
+    }
+  ],
+  "weekly_recap": null,
+  "data_availability": {
+    "sp500": true,
+    "ndx": true,
+    "vix": true,
+    "ten_year": true,
+    "news_world": true,
+    "news_us": true,
+    "news_science": true,
+    "news_business": true,
+    "news_tech": true,
+    "summary": "ok",
+    "summary_error": null,
+    "breadth": true,
+    "policy": true,
+    "mortgage": true,
+    "watchlist": true
+  }
+}

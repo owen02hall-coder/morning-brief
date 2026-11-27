@@ -1,22 +1,6 @@
 {
-  "generated_at": "2026-11-26T10:47:09.725111-07:00",
+  "generated_at": "2026-11-27T10:30:58.741998-07:00",
   "lessons": [
-    {
-      "id": "2026-09-25-appendicitis",
-      "date": "2026-09-25",
-      "domain": "Health and emergencies",
-      "title": "Sudden Abdominal Pain Can Signal Appendicitis",
-      "hook": "Severe abdominal pain might mean your appendix needs immediate medical attention to prevent dangerous complications.",
-      "quick": "Appendicitis is a common cause of sudden, severe abdominal pain that often requires surgery. While typical symptoms include pain in the lower right abdomen, nausea, vomiting, and fever, about 40% of people don't experience these classic signs. The pain can start as a dull ache near the navel and then migrate to the lower right side, becoming sharp and tender to the touch. Sometimes, even pressing on the area or releasing pressure quickly causes significant pain. It's crucial to seek medical help if you develop sudden, intense abdominal pain, as untreated appendicitis can lead to a ruptured appendix. A rupture releases bacteria into the abdominal cavity, causing widespread inflammation and potentially life-threatening sepsis.",
-      "more": "A ruptured appendix is a serious medical emergency that can have severe consequences. When the appendix bursts, it spills infectious material into the entire abdominal cavity, leading to a painful and widespread inflammation of the abdominal lining called peritonitis. This can quickly progress to sepsis, a dangerous body-wide response to infection that can cause organ damage and even death. While antibiotics can sometimes treat non-ruptured appendicitis, surgery to remove the appendix is often essential to prevent these severe complications. Annually, over 300,000 people in the United States undergo this surgery, highlighting how common and significant it is.",
-      "deep": "The underlying cause of appendicitis is typically a blockage in the hollow part of the appendix. This obstruction is often caused by a hardened piece of stool, known as a fecalith or appendicolith. Other causes can include inflamed tissue from an infection, parasites, gallstones, or tumors. When the appendix is blocked, pressure builds up inside, blood flow is reduced, and bacteria multiply, leading to inflammation and tissue death. If this process isn't stopped, the appendix can rupture. Interestingly, some studies suggest a link between a diet low in fiber and an increased frequency of appendicitis, possibly due to slower digestion and stool movement which can contribute to blockages. The appendix's location can also affect symptoms; if it's behind the main part of the large intestine or within the pelvis, tenderness might not be felt in the usual spot, making diagnosis trickier.",
-      "takeaway": "See a doctor immediately for sudden, severe abdominal pain, especially if it's migrating to the lower right side.",
-      "source": {
-        "title": "Appendicitis",
-        "url": "https://en.wikipedia.org/wiki/Appendicitis"
-      },
-      "audio": {}
-    },
     {
       "id": "2026-09-26-bait-and-switch",
       "date": "2026-09-26",
@@ -639,11 +623,7 @@
         "title": "Distribution board",
         "url": "https://en.wikipedia.org/wiki/Distribution_board"
       },
-      "audio": {
-        "quick": "lessons/2026-11-06-distribution-board-quick.mp3",
-        "more": "lessons/2026-11-06-distribution-board-more.mp3",
-        "deep": "lessons/2026-11-06-distribution-board-deep.mp3"
-      }
+      "audio": {}
     },
     {
       "id": "2026-11-07-sepsis",
@@ -1043,6 +1023,26 @@
         "quick": "lessons/2026-11-26-air-filter-quick.mp3",
         "more": "lessons/2026-11-26-air-filter-more.mp3",
         "deep": "lessons/2026-11-26-air-filter-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-11-27-shock-circulatory",
+      "date": "2026-11-27",
+      "domain": "Health and emergencies",
+      "title": "Recognizing and Responding to Circulatory Shock",
+      "hook": "Insufficient blood flow to your body\u2019s tissues is a medical emergency that can quickly become life-threatening.",
+      "quick": "When the body isn't getting enough blood flow to its tissues, it's a serious medical condition called shock. This can start with subtle symptoms like weakness, a faster heart rate, rapid breathing, sweating, anxiety, or increased thirst. If not addressed, these issues can quickly worsen, leading to confusion, unconsciousness, or even cardiac arrest. It's crucial to understand that shock is always a medical emergency requiring urgent professional care. If you suspect someone is in shock, you must call for emergency help immediately. While waiting for medical assistance, if it\u2019s safe to do so and there are no suspected head or back injuries, lay the person down, raise their legs if possible, and keep them warm.",
+      "more": "Recognizing shock can be tricky because the symptoms vary greatly; some people may show only minimal signs like confusion and weakness. While common indicators include low blood pressure, reduced urine output, and confusion, these are not always present. For example, a fast heart rate is typical, but in individuals taking certain medications or who are athletic, and in 30% of cases involving intra-abdominal bleeding, the heart rate might be normal or even slow. Other early signs to watch for include dry mucous membranes, reduced skin elasticity, a slow capillary refill time, weak pulses in the extremities, and cold hands or feet.",
+      "deep": "There are four main types of shock, each stemming from a different problem within the circulatory system. Hypovolemic shock, the most common type, results from an insufficient circulating blood volume, often due to significant bleeding, severe vomiting, or diarrhea. Cardiogenic shock occurs when the heart itself fails to pump blood effectively, frequently after a major heart attack or due to heart muscle damage. Obstructive shock happens when there\u2019s a physical blockage preventing blood flow in the major vessels, such as fluid accumulating around the heart, a collapsed lung, or a large clot in the lungs. Lastly, distributive shock is characterized by widespread dilation of blood vessels, leading to dangerously low blood pressure, as seen in severe infections like sepsis, extreme allergic reactions, or injuries to the spinal cord.",
+      "takeaway": "Call for emergency medical help immediately if you suspect someone is experiencing symptoms of shock like confusion, fast breathing, or a very rapid heart rate.",
+      "source": {
+        "title": "Shock (circulatory)",
+        "url": "https://en.wikipedia.org/wiki/Shock_(circulatory)"
+      },
+      "audio": {
+        "quick": "lessons/2026-11-27-shock-circulatory-quick.mp3",
+        "more": "lessons/2026-11-27-shock-circulatory-more.mp3",
+        "deep": "lessons/2026-11-27-shock-circulatory-deep.mp3"
       }
     }
   ],
