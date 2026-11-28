@@ -1,47 +1,47 @@
 {
-  "generated_at": "2026-11-27T10:30:58.741998-07:00",
-  "date": "2026-11-27",
+  "generated_at": "2026-11-28T09:15:11.814087-07:00",
+  "date": "2026-11-28",
   "tldr": [
-    "A powerful storm disrupted Thanksgiving travel and caused widespread power outages across the US East Coast.",
-    "US authorities gave Elon Musk's Starlink project approval to launch one million satellites, with an aim to power AI data centers in space.",
-    "A global surge in severe flu cases has prompted health officials in England to urge vaccinations, particularly for children."
+    "Taiwan's ruling Democratic Progressive Party secured its best local election result in a decade, nearly doubling its controlled constituencies.",
+    "The US government is increasing its focus on kratom following overdose deaths, while advocates emphasize the distinction between natural and chemically enhanced forms of the drug.",
+    "California voters approved a ballot measure that allocates $8.4 billion for immunology research, with half of the funding directed to a research group founded by the measure's billionaire proponent."
   ],
   "market": {
     "sp500": {
-      "value": 7182.78,
-      "change": -18.31,
-      "asof": "2026-11-25"
+      "value": 7297.49,
+      "change": 114.71,
+      "asof": "2026-11-27"
     },
     "ndx": {
-      "value": 23585.8,
-      "change": -147.74,
-      "asof": "2026-11-25"
+      "value": 24129.5,
+      "change": 543.7,
+      "asof": "2026-11-27"
     },
-    "why": "The provided articles do not offer a specific reason for the S&P 500 and Nasdaq Composite closing lower on 2026-11-25."
+    "why": "Equity markets closed higher, with the S&P 500 and Nasdaq Composite both gaining, driven by a reported tech rally and robust holiday spending expectations despite inflation, alongside a significant upward revision in third-quarter GDP data."
   },
   "yield_10y": {
-    "value": 4.85,
-    "change": -0.06,
-    "asof": "2026-11-25",
-    "why": "The provided articles do not offer a specific reason for the 10-year Treasury yield falling on 2026-11-25."
+    "value": 4.94,
+    "change": 0.09,
+    "asof": "2026-11-27",
+    "why": "The 10-year Treasury yield increased, likely influenced by the upward revision of the third-quarter GDP data indicating a stronger economy, and ongoing concerns about potential oil supply disruptions from the Iran war which could fuel inflation."
   },
   "vix": {
-    "value": 26.8,
-    "change": -1.49,
-    "asof": "2026-11-26",
-    "why": "The provided articles do not offer a specific reason for the VIX declining on 2026-11-26."
+    "value": 23.81,
+    "change": -2.99,
+    "asof": "2026-11-27",
+    "why": "The VIX, an indicator of market volatility, decreased. This suggests reduced investor fear and uncertainty, aligning with the positive movements seen in the S&P 500 and Nasdaq Composite."
   },
   "breadth": {
     "sp500": {
-      "value": 59.0,
-      "asof": "2026-11-26",
+      "value": 59.4,
+      "asof": "2026-11-27",
       "status": "healthy",
       "matched": 500,
       "stale": false
     },
     "ndx100": {
-      "value": 47.9,
-      "asof": "2026-11-26",
+      "value": 49.0,
+      "asof": "2026-11-27",
       "status": "healthy",
       "matched": 96,
       "stale": false
@@ -51,47 +51,47 @@
     {
       "symbol": "SOXL",
       "what": "3x semiconductors",
-      "value": 32.02,
-      "day_move": -1.78,
-      "asof": "2026-11-25",
-      "rsi": 33.0,
+      "value": 36.57,
+      "day_move": 14.21,
+      "asof": "2026-11-27",
+      "rsi": 36.0,
       "rsi_zone": "neutral",
       "low": 30.88,
-      "high": 107.35,
-      "band_pct": 1.5,
-      "zone": "low",
-      "action": "buy",
-      "read": "Within 4% of its 1-month low."
+      "high": 102.39,
+      "band_pct": 8.0,
+      "zone": "mid",
+      "action": "hold",
+      "read": "Mid-range - 8% of the way up its 1-month band. Big session: up 14.2% in a day."
     },
     {
       "symbol": "SPXL",
       "what": "3x S&P 500",
-      "value": 223.52,
-      "day_move": -0.94,
-      "asof": "2026-11-25",
-      "rsi": 37.5,
+      "value": 234.77,
+      "day_move": 5.03,
+      "asof": "2026-11-27",
+      "rsi": 42.8,
       "rsi_zone": "neutral",
       "low": 201.97,
-      "high": 288.95,
-      "band_pct": 24.8,
+      "high": 285.67,
+      "band_pct": 39.2,
       "zone": "mid",
       "action": "hold",
-      "read": "Mid-range - 25% of the way up its 1-month band."
+      "read": "Mid-range - 39% of the way up its 1-month band."
     },
     {
       "symbol": "TQQQ",
       "what": "3x Nasdaq-100",
-      "value": 45.28,
-      "day_move": -1.97,
-      "asof": "2026-11-25",
-      "rsi": 35.6,
+      "value": 48.85,
+      "day_move": 7.88,
+      "asof": "2026-11-27",
+      "rsi": 40.7,
       "rsi_zone": "neutral",
       "low": 41.2,
-      "high": 72.36,
-      "band_pct": 13.1,
+      "high": 69.26,
+      "band_pct": 27.3,
       "zone": "mid",
       "action": "hold",
-      "read": "Mid-range - 13% of the way up its 1-month band."
+      "read": "Mid-range - 27% of the way up its 1-month band. Big session: up 7.9% in a day."
     }
   ],
   "watchlist_missing": [],
@@ -99,7 +99,7 @@
     "value": 7.21,
     "change": -0.07,
     "asof": "2026-11-25",
-    "why": "The 30-year fixed mortgage rate, reported in a weekly survey as of 2026-11-25, decreased by 0.07% from the previous week, aligning with the decline observed in the 10-year Treasury yield."
+    "why": "The 30-year fixed mortgage rate, as reported in a weekly survey released November 25, decreased by 0.07%. The articles do not provide specific reasons for this weekly change, but mortgage rates generally track the direction of 10-year Treasury yields over recent days, which were trending upwards on November 27."
   },
   "policy": [],
   "policy_upcoming": [
@@ -152,14 +152,6 @@
       "status": "Final rule",
       "effective_date": "2026-12-14",
       "source": "Federal Register"
-    },
-    {
-      "what_happened": "Final regulations provide guidance for automatic enrollment requirements that apply to certain retirement plans.",
-      "effect": "Your retirement plan participation is subject to new automatic enrollment requirements starting January 19, 2027.",
-      "url": "https://www.federalregister.gov/documents/2026/11/18/2026-23530/automatic-enrollment-requirements-under-section-414a",
-      "status": "Final rule",
-      "effective_date": "2027-01-19",
-      "source": "Federal Register"
     }
   ],
   "policy_calendar": [
@@ -173,70 +165,55 @@
   ],
   "tech": [
     {
-      "summary": "The US Air Force's cloud computing platform has reportedly been compromised by hackers, raising concerns about cybersecurity in defense systems.",
+      "summary": "Malicious GGUF LLM models containing hidden malware have affected approximately 2,400 victims on Hugging Face.",
       "source": "Hacker News",
-      "url": "https://news.sky.com/story/us-air-forces-cloud-computing-platform-hacked-13617163"
+      "url": "https://malspark.com/blog/malicious-gguf-models-hugging-face/"
     },
     {
-      "summary": "AI shopping agents, such as those from OpenAI, Meta, and Google, are facing obstacles from retailers like Amazon that are blocking their access, potentially stunting their growth.",
-      "source": "CNBC",
-      "url": "https://www.cnbc.com/2026/11/27/ai-shopping-agents-retailer-blocks.html"
+      "summary": "Google's DeepCrossAttention technique has achieved comparable model quality while running up to three times faster than previous methods.",
+      "source": "Hacker News",
+      "url": "https://research.google/blog/supercharging-transformer-residual-connections/"
     },
     {
-      "summary": "A new deterministic subexponential-time algorithm has been proposed for solving the discrete logarithm problem, a fundamental challenge in cryptography.",
+      "summary": "A project called Unkernel allows the real Linux kernel to be compiled to WebAssembly, demonstrating new possibilities for operating system deployment.",
       "source": "Hacker News",
-      "url": "https://eprint.iacr.org/2026/3020.pdf"
+      "url": "https://unkernel.dev"
     }
   ],
   "world": [
     {
-      "summary": "Paul Mackenzie, a Kenyan doomsday cult leader, was convicted for an additional 123 deaths of his followers, weeks after being imprisoned for the mass murder of children.",
+      "summary": "Taiwan's ruling Democratic Progressive Party achieved its strongest performance in a decade during local elections, nearly doubling its control of constituencies, an outcome likely to provoke Beijing.",
+      "source": "Guardian World",
+      "url": "https://www.theguardian.com/world/2026/nov/28/taiwan-ruling-party-dpp-secures-best-result-in-decade-china"
+    },
+    {
+      "summary": "An explosion in Afghanistan, attributed to carelessness at an explosives depot, killed 10 students and injured over 100 people.",
       "source": "BBC World",
-      "url": "https://www.bbc.co.uk/news/articles/cmy49de4xx1zo?at_medium=RSS&at_campaign=rss"
-    },
-    {
-      "summary": "Ukrainian authorities have rejected 'unfavorable compromises' amid ongoing Western discussions of ceasefire proposals, as Ukrainian forces continue to free territory and resist Russian assaults.",
-      "source": "Al Jazeera",
-      "url": "https://www.aljazeera.com/news/2026/11/27/ukraine-rejects-unfavourable-compromises-as-it-frees-more-territory?traffic_source=rss"
-    },
-    {
-      "summary": "Canada's top court has largely upheld Quebec's law banning public sector workers from wearing religious symbols, a decision that faced challenges from groups arguing it violated fundamental rights.",
-      "source": "BBC World",
-      "url": "https://www.bbc.co.uk/news/articles/cq3dgpy9lem3o?at_medium=RSS&at_campaign=rss"
-    },
-    {
-      "summary": "British budget airline Norse Atlantic has filed for bankruptcy and halted all flights, advising passengers to seek refunds via the bankruptcy process, citing surging fuel costs as a contributing factor.",
-      "source": "Al Jazeera",
-      "url": "https://www.aljazeera.com/economy/2026/11/27/norse-atlantic-files-for-bankruptcy-halts-flights-and-ticket-sales?traffic_source=rss"
+      "url": "https://www.bbc.co.uk/news/articles/ckp80jyz6dl8o?at_medium=RSS&at_campaign=rss"
     }
   ],
   "us": [
     {
-      "summary": "A powerful storm impacted the US eastern seaboard, causing heavy rains, high winds, and extensive power outages that disrupted Thanksgiving plans for hundreds of thousands of customers.",
-      "source": "Guardian World",
-      "url": "https://www.theguardian.com/us-news/2026/nov/27/heavy-rain-wind-flooding-us-thanksgiving"
-    },
-    {
-      "summary": "Former President Donald Trump called for an immediate investigation into the third-quarter GDP data revision, which showed a significant upward adjustment.",
-      "source": "CNBC",
-      "url": "https://www.cnbc.com/2026/11/26/trump-gdp-revision-investigation.html"
-    },
-    {
-      "summary": "Changes to asylum policy, including an asylum ban and new legal maneuvers, have effectively halted asylum proceedings, leading advocates to seek a review from the Supreme Court on due process concerns.",
+      "summary": "A powerful storm impacted the East Coast, causing widespread power outages and travel disruptions, while Black Friday sales were predicted to reach record levels despite rising energy prices.",
       "source": "NPR National",
-      "url": "https://www.npr.org/2026/11/27/nx-s1-6037854/trump-effectively-ended-asylum-supreme-court"
+      "url": "https://www.npr.org/2026/11/27/g-s1-156004/up-first-newsletter-thanksgiving-storm-black-friday-shopping-asylum-supreme-court"
+    },
+    {
+      "summary": "California voters passed a ballot measure proposed by a billionaire to fund $8.4 billion in immunology research, with half of the allocation going to a research group supported by the same individual.",
+      "source": "NPR Science",
+      "url": "https://www.npr.org/2026/11/27/nx-s1-6052399/california-voters-pass-billionaires-measure-to-bankroll-his-own-medical-lab"
     }
   ],
   "science": [
     {
-      "summary": "Health officials in England are urging parents to vaccinate their children for flu as hospital cases surge, with pharmacies now administering jabs to address missed vaccinations.",
-      "source": "Guardian World",
-      "url": "https://www.theguardian.com/society/2026/nov/27/parents-urged-to-vaccinate-children-for-flu-as-hospital-cases-surge-in-england"
+      "summary": "A cheaper HIV prevention jab, Lenacapavir, which is nearly 100% effective and administered twice a year, is now being introduced in Africa, offering hope to millions.",
+      "source": "BBC Health",
+      "url": "https://www.bbc.co.uk/news/articles/cmly7jve72r2o?at_medium=RSS&at_campaign=rss"
     },
     {
-      "summary": "California voters approved a ballot measure backed by a billionaire to provide $8.4 billion in funding for immunology research, with half of the funding allocated to a research group supported by the same individual.",
-      "source": "NPR Science",
-      "url": "https://www.npr.org/2026/11/27/nx-s1-6052399/california-voters-pass-billionaires-measure-to-bankroll-his-own-medical-lab"
+      "summary": "Health officials in England are urging those at risk to get vaccinated immediately due to a surge in severe flu cases and a warning from an NHS boss about a 'horrible spike' in hospital admissions.",
+      "source": "BBC Health",
+      "url": "https://www.bbc.co.uk/news/articles/cwvg2ndxdjr2o?at_medium=RSS&at_campaign=rss"
     }
   ],
   "weekly_recap": null,

@@ -1,22 +1,6 @@
 {
-  "generated_at": "2026-11-27T10:30:58.741998-07:00",
+  "generated_at": "2026-11-28T09:15:11.814087-07:00",
   "lessons": [
-    {
-      "id": "2026-09-26-bait-and-switch",
-      "date": "2026-09-26",
-      "domain": "Thinking and people",
-      "title": "Protecting Yourself from Tricky Sales Tactics",
-      "hook": "Aggressive sales tactics can cost you money or leave you with a product that isn't what you wanted.",
-      "quick": "Have you ever been lured by an incredibly low price on an advertised item, only to find it unavailable when you went to buy it? This common tactic is called bait-and-switch, and it can leave you spending more than you planned. A merchant first advertises a product or service at an attractive, low price to 'bait' you in. But when you arrive, that specific item is suddenly out of stock, or perhaps was never truly available. The goal is not to sell you the advertised item, but to 'switch' you to a similar, more expensive product, or one of lower quality at a similar price. The seller expects to earn a higher profit margin on this substituted item, banking on your disappointment or inconvenience to make you accept a less desirable alternative rather than walk away empty-handed.",
-      "more": "While this tactic feels dishonest, it isn't always illegal. In the United States, a seller might avoid legal issues if they can actually sell the advertised goods, even if they strongly push you toward a different product. Similarly, advertising a sale on an item they know will sell out quickly, often called a 'loss-leader,' is permissible. The key is whether they make it clear in their advertisements that quantities are limited or if they offer a rain check for items that are sold out. Without these disclosures, the purveyor could face lawsuits for false advertising from customers or even trademark infringement from competing manufacturers if they profit from the original product used as bait.",
-      "deep": "This tactic appears in many places beyond just retail stores. Car dealerships, for instance, are known to advertise vehicles online at what seems like a bargain price. Once you arrive, you might discover that specific car is no longer available, leading them to pressure you into purchasing a different vehicle, or even adding many additional fees to the initially advertised price when you're close to closing a sale. Online, a seller might show a desired item in a photograph, secure your purchase, but then ship a cheaper copy or sometimes even just a picture of the item. The underlying intention is to make you feel like you\u2019ve already invested time and effort, your \u2018sunk cost,\u2019 making you more likely to accept a substitute rather than abandoning the entire process and feeling your time was wasted.",
-      "takeaway": "Before committing to a purchase, confirm the specific details and availability of any advertised item, especially if it seems like an unusually good deal.",
-      "source": {
-        "title": "Bait-and-switch",
-        "url": "https://en.wikipedia.org/wiki/Bait-and-switch"
-      },
-      "audio": {}
-    },
     {
       "id": "2026-09-27-annual-percentage-rate",
       "date": "2026-09-27",
@@ -639,11 +623,7 @@
         "title": "Sepsis",
         "url": "https://en.wikipedia.org/wiki/Sepsis"
       },
-      "audio": {
-        "quick": "lessons/2026-11-07-sepsis-quick.mp3",
-        "more": "lessons/2026-11-07-sepsis-more.mp3",
-        "deep": "lessons/2026-11-07-sepsis-deep.mp3"
-      }
+      "audio": {}
     },
     {
       "id": "2026-11-08-framing-social-sciences",
@@ -1043,6 +1023,26 @@
         "quick": "lessons/2026-11-27-shock-circulatory-quick.mp3",
         "more": "lessons/2026-11-27-shock-circulatory-more.mp3",
         "deep": "lessons/2026-11-27-shock-circulatory-deep.mp3"
+      }
+    },
+    {
+      "id": "2026-11-28-endowment-effect",
+      "date": "2026-11-28",
+      "domain": "Thinking and people",
+      "title": "Why You Overvalue Things You Own",
+      "hook": "You might find yourself overvaluing items you already own, which can impact your financial decisions, from selling a car to negotiating a house price.",
+      "quick": "When you own something, you tend to value it more highly than if you didn't own it, even if you just acquired it. This means you are more likely to keep an item you possess than to acquire that exact same item if you did not yet own it. This effect can make it difficult to sell things at a realistic price or trade them for something of similar value. For example, in one study, university students who were given a mug and then offered the chance to sell it, demanded compensation that was approximately twice as high as what others were willing to pay to acquire that same mug. This happens even when there's no personal attachment to the item, showing how quickly ownership can change your perception of value.",
+      "more": "This phenomenon isn't limited to small items. In another instance, participants given an object were reluctant to trade it for another item of similar value. For example, people given a pen were generally unwilling to trade it for a coffee mug of equal expected value, and those given the coffee mug were similarly unwilling to trade it for the pen. This effect has also been seen in hypothetical high-stakes scenarios. Researchers found that people's hypothetical selling price for NCAA final four tournament tickets was 14 times higher than their hypothetical buying price for those same tickets. The same principle applies to work and incentives; workers put in more effort to keep a bonus they were provisionally awarded than they did for a bonus that was framed as a potential future gain.",
+      "deep": "The primary reason people overvalue what they own is often attributed to loss aversion. When you sell something, it feels like a loss, and humans are generally wired to feel the pain of a loss more strongly than the pleasure of an equivalent gain. Thus, giving up an item is perceived as a greater cost than the benefit of receiving the same item would be. This also means that people often undervalue the opportunity costs of holding onto an item; the focus is on the emotional fixation of losing the item rather than on the potential financial or practical gain from selling it. Another explanation is psychological inertia, suggesting that people don't have a precise, fixed value for many items. In the absence of a strong incentive to either buy or sell, they simply prefer to maintain the status quo, which means holding onto what they already have.",
+      "takeaway": "Before making a significant purchase or sale, research objective market values for the item rather than relying solely on your subjective feeling of its worth.",
+      "source": {
+        "title": "Endowment effect",
+        "url": "https://en.wikipedia.org/wiki/Endowment_effect"
+      },
+      "audio": {
+        "quick": "lessons/2026-11-28-endowment-effect-quick.mp3",
+        "more": "lessons/2026-11-28-endowment-effect-more.mp3",
+        "deep": "lessons/2026-11-28-endowment-effect-deep.mp3"
       }
     }
   ],
